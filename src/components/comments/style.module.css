@@ -1,0 +1,63 @@
+.CommentLine{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    padding: 1% 5%;
+    border: 1px solid #ccc;
+    background: aliceblue;
+    transition: all ease 0.3s;
+}
+.Comments{
+    max-height: 1000px;
+    overflow: auto;
+    min-height: 600px;
+}
+.Comments>div{
+    position: relative;
+    text-align: left;
+    padding: 1% 5%;
+    border-bottom: 1px solid;
+}
+.Comments>div:last-of-type{
+    border-bottom: none;
+}
+.Comments h2{
+    font-size: 16px;
+}
+.Comments span{
+    position: absolute;
+    top: 1%;
+    right: 1%;
+    color: gray;
+    font-size: 13px;
+}
+.Comments p{
+    padding: 0% 1%;
+}
+.Container{
+    margin-left: 15%;
+    height: auto;
+    min-height: 100%;
+    border-left: 1px solid gray;
+}
+.Container >div:nth-child(2){
+    height: auto;
+    overflow: auto;
+}
+
+.CommentLine textarea{
+    flex: 6 0;
+    margin: 0% 5%;
+    min-height: 75px;
+    outline: none;
+    border: 1px solid #ccc;
+    background: transparent;
+    color: gray;
+    font-size: 16px;
+}
+
+.CommentLine button{
+    flex: 2 0;
+    align-self: baseline;
+}

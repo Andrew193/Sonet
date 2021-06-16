@@ -1,0 +1,65 @@
+.Container p{
+    padding: 10px;
+    border-top: 1px solid rgb(206, 204, 204);
+}
+.InputPostText {
+    resize: vertical;
+    width: -webkit-fill-available;
+    outline: none;
+    color: grey;
+    font-size: 16px;
+    min-height: 75px;
+    padding: 5px;
+    border: none;
+}
+
+.InputPostText::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background-color: transparent;
+}
+
+.InputPostText::-webkit-scrollbar {
+    width: 7px;
+    background-color: transparent;
+}
+
+.InputPostText::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: #57b5f3;
+}
+
+.Container p {
+    display: flex;
+    justify-content: space-between;
+}
+
+@media (min-width:2100px) {
+    .InputPostText{
+        font-size: 30px;
+        padding: 20px 30px;
+    }
+    .Container p{
+        padding: 30px 25px;
+    }
+}
+
+
+@media (max-width:2099px) {
+    .InputPostText{
+        font-size: 26px;
+        padding: 20px 30px;
+    }
+    .Container p{
+        padding: 30px 25px;
+    }
+}
+
+@media (max-width:1700px) {
+    .InputPostText{
+        font-size: 20px;
+        padding: 13px 23px;
+    }
+    .Container p{
+        padding: 20px 15px;
+    }
+}

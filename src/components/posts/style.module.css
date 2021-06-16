@@ -1,0 +1,114 @@
+.Container {
+    margin: 0 0 0 15%;
+    -webkit-flex: 3 0;
+    flex: 3 0;
+    max-width: 60%;
+    height: -webkit-fill-available;
+    border-left: 1px solid #cecccc;
+    border-right: 1px solid #cecccc;
+}
+#HF{
+    height: 100%;
+    max-width:unset;
+}
+#HF>div{
+    overflow: unset;
+}
+.PostsCont {
+    height: 85%;
+    overflow-y: scroll;
+}
+
+.PostsCont>div {
+    text-align: left;
+    padding: 1% 5%;
+    position: relative;
+    border-bottom: 1px solid #cecccc;
+}
+
+.PostsCont a {
+    text-decoration: none;
+    color: black;
+    transition: all ease 0.7s;
+}
+
+.PostsCont a:hover {
+    color: rgb(73, 73, 248);
+}
+
+.PostsCont>div div p:last-of-type {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+.PostsCont span {
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 5px;
+    cursor: pointer;
+    transition: color ease 0.3s;
+}
+.Pheader{
+    display: flex;
+    align-items: center;
+}
+.Pheader svg{
+    padding: 10px;
+    height: 45px;
+    width: auto;
+    cursor: pointer;
+    border-radius: 50%;
+    margin-right: 10px;
+    transition: all ease 0.7s;
+}
+.Pheader:hover{
+    color: rgb(73, 73, 248);;
+}
+.Pheader svg:hover{
+    background-color: rgb(206, 225, 255);
+}
+#HF .SortLine{
+    width: 85%;
+}
+.SortLine{
+    padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    position: fixed;
+    width: 60%;
+    background: aliceblue;
+    bottom: 0;
+    height: 9%;
+    justify-content: space-around;
+}
+.SortLine button{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.dislike:hover {
+    color: rgb(211, 59, 59);
+}
+
+.like:hover {
+    color: rgb(46, 153, 46);
+}
+
+.com:hover {
+    color: rgb(73, 73, 248);
+}
+
+.PostsCont svg{
+    cursor: pointer;
+}
+
+.Time{
+    position: absolute;
+    top: 0%;
+    font-size: 13px!important;
+    right: 1%;
+    color: gray;
+}

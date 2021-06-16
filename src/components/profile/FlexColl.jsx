@@ -1,0 +1,26 @@
+import s from "./style.module.css"
+import { AiOutlineCalendar, AiOutlineMail, AiOutlineNumber, AiOutlineEye } from "react-icons/ai";
+
+function FlexColl(props) {
+    const { userInfo, cr, up, myId } = props;
+    return (
+        <div className={s.FlexColl}>
+            <div className={s.SecondLine}>
+                <span className={s.Black}><b>{userInfo.createdBy}</b></span>
+                <span><AiOutlineMail className={s.CommonIcon} />
+                    {myId !== userInfo.id ? <a href={`mailto:${userInfo.email}`}>userInfo.email</a> : userInfo.email}</span>
+                <span><AiOutlineNumber className={s.CommonIcon} />{userInfo.Id}</span></div>
+            <div>
+                <AiOutlineCalendar className={s.CommonIcon} /> Joined {cr}
+            </div>
+            <div style={{ margin: "10px 0px" }}>
+                <AiOutlineCalendar className={s.CommonIcon} /> Last update {cr === up ? " nefer" : up}
+            </div>
+            <div className={s.LastLine}>
+                <span><AiOutlineEye className={s.CommonIcon} /> <b className={s.Black}>0</b> Following</span>
+                <span><AiOutlineEye className={s.CommonIcon} /><b className={s.Black}>0</b> Followers</span>
+            </div>
+        </div>
+    )
+}
+export default FlexColl;

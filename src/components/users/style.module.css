@@ -1,0 +1,295 @@
+.Container {
+    margin: 0 0 0 15%;
+    -webkit-flex: 3 0;
+    flex: 3 0;
+    max-width: 60%;
+    height: -webkit-fill-available;
+    border-left: 1px solid #cecccc;
+    border-right: 1px solid #cecccc;
+}
+
+.Item {
+    border-bottom: 1px solid #cecccc;
+    display: flex;
+    justify-content: space-between;
+}
+
+.Item h3 svg {
+    font-size: 20px;
+    color: #4949f8;
+    margin-left: 5%;
+}
+
+.Item h3 {
+    display: flex;
+    align-items: center;
+}
+
+.Item h3:hover a {
+    color: rgb(73, 73, 248)!important;
+}
+
+.Item>div {
+    text-align: left;
+    padding: 1% 5%;
+}
+
+.Item>div span {
+    display: flex;
+    align-items: center;
+}
+
+.Item>div span svg {
+    font-size: 20px;
+    margin-right: 5px;
+}
+.Item span {
+    padding: 0.1% 1%;
+    font-size: 10px;
+    color: gray;
+}
+.Item span:hover {
+    color: rgb(73, 73, 248);
+}
+.Item span:hover a {
+    color: rgb(73, 73, 248);
+}
+.Item a {
+    transition: all ease 0.3s;
+    text-decoration: none;
+    color: black;
+}
+
+.FindUserLine {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+    padding: 1% 3%;
+    position: fixed;
+    width: 60%;
+    background-color: aliceblue;
+    bottom: 0px;
+    flex-direction: column;
+    transition: all ease 0.7s;
+}
+
+.UsersCont {
+    transition: all 0.3s ease 0s;
+    height: 80.8%;
+    overflow-y: scroll;
+}
+
+.UsersCont::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background-color: transparent;
+}
+
+.UsersCont::-webkit-scrollbar {
+    width: 7px;
+    background-color: transparent;
+}
+
+.UsersCont::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: #b9def7;
+}
+
+.Hide {
+    transform: translateY(70%);
+}
+
+.FullHeight {
+    height: 89%!important;
+}
+
+.FindUserLine>div {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 1%;
+}
+
+.FindUserLine input {
+    height: min-content;
+    border: none;
+    color: gray;
+    border-bottom: 1px solid #4949f8;
+    padding: 10px 15px;
+    font-size: 16px;
+    outline: none;
+    background-color: transparent;
+}
+
+@media (min-width:2201px) {
+    .Item span {
+        font-size: 20px;
+    }
+    .FullHeight {
+        height: 89%!important;
+    }
+    .UsersCont {
+        height: 88%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    .Item h3 svg {
+        width: auto;
+        height: 36px;
+    }
+    .Item h3 {
+        font-size: 36px;
+    }
+    .Item>div span {
+        font-size: 26px;
+    }
+    .Item>div span svg {
+        width: auto;
+        height: 30px;
+    }
+    .UsersCont {
+        height: 80%;
+    }
+}
+
+@media (max-width:2200px) {
+    .UsersCont {
+        height: 80%;
+    }
+    .FullHeight {
+        height: 89%!important;
+    }
+    .Item span {
+        font-size: 20px;
+    }
+    .Item h3 svg {
+        width: auto;
+        height: 33px;
+    }
+    .Item h3 {
+        font-size: 33px;
+    }
+    .Item>div span {
+        font-size: 26px;
+    }
+    .Item>div span svg {
+        width: auto;
+        height: 30px;
+    }
+}
+
+@media (max-width:1800px) {
+    .UsersCont {
+        height: 75%;
+    }
+    .FullHeight {
+        height: 84%!important;
+    }
+    .Item span {
+        font-size: 16px;
+    }
+    .Item h3 svg {
+        width: auto;
+        height: 26px;
+    }
+    .Item h3 {
+        font-size: 26px;
+    }
+    .Item>div span {
+        font-size: 20px;
+    }
+    .Item>div span svg {
+        width: auto;
+        height: 26px;
+    }
+}
+
+@media (max-width:1440px) {
+    .UsersCont {
+        height: 80%;
+    }
+    .FullHeight {
+        height: 89%!important;
+    }
+    .Item span {
+        font-size: 16px;
+    }
+    .Item h3 {
+        font-size: 23px;
+    }
+    .Item>div span {
+        font-size: 16px;
+    }
+    .Item>div span svg {
+        width: auto;
+        height: 23px;
+    }
+}
+
+@media (max-width:1024px) {
+    .FindUserLine{
+        width: 85%;
+    }
+    .FullHeight {
+        height: 89%!important;
+    }
+    .UsersCont {
+        height: 80%;
+    }
+    .Container {
+        max-width: unset;
+    }
+    .Item span {
+        font-size: 13px;
+    }
+    .Item h3 {
+        font-size: 20px;
+    }
+    .Item>div span {
+        font-size: 13px;
+    }
+    .Item>div span svg {
+        height: 20px;
+        width: auto;
+    }
+}
+
+@media (max-width:768px) {
+    .FindUserLine {
+        display: none;
+    }
+    .FullHeight {
+        height: 82%!important;
+    }
+    .UsersCont {
+        height: 82%;
+    }
+    .Container {
+        margin: unset;
+        max-width: unset;
+    }
+    .Item h3 {
+        font-size: 16px;
+    }
+}
+
+@media (max-width:425px) {
+    .UsersCont {
+        height: 82%;
+    }
+    .FullHeight {
+        height: 83%!important;
+    }
+    .Container {
+        margin: unset;
+        max-width: unset;
+    }
+    .Item {
+        flex-wrap: wrap;
+    }
+    .Item h3 {
+        font-size: 13px;
+    }
+}

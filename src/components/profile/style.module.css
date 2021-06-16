@@ -1,0 +1,254 @@
+.Container {
+    border-left: 1px solid rgb(206, 204, 204);
+    border-right: 1px solid rgb(206, 204, 204);
+    margin: 0 0 0 15%;
+    max-width: 60%;
+    height: -webkit-fill-available;
+    color: rgb(206, 204, 204);
+    text-align: left;
+    -webkit-flex: 3 0;
+    flex: 3 0;
+}
+
+.Ver {
+    transition: all ease 0.3s;
+    flex: 1 0;
+    text-align: end;
+    display: flex;
+    justify-content: space-between;
+}
+.Ver svg{
+    height: 50px;
+    width: auto;
+}
+
+.Container span {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.Back {
+    background-image: url("./img/luxfon.com-4767.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding-bottom: 33.3333%;
+}
+
+.FlexColl {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    margin: 0px 5%;
+    transition: all ease 0.7s;
+}
+
+.CommonIcon {
+    font-size: 16px;
+    margin-right: 10px;
+}
+
+.PostCount {
+    font-size: 13px;
+    cursor: pointer;
+    color: rgb(73, 73, 248);
+}
+
+.FirstLine {
+    position: relative;
+    display: flex;
+    margin: 2% 3%;
+    justify-content: space-between;
+}
+
+.FirstLine button {
+    transition: all ease 0.7s;
+    font-weight: bold;
+    border: 1px solid rgb(108, 108, 195);
+    color: rgb(73, 73, 248);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.FirstLine button:hover {
+    background-color: rgb(206, 225, 255);
+}
+
+.SecondLine {
+    display: flex;
+    flex-direction: column;
+}
+
+.Black {
+    color: black!important;
+    font-size: 20px;
+}
+
+.LastLine {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.LastLine span {
+    margin: 10px;
+    cursor: pointer;
+}
+
+.LastLine span:hover {
+    color: rgb(73, 73, 248);
+}
+.SecondLine a{
+    text-decoration: none;
+    cursor: pointer;
+    color: rgb(105, 157, 226);
+}
+.SecondLine a:hover {
+    color: rgb(73, 73, 248);
+}
+
+.Icon {
+    font-size: 50px;
+    color: #000;
+    cursor: pointer;
+    border-radius: 50%;
+    padding: 10px;
+    margin-right: 5%;
+}
+
+.Icon:hover {
+    color: rgb(73, 73, 248);
+    background-color: #dbdbec;
+}
+
+.ConfirmLine {
+    display: flex;
+    justify-content: space-between;
+}
+
+.ConfirmLine input {
+    margin: 5%;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid #8181dc;
+    outline: none;
+    color: grey;
+}
+
+@media (min-width:2201px) {
+    .Container {
+        font-size: 33px;
+    }
+    .PostCount {
+        font-size: 26px;
+    }
+    .CommonIcon {
+        font-size: 30px;
+    }
+    .FirstLine button {
+        font-size: 30px;
+        max-width: unset;
+    }
+    .Black {
+        font-size: 43px;
+    }
+    .Icon {
+        font-size: 80px;
+        margin: 10px;
+    }
+    .ConfirmLine input {
+        font-size: 26px;
+    }
+}
+
+@media (max-width:2200px) {
+    .Container {
+        font-size: 20px;
+    }
+    .FlexColl {
+        font-size: 26px;
+    }
+    .PostCount {
+        font-size: 16px;
+    }
+    .CommonIcon {
+        font-size: 23px;
+    }
+    .FirstLine button {
+        font-size: 20px;
+    }
+    .Black {
+        font-size: 30px;
+    }
+    .Icon {
+        font-size: 65px
+    }
+}
+
+@media (max-width:1800px) {
+    .ConfirmLine input {
+        font-size: 16px;
+    }
+    .Icon {
+        font-size: 50px
+    }
+    .PostCount {
+        font-size: 13px;
+    }
+    .FirstLine button {
+        font-size: 16px;
+        padding: 10px 15px;
+    }
+    .CommonIcon{
+        font-size: 20px;
+    }
+    .FlexColl{
+        font-size: 20px;
+    }
+    .Back{
+        font-size: 23px;
+    }
+}
+
+@media (max-width:1024px) {
+    .Container {
+        max-width: unset;
+    }
+}
+
+@media (max-width:768px) {
+    .Container {
+        margin: unset;
+        max-width: unset;
+    }
+}
+
+@media (max-width:475px) {
+    .Container {
+        margin: unset;
+        max-width: unset;
+    }
+    .FlexColl {
+        font-size: 13px;
+    }
+    .PostCount {
+        font-size: 10px;
+    }
+    .FirstLine button {
+        padding: 5px 10px;
+        justify-content: space-around;
+    }
+    .Icon {
+        font-size: 40px;
+        margin: 5px;
+    }
+    .ConfirmLine {
+        align-items: center;
+    }
+    .ConfirmLine input {
+        width: 70px;
+        font-size: 10px;
+        height: min-content;
+    }
+}
