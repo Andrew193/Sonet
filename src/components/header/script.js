@@ -12,7 +12,7 @@ function GetShortUserInfo(notify) {
         return axios.get("https://sonet34.herokuapp.com/api/users/me")
             .then((response) => response)
             .catch((error) => {
-                if (error) {
+                if (error.response) {
                     const inner = htmlHelper.stringFromJSON(error.response.data);
                     inner[0] !== "<" &&
                         notify(htmlHelper.createHTML({ title: "Error", message: inner }));

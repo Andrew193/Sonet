@@ -1,6 +1,4 @@
-const { default: axios } = require("axios")
-
-
+import axios from "axios";
 
 function openModal(cl) {
     document.querySelector(`.${cl}`).classList.toggle("Open")
@@ -20,9 +18,33 @@ function getPCount(id, set) {
             console.log(error);
         })
 }
+
+function getMyFollowers(myId, history) {
+
+}
+
+function getMyFollowings(myId, history) {
+    axios.get("https://sonet34.herokuapp.com/api/follow/followingsArray", { params: { myId } })
+        .then((response) => {
+            const idArray = response.data.length.reduce((prev, curr) => [...prev, +curr.userId], [])
+            axios.get("https://sonet34.herokuapp.com/api/follow", { params: { idArray: JSON.stringify(idArray) } })
+                .then((response) => {
+                    console.log(response.data);
+                    history.push({
+                        pathname: "/followers",
+                        state: response.data
+                    })
+                }).catch((error) => error.response && console.error(error.response.data.error))
+        })
+        .catch((error) => error.response && console.error(error.response.data.error))
+}
+
 function getUser(id) {
     return axios.get("https://sonet34.herokuapp.com/api/users/getOneObj", { params: { id } })
         .then((response) => response)
         .catch((error) => error)
 }
-module.exports = { openModal, getPCount, confirmPerson, getUser }
+
+const obj = { openModal, getPCount, confirmPerson, getUser, getMyFollowings }
+
+export default obj;

@@ -62,6 +62,10 @@ function App() {
             <Components.Comment notify={notify} socket={socket} />
           }>
           </Route>
+          <Route exact path={"/followers"} render={() =>
+            <Components.Followers />
+          }>
+          </Route>
         </Switch>
         <Components.Footer />
         <ToastContainer toastStyle={{ background: "black", borderRadius: "15px" }} hideProgressBar={true} autoClose={2000}

@@ -1,0 +1,39 @@
+.Icon {
+    font-size: 50px;
+    color: #000;
+    cursor: pointer;
+    border-radius: 50%;
+    padding: 10px;
+    margin-right: 5%;
+}
+
+.Icon:hover {
+    color: rgb(73, 73, 248);
+    background-color: #dbdbec;
+}
+
+@media (min-width:2201px) {
+    .Icon {
+        font-size: 80px;
+        margin: 10px;
+    }
+}
+
+@media (max-width:2200px) {
+    .Icon {
+        font-size: 65px
+    }
+}
+
+@media (max-width:1800px) {
+    .Icon {
+        font-size: 50px
+    }
+}
+
+@media (max-width:475px) {
+    .Icon {
+        font-size: 40px;
+        margin: 5px;
+    }
+}

@@ -1,8 +1,10 @@
 import s from "./style.module.css"
 import { AiOutlineCalendar, AiOutlineMail, AiOutlineNumber, AiOutlineEye } from "react-icons/ai";
-
+import Script from "./script"
+import { useHistory } from "react-router";
 function FlexColl(props) {
     const { userInfo, cr, up, myId } = props;
+    const history = useHistory();
     return (
         <div className={s.FlexColl}>
             <div className={s.SecondLine}>
@@ -21,8 +23,12 @@ function FlexColl(props) {
                 <AiOutlineCalendar className={s.CommonIcon} /> Last update {cr === up ? " nefer" : up}
             </div>
             <div className={s.LastLine}>
-                <span><AiOutlineEye className={s.CommonIcon} /> <b className={s.Black}>{userInfo.youFolCount}</b> Following</span>
-                <span><AiOutlineEye className={s.CommonIcon} /><b className={s.Black}>{userInfo.folCount}</b> Followers</span>
+                <span onClick={() => Script.getMyFollowings(myId, history)}>
+                    <AiOutlineEye className={s.CommonIcon} /> <b className={s.Black}>{userInfo.youFolCount}</b> Following
+                </span>
+                <span>
+                    <AiOutlineEye className={s.CommonIcon} /><b className={s.Black}>{userInfo.folCount}</b> Followers
+                </span>
             </div>
         </div>
     )

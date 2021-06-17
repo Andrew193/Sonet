@@ -10,10 +10,11 @@ import ModalUser from './components/mainPage/modalUpdateUser';
 import UsersContainer from './components/users';
 import PostsContainer from "./components/posts/index"
 import TopInfo from './components/TopInfo';
-
+import Followers from "./components/followers/index"
 const obj={
     ContainerAuth, Footer, NotMy, Comment, Header, MainPage, My,
-    Profile, ModalUser, UsersContainer, PostsContainer, TopInfo
+    Profile, ModalUser, UsersContainer, PostsContainer, TopInfo,
+    Followers
 }
 
 export default obj;

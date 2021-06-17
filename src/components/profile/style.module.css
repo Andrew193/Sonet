@@ -108,20 +108,6 @@
     color: rgb(73, 73, 248);
 }
 
-.Icon {
-    font-size: 50px;
-    color: #000;
-    cursor: pointer;
-    border-radius: 50%;
-    padding: 10px;
-    margin-right: 5%;
-}
-
-.Icon:hover {
-    color: rgb(73, 73, 248);
-    background-color: #dbdbec;
-}
-
 .ConfirmLine {
     display: flex;
     justify-content: space-between;
@@ -153,10 +139,6 @@
     .Black {
         font-size: 43px;
     }
-    .Icon {
-        font-size: 80px;
-        margin: 10px;
-    }
     .ConfirmLine input {
         font-size: 26px;
     }
@@ -181,17 +163,11 @@
     .Black {
         font-size: 30px;
     }
-    .Icon {
-        font-size: 65px
-    }
 }
 
 @media (max-width:1800px) {
     .ConfirmLine input {
         font-size: 16px;
-    }
-    .Icon {
-        font-size: 50px
     }
     .PostCount {
         font-size: 13px;
@@ -238,10 +214,6 @@
     .FirstLine button {
         padding: 5px 10px;
         justify-content: space-around;
-    }
-    .Icon {
-        font-size: 40px;
-        margin: 5px;
     }
     .ConfirmLine {
         align-items: center;

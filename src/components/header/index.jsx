@@ -11,7 +11,7 @@ import {
     AiOutlineLogout, AiOutlineTeam, AiOutlineFile
 } from "react-icons/ai";
 import PostPortal from "./postPortal";
-import { openModal } from "../profile/script";
+import Script2 from "../profile/script"
 function Header(props) {
     const [flag, setFlag] = useState(false);
     const history = useHistory();
@@ -32,7 +32,7 @@ function Header(props) {
                 </NavLink>
                 <button className={s.LeaveBtn} onClick={() => Script.leave(history)} data-tooltip="Leave">
                     <span >Leave</span><AiOutlineLogout size={"24px"} /></button>
-                <button className={"button"+" "+s.PostBtn} onClick={() => openModal("Mpost")}>Post</button>
+                <button className={"button"+" "+s.PostBtn} onClick={() =>Script2.openModal("Mpost")}>Post</button>
                 <span data-tooltip="Post"><AiOutlineHighlight id={s.PostBtnS}/></span>
             </div>
             <div className={s.userInfo} onClick={() => Script.realOpen(setFlag)}>

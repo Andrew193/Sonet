@@ -12,10 +12,10 @@ function getPosts() {
         .catch((error) => error)
 }
 
-function getSelectedPost(id) {
+function getSelectedPost(id, notify) {
     return axios.get("https://sonet34.herokuapp.com/api/post/getOne", { params: { id } })
         .then((response) => response.data)
-        .catch((error) => error)
+        .catch((error) => error.response && notify(error.response.data.posts))
 }
 
 function like(id, userId, likeCount, notify, dislikeCount, socket) {
@@ -24,10 +24,10 @@ function like(id, userId, likeCount, notify, dislikeCount, socket) {
             notify(HTMLhelp.createHTML({ title: "Ok", message: "You like it" }))
             refresh(socket, userId);
         })
-        .catch((error) => console.log(error))
+        .catch((error) => error.response && notify(HTMLhelp.createHTML({ title: "Sorry", message: error.response.data.error })))
 }
 
-function getComment(history,id) {
+function getComment(history, id) {
     history.push({
         pathname: "/comment",
         state: { id }
@@ -41,7 +41,7 @@ function getNotMy(hist, id) {
     })
 }
 
-function getMy(hist,id) {
+function getMy(hist, id) {
     hist.push({
         pathname: "/post/my",
         state: { id }
@@ -58,7 +58,7 @@ function dislike(id, userId, dislikeCount, notify, likeCount, socket) {
             notify(HTMLhelp.createHTML({ title: "Ok", message: "You dislike it" }))
             refresh(socket, userId);
         })
-        .catch((error) => console.log(error))
+        .catch((error) => error.response && notify(HTMLhelp.createHTML({ title: "Sorry", message: error.response.data.error })))
 }
 
 function openPost(e, history, inputId) {
@@ -67,6 +67,6 @@ function openPost(e, history, inputId) {
     window.location.reload();
 }
 
-const obj={ openPost, getSelectedPost, getPosts, like, dislike, getNotMy, getMy, def, getComment }
+const obj = { openPost, getSelectedPost, getPosts, like, dislike, getNotMy, getMy, def, getComment }
 
 export default obj;

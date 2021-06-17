@@ -23,7 +23,7 @@ function sendReq(values, resetForm, flag, seter, toast) {
                     window.location.reload()
                 }, 150);
             })
-            .then((error) => error && toast(error.response.data.error))
+            .then((error) => error.response && toast(error.response.data.error))
 }
 
 module.exports = { sendReq };
