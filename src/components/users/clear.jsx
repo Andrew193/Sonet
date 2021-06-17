@@ -4,9 +4,11 @@ import DataHelper from "../../helpers/dateHelper.js"
 import s from "./style.module.css"
 import { AiOutlineMail } from "react-icons/ai";
 import Script from "./script.js"
+import ActionLine from "./actionLine.jsx";
 function ClearUsers(props) {
+    console.log(props);
     const history = useHistory();
-    const { id } = JSON.parse(localStorage.getItem("userInfo"))
+    const { id, youFolCount } = JSON.parse(localStorage.getItem("userInfo"))
     return (
         <div className={s.UsersCont}>
             {props.toMake.users.map((value, index) => {
@@ -22,7 +24,7 @@ function ClearUsers(props) {
                         </div>
                         <span>Joined us {DataHelper.fromNow(value[4])}</span>
                     </div>
-                        {value[6] && <button style={{margin:"2% 5%"}} onClick={()=>Script.openUserPofile(value[5],history)} className={"button"}>Open profile</button>}
+                        {value[7] && <ActionLine notYouFolCount={value[6]} youFolCount={youFolCount} myId={id} value={value[5]} history={history}/>}
                     </>
                 } return null
             })}

@@ -18,7 +18,7 @@ function openUser(e, history, inputId) {
     history.push(`/users/${id}`)
     window.location.reload()
 }
-function openUserPofile(id,hist) {
+function openUserPofile(id, hist) {
     hist.push(`/profile/${id}`)
 }
 function input(value) {
@@ -31,7 +31,12 @@ function HidePanel(e, s) {
     parrent.previousElementSibling.classList.toggle(s.FullHeight)
     parrent.previousElementSibling.children[0].scrollIntoView()
 }
+function Subscribe(id, myId, youFolCount, toast, otherUserFolCount) {
+    axios.post("https://sonet34.herokuapp.com/api/subscribe", { id, myId, count: youFolCount, otherUserFolCount })
+        .then((response) => toast(response.data.message))
+        .catch((error) => error && console.error(error))
+}
 
-const obj={ getUsers, openUser, getSelectedUser, HidePanel, input, openUserPofile}
+const obj = { getUsers, openUser, getSelectedUser, HidePanel, input, openUserPofile, Subscribe }
 
 export default obj;
