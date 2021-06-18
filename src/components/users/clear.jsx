@@ -7,7 +7,7 @@ import Script from "./script.js"
 import ActionLine from "./actionLine.jsx";
 function ClearUsers(props) {
     const history = useHistory();
-    const { id, youFolCount } = JSON.parse(localStorage.getItem("userInfo"))
+    const { id } = JSON.parse(localStorage.getItem("userInfo"))
     return (
         <div className={s.UsersCont}>
             {props.toMake.users.map((value, index) => {
@@ -25,7 +25,7 @@ function ClearUsers(props) {
                         </div>
                         <span><AiOutlineClockCircle /> Joined us {DataHelper.fromNow(value[4])}</span>
                     </div>
-                        {value[7] && <ActionLine notYouFolCount={value[6]} youFolCount={youFolCount} myId={id} value={value[5]} history={history} />}
+                        {value[7] && <ActionLine notYouFolCount={value[6]} value={value[5]} history={history} />}
                     </>
                 } return null
             })}

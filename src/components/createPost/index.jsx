@@ -8,7 +8,7 @@ function CreatePost(props) {
     return (
         <div className={s.Container}>
             <form>
-                <input ref={(el) => image = el} type="file"></input>
+                <input ref={(el) => image = el} type="file" style={{display:"none"}}></input>
             </form>
             <textarea ref={(el) => text = el} className={s.InputPostText} placeholder={"Input your post text"} ></textarea>
             <p>

@@ -31,8 +31,8 @@ function HidePanel(e, s) {
     parrent.previousElementSibling.classList.toggle(s.FullHeight)
     parrent.previousElementSibling.children[0].scrollIntoView()
 }
-function Subscribe(id, myId, youFolCount, toast, otherUserFolCount) {
-    axios.post("https://sonet34.herokuapp.com/api/subscribe", { id, myId, count: youFolCount, otherUserFolCount })
+function Subscribe(id, toast, otherUserFolCount) {
+    axios.post("https://sonet34.herokuapp.com/api/subscribe", { userId:id, otherUserFolCount })
         .then((response) => toast(response.data.message))
         .catch((error) => error && console.error(error))
 }

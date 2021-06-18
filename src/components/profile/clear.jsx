@@ -25,7 +25,7 @@ function ClearProfile(props) {
             <Ver userInfo={userInfo} myId={myId} />
         </></PageHeader>
         <div className={s.Back}></div>
-        {myId === userInfo.id && <FirstLine />}
+        <FirstLine imgUrl={userInfo.avatar} myId={myId} id={userInfo.id}/>
         <div className={"Separator"} onClick={(e) => e.target.nextElementSibling.classList.toggle("Hide")}></div>
         <FlexColl myId={myId} up={up} cr={cr} userInfo={userInfo} />
     </>

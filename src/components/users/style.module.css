@@ -43,6 +43,15 @@
 .Item>div {
     text-align: left;
     padding: 1% 5%;
+    flex: 2 0;
+}
+
+.Item img{
+    height: 80px;
+    width: auto;
+    margin: 5px -20px 5px 20px;
+    border-radius: 10%;
+    box-shadow: 0 5px 10px 0 rgb(107 159 199 / 34%);
 }
 
 .Item>div span {
@@ -91,8 +100,9 @@
 
 .UsersCont {
     transition: all 0.3s ease 0s;
-    height: 80.8%;
+    height: 80%;
     overflow-y: scroll;
+    margin-bottom: 13%;
 }
 
 .UsersCont::-webkit-scrollbar-track {
@@ -143,7 +153,6 @@
         height: 89%!important;
     }
     .UsersCont {
-        height: 88%;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
@@ -162,15 +171,9 @@
         width: auto;
         height: 30px;
     }
-    .UsersCont {
-        height: 80%;
-    }
 }
 
 @media (max-width:2200px) {
-    .UsersCont {
-        height: 80%;
-    }
     .FullHeight {
         height: 89%!important;
     }
@@ -194,9 +197,6 @@
 }
 
 @media (max-width:1800px) {
-    .UsersCont {
-        height: 73%;
-    }
     .FullHeight {
         height: 84%!important;
     }
@@ -220,9 +220,6 @@
 }
 
 @media (max-width:1440px) {
-    .UsersCont {
-        height: 76%;
-    }
     .FullHeight {
         height: 89%!important;
     }
@@ -247,9 +244,6 @@
     }
     .FullHeight {
         height: 89%!important;
-    }
-    .UsersCont {
-        height: 78%;
     }
     .Container {
         max-width: unset;
@@ -276,9 +270,6 @@
     .FullHeight {
         height: 82%!important;
     }
-    .UsersCont {
-        height: 79%;
-    }
     .Container {
         margin: unset;
         max-width: unset;
@@ -289,9 +280,6 @@
 }
 
 @media (max-width:425px) {
-    .UsersCont {
-        height: 78%;
-    }
     .FullHeight {
         height: 83%!important;
     }

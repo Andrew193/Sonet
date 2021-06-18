@@ -6,6 +6,8 @@
     height: -webkit-fill-available;
     border-left: 1px solid #cecccc;
     border-right: 1px solid #cecccc;
+    display: flex;
+    flex-direction: column;
 }
 #HF{
     height: 100%;
@@ -15,7 +17,7 @@
     overflow: unset;
 }
 .PostsCont {
-    height: 85%;
+    margin-bottom: 11%;
     overflow-y: scroll;
 }
 
