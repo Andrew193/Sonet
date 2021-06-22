@@ -1,25 +1,20 @@
-import axios from "axios";
-
-
+import HttpHelper from "../../helpers/httpHelper"
+import CommonHelper from "../../helpers/common"
 function getUsers() {
-    return axios.get("https://sonet34.herokuapp.com/api/users")
-        .then((response) => response.data)
-        .catch((error) => error)
+    return HttpHelper.getAllUsers();
 }
 
 function getSelectedUser(id) {
-    return axios.get("https://sonet34.herokuapp.com/api/users/getOne", { params: { id } })
-        .then((response) => response.data)
-        .catch((error) => error)
+    return HttpHelper.getOneUser(id)
 }
 
 function openUser(e, history, inputId) {
     const id = e ? e.currentTarget.dataset.id : inputId
-    history.push(`/users/${id}`)
+    CommonHelper.redirect(history, null, `/users/${id}`)
     window.location.reload()
 }
 function openUserPofile(id, hist) {
-    hist.push(`/profile/${id}`)
+    CommonHelper.redirect(hist, null, `/profile/${id}`)
 }
 function input(value) {
     const valueReal = parseInt(value)
@@ -32,9 +27,7 @@ function HidePanel(e, s) {
     parrent.previousElementSibling.children[0].scrollIntoView()
 }
 function Subscribe(id, toast, otherUserFolCount) {
-    axios.post("https://sonet34.herokuapp.com/api/subscribe", { userId:id, otherUserFolCount })
-        .then((response) => toast(response.data.message))
-        .catch((error) => error && console.error(error))
+    HttpHelper.subscribe(id, otherUserFolCount, toast)
 }
 
 const obj = { getUsers, openUser, getSelectedUser, HidePanel, input, openUserPofile, Subscribe }

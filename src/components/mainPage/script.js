@@ -1,13 +1,13 @@
-import axios from "axios";
+import HttpHelper from "../../helpers/httpHelper"
 import Script from "../header/script.js"
 
 
-function UpdateInfo(values, close,history) {
-    axios.put("https://sonet34.herokuapp.com/api/users/update", values)
+function UpdateInfo(values, close, history) {
+    HttpHelper.userUpdate(values)
     close();
     Script.leave(history)
 }
 
-const obj={ UpdateInfo }
+const obj = { UpdateInfo }
 
 export default obj;

@@ -1,72 +1,62 @@
-import axios from "axios";
 import HTMLhelp from "../../helpers/htmlHelper.js"
-
+import HttpHelper from "../../helpers/httpHelper"
+import CommonHelper from "../../helpers/common"
 function refresh(socket, userId) {
-    socket.emit("postUpdate").emit("notMyPostUpdate", { userId }).emit("MyPostUpdate", { userId })
-        .emit("postCreate")
+    socket.emit("postUpdate").emit("notMyPostUpdate", { userId }).emit("MyPostUpdate", { userId }).emit("postCreate")
+}
+
+function getMyPostWithEndpoint(id,set,endpoint) {
+    HttpHelper.getPostWithType(id,set,endpoint)
 }
 
 function getPosts() {
-    return axios.get("https://sonet34.herokuapp.com/api/post")
-        .then((response) => response.data)
-        .catch((error) => error)
+    return HttpHelper.getPosts(null);
+}
+
+function afterEmotion(socket, userId, emtype, notify) {
+    notify(HTMLhelp.createHTML({ title: "Ok", message: `You ${emtype} it` }))
+    refresh(socket, userId);
 }
 
 function getSelectedPost(id, notify) {
-    return axios.get("https://sonet34.herokuapp.com/api/post/getOne", { params: { id } })
-        .then((response) => response.data)
-        .catch((error) => error.response && notify(error.response.data.posts))
+    return HttpHelper.getOnePost(id, notify);
 }
 
 function like(id, userId, likeCount, notify, dislikeCount, socket) {
-    axios.put("https://sonet34.herokuapp.com/api/post/like", { userId, id, likeCount, dislikeCount })
-        .then((response) => {
-            notify(HTMLhelp.createHTML({ title: "Ok", message: "You like it" }))
-            refresh(socket, userId);
-        })
-        .catch((error) => error.response && notify(HTMLhelp.createHTML({ title: "Sorry", message: error.response.data.error })))
+    HttpHelper.emotion(userId, id, likeCount, dislikeCount, () => afterEmotion(socket, userId, "dislike", notify),
+        (error) => notify(HTMLhelp.createHTML({ title: "Sorry", message: error.response.data.error })), "like")
 }
 
 function getComment(history, id) {
-    history.push({
-        pathname: "/comment",
-        state: { id }
-    })
+    CommonHelper.redirect(history, { id }, "/comment")
 }
 
-function getNotMy(hist, id) {
-    hist.push({
-        pathname: "/post/notMy",
-        state: { id }
-    })
+function getNotMy(history, id) {
+    CommonHelper.redirect(history, { id }, "/post/notMy")
+    window.location.reload();
 }
 
-function getMy(hist, id) {
-    hist.push({
-        pathname: "/post/my",
-        state: { id }
-    })
+function getMy(history, id) {
+    CommonHelper.redirect(history, { id }, "/post/my")
+    window.location.reload();
 }
 
 function def(hist) {
-    hist.push("/posts")
+    CommonHelper.redirect(hist, null, "/posts")
 }
 
 function dislike(id, userId, dislikeCount, notify, likeCount, socket) {
-    axios.put("https://sonet34.herokuapp.com/api/post/dislike", { userId, id, dislikeCount, likeCount })
-        .then((response) => {
-            notify(HTMLhelp.createHTML({ title: "Ok", message: "You dislike it" }))
-            refresh(socket, userId);
-        })
-        .catch((error) => error.response && notify(HTMLhelp.createHTML({ title: "Sorry", message: error.response.data.error })))
+    HttpHelper.emotion(userId, id, likeCount, dislikeCount, () => afterEmotion(socket, userId, "dislike", notify),
+        (error) => notify(HTMLhelp.createHTML({ title: "Sorry", message: error.response.data.error })), "dislike")
 }
 
 function openPost(e, history, inputId) {
     const id = e ? e.currentTarget.dataset.id : inputId
-    history.push(`/posts/${id}`)
+    CommonHelper.redirect(history, null, `/posts/${id}`)
     window.location.reload();
 }
 
-const obj = { openPost, getSelectedPost, getPosts, like, dislike, getNotMy, getMy, def, getComment }
+const obj = { openPost, getSelectedPost, getPosts, like, dislike, getNotMy, getMy, def, getComment,
+    getMyPostWithEndpoint }
 
 export default obj;

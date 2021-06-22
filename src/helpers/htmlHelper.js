@@ -1,6 +1,3 @@
-
-
-
 function createHTML(info) {
     const { title, message } = info;
     return <>

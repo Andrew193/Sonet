@@ -8,6 +8,10 @@ function getCookie(value) {
     return spdString[value];
 }
 function removeCookie(valueToRemove) {
-   document.cookie=`${valueToRemove}="";  max-age=0`;
+    document.cookie = `${valueToRemove}="";  max-age=0`;
 }
-module.exports = { getCookie, removeCookie };
+function refreshCookie(name, value) {
+    removeCookie(name);
+    document.cookie = `${name}=${value}`;
+}
+module.exports = { getCookie, removeCookie, refreshCookie };

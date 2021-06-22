@@ -5,18 +5,24 @@ import DateHelper from "../../helpers/dateHelper.js";
 import FlexColl from "./FlexColl.jsx";
 import Script from "./script.js"
 import postServ from "../posts/script.js"
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import PageHeader from "../common/header/index.jsx";
+import UserHelper from "../../helpers/userHelper"
 function ClearProfile(props) {
     const { s, history, userInfo } = props;
     const myId = JSON.parse(localStorage.getItem("userInfo")).id
     const [count, setCount] = useState(0)
     const cr = DateHelper.fromNow(userInfo.createdAt),
         up = DateHelper.fromNow(userInfo.updatedAt);
+    let image = useRef();
     useEffect(() => {
         Script.getPCount(userInfo.id, setCount);
     }, [userInfo.id])
     return (<>
+        <form>
+            <input ref={(el) => image = el} onChange={() => UserHelper.updateImage(image,"setBack")} type="file"
+                style={{ display: "none" }}></input>
+        </form>
         <PageHeader historyPath={"/"}><>
             <div>
                 <Link to={{ pathname: "/profile" }}>{userInfo.userName}</Link><br />
@@ -24,8 +30,9 @@ function ClearProfile(props) {
             </div>
             <Ver userInfo={userInfo} myId={myId} />
         </></PageHeader>
-        <div className={s.Back}></div>
-        <FirstLine imgUrl={userInfo.avatar} myId={myId} id={userInfo.id}/>
+        <div className={s.Back} onClick={() => (myId === userInfo.id) && UserHelper.CallImageInput(image)}
+            style={userInfo.back && { backgroundImage: `url(${userInfo.back})` }}></div>
+        <FirstLine imgUrl={userInfo.avatar} myId={myId} id={userInfo.id} />
         <div className={"Separator"} onClick={(e) => e.target.nextElementSibling.classList.toggle("Hide")}></div>
         <FlexColl myId={myId} up={up} cr={cr} userInfo={userInfo} />
     </>

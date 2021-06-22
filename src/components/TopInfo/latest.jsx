@@ -6,9 +6,7 @@ import PostCreator from "./creators/post";
 function LatestPosts(props) {
     const [state, setState] = useState(false);
     props.socket.on("postCreate", (updatedPosts) => setState({ posts: updatedPosts }))
-    useEffect(() => {
-        Script.getPosts().then((newState) => setState(newState))
-    }, [])
+    useEffect(() => Script.getPosts().then((newState) => setState(newState)), [])
     return (
         <div className={!state ? s.Tip + " " + s.Center : s.Tip}>
             <h2>Latest Posts</h2>
@@ -16,7 +14,7 @@ function LatestPosts(props) {
                 <>
                     <PostCreator toCreate={state.posts} />
                     <div className={s.LastTipItem}>Show More</div>
-                </> : <Skeleton height={"50px"} count={5}/>}
+                </> : <Skeleton height={"50px"} count={5} />}
         </div>
     )
 }

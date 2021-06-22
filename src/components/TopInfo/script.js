@@ -1,21 +1,14 @@
-import axios from "axios";
-
-
+import HttpHelper from "../../helpers/httpHelper"
+import CommonHelper from "../../helpers/common"
 function getPosts() {
-    return axios.get("https://sonet34.herokuapp.com/api/post", { params: { howMany: 5 } })
-        .then((response) => response.data)
-        .catch((error) => {
-            if (error) { 
-                console.log(error);
-            }
-        })
+    return HttpHelper.getPosts(5)
 }
 
-function openFull(history,id) {
-    history.push(`/posts/${id}`)
+function openFull(history, id) {
+    CommonHelper.redirect(history, null, `/posts/${id}`)
     window.location.reload()
 }
 
-const obj={ getPosts, openFull }
+const obj = { getPosts, openFull }
 
 export default obj

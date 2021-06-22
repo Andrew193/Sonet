@@ -9,7 +9,7 @@ function FirstLine(props) {
     return (
         <>
             <form>
-                <input ref={(el) => image = el} onChange={()=>UserHelper.updateAvatar(image)} type="file"
+                <input ref={(el) => image = el} onChange={()=>UserHelper.updateImage(image,"setAvatar")} type="file"
                     style={{ display: "none" }}></input>
             </form>
             <div className={s.FirstLine}>

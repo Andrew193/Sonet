@@ -9,15 +9,12 @@ import Skeleton from "react-loading-skeleton";
 function Profile(props) {
     const history = useHistory();
     const [userInfo, setUserInfo] = useState(false);
-    const id=props.match.params.id;
+    const id = props.match.params.id;
     useEffect(() => {
-        if (!id) {
-            setUserInfo(JSON.parse(localStorage.getItem("userInfo")));
-        } else {
-            Script.getUser(id)
+        !id ? setUserInfo(JSON.parse(localStorage.getItem("userInfo")))
+            : Script.getUser(id)
                 .then((response) => setUserInfo(response.data.user))
                 .catch((error) => console.log(error))
-        }
     }, [id])
     return (
         <div className={s.Container}>
@@ -27,7 +24,7 @@ function Profile(props) {
                 <>
                     <Skeleton height={"50px"} />
                     <Skeleton height={"250px"} />
-                    <Skeleton height={"50px"} count={5}/>
+                    <Skeleton height={"50px"} count={5} />
                 </>
             }
         </div>

@@ -48,14 +48,9 @@ function App() {
               <Components.PostsContainer notify={notify} socket={socket} />
               <Components.TopInfo socket={socket} />
             </div>}></Route>
-          <Route exact path={"/post/notMy"} render={() =>
+          <Route exact path={"/post/:type"} render={() =>
             <div className={"genContainer"}>
-              <Components.NotMy notify={notify} socket={socket} />
-            </div>}>
-          </Route>
-          <Route exact path={"/post/my"} render={() =>
-            <div className={"genContainer"}>
-              <Components.My notify={notify} socket={socket} />
+              <Components.SpecialPosts notify={notify} socket={socket} />
             </div>}>
           </Route>
           <Route exact path={"/comment/:id?"} render={() =>
