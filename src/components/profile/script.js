@@ -13,17 +13,17 @@ function getPCount(id, set) {
 }
 
 function getMyFollowers(myId, history) {
-
+    HttpHelper.followersArray((idArray, history) => HttpHelper.follow(idArray, history), history, myId)
 }
 
 function getMyFollowings(myId, history) {
-    HttpHelper.followingArray((idArray,history) => HttpHelper.follow(idArray, history), history, myId)
+    HttpHelper.followingArray((idArray, history) => HttpHelper.follow(idArray, history), history, myId)
 }
 
 function getUser(id) {
     return HttpHelper.getOneObj(id);
 }
 
-const obj = { openModal, getPCount, confirmPerson, getUser, getMyFollowings }
+const obj = { openModal, getPCount, confirmPerson, getUser, getMyFollowings, getMyFollowers }
 
 export default obj;
