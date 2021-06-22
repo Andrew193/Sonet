@@ -7,7 +7,7 @@ function PageHeader(props) {
     const { historyPath } = props;
     return (
         <div className={"basicPageHead"} style={{ display: "flex" }}>
-            <MdKeyboardBackspace className={s.Icon} onClick={() => CommonHelper.redirect(history, null, historyPath)} />
+            <MdKeyboardBackspace id={s.Icon} onClick={() => CommonHelper.redirect(history, null, historyPath)} />
             {props.children}
         </div>
     )

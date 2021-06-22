@@ -46,6 +46,7 @@
     background-color: white;
     border-radius: 20px;
     padding: 10px;
+    box-shadow: 0 5px 10px 0 rgb(0,130,231,20%);
 }
 
 .userInfo p {

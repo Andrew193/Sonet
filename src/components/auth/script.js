@@ -14,4 +14,4 @@ function sendReq(values, resetForm, flag, seter, toast) {
         : HttpHelper.authUser(values, (token) => comboReset(token, seter, resetForm), (error) => toast(error))
 }
 
-export default sendReq;
+export default {sendReq};

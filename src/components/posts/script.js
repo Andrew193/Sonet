@@ -5,8 +5,8 @@ function refresh(socket, userId) {
     socket.emit("postUpdate").emit("notMyPostUpdate", { userId }).emit("MyPostUpdate", { userId }).emit("postCreate")
 }
 
-function getMyPostWithEndpoint(id,set,endpoint) {
-    HttpHelper.getPostWithType(id,set,endpoint)
+function getMyPostWithEndpoint(id, set, endpoint) {
+    HttpHelper.getPostWithType(id, set, endpoint)
 }
 
 function getPosts() {
@@ -19,7 +19,9 @@ function afterEmotion(socket, userId, emtype, notify) {
 }
 
 function getSelectedPost(id, notify) {
-    return HttpHelper.getOnePost(id, notify);
+    return HttpHelper.getOnePost(id, notify)
+        .then(response => response)
+        .catch(error => error.response && console.error(error.response))
 }
 
 function like(id, userId, likeCount, notify, dislikeCount, socket) {
@@ -56,7 +58,9 @@ function openPost(e, history, inputId) {
     window.location.reload();
 }
 
-const obj = { openPost, getSelectedPost, getPosts, like, dislike, getNotMy, getMy, def, getComment,
-    getMyPostWithEndpoint }
+const obj = {
+    openPost, getSelectedPost, getPosts, like, dislike, getNotMy, getMy, def, getComment,
+    getMyPostWithEndpoint
+}
 
 export default obj;

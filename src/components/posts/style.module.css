@@ -13,11 +13,8 @@
     height: 100%;
     max-width:unset;
 }
-#HF>div{
-    overflow: unset;
-}
 .PostsCont {
-    margin-bottom: 11%;
+    margin-bottom: 70px;
     overflow-y: scroll;
 }
 
