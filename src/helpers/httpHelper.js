@@ -65,6 +65,14 @@ class Http {
             })
             .catch((error) => error.response && console.error(error.response.data.error))
     }
+    followersArray(callback, history, myId) {
+        axios.get("https://sonet34.herokuapp.com/api/follow/followersArray", { params: { myId } })
+            .then((response) => {
+                const idArray = response.data.length.reduce((prev, curr) => [...prev, +curr.userId], [])
+                callback(idArray, history)
+            })
+            .catch((error) => error.response && console.error(error.response.data.error))
+    }
     getOnePost(id, notify) {
         return axios.get("https://sonet34.herokuapp.com/api/post/getOne", { params: { id } })
             .then((response) => response.data)
