@@ -20,9 +20,11 @@
     text-align: end;
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 .Ver svg {
+    cursor: pointer;
     height: 50px;
     width: auto;
     transition: color ease 0.7s;
