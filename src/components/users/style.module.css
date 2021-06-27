@@ -106,12 +106,12 @@
 
 ::-webkit-scrollbar-track {
     border-radius: 10px;
-    background-color: transparent;
+    background-color: #f6f2ff;
 }
 
 ::-webkit-scrollbar {
     width: 7px;
-    background-color: transparent;
+    background-color: #f6f2ff;
 }
 
 ::-webkit-scrollbar-thumb {
