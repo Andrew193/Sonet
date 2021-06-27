@@ -28,37 +28,37 @@ function App() {
     <Context.Provider value={{ notify, socket }}>
       <div className="App">
         {flag && <>
-          <Components.Header notify={notify} socket={socket} />
+          <Components.Header />
           <Switch>
             <Route exact path={"/"} render={() =>
               <div className={"genContainer"}>
-                <Components.MainPage socket={socket} open={open} notify={notify} />
-                <Components.TopInfo socket={socket} />
+                <Components.MainPage open={open} />
+                <Components.TopInfo />
               </div>}>
             </Route>
             <Route exact path={"/auth"} render={() => <Components.ContainerAuth />}></Route>
             <Route exact path={"/users/:id?"} render={() =>
               <div className={"genContainer"}>
-                <Components.UsersContainer notify={notify} />
-                <Components.TopInfo socket={socket} />
+                <Components.UsersContainer />
+                <Components.TopInfo />
               </div>}></Route>
             <Route exact path={"/profile/:id?"} render={() =>
               <div className={"genContainer"}>
                 <Components.Profile />
-                <Components.TopInfo socket={socket} />
+                <Components.TopInfo />
               </div>}></Route>
             <Route exact path={"/posts/:id?"} render={() =>
               <div className={"genContainer"}>
-                <Components.PostsContainer notify={notify} socket={socket} />
-                <Components.TopInfo socket={socket} />
+                <Components.PostsContainer />
+                <Components.TopInfo />
               </div>}></Route>
             <Route exact path={"/post/:type"} render={() =>
               <div className={"genContainer"}>
-                <Components.SpecialPosts notify={notify} socket={socket} />
+                <Components.SpecialPosts />
               </div>}>
             </Route>
             <Route exact path={"/comment/:id?"} render={() =>
-              <Components.Comment notify={notify} socket={socket} />
+              <Components.Comment />
             }>
             </Route>
             <Route exact path={"/followers"} render={() =>

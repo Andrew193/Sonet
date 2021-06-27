@@ -4,8 +4,11 @@ import DataHelper from "../../helpers/dateHelper.js"
 import s from "./style.module.css"
 import Script from "./script.js"
 import { v4 as uuidv4 } from 'uuid';
+import { useContext } from "react";
+import Context from "../../helpers/contextHelper"
 function ClearPosts(props) {
-    const { toMake, id, notify, socket } = props;
+    const { toMake, id } = props;
+    const { socket, notify } = useContext(Context)
     const history = useHistory();
     return (
         <div className={s.PostsCont}>

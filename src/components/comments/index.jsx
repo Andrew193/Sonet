@@ -1,13 +1,15 @@
 import { withRouter } from "react-router";
 import s from "./style.module.css"
 import Loader from "../common/spinner/index"
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import Context from "../../helpers/contextHelper"
 import Script from "../posts/script"
 import S2 from "./Script.js"
 import ClearComment from "./clearComment";
 function Comments(props) {
-    const { id } = props.location.state || props.match.params, [post, setPost] = useState(false), { notify, socket } = props,
+    const { id } = props.location.state || props.match.params, [post, setPost] = useState(false),
         userId = JSON.parse(localStorage.getItem("userInfo")).id, [comments, setComments] = useState(false);
+    const { socket, notify } = useContext(Context)
     socket.on("CommentAdd", (updatedComment) => setComments(updatedComment));
     socket.on("refreshPost", (e) => setPost({ posts: [e] }));
     useEffect(() => {

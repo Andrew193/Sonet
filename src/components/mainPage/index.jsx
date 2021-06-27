@@ -1,10 +1,10 @@
 import ClearMainPage from "./clear";
 
 function MainPage(props) {
-    const { open, socket, notify } = props
+    const { open } = props
     return (
         <>
-            <ClearMainPage open={open} socket={socket} notify={notify} />
+            <ClearMainPage open={open} />
         </>
     )
 }

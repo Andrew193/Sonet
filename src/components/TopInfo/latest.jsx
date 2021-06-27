@@ -1,11 +1,13 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import s from "./style.module.css"
 import Script from "./script.js"
 import Skeleton from 'react-loading-skeleton';
 import PostCreator from "./creators/post";
-function LatestPosts(props) {
+import Context from "../../helpers/contextHelper"
+function LatestPosts() {
     const [state, setState] = useState(false);
-    props.socket.on("postCreate", (updatedPosts) => setState({ posts: updatedPosts }))
+    const { socket } = useContext(Context)
+    socket.on("postCreate", (updatedPosts) => setState({ posts: updatedPosts }))
     useEffect(() => Script.getPosts().then((newState) => setState(newState)), [])
     return (
         <div className={!state ? s.Tip + " " + s.Center : s.Tip}>

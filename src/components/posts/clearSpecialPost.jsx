@@ -1,9 +1,12 @@
 import withPageHeader from "../../hoc/withPageHeader"
 import SortLine from "./SortLine.jsx";
 import ClearPost from "./clear.jsx"
+import { useContext } from "react";
+import Context from "../../helpers/contextHelper"
 
 function ClearSpecialPost(props) {
-    const { notify, socket, posts, id } = props
+    const { socket, notify } = useContext(Context)
+    const { posts, id } = props
     return (
         <>
             <div className={"Separator"}></div>

@@ -1,10 +1,10 @@
 import LatestPosts from "./latest"
 import s from "./style.module.css"
 
-function TopInfo(props) {
+function TopInfo() {
     return (
         <aside className={s.Container}>
-            <LatestPosts socket={props.socket} />
+            <LatestPosts />
             <span>© {(new Date()).getFullYear()} Sonet, Inc.</span>
         </aside>
     )
