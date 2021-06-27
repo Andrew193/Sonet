@@ -26,7 +26,7 @@ function FlexColl(props) {
                 <span onClick={() => Script.getMyFollowings(myId, history)}>
                     <AiOutlineEye className={s.CommonIcon} /> <b className={s.Black}>{userInfo.youFolCount}</b> Following
                 </span>
-                <span>
+                <span onClick={() => Script.getMyFollowers(myId, history)}>
                     <AiOutlineEye className={s.CommonIcon} /><b className={s.Black}>{userInfo.folCount}</b> Followers
                 </span>
             </div>
