@@ -48,6 +48,7 @@
     padding-bottom: 38%;
     background-color: #ccc;
     transition: all ease 0.7s;
+    position: relative;
 }
 
 .FlexColl {
@@ -95,12 +96,24 @@
 
 .FirstLine img:hover {
     opacity: 0.9;
-    border-color: darkkhaki;
+    border-color: rgb(73, 73, 248);
 }
 
-.Back:hover {
-    opacity: 0.9;
-    border-color: darkkhaki;
+.Back::after {
+    content: "";
+    background: rgb(73, 73, 248);
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    width: 100%;
+    opacity: 0.5;
+    height: 100%;
+    visibility: hidden;
+}
+
+.Back:hover::after {
+    visibility: visible;
 }
 
 .FirstLine button {
@@ -247,6 +260,11 @@
     .Container {
         margin: unset;
         max-width: unset;
+    }
+    .FirstLine img {
+        height: 150px;
+        width: 150px;
+        top: -100%;
     }
 }
 
