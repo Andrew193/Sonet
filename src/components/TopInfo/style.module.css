@@ -40,6 +40,7 @@
     width: 110%;
     margin-left: -5%;
     transition: all ease 0.7s;
+    margin-top: 10px;
 }
 
 .Tip>div span {
@@ -63,7 +64,7 @@
 }
 
 .LastTipItem {
-    margin-top: 0px!important;
+    margin-bottom: -10px;
     text-align: center;
     padding: 10px 5px;
     border-bottom-left-radius: 20px;
