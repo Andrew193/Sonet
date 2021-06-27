@@ -291,4 +291,30 @@
         font-size: 10px;
         height: min-content;
     }
+    .FirstLine {
+        min-height: 40px;
+    }
+    .FirstLine img {
+        height: 100px;
+        width: 100px;
+        top: -150%;
+    }
+}
+
+@media (max-width:475px) {
+    .FirstLine {
+        min-height: 30px;
+    }
+    .FirstLine img {
+        height: 70px;
+        width: 70px;
+        top: -120%;
+    }
+    .FirstLine button {
+        font-size: 13px;
+        min-width: unset;
+    }
+    .FirstLine button svg {
+        display: none;
+    }
 }
