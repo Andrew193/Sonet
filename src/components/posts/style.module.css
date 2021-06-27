@@ -9,10 +9,12 @@
     display: flex;
     flex-direction: column;
 }
-#HF{
+
+#HF {
     height: 100%;
-    max-width:unset;
+    max-width: unset;
 }
+
 .PostsCont {
     margin-bottom: 70px;
     overflow-y: scroll;
@@ -23,6 +25,10 @@
     padding: 1% 5%;
     position: relative;
     border-bottom: 1px solid #cecccc;
+}
+
+.PostsCont>div:nth-child(2n) {
+    background-color: #f6f2ff;
 }
 
 .PostsCont a {
@@ -50,14 +56,17 @@
     cursor: pointer;
     transition: color ease 0.3s;
 }
-.Pheader{
+
+.Pheader {
     display: flex;
     align-items: center;
 }
-#HF .SortLine{
+
+#HF .SortLine {
     width: 85%;
 }
-.SortLine{
+
+.SortLine {
     padding: 10px;
     display: flex;
     flex-wrap: wrap;
@@ -68,11 +77,13 @@
     height: 9%;
     justify-content: space-around;
 }
-.SortLine button{
+
+.SortLine button {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
 }
+
 .dislike:hover {
     color: rgb(211, 59, 59);
 }
@@ -85,14 +96,20 @@
     color: rgb(73, 73, 248);
 }
 
-.PostsCont svg{
+.PostsCont svg {
     cursor: pointer;
 }
 
-.Time{
+.Time {
     position: absolute;
     top: 0%;
     font-size: 13px!important;
     right: 1%;
     color: gray;
+}
+
+@media (max-width:1024px) {
+    .Container {
+        max-width: 100%;
+    }
 }
