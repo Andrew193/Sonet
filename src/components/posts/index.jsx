@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import ClearPosts from "./clear.jsx";
 import Script from "./script.js"
 import Skeleton from 'react-loading-skeleton';
@@ -6,9 +6,10 @@ import SortLine from "./SortLine.jsx"
 import s from "./style.module.css"
 import { Link, withRouter } from "react-router-dom";
 import PageHeader from "../common/header/index.jsx";
+import Context from "../../helpers/contextHelper"
 function PostsContainer(props) {
     const [posts, setPosts] = useState(false);
-    const { socket, notify } = props;
+    const { socket, notify } = useContext(Context)
     const { id } = JSON.parse(localStorage.getItem("userInfo"))
     socket.on("postUpdate", (updatedPosts) => setPosts({ posts: updatedPosts }))
     useEffect(() => {
@@ -29,7 +30,7 @@ function PostsContainer(props) {
                 <Link to={{ pathname: "/posts" }}>Posts</Link>
             </PageHeader>
             <div className={"Separator"} onClick={(e) => e.target.nextElementSibling.classList.toggle("Hide")}></div>
-            {posts ? <><ClearPosts id={id} socket={socket} toMake={posts} notify={notify} />
+            {posts ? <><ClearPosts id={id} toMake={posts} />
                 <SortLine /> </> :
                 <Skeleton height={"60px"} count={10} />}
         </div>

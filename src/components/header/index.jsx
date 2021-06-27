@@ -12,7 +12,7 @@ import {
 } from "react-icons/ai";
 import PostPortal from "./postPortal";
 import Script2 from "../profile/script"
-function Header(props) {
+function Header() {
     const [flag, setFlag] = useState(false);
     const history = useHistory();
     return (
@@ -39,7 +39,7 @@ function Header(props) {
                 <ProfileContainer />
             </div>
             {flag && <Portal s={s.userInfo} click={() => setFlag(!flag)} />}
-            <PostPortal socket={props.socket} notify={props.notify} />
+            <PostPortal />
         </nav>
     )
 }

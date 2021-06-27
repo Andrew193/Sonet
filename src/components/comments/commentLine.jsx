@@ -1,9 +1,11 @@
-import { useRef } from "react";
+import { useContext, useRef } from "react";
 import s from "./style.module.css"
 import Script from "./Script.js"
+import Context from "../../helpers/contextHelper"
 
 function CommentLine(props) {
-    const { id, comCount, notify, socket } = props
+    const { socket, notify } = useContext(Context)
+    const { id, comCount } = props
     let input = useRef();
     const userInfo = JSON.parse(localStorage.getItem("userInfo"))
     return (

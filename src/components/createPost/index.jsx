@@ -1,10 +1,11 @@
 import s from "./index.module.css"
 import Script from "./script"
-import { useRef } from "react";
-function CreatePost(props) {
+import { useContext, useRef } from "react";
+import Context from "../../helpers/contextHelper"
+function CreatePost() {
     let text = useRef();
     let image = useRef();
-    const { notify, socket } = props
+    const { socket, notify } = useContext(Context)
     return (
         <div className={s.Container}>
             <form>
