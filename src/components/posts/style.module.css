@@ -112,4 +112,14 @@
     .Container {
         max-width: 100%;
     }
+    .SortLine{
+        width: 85%;
+    }
+}
+
+
+@media (max-width:768px) {
+    .Container{
+        margin: 0px;
+    }
 }
