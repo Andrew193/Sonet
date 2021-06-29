@@ -2,7 +2,7 @@ import s from "./index.module.css"
 function Auth(props) {
     const { Formik, setFlag, flag } = props
     return (
-        <div className={s.Container}>
+        <div className={s.Container} testId="Auth">
             <form onSubmit={Formik.handleSubmit}>
                 <article>
                     <h2 className={flag && s.Active} onClick={() => setFlag(true)}>Reg</h2>

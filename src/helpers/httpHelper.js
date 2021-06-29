@@ -121,7 +121,7 @@ class Http {
     authUser(values, callback, callback1) {
         axios.get("https://sonet34.herokuapp.com/api/users/auth", { params: values })
             .then((response) => callback(response.data.token))
-            .then((error) => error.response && callback1(error.response.data.error))
+            .catch((error) => error.response && callback1(error.response.data.error))
     }
 }
 
