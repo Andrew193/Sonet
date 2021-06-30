@@ -1,0 +1,20 @@
+.Container{
+    height: 100%;
+    width: 60%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.Container span{
+    color: rgb(214, 114, 114);
+}
+
+.Container a {
+    color: #060680;
+}
+
+.Container a:hover{
+    color: #0b0bcc;
+}
