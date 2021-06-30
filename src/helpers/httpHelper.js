@@ -12,7 +12,7 @@ class Http {
     }
     configToken(token, history) {
         axios.get("https://sonet34.herokuapp.com/api/token/configToken", { params: { token } })
-            .then((response) => console.log(response)).catch((error) => {
+            .then(_ =>{}).catch((error) => {
                 if (error) {
                     cookieHelper.removeCookie("token")
                     CommonHelper.redirect(history, null, "/auth")
