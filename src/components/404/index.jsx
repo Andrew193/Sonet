@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom"
-import Style from "./style.modyle.css"
+import Style from "./style.module.css"
 
 function Page404() {
     return(
