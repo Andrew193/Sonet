@@ -14,7 +14,7 @@ function Profile(props) {
         !id ? setUserInfo(JSON.parse(localStorage.getItem("userInfo")))
             : Script.getUser(id)
                 .then((response) => setUserInfo(response.data.user))
-                .catch((error) => console.log(error))
+                .catch((error) => console.error(error))
     }, [id])
     return (
         <div className={s.Container}>

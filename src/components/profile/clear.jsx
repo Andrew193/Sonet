@@ -10,17 +10,15 @@ import PageHeader from "../common/header/index.jsx";
 import UserHelper from "../../helpers/userHelper"
 function ClearProfile(props) {
     const { s, history, userInfo } = props;
-    const myId = JSON.parse(localStorage.getItem("userInfo")).id
-    const [count, setCount] = useState(0)
+    const myId = JSON.parse(localStorage.getItem("userInfo")).id;
+    const [count, setCount] = useState(0);
     const cr = DateHelper.fromNow(userInfo.createdAt),
         up = DateHelper.fromNow(userInfo.updatedAt);
     let image = useRef();
-    useEffect(() => {
-        Script.getPCount(userInfo.id, setCount);
-    }, [userInfo.id])
+    useEffect(() => Script.getPCount(userInfo.id, setCount), [userInfo.id])
     return (<>
         <form>
-            <input ref={(el) => image = el} onChange={() => UserHelper.updateImage(image,"setBack")} type="file"
+            <input ref={(el) => image = el} onChange={() => UserHelper.updateImage(image, "setBack")} type="file"
                 style={{ display: "none" }}></input>
         </form>
         <PageHeader historyPath={"/"}><>
