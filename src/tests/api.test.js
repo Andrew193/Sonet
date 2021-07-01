@@ -21,13 +21,13 @@ test("Test create user", (done) => {
 })
 
 //Do not open
-test("Test create comment", (done) => {
-    const callback = () => done();
-    const callback1 = (error) => done(error);
+// test("Test create comment", (done) => {
+//     const callback = () => done();
+//     const callback1 = (error) => done(error);
 
-    HttpHelper.createComment("Test comment's text", 5, 1, "Default", 0, callback, callback1)
-    //+
-})
+//     HttpHelper.createComment("Test comment's text", 5, 1, "Default", 0, callback, callback1)
+//     //+
+// })
 
 test("Test get all comments", (done) => {
     const callback = (error) => done(error)

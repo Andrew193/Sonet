@@ -10,10 +10,11 @@ import UsersContainer from './components/users';
 import PostsContainer from "./components/posts/index"
 import TopInfo from './components/TopInfo';
 import Followers from "./components/followers/index"
+import Page404 from "./components/404/index"
 const obj={
     ContainerAuth, Footer, SpecialPosts, Comment, Header, MainPage,
     Profile, ModalUser, UsersContainer, PostsContainer, TopInfo,
-    Followers
+    Followers, Page404
 }
 
 export default obj;

@@ -61,10 +61,8 @@ function App() {
               <Components.Comment />
             }>
             </Route>
-            <Route exact path={"/followers"} render={() =>
-              <Components.Followers />
-            }>
-            </Route>
+            <Route exact path={"/followers"} render={() =><Components.Followers />}></Route>
+            <Route render={()=><Components.Page404 />}></Route>
           </Switch>
           <Components.Footer />
           <ToastContainer toastStyle={{ background: "black", borderRadius: "15px" }} hideProgressBar={true} autoClose={2000}
