@@ -9,7 +9,7 @@ const ModalUser = forwardRef((props, ref) => {
     const [nm, setName] = useState(userName);
     const [em, setEmail] = useState(email)
     const history = useHistory();
-    const [pas, setPassword] = useState("Your password")
+    const [pas, setPassword] = useState("Confirm/update your password")
     const { click } = props
     return createPortal(
         <div className={s.UpdateModal + " " + "Hide Muser"} ref={ref} onDoubleClick={() => click()}>
