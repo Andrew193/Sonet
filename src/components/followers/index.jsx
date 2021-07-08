@@ -3,10 +3,10 @@ import ClearFollowings from "./clearFollowings";
 import s from "./style.module.css"
 
 function Followers(props) {
-    const users = props.location.state.users
+    const users = props.location.state.users;
     return (
         <div className={s.Container}>
-            <ClearFollowings users={users}/>
+            <ClearFollowings users={users} />
         </div>
     )
 }

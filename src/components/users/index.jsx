@@ -14,9 +14,9 @@ function UsersContainer(props) {
                     usersF.users[0].push(true)
                     setUsers(usersF)
                 })
-                .catch((error) => { error && console.log(error); })
+                .catch((error) => { error && console.error(error); })
         } else {
-            Script.getUsers().then((usersF) => setUsers(usersF)).catch((error) => { error && console.log(error); })
+            Script.getUsers(10).then((usersF) => setUsers(usersF)).catch((error) => { error && console.error(error); })
         }
     }, [props.match.params.id])
     return (

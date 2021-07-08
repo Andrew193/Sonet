@@ -12,7 +12,7 @@ class Http {
     }
     configToken(token, history) {
         axios.get("https://sonet34.herokuapp.com/api/token/configToken", { params: { token } })
-            .then(_ =>{}).catch((error) => {
+            .then(_ => { }).catch((error) => {
                 if (error) {
                     cookieHelper.removeCookie("token")
                     CommonHelper.redirect(history, null, "/auth")
@@ -29,8 +29,8 @@ class Http {
             .then((response) => response.data)
             .catch((error) => error.response && console.error(error.response))
     }
-    getAllUsers() {
-        return axios.get("https://sonet34.herokuapp.com/api/users")
+    getAllUsers(count) {
+        return axios.get("https://sonet34.herokuapp.com/api/users", { params: { count } })
             .then((response) => response.data)
             .catch((error) => error.response && console.error(error.response))
     }

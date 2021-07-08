@@ -1,7 +1,7 @@
 import HttpHelper from "../../helpers/httpHelper"
 import CommonHelper from "../../helpers/common"
-function getUsers() {
-    return HttpHelper.getAllUsers();
+function getUsers(count) {
+    return HttpHelper.getAllUsers(count);
 }
 
 function getSelectedUser(id) {

@@ -100,8 +100,9 @@
 
 .UsersCont {
     transition: all 0.3s ease 0s;
-    height: 78%;
+    height: 75%;
     overflow-y: scroll;
+    margin-bottom: 95px;
 }
 
 ::-webkit-scrollbar-track {
@@ -199,6 +200,9 @@
     .FullHeight {
         height: 84%!important;
     }
+    .UsersCont{
+        height: 73%;
+    }
     .Item span {
         font-size: 16px;
     }
@@ -222,6 +226,9 @@
     .FullHeight {
         height: 89%!important;
     }
+    .UsersCont{
+        height: 77%;
+    }
     .Item span {
         font-size: 16px;
     }
@@ -242,7 +249,7 @@
         width: 85%;
     }
     .FullHeight {
-        height: 89%!important;
+        height: 84%!important;
     }
     .Container {
         max-width: unset;
@@ -267,7 +274,7 @@
         display: none;
     }
     .FullHeight {
-        height: 82%!important;
+        height: 77%!important;
     }
     .Container {
         margin: unset;
@@ -279,9 +286,6 @@
 }
 
 @media (max-width:425px) {
-    .FullHeight {
-        height: 83%!important;
-    }
     .Container {
         margin: unset;
         max-width: unset;
