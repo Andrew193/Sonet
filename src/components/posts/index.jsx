@@ -19,7 +19,7 @@ function PostsContainer(props) {
                 .then((postF) => setPosts(postF))
                 .catch((error) => { error && notify(error.response.data.posts) })
         } else {
-            Script.getPosts()
+            Script.getPosts(10)
                 .then((postF) => setPosts(postF))
                 .catch((error) => { error && notify(error.response.data.error) })
         }

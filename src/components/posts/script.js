@@ -9,8 +9,8 @@ function getMyPostWithEndpoint(id, set, endpoint) {
     HttpHelper.getPostWithType(id, set, endpoint)
 }
 
-function getPosts() {
-    return HttpHelper.getPosts(null);
+function getPosts(count) {
+    return HttpHelper.getPosts(count);
 }
 
 function afterEmotion(socket, userId, emtype, notify) {
