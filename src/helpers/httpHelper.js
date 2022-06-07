@@ -1,5 +1,6 @@
 import cookieHelper from "./cookieHelper"
 import CommonHelper from "./common"
+import Script from "./cookieHelper";
 
 const axios = require('axios').default;
 
@@ -114,7 +115,7 @@ class Http {
 
     getMe(callback) {
         debugger
-        return axios.get("https://sonet34.herokuapp.com/api/users/me?token=" + localStorage.getItem("token"))
+        return axios.get("https://sonet34.herokuapp.com/api/users/me?token=" + Script.getCookie("token"))
             .then((response) => {
                 return response;
             })
