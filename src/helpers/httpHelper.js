@@ -92,8 +92,11 @@ class Http {
         axios.put("https://sonet34.herokuapp.com/api/users/update", values)
     }
     getMe(callback) {
+        debugger
         return axios.get("https://sonet34.herokuapp.com/api/users/me")
-            .then((response) => response)
+            .then((response) => {
+                return response;
+            })
             .catch((error) => error.response && callback(error.response))
     }
     createPost(text, callback, callback1) {
