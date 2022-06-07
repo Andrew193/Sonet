@@ -116,9 +116,7 @@ class Http {
     getMe(callback) {
         debugger
         return axios.get("https://sonet34.herokuapp.com/api/users/me?token=" + Script.getCookie("token"))
-            .then((response) => {
-                return response;
-            })
+            .then((response) => response)
             .catch((error) => error.response && callback(error.response))
     }
 
