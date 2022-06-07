@@ -8,10 +8,10 @@ function leave(history) {
 }
 function GetShortUserInfo(notify) {
     const token = Script.getCookie("token");
-    debugger
+
     if (token) {
         return HttpHelper.getMe((error) => {
-            const inner = htmlHelper.stringFromJSON(error.data);
+            const inner = htmlHelper.stringFromJSON(error?.data);
             inner[0] !== "<" &&
                 notify(htmlHelper.createHTML({ title: "Error", message: inner }));
         })

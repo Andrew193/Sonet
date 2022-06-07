@@ -15,7 +15,7 @@ function ContainerAuth() {
         onSubmit: (values, { resetForm }) => Script.sendReq(values, resetForm, flag, setFlag2, toast)
     })
     return (
-        <Auth Formik={Formik} flag={flag} setFlag={setFlag}></Auth>
+        <Auth Formik={Formik} flag={flag} setFlag={setFlag}/>
     )
 }
 export default ContainerAuth;
