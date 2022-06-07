@@ -17,11 +17,11 @@ function PostsContainer(props) {
         if (id && typeof (+id) === "number") {
             Script.getSelectedPost(+id)
                 .then((postF) => setPosts(postF))
-                .catch((error) => { error && notify(error.response.data.posts) })
+                .catch((error) => { error && notify(error?.response?.data?.posts) })
         } else {
             Script.getPosts()
                 .then((postF) => setPosts(postF))
-                .catch((error) => { error && notify(error.response.data.error) })
+                .catch((error) => { error && notify(error?.response?.data?.error) })
         }
     }, [props.match.params.id])
     return (

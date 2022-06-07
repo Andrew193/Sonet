@@ -26,7 +26,7 @@ function getSelectedPost(id, notify) {
 
 function like(id, userId, likeCount, notify, dislikeCount, socket) {
     HttpHelper.emotion(userId, id, likeCount, dislikeCount, () => afterEmotion(socket, userId, "dislike", notify),
-        (error) => notify(HTMLhelp.createHTML({ title: "Sorry", message: error.response.data.error })), "like")
+        (error) => notify(HTMLhelp.createHTML({ title: "Sorry", message: error?.response?.data?.error })), "like")
 }
 
 function getComment(history, id) {
@@ -49,11 +49,11 @@ function def(hist) {
 
 function dislike(id, userId, dislikeCount, notify, likeCount, socket) {
     HttpHelper.emotion(userId, id, likeCount, dislikeCount, () => afterEmotion(socket, userId, "dislike", notify),
-        (error) => notify(HTMLhelp.createHTML({ title: "Sorry", message: error.response.data.error })), "dislike")
+        (error) => notify(HTMLhelp.createHTML({ title: "Sorry", message: error?.response?.data?.error })), "dislike")
 }
 
 function openPost(e, history, inputId) {
-    const id = e ? e.currentTarget.dataset.id : inputId
+    const id = e ? e?.currentTarget?.dataset?.id : inputId
     CommonHelper.redirect(history, null, `/posts/${id}`)
     window.location.reload();
 }

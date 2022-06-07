@@ -13,7 +13,7 @@ function Profile(props) {
     useEffect(() => {
         !id ? setUserInfo(JSON.parse(localStorage.getItem("userInfo")))
             : Script.getUser(id)
-                .then((response) => setUserInfo(response.data.user))
+                .then((response) => setUserInfo(response?.data?.user))
                 .catch((error) => console.log(error))
     }, [id])
     return (

@@ -9,7 +9,8 @@ function comboReset(token, seter, resetForm) {
     setTimeout(() => window.location.reload(), 150);
 }
 function sendReq(values, resetForm, flag, seter, toast) {
-    values.userName = "Default"
+    values.userName = "Default";
+    console.log("test")
     flag ? HttpHelper.createUser(values, (token) => comboReset(token, seter, resetForm), () => toast("User already exist"))
         : HttpHelper.authUser(values, (token) => comboReset(token, seter, resetForm), (error) => toast(error))
 }

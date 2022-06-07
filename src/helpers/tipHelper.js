@@ -5,7 +5,7 @@ function rel() {
     document.onmouseover = function (event) {
         if (document.body.offsetWidth <= 1024) {
             let target = event.target;
-            let tooltipHtml = target.dataset.tooltip;
+            let tooltipHtml = target?.dataset?.tooltip;
             if (!tooltipHtml) return;
             tooltipElem = document.createElement('div');
             tooltipElem.className = 'tooltip';

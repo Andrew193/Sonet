@@ -14,7 +14,7 @@ function Comments(props) {
     socket.on("refreshPost", (e) => setPost({ posts: [e] }));
     useEffect(() => {
         Script.getSelectedPost(id || 1, notify).then((response) => setPost(response))
-        S2.getAllComments(id, notify).then((response) => setComments(response.data.posts))
+        S2.getAllComments(id, notify).then((response) => setComments(response?.data?.posts))
     }, [id])
     return (
         <div className={s.Container}>
