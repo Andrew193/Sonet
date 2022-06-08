@@ -9,7 +9,7 @@ class Http {
     }
 
     uploadImg(endpoint, data) {
-        fetch("https://sonet34.herokuapp.com/api/img/" + endpoint, {
+        fetch("https://sonet34.herokuapp.com/api/img/" + endpoint + "?token=" + Script.getCookie("token"), {
                 method: "POST",
                 body: data
             }
@@ -28,7 +28,10 @@ class Http {
     }
 
     subscribe(id, otherUserFolCount, toast) {
-        axios.post("https://sonet34.herokuapp.com/api/subscribe", {userId: id, otherUserFolCount})
+        axios.post("https://sonet34.herokuapp.com/api/subscribe?token=" + Script.getCookie("token"), {
+            userId: id,
+            otherUserFolCount
+        })
             .then((response) => toast(response?.data?.message))
             .catch((error) => error.response && console.error(error.response))
     }
@@ -46,35 +49,35 @@ class Http {
     }
 
     getPosts(count) {
-        return axios.get("https://sonet34.herokuapp.com/api/post", {params: {howMany: count}})
+        return axios.get("https://sonet34.herokuapp.com/api/post?token=" + Script.getCookie("token"), {params: {howMany: count}})
             .then((response) => response?.data)
             .catch((error) => error.response && console.error(error.response))
     }
 
     confirm(phone, email) {
-        axios.post("https://sonet34.herokuapp.com/api/users/confirm", {phone, email})
+        axios.post("https://sonet34.herokuapp.com/api/users/confirm?token=" + Script.getCookie("token"), {phone, email})
     }
 
     getPCount(id, set) {
-        axios.get("https://sonet34.herokuapp.com/api/post/count", {params: {id}})
+        axios.get("https://sonet34.herokuapp.com/api/post/count?token=" + Script.getCookie("token"), {params: {id}})
             .then((response) => set(response?.data?.count))
             .catch((error) => error.response && console.error(error.response))
     }
 
     getOneObj(id) {
-        return axios.get("https://sonet34.herokuapp.com/api/users/getOneObj", {params: {id}})
+        return axios.get("https://sonet34.herokuapp.com/api/users/getOneObj?token=" + Script.getCookie("token"), {params: {id}})
             .then((response) => response)
             .catch((error) => error)
     }
 
     follow(idArray, history) {
-        axios.get("https://sonet34.herokuapp.com/api/follow", {params: {idArray: JSON.stringify(idArray)}})
+        axios.get("https://sonet34.herokuapp.com/api/follow?token=" + Script.getCookie("token"), {params: {idArray: JSON.stringify(idArray)}})
             .then((response) => CommonHelper.redirect(history, response?.data, "/followers"))
             .catch((error) => error.response && console.error(error?.response?.data?.error))
     }
 
     followingArray(callback, history, myId) {
-        axios.get("https://sonet34.herokuapp.com/api/follow/followingsArray", {params: {myId}})
+        axios.get("https://sonet34.herokuapp.com/api/follow/followingsArray?token=" + Script.getCookie("token"), {params: {myId}})
             .then((response) => {
                 const idArray = response?.data?.length?.reduce((prev, curr) => [...prev, +curr.userId], [])
                 callback(idArray, history)
@@ -83,7 +86,7 @@ class Http {
     }
 
     followersArray(callback, history, myId) {
-        axios.get("https://sonet34.herokuapp.com/api/follow/followersArray", {params: {myId}})
+        axios.get("https://sonet34.herokuapp.com/api/follow/followersArray?token=" + Script.getCookie("token"), {params: {myId}})
             .then((response) => {
                 const idArray = response?.data?.length?.reduce((prev, curr) => [...prev, +curr.userId], [])
                 callback(idArray, history)
@@ -92,19 +95,24 @@ class Http {
     }
 
     getOnePost(id, notify) {
-        return axios.get("https://sonet34.herokuapp.com/api/post/getOne", {params: {id}})
+        return axios.get("https://sonet34.herokuapp.com/api/post/getOne?token=" + Script.getCookie("token"), {params: {id}})
             .then((response) => response?.data)
             .catch((error) => error?.response && notify(error?.response?.data?.posts))
     }
 
     emotion(userId, id, likeCount, dislikeCount, callback, callback1, emType) {
-        axios.put("https://sonet34.herokuapp.com/api/post/" + emType, {userId, id, likeCount, dislikeCount})
+        axios.put("https://sonet34.herokuapp.com/api/post/" + emType + "?token=" + Script.getCookie("token"), {
+            userId,
+            id,
+            likeCount,
+            dislikeCount
+        })
             .then((response) => callback())
             .catch((error) => error.response && callback1(error))
     }
 
     getPostWithType(id, setPosts, endpoint) {
-        axios.get("https://sonet34.herokuapp.com/api/post/" + endpoint, {params: {userId: id}})
+        axios.get("https://sonet34.herokuapp.com/api/post/" + endpoint + "?token=" + Script.getCookie("token"), {params: {userId: id}})
             .then((response) => setPosts({posts: response?.data?.posts}))
             .catch((error) => console.log(error))
     }
@@ -120,19 +128,21 @@ class Http {
     }
 
     createPost(text, callback, callback1) {
-        axios.post("https://sonet34.herokuapp.com/api/post", {text})
+        axios.post("https://sonet34.herokuapp.com/api/post?token=" + Script.getCookie("token"), {text}, {
+            withCredentials: true
+        })
             .then((response) => callback(response))
             .catch((error) => error && callback1(error))
     }
 
     getAllComments(id, callback) {
-        return axios.get("https://sonet34.herokuapp.com/api/post/comment", {params: {id}})
+        return axios.get("https://sonet34.herokuapp.com/api/post/comment?token=" + Script.getCookie("token"), {params: {id}})
             .then((response) => response)
             .catch((error) => error.response && callback())
     }
 
     createComment(value, postId, id, userName, comCount, callback, callback1) {
-        axios.post("https://sonet34.herokuapp.com/api/post/comment", {
+        axios.post("https://sonet34.herokuapp.com/api/post/comment?token=" + Script.getCookie("token"), {
             text: value, postId, userId: id, createdBy: userName, comCount
         })
             .then((response) => callback(response))
