@@ -128,9 +128,7 @@ class Http {
     }
 
     createPost(text, callback, callback1) {
-        axios.post("https://sonet34.herokuapp.com/api/post?token=" + Script.getCookie("token"), {text}, {
-            withCredentials: true
-        })
+        axios.post("https://sonet34.herokuapp.com/api/post?token=" + Script.getCookie("token"), {text})
             .then((response) => callback(response))
             .catch((error) => error && callback1(error))
     }

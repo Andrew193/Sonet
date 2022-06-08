@@ -6,7 +6,10 @@ function createHTML(info) {
     </>
 }
 function stringFromJSON(json) {
-    return Object.values(json).reduce((value, curr) => value += Object.values(curr).join(". "), "")
+    if(json) {
+        return Object.values(json).reduce((value, curr) => value += Object.values(curr).join(". "), "")
+    }
+    return null;
 }
 
 const obj={ createHTML, stringFromJSON };
