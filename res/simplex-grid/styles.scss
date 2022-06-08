@@ -1,0 +1,33 @@
+@import "variables";
+@import "mixins";
+@import "grid";
+@import "button";
+@import "table";
+@import "flex";
+@import "form";
+@import "components";
+@import "theme";
+@import "utilities";
+$prefix:"";
+
+
+.flex-form {
+  @import "content";
+  @import "grid";
+  @import "flex";
+  @import "form";
+  @import "button";
+  @import "breadcrumbs";
+  @import "utilities";
+  @import "table";
+  @import "elements";
+  @import "components";
+  //@import "header";
+  @import "spinner";
+  @import "customization";
+}
+@import "header";
+
+$prefix: fs_;
+@import "flex";
+@import "utilities";

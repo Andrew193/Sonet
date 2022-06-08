@@ -1,0 +1,57 @@
+$default-line-height: 1.8;
+$default-letter-spacing: 0.4px;
+$default-font-weight: normal;
+
+// *** main theme color ***
+$default-simplex-color: #DE001A;
+$default-simplex-hover-color: darken($default-simplex-color, 5%);
+// ***
+
+
+$default-success-color: #5cb85c;
+$default-success-hover-color: darken($default-success-color, 5%);
+$default-success-light-color: #dff0d8;
+
+$default-primary-color: #007bff;
+$default-primary-hover-color: darken($default-primary-color, 5%);
+
+$default-primary-color-dark: #2871bb;
+
+$default-info-color: #17a2b8;
+$default-info-hover-color: darken($default-info-color, 5%);
+
+$default-warning-color: #f0ad4e;
+$default-warning-hover-color: darken($default-warning-color, 5%);
+$default-warning-light-color: #fcf8e3;
+
+$default-danger-color: #a94442;
+$default-danger-hover-color: darken($default-danger-color, 5%);
+$default-danger-light-color: #f2dede;
+
+$default-covid-header-color: #365f91;
+$default-covid-header-color: darken($default-covid-header-color, 5%);
+
+
+$default-dark-color: #000;
+$default-light-color: #ffffff;
+
+$default-grey-color: #cacaca;
+$default-dark-grey-color: #696969;
+$default-middle-grey-color: #e6e3e3;
+$default-light-grey-color: #eeeeee;
+
+
+$default-border-color: #ddd;
+$default-gray-border-color: #a6a3a3;
+$default-light-gray-border-color: #cccccc;
+
+
+// *** bright colors ***
+$color-green: #00e400;
+$color-yellow: #ff0;
+$color-orange: #ff7e00;
+$color-red: #f00;
+$color-purple: #99004c;
+$color-maroon: #7e0023;
+// ***
+

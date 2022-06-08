@@ -4,10 +4,12 @@ function reset(token, seter, resetForm) {
     resetForm();
     seter(true);
 }
+
 function comboReset(token, seter, resetForm) {
     reset(token, seter, resetForm)
     setTimeout(() => window.location.reload(), 150);
 }
+
 function sendReq(values, resetForm, flag, seter, toast) {
     values.userName = "Default";
     console.log("test")

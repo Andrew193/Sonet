@@ -1,0 +1,97 @@
+hr {
+  border: none;
+  background-color: $default-light-grey-color;
+  height: 1px;
+  margin-top: 20px;
+  margin-bottom: 15px;
+
+
+  &.hr-red {
+    background-color: $default-simplex-color;
+  }
+
+  &.hr-dark {
+    background-color: $default-dark-color;
+  }
+}
+
+a {
+  color: $default-dark-color;
+  text-decoration: underline;
+
+  &:hover {
+    color: $default-dark-color;
+  }
+}
+
+
+.fs_hint {
+  font-weight: 600;
+  border-radius: 4px;
+  padding: 3px 6px;
+  font-size: 12px;
+  width: 100%;
+  text-align: center;
+  display: block;
+
+  &.green {
+    background-color: $color-green;
+    color: $default-dark-color;
+  }
+
+  &.yellow {
+    background-color: $color-yellow;
+    color: $default-dark-color;
+  }
+
+  &.orange {
+    background-color: $color-orange;
+    color: $default-light-color;
+  }
+
+  &.red {
+    background-color: $color-red;
+    color: $default-light-color;
+  }
+
+  &.purple {
+    background-color: $color-purple;
+    color: $default-light-color;
+  }
+
+  &.maroon {
+    background-color: $color-maroon;
+    color: $default-light-color;
+  }
+}
+
+.tailboard-hazards-table-tr .wr-datalist::after,
+.tailboard-hazards-table-tr .wr-select::after {
+  top: 16px;
+}
+
+table tbody .tailboard-hazards-table-tr td,
+table tbody .daily-report-crew-member-row-table td {
+  vertical-align: top;
+}
+
+table tbody .daily-report-crew-member-row-table td input,
+table tbody .daily-report-crew-member-row-table td select {
+  min-height: 32px;
+}
+
+.top-0 {
+  top: 0;
+}
+
+.bottom-0 {
+  bottom: 0;
+}
+
+.left-0 {
+  left: 0;
+}
+
+.right-0 {
+  right: 0;
+}

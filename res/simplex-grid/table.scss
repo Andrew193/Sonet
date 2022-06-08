@@ -1,0 +1,587 @@
+
+caption {
+  background-color: #c00000;
+  color: #fff;
+  padding: 5px 0;
+  font-weight: 500;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.par_table-config {
+  margin-top: 20px;
+}
+
+.table > tbody > tr > td,
+.table > tbody > tr > th,
+.table > tfoot > tr > td,
+.table > tfoot > tr > th,
+.table > thead > tr > td,
+.table > thead > tr > th {
+  vertical-align: middle;
+}
+
+td, th {
+  text-align: center;
+}
+
+//.table-align-left{
+//  td, th {
+//    text-align: left;
+//  }
+//}
+
+tr {
+  .border-none {
+    td,
+    th {
+      border: none !important;
+    }
+  }
+}
+
+// for PWA mods //
+tr.synced {
+  background: white;
+}
+
+tr.finishedNotSynced {
+  background: #FFFFDD;
+  &:hover {
+    background: #FFFFDD!important;
+    opacity: 0.9;
+  }
+}
+
+tr.notCompleted {
+  background: #f2bba9;
+  &:hover {
+    background: #f2bba9!important;
+    opacity: 0.9;
+  }
+}
+
+.table-for-form {
+  margin-bottom: 40px;
+  border-collapse: collapse;
+
+  &.table > caption + thead > tr:first-child > td,
+  &.table > caption + thead > tr:first-child > th,
+  &.table > colgroup + thead > tr:first-child > td,
+  &.table > colgroup + thead > tr:first-child > th,
+  &.table > thead:first-child > tr:first-child > td,
+  &.table > thead:first-child > tr:first-child > th {
+    border: 1px solid $default-dark-color;
+  }
+
+  & .table-for-form {
+    margin-bottom: 0;
+  }
+
+  //*** fix for only Mozilla browser for tables cells don't have borders
+  //and also table rows can be deleted/added in border-collapse:collapse mode ***
+
+  @-moz-document url-prefix() {
+    &.separate-table-for-mozilla{
+      border-collapse: separate  !important;
+      border-spacing: 1px !important;
+    }
+  }
+  //*** //
+
+  th > a{
+    text-decoration: none;
+  }
+
+  textarea {
+    display: block;
+  }
+
+  tr {
+    height: 31px;
+    cursor: pointer;
+
+    &.space-for-heading {
+      .td-heading {
+        padding: 0 3px;
+      }
+    }
+
+    &.heading-right {
+      .td-heading {
+        text-align: right;
+        padding: 0 10px 0 4px;
+      }
+    }
+
+    &.heading-left {
+      .td-heading {
+        text-align: left;
+        padding: 0 10px 0 4px;
+      }
+    }
+
+    &.tr-error-message {
+      height: 41px;
+
+      & > td {
+        padding-left: 10px;
+        text-align: left;
+        border: none !important;
+      }
+    }
+
+    & > td {
+      &.td-title {
+        background-color: $default-simplex-color;
+        font-weight: 400;
+        color: $default-light-color;
+        text-align: center;
+      }
+
+      &.td-heading,
+      & > div .td-heading {
+        background-color: $default-grey-color;
+        font-weight: bold;
+
+        &.double-line {
+          height: 41px;
+        }
+
+        &.double-height {
+          height: 62px;
+        }
+
+        &.bg-warning {
+          background-color: $default-warning-color;
+          color: $default-light-color;
+
+        }
+
+        &.bg-warning-black {
+          background-color: $default-warning-color;
+          color: $default-dark-color;
+
+        }
+
+        &.bg-red {
+          background-color: $default-simplex-color;
+          color: $default-light-color;
+        }
+      }
+    }
+  }
+
+  //&.table-spacing-lg{
+  //  tbody > tr > td,
+  //  tbody > tr > th,
+  //  tfoot > tr > td,
+  //  tfoot > tr > th,
+  //  thead > tr > td,
+  //  thead > tr > th {
+  //    padding: 2px 8px;
+  //  }
+  //}
+
+  tbody > tr > td,
+  tbody > tr > th,
+  tfoot > tr > td,
+  tfoot > tr > th,
+  thead > tr > td,
+  thead > tr > th {
+    padding: 0;
+  }
+
+  thead > tr > td,
+  thead > tr > th,
+  tr > th{
+    padding: 0 5px;
+    height: 30px;
+    margin: 0;
+    background-color: $default-grey-color;
+  }
+
+
+  tbody > tr.table > td {
+    background-color: $default-grey-color;
+  }
+
+  &.table-bordered {
+    border: none;
+
+
+    & > tbody > tr > td,
+    & > tbody > tr > th,
+    & > tfoot > tr > td,
+    & > tfoot > tr > th,
+    & > thead > tr > td,
+    & > thead > tr > th {
+      border: 1px solid $default-dark-color;
+    }
+
+    //need to fix
+    & > tbody > tr > td.border-top-0,
+    & > tbody > tr > th.border-top-0,
+    & > tfoot > tr > td.border-top-0,
+    & > tfoot > tr > th.border-top-0,
+    & > thead > tr > td.border-top-0,
+    & > thead > tr > th.border-top-0 {
+      border: none;
+    }
+
+    //END need to fix
+
+    & > tbody > tr > td.bdt-0,
+    & > tbody > tr > th.bdt-0,
+    & > tfoot > tr > td.bdt-0,
+    & > tfoot > tr > th.bdt-0,
+    & > thead > tr > td.bdt-0,
+    & > thead > tr > th.bdt-0 {
+      border-top-width: 0;
+      border-bottom-style: none;
+    }
+
+    & > tbody > tr > td.bdr-0,
+    & > tbody > tr > th.bdr-0,
+    & > tfoot > tr > td.bdr-0,
+    & > tfoot > tr > th.bdr-0,
+    & > thead > tr > td.bdr-0,
+    & > thead > tr > th.bdr-0 {
+      border-right: 0;
+    }
+
+    & > tbody > tr > td.bdb-0,
+    & > tbody > tr > th.bdb-0,
+    & > tfoot > tr > td.bdb-0,
+    & > tfoot > tr > th.bdb-0,
+    & > thead > tr > td.bdb-0,
+    & > thead > tr > th.bdb-0 {
+      border-bottom: 0;
+    }
+
+    & > tbody > tr > td.bdl-0,
+    & > tbody > tr > th.bdl-0,
+    & > tfoot > tr > td.bdl-0,
+    & > tfoot > tr > th.bdl-0,
+    & > thead > tr > td.bdl-0,
+    & > thead > tr > th.bdl-0 {
+      border-left: 0;
+    }
+
+    input:not([type="checkbox"]),
+    textarea,
+    select {
+      border: none;
+      width: 100%;
+      padding: 3px 2px;
+    }
+
+    select{
+      padding-right: 24px;
+    }
+  }
+  .fs_input-text{
+    height: 30px;
+    display: inline-block;
+    line-height: 30px;
+    padding: 0 5px;
+    border-left: 1px solid;
+  }
+}
+
+//*** PAR ***
+.par_table-config {
+  margin-top: 20px;
+}
+
+//***
+
+
+//*** specific styles only for table Job Time Report ***
+.fs_table-overflow {
+  display: flex;
+  margin-bottom: 40px;
+
+  .td-heading{
+    padding-left: 2px;
+    padding-right: 2px;
+  }
+  .fs_left-table,
+  .fs_middle-table,
+  .fs_right-table {
+    table {
+      margin-bottom: 0;
+    }
+  }
+
+  .fs_left-table,
+  .fs_right-table {
+    z-index:1;
+    position: relative;
+  }
+
+
+  .fs_middle-table {
+    position: relative;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: auto;
+
+    table {
+      tr {
+        td:first-child {
+          border-left: 0;
+        }
+
+        td:last-child {
+          border-right: 0;
+        }
+      }
+    }
+  }
+
+  .fs_right-table {
+    flex-basis: 311px;
+    flex-shrink: 0;
+    border-left: 1px solid;
+
+    table {
+      tr {
+        td:first-child {
+          border-left: none;
+        }
+      }
+    }
+  }
+
+  .fs_left-table {
+    flex-basis: 251px;
+    flex-shrink: 0;
+    border-right: 1px solid black;
+
+    table {
+      tr {
+        td:last-child {
+          border-right: none;
+        }
+      }
+    }
+  }
+  .fs_left-table.add-warning-icon {
+    flex-basis: 231px;
+    padding-left: 20px;
+  }
+
+
+  .fs_fixed-xs-cells {
+    & > td {
+      min-width: 35px;
+      padding-left: 3px;
+      padding-right: 3px;
+    }
+  }
+}
+
+//*** /
+
+
+//*** specific styles only for table Work Order Detail ***
+
+.fs_work-order-detail {
+  margin-bottom: 40px;
+
+  .td-heading {
+    height: 31px;
+    border-bottom: 1px solid $default-dark-color;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    background-color: $default-grey-color;
+  }
+
+  .t-head {
+    display: flex;
+    height: 31px;
+
+    .cell {
+      padding: 5px 2px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid $default-dark-color;
+
+      &:last-child {
+        border: none;
+      }
+
+      &:first-child,
+      &:nth-child(2) {
+        background-color: $default-grey-color;
+      }
+
+      &:first-child {
+        border-right: none;
+      }
+
+    }
+  }
+
+
+  .t-message {
+    flex: 0 1 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 31px;
+    padding: 2px 6px;
+    border: 1px solid;
+    border-top: none;
+    margin-right: 39px;
+  }
+
+
+  .t-body {
+    display: flex;
+
+    input, textarea, select {
+      border: none;
+    }
+
+    .column {
+      display: inline-flex;
+      border: 1px solid $default-dark-color;
+
+      &:first-child {
+        border-top: none;
+        display: flex;
+        align-items: stretch;
+        border-right: none;
+
+        input {
+          height: 100%;
+        }
+
+      }
+
+      &:nth-child(2) {
+        border-top: none;
+      }
+
+      &:last-child {
+        display: flex;
+        border: none;
+        align-items: flex-start;
+      }
+    }
+
+    .tr-grid {
+      display: flex;
+      flex-wrap: wrap;
+      width: calc(100% + 1px);
+      margin-right: -1px;
+
+      .td-address {
+        margin-top: -1px;
+        flex: 0 1 100%;
+        display: flex;
+        flex-direction: column;
+        border-top: 1px solid $default-dark-color;
+        border-right: 1px solid $default-dark-color;
+      }
+
+      .td-item {
+        display: flex;
+        flex-direction: column;
+        flex: 0 1 25%;
+        border-bottom: 1px solid $default-dark-color;
+        border-top: none;
+
+        &.width-50{
+          flex: 0 1 50%;
+        }
+        &.width-75{
+          flex: 0 1 75%;
+        }
+        &.width-100{
+          flex: 0 1 100%;
+        }
+
+        .td-heading {
+          border-right: 1px solid $default-dark-color;
+        }
+
+        .wrap-field {
+          border-right: 1px solid $default-dark-color;
+        }
+
+      }
+
+      .td-address,
+      .td-item {
+        flex-direction: column;
+
+        @media (min-width: 1200px) {
+          flex-direction: row;
+
+          .td-heading {
+            padding: 0 4px;
+            border-right: 1px solid $default-dark-color;
+            border-bottom: none !important;
+            flex: 0 0 110px;
+            display: flex;
+            justify-content: flex-end;
+            height: 100% !important;
+          }
+          .wrap-field {
+            flex-grow: 1;
+          }
+        }
+
+        .td-heading {
+          align-items: center;
+          white-space: nowrap;
+        }
+      }
+    }
+  }
+
+  .t-head .cell,
+  .t-body .column {
+
+    &:first-child {
+      //flex: 0 0 50px;
+      width: 50px;
+      min-width: 50px;
+    }
+
+    &:nth-child(2) {
+      flex: 1 1 auto;
+    }
+
+    &:last-child {
+      //flex: 0 0 39px;
+      width: 39px;
+      min-width: 39px;
+      justify-content: center;
+      display: flex;
+    }
+  }
+}
+
+//@media screen and (min-width: 768px) {
+//  .table .fco-row-prefix-cell {
+//    width: 12%;
+//  }
+//}
+//@media screen and (min-width: 992px) {
+//  .table .fco-row-prefix-cell {
+//    width: 8%;
+//  }
+//}
+//@media screen and (min-width: 1200px) {
+//  .table .fco-row-prefix-cell {
+//    width: 7%;
+//  }
+//}
+
+//*** /

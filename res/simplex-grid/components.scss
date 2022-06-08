@@ -1,0 +1,373 @@
+//*** Pagination ***
+
+.pagination_primary-color {
+
+  .pagination > li > a, .pagination > li > span {
+    color: $default-dark-color;
+  }
+
+  .pagination > li:first-child > a,
+  .pagination > li:first-child > span,
+  .pagination > li:last-child > a,
+  .pagination > li:last-child > span {
+
+    border-radius: 0;
+  }
+
+
+  .pagination > .active > a,
+  .pagination > .active > a:focus,
+  .pagination > .active > a:hover,
+  .pagination > .active > span,
+  .pagination > .active > span:focus,
+  .pagination > .active > span:hover {
+    color: $default-light-color;
+    background-color: $default-simplex-color;
+    border-color: $default-simplex-color;
+  }
+
+
+  .pagination > li > a:focus,
+  .pagination > li > a:hover,
+  .pagination > li > span:focus,
+  .pagination > li > span:hover {
+    color: $default-dark-color;
+    background-color: $default-light-grey-color;
+    border-color: $default-border-color;
+  }
+
+  //*** Modal ***
+  #par-checklist_modal {
+    .modal-content {
+      padding: 20px 20px 30px 20px;
+    }
+
+    .modal-footer {
+      border: none;
+      padding: 0;
+    }
+
+    .close {
+      position: absolute;
+      right: 10px;
+      top: 4px;
+      padding: 5px;
+
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+}
+
+//***
+
+//*** TABS ***
+.fs_tabs-nav {
+  display: flex;
+  flex-direction: row;
+  margin-top: 20px;
+
+  .fs_tab-item {
+    &:not(:last-child) {
+      margin-right: 4px;
+    }
+  }
+
+  .fs_tab-link {
+    text-align: center;
+    display: block;
+    min-width: 150px;
+    padding: 8px 15px;
+    background-color: $default-middle-grey-color;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    text-decoration: none;
+    color: $default-dark-color;
+    transition: .3s;
+
+    &.link-sm {
+      min-width: auto;
+    }
+
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &.is-active {
+      border: 2px solid $default-dark-color;
+      margin-bottom: -2px;
+      border-bottom: none;
+    }
+
+    &.bg-success {
+      background-color: $default-success-color;
+      color: $default-light-color;
+
+      &:hover {
+        background-color: $default-success-hover-color;
+      }
+    }
+
+    &.bg-warning {
+      background-color: $default-warning-color;
+      color: $default-light-color;
+
+      &:hover {
+        background-color: $default-warning-hover-color;
+      }
+    }
+
+    &.bg-red {
+      background-color: $default-simplex-color;
+      color: $default-light-color;
+
+      &:hover {
+        background-color: $default-simplex-hover-color;
+      }
+    }
+
+  }
+
+  .fs_tab-btn {
+    text-align: center;
+    display: block;
+    min-width: 150px;
+    padding: 8px 15px;
+    background-color: $default-middle-grey-color;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    color: $default-dark-color;
+    transition: .3s;
+    border: none;
+
+    &.fs_btn-sm {
+      min-width: auto;
+    }
+
+    &.disabled,
+    &[disabled],
+    fieldset[disabled] & {
+      cursor: not-allowed;
+      -webkit-box-shadow: none;
+      box-shadow: none;
+      opacity: .65;
+    }
+  }
+}
+
+.oX {
+  overflow-x: scroll;
+}
+
+.oX::-webkit-scrollbar-track {border-radius: 4px;}
+.oX::-webkit-scrollbar {width: 1px;}
+.oX::-webkit-scrollbar-thumb {border-radius: 1px;}
+
+.fs_tab-content {
+  border: 2px solid $default-dark-color;
+  padding: 15px;
+  margin-bottom: 20px;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+  position: relative;
+}
+
+//***
+
+//*** PANELS ***
+
+.fs_panel {
+  margin-bottom: 20px;
+  background-color: $default-light-color;
+  border: 1px solid $default-dark-color;
+  border-radius: 0;
+  min-height: 30px;
+  font-size: inherit;
+  box-shadow: none;
+  vertical-align: middle;
+  /* -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.05); */
+  /* box-shadow: 0 1px 1px rgba(0,0,0,.05); */
+
+  .fs_panel-heading {
+    position: relative;
+    border-bottom: 1px solid $default-dark-color;
+    background-color: $default-light-color;
+    border-radius: 0;
+    font-size: inherit;
+    font-weight: bold;
+    min-height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .fs_panel-btn {
+      position: absolute;
+      right: 0;
+      top: 0;
+      height: calc(100% - 1px);
+      width: 30px;
+      border: none;
+      background-color: $default-light-grey-color;
+      display: flex;
+      flex-shrink: 0;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+
+      &:hover {
+        .fs_panel-btn-icon {
+          opacity: 1;
+        }
+      }
+
+      .fs_panel-btn-icon {
+        background-position: center;
+        background-size: contain;
+        background-repeat: no-repeat;
+        opacity: 0.8;
+        transition: opacity .15s;
+
+        &.fs_search-files-icon {
+          //background-image: url(../../res/icons/searchFiles.svg);
+          width: 20px;
+          height: 20px;
+        }
+      }
+    }
+  }
+
+  & > .fs_panel-body {
+    padding: 10px;
+  }
+
+  textarea {
+    display: block;
+  }
+}
+
+.fs_panel-default {
+
+  & > .fs_panel-heading {
+    background-color: $default-grey-color;
+  }
+}
+
+.fs_panel-danger {
+  border-color: $default-simplex-color;
+
+  & > .fs_panel-heading {
+    color: $default-light-color;
+    background-color: $default-simplex-color;
+    border-color: $default-light-color;
+  }
+}
+
+.fs_panel-warning {
+  border-color: $default-warning-color;
+
+  & > .fs_panel-heading {
+    color: $default-light-color;
+    background-color: $default-warning-color;
+    border-color: $default-light-color;
+  }
+}
+
+.fs_panel-success {
+  border-color: $default-success-color;
+
+  & > .fs_panel-heading {
+    color: $default-light-color;
+    background-color: $default-success-color;
+    border-color: $default-light-color;
+  }
+}
+
+//***
+
+.signature-container {
+  border: 1px solid $default-dark-color;
+}
+
+//*** LEGEND COLOR BOX ***
+
+.fs_legend-color-box {
+  display: flex;
+  flex-shrink: 0;
+  font-size: 12px;
+
+  .fs_legend-title {
+    margin-right: 5px;
+  }
+
+  ul > li {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start !important;
+    align-items: center;
+    margin-bottom: -1px;
+  }
+
+  .fs_legend-color {
+    height: 18px;
+    width: 28px;
+    border: 1px solid $default-light-gray-border-color;
+    background-color: $default-light-color;
+    margin-right: 5px;
+
+    &.fs_legend-success {
+      background-color: $default-success-light-color;
+      font-size: 20px;
+    }
+
+    &.fs_legend-warning {
+      background-color: $default-warning-light-color;
+    }
+
+    &.fs_legend-error {
+      background-color: $default-danger-light-color;
+    }
+  }
+
+  .fs_legend-desc {
+    &::before {
+      content: "=";
+      display: inline-block;
+      color: $default-dark-color;
+      margin-right: 5px;
+    }
+  }
+}
+
+//***
+
+
+//*** SIGNATURE ROW ***
+
+.signature-row {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0px -15px;
+
+  .signature-column {
+    padding: 0px 15px;
+    flex: 0 0 100%;
+    max-width: 100%;
+    @media (min-width: 992px) {
+      flex: 0 0 50%;
+      max-width: 50%;
+    }
+  }
+
+  .signature-name {
+    margin-bottom: 5px;
+  }
+
+  .signature-date {
+    font-size: 12px;
+  }
+}
+
+//***
