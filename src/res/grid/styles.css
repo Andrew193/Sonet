@@ -1473,7 +1473,7 @@ body {
 }
 
 .flex-form .fs_input-group .fs_input-group-icon.fs_search-files-icon {
-    background-image: url(../../res/icons/searchFiles.svg);
+    background-image: url(src/res/icons/searchFiles.svg);
     width: 20px;
     height: 20px;
 }
@@ -5468,7 +5468,7 @@ body {
 }
 
 .flex-form .fs_panel .fs_panel-heading .fs_panel-btn .fs_panel-btn-icon.fs_search-files-icon {
-    background-image: url(../../res/icons/searchFiles.svg);
+    background-image: url(src/res/icons/searchFiles.svg);
     width: 20px;
     height: 20px;
 }

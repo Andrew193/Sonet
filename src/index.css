@@ -40,31 +40,31 @@ code {
 }
 
 button {
-  min-width: 150px;
-  max-width: 250px;
-  display: block;
-  padding: 1em 2em;
-  border: none;
-  background: none;
-  color: inherit;
-  vertical-align: middle;
-  position: relative;
-  z-index: 1;
+  min-width: 150px!important;
+  max-width: 250px!important;
+  display: block!important;
+  padding: 1em 2em!important;
+  border: none!important;
+  background: none!important;
+  color: inherit!important;
+  vertical-align: middle!important;
+  position: relative!important;
+  z-index: 1!important;
   cursor: pointer;
-  font-size: 14px;
-  border: 3px solid;
+  font-size: 14px!important;
+  border: 3px solid!important;
 }
 .Toastify__close-button{
   display: none;
 }
 .button {
-  padding: 15px 30px;
-  border-radius: 50px;
-  background: #7986cb;
+  padding: 15px 30px !important;
+  border-radius: 50px !important;
+  background: #7986cb !important;
   cursor: pointer;
-  color: #fff;
-  -webkit-transition: background-color 0.3s, color 0.3s;
-  transition: background-color 0.3s, color 0.3s;
+  color: #fff !important;
+  -webkit-transition: background-color 0.3s, color 0.3s !important;
+  transition: background-color 0.3s, color 0.3s !important;
 }
 
 .button.button--inverted {
