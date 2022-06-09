@@ -22,6 +22,7 @@ function ClearProfile(props) {
         Script.getPCount(userInfo.id, setCount);
     }, [userInfo.id]);
 
+    console.log(JSON.parse(userInfo.back))
     return (<>
             <form>
                 <input
@@ -48,7 +49,7 @@ function ClearProfile(props) {
             <div
                 className={s.Back}
                 onClick={() => (myId === userInfo.id) && UserHelper.CallImageInput(image)}
-                style={userInfo.back && {backgroundImage: `url(${userInfo.back})`}}
+                style={userInfo.back && {backgroundImage: `url(${JSON.parse(userInfo.back)?.webContentLink})`}}
             />
             <FirstLine
                 imgUrl={userInfo.avatar}

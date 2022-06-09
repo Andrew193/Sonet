@@ -1,23 +1,34 @@
 import s from "./profile.module.css"
 import Script from "./script.js"
-import { AiOutlineHighlight } from "react-icons/ai";
+import {AiOutlineHighlight} from "react-icons/ai";
 import UserHelper from "../../helpers/userHelper"
-import { useRef } from "react";
+import {useRef} from "react";
+
 function FirstLine(props) {
     let image = useRef();
-    const { imgUrl, myId, id } = props;
+    const {imgUrl, myId, id} = props;
+
     return (
         <>
             <form>
-                <input ref={(el) => image = el} onChange={()=>UserHelper.updateImage(image,"setAvatar")} type="file"
-                    style={{ display: "none" }}></input>
+                <input
+                    ref={(el) => image = el}
+                    onChange={() => UserHelper.updateImage(image, "setAvatar")}
+                    type="file"
+                    style={{display: "none"}}
+                />
             </form>
             <div className={s.FirstLine}>
-                <img alt={"Avatar"} src={imgUrl} onClick={() => (myId === id) && UserHelper.CallImageInput(image)}></img>
+                <img
+                    alt={"Avatar"}
+                    src={imgUrl}
+                    onClick={() => (myId === id) && UserHelper.CallImageInput(image)}
+                />
                 {myId === id && <button onClick={() => Script.openModal("Muser")}>
-                    <AiOutlineHighlight className={s.CommonIcon} />Set up profile
+                    <AiOutlineHighlight className={s.CommonIcon}/>Set up profile
                 </button>}
             </div>
         </>)
 }
+
 export default FirstLine;

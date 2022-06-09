@@ -277,7 +277,19 @@ a {
     }
 }
 
+.row {
+    margin-right: unset !important;
+    margin-left: unset !important;
+}
+
 @media (max-width: 768px) {
+
+    .users-box{
+        margin: 75px;
+        margin-left: unset;
+        margin-right: unset;
+        margin-top: unset;
+    }
 
     .logotype {
         display: none !important;

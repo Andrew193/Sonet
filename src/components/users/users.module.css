@@ -83,19 +83,7 @@
 }
 
 .FindUserLine {
-    display: -webkit-flex;
-    display: flex;
-    -webkit-flex-wrap: wrap;
-    flex-wrap: wrap;
-    -webkit-justify-content: space-between;
-    justify-content: space-between;
-    padding: 1% 3%;
-    position: fixed;
-    width: 60%;
-    background-color: aliceblue;
-    bottom: 0px;
-    flex-direction: column;
-    transition: all ease 0.7s;
+    padding: unset;
 }
 
 .UsersCont {
@@ -129,11 +117,13 @@
 
 .FindUserLine>div {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     padding-top: 1%;
+    flex-wrap: wrap;
 }
 
 .FindUserLine input {
+    flex: 1;
     height: min-content;
     border: none;
     color: gray;
@@ -263,9 +253,6 @@
 }
 
 @media (max-width:768px) {
-    .FindUserLine {
-        display: none;
-    }
     .FullHeight {
         height: 82%!important;
     }

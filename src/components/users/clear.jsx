@@ -47,7 +47,10 @@ function ClearUsers(props) {
         }), [history, id, props.toMake.users])
 
     return (
-        <div className={s.UsersCont}>
+        <div
+            className={"col-xs-8 col-sm-8 users-box " + s.UsersCont}
+            style={{height: '700px', padding: 'unset'}}
+        >
             {usersToMake}
         </div>
     )
