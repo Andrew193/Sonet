@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import Skeleton from 'react-loading-skeleton';
-import s from "./style.module.css"
+import s from "./posts.module.css"
 import { withRouter } from "react-router-dom";
 import Script from "./script"
 import ClearSpecialPost from "./clearSpecialPost.jsx";

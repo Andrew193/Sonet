@@ -2,7 +2,7 @@ import { forwardRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { useHistory } from "react-router";
 import ClearModalUser from "./clearModalUser";
-import s from "./index.module.css"
+import s from "./main-page.module.css"
 import Script from "./script.js"
 const ModalUser = forwardRef((props, ref) => {
     const { userName, email, id } = JSON.parse(localStorage.getItem("userInfo"));

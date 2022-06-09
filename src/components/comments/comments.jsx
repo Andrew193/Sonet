@@ -1,4 +1,4 @@
-import s from "./style.module.css"
+import s from "./comments.module.css"
 import DataHelper from "../../helpers/dateHelper"
 import { v4 as uuidv4 } from 'uuid';
 function Comments(props) {

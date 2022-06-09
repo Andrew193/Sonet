@@ -107,10 +107,10 @@
     transition: all ease 0.7s;
     font-weight: bold;
     height: fit-content;
-    border: 1px solid rgb(108, 108, 195);
-    color: rgb(73, 73, 248);
+    border: 1px solid rgb(108, 108, 195)!important;
+    color: rgb(73, 73, 248) !important;
     border-radius: 20px;
-    display: flex;
+    display: flex!important;
     align-items: center;
 }
 

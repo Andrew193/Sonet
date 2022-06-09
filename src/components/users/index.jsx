@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Script from "./script.js"
 import Skeleton from 'react-loading-skeleton';
-import s from "./style.module.css"
+import s from "./users.module.css"
 import { withRouter } from "react-router-dom";
 import ClearUsersContainer from "./clearUsersContainer.jsx";
 function UsersContainer(props) {

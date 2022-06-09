@@ -1,7 +1,7 @@
 import { AiOutlineSafetyCertificate } from "react-icons/ai";
 import { Link, useHistory } from "react-router-dom";
 import DataHelper from "../../helpers/dateHelper.js"
-import s from "./style.module.css"
+import s from "./users.module.css"
 import { AiOutlineMail, AiOutlineUser, AiOutlineClockCircle } from "react-icons/ai";
 import Script from "./script.js"
 import ActionLine from "./actionLine.jsx";

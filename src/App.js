@@ -4,6 +4,7 @@ import Components from "./components"
 import Script from "../src/header/script.js"
 import Script2 from "./components/user/script.js";
 import 'react-toastify/dist/ReactToastify.css';
+import './res/bootstrap/bootstrap.min.css';
 import './res/grid/styles.scss';
 import {ToastContainer} from 'react-toastify';
 import {useEffect, useRef, useState} from "react";

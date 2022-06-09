@@ -1,4 +1,4 @@
-import s from "./index.module.css"
+import s from "./create-post.module.css"
 import Script from "./script"
 import {useContext, useRef} from "react";
 import Context from "../../helpers/contextHelper"

@@ -1,4 +1,4 @@
-import s from "./style.module.css"
+import s from "./profile.module.css"
 import Script from "./script.js"
 import { AiOutlineHighlight } from "react-icons/ai";
 import UserHelper from "../../helpers/userHelper"

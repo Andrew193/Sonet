@@ -1,7 +1,7 @@
 import { AiOutlineReload } from "react-icons/ai";
 import { useHistory } from "react-router-dom";
 import Script from "./script.js"
-import s from "./style.module.css";
+import s from "./posts.module.css";
 function SortLine() {
     const hist=useHistory();
     const id=JSON.parse(localStorage.getItem("userInfo")).id

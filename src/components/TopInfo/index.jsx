@@ -1,5 +1,5 @@
 import LatestPosts from "./latest"
-import s from "./style.module.css"
+import s from "./top-info.module.css"
 
 function TopInfo() {
     return (

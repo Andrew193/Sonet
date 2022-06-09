@@ -1,5 +1,5 @@
 import { withRouter } from "react-router";
-import s from "./style.module.css"
+import s from "./comments.module.css"
 import Loader from "../common/spinner/Spinner"
 import { useContext, useEffect, useState } from "react";
 import Context from "../../helpers/contextHelper"
