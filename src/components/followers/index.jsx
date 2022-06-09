@@ -1,6 +1,6 @@
 import { withRouter } from "react-router-dom";
 import ClearFollowings from "./clearFollowings";
-import s from "./style.module.css"
+import s from "./followers.module.css"
 
 function Followers(props) {
     const users = props.location.state.users

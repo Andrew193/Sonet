@@ -1,4 +1,4 @@
-import s from "./style.module.css"
+import s from "./profile.module.css"
 import s2 from "../common/navigationLine/style.module.css"
 import Script from "./script.js"
 import { useRef } from "react";

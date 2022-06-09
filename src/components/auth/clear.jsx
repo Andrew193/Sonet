@@ -1,4 +1,4 @@
-import s from "./index.module.css"
+import s from "./auth.module.css"
 function Auth(props) {
     const { Formik, setFlag, flag } = props
     return (

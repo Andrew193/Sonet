@@ -3,7 +3,7 @@ import ClearPosts from "./clear.jsx";
 import Script from "./script.js"
 import Skeleton from 'react-loading-skeleton';
 import SortLine from "./SortLine.jsx"
-import s from "./style.module.css"
+import s from "./posts.module.css"
 import { Link, withRouter } from "react-router-dom";
 import PageHeader from "../common/navigationLine/NavigationLine.jsx";
 import Context from "../../helpers/contextHelper"

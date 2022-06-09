@@ -1,7 +1,7 @@
 import {Link} from "react-router-dom";
 import CreatePost from "../createPost";
 import ConfigLine from "./configLine";
-import s from "./index.module.css"
+import s from "./main-page.module.css"
 
 function ClearMainPage(props) {
     const {open} = props;

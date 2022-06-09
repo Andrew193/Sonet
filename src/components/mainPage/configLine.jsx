@@ -1,5 +1,5 @@
 import { useHistory } from "react-router";
-import s from "./index.module.css"
+import s from "./main-page.module.css"
 
 function ConfigLine(props) {
     const history=useHistory();

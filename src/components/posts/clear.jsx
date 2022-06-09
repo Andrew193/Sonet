@@ -1,7 +1,7 @@
 import { AiOutlineDislike, AiOutlineLike, AiOutlineComment } from "react-icons/ai";
 import { Link, useHistory } from "react-router-dom";
 import DataHelper from "../../helpers/dateHelper.js"
-import s from "./style.module.css"
+import s from "./posts.module.css"
 import Script from "./script.js"
 import { v4 as uuidv4 } from 'uuid';
 import { useContext } from "react";

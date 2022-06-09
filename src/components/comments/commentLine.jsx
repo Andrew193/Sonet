@@ -1,5 +1,5 @@
 import { useContext, useRef } from "react";
-import s from "./style.module.css"
+import s from "./comments.module.css"
 import Script from "./Script.js"
 import Context from "../../helpers/contextHelper"
 

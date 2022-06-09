@@ -1,4 +1,4 @@
-import s from "./style.module.css"
+import s from "./profile.module.css"
 import { AiOutlineCalendar, AiOutlineMail, AiOutlineNumber, AiOutlineEye } from "react-icons/ai";
 import Script from "./script"
 import { useHistory } from "react-router";

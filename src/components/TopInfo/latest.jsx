@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import s from "./style.module.css"
+import s from "./top-info.module.css"
 import Script from "./script.js"
 import Skeleton from 'react-loading-skeleton';
 import PostCreator from "./creators/post";

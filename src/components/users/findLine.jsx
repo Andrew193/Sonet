@@ -1,4 +1,4 @@
-import s from "./style.module.css"
+import s from "./users.module.css"
 import Script from "./script.js"
 import { useRef } from "react"
 import { useHistory } from "react-router-dom"

@@ -1,5 +1,5 @@
 import {Link, NavLink, useHistory} from "react-router-dom";
-import s from "./index.module.css";
+import s from "./header.module.css";
 import Script from "./script";
 import Logo from "./img/icon.ico";
 import ProfileContainer from "../components/user";
