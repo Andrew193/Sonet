@@ -1,7 +1,8 @@
 
 
 function ProfileContainer() {
-    const { userName, id } = JSON.parse(localStorage.getItem("userInfo"))
+    const { userName, id } = JSON.parse(localStorage.getItem("userInfo"));
+
     return (
         <>
             <h2>{userName || "Log in again"}</h2>

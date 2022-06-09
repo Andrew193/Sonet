@@ -36,17 +36,16 @@
     z-index: 10;
     left: 0;
     padding: 5% 30%;
-    background-color: #cbcbf3a4;
-    ;
+    background-color: #cbcbf3a4;;
     width: -webkit-fill-available;
     height: -webkit-fill-available;
 }
 
-.PostModal>div {
+.PostModal > div {
     background-color: white;
     border-radius: 20px;
     padding: 10px;
-    box-shadow: 0 5px 10px 0 rgb(0,130,231,20%);
+    box-shadow: 0 5px 10px 0 rgb(0, 130, 231, 20%);
 }
 
 .userInfo p {
@@ -86,38 +85,42 @@
 }
 
 .NavBar a svg {
-    margin-left: 10px;
+    margin-right: 10px;
     border-radius: 50%;
 }
 
 .NavBar a:hover, .LeaveBtn:hover {
     color: rgb(73, 73, 248);
-    background-color: rgb(203, 203, 243);
+    /*background-color: rgb(203, 203, 243);*/
     border-radius: 25px;
     cursor: pointer;
-    border: 1px solid rgb(73, 73, 248);
+    /*border: 1px solid rgb(73, 73, 248);*/
 }
 
 .LeaveBtn {
-    min-width: unset!important;
-    max-width: unset!important;
-    border: none!important;
-    width: fit-content!important;
-    font-weight: bolder!important;
-    padding: 10px!important;
-    margin: 0px 3px!important;
-    text-align: left!important;
-    font-size: 13px!important;
-    border: 1px solid transparent!important;
-    display: flex!important;
-    align-items: center!important;
+    min-width: unset !important;
+    max-width: unset !important;
+    border: none !important;
+    width: fit-content;
+    font-weight: bolder !important;
+    padding: 10px !important;
+    margin: 0px 3px !important;
+    text-align: left !important;
+    font-size: 13px !important;
+    border: 1px solid transparent !important;
+    display: flex !important;
+    align-items: center !important;
+}
+
+.LeaveBtn svg {
+    min-width: 20px !important;
 }
 
 .UserPortal {
     min-width: 20%;
     position: fixed;
     bottom: 10%;
-    height: min-content!important;
+    height: min-content !important;
     cursor: pointer;
     background-color: #cbcbf3;
     border-radius: 15px;
@@ -153,154 +156,188 @@
 }
 
 .ActivePage {
-    color: rgb(73, 73, 248)!important;
-    border-bottom: 1px soid #a6c3f7!important;
+    color: rgb(73, 73, 248) !important;
+    border-bottom: 1px soid #a6c3f7 !important;
 }
-.ActivePage svg{
+
+.ActivePage svg {
     box-shadow: 0px 0px 8px 0px rgb(107 159 199 / 34%);
 }
-#PostBtnS{
+
+#PostBtnS {
     display: none;
     border-radius: 50%;
     background-color: rgb(79, 141, 255);
     cursor: pointer;
     padding: 5px;
-    margin: 5px 15px!important;
+    margin: 5px 15px !important;
     height: 40px;
     color: white;
 }
-#PostBtnS:hover{
-    background-color:rgb(0, 89, 255);
+
+#PostBtnS:hover {
+    background-color: rgb(0, 89, 255);
 }
-@media (max-width:1900px) {
+
+.PostBtn {
+    padding: 10px !important;
+}
+
+@media (max-width: 1900px) {
     .NavBar svg {
         width: auto;
         height: 30px;
     }
+
     .userInfo h2 {
         font-size: 23px;
     }
+
     .userInfo p {
         font-size: 16px;
     }
+
     .NavBar div:first-of-type {
         height: unset;
         justify-content: space-around;
     }
-    .NavBar a:first-of-type img{
+
+    .NavBar a:first-of-type img {
         width: 40px;
     }
+
     .NavBar div:first-of-type a {
         padding: 7px;
     }
+
     .NavBar a:first-of-type {
         font-size: 16px;
     }
+
     .PostBtn {
         font-size: 16px;
     }
+
     .NavBar span {
         font-size: 16px;
     }
 }
 
-@media (min-width:1901px) {
+@media (min-width: 1901px) {
     .NavBar svg {
         width: auto;
         height: 46px;
     }
+
     .userInfo h2 {
         font-size: 30px;
     }
+
     .NavBar a:first-of-type img {
         width: auto;
         height: 50px;
     }
+
     .LeaveBtn {
-        font-size: 26px!important;
+        font-size: 26px !important;
     }
+
     .userInfo p {
         font-size: 23px;
     }
+
     .PostBtn {
         font-size: 26px;
     }
+
     .NavBar div:first-of-type {
         height: 40%;
         justify-content: space-around;
     }
+
     .NavBar div:first-of-type a {
         font-size: 30px;
     }
 }
 
-@media (max-width:1440px) {
+@media (max-width: 1440px) {
     .NavBar svg {
         height: 20px;
     }
-    .userInfo h2{
+
+    .userInfo h2 {
         font-size: 20px;
     }
-    .userInfo p{
+
+    .userInfo p {
         font-size: 16px;
     }
-    .NavBar div:first-of-type{
+
+    .NavBar div:first-of-type {
         height: unset;
         justify-content: space-around;
     }
+
     .NavBar div:first-of-type a {
         padding: 7px;
     }
-    .NavBar a:first-of-type img{
+
+    .NavBar a:first-of-type img {
         width: 30px;
     }
+
     .NavBar a:first-of-type {
         font-size: 13px;
     }
+
     .PostBtn {
         font-size: 13px;
     }
+
     .NavBar span {
         font-size: 13px;
     }
-    .userInfo h2{
+
+    .userInfo h2 {
         font-size: 20px;
     }
-    .userInfo p{
+
+    .userInfo p {
         font-size: 16px;
     }
 }
-@media (max-width:1024px) {
+
+@media (max-width: 1024px) {
     .NavBar svg {
-        margin: 0px!important;
+        margin: 0px !important;
     }
-    #PostBtnS{
+
+    #PostBtnS {
         display: block;
     }
+
     .userInfo {
         display: none;
     }
+
     .PostBtn {
         display: block;
     }
-    .NavBar div:first-of-type{
+
+    .NavBar div:first-of-type {
         height: unset;
     }
+
     .NavBar div:first-of-type a {
         padding: 7px;
     }
-    .NavBar a:first-of-type {
-        display: none;
-    }
+
     .PostBtn {
-        display: none;
-    }
-    .NavBar span {
         display: none;
     }
 }
 
-@media (max-width:768px) {
+@media (max-width: 768px) {
     .NavBar {
         height: 10%;
         flex-direction: row;
@@ -308,26 +345,38 @@
         top: 90%;
         background-color: aliceblue;
     }
-    .NavBar svg {
-        margin: 0px!important;
+
+    .LeaveBtn{
+        width: 36px;
+        height: 32px;
     }
+
+    .NavBar svg {
+        margin: 0px !important;
+    }
+
     .userInfo {
         display: none;
     }
+
     .NavBar div:first-of-type {
         flex-direction: row;
         width: 100%;
         justify-content: space-evenly;
     }
+
     .NavBar div:first-of-type a {
         padding: 7px;
     }
-    .NavBar a:first-of-type {
-        display: none;
+
+    .logotype {
+        display: none !important;
     }
+
     .PostBtn {
         display: none;
     }
+
     .NavBar span {
         display: none;
     }

@@ -20,14 +20,18 @@
     overflow-y: scroll;
 }
 
-.PostsCont>div {
+.PostsCont > div {
     text-align: left;
     padding: 1% 5%;
     position: relative;
     border-bottom: 1px solid #cecccc;
 }
 
-.PostsCont>div:nth-child(2n) {
+.PostsCont p {
+    word-break: break-all;
+}
+
+.PostsCont > div:nth-child(2n) {
     background-color: #f6f2ff;
 }
 
@@ -41,7 +45,7 @@
     color: rgb(73, 73, 248);
 }
 
-.PostsCont>div div p:last-of-type {
+.PostsCont > div div p:last-of-type {
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
@@ -103,23 +107,24 @@
 .Time {
     position: absolute;
     top: 0%;
-    font-size: 13px!important;
+    font-size: 13px !important;
     right: 1%;
     color: gray;
 }
 
-@media (max-width:1024px) {
+@media (max-width: 1024px) {
     .Container {
         max-width: 100%;
     }
-    .SortLine{
+
+    .SortLine {
         width: 85%;
     }
 }
 
 
-@media (max-width:768px) {
-    .Container{
+@media (max-width: 768px) {
+    .Container {
         margin: 0px;
     }
 }

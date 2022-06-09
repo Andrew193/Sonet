@@ -28,44 +28,62 @@ function Header() {
     const history = useHistory();
 
     const headerLinks = useMemo(() => headerLinksConfig?.map((linkConfig) =>
-        <NavLink
-            key={uuidv4()}
-            exact to={{pathname: linkConfig?.path}}
-            activeClassName={s.ActivePage}
-            data-tooltip={linkConfig?.label}
-        >
-            <span>{linkConfig.label}</span>
-            {linkConfig?.img}
-        </NavLink>
+        <p className={"wrap-link-line"}>
+            <span className={"col-sm-2 col-xs-2"}/>
+            <NavLink
+                className={"col-sm-7 col-xs-7"}
+                key={uuidv4()}
+                exact to={{pathname: linkConfig?.path}}
+                activeClassName={s.ActivePage}
+                data-tooltip={linkConfig?.label}
+            >
+                {linkConfig?.img}
+                <span>{linkConfig.label}</span>
+            </NavLink>
+
+            <span className={"col-sm-3 col-xs-3"}/>
+        </p>
     ), []);
 
     return (
         <nav className={s.NavBar}>
             <div>
-                <Link to={{pathname: "/"}}>
-                    <img alt="Logotype" src={Logo}/>
-                </Link>
-
+                <p className={"wrap-link-line logotype"}>
+                    <span className={"col-sm-2"}/>
+                    <Link to={{pathname: "/"}} className={"col-sm-7 logotype"}>
+                        <img alt="Logotype" src={Logo}/>
+                    </Link>
+                    <span className={"col-sm-3"}/>
+                </p>
                 {headerLinks}
 
-                <span
-                    className={s.LeaveBtn}
-                    onClick={() => {
-                        Script.leave(history)
-                    }}
-                    data-tooltip="Leave"
-                >
-                    <span>Leave</span>
-                    <AiOutlineLogout size={"24px"} style={{"margin-left":"10px"}}/>
-                </span>
+                <p className={"wrap-link-line"}>
+                    <span className={"col-sm-2"}/>
+                    <span
+                        className={s.LeaveBtn + " col-sm-7"}
+                        onClick={() => {
+                            Script.leave(history)
+                        }}
+                        data-tooltip="Leave"
+                    >
+                        <AiOutlineLogout size={"24px"} style={{"margin-right": "10px"}}/>
+                        <span>Leave</span>
+                    </span>
+                    <span className={"col-sm-3"}/>
+                </p>
 
-                <button
-                    className={"button " + s.PostBtn}
-                    onClick={() => {
-                        Script2.openModal("Mpost")
-                    }}
-                >Post
-                </button>
+                <p className={"wrap-link-line post-btn-nav "}>
+                    <span className={"col-sm-2"}/>
+                    <span
+                        id={"mainPostBtn"}
+                        className={"col-sm-7 " + s.PostBtn}
+                        onClick={() => {
+                            Script2.openModal("Mpost")
+                        }}
+                    >Post
+                    </span>
+                    <span className={"col-sm-2"}/>
+                </p>
 
                 <span
                     data-tooltip="Post"
