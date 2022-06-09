@@ -1,7 +1,8 @@
 import { createPortal } from "react-dom";
-import CreatePost from "../createPost";
+import CreatePost from "../components/createPost";
 import s from "./index.module.css"
-import Script from "../profile/script";
+import Script from "../components/profile/script";
+
 function PostPortal() {
     return createPortal(
         <div className={s.PostModal + " " + "Hide Mpost"} onDoubleClick={() => Script.openModal("Mpost")}>

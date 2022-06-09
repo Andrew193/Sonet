@@ -101,7 +101,7 @@ class Http {
     }
 
     emotion(userId, id, likeCount, dislikeCount, callback, callback1, emType) {
-        axios.put("https://sonet34.herokuapp.com/api/post/" + emType + "?token=" + Script.getCookie("token"), {
+        axios.put("https://sonet34.herokuapp.com/api/post/" + emType, {
             userId,
             id,
             likeCount,

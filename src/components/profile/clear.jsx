@@ -6,7 +6,7 @@ import FlexColl from "./FlexColl.jsx";
 import Script from "./script.js"
 import postServ from "../posts/script.js"
 import { useEffect, useRef, useState } from "react";
-import PageHeader from "../common/header/index.jsx";
+import PageHeader from "../common/navigationLine/NavigationLine.jsx";
 import UserHelper from "../../helpers/userHelper"
 function ClearProfile(props) {
     const { s, history, userInfo } = props;

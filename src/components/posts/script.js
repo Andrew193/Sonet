@@ -25,7 +25,7 @@ function getSelectedPost(id, notify) {
 }
 
 function like(id, userId, likeCount, notify, dislikeCount, socket) {
-    HttpHelper.emotion(userId, id, likeCount, dislikeCount, () => afterEmotion(socket, userId, "dislike", notify),
+    HttpHelper.emotion(userId, id, likeCount, dislikeCount, () => afterEmotion(socket, userId, "like", notify),
         (error) => notify(HTMLhelp.createHTML({ title: "Sorry", message: error?.response?.data?.error })), "like")
 }
 

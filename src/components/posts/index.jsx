@@ -5,7 +5,7 @@ import Skeleton from 'react-loading-skeleton';
 import SortLine from "./SortLine.jsx"
 import s from "./style.module.css"
 import { Link, withRouter } from "react-router-dom";
-import PageHeader from "../common/header/index.jsx";
+import PageHeader from "../common/navigationLine/NavigationLine.jsx";
 import Context from "../../helpers/contextHelper"
 function PostsContainer(props) {
     const [posts, setPosts] = useState(false);

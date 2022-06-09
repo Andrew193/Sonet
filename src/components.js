@@ -2,7 +2,7 @@ import ContainerAuth from './components/auth';
 import Footer from './components/footer';
 import SpecialPosts from "./components/posts/specialPosts";
 import Comment from "./components/comments/index";
-import Header from './components/header';
+import Header from './header/HeaderContainerPage';
 import MainPage from "./components/mainPage";
 import Profile from './components/profile';
 import ModalUser from './components/mainPage/modalUpdateUser';

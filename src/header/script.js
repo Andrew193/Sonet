@@ -1,11 +1,13 @@
-import Script from "../../helpers/cookieHelper";
-import htmlHelper from "../../helpers/htmlHelper";
-import HttpHelper from "../../helpers/httpHelper"
-import CommonHelper from "../../helpers/common"
+import Script from "../helpers/cookieHelper";
+import htmlHelper from "../helpers/htmlHelper";
+import HttpHelper from "../helpers/httpHelper";
+import CommonHelper from "../helpers/common";
+
 function leave(history) {
     Script.removeCookie("token");
     CommonHelper.redirect(history, null, "/auth")
 }
+
 function GetShortUserInfo(notify) {
     const token = Script.getCookie("token");
 

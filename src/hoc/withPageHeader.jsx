@@ -1,4 +1,4 @@
-import PageHeader from "../components/common/header/index"
+import PageHeader from "../components/common/navigationLine/NavigationLine"
 import { Link } from "react-router-dom";
 
 function WithPageHeader(Component, props) {

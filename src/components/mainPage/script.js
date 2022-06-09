@@ -1,5 +1,5 @@
 import HttpHelper from "../../helpers/httpHelper"
-import Script from "../header/script.js"
+import Script from "../../header/script.js"
 
 
 function UpdateInfo(values, close, history) {

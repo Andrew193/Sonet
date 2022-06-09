@@ -1,5 +1,5 @@
 import s from "./style.module.css"
-import s2 from "../common/header/style.module.css"
+import s2 from "../common/navigationLine/style.module.css"
 import Script from "./script.js"
 import { useRef } from "react";
 import { AiOutlineSafetyCertificate, AiOutlineSecurityScan } from "react-icons/ai";

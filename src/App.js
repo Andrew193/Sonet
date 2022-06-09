@@ -1,7 +1,7 @@
 import {Route, Switch, useHistory} from 'react-router';
 import './App.css';
 import Components from "./components"
-import Script from "./components/header/script.js"
+import Script from "../src/header/script.js"
 import Script2 from "./components/user/script.js";
 import 'react-toastify/dist/ReactToastify.css';
 import './res/grid/styles.scss';
