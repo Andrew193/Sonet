@@ -1,4 +1,5 @@
 import HttpHelper from "../../helpers/httpHelper"
+
 function reset(token, seter, resetForm) {
     document.cookie = `token=${token}`;
     resetForm();
@@ -12,9 +13,20 @@ function comboReset(token, seter, resetForm) {
 
 function sendReq(values, resetForm, flag, seter, toast) {
     values.userName = "Default";
-    console.log("test")
-    flag ? HttpHelper.createUser(values, (token) => comboReset(token, seter, resetForm), () => toast("User already exist"))
-        : HttpHelper.authUser(values, (token) => comboReset(token, seter, resetForm), (error) => toast(error))
+
+    if (flag) {
+        HttpHelper.createUser(values, (token) => {
+            comboReset(token, seter, resetForm);
+        }, () => {
+            toast("User already exist");
+        })
+    } else {
+        HttpHelper.authUser(values, (token) => {
+            comboReset(token, seter, resetForm);
+        }, (error) => {
+            toast(error);
+        })
+    }
 }
 
 export default {sendReq};

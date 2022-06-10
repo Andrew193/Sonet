@@ -147,10 +147,17 @@ class Http {
             .catch((error) => error.response && callback1())
     }
 
-    createUser(values, callback, callback1) {
+    createUser(values, okCallback, errorCallback) {
         axios.post("https://sonet34.herokuapp.com/api/users", values)
-            .then((response) => callback(response?.data?.token))
-            .catch((error) => error && callback1())
+            .then((response) => {
+                okCallback(response?.data?.token);
+            })
+            .catch((error) => {
+                console.log(error.data);
+                if (error) {
+                    errorCallback()
+                }
+            })
     }
 
     authUser(values, callback, callback1) {
