@@ -22,7 +22,6 @@ function ClearProfile(props) {
         Script.getPCount(userInfo.id, setCount);
     }, [userInfo.id]);
 
-    console.log(JSON.parse(userInfo.back))
     return (<>
             <form>
                 <input

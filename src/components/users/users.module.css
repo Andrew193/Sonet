@@ -8,7 +8,7 @@
     border-right: 1px solid #cecccc;
 }
 
-.ActionLine{
+.ActionLine {
     display: flex;
     padding: 1% 5%;
     flex-wrap: wrap;
@@ -19,10 +19,17 @@
     border-bottom: 1px solid #cecccc;
     display: flex;
     justify-content: space-between;
+    cursor: pointer;
+    transition: background-color ease 0.5s;
 }
 
-.Item:nth-child(2n){
+.Item:nth-child(2n) {
     background-color: #f6f2ff;;
+}
+
+.Item:hover {
+    background-color: #d6cbf0!important;
+    color: #c0bebe;
 }
 
 .Item h3 svg {
@@ -37,16 +44,16 @@
 }
 
 .Item h3:hover a {
-    color: rgb(73, 73, 248)!important;
+    color: rgb(73, 73, 248) !important;
 }
 
-.Item>div {
+.Item > div {
     text-align: left;
     padding: 1% 5%;
     flex: 2 0;
 }
 
-.Item img{
+.Item img {
     height: 80px;
     width: auto;
     margin: 5px -20px 5px 20px;
@@ -54,26 +61,30 @@
     box-shadow: 0 5px 10px 0 rgb(107 159 199 / 34%);
 }
 
-.Item>div span {
+.Item > div span {
     display: flex;
     align-items: center;
 }
 
-.Item>div span svg {
+.Item > div span svg {
     font-size: 20px;
     margin-right: 5px;
 }
+
 .Item span {
     padding: 0.1% 1%;
     font-size: 10px;
     color: gray;
 }
+
 .Item span:hover {
     color: rgb(73, 73, 248);
 }
+
 .Item span:hover a {
     color: rgb(73, 73, 248);
 }
+
 .Item a {
     transition: all ease 0.3s;
     text-decoration: none;
@@ -112,10 +123,10 @@
 }
 
 .FullHeight {
-    height: 89%!important;
+    height: 89% !important;
 }
 
-.FindUserLine>div {
+.FindUserLine > div {
     display: flex;
     justify-content: center;
     padding-top: 1%;
@@ -134,148 +145,179 @@
     background-color: transparent;
 }
 
-@media (min-width:2201px) {
+@media (min-width: 2201px) {
     .Item span {
         font-size: 20px;
     }
+
     .FullHeight {
-        height: 89%!important;
+        height: 89% !important;
     }
+
     .UsersCont {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
     }
+
     .Item h3 svg {
         width: auto;
         height: 36px;
     }
+
     .Item h3 {
         font-size: 36px;
     }
-    .Item>div span {
+
+    .Item > div span {
         font-size: 26px;
     }
-    .Item>div span svg {
+
+    .Item > div span svg {
         width: auto;
         height: 30px;
     }
 }
 
-@media (max-width:2200px) {
+@media (max-width: 2200px) {
     .FullHeight {
-        height: 89%!important;
+        height: 89% !important;
     }
+
     .Item span {
         font-size: 20px;
     }
+
     .Item h3 svg {
         width: auto;
         height: 33px;
     }
+
     .Item h3 {
         font-size: 33px;
     }
-    .Item>div span {
+
+    .Item > div span {
         font-size: 26px;
     }
-    .Item>div span svg {
+
+    .Item > div span svg {
         width: auto;
         height: 30px;
     }
 }
 
-@media (max-width:1800px) {
+@media (max-width: 1800px) {
     .FullHeight {
-        height: 84%!important;
+        height: 84% !important;
     }
+
     .Item span {
         font-size: 16px;
     }
+
     .Item h3 svg {
         width: auto;
         height: 26px;
     }
+
     .Item h3 {
         font-size: 26px;
     }
-    .Item>div span {
+
+    .Item > div span {
         font-size: 20px;
     }
-    .Item>div span svg {
+
+    .Item > div span svg {
         width: auto;
         height: 26px;
     }
 }
 
-@media (max-width:1440px) {
+@media (max-width: 1440px) {
     .FullHeight {
-        height: 89%!important;
+        height: 89% !important;
     }
+
     .Item span {
         font-size: 16px;
     }
+
     .Item h3 {
         font-size: 23px;
     }
-    .Item>div span {
+
+    .Item > div span {
         font-size: 16px;
     }
-    .Item>div span svg {
+
+    .Item > div span svg {
         width: auto;
         height: 23px;
     }
 }
 
-@media (max-width:1024px) {
-    .FindUserLine{
+@media (max-width: 1024px) {
+    .FindUserLine {
         width: 85%;
     }
+
     .FullHeight {
-        height: 89%!important;
+        height: 89% !important;
     }
+
     .Container {
         max-width: unset;
     }
+
     .Item span {
         font-size: 13px;
     }
+
     .Item h3 {
         font-size: 20px;
     }
-    .Item>div span {
+
+    .Item > div span {
         font-size: 13px;
     }
-    .Item>div span svg {
+
+    .Item > div span svg {
         height: 20px;
         width: auto;
     }
 }
 
-@media (max-width:768px) {
+@media (max-width: 768px) {
     .FullHeight {
-        height: 82%!important;
+        height: 82% !important;
     }
+
     .Container {
         margin: unset;
         max-width: unset;
     }
+
     .Item h3 {
         font-size: 16px;
     }
 }
 
-@media (max-width:425px) {
+@media (max-width: 425px) {
     .FullHeight {
-        height: 83%!important;
+        height: 83% !important;
     }
+
     .Container {
         margin: unset;
         max-width: unset;
     }
+
     .Item {
         flex-wrap: wrap;
     }
+
     .Item h3 {
         font-size: 13px;
     }

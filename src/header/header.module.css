@@ -339,11 +339,16 @@
 
 @media (max-width: 768px) {
     .NavBar {
-        height: 10%;
+        height: 7%;
         flex-direction: row;
         width: -webkit-fill-available;
-        top: 90%;
+        top: 93%;
         background-color: aliceblue;
+        padding: unset;
+    }
+
+    .NavBar div p {
+        height: 100%;
     }
 
     .LeaveBtn{

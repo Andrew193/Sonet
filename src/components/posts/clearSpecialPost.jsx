@@ -9,7 +9,7 @@ function ClearSpecialPost(props) {
     const { posts, id } = props
     return (
         <>
-            <div className={"Separator"}></div>
+            <div className={"Separator"}/>
             <ClearPost id={id} socket={socket} notify={notify} toMake={posts} />
             <SortLine />
         </>

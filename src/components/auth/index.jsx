@@ -19,7 +19,6 @@ function ContainerAuth() {
         },
         onSubmit: (values, {resetForm}) => {
             Script.sendReq(values, resetForm, flag, setFlag2, (message) => {
-                console.log(message)
                 const Msg = ({closeToast, toastProps}) => (
                     <div>
                         {message}

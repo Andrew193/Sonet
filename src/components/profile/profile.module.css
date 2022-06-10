@@ -126,11 +126,13 @@
 .Black {
     color: black!important;
     font-size: 20px;
+    margin-right: 10px;
 }
 
 .LastLine {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: flex-start;
+    max-height: 20px;
 }
 
 .LastLine span {
@@ -247,6 +249,7 @@
     .Container {
         margin: unset;
         max-width: unset;
+        min-height: 800px;
     }
 }
 

@@ -8,7 +8,7 @@ function rel() {
             let tooltipHtml = target?.dataset?.tooltip;
             if (!tooltipHtml) return;
             tooltipElem = document.createElement('div');
-            tooltipElem.className = 'tooltip';
+            tooltipElem.className = 'customTooltip';
             tooltipElem.innerHTML = tooltipHtml;
             document.body.append(tooltipElem);
             let coords = target.getBoundingClientRect();

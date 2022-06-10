@@ -1,8 +1,5 @@
 .Tip {
   transition: all ease 0.7s;
-  position: absolute;
-  top: 25%;
-  left: -8%;
 }
 
 .Active{
@@ -35,6 +32,7 @@
 }
 
 .Container form {
+  color: #6e6e6e;
   position: relative;
   padding: 25px 20px;
   border-radius: 15px;
@@ -82,14 +80,18 @@
 
 .Container form div {
   position: relative;
-  margin: 7px;
+  margin: 5% 0px;
+  display: flex;
+  align-items: baseline;
+  flex-direction: row-reverse;
+  justify-content: space-between;
 }
 
 .Container form input {
   border-bottom: 1px solid black;
   outline: none;
   padding: 5px 40px;
-  margin: 9px 20px;
+  margin: 5px 10px;
   border: none;
   background: #1c1e21;
   box-shadow: inset -100px -100px 0 #1c1e21;
@@ -113,8 +115,8 @@
 .Container .welcB {
   position: absolute!important;
   top: 24%;
-  width: 60px;
-  height: 60px;
+  width: 70px;
+  height: 70px;
   right: -10%;
   color: #34383d!important;
   border-radius: 50%;

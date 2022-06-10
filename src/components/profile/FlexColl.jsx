@@ -11,7 +11,7 @@ function FlexColl(props) {
         <div className={s.FlexColl}>
             <div className={s.SecondLine}>
                 <span className={s.Black}>
-                    <b>{userInfo.createdBy}</b>
+                    <b>{userInfo.userName}</b>
                 </span>
                 <span>
                     <AiOutlineMail className={s.CommonIcon}/>

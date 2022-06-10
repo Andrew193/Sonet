@@ -1500,7 +1500,7 @@ hr {
 }
 
 p {
-    margin: 0 0 10px
+    margin: unset !important;
 }
 
 .lead {
@@ -3841,8 +3841,9 @@ tbody.collapse.in {
     display: inline-block;
     vertical-align: middle
 }
+
 .btn-group .btn {
-   border-radius: 4px !important;
+    border-radius: 4px !important;
 }
 
 .btn-group-vertical > .btn, .btn-group > .btn {
