@@ -122,10 +122,7 @@ class Http {
     }
 
     getMe(callback) {
-        return axios.get("https://sonet34.herokuapp.com/api/users/me?token=" + Script.getCookie("token"), {
-            withCredentials: true,
-            credentials: 'include',
-        })
+        return axios.get("https://sonet34.herokuapp.com/api/users/me?token=" + Script.getCookie("token"))
             .then((response) => response)
             .catch((error) => error.response && callback(error.response))
     }

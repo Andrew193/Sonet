@@ -4,9 +4,11 @@
   top: 25%;
   left: -8%;
 }
+
 .Active{
   color: #060680;
 }
+
 .Container {
   position: absolute;
   width: 100%;
@@ -23,12 +25,15 @@
   -ms-flex-pack: center;
   justify-content: center;
 }
+
 .Container a{
   color: #2525ac;
 }
+
 .Container a:hover{
   color: #060680;
 }
+
 .Container form {
   position: relative;
   padding: 25px 20px;
@@ -49,18 +54,22 @@
   -ms-flex-direction: column;
   flex-direction: column;
 }
+
 .Container article{
   display: flex;
   cursor: pointer;
   justify-content: space-evenly;
 }
+
 .Container article h2{
   margin: 0;
 }
+
 .Container article h2:hover{
   text-shadow: 0px 0px 10px #0a00ce;
   color: #2525ac;
 }
+
 .Container form::before {
   display: block;
   position: relative;
@@ -70,10 +79,12 @@
   top: 44px;
   z-index: 1;
 }
+
 .Container form div {
   position: relative;
   margin: 7px;
 }
+
 .Container form input {
   border-bottom: 1px solid black;
   outline: none;
@@ -84,9 +95,11 @@
   box-shadow: inset -100px -100px 0 #1c1e21;
   color: #6c6f75 !important;
 }
+
 .Container form input:focus + span {
   left: -4% !important;
 }
+
 .Container form p {
   color: #4f5561;
   padding: 0 20px;
@@ -96,37 +109,42 @@
   position: absolute;
   top: 100%;
 }
+
 .Container .welcB {
-  position: absolute;
+  position: absolute!important;
   top: 24%;
   width: 60px;
   height: 60px;
   right: -10%;
-  color: #34383d;
+  color: #34383d!important;
   border-radius: 50%;
   outline: 0;
   z-index: 2;
-  background: #1c1e21;
-  border: 6px solid #34383d;
-  min-width: unset;
-  max-width: unset;
-  padding: unset;
+  background: #1c1e21!important;
+  border: 6px solid #34383d!important;
+  min-width: unset!important;
+  max-width: unset!important;
+  padding: unset!important;
 }
+
 .Container .welcB:hover {
   text-shadow: 0px 0px 10px #0a00ce;
   color: #2525ac;
   box-shadow: -1px -1px 29px 0px rgba(0, 114, 202, 0.43);
 }
+
 .Error {
   border: 1px solid red;
   border-radius: 15px;
   margin: 5px;
   position: absolute;
 }
+
 .f1 {
   left: -48%;
   top: 45%;
 }
+
 .f2 {
   left: -125%;
   top: 75%;
