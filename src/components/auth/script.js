@@ -17,8 +17,8 @@ function sendReq(values, resetForm, flag, seter, toast) {
     if (flag) {
         HttpHelper.createUser(values, (token) => {
             comboReset(token, seter, resetForm);
-        }, () => {
-            toast("User already exist");
+        }, (error) => {
+            toast(error || "User already exist");
         })
     } else {
         HttpHelper.authUser(values, (token) => {

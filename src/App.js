@@ -15,7 +15,7 @@ import Context from "./helpers/contextHelper"
 const sessionHelper = require("./helpers/sessionHelper")
 const socket = io();
 
-function notify(content) {
+export function notify(content) {
     toast(content);
 }
 
@@ -33,7 +33,6 @@ function App() {
         sessionHelper?.default?.isElive(history);
 
         Script.GetShortUserInfo(notify)?.then((newState) => {
-            debugger
             Script2.SaveInfo(newState?.data);
             setFlag(true);
         });

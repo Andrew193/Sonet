@@ -1,6 +1,7 @@
 import cookieHelper from "./cookieHelper"
 import CommonHelper from "./common"
 import Script from "./cookieHelper";
+import {createErrorsForApiCall} from "../utils";
 
 const axios = require('axios').default;
 
@@ -153,9 +154,9 @@ class Http {
                 okCallback(response?.data?.token);
             })
             .catch((error) => {
-                console.log(error.data);
+                console.log(error.response.data);
                 if (error) {
-                    errorCallback()
+                    errorCallback(createErrorsForApiCall(error?.response?.data, error?.response?.data))
                 }
             })
     }
