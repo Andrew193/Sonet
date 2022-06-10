@@ -7,15 +7,18 @@ import Skeleton from "react-loading-skeleton";
 
 
 function Profile(props) {
+    const userId = props.match.params.id;
+
     const history = useHistory();
     const [userInfo, setUserInfo] = useState(false);
-    const id = props.match.params.id;
+
     useEffect(() => {
-        !id ? setUserInfo(JSON.parse(localStorage.getItem("userInfo")))
-            : Script.getUser(id)
+        !userId ? setUserInfo(JSON.parse(localStorage.getItem("userInfo")))
+            : Script.getUser(userId)
                 .then((response) => setUserInfo(response?.data?.user))
                 .catch((error) => console.log(error))
-    }, [id])
+    }, [userId]);
+
     return (
         <div className={s.Container}>
             {userInfo ?

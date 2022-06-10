@@ -5,8 +5,13 @@ import UserHelper from "../../helpers/userHelper"
 import {useRef} from "react";
 
 function FirstLine(props) {
+    const {
+        imgUrl,
+        myId,
+        id
+    } = props;
+
     let image = useRef();
-    const {imgUrl, myId, id} = props;
 
     return (
         <>
@@ -21,7 +26,7 @@ function FirstLine(props) {
             <div className={s.FirstLine}>
                 <img
                     alt={"Avatar"}
-                    src={imgUrl}
+                    src={JSON.parse(imgUrl)?.webContentLink}
                     onClick={() => (myId === id) && UserHelper.CallImageInput(image)}
                 />
                 {myId === id && <button onClick={() => Script.openModal("Muser")}>

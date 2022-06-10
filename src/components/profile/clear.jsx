@@ -10,11 +10,17 @@ import PageHeader from "../common/navigationLine/NavigationLine.jsx";
 import UserHelper from "../../helpers/userHelper";
 
 function ClearProfile(props) {
-    const {s, history, userInfo} = props;
-    const myId = JSON.parse(localStorage.getItem("userInfo")).id
+    const {
+        s,
+        history,
+        userInfo
+    } = props;
+
+    const myId = JSON.parse(localStorage.getItem("userInfo")).id;
+
     const [count, setCount] = useState(0)
-    const cr = DateHelper.fromNow(userInfo.createdAt),
-        up = DateHelper.fromNow(userInfo.updatedAt);
+    const createdAt = DateHelper.fromNow(userInfo.createdAt);
+    const updatedAt = DateHelper.fromNow(userInfo.updatedAt);
 
     let image = useRef();
 
@@ -61,8 +67,8 @@ function ClearProfile(props) {
             />
             <FlexColl
                 myId={myId}
-                up={up}
-                cr={cr}
+                up={updatedAt}
+                cr={createdAt}
                 userInfo={userInfo}
             />
         </>
