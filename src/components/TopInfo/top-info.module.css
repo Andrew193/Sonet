@@ -18,6 +18,7 @@
     padding: 10px;
     position: relative;
     text-align: center;
+    margin-top: unset;
 }
 
 .Center {
@@ -44,9 +45,26 @@
 }
 
 .Tip>div span {
-    position: absolute;
-    right: 5%;
+    display: flex;
     font-size: 10px;
+    align-items: center;
+}
+
+.PostLine {
+    margin: 2px 3px!important;
+    max-width: 100%!important;
+    padding-left: 10px;
+    font-size: 16px;
+}
+
+.PostLine:first-letter {
+    text-transform: capitalize;
+}
+
+.latestPostFirstLine{
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-evenly;
 }
 
 .Tip>div>h4 {

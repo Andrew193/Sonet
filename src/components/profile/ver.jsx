@@ -10,7 +10,7 @@ function Ver(props) {
 
     return (
         <div className={s.Ver}>
-            <div className={s.ConfirmLine + " " + "Hide Mconfirm"}>
+            <div className={s.ConfirmLine + " Hide Mconfirm"}>
                 <input placeholder={"Input your email"} ref={(el) => text = el} />
                 <span id="mainPostBtn" onClick={() =>
                     Script.confirmPerson("Mconfirm", text.value, userInfo.email)}>Confirm</span>

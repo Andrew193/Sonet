@@ -48,6 +48,7 @@
     padding-bottom: 38%;
     background-color: #ccc;
     transition: all ease 0.7s;
+    cursor: pointer;
 }
 
 .FlexColl {

@@ -10,17 +10,54 @@
     justify-content: space-between;
 }
 
+.NavBar p {
+    margin: 10px !important;
+}
+
+.NavBar > div p:last-of-type {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+}
+
+.NavBar > div p:first-of-type {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+}
+
 .userInfo {
     border: 1px solid transparent;
     margin: 0px 10%;
-    border-radius: 20px;
+    border-radius: 50px;
     cursor: pointer;
-    background: #ecf0f5;
+    display: flex;
+    padding: 12px;
+    transition: all ease 0.5s;
+    align-items: center;
+}
+
+.userInfo > p {
+    flex-direction: column;
+    margin: 0px 0px 0px 10px !important;
+    align-items: baseline;
+}
+
+.userInfo > p > span:first-of-type {
+    margin-bottom: 3px;
+}
+
+.userInfo > span {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
 }
 
 .userInfo:hover {
     background-color: rgb(203, 203, 243);
-    border: 1px solid rgb(73, 73, 248);
+    border: 1px solid rgb(157 157 240);
 }
 
 .userInfo h2 {
@@ -52,7 +89,7 @@
     font-size: 13px;
 }
 
-.NavBar div:first-of-type {
+.NavBar > div:first-of-type {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
@@ -103,8 +140,8 @@
     border: none !important;
     width: fit-content;
     font-weight: bolder !important;
-    padding: 10px !important;
-    margin: 0px 3px !important;
+    padding: unset !important;
+    margin: unset !important;
     text-align: left !important;
     font-size: 13px !important;
     border: 1px solid transparent !important;
@@ -122,25 +159,45 @@
     bottom: 10%;
     height: min-content !important;
     cursor: pointer;
-    background-color: #cbcbf3;
+    background: rgb(203, 203, 243);
     border-radius: 15px;
-    box-shadow: 0px 0px 8px 0px rgb(0 130 231 / 80%);
+    box-shadow: 0px 0px 8px 0px rgb(165 216 255 / 80%);
 }
 
 .UserPortal p {
     width: -webkit-fill-available;
     padding: 5% 10%;
+    border-bottom: 1px soid #a6c3f7;
 }
 
-.UserPortal p {
-    border-bottom: 1px soid #a6c3f7;
+.UserPortal > div {
+    display: flex;
+    align-items: center;
+    padding-bottom: 12px;
+    padding-top: 12px;
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+.UserPortal > div > div {
+    display: flex;
+    flex-direction: column;
+}
+
+.UserPortal > div > div:first-of-type {
+    margin-right: 12px
+}
+
+.UserPortal > div > div:last-of-type {
+    height: 100%;
+    width: 100%;
+    align-items: end;
 }
 
 .UserPortal p:last-of-type {
     border-bottom: none;
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
-    color: #3452f1;
 }
 
 .UserPortal h2 {
@@ -149,10 +206,17 @@
     padding-left: 10%;
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
+    margin-top: unset !important;
 }
 
-.Controle:hover {
+#Controle:hover {
     background-color: #a4a4f7;
+}
+
+#Controle {
+    margin: unset!important;
+    justify-content: flex-start;
+    transition: all ease 0.5s;
 }
 
 .ActivePage {
@@ -197,7 +261,7 @@
         font-size: 16px;
     }
 
-    .NavBar div:first-of-type {
+    .NavBar > div:first-of-type {
         height: unset;
         justify-content: space-around;
     }
@@ -273,7 +337,7 @@
         font-size: 16px;
     }
 
-    .NavBar div:first-of-type {
+    .NavBar > div:first-of-type {
         height: unset;
         justify-content: space-around;
     }
@@ -308,9 +372,6 @@
 }
 
 @media (max-width: 1024px) {
-    .NavBar svg {
-        margin: 0px !important;
-    }
 
     #PostBtnS {
         display: block;
@@ -351,7 +412,7 @@
         height: 100%;
     }
 
-    .LeaveBtn{
+    .LeaveBtn {
         width: 36px;
         height: 32px;
     }

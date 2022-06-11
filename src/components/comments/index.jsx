@@ -3,7 +3,7 @@ import s from "./comments.module.css"
 import Loader from "../common/spinner/Spinner"
 import { useContext, useEffect, useState } from "react";
 import Context from "../../helpers/contextHelper"
-import Script from "../posts/script"
+import Script from "../../posts/script"
 import S2 from "./Script.js"
 import ClearComment from "./clearComment";
 function Comments(props) {

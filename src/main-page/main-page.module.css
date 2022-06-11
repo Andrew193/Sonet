@@ -1,0 +1,211 @@
+.Container {
+    margin: 0px 0px 0px 15%;
+    flex: 3 0;
+    max-width: 60%;
+    height: -webkit-fill-available;
+    border-left: 1px solid rgb(206, 204, 204);
+    border-right: 1px solid rgb(206, 204, 204);
+}
+
+.UpdateModal {
+    transition: all ease 0.7s;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: -webkit-fill-available;
+    width: -webkit-fill-available;
+    z-index: 10;
+    background: #b1afaf9c;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.UpdateModal > div {
+    width: 45%;
+    height: 45%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: #cbcbf3;
+    border-radius: 25px;
+    box-shadow: 0 0 8px 0 rgb(0 130 231 / 20%);
+    padding: 10px;
+}
+
+.UpdateModal label {
+    cursor: pointer;
+    text-align: left;
+    font-size: 14px;
+}
+
+.UpdateModal label:hover {
+    color: #3452f1;
+}
+
+.UpdateModal > div > div {
+    width: -webkit-fill-available;
+    display: flex;
+    flex-wrap: wrap;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.UpdateModal > div > div > div {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.UpdateModal > div > div > div > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.UpdateModal > div > div input {
+    margin: 0px 10px;
+    border: none;
+    background-color: transparent;
+    border-bottom: 1px solid #8181dc;
+    outline: none;
+    width: 100%;
+    color: gray;
+}
+
+.ConfigLine {
+    padding: 40px 20px;
+    transition: all ease 0.7s;
+}
+
+.ConfigLine p:first-of-type {
+    color: grey;
+    margin: 2% 0%;
+}
+
+.ConfigLine h3 {
+    letter-spacing: 1px;
+}
+
+.ConfigLine p:last-of-type {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+@media (min-width: 2201px) {
+    .Container {
+        flex: 2 0;
+    }
+
+    .UpdateModal > div {
+        width: 70%;
+    }
+
+    .ConfigLine h3 {
+        letter-spacing: 1px;
+        font-size: 36px;
+    }
+
+    .ConfigLine p {
+        display: flex;
+        justify-content: space-evenly;
+        flex-wrap: wrap;
+        font-size: 30px;
+    }
+}
+
+@media (max-width: 2200px) {
+    .Container {
+        flex: 2 0;
+    }
+
+    .UpdateModal > div {
+        width: 60%;
+    }
+
+    .ConfigLine h3 {
+        font-size: 30px;
+    }
+
+    .ConfigLine p {
+        font-size: 26px;
+    }
+}
+
+@media (max-width: 1700px) {
+    .Container {
+        flex: 2 0;
+    }
+
+    .ConfigLine h3 {
+        font-size: 23px;
+    }
+
+    .ConfigLine p {
+        font-size: 20px;
+    }
+
+    .UpdateModal > div {
+        width: 40%;
+    }
+}
+
+@media (max-width: 1440px) {
+    .Container {
+        flex: 2 0;
+    }
+
+    .UpdateModal > div {
+        width: 45%;
+    }
+}
+
+@media (max-width: 1024px) {
+    .Container {
+        flex: 2 0;
+        max-width: unset;
+    }
+
+    .UpdateModal > div {
+        width: 60%;
+    }
+}
+
+@media (max-width: 768px) {
+    .Container {
+        flex: 2 0;
+        margin: 0px;
+    }
+
+    .UpdateModal > div {
+        width: 65%;
+    }
+}
+
+@media (max-width: 425px) {
+    .Container {
+        max-width: unset;
+        margin: 0;
+    }
+
+    .UpdateModal > div {
+        width: 80%;
+    }
+}
+
+@media (max-width: 320px) {
+    .Container {
+        flex: 2 0;
+    }
+
+    .UpdateModal > div {
+        width: 75%;
+    }
+}

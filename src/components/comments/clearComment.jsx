@@ -2,7 +2,7 @@ import withPageHeader from "../../hoc/withPageHeader"
 import Comment from "./comments"
 import Skeleton from "react-loading-skeleton";
 import CommentLine from "./commentLine"
-import ClearPosts from "../posts/clear";
+import ClearPosts from "../../posts/clear";
 import Context from "../../helpers/contextHelper"
 import { useContext } from "react";
 function ClearComment(props) {

@@ -2,16 +2,16 @@ import {Link, NavLink, useHistory} from "react-router-dom";
 import s from "./header.module.css";
 import Script from "./script";
 import Logo from "./img/icon.ico";
-import ProfileContainer from "../components/user";
+import ProfileContainer from "../user/ProfileContainerForNavbar";
 import {useMemo, useState} from "react";
-import Portal from "./userPortal";
+import Portal from "./UserPortal";
 import {AiOutlineHighlight} from "react-icons/ai";
 import {v4 as uuidv4} from "uuid";
 import {
     AiOutlineUser, AiOutlineBank, AiOutlineComment,
     AiOutlineLogout, AiOutlineTeam, AiOutlineFile
 } from "react-icons/ai";
-import PostPortal from "./postPortal";
+import PostPortal from "./PostPortal";
 import Script2 from "../components/profile/script";
 import {headerListLinks} from "../vars";
 
@@ -96,7 +96,7 @@ function Header() {
             <div
                 className={s.userInfo}
                 onClick={() => {
-                    Script.realOpen(setFlag)
+                    Script.ToggleStateValue(setFlag)
                 }}
             >
                 <ProfileContainer/>

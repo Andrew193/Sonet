@@ -19,15 +19,15 @@ function GetShortUserInfo(notify) {
         })
     }
 }
-function realOpen(setFlag) {
+function ToggleStateValue(setFlag) {
     setFlag((prev) => !prev.flag)
-    setTimeout(() => setFlag((prev) => false), 3000)
 }
+
 function GetInfo() {
     const { userName, id } = JSON.parse(localStorage.getItem("userInfo"));
     return { userName, id };
 }
 
-const obj = { leave, GetShortUserInfo, realOpen, GetInfo }
+const obj = { leave, GetShortUserInfo, ToggleStateValue, GetInfo }
 
 export default obj;

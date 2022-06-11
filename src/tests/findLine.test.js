@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react';
-import FindLine from "../components/users/findLine"
+import FindLine from "../users/findLine"
 test("Is exist",()=>{
     render(<FindLine />,document.body)
     expect(document.body.querySelector("[data-testid='FindLine']")).toBeInTheDocument()

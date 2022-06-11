@@ -1,4 +1,5 @@
-import HttpHelper from "../../helpers/httpHelper"
+import HttpHelper from "../../helpers/httpHelper";
+
 function openModal(cl) {
     document.querySelector(`.${cl}`).classList.toggle("Open")
 }

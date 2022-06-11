@@ -26,7 +26,8 @@ body {
     border-bottom: 1px solid rgb(206, 204, 204);
     text-align: left;
     padding: 14px;
-    max-height: 70px;
+    height: auto;
+    max-height: 75px;
 }
 
 .basicPageHead a {
@@ -93,6 +94,11 @@ a {
     transition: background-color 0.3s, color 0.3s !important;
 }
 
+.divider_default {
+    background: rgb(171 171 245) !important;
+}
+
+
 .button.button--inverted {
     background: #ECEFF1;
     color: #37474f;
@@ -157,7 +163,7 @@ a {
 
     .basicPageHead {
         font-size: 26px;
-        padding: 25px 30px;
+        padding: 20px 30px;
     }
 
     .basicPageHead a {
@@ -173,7 +179,7 @@ a {
 
     .basicPageHead {
         font-size: 20px;
-        padding: 15px 20px;
+        padding: 10px 20px;
     }
 
     .basicPageHead a {
