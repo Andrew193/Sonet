@@ -1,7 +1,7 @@
 import s from "./users.module.css"
 import Script from "./script"
 import { toast } from "react-toastify"
-function ActionLine(props) {
+function UsersPageActions(props) {
     const { value, history, notYouFolCount } = props
     return (
         <div className={s.ActionLine}>
@@ -11,4 +11,4 @@ function ActionLine(props) {
     )
 }
 
-export default ActionLine;
+export default UsersPageActions;

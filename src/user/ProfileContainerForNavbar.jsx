@@ -1,19 +1,50 @@
 import Avatar from '@mui/material/Avatar';
 import {BsThreeDots} from "react-icons/all";
 
-function ProfileContainer() {
+function ProfileContainer(props) {
+    const {
+        customStyles
+    } = props;
+
     const {userName, id} = JSON.parse(localStorage.getItem("userInfo"));
 
     return (
         <>
-            <Avatar>{userName[0]}</Avatar>
+            <Avatar
+                style={{
+                    fontSize: customStyles?.fontSize,
+                    color: customStyles?.color,
+                }}
+            >{userName[0]}</Avatar>
             <p
-                style={{alignItems: 'flex-start'}}
+                style={{
+                    fontSize: customStyles?.fontSize,
+                    color: customStyles?.color,
+                    alignItems: 'flex-start'
+                }}
             >
-                <span className={"fs_font-bold"}>{userName}</span>
-                <span>#{id}</span>
+                <span
+                    className={"fs_font-bold"}
+                    style={{
+                        fontSize: customStyles?.fontSize,
+                        color: customStyles?.color,
+                        alignItems: 'flex-start'
+                    }}
+                >{userName}</span>
+                <span
+                    style={{
+                        fontSize: customStyles?.fontSize,
+                        color: customStyles?.color,
+                        alignItems: 'flex-start'
+                    }}
+                >#{id}</span>
             </p>
-            <span>
+            <span
+                style={{
+                    fontSize: customStyles?.fontSize,
+                    color: customStyles?.color,
+                }}
+            >
             <BsThreeDots/>
             </span>
         </>

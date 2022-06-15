@@ -1,0 +1,48 @@
+.table-tic td {
+    border: solid rgb(73, 73, 248);
+    width: 100px;
+    height: 100px;
+    cursor: pointer;
+    transition: all ease 0.5s;
+}
+
+.table-tic td:hover {
+    background: rgb(203, 203, 243) !important;
+}
+
+.table-back-tic {
+    padding: 20px 30px;
+    background: rgb(231 231 240);
+    border-radius: 10px;
+    box-shadow: 0px 0px 8px 0px rgb(107 159 199 / 80%);
+}
+
+.container-tic {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 500px;
+    align-items: center;
+    margin: auto;
+}
+
+.btn-tic {
+    font-weight: bold;
+    padding: 10px 15px;
+}
+
+.winner-tic {
+    color: rgb(87, 87, 212);
+}
+
+.line-tic {
+    line-height: 10px;
+}
+
+.line-tic > h3 {
+    color: rgb(231, 48, 235);
+}
+
+.line-tic > h2 {
+    color: rgb(33, 212, 224);
+}

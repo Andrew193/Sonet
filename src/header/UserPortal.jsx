@@ -8,12 +8,13 @@ import {useOutsideClick} from "../hooks";
 import {useRef} from "react";
 import {Divider} from "@mui/material";
 import Avatar from "@mui/material/Avatar";
-import {BsThreeDots} from "react-icons/all";
 import {AiOutlineSecurityScan} from "react-icons/ai";
+import {hexToRgb} from "../utils";
 
 function Portal(props) {
     const {
-        click
+        click,
+        customStyles
     } = props;
 
     const {
@@ -28,14 +29,27 @@ function Portal(props) {
         click(false);
     })
 
+    console.log(hexToRgb(customStyles?.color))
+    ///rgb(179, 45, 210) 0px 0px 8px 0p
     return createPortal(
         <div
             className={s.UserPortal}
             onClick={click}
             ref={wrapperRef}
+            style={{
+                fontSize: customStyles?.fontSize,
+                color: customStyles?.color,
+                background: customStyles?.background,
+                boxShadow: `0px 0px 8px 0px rgb(${hexToRgb(customStyles?.color)?.r} ${hexToRgb(customStyles?.color)?.g} ${hexToRgb(customStyles?.color)?.b} / 80%)`
+            }}
         >
             <div>
-                <Avatar>{name[0]}</Avatar>
+                <Avatar
+                    style={{
+                        fontSize: customStyles?.fontSize,
+                        color: customStyles?.color,
+                    }}
+                >{name[0]}</Avatar>
                 <div
                     onClick={() => {
                         CommonHelper.redirect(history, null, "/profile")
@@ -60,11 +74,21 @@ function Portal(props) {
                 onClick={() => {
                     Script2.openModal("Muser")
                 }}
+                style={{
+                    fontSize: customStyles?.fontSize,
+                    color: customStyles?.color,
+                    background: customStyles?.background
+                }}
             >Set up profile</p>
             <p
                 id={s.Controle}
                 onClick={() => {
                     Script.leave(history)
+                }}
+                style={{
+                    fontSize: customStyles?.fontSize,
+                    color: customStyles?.color,
+                    background: customStyles?.background
                 }}
             >Log out @{name}</p>
         </div>

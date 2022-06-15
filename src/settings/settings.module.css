@@ -1,0 +1,168 @@
+.Container {
+    margin: 0px 0px 0px 15%;
+    flex: 3 0;
+    max-width: 85%;
+    height: -webkit-fill-available;
+    border-left: 1px solid rgb(206, 204, 204);
+    border-right: 1px solid rgb(206, 204, 204);
+}
+
+.Accordion :nth-child(2n) {
+    background-color: #f6f2ff;
+}
+
+.Label {
+    font-size: 16px;
+}
+
+.FontContainer {
+    background: rgb(203, 203, 243);
+    padding: 5px 30px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    width: 100%;
+}
+
+.FontLabel {
+    font-size: 16px !important;
+    flex: 1;
+    margin-bottom: 10px !important;
+    margin-top: 10px !important;
+    align-self: baseline;
+    padding-left: 10px;
+    font-weight: bold !important;
+}
+
+.Divider {
+    border-bottom: 1px solid rgb(206, 204, 204);
+}
+
+.FontMainContainer {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+.Badge {
+    padding: 16px 16px;
+    border-radius: 100px;
+    cursor: pointer;
+    transition: all ease 0.2s;
+    margin: 4px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.Badge svg {
+    font-size: 23px;
+}
+
+.Summary {
+    font-size: 20px;
+    transition: background-color ease 0.5s !important;
+}
+
+.Summary p {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.SelectedBadge svg {
+    color: black;
+}
+
+.Summary:hover {
+    background: rgb(203, 203, 243);
+}
+
+.Red {
+    background-color: #FF0000FF;
+}
+
+.Orange {
+    background-color: #FFA500FF;
+}
+
+.Green {
+    background-color: #008000FF;
+}
+
+.Default {
+    background-color: #0a00ce;
+}
+
+.Coral {
+    background-color: #FF7F50FF;
+}
+
+.Special_1 {
+    background-color: #bd9d33;
+}
+
+.Special_2 {
+    background-color: #2177e8;
+}
+
+.Special_3 {
+    background-color: #b32dd2;
+}
+
+.Badge:hover {
+    padding: 15px;
+    opacity: 0.5;
+}
+
+.ColorsLine {
+    justify-content: space-between;
+    padding: 10px 30px;
+    min-height: 80px;
+    flex-wrap: wrap;
+}
+
+.White {
+    background-color: #d2cfcf;
+}
+
+.Black {
+    background-color: #282828;
+}
+
+.Actions {
+    display: flex;
+    align-items: center;
+    margin: 10px;
+    justify-content: right;
+}
+
+.Default2 {
+    background: #858585;
+}
+
+.Blue {
+    background-color: #534df1;
+}
+
+.BackBadge {
+    border-radius: 5px;
+    flex: 1;
+    justify-content: inherit;
+    flex-direction: row-reverse;
+}
+
+.BackBadge span {
+
+}
+
+@media (max-width: 768px) {
+    .Container {
+        max-width: 100%;
+        margin: unset;
+    }
+}

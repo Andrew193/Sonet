@@ -3,5 +3,7 @@ export const headerListLinks = {
     profile: "/profile",
     chats: "/chats",
     users: "/users",
-    posts: "/posts"
+    posts: "/posts",
+    games: "/games",
+    settings: "/settings"
 }

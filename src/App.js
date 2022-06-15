@@ -11,6 +11,7 @@ import {useEffect, useRef, useState} from "react";
 import {toast} from 'react-toastify';
 import {io} from "socket.io-client";
 import Context from "./helpers/contextHelper"
+import {getSettings, setupDb} from "./db";
 
 const sessionHelper = require("./helpers/sessionHelper")
 const socket = io();
@@ -23,6 +24,7 @@ function App() {
     let modal = useRef();
 
     const [flag, setFlag] = useState(false);
+    const [settings, setSettings] = useState({});
     const history = useHistory();
 
     function open() {
@@ -36,6 +38,8 @@ function App() {
             Script2.SaveInfo(newState?.data);
             setFlag(true);
         });
+
+        setupDb(async () => {});
     }, []);
 
     return (
@@ -79,6 +83,8 @@ function App() {
                     />
                     <Components.ModalUser ref={modal} click={open}/>
                 </>}
+                <Route exact path={'/games/:gameType?'} render={() => <Components.GamesContainer/>}/>
+                <Route exact path={"/settings"} render={() => <Components.SettingsContainerPage/>}/>
                 <Route exact path={"/auth"} render={() => <Components.ContainerAuth/>}/>
             </div>
         </Context.Provider>

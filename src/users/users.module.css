@@ -28,7 +28,7 @@
 }
 
 .Item:hover {
-    background-color: #d6cbf0!important;
+    background-color: #d6cbf0 !important;
     color: #c0bebe;
 }
 
@@ -85,7 +85,7 @@
     color: rgb(73, 73, 248);
 }
 
-.Item a {
+.Item .users_a {
     transition: all ease 0.3s;
     text-decoration: none;
     color: black;
@@ -131,6 +131,8 @@
     justify-content: center;
     padding-top: 1%;
     flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
 }
 
 .FindUserLine input {
@@ -139,10 +141,21 @@
     border: none;
     color: gray;
     border-bottom: 1px solid #4949f8;
-    padding: 10px 15px;
-    font-size: 16px;
     outline: none;
     background-color: transparent;
+    width: 100%;
+    padding-left: 10px;
+}
+
+.ThisIsYouLabel {
+    position: absolute;
+    top: 10px;
+    color: red!important;
+}
+
+.FindUserLine span {
+    padding: 5px 10px;
+    margin: 5px 0px;
 }
 
 @media (min-width: 2201px) {
@@ -292,6 +305,39 @@
 @media (max-width: 768px) {
     .FullHeight {
         height: 82% !important;
+    }
+
+    .FindUserLine {
+        padding: unset;
+        position: absolute !important;
+        display: flex;
+        width: 99.8% !important;
+        background-color: #f6f2ff;
+        align-items: center;
+        box-shadow: 0px 0px 8px 0px rgb(107 159 199 / 80%);
+    }
+
+    .FindUserLine div {
+        padding-top: unset !important;
+        flex: 1;
+    }
+
+    .FindUserLine input {
+        margin-right: 10px;
+        margin-left: 10px;
+    }
+
+    .FindUserLine span {
+        display: flex;
+        align-items: center;
+        padding: 5px 15px;
+        margin: 10px;
+    }
+
+    .FindUserLine div:last-of-type {
+        flex-direction: row;
+        flex: 2;
+        align-items: center;
     }
 
     .Container {

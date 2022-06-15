@@ -4,14 +4,21 @@ import ConfigLine from "./configLine";
 import s from "./main-page.module.css"
 
 function ClearMainPage(props) {
-    const {open} = props;
+    const {
+        open
+    } = props;
+
     return (
         <main className={s.Container}>
-            <div className={"basicPageHead"}><Link to={{pathname: "/"}}>Home</Link></div>
+            <div className={"basicPageHead"}>
+                <Link to={{pathname: "/"}}>Home</Link>
+            </div>
             <CreatePost/>
             <div
                 className={"Separator"}
-                onClick={(e) => e.target.nextElementSibling.classList.toggle("Hide")}
+                onClick={(e) => {
+                    e.target.nextElementSibling.classList.toggle("Hide")
+                }}
             />
             <ConfigLine open={open}/>
         </main>

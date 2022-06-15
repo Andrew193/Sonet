@@ -1,4 +1,4 @@
-import ClearMainPage from "./clear";
+import ClearMainPage from "./ClearMainPage";
 
 function MainPage(props) {
     const { open } = props

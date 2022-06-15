@@ -259,6 +259,12 @@
         max-width: unset;
         min-height: 800px;
     }
+
+    .FirstLine img {
+        height: 165px;
+        width: 165px;
+        top: -110%;
+    }
 }
 
 @media (max-width:475px) {
@@ -266,6 +272,13 @@
         margin: unset;
         max-width: unset;
     }
+
+    .FirstLine img {
+        height: 135px;
+        width: 135px;
+        top: -75%;
+    }
+
     .FlexColl {
         font-size: 13px;
     }
