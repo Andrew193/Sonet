@@ -20,6 +20,7 @@ function ChatContainer() {
 
     useEffect(() => {
         socket.on("getMessageInChat", (data) => {
+            console.log("Receive new message")
             setArrivalMessage({
                 sender: data?.senderId,
                 text: data?.text,
@@ -30,10 +31,10 @@ function ChatContainer() {
     }, [socket]);
 
     useEffect(() => {
-        arrivalMessage &&
-        currentChat?.members.includes(arrivalMessage.sender) &&
-        setMessages((prev) => [...prev, arrivalMessage]);
-
+        console.log(arrivalMessage, currentChat?.members.includes(arrivalMessage.sender))
+        if (arrivalMessage && currentChat?.members.includes(arrivalMessage.sender)) {
+            setMessages((prev) => [...prev, arrivalMessage]);
+        }
     }, [arrivalMessage, currentChat]);
 
     useEffect(() => {
