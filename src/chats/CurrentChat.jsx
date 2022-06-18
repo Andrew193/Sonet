@@ -33,7 +33,7 @@ function CurrentChat(props) {
                   />
                 <button
                     className={`button ${buttonsConfig[customStyle?.color]}`}
-                    onClick={() => handleSubmit()}
+                    onClick={handleSubmit}
                 >
                    Send
                 </button>
