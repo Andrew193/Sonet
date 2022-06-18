@@ -13,6 +13,7 @@ import Followings from "./followings/FollowingsPageContainer";
 import GamesContainer from '../src/games/GamesContainer';
 import SettingsContainerPage from "./settings/SettingsContainerPage";
 import Followers from "./followers/FollowersPageContainer";
+import ChatContainer from "./chats/ChatContainer";
 
 const obj = {
     GamesContainer,
@@ -29,7 +30,8 @@ const obj = {
     PostsContainer,
     TopInfo,
     Followings,
-    Followers
+    Followers,
+    ChatContainer
 }
 
 export default obj;

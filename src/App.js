@@ -24,7 +24,6 @@ function App() {
     let modal = useRef();
 
     const [flag, setFlag] = useState(false);
-    const [settings, setSettings] = useState({});
     const history = useHistory();
 
     function open() {
@@ -86,6 +85,7 @@ function App() {
                 </>}
                 <Route exact path={'/games/:gameType?'} render={() => <Components.GamesContainer/>}/>
                 <Route exact path={"/settings"} render={() => <Components.SettingsContainerPage/>}/>
+                <Route exact path={"/chats"} render={() => <Components.ChatContainer/>}/>
                 <Route exact path={"/auth"} render={() => <Components.ContainerAuth/>}/>
             </div>
         </Context.Provider>
