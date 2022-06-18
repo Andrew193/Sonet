@@ -40,14 +40,15 @@ function CurrentChat(props) {
     return (
         <>
             <div className="chatBoxTop">
-                {messages.map((m) => (
-                    <div>
+                {messages.map((m) => {
+                    console.log((+m.sender === +userInformation.id) || (+m.createdById === +userInformation.id))
+                    return <div>
                         <Message
                             message={m}
-                            own={(m.sender === userInformation.id) || (m.createdById === userInformation.id)}
+                            own={(+m.sender === +userInformation.id) || (+m.createdById === +userInformation.id)}
                         />
                     </div>
-                ))}
+                })}
             </div>
             <div className="chatBoxBottom">
                   <textarea
