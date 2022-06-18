@@ -44,7 +44,7 @@ function CurrentChat(props) {
                     <div>
                         <Message
                             message={m}
-                            own={m.sender === userInformation.id}
+                            own={(m.sender === userInformation.id) || (m.createdById === userInformation.id)}
                         />
                     </div>
                 ))}
