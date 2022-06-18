@@ -104,8 +104,8 @@ function ChatContainer() {
                         <div
                             onClick={() => {
                                 setCurrentChat({
-                                    members: [1, 2],
-                                    id: `12`
+                                    members: [6, 2],
+                                    id: `62`
                                 })
                             }}
                         >
