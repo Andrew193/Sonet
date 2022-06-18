@@ -38,9 +38,10 @@ function ChatContainer() {
             socket.emit("addUserToChat", userInformation?.id);
             socket.on("getUsersInChat", (users) => {
 
+                console.log(users)
             });
         }
-    }, [socket, userInformation]);
+    }, [userInformation]);
 
     // useEffect(() => {
     //     const getConversations = async () => {
@@ -103,7 +104,8 @@ function ChatContainer() {
                         <div
                             onClick={() => {
                                 setCurrentChat({
-                                    members: [1, 2]
+                                    members: [1, 2],
+                                    id: `12`
                                 })
                             }}
                         >

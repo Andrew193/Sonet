@@ -1,6 +1,7 @@
 import HTMLhelp from "../helpers/htmlHelper.js"
 import HttpHelper from "../helpers/httpHelper"
-import CommonHelper from "../helpers/common"
+import CommonHelper from "../helpers/common";
+
 function refresh(socket, userId) {
     socket.emit("postUpdate").emit("notMyPostUpdate", { userId }).emit("MyPostUpdate", { userId }).emit("postCreate")
 }
