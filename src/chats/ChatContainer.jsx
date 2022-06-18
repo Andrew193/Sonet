@@ -1,8 +1,6 @@
 import {useEffect, useContext, useState} from "react";
 import Context from "../helpers/contextHelper";
 import "./messenger.css";
-import FriendPin from "./FriendPin";
-import CurrentChat from "./CurrentChat";
 import {getSettings} from "../db";
 import {alpha} from "@mui/material";
 import Messenger from "./Messenger";
@@ -21,7 +19,6 @@ function ChatContainer() {
 
     useEffect(() => {
         socket.on("getMessageInChat", (data) => {
-            console.log(data, "dfdfsfdfsdfs")
             setArrivalMessage({
                 sender: data?.senderId,
                 text: data?.text,
@@ -47,30 +44,6 @@ function ChatContainer() {
             });
         }
     }, [userInformation]);
-
-    // useEffect(() => {
-    //     const getConversations = async () => {
-    //         try {
-    //             const res = await axios.get("/conversations/" + user._id);
-    //             setConversations(res.data);
-    //         } catch (err) {
-    //             console.log(err);
-    //         }
-    //     };
-    //     getConversations();
-    // }, [user._id]);
-
-    // useEffect(() => {
-    //     const getMessages = async () => {
-    //         try {
-    //             const res = await axios.get("/messages/" + currentChat?._id);
-    //             setMessages(res.data);
-    //         } catch (err) {
-    //             console.log(err);
-    //         }
-    //     };
-    //     getMessages();
-    // }, [currentChat]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
