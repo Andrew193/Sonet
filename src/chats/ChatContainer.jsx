@@ -95,6 +95,7 @@ function ChatContainer() {
         // }
     };
 
+    console.log(messages)
     return (
         <>
             <div className="messenger">
