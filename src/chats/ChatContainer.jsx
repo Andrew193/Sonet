@@ -35,7 +35,8 @@ function ChatContainer() {
 
     useEffect(() => {
         if (userInformation?.id) {
-            socket.emit("addUserToChat", userInformation?.id);
+            console.log("sfsdfsdfsdfsfsfsfd")
+            socket.emit("postUpdate", userInformation?.id);
             socket.on("getUsersInChat", (users) => {
 
                 console.log(users)
