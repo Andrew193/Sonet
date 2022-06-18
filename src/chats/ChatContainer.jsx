@@ -17,6 +17,7 @@ function ChatContainer() {
 
     useEffect(() => {
         socket.on("getMessageInChat", (data) => {
+            console.log(data,"dfdfsfdfsdfs")
             setArrivalMessage({
                 sender: data?.senderId,
                 text: data?.text,
@@ -38,7 +39,7 @@ function ChatContainer() {
             socket.emit("addUserToChat", userInformation?.id);
             socket.on("getUsersInChat", (users) => {
 
-                console.log(users)
+
             });
         }
     }, [userInformation]);
