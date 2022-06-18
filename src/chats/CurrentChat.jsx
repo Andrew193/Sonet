@@ -23,7 +23,7 @@ function CurrentChat(props) {
         async function getData() {
             getConversationById(conversationId,
                 (response) => {
-                    setMessages(response)
+                    setMessages(response?.clearData)
                     console.log(response)
                 },
                 (errorMessage) => {
