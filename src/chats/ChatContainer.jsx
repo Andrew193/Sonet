@@ -46,11 +46,7 @@ function ChatContainer() {
         if (userInformation?.id) {
             socket.emit("addUserToChat", userInformation?.id);
             socket.on("getUsersInChat", (users) => {
-                setCurrentChat((state) => ({
-                    ...state,
-                    members: users?.map((user) => user?.userId)
-                }))
-                console.log(users, "dfsfsfsdf")
+
             });
         }
     }, [userInformation]);
