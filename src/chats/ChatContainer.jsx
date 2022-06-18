@@ -31,9 +31,13 @@ function ChatContainer() {
     }, [socket]);
 
     useEffect(() => {
-        console.log(arrivalMessage, currentChat?.members.includes(arrivalMessage.sender))
-        if (arrivalMessage && currentChat?.members.includes(arrivalMessage.sender)) {
-            setMessages((prev) => [...prev, arrivalMessage]);
+        try {
+            console.log(arrivalMessage, currentChat?.members?.includes(arrivalMessage?.sender))
+            if (arrivalMessage && currentChat?.members.includes(arrivalMessage.sender)) {
+                setMessages((prev) => [...prev, arrivalMessage]);
+            }
+        } catch (error) {
+            console.error(error)
         }
     }, [arrivalMessage, currentChat]);
 
