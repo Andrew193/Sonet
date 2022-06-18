@@ -46,8 +46,7 @@ function ChatContainer() {
         if (userInformation?.id) {
             socket.emit("addUserToChat", userInformation?.id);
             socket.on("getUsersInChat", (users) => {
-
-
+                console.log(users,"dfsfsfsdf")
             });
         }
     }, [userInformation]);

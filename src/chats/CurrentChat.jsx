@@ -45,7 +45,6 @@ function CurrentChat(props) {
         <>
             <div className="chatBoxTop">
                 {messages.map((m) => {
-                    console.log((+m.sender === +userInformation.id) || (+m.createdById === +userInformation.id))
                     return <div ref={scrollRef}>
                         <Message
                             message={m}
