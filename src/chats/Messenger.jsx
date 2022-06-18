@@ -25,8 +25,8 @@ function Messenger(props) {
                     <div
                         onClick={() => {
                             setCurrentChat({
-                                members: [6, 2],
-                                id: `62`
+                                members: [1, 2],
+                                id: `12`
                             })
                         }}
                     >
