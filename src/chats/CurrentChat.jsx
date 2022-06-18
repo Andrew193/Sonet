@@ -13,7 +13,8 @@ function CurrentChat(props) {
         customStyle,
         userInformation,
         handleSubmit,
-        conversationId
+        conversationId,
+        setMessages
     } = props;
 
     console.log(messages)
@@ -22,6 +23,7 @@ function CurrentChat(props) {
         async function getData() {
             getConversationById(conversationId,
                 (response) => {
+                    setMessages(response)
                     console.log(response)
                 },
                 (errorMessage) => {

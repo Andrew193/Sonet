@@ -11,7 +11,8 @@ function Messenger(props) {
         setNewMessage,
         newMessage,
         userInformation,
-        handleSubmit
+        handleSubmit,
+        setMessages
     } = props;
 
     return (
@@ -46,6 +47,7 @@ function Messenger(props) {
                                 userInformation={userInformation}
                                 handleSubmit={handleSubmit}
                                 conversationId={currentChat?.id}
+                                setMessages={setMessages}
                             />
                             : <span className="noConversationText">
                                     Open a conversation to start a chat.

@@ -118,6 +118,7 @@ function ChatContainer() {
                 messages={messages}
                 setNewMessage={setNewMessage}
                 newMessage={newMessage}
+                setMessages={setMessages}
                 userInformation={userInformation}
                 handleSubmit={handleSubmit}
             />
