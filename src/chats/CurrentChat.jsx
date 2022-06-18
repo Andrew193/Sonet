@@ -1,5 +1,8 @@
 import {buttonsConfig} from "../createPost/CreatePostLine";
 import Message from "./Message";
+import {useEffect} from "react";
+import {getConversationById} from "./chatHelper";
+import {notify} from "../App";
 
 
 function CurrentChat(props) {
@@ -9,11 +12,30 @@ function CurrentChat(props) {
         setNewMessage,
         customStyle,
         userInformation,
-        handleSubmit
+        handleSubmit,
+        conversationId
     } = props;
 
     console.log(messages)
-    return(
+
+    useEffect(() => {
+        async function getData() {
+            getConversationById(conversationId,
+                (response) => {
+                    console.log(response)
+                },
+                (errorMessage) => {
+                    notify(errorMessage || "Error");
+                })
+        }
+
+        if (conversationId) {
+            getData();
+        }
+
+    }, [conversationId])
+
+    return (
         <>
             <div className="chatBoxTop">
                 {messages.map((m) => (
@@ -36,7 +58,7 @@ function CurrentChat(props) {
                     className={`button ${buttonsConfig[customStyle?.color]}`}
                     onClick={handleSubmit}
                 >
-                   Send
+                    Send
                 </button>
             </div>
         </>

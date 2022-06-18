@@ -180,6 +180,20 @@ class Http {
                 }
             })
     }
+
+    getConversationById(conversationId, okCallback, errorCallback) {
+        axios.get("https://sonet34.herokuapp.com/api/chat/conversation", {params: {conversationId}})
+            .then((response) => {
+                okCallback(response?.data);
+            })
+            .catch((error) => {
+                console.error(error?.response?.data);
+
+                if (error) {
+                    errorCallback(createErrorsForApiCall(error?.response?.data, error?.response?.data))
+                }
+            })
+    }
 }
 
 const Item = new Http();

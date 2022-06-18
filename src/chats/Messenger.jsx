@@ -25,7 +25,7 @@ function Messenger(props) {
                     <div
                         onClick={() => {
                             setCurrentChat({
-                                members: [1, 2],
+                                members: [userInformation?.id, 2],
                                 id: `12`
                             })
                         }}
@@ -45,6 +45,7 @@ function Messenger(props) {
                                 customStyle={settings}
                                 userInformation={userInformation}
                                 handleSubmit={handleSubmit}
+                                conversationId={currentChat?.id}
                             />
                             : <span className="noConversationText">
                                     Open a conversation to start a chat.

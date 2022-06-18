@@ -48,7 +48,6 @@ function ChatContainer() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        debugger
         const message = {
             sender: userInformation.id,
             text: newMessage,
