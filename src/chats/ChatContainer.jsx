@@ -29,7 +29,7 @@ function ChatContainer() {
             });
         });
 
-    }, []);
+    }, [socket]);
 
     useEffect(() => {
         try {
@@ -47,6 +47,7 @@ function ChatContainer() {
             socket.emit("addUserToChat", userInformation?.id);
             socket.on("getUsersInChat", (users) => {
 
+
             });
         }
     }, [userInformation]);
@@ -59,6 +60,7 @@ function ChatContainer() {
             conversationId: currentChat.id,
         };
 
+        console.log(currentChat)
         const receiverId = currentChat.members.find(
             (member) => member !== userInformation.id
         );
