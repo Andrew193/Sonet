@@ -12,7 +12,7 @@ function CurrentChat(props) {
         handleSubmit
     } = props;
 
-
+    console.log(messages)
     return(
         <>
             <div className="chatBoxTop">
