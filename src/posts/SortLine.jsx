@@ -5,7 +5,8 @@ import s from "./posts.module.css";
 
 function SortLine() {
     const hist = useHistory();
-    const id = JSON.parse(localStorage.getItem("userInfo")).id
+    const id = JSON.parse(localStorage.getItem("userInfo")).id;
+
     return (
         <div className={s.SortLine}>
             <span

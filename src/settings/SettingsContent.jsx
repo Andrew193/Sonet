@@ -1,4 +1,4 @@
-import {Box, Typography} from "@mui/material";
+import {Typography} from "@mui/material";
 import {useMemo, useState} from "react";
 import withPageHeader from "../hoc/withPageHeader";
 import Accordion from "./SettingsAccordion";
@@ -11,7 +11,11 @@ const settingsList = [
     {panelName: "themes", label: "Display", innerContent: <DisplaySettings/>}
 ]
 
-function SettingsContent() {
+function SettingsContent(props) {
+    const {
+        settingsStyles
+    } = props;
+
     const [expanded, setExpanded] = useState('panel1');
 
     const handleChange = (panel) => (event, newExpanded) => {
@@ -28,12 +32,27 @@ function SettingsContent() {
                     aria-controls="panel1d-content"
                     id="panel1d-header"
                     className={s.Summary}
+                    style={{
+                        color: settingsStyles?.configs?.color[settingsStyles?.color],
+                        fontSize: settingsStyles?.configs?.size[settingsStyles?.fontSize],
+                    }}
+                    iconStyle={{
+                        color: settingsStyles?.configs?.color[settingsStyles?.color],
+                        fontSize: settingsStyles?.configs?.size[settingsStyles?.fontSize]
+                    }}
                 >
                     <Typography
+                        style={{
+                            color: `${settingsStyles?.configs?.color[settingsStyles?.color]}!important`
+                        }}
                         className={s.Label}
                     >{config?.label}</Typography>
                 </AccordionSummary>
-                <AccordionDetails>{config?.innerContent}</AccordionDetails>
+                <AccordionDetails
+                    style={{
+                        color: settingsStyles?.configs?.color[settingsStyles?.color]
+                    }}
+                >{config?.innerContent}</AccordionDetails>
             </Accordion>)
     }, [expanded])
 
@@ -47,4 +66,4 @@ function SettingsContent() {
     )
 }
 
-export default withPageHeader(SettingsContent, {path: "/settings", Title: "Settings"});
+export default withPageHeader(SettingsContent, {path: "/settings", Title: <span>Settings</span>});

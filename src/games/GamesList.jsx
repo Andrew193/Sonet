@@ -5,7 +5,6 @@ import Image2048 from './images/2048.avif';
 import Tetris from './images/tetris.png'
 import {Box} from "@mui/material";
 import s from './games.module.css';
-import {withRouter} from "react-router-dom";
 
 const gamesLisConfig = [
     {
@@ -25,17 +24,23 @@ const gamesLisConfig = [
     {
         gameName: "Tetris",
         icon: Tetris,
-        description:'Tetris is a computer game originally invented and developed by Soviet programmer Alexei Pajitnov. The game was released on June 6, 1984 - at that time Pajitnov worked at the Computing Center of the USSR Academy of Sciences.',
+        description: 'Tetris is a computer game originally invented and developed by Soviet programmer Alexei Pajitnov. The game was released on June 6, 1984 - at that time Pajitnov worked at the Computing Center of the USSR Academy of Sciences.',
         keyPath: "/tetris",
         altText: "Tetris"
     }
 ]
 
-function GamesList() {
+function GamesList(props) {
+    const {
+        styleSettings
+    } = props;
 
     const games = useMemo(() => {
-        return gamesLisConfig?.map((gameConfig) => <GamePreviewTile {...gameConfig}/>)
-    }, []);
+        return gamesLisConfig?.map((gameConfig) => <GamePreviewTile
+            {...gameConfig}
+            styleSettings={styleSettings}
+        />)
+    }, [styleSettings]);
 
     return (
         <Box

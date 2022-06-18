@@ -4,8 +4,6 @@
     flex: 3 0;
     max-width: 60%;
     height: -webkit-fill-available;
-    border-left: 1px solid #cecccc;
-    border-right: 1px solid #cecccc;
 }
 
 .ActionLine {

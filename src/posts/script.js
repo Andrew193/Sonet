@@ -35,12 +35,10 @@ function getComment(history, id) {
 
 function getNotMy(history, id) {
     CommonHelper.redirect(history, { id }, "/post/notMy")
-    window.location.reload();
 }
 
 function getMy(history, id) {
     CommonHelper.redirect(history, { id }, "/post/my")
-    window.location.reload();
 }
 
 function def(hist) {

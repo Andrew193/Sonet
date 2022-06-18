@@ -71,9 +71,9 @@ class Http {
             .catch((error) => error)
     }
 
-    follow(idArray, history) {
+    follow(idArray, history, type) {
         axios.get("https://sonet34.herokuapp.com/api/follow?token=" + Script.getCookie("token"), {params: {idArray: JSON.stringify(idArray)}})
-            .then((response) => CommonHelper.redirect(history, response?.data, "/followers"))
+            .then((response) => CommonHelper.redirect(history, response?.data, "/followers" + type))
             .catch((error) => error.response && console.error(error?.response?.data?.error))
     }
 

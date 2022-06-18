@@ -5,6 +5,7 @@ import Script from "./script.js"
 import {useEffect, useState} from "react";
 import {useHistory} from "react-router";
 import {notify} from "../App";
+import {getSettings} from "../db";
 
 
 function ContainerAuth() {
@@ -12,6 +13,18 @@ function ContainerAuth() {
     const [redirect, setRedirect] = useState(false)
 
     const history = useHistory();
+
+    const [settings, setSettings] = useState({});
+
+    useEffect(() => {
+        async function getData() {
+            const response = await getSettings();
+
+            setSettings(response[0])
+        }
+
+        getData();
+    }, [])
 
     const Formik = useFormik({
         initialValues: {
@@ -42,6 +55,7 @@ function ContainerAuth() {
                 Formik={Formik}
                 isRegisterUser={isRegisterUser}
                 setIsRegisterUser={setIsRegisterUser}
+                styleSettings={settings}
             />
 
             <ToastContainer

@@ -7,6 +7,10 @@ import {useMemo} from "react";
 import s from "../top-info.module.css"
 
 function PostCreator(props) {
+    const {
+        settings
+    } = props;
+
     const history = useHistory();
 
     const postsListToMap = useMemo(() => {
@@ -22,6 +26,9 @@ function PostCreator(props) {
                         script.openFull(history, value.id)
                     }}
                     data-id={value.id}
+                    style={{
+                        color: settings?.configs?.color[settings?.color]
+                    }}
                 >
                     <Typography
                         variant="p"
@@ -32,6 +39,9 @@ function PostCreator(props) {
                         <Typography
                             variant="h5"
                             component="h4"
+                            style={{
+                                fontWeight: "bold"
+                            }}
                         >Created by @{value.createdBy}</Typography>
                     </Typography>
                     <Typography

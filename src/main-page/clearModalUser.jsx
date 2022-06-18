@@ -1,4 +1,7 @@
-import {CardActions, Typography} from "@mui/material";
+import {alpha, CardActions, Typography} from "@mui/material";
+import {buttonsConfig} from "../createPost/CreatePostLine";
+import {useEffect, useState} from "react";
+import {getSettings} from "../db";
 
 function ClearModalUser(props) {
     const {
@@ -14,8 +17,31 @@ function ClearModalUser(props) {
         userId
     } = props;
 
+    const [settings, setSettings] = useState({});
+
+    useEffect(() => {
+        async function getData() {
+            const response = await getSettings();
+
+            setSettings(response[0])
+        }
+
+        getData();
+    }, [])
+
     return (
-        <div>
+        <div
+            style={{
+                color: settings?.configs?.color[settings?.color],
+            }}
+        >
+            <style>
+                {`
+                  .Muser {
+                   background:${alpha(settings?.configs?.color[settings?.color] || "rgb(177 175 175)", 0.3)}
+                  }
+                `}
+            </style>
             <Typography
                 gutterBottom
                 component={'div'}
@@ -66,7 +92,7 @@ function ClearModalUser(props) {
             </Typography>
             <CardActions>
                 <button
-                    className={"button"}
+                    className={`button ${buttonsConfig[settings?.configs?.color[settings?.color]]}`}
                     onClick={() => {
                         Script.UpdateInfo({
                             userName: nm, email: em,

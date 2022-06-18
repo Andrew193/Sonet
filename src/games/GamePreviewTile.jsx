@@ -1,9 +1,10 @@
 import {
+    alpha,
     Card,
     CardContent,
     CardHeader,
     CardMedia,
-    Divider,
+    Divider, hexToRgb,
     Typography
 } from "@mui/material";
 import {useHistory} from "react-router-dom";
@@ -14,7 +15,8 @@ function GamePreviewTile(props) {
         icon,
         description,
         keyPath,
-        altText
+        altText,
+        styleSettings
     } = props;
 
     const history = useHistory();
@@ -25,10 +27,43 @@ function GamePreviewTile(props) {
             onClick={() => {
                 history.push(`/games${keyPath}`)
             }}
+            style={{
+                color: styleSettings?.configs?.color[styleSettings?.color],
+                fontSize: styleSettings?.configs?.size[styleSettings?.fontSize]
+            }}
+            className={"gameTile"}
         >
+            <style>
+                {`
+                .gameTile {
+                transition: all ease 0.5s;
+                }
+                
+                .gameTile:hover{
+                background-color: ${alpha(hexToRgb(styleSettings?.configs?.color[styleSettings?.color] || "rgb(0, 0, 0)"), 0.2)} !important;
+                }  
+                
+                .divider_default{
+                 background-color: ${alpha(hexToRgb(styleSettings?.configs?.color[styleSettings?.color] || "rgb(0, 0, 0)"), 0.6)} !important;
+                }
+                
+                ::-webkit-scrollbar-thumb {
+                background-color: ${alpha(hexToRgb(styleSettings?.configs?.color[styleSettings?.color] || "rgb(0, 0, 0)"), 0.6)};
+                }
+                
+                ::-webkit-scrollbar-track {
+                background-color: ${alpha(hexToRgb(styleSettings?.configs?.color[styleSettings?.color] || "rgb(0, 0, 0)"), 0.2)};
+                }
+                `}
+            </style>
+
             <CardHeader
                 title={gameName}
                 subheader={"Play now!)"}
+                style={{
+                    color: styleSettings?.configs?.color[styleSettings?.color],
+                    fontSize: styleSettings?.configs?.size[styleSettings?.fontSize]
+                }}
             />
             <Divider
                 light
@@ -45,7 +80,14 @@ function GamePreviewTile(props) {
                 className={"divider_default"}
             />
             <CardContent>
-                <Typography variant="body2" color="text.secondary">
+                <Typography
+                    variant="body2"
+                    color="text.secondary"
+                    style={{
+                        color: styleSettings?.configs?.color[styleSettings?.color],
+                        fontSize: styleSettings?.configs?.size[styleSettings?.fontSize]
+                    }}
+                >
                     {description}
                 </Typography>
             </CardContent>

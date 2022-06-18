@@ -17,7 +17,8 @@ function getSelectedGame(game) {
 
 function GamesContent(props) {
     const {
-        match
+        match,
+        styleSettings
     } = props;
 
     const Game = useMemo(() => {
@@ -37,10 +38,16 @@ function GamesContent(props) {
                         <Typography
                             variant={'h4'}
                             component={'h4'}
-                            style={{margin: '10px'}}
+                            style={{
+                                margin: '10px',
+                                fontSize: styleSettings?.configs?.size[styleSettings?.fontSize],
+                                fontWeight:"bold"
+                            }}
                         >Choose a game</Typography>
 
-                        <GamesList/>
+                        <GamesList
+                            styleSettings={styleSettings}
+                        />
                     </>
             }
         </>

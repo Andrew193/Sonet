@@ -1,10 +1,15 @@
-import {Box, Slider, Typography} from "@mui/material";
+import {Backdrop, Box, CircularProgress, Slider, Typography} from "@mui/material";
 import s from '../settings.module.css'
 import {useEffect, useMemo, useState} from "react";
 import {AiOutlineCheck} from "react-icons/all";
 import {getSettings, updateSettings} from "../../db";
+import {buttonsConfig} from "../../createPost/CreatePostLine";
 
 const marks = [
+    {
+        value: 16,
+        label: 'Default',
+    },
     {
         value: 10,
         label: 'Extra Small',
@@ -12,10 +17,6 @@ const marks = [
     {
         value: 13,
         label: 'Small',
-    },
-    {
-        value: 16,
-        label: 'Default',
     },
     {
         value: 20,
@@ -51,6 +52,7 @@ function DisplaySettings() {
     const [selectedColor, setSelectedColor] = useState(-1);
     const [selectedBack, setSelectedBack] = useState(-1);
     const [fontSize, setFontSize] = useState(16);
+    const [open, setOpen] = useState(false);
 
     const colors = useMemo(() => colorsConfig?.map(config =>
         <div
@@ -76,13 +78,32 @@ function DisplaySettings() {
     ), [selectedBack])
 
     function saveSettingsHandler() {
-        console.log(selectedBack, selectedColor, fontSize)
-        updateSettings({
+        settingsCover(() => updateSettings({
             color: selectedColor,
             background: selectedBack,
             fontSize: fontSize === 16 ? -1 : fontSize,
             configs: settings?.configs
-        }, 1)
+        }, 1))
+    }
+
+    function defaultSettingsHandler() {
+        settingsCover(() => updateSettings({
+            color: -1,
+            background: -1,
+            fontSize: -1,
+            configs: settings?.configs
+        }, 1))
+    }
+
+    function settingsCover(callBack) {
+        setOpen(() => true);
+
+        callBack();
+
+        setTimeout(() => {
+            setOpen(() => false)
+            window.location.reload();
+        }, 1000);
     }
 
     useEffect(() => {
@@ -98,8 +119,16 @@ function DisplaySettings() {
         getSettingsConfig();
     }, [])
 
+
     return (
         <>
+            <Backdrop
+                sx={{color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1}}
+                open={open}
+            >
+                <CircularProgress color="inherit"/>
+            </Backdrop>
+
             <Box
                 className={s.FontMainContainer}
             >
@@ -110,11 +139,12 @@ function DisplaySettings() {
                     className={s.FontContainer}
                 >
                     <Slider
-                        defaultValue={fontSize}
+                        defaultValue={fontSize === -1 ? 16 : fontSize}
                         step={null}
                         marks={marks}
                         min={10}
                         max={23}
+                        value={fontSize === -1 ? 16 : fontSize}
                         onChange={(e, value) => {
                             setFontSize(value)
                         }}
@@ -151,9 +181,13 @@ function DisplaySettings() {
             <Box
                 className={s.Actions}
             >
-                <button className={"button btn btn-default"}>Default settings</button>
                 <button
-                    className={"button btn btn-default"}
+                    className={`button btn btn-default ${buttonsConfig[settings?.configs?.color[settings?.color]]}`}
+                    onClick={defaultSettingsHandler}
+                >Default settings
+                </button>
+                <button
+                    className={`button btn btn-default  ${buttonsConfig[settings?.configs?.color[settings?.color]]}`}
                     onClick={saveSettingsHandler}
                 >Save
                 </button>

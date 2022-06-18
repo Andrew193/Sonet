@@ -1,30 +1,42 @@
 import {useContext, useEffect, useState} from "react";
+import ClearPosts from "./PostsInnerContent";
+import Script from "./script.js"
 import Skeleton from 'react-loading-skeleton';
+import SortLine from "./SortLine.jsx"
 import s from "./posts.module.css"
-import {withRouter} from "react-router-dom";
-import Script from "./script"
-import ClearSpecialPost from "./ClearSpecialPost";
+import {Link, withRouter} from "react-router-dom";
+import PageHeader from "../components/common/navigationLine/NavigationLine.jsx";
 import Context from "../helpers/contextHelper";
-import {alpha} from "@mui/material";
 import {getSettings} from "../db";
+import {alpha} from "@mui/material";
 
-function SpecialPosts(props) {
-    const id = props.location.state.id;
-
-    const {
-        type
-    } = props.match.params;
-
-    const {socket} = useContext(Context);
-
+function PostsContainer(props) {
     const [posts, setPosts] = useState(false);
     const [settings, setSettings] = useState({});
 
-    socket.on(type === "notMy" ? "notMyPostUpdate" : "MyPostUpdate", (updatedPosts) => setPosts({posts: updatedPosts}));
+    const {socket, notify} = useContext(Context);
+
+    const {id} = JSON.parse(localStorage.getItem("userInfo"));
+
+    socket.on("postUpdate", (updatedPosts) => setPosts({posts: updatedPosts}));
 
     useEffect(() => {
-        Script.getMyPostWithEndpoint(id, setPosts, type === "notMy" ? "notMy" : "my")
-    }, [id, type]);
+        const id = props.match.params.id;
+
+        if (id && typeof (+id) === "number") {
+            Script.getSelectedPost(+id)
+                .then((postF) => setPosts(postF))
+                .catch((error) => {
+                    error && notify(error?.response?.data?.posts)
+                })
+        } else {
+            Script.getPosts()
+                .then((postF) => setPosts(postF))
+                .catch((error) => {
+                    error && notify(error?.response?.data?.error)
+                })
+        }
+    }, [notify, props.match.params.id]);
 
     useEffect(() => {
         async function getData() {
@@ -37,16 +49,7 @@ function SpecialPosts(props) {
     }, [])
 
     return (
-        <div
-            className={s.Container}
-            id={s.HF}
-            style={{
-                height: '-webkit-fill-available',
-                background: settings?.configs?.background[settings?.background],
-                borderLeft: `1px solid ${settings?.configs?.color[settings?.color]}`,
-                borderRight: `1px solid ${settings?.configs?.color[settings?.color]}`
-            }}
-        >
+        <div className={s.Container}>
             <style>
                 {`
                      .itemsPostsPage {
@@ -77,13 +80,23 @@ function SpecialPosts(props) {
                      }
                 `}
             </style>
-            {
-                posts
-                    ? <ClearSpecialPost id={id} posts={posts}/>
-                    : <Skeleton height={"50px"} count={5}/>
-            }
+            <PageHeader historyPath={"/"}>
+                <Link to={{pathname: "/posts"}}>Posts</Link>
+            </PageHeader>
+            <div
+                className={"Separator"}
+                onClick={(e) => {
+                    e.target.nextElementSibling.classList.toggle("Hide")
+                }}
+            />
+            {posts
+                ? <>
+                    <ClearPosts id={id} toMake={posts}/>
+                    <SortLine/>
+                </>
+                : <Skeleton height={"60px"} count={10}/>}
         </div>
     )
 }
 
-export default withRouter(SpecialPosts)
+export default withRouter(PostsContainer);

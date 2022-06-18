@@ -72,7 +72,8 @@ function App() {
                             </div>}/>
                         <Route exact path={"/post/:type"} render={() => <Components.SpecialPosts/>}/>
                         <Route exact path={"/comment/:id?"} render={() => <Components.Comment/>}/>
-                        <Route exact path={"/followers"} render={() => <Components.Followers/>}/>
+                        <Route exact path={"/followers/Followings"} render={() => <Components.Followings/>}/>
+                        <Route exact path={"/followers/Followers"} render={() => <Components.Followers/>}/>
                     </Switch>
                     <Components.Footer/>
                     <ToastContainer

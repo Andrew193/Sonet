@@ -1,6 +1,8 @@
 import "./2048.css";
-import {useEffect, useState} from "react";
+import {useEffect, useMemo, useState} from "react";
 import {ImStarEmpty} from "react-icons/all";
+import {getSettings} from "../../db";
+import {alpha, hexToRgb as muiHexToRgb} from "@mui/material"
 
 let mydata = [];    // Добавляем атрибут mydata для хранения игровых данных
 let score = 0;	  	   // Добавляем атрибут оценки
@@ -257,6 +259,7 @@ function moveBottomInRow(r) {
 
 function Game2048Container() {
     const [highestTileCost, setHighestTileCost] = useState(0);
+    const [settings, setSettings] = useState({});
 
     useEffect(() => {
         document.onkeydown = function (e) {
@@ -320,18 +323,55 @@ function Game2048Container() {
             }
         }
     }, [])
+
+    useEffect(() => {
+        async function getData() {
+            const response = await getSettings();
+
+            setSettings(response[0])
+        }
+
+        getData();
+    }, [])
+
+
     return (
         <div className="marg-2048">
+            <style>
+                {`
+                    .actionBtn2048 {
+                     background: ${settings?.configs?.color[settings?.color]} !important;
+                     }
+                     
+                     .cell-2048:hover {
+                      background: ${settings?.configs?.color[settings?.color]} !important;
+                     }
+                     
+                     .actionBtn2048:hover {
+                        background: ${alpha(muiHexToRgb(settings?.configs?.color[settings?.color] || "red"), 0.5)} !important;
+                     }
+                     
+                     .score2048{
+                      color: ${settings?.configs?.color[settings?.color]} !important;
+                     }
+                `}
+            </style>
+
             <div className={'stat-2048'}>
                 <div className={'logo-2048'}>2048</div>
                 <div className={'actions-2048'}>
                     <span
-                        id={'mainPostBtn'}
-                        className={'btn-new-2048'}
+                        id={`mainPostBtn`}
+                        className={'btn-new-2048 actionBtn2048'}
+                        onClick={() => {
+                            start();
+                        }}
                     >New</span>
                     <p>
                         SCORE:
-                        <ImStarEmpty/>
+                        <ImStarEmpty
+                            className={"score2048"}
+                        />
                         <span id="score01-2048">0</span>
                     </p>
                 </div>
@@ -340,7 +380,9 @@ function Game2048Container() {
                 >
                     <p>
                         <span style={{color: 'white'}}>Highest match:</span>
-                        <ImStarEmpty/>
+                        <ImStarEmpty
+                            className={"score2048"}
+                        />
                         <span>{highestTileCost}</span>
                     </p>
                 </div>

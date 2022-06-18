@@ -14,11 +14,11 @@ function getPCount(id, set) {
 }
 
 function getMyFollowers(myId, history) {
-    HttpHelper.followersArray((idArray, history) => HttpHelper.follow(idArray, history), history, myId)
+    HttpHelper.followersArray((idArray, history) => HttpHelper.follow(idArray, history, "/Followers"), history, myId)
 }
 
 function getMyFollowings(myId, history) {
-    HttpHelper.followingArray((idArray, history) => HttpHelper.follow(idArray, history), history, myId)
+    HttpHelper.followingArray((idArray, history) => HttpHelper.follow(idArray, history, "/Followings"), history, myId)
 }
 
 function getUser(id) {

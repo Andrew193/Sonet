@@ -21,7 +21,7 @@ function openUser(e, history, inputId, setLoader) {
     CommonHelper.redirect(history, null, `/users/${id}`)
 }
 
-function openUserPofile(id, hist) {
+function openUserProfile(id, hist) {
     CommonHelper.redirect(hist, null, `/profile/${id}`)
 }
 
@@ -41,6 +41,6 @@ function Subscribe(id, toast, otherUserFolCount) {
     HttpHelper.subscribe(id, otherUserFolCount, toast)
 }
 
-const obj = {getUsers, openUser, getSelectedUser, HidePanel, input, openUserPofile, Subscribe}
+const obj = {getUsers, openUser, getSelectedUser, HidePanel, input, openUserProfile, Subscribe}
 
 export default obj;

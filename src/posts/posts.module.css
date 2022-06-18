@@ -70,10 +70,6 @@
     align-items: center;
 }
 
-#HF .SortLine {
-    width: 85%;
-}
-
 .SortLine {
     padding: 10px;
     display: flex;

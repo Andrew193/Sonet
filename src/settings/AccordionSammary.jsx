@@ -2,12 +2,18 @@ import {styled} from "@mui/material/styles";
 import MuiAccordionSummary from "@mui/material/AccordionSummary";
 import {AiOutlineArrowRight} from "react-icons/all";
 
-const AccordionSummary = styled((props) => (
-    <MuiAccordionSummary
-        expandIcon={<AiOutlineArrowRight sx={{fontSize: '0.9rem'}}/>}
+const AccordionSummary = styled((props) => {
+    return <MuiAccordionSummary
+        expandIcon={<AiOutlineArrowRight
+            sx={{fontSize: '0.9rem'}}
+            style={{
+                color: props?.iconStyle?.color,
+                fontSize: props?.iconStyle?.fontSize
+            }}
+        />}
         {...props}
     />
-))(({theme}) => ({
+})(({theme}) => ({
     backgroundColor:
         theme.palette.mode === 'dark'
             ? 'rgba(255, 255, 255, .05)'

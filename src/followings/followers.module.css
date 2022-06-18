@@ -1,0 +1,84 @@
+.Container {
+    margin: 0px 0px 0px 15%;
+    border-left: 1px solid #ccc;
+    min-height: 100%;
+    border-left: 1px solid #cecccc;
+    border-right: 1px solid #cecccc;
+}
+
+.Container > div {
+    cursor: pointer;
+    border-bottom: 1px solid #4e3dea;
+    text-align: left;
+    padding: 1% 5%;
+    position: relative;
+    transition: all ease 0.5s;
+}
+
+.Container > div:nth-child(2n) {
+    background-color: #f6f2ff;
+}
+
+.Container > div:hover {
+    background-color: #d6cbf0;
+}
+
+.Container h3 {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    width: fit-content;
+    transition: all ease 0.7s;
+}
+
+.Container h3:hover {
+    color: #3452f1;
+}
+
+.Container span {
+    display: flex;
+    align-items: center;
+    width: fit-content;
+}
+
+.Container span:first-of-type {
+    margin: 10px 0px;
+    cursor: pointer;
+    transition: all ease 0.7s;
+}
+
+.Container a {
+    text-decoration: none;
+    color: rgb(17, 45, 167);
+}
+
+.Container span:first-of-type:hover {
+    color: #3452f1;
+}
+
+.Container span:last-of-type {
+    color: gray;
+    position: absolute;
+    top: 10%;
+    right: 5%;
+}
+
+.Container svg {
+    height: 26px;
+    width: auto;
+    margin-right: 5px;
+}
+
+@media (max-width: 768px) {
+    .Container {
+        margin: 0px;
+    }
+
+    .SortLine {
+        width: 75%;
+    }
+
+    .PostsCont {
+        margin-bottom: 55px;
+    }
+}

@@ -16,6 +16,7 @@ import Script2 from "../components/profile/script";
 import {headerListLinks} from "../vars";
 import {CgGames, IoSettingsOutline} from "react-icons/all";
 import {getSettings} from "../db";
+import {alpha} from "@mui/material";
 
 const headerLinksConfig = [
     {path: headerListLinks.base, img: <AiOutlineBank size={"24px"}/>, label: "Home"},
@@ -33,7 +34,6 @@ function Header() {
     const history = useHistory();
 
     const headerLinks = useMemo(() => headerLinksConfig?.map((linkConfig) => {
-        console.log(settings?.configs?.color[settings?.color])
 
         return <p className={"wrap-link-line"}>
             <span className={"col-sm-2 col-xs-2"}/>
@@ -69,9 +69,6 @@ function Header() {
         getData();
     }, [])
 
-    console.log(settings)
-
-
     return (
         <nav
             className={s.NavBar}
@@ -82,7 +79,8 @@ function Header() {
         >
             <div
                 style={{
-                    color: settings?.configs?.color[settings?.color]
+                    color: settings?.configs?.color[settings?.color],
+                    boxShadow: `0px 0px 8px 0px ${alpha(settings?.configs?.color[settings?.color] || "#b6c0f3", 0.8)}`,
                 }}
             >
                 <p className={"wrap-link-line logotype"}>
@@ -148,7 +146,7 @@ function Header() {
                     customStyles={{
                         fontSize: settings?.configs?.size[settings?.fontSize],
                         color: settings?.configs?.color[settings?.color],
-                        background:  settings?.configs?.background[settings?.background],
+                        background: settings?.configs?.background[settings?.background],
                     }}
                 />
             </div>
@@ -161,7 +159,7 @@ function Header() {
                 customStyles={{
                     fontSize: settings?.configs?.size[settings?.fontSize],
                     color: settings?.configs?.color[settings?.color],
-                    background:  settings?.configs?.background[settings?.background],
+                    background: settings?.configs?.background[settings?.background],
                 }}
             />}
 

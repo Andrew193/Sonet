@@ -4,10 +4,13 @@ import Skeleton from 'react-loading-skeleton';
 import s from "./users.module.css"
 import {withRouter} from "react-router-dom";
 import ClearUsersContainer from './UsersPageContent';
+import {hexToRgb} from "@mui/material";
+import {getSettings} from "../db";
 
 function UsersContainer(props) {
     const [users, setUsers] = useState(false);
     const [open, setOpen] = useState(false);
+    const [settings, setSettings] = useState({});
 
     useEffect(() => {
         const id = props?.match?.params?.id;
@@ -29,13 +32,28 @@ function UsersContainer(props) {
         }
     }, [props?.match?.params?.id])
 
+    useEffect(() => {
+        async function getData() {
+            const response = await getSettings();
+
+            setSettings(response[0])
+        }
+
+        getData();
+    }, [])
+
     return (
-        <div className={s.Container}>
+        <div
+            className={s.Container}
+            style={{
+                fontSize: settings?.configs?.size[settings?.fontSize]
+            }}
+        >
             {users
                 ? <ClearUsersContainer
                     users={users}
                     setOpen={setOpen}
-                    open={open}
+                    settings={settings}
                 />
                 : <Skeleton
                     height={"50px"}

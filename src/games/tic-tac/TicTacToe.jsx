@@ -1,11 +1,18 @@
 import React from 'react'
-import {useState} from "react"
+import {useState, useEffect} from "react"
 import "./TicTacToe.css"
+import {getSettings} from "../../db";
+import {alpha, Typography} from "@mui/material";
+import Tic from "../images/check+circle+icon-1320184982103223133.png";
+import Tac from "../images/416-4167052_cross-sign-png-tic-tac-toe-cross-transparent.png";
+import {buttonsConfig} from "../../createPost/CreatePostLine";
 
 const TicTacToe = () => {
     const [turn, setTurn] = useState('X')
     const [cells, setCells] = useState(Array(9).fill(''))
     const [winner, setWinner] = useState()
+
+    const [settings, setSettings] = useState({});
 
     const CheckWinner = (squares) => {
         let combos = {
@@ -27,37 +34,36 @@ const TicTacToe = () => {
 
         for (let combo in combos) {
             combos[combo].forEach((pattern) => {
+                debugger
                 if (
-                    squares[pattern[0]] === "" ||
-                    squares[pattern[1]] === "" ||
-                    squares[pattern[2]] === ""
+                    squares[pattern[0]]?.props?.alt === "" ||
+                    squares[pattern[1]]?.props?.alt === "" ||
+                    squares[pattern[2]]?.props?.alt === ""
                 ) {
 
-                } else if (squares[pattern[0]] === squares[pattern[1]] &&
-                    squares[pattern[1]] === squares[pattern[2]]) {
-                    setWinner(squares[pattern[0]])
+                } else if (squares[pattern[0]]?.props?.alt === squares[pattern[1]]?.props?.alt &&
+                    squares[pattern[1]]?.props?.alt === squares[pattern[2]]?.props?.alt) {
+                    setWinner(squares[pattern[0]]?.props?.alt)
                 }
             })
         }
     }
-
 
     const handleClick = (num) => {
         if (cells[num] !== "") {
             return
         }
         let squares = [...cells]
-        if (turn === "X") {
-            squares[num] = "X"
+        if (turn === "X" && winner === undefined) {
+            squares[num] = <img src={Tac} alt={"X"}/>
             setTurn("O")
-        } else {
-            squares[num] = "O"
+        } else if (winner === undefined) {
+            squares[num] = <img src={Tic} alt={"O"}/>
             setTurn("X")
         }
         CheckWinner(squares)
         setCells(squares)
     };
-
 
     const Cell = ({num}) => {
         return <td onClick={() => handleClick(num)}>{cells[num]}</td>
@@ -68,10 +74,48 @@ const TicTacToe = () => {
         setCells(Array(9).fill(''))
     }
 
+    useEffect(() => {
+        async function getData() {
+            const response = await getSettings();
+
+            setSettings(response[0])
+        }
+
+        getData();
+    }, [])
+
     return (
         <div className='container-tic'>
+            <style>
+                {`
+                .table-back-tic {
+                box-shadow: 0px 0px 8px 0px ${alpha(settings?.configs?.color[settings?.color] || "rgb(0,0,0)", 0.8)};
+                background: ${alpha(settings?.configs?.color[settings?.color] || "rgb(0,0,0)", 0.1)};
+                }  
+                .table-back-tic td{
+                border: solid ${alpha(settings?.configs?.color[settings?.color] || "rgb(0,0,0)", 0.9)};
+                color: black !important;
+                }
+                .table-back-tic td:hover{
+                background: ${alpha(settings?.configs?.color[settings?.color] || "rgb(0,0,0)", 0.4)} !important;
+                }
+                .table-back-tic td img{
+                height: 50px;
+                width: 50px; 
+                }
+                .labelTurn {
+                   margin: 10px !important;
+                   background: ${alpha(settings?.configs?.color[settings?.color] || "rgb(0,0,0)", 0.4)} !important;
+                }
+               `}
+            </style>
             <div className='line-tic'>
-                <h3>Just Play, Have Fun And Enjoy The Game</h3>
+                <h3
+                    style={{
+                        color: settings?.configs?.color[settings?.color],
+                        fontSize: settings?.configs?.size[settings?.fontSize]
+                    }}
+                >Just Play, Have Fun And Enjoy The Game</h3>
             </div>
 
             <div
@@ -104,13 +148,24 @@ const TicTacToe = () => {
                     <h3 className='winner-tic'>{winner} is the winner!</h3>
                     <span
                         id={'mainPostBtn'}
-                        className={'btn-tic'}
+                        className={`btn-tic ${buttonsConfig[settings?.configs?.color[settings?.color]]}`}
                         onClick={() => {
                             handleRestart();
                         }}
                     >Start Again</span>
                 </>
             )}
+            <Typography
+                style={{
+                    fontSize: settings?.configs?.size[settings?.fontSize] || "16px",
+                    padding: '1px 7px',
+                    background: settings?.configs?.background[settings?.background] || "rgb(203, 203, 243)",
+                    borderRadius: '5px',
+                }}
+                className={"labelTurn"}
+            >
+                Now this is <span style={{color: "red"}}>{turn}</span> turn
+            </Typography>
         </div>
     )
 }

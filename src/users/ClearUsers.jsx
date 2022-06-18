@@ -10,7 +10,8 @@ import {useMemo} from "react";
 function ClearUsers(props) {
     const {
         isSearchBarOpened,
-        setOpen
+        setOpen,
+        settings
     } = props;
 
     const history = useHistory();
@@ -33,7 +34,7 @@ function ClearUsers(props) {
             return <>
                 <div
                     key={"df" + index}
-                    className={s.Item}
+                    className={s.Item + " itemsUsersPage"}
                     data-id={value[5]}
                     onClick={(e) => {
                         Script.openUser(e, history)
@@ -47,7 +48,7 @@ function ClearUsers(props) {
                                 onClick={() => {
                                     history.push(`/users/${value[0]}`)
                                 }}>
-                                <AiOutlineUser/> {value[0]}
+                                <AiOutlineUser/> <span className={"usersNamePageName"}>{value[0]}</span>
                                 <span
                                     className={s.ThisIsYouLabel}
                                 >{value[5] === id ? "This is you" : ""}</span>
@@ -63,10 +64,15 @@ function ClearUsers(props) {
                             <AiOutlineClockCircle/> Joined us {DataHelper.fromNow(value[4])}
                         </span>
                 </div>
-                {value[7] && <UsersPageActions notYouFolCount={value[6]} value={value[5]} history={history}/>}
+                {value[7] && <UsersPageActions
+                    notYouFolCount={value[6]}
+                    value={value[5]}
+                    history={history}
+                    settings={settings}
+                />}
             </>
         })
-    }, [history, id, props.toMake.users])
+    }, [history, id, props?.toMake?.users, setOpen])
 
     return (
         <div
@@ -77,7 +83,11 @@ function ClearUsers(props) {
                         : 'col-xs-12 col-sm-12'
                     : 'col-xs-12 col-sm-12'
             } users-box` + s.UsersCont}
-            style={{height: '700px', padding: 'unset'}}
+            style={{
+                height: '700px',
+                padding: 'unset',
+                background: usersToMake?.length === 1 ? settings?.configs?.background[settings?.background] : ""
+            }}
         >
             {usersToMake}
         </div>
