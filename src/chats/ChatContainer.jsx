@@ -20,6 +20,7 @@ function ChatContainer() {
 
     useEffect(() => {
         socket.on("getMessageInChat", (data) => {
+            console.log(data)
             console.log("Receive new message")
             setArrivalMessage({
                 sender: data?.senderId,
@@ -28,7 +29,7 @@ function ChatContainer() {
             });
         });
 
-    }, [socket]);
+    }, []);
 
     useEffect(() => {
         try {
@@ -45,7 +46,6 @@ function ChatContainer() {
         if (userInformation?.id) {
             socket.emit("addUserToChat", userInformation?.id);
             socket.on("getUsersInChat", (users) => {
-
 
             });
         }
@@ -99,7 +99,6 @@ function ChatContainer() {
         getData();
     }, [])
 
-    console.log(messages)
     return (
         <>
             <style>
