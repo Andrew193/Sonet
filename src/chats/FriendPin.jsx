@@ -1,3 +1,4 @@
+import {Avatar} from "@mui/material";
 
 
 function FriendPin() {
@@ -5,11 +6,12 @@ function FriendPin() {
 
     return(
         <div className="conversation">
-            <img
-                className="conversationImg"
+            <Avatar
                 src={""}
-                alt=""
-            />
+                className={"conversationImg"}
+            >
+                T
+            </Avatar>
             <span className="conversationName">user?.username</span>
         </div>
     )

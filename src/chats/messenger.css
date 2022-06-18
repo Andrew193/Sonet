@@ -3,7 +3,6 @@
   border-right: 1px solid rgb(206, 204, 204);
   margin: 0 0 0 15%;
   height: -webkit-fill-available;
-  color: rgb(206, 204, 204);
   text-align: left;
   -webkit-flex: 3 0;
   flex: 3 0;
@@ -16,6 +15,8 @@
   padding: 10px;
   cursor: pointer;
   margin-top: 20px;
+  transition: all ease 0.5s;
+  border-radius: 5px;
 }
 
 .conversation:hover {
@@ -36,13 +37,15 @@
 
 .chatMenu {
   flex: 3.5;
+  border-right: 1px solid #cecccc;
 }
 
 .chatMenuInput {
-  width: 90%;
+  width: 100%;
   padding: 10px 0;
   border: none;
-  border-bottom: 1px solid gray;
+  border-bottom: 1px solid #cecccc;
+  outline: none;
 }
 
 .chatBox {
@@ -62,10 +65,50 @@
   padding-right: 10px;
 }
 
+.message {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+.messageTop{
+  display: flex;
+}
+
+.messageImg {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 10px;
+}
+
+.messageText{
+  padding: 10px;
+  border-radius: 20px;
+  background-color: #1877f2;
+  color: white;
+  max-width: 300px;
+}
+
+.messageBottom{
+  font-size: 12px;
+  margin-top: 10px;
+}
+
+.message.own{
+  align-items: flex-end;
+}
+
+.message.own .messageText{
+  background-color: rgb(245, 241, 241);
+  color: black;
+}
+
 .chatBoxBottom {
   margin-top: 5px;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: space-between;
 }
 

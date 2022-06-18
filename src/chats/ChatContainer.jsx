@@ -2,6 +2,10 @@ import {useEffect, useContext, useState} from "react";
 import Context from "../helpers/contextHelper";
 import "./messenger.css";
 import FriendPin from "./FriendPin";
+import CurrentChat from "./CurrentChat";
+import {getSettings} from "../db";
+import {alpha} from "@mui/material";
+import Messenger from "./Messenger";
 
 function ChatContainer() {
     const [conversations, setConversations] = useState([]);
@@ -9,15 +13,15 @@ function ChatContainer() {
     const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState("");
     const [arrivalMessage, setArrivalMessage] = useState(null);
+    const [settings, setSettings] = useState({});
 
     const userInformation = JSON.parse(localStorage.getItem("userInfo"));
-
 
     const {socket} = useContext(Context);
 
     useEffect(() => {
         socket.on("getMessageInChat", (data) => {
-            console.log(data,"dfdfsfdfsdfs")
+            console.log(data, "dfdfsfdfsdfs")
             setArrivalMessage({
                 sender: data?.senderId,
                 text: data?.text,
@@ -96,59 +100,45 @@ function ChatContainer() {
         // }
     };
 
+    useEffect(() => {
+        async function getData() {
+            const response = await getSettings();
+
+            setSettings(response[0])
+        }
+
+        getData();
+    }, [])
+
     console.log(messages)
     return (
         <>
-            <div className="messenger">
-                <div className="chatMenu">
-                    <div className="chatMenuWrapper">
-                        <input placeholder="Search for friends" className="chatMenuInput"/>
-                        <div
-                            onClick={() => {
-                                setCurrentChat({
-                                    members: [6, 2],
-                                    id: `62`
-                                })
-                            }}
-                        >
-                            <FriendPin/>
-                        </div>
-                    </div>
-                </div>
-                <div className="chatBox">
-                    <div className="chatBoxWrapper">
-                        {currentChat ? (
-                            <>
-                                <div className="chatBoxTop">
-                                    {messages.map((m) => (
-                                        <div>
-                                            {/*<Message message={m} own={m.sender === user._id}/>*/}
-                                        </div>
-                                    ))}
-                                </div>
-                                <div className="chatBoxBottom">
-                  <textarea
-                      className="chatMessageInput"
-                      placeholder="write something..."
-                      onChange={(e) => setNewMessage(e.target.value)}
-                      value={newMessage}
-                  />
-                                    <button className="chatSubmitButton" onClick={handleSubmit}>
-                                        Send
-                                    </button>
-                                </div>
-                            </>
-                        ) : (
-                            <span className="noConversationText">
-                Open a conversation to start a chat.
-              </span>
-                        )}
-                    </div>
-                </div>
-
-            </div>
+            <style>
+                {`
+                .chatMenuInput {
+                 border-bottom: 1px solid ${settings?.configs?.color[settings?.color]};
+                 }
+                 .chatMenuWrapper {
+                 border-right: 1px solid ${settings?.configs?.color[settings?.color]};
+                 }
+                 .conversation:hover {
+                 color: ${settings?.configs?.color[settings?.color]};
+                 background: ${alpha(settings?.configs?.color[settings?.color] || "#cecccc", 0.3)};
+                 }
+                `}
+            </style>
+            <Messenger
+                settings={settings}
+                setCurrentChat={setCurrentChat}
+                currentChat={currentChat}
+                messages={messages}
+                setNewMessage={setNewMessage}
+                newMessage={newMessage}
+                userInformation={userInformation}
+            />
         </>
     );
 }
+
 
 export default ChatContainer;
