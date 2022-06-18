@@ -33,7 +33,7 @@ function ChatContainer() {
 
     useEffect(() => {
         try {
-            console.log(arrivalMessage, currentChat?.members?.includes(arrivalMessage?.sender))
+            console.log(arrivalMessage, currentChat?.members?.includes(arrivalMessage?.sender), currentChat?.members)
             if (arrivalMessage && currentChat?.members.includes(arrivalMessage.sender)) {
                 setMessages((prev) => [...prev, arrivalMessage]);
             }
