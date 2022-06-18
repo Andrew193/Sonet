@@ -1,6 +1,6 @@
 import {buttonsConfig} from "../createPost/CreatePostLine";
 import Message from "./Message";
-import {useEffect} from "react";
+import {useEffect, useRef} from "react";
 import {getConversationById} from "./chatHelper";
 import {notify} from "../App";
 
@@ -17,7 +17,7 @@ function CurrentChat(props) {
         setMessages
     } = props;
 
-    console.log(messages)
+    const scrollRef = useRef();
 
     useEffect(() => {
         async function getData() {
@@ -37,12 +37,16 @@ function CurrentChat(props) {
 
     }, [conversationId])
 
+    useEffect(() => {
+        scrollRef.current?.scrollIntoView({ behavior: "smooth" });
+    }, [messages]);
+
     return (
         <>
             <div className="chatBoxTop">
                 {messages.map((m) => {
                     console.log((+m.sender === +userInformation.id) || (+m.createdById === +userInformation.id))
-                    return <div>
+                    return <div ref={scrollRef}>
                         <Message
                             message={m}
                             own={(+m.sender === +userInformation.id) || (+m.createdById === +userInformation.id)}

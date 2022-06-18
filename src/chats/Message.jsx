@@ -1,3 +1,4 @@
+import dateHelper from "../helpers/dateHelper";
 
 
 function Message(props) {
@@ -16,7 +17,7 @@ function Message(props) {
                 />
                 <p className="messageText">{message.text || message?.messageText}</p>
             </div>
-            <div className="messageBottom">{message.createdAt}</div>
+            <div className="messageBottom">{dateHelper.fromNow(message.createdAt)}</div>
         </div>
     )
 }
