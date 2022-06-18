@@ -135,6 +135,7 @@ function ChatContainer() {
                 setNewMessage={setNewMessage}
                 newMessage={newMessage}
                 userInformation={userInformation}
+                handleSubmit={handleSubmit}
             />
         </>
     );

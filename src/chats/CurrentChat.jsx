@@ -8,7 +8,8 @@ function CurrentChat(props) {
         newMessage,
         setNewMessage,
         customStyle,
-        userInformation
+        userInformation,
+        handleSubmit
     } = props;
 
     return(
@@ -32,7 +33,7 @@ function CurrentChat(props) {
                   />
                 <button
                     className={`button ${buttonsConfig[customStyle?.color]}`}
-                    onClick={() => props.open()}
+                    onClick={() => handleSubmit()}
                 >
                    Send
                 </button>
