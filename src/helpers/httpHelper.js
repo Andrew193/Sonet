@@ -166,6 +166,20 @@ class Http {
             .then((response) => callback(response?.data?.token))
             .catch((error) => error?.response && callback1(error?.response?.data?.error))
     }
+
+    createChatMessage(values, okCallback, errorCallback) {
+        axios.post("https://sonet34.herokuapp.com/api/chat", values)
+            .then((response) => {
+                okCallback(response?.data);
+            })
+            .catch((error) => {
+                console.error(error?.response?.data);
+
+                if (error) {
+                    errorCallback(createErrorsForApiCall(error?.response?.data, error?.response?.data))
+                }
+            })
+    }
 }
 
 const Item = new Http();

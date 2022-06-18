@@ -4,6 +4,7 @@ import "./messenger.css";
 import {getSettings} from "../db";
 import {alpha} from "@mui/material";
 import Messenger from "./Messenger";
+import {createChatMessage} from "./chatHelper";
 
 function ChatContainer() {
     const [conversations, setConversations] = useState([]);
@@ -15,7 +16,7 @@ function ChatContainer() {
 
     const userInformation = JSON.parse(localStorage.getItem("userInfo"));
 
-    const {socket} = useContext(Context);
+    const {socket, notify} = useContext(Context);
 
     useEffect(() => {
         socket.on("getMessageInChat", (data) => {
@@ -64,13 +65,24 @@ function ChatContainer() {
             text: newMessage,
         });
 
-        // try {
-        //     const res = await axios.post("/messages", message);
-        //     setMessages([...messages, res.data]);
-        //     setNewMessage("");
-        // } catch (err) {
-        //     console.log(err);
-        // }
+        try {
+            createChatMessage({
+                    conversationId: message?.conversationId,
+                    messageText: message?.text,
+                    createdById: userInformation?.id
+                },
+                (res) => {
+                    console.log(res)
+                    setMessages((currentMessages) => [...currentMessages, res.data]);
+                    setNewMessage("");
+                },
+                (errorMessage) => {
+                    notify(errorMessage || "Error");
+                })
+
+        } catch (err) {
+            console.error(err);
+        }
     };
 
     useEffect(() => {
