@@ -28,7 +28,9 @@ function Messenger(props) {
                 onClick={() => {
                     setCurrentChat({
                         members: [+friend?.receiverId, +friend?.requestSendById],
-                        id: `${friend?.receiverId}${friend?.requestSendById}`
+                        id: `${[friend?.receiverId, friend?.requestSendById].sort(function (a, b) {
+                            return a - b;
+                        }).join("")}`
                     })
                 }}
             >
@@ -82,18 +84,20 @@ function Messenger(props) {
     }, [userInformation?.id])
 
     useEffect(() => {
-        approvedByMe(userInformation?.id,
-            (response) => {
-                console.log(response, "fdsfdsfsdffsfsffsfdffsdf")
-                // const realConversation = possibleMates?.filter((friend) => friend?.approved);
-                //
-                // if (realConversation || realConversation?.length) {
-                //     setConversations((state) => [...(realConversation || []), ...state])
-                // }
-            },
-            (errorMessage) => {
-                notify(errorMessage || "Error");
-            })
+        if (userInformation?.id) {
+            approvedByMe(userInformation?.id,
+                (response) => {
+                    console.log(response, "fdsfdsfsdffsfsffsfdffsdf")
+                    // const realConversation = possibleMates?.filter((friend) => friend?.approved);
+                    //
+                    // if (realConversation || realConversation?.length) {
+                    //     setConversations((state) => [...(realConversation || []), ...state])
+                    // }
+                },
+                (errorMessage) => {
+                    notify(errorMessage || "Error");
+                })
+        }
     }, [userInformation?.id])
 
     return (
