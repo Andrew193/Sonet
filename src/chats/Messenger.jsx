@@ -53,8 +53,10 @@ function Messenger(props) {
                 })
         }
 
-        getPossibleMates();
-    }, [])
+        if(userInformation?.id) {
+            getPossibleMates();
+        }
+    }, [userInformation?.id])
 
     console.log(possibleMates,"possibleMates")
     return (
