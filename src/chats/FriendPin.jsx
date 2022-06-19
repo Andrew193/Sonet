@@ -25,9 +25,12 @@ function FriendPin(props) {
                     {friendName[0]}
                 </Avatar>
                 <span className="conversationName">{friendName}</span>
-                <AiOutlineLock
-                    className={"lockedFriendPin"}
-                />
+                {
+                    !requestMode
+                    && <AiOutlineLock
+                        className={"lockedFriendPin"}
+                    />
+                }
 
                 {
                     !requestMode
