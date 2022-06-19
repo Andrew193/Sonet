@@ -4,7 +4,6 @@ import Skeleton from 'react-loading-skeleton';
 import s from "./users.module.css"
 import {withRouter} from "react-router-dom";
 import ClearUsersContainer from './UsersPageContent';
-import {hexToRgb} from "@mui/material";
 import {getSettings} from "../db";
 
 function UsersContainer(props) {

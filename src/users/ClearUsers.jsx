@@ -1,5 +1,5 @@
 import {AiOutlineSafetyCertificate} from "react-icons/ai";
-import {Link, useHistory} from "react-router-dom";
+import {useHistory} from "react-router-dom";
 import DataHelper from "../helpers/dateHelper.js"
 import s from "./users.module.css"
 import {AiOutlineMail, AiOutlineUser, AiOutlineClockCircle} from "react-icons/ai";
@@ -69,6 +69,7 @@ function ClearUsers(props) {
                     value={value[5]}
                     history={history}
                     settings={settings}
+                    userName={value[0]}
                 />}
             </>
         })

@@ -8,7 +8,8 @@ function UsersPageActions(props) {
         value,
         history,
         notYouFolCount,
-        settings
+        settings,
+        userName
     } = props;
 
     const userInformation = JSON.parse(localStorage.getItem("userInfo"));
@@ -33,7 +34,9 @@ function UsersPageActions(props) {
                 onClick={() => {
                     Script.friendRequest({
                         receiverId: +value,
-                        requestSendById: +userInformation?.id
+                        requestSendById: +userInformation?.id,
+                        receiverName: userName,
+                        requesterName: userInformation?.userName
                     }, toast)
                 }}
                 className={`button ${buttonsConfig[settings?.configs?.color[settings?.color]]}`}
