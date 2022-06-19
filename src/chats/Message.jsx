@@ -1,6 +1,13 @@
 import dateHelper from "../helpers/dateHelper";
-import {FiCopy} from "react-icons/all";
+import {AiOutlineDelete, AiOutlineEdit, FiCopy} from "react-icons/all";
+import {IconButton, Tooltip} from "@mui/material";
+import {useMemo} from "react";
 
+const actionsConfig = [
+    {label: "Copy to buffer", icon: <FiCopy/>, type: "copy"},
+    {label: "Delete the message", icon: <AiOutlineDelete/>, type: "delete"},
+    {label: "Edit the message", icon: <AiOutlineEdit/>, type: "edit"}
+]
 
 function Message(props) {
     const {
@@ -8,7 +15,25 @@ function Message(props) {
         own
     } = props;
 
-    return(
+    const actions = useMemo(() => {
+        return actionsConfig?.map((action) => {
+            if (action?.type !== "copy" && own === false) {
+                return null
+            }
+
+            return <Tooltip title={action?.label}>
+                <button
+                    id={"dropStylesForMessagesActions"}
+                >
+                    {action?.icon}
+                </button>
+
+            </Tooltip>
+
+        })
+    }, [own])
+
+    return (
         <div className={own ? "message own" : "message"}>
             <div className="messageTop">
                 <img
@@ -18,9 +43,9 @@ function Message(props) {
                 />
                 <p className="messageText">
                     {message.text || message?.messageText}
-                <div className={"chatActionsBar"}>
-                    <FiCopy />
-                </div>
+                    <div className={"chatActionsBar"}>
+                        {actions}
+                    </div>
                 </p>
             </div>
             <div className="messageBottom">{dateHelper.fromNow(message.createdAt)}</div>
