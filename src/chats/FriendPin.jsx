@@ -1,8 +1,10 @@
 import {Avatar} from "@mui/material";
 
 
-function FriendPin() {
-
+function FriendPin(props) {
+    const {
+        friendName
+    } = props;
 
     return(
         <div className="conversation">
@@ -10,9 +12,9 @@ function FriendPin() {
                 src={""}
                 className={"conversationImg"}
             >
-                T
+                {friendName[0]}
             </Avatar>
-            <span className="conversationName">user?.username</span>
+            <span className="conversationName">{friendName}</span>
         </div>
     )
 }

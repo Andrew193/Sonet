@@ -1,5 +1,6 @@
 import FriendPin from "./FriendPin";
 import CurrentChat from "./CurrentChat";
+import {useMemo} from "react";
 
 
 function Messenger(props) {
@@ -12,8 +13,27 @@ function Messenger(props) {
         newMessage,
         userInformation,
         handleSubmit,
-        setMessages
+        setMessages,
+        conversations
     } = props;
+
+    const matesList = useMemo(() => {
+        return conversations?.map((friend) =>
+            <div
+                key={`${friend?.receiverId}${friend?.requestSendById}`}
+                onClick={() => {
+                    setCurrentChat({
+                        members: [+friend?.receiverId, +friend?.requestSendById],
+                        id: `${friend?.receiverId}${friend?.requestSendById}`
+                    })
+                }}
+            >
+                <FriendPin
+                    friendName={friend?.receiverName}
+                />
+            </div>
+        )
+    }, [conversations]);
 
     return (
         <div className="messenger">
@@ -23,16 +43,7 @@ function Messenger(props) {
                         placeholder="Search for friends"
                         className="chatMenuInput"
                     />
-                    <div
-                        onClick={() => {
-                            setCurrentChat({
-                                members: [1, 2],
-                                id: `12`
-                            })
-                        }}
-                    >
-                        <FriendPin/>
-                    </div>
+                    {matesList}
                 </div>
             </div>
             <div className="chatBox">

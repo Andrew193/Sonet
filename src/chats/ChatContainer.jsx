@@ -50,7 +50,6 @@ function ChatContainer() {
             getMatesList(userInformation?.id,
                 (response) => {
                     setConversations(response?.clearData)
-                    console.log(response)
                 },
                 (errorMessage) => {
                     notify(errorMessage || "Error");
@@ -145,6 +144,7 @@ function ChatContainer() {
                 setMessages={setMessages}
                 userInformation={userInformation}
                 handleSubmit={handleSubmit}
+                conversations={conversations}
             />
         </>
     );

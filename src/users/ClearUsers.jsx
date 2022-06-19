@@ -70,6 +70,7 @@ function ClearUsers(props) {
                     history={history}
                     settings={settings}
                     userName={value[0]}
+                    userAvatarLink={value[3]}
                 />}
             </>
         })

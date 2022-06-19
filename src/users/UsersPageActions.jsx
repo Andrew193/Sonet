@@ -9,7 +9,8 @@ function UsersPageActions(props) {
         history,
         notYouFolCount,
         settings,
-        userName
+        userName,
+        userAvatarLink
     } = props;
 
     const userInformation = JSON.parse(localStorage.getItem("userInfo"));
@@ -36,7 +37,8 @@ function UsersPageActions(props) {
                         receiverId: +value,
                         requestSendById: +userInformation?.id,
                         receiverName: userName,
-                        requesterName: userInformation?.userName
+                        requesterName: userInformation?.userName,
+                        userAvatarLink
                     }, toast)
                 }}
                 className={`button ${buttonsConfig[settings?.configs?.color[settings?.color]]}`}
