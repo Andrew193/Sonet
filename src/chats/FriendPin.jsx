@@ -70,7 +70,8 @@ function FriendPin(props) {
                                 requestSendById: requestSendById,
                                 receiverName: userInformation?.userName,
                                 requesterName: friendName,
-                                userAvatarLink: "/"
+                                userAvatarLink: "/",
+                                approved: true
                             }, toast)
                         }}
                     >
