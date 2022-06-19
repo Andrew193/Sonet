@@ -4,7 +4,8 @@ import "./messenger.css";
 import {getSettings} from "../db";
 import {alpha} from "@mui/material";
 import Messenger from "./Messenger";
-import {createChatMessage} from "./chatHelper";
+import {createChatMessage, getConversationById, getMatesList} from "./chatHelper";
+import {notify} from "../App";
 
 function ChatContainer() {
     const [conversations, setConversations] = useState([]);
@@ -42,11 +43,29 @@ function ChatContainer() {
         }
     }, [arrivalMessage, currentChat]);
 
+    console.log(conversations)
+
+    useEffect(() => {
+        async function getMates() {
+            getMatesList(userInformation?.id,
+                (response) => {
+                    setConversations(response?.clearData)
+                    console.log(response)
+                },
+                (errorMessage) => {
+                    notify(errorMessage || "Error");
+                })
+        }
+
+        if (userInformation?.id) {
+            getMates();
+        }
+    }, [JSON.stringify(userInformation?.id)])
+
     useEffect(() => {
         if (userInformation?.id) {
             socket.emit("addUserToChat", userInformation?.id);
             socket.on("getUsersInChat", (users) => {
-
             });
         }
     }, [userInformation]);

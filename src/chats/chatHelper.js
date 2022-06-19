@@ -7,3 +7,7 @@ export async function createChatMessage(values, okCallback, errorCallback) {
 export async function getConversationById(conversationId, okCallback, errorCallback) {
     HttpHelper.getConversationById(conversationId, okCallback, errorCallback);
 }
+
+export async function getMatesList(userId, okCallback, errorCallback) {
+    HttpHelper.getMatesList(userId, okCallback, errorCallback)
+}
