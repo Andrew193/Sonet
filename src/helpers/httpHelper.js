@@ -3,6 +3,7 @@ import CommonHelper from "./common"
 import Script from "./cookieHelper";
 import {createErrorsForApiCall} from "../utils";
 import {getForApprovalMatesList} from "../chats/chatHelper";
+import {notify} from "../App";
 
 const axios = require('axios').default;
 
@@ -176,6 +177,18 @@ class Http {
             .catch((error) => {
                 if (error) {
                     errorCallback(createErrorsForApiCall(error?.response?.data, error?.response?.data))
+                }
+            })
+    }
+
+    approveRequest(values, okCallback, errorCallback) {
+        axios.post("https://sonet34.herokuapp.com/api/mates/approve", values)
+            .then((response) => {
+                okCallback("Added")
+            })
+            .catch((error) => {
+                if (error) {
+                    errorCallback("Canceled")
                 }
             })
     }

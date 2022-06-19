@@ -3,6 +3,7 @@ import CurrentChat from "./CurrentChat";
 import {useEffect, useMemo, useState} from "react";
 import {getForApprovalMatesList} from "./chatHelper";
 import {notify} from "../App";
+import {buttonsConfig} from "../createPost/CreatePostLine";
 
 
 function Messenger(props) {
@@ -40,6 +41,23 @@ function Messenger(props) {
 
 
     const [possibleMates, setPossibleMates] = useState(null);
+    const [chatMode, setChatMode] = useState(false);
+
+    const possibleMatesList = useMemo(() => {
+        return possibleMates?.map((friend, index) =>
+            <div
+                key={`${index}`}
+            >
+                <FriendPin
+                    receiverId={friend?.receiverId}
+                    requestSendById={friend?.requestSendById}
+                    friendName={friend?.receiverName}
+                    approved={friend?.approved}
+                    requestMode
+                />
+            </div>
+        )
+    }, [possibleMates]);
 
     useEffect(() => {
         async function getPossibleMates() {
@@ -53,21 +71,48 @@ function Messenger(props) {
                 })
         }
 
-        if(userInformation?.id) {
+        if (userInformation?.id) {
             getPossibleMates();
         }
     }, [userInformation?.id])
 
-    console.log(possibleMates,"possibleMates")
+    console.log(possibleMates, "possibleMates")
     return (
         <div className="messenger">
             <div className="chatMenu">
                 <div className="chatMenuWrapper">
+                    <div
+                        className={"chatModeLine"}
+                    >
+                        <button
+                            onClick={() => {
+                                setChatMode(false)
+                            }}
+                            className={`button ${buttonsConfig[settings?.configs?.color[settings?.color]]} ${!chatMode ? "activeChatMode" : ""}`}
+                        >My Friends
+                        </button>
+                        <button
+                            onClick={() => {
+                                setChatMode(true)
+                            }}
+                            className={`button ${buttonsConfig[settings?.configs?.color[settings?.color]]} ${chatMode ? "activeChatMode" : ""}`}
+                        >Friend Requests
+                        </button>
+                    </div>
                     <input
                         placeholder="Search for friends"
                         className="chatMenuInput"
                     />
-                    {matesList}
+                    {
+                        !chatMode
+                            ? <>
+                                <h3>Mates</h3>
+                                {matesList}</>
+                            : <>
+                                <h3>Requests</h3>
+                                {possibleMatesList}
+                            </>
+                    }
                 </div>
             </div>
             <div className="chatBox">

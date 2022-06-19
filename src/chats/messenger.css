@@ -23,6 +23,7 @@
 .closedFriendPin {
     background-color: gray;
     opacity: 0.5;
+    pointer-events: none;
 }
 
 .approvalIsRequired {
@@ -30,6 +31,24 @@
     position: absolute;
     bottom: 0px;
     right: 10px;
+}
+
+.matesActions {
+    display: flex;
+    align-items: center;
+}
+
+.matesActions span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.matesActions span svg {
+    margin-right: 5px;
+    font-weight: bold!important;
 }
 
 .lockedFriendPin {
@@ -201,6 +220,16 @@
     font-size: 50px;
     color: rgb(224, 220, 220);
     cursor: default;
+}
+
+.chatModeLine {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.activeChatMode {
+    color: black !important;
 }
 
 @media screen and (max-width: 768px) {
