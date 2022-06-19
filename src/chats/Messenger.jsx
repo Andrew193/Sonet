@@ -1,6 +1,8 @@
 import FriendPin from "./FriendPin";
 import CurrentChat from "./CurrentChat";
-import {useMemo} from "react";
+import {useEffect, useMemo, useState} from "react";
+import {getForApprovalMatesList} from "./chatHelper";
+import {notify} from "../App";
 
 
 function Messenger(props) {
@@ -30,11 +32,31 @@ function Messenger(props) {
             >
                 <FriendPin
                     friendName={friend?.receiverName}
+                    approved={friend?.approved}
                 />
             </div>
         )
     }, [conversations]);
 
+
+    const [possibleMates, setPossibleMates] = useState(null);
+
+    useEffect(() => {
+        async function getPossibleMates() {
+            getForApprovalMatesList(userInformation?.id,
+                (response) => {
+                    setPossibleMates(response?.clearData)
+                    console.log(response)
+                },
+                (errorMessage) => {
+                    notify(errorMessage || "Error");
+                })
+        }
+
+        getPossibleMates();
+    }, [])
+
+    console.log(possibleMates,"possibleMates")
     return (
         <div className="messenger">
             <div className="chatMenu">

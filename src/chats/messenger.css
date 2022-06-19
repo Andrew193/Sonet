@@ -17,6 +17,25 @@
     margin-top: 20px;
     transition: all ease 0.5s;
     border-radius: 5px;
+    position: relative;
+}
+
+.closedFriendPin {
+    background-color: gray;
+    opacity: 0.5;
+}
+
+.approvalIsRequired {
+    color: red;
+    position: absolute;
+    bottom: 0px;
+    right: 10px;
+}
+
+.lockedFriendPin {
+    position: absolute;
+    top: 10px;
+    right: 10px;
 }
 
 .conversation:hover {
@@ -186,7 +205,16 @@
 
 @media screen and (max-width: 768px) {
     .chatMenu {
-        flex: 1;
+        flex: 4 1;
+    }
+
+    .messenger {
+        margin: unset;
+    }
+
+    .approvalIsRequired {
+        font-size: 10px;
+        bottom: 2px;
     }
 
     .conversationName {

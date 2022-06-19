@@ -2,6 +2,7 @@ import cookieHelper from "./cookieHelper"
 import CommonHelper from "./common"
 import Script from "./cookieHelper";
 import {createErrorsForApiCall} from "../utils";
+import {getForApprovalMatesList} from "../chats/chatHelper";
 
 const axios = require('axios').default;
 
@@ -169,6 +170,18 @@ class Http {
 
     friendRequest(values, okCallback, errorCallback) {
         axios.post("https://sonet34.herokuapp.com/api/mates", values)
+            .then((response) => {
+                okCallback(response?.data);
+            })
+            .catch((error) => {
+                if (error) {
+                    errorCallback(createErrorsForApiCall(error?.response?.data, error?.response?.data))
+                }
+            })
+    }
+
+    getForApprovalMatesList(receiverId, okCallback, errorCallback) {
+        axios.get("https://sonet34.herokuapp.com/api/mates/forMe", {params: {receiverId}})
             .then((response) => {
                 okCallback(response?.data);
             })

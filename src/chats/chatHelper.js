@@ -11,3 +11,7 @@ export async function getConversationById(conversationId, okCallback, errorCallb
 export async function getMatesList(userId, okCallback, errorCallback) {
     HttpHelper.getMatesList(userId, okCallback, errorCallback)
 }
+
+export async function getForApprovalMatesList(userId, okCallback, errorCallback) {
+    HttpHelper.getForApprovalMatesList(userId, okCallback, errorCallback)
+}
