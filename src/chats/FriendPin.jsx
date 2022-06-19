@@ -66,8 +66,8 @@ function FriendPin(props) {
                                 requestSendById
                             }, notify, notify)
                             friendRequest({
-                                receiverId: receiverId,
-                                requestSendById: requestSendById,
+                                receiverId: requestSendById,
+                                requestSendById: receiverId,
                                 receiverName: userInformation?.userName,
                                 requesterName: friendName,
                                 userAvatarLink: "/",
