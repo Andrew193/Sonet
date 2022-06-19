@@ -41,12 +41,12 @@ function Subscribe(id, toast, otherUserFolCount) {
     HttpHelper.subscribe(id, otherUserFolCount, toast)
 }
 
-function friendRequest(values) {
+function friendRequest(values, callback) {
     HttpHelper.friendRequest(values,
         (e) => {
-            console.log(e);
+            callback("Success");
         }, (error) => {
-            console.error(error);
+            callback(error);
         })
 }
 

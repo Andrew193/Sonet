@@ -34,7 +34,7 @@ function UsersPageActions(props) {
                     Script.friendRequest({
                         receiverId: +value,
                         requestSendById: +userInformation?.id
-                    })
+                    }, toast)
                 }}
                 className={`button ${buttonsConfig[settings?.configs?.color[settings?.color]]}`}
             >
