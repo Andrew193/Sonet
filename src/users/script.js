@@ -13,7 +13,7 @@ function openUser(e, history, inputId, setLoader) {
     const id = e ? e.currentTarget.dataset.id : inputId;
 
     if (id === '' || history.location.pathname.split('/')[2] === id) {
-        if(setLoader) {
+        if (setLoader) {
             setLoader(() => false)
         }
     }
@@ -41,6 +41,15 @@ function Subscribe(id, toast, otherUserFolCount) {
     HttpHelper.subscribe(id, otherUserFolCount, toast)
 }
 
-const obj = {getUsers, openUser, getSelectedUser, HidePanel, input, openUserProfile, Subscribe}
+function friendRequest(values) {
+    HttpHelper.friendRequest(values,
+        (e) => {
+            console.log(e);
+        }, (error) => {
+            console.error(error);
+        })
+}
+
+const obj = {getUsers, openUser, getSelectedUser, HidePanel, input, openUserProfile, Subscribe, friendRequest}
 
 export default obj;

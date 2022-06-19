@@ -167,6 +167,18 @@ class Http {
             .catch((error) => error?.response && callback1(error?.response?.data?.error))
     }
 
+    friendRequest(values, okCallback, errorCallback) {
+        axios.post("https://sonet34.herokuapp.com/api/mates", values)
+            .then((response) => {
+                okCallback(response?.data);
+            })
+            .catch((error) => {
+                if (error) {
+                    errorCallback(createErrorsForApiCall(error?.response?.data, error?.response?.data))
+                }
+            })
+    }
+
     createChatMessage(values, okCallback, errorCallback) {
         axios.post("https://sonet34.herokuapp.com/api/chat", values)
             .then((response) => {
