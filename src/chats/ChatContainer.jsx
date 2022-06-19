@@ -21,8 +21,6 @@ function ChatContainer() {
 
     useEffect(() => {
         socket.on("getMessageInChat", (data) => {
-            console.log(data)
-            console.log("Receive new message")
             setArrivalMessage({
                 sender: data?.senderId,
                 text: data?.text,
@@ -34,7 +32,6 @@ function ChatContainer() {
 
     useEffect(() => {
         try {
-            console.log(arrivalMessage, currentChat?.members?.includes(arrivalMessage?.sender), currentChat?.members)
             if (arrivalMessage && currentChat?.members.includes(arrivalMessage.sender)) {
                 setMessages((prev) => [...prev, arrivalMessage]);
             }
@@ -43,12 +40,11 @@ function ChatContainer() {
         }
     }, [arrivalMessage, currentChat]);
 
-    console.log(conversations)
-
     useEffect(() => {
         async function getMates() {
             getMatesList(userInformation?.id,
                 (response) => {
+                    console.log(response)
                     setConversations(response?.clearData)
                 },
                 (errorMessage) => {
@@ -77,7 +73,6 @@ function ChatContainer() {
             conversationId: currentChat.id,
         };
 
-        console.log(currentChat)
         const receiverId = currentChat.members.find(
             (member) => member !== userInformation.id
         );
@@ -95,7 +90,7 @@ function ChatContainer() {
                     createdById: userInformation?.id
                 },
                 (res) => {
-                    console.log(res)
+
                     setMessages((currentMessages) => [...currentMessages, res.data]);
                     setNewMessage("");
                 },
@@ -118,6 +113,7 @@ function ChatContainer() {
         getData();
     }, [])
 
+    console.log(conversations)
     return (
         <>
             <style>

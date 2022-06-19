@@ -22,9 +22,9 @@ function Messenger(props) {
     } = props;
 
     const matesList = useMemo(() => {
-        return conversations?.map((friend) =>
+        return conversations?.map((friend, index) =>
             <div
-                key={`${friend?.receiverId}${friend?.requestSendById}`}
+                key={index}
                 onClick={() => {
                     setCurrentChat({
                         members: [+friend?.receiverId, +friend?.requestSendById],
