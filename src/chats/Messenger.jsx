@@ -11,6 +11,7 @@ function Messenger(props) {
         settings,
         setCurrentChat,
         currentChat,
+        setConversations,
         messages,
         setNewMessage,
         newMessage,
@@ -43,9 +44,13 @@ function Messenger(props) {
     const [possibleMates, setPossibleMates] = useState(null);
     const [chatMode, setChatMode] = useState(false);
 
+
     const possibleMatesList = useMemo(() => {
-        return possibleMates?.map((friend, index) =>
-            <div
+        return possibleMates?.map((friend, index) => {
+            if (friend?.approved) {
+                return null;
+            }
+            return <div
                 key={`${index}`}
             >
                 <FriendPin
@@ -56,7 +61,7 @@ function Messenger(props) {
                     requestMode
                 />
             </div>
-        )
+        })
     }, [possibleMates]);
 
     useEffect(() => {
@@ -76,7 +81,12 @@ function Messenger(props) {
         }
     }, [userInformation?.id])
 
-    console.log(possibleMates, "possibleMates")
+    useEffect(() => {
+        const realConversation = possibleMates?.filter((friend) => friend?.approved);
+
+        setConversations((state) => [...(realConversation || []), ...state])
+    }, [JSON.stringify(possibleMates)])
+
     return (
         <div className="messenger">
             <div className="chatMenu">
