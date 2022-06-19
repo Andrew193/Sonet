@@ -126,7 +126,7 @@ function ChatContainer() {
                  }
                  .conversation:hover {
                  color: ${settings?.configs?.color[settings?.color]};
-                 background: ${alpha(settings?.configs?.color[settings?.color] || "#cecccc", 0.3)};
+                 background: ${alpha(settings?.configs?.color[settings?.color] || "#7986cb", 0.7)};
                  }
                 `}
             </style>

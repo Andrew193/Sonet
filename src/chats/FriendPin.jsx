@@ -12,12 +12,12 @@ function FriendPin(props) {
         approved,
         requestMode,
         receiverId,
-        requestSendById,
-        friend
+        requestSendById
     } = props;
 
     const userInformation = JSON.parse(localStorage.getItem("userInfo"));
-    console.log(friend)
+    console.log( requestMode
+        && "f")
     return (
         <>
             <div
@@ -31,7 +31,7 @@ function FriendPin(props) {
                 </Avatar>
                 <span className="conversationName">{friendName}</span>
                 {
-                    !requestMode
+                    !approved
                     && <AiOutlineLock
                         className={"lockedFriendPin"}
                     />

@@ -69,6 +69,8 @@ function Header() {
         getData();
     }, [])
 
+    const currentWidth = useMemo(() => document?.body.offsetWidth, [document?.body.offsetWidth]);
+
     return (
         <nav
             className={s.NavBar}
@@ -80,7 +82,7 @@ function Header() {
             <div
                 style={{
                     color: settings?.configs?.color[settings?.color],
-                    boxShadow: `0px 0px 8px 0px ${alpha(settings?.configs?.color[settings?.color] || "#b6c0f3", 0.8)}`,
+                    boxShadow: currentWidth < 768 ? `0px 0px 8px 0px ${alpha(settings?.configs?.color[settings?.color] || "#b6c0f3", 0.8)}` : "",
                 }}
             >
                 <p className={"wrap-link-line logotype"}>

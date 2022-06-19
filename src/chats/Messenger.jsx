@@ -1,9 +1,11 @@
 import FriendPin from "./FriendPin";
 import CurrentChat from "./CurrentChat";
 import {useEffect, useMemo, useState} from "react";
-import {approvedByMe, getForApprovalMatesList} from "./chatHelper";
+import {getForApprovalMatesList} from "./chatHelper";
 import {notify} from "../App";
 import {buttonsConfig} from "../createPost/CreatePostLine";
+import {useOutsideClick} from "../hooks";
+import {useRef} from "react";
 
 
 function Messenger(props) {
@@ -11,7 +13,6 @@ function Messenger(props) {
         settings,
         setCurrentChat,
         currentChat,
-        setConversations,
         messages,
         setNewMessage,
         newMessage,
@@ -22,16 +23,18 @@ function Messenger(props) {
     } = props;
 
     const matesList = useMemo(() => {
-        return conversations?.map((friend, index) =>
-            <div
+        return conversations?.map((friend, index) => {
+            return <div
                 key={index}
                 onClick={() => {
-                    setCurrentChat({
-                        members: [+friend?.receiverId, +friend?.requestSendById],
-                        id: `${[friend?.receiverId, friend?.requestSendById].sort(function (a, b) {
-                            return a - b;
-                        }).join("")}`
-                    })
+                    if (friend?.approved) {
+                        setCurrentChat({
+                            members: [+friend?.receiverId, +friend?.requestSendById],
+                            id: `${[friend?.receiverId, friend?.requestSendById].sort(function (a, b) {
+                                return a - b;
+                            }).join("")}`
+                        })
+                    }
                 }}
             >
                 <FriendPin
@@ -39,13 +42,12 @@ function Messenger(props) {
                     approved={friend?.approved}
                 />
             </div>
-        )
+        })
     }, [conversations]);
 
 
     const [possibleMates, setPossibleMates] = useState(null);
     const [chatMode, setChatMode] = useState(false);
-
 
     const possibleMatesList = useMemo(() => {
         return possibleMates?.map((friend, index) => {
@@ -72,7 +74,6 @@ function Messenger(props) {
             getForApprovalMatesList(userInformation?.id,
                 (response) => {
                     setPossibleMates(response?.clearData)
-                    console.log(response)
                 },
                 (errorMessage) => {
                     notify(errorMessage || "Error");
@@ -84,22 +85,11 @@ function Messenger(props) {
         }
     }, [userInformation?.id])
 
-    useEffect(() => {
-        if (userInformation?.id) {
-            approvedByMe(userInformation?.id,
-                (response) => {
-                    console.log(response, "fdsfdsfsdffsfsffsfdffsdf")
-                    // const realConversation = possibleMates?.filter((friend) => friend?.approved);
-                    //
-                    // if (realConversation || realConversation?.length) {
-                    //     setConversations((state) => [...(realConversation || []), ...state])
-                    // }
-                },
-                (errorMessage) => {
-                    notify(errorMessage || "Error");
-                })
-        }
-    }, [userInformation?.id])
+    const wrapperRef = useRef(null);
+
+    useOutsideClick(wrapperRef, () => {
+        setCurrentChat(null)
+    })
 
     return (
         <div className="messenger">
@@ -123,10 +113,13 @@ function Messenger(props) {
                         >Friend Requests
                         </button>
                     </div>
-                    <input
-                        placeholder="Search for friends"
-                        className="chatMenuInput"
-                    />
+                    {
+                        !chatMode
+                        && <input
+                            placeholder="Search for friends"
+                            className="chatMenuInput"
+                        />
+                    }
                     {
                         !chatMode
                             ? <>
@@ -143,16 +136,21 @@ function Messenger(props) {
                 <div className="chatBoxWrapper">
                     {
                         currentChat
-                            ? <CurrentChat
-                                messages={messages}
-                                newMessage={newMessage}
-                                setNewMessage={setNewMessage}
-                                customStyle={settings}
-                                userInformation={userInformation}
-                                handleSubmit={handleSubmit}
-                                conversationId={currentChat?.id}
-                                setMessages={setMessages}
-                            />
+                            ?
+                            <div
+                                ref={wrapperRef}
+                            >
+                                <CurrentChat
+                                    messages={messages}
+                                    newMessage={newMessage}
+                                    setNewMessage={setNewMessage}
+                                    customStyle={settings}
+                                    userInformation={userInformation}
+                                    handleSubmit={handleSubmit}
+                                    conversationId={currentChat?.id}
+                                    setMessages={setMessages}
+                                />
+                            </div>
                             : <span className="noConversationText">
                                     Open a conversation to start a chat.
                             </span>

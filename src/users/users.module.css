@@ -49,6 +49,7 @@
     text-align: left;
     padding: 1% 5%;
     flex: 2 0;
+    position: relative;
 }
 
 .Item img {
