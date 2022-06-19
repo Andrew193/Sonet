@@ -41,7 +41,7 @@ function Subscribe(id, toast, otherUserFolCount) {
     HttpHelper.subscribe(id, otherUserFolCount, toast)
 }
 
-function friendRequest(values, callback) {
+export function friendRequest(values, callback) {
     HttpHelper.friendRequest(values,
         (e) => {
             callback("Success");

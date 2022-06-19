@@ -61,6 +61,7 @@ function Messenger(props) {
                     friendName={friend?.receiverName}
                     approved={friend?.approved}
                     requestMode
+                    friend={friend}
                 />
             </div>
         })

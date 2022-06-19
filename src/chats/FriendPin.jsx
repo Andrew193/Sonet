@@ -2,6 +2,8 @@ import {Avatar} from "@mui/material";
 import {AiOutlineLock, ImCancelCircle, IoAddSharp} from "react-icons/all";
 import {approveFriendRequest} from "./chatHelper";
 import {notify} from "../App";
+import {toast} from "react-toastify";
+import {friendRequest} from "../users/script";
 
 
 function FriendPin(props) {
@@ -10,9 +12,12 @@ function FriendPin(props) {
         approved,
         requestMode,
         receiverId,
-        requestSendById
+        requestSendById,
+        friend
     } = props;
 
+    const userInformation = JSON.parse(localStorage.getItem("userInfo"));
+    console.log(friend)
     return (
         <>
             <div
@@ -60,6 +65,13 @@ function FriendPin(props) {
                                 receiverId,
                                 requestSendById
                             }, notify, notify)
+                            friendRequest({
+                                receiverId: receiverId,
+                                requestSendById: requestSendById,
+                                receiverName: userInformation?.userName,
+                                requesterName: friendName,
+                                userAvatarLink: "/"
+                            }, toast)
                         }}
                     >
                         <IoAddSharp
