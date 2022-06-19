@@ -19,3 +19,7 @@ export async function getForApprovalMatesList(userId, okCallback, errorCallback)
 export async function approveFriendRequest(info, okCallback, errorCallback) {
     HttpHelper.approveRequest(info, okCallback, errorCallback)
 }
+
+export async function approvedByMe(userId, okCallback, errorCallback) {
+    HttpHelper.getApprovedByMeMatesList(userId, okCallback, errorCallback)
+}

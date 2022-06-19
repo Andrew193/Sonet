@@ -1,7 +1,7 @@
 import FriendPin from "./FriendPin";
 import CurrentChat from "./CurrentChat";
 import {useEffect, useMemo, useState} from "react";
-import {getForApprovalMatesList} from "./chatHelper";
+import {approvedByMe, getForApprovalMatesList} from "./chatHelper";
 import {notify} from "../App";
 import {buttonsConfig} from "../createPost/CreatePostLine";
 
@@ -82,10 +82,19 @@ function Messenger(props) {
     }, [userInformation?.id])
 
     useEffect(() => {
-        const realConversation = possibleMates?.filter((friend) => friend?.approved);
-
-        setConversations((state) => [...(realConversation || []), ...state])
-    }, [JSON.stringify(possibleMates)])
+        approvedByMe(userInformation?.id,
+            (response) => {
+                console.log(response, "fdsfdsfsdffsfsffsfdffsdf")
+                // const realConversation = possibleMates?.filter((friend) => friend?.approved);
+                //
+                // if (realConversation || realConversation?.length) {
+                //     setConversations((state) => [...(realConversation || []), ...state])
+                // }
+            },
+            (errorMessage) => {
+                notify(errorMessage || "Error");
+            })
+    }, [userInformation?.id])
 
     return (
         <div className="messenger">

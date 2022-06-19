@@ -205,6 +205,18 @@ class Http {
             })
     }
 
+    getApprovedByMeMatesList(receiverId, okCallback, errorCallback) {
+        axios.get("https://sonet34.herokuapp.com/api/mates/approvedByMe", {params: {receiverId}})
+            .then((response) => {
+                okCallback(response?.data);
+            })
+            .catch((error) => {
+                if (error) {
+                    errorCallback(createErrorsForApiCall(error?.response?.data, error?.response?.data))
+                }
+            })
+    }
+
     getMatesList(requestSendById, okCallback, errorCallback) {
         axios.get("https://sonet34.herokuapp.com/api/mates/my", {params: {requestSendById}})
             .then((response) => {
