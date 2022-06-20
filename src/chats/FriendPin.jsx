@@ -1,9 +1,10 @@
 import {Avatar} from "@mui/material";
 import {AiOutlineLock, ImCancelCircle, IoAddSharp} from "react-icons/all";
-import {approveFriendRequest} from "./chatHelper";
+import {approveFriendRequest, rejectFriendRequest} from "./chatHelper";
 import {notify} from "../App";
 import {toast} from "react-toastify";
 import {friendRequest} from "../users/script";
+import {createCopy} from "../utils";
 
 
 function FriendPin(props) {
@@ -12,12 +13,14 @@ function FriendPin(props) {
         approved,
         requestMode,
         receiverId,
-        requestSendById
+        requestSendById,
+        setConversations,
+        setPossibleMates,
+        id
     } = props;
 
     const userInformation = JSON.parse(localStorage.getItem("userInfo"));
-    console.log( requestMode
-        && "f")
+
     return (
         <>
             <div
@@ -51,13 +54,20 @@ function FriendPin(props) {
                 <div
                     className={"matesActions"}
                 >
-                    <span>
+                    <span
+                        onClick={() => {
+                            rejectFriendRequest({
+                                receiverId,
+                                requestSendById
+                            }, notify, notify)
+                        }}
+                    >
                         <ImCancelCircle
                             style={{
                                 color: "red"
                             }}
                         />
-                        Cancel
+                        Reject
                     </span>
                     <span
                         onClick={() => {
@@ -73,6 +83,21 @@ function FriendPin(props) {
                                 userAvatarLink: "/",
                                 approved: true
                             }, toast)
+
+                            // setConversations((state)=>{
+                            //     const copy = createCopy(state);
+                            //
+                            //     copy.splice(id, 1)
+                            //
+                            //     console.log(copy)
+                            // })
+                            setPossibleMates((state)=>{
+                                const copy = createCopy(state);
+                                console.log(JSON.stringify(copy))
+                                copy.splice(id, 1)
+                                console.log(copy,"ssdsd")
+                                return copy;
+                            })
                         }}
                     >
                         <IoAddSharp

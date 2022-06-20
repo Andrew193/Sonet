@@ -4,11 +4,11 @@ import "./messenger.css";
 import {getSettings} from "../db";
 import {alpha} from "@mui/material";
 import Messenger from "./Messenger";
-import {createChatMessage, getConversationById, getMatesList} from "./chatHelper";
-import {notify} from "../App";
+import {createChatMessage, getMatesList} from "./chatHelper";
 
 function ChatContainer() {
     const [conversations, setConversations] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
     const [currentChat, setCurrentChat] = useState(null);
     const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState("");
@@ -53,6 +53,7 @@ function ChatContainer() {
         }
 
         if (userInformation?.id) {
+            setIsLoading(() => true)
             getMates();
         }
     }, [JSON.stringify(userInformation?.id)])
@@ -113,7 +114,6 @@ function ChatContainer() {
         getData();
     }, [])
 
-    console.log(conversations)
     return (
         <>
             <style>
@@ -142,6 +142,8 @@ function ChatContainer() {
                 handleSubmit={handleSubmit}
                 conversations={conversations}
                 setConversations={setConversations}
+                setIsLoading={setIsLoading}
+                isLoading={isLoading}
             />
         </>
     );

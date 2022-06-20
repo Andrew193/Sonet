@@ -9,6 +9,10 @@
     display: flex;
 }
 
+.mainMessagesCaver {
+    height: 88%;
+}
+
 .conversation {
     display: flex;
     align-items: center;
@@ -37,6 +41,7 @@
 .matesActions {
     display: flex;
     align-items: center;
+    margin-top: 5px;
 }
 
 .matesActions span {
@@ -45,11 +50,36 @@
     justify-content: center;
     margin-right: 10px;
     cursor: pointer;
+    background: #6162623b;
+    border-radius: 2px;
+    padding: 2px 5px;
+    transition: all ease 0.5s;
+}
+
+.matesActions span:hover {
+    background: rgba(121, 134, 203, 0.7);
+}
+
+.matesActions span:first-of-type:hover {
+    color: red;
+}
+
+.noMessagesLabel {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 50px;
+    color: #8b8f8f94;
+}
+
+.matesActions span:last-of-type:hover {
+    color: green;
 }
 
 .matesActions span svg {
     margin-right: 5px;
-    font-weight: bold!important;
+    font-weight: bold !important;
 }
 
 .lockedFriendPin {
@@ -102,6 +132,24 @@
     height: 100%;
     overflow-y: scroll;
     padding-right: 10px;
+    padding-left: 10px;
+}
+
+.messagesLoader {
+    height: 87.6%;
+    top: 0;
+    left: 0px;
+    position: absolute;
+    width: 100%;
+    background: gray;
+    z-index: 1;
+    opacity: 0.6;
+}
+
+.chatLoader {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .message {
@@ -218,6 +266,7 @@
 .noConversationText {
     position: absolute;
     top: 10%;
+    margin: 15px;
     font-size: 50px;
     color: rgb(224, 220, 220);
     cursor: default;

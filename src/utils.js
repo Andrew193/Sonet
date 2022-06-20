@@ -10,7 +10,7 @@ export function downloadFile(url) {
 }
 
 export function hexToRgb(hex) {
-    if(hex) {
+    if (hex) {
         // Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
         const shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
         hex = hex.replace(shorthandRegex, function (m, r, g, b) {
@@ -34,11 +34,15 @@ export function createErrorsForApiCall(parsedResponse, oneErrorMessage) {
     return parsedResponse
         ? Object.entries(parsedResponse)
             ?.map((error) => {
-                if(JSON.stringify(error[1]) === "{}") {
+                if (JSON.stringify(error[1]) === "{}") {
                     return null;
                 }
                 return <li
                     key={uuidv4()}>{error[0] === "error" ? "Main reason" : error[0]}: {error[1]?.wrong || error[1]}</li>
             })
         : <li key={uuidv4()}>{oneErrorMessage?.error || "Something went wrong"}</li>;
+}
+
+export function createCopy(item) {
+    return JSON.parse(JSON.stringify(item))
 }

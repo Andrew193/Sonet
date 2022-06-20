@@ -193,6 +193,18 @@ class Http {
             })
     }
 
+    rejectRequest(values, okCallback, errorCallback) {
+        axios.delete("https://sonet34.herokuapp.com/api/mates/", values)
+            .then((response) => {
+                okCallback("Rejected")
+            })
+            .catch((error) => {
+                if (error) {
+                    errorCallback("Canceled")
+                }
+            })
+    }
+
     getForApprovalMatesList(receiverId, okCallback, errorCallback) {
         axios.get("https://sonet34.herokuapp.com/api/mates/forMe", {params: {receiverId}})
             .then((response) => {

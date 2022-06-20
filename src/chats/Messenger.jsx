@@ -6,10 +6,14 @@ import {notify} from "../App";
 import {buttonsConfig} from "../createPost/CreatePostLine";
 import {useOutsideClick} from "../hooks";
 import {useRef} from "react";
+import Loader from "../components/common/spinner/Spinner";
 
 
 function Messenger(props) {
     const {
+        setConversations,
+        setIsLoading,
+        isLoading,
         settings,
         setCurrentChat,
         currentChat,
@@ -24,6 +28,10 @@ function Messenger(props) {
 
     const matesList = useMemo(() => {
         return conversations?.map((friend, index) => {
+            if (index === conversations?.length - 1) {
+                setIsLoading(() => false)
+            }
+
             return <div
                 key={index}
                 onClick={() => {
@@ -44,8 +52,6 @@ function Messenger(props) {
             </div>
         })
     }, [conversations]);
-
-
     const [possibleMates, setPossibleMates] = useState(null);
     const [chatMode, setChatMode] = useState(false);
 
@@ -58,11 +64,14 @@ function Messenger(props) {
                 key={`${index}`}
             >
                 <FriendPin
+                    id={index}
                     receiverId={friend?.receiverId}
                     requestSendById={friend?.requestSendById}
                     friendName={friend?.receiverName}
                     approved={friend?.approved}
                     requestMode
+                    setConversations={setConversations}
+                    setPossibleMates={setPossibleMates}
                     friend={friend}
                 />
             </div>
@@ -124,7 +133,14 @@ function Messenger(props) {
                         !chatMode
                             ? <>
                                 <h3>Mates</h3>
-                                {matesList}</>
+                                {matesList}
+                                {isLoading && <div
+                                    className={"chatLoader"}
+                                >
+                                    <Loader/>
+                                </div>
+                                }
+                            </>
                             : <>
                                 <h3>Requests</h3>
                                 {possibleMatesList}
@@ -133,12 +149,19 @@ function Messenger(props) {
                 </div>
             </div>
             <div className="chatBox">
-                <div className="chatBoxWrapper">
+                <div
+                    className="chatBoxWrapper"
+                    style={{
+                        paddingLeft: '0px',
+                        paddingRight: '0px'
+                    }}
+                >
                     {
                         currentChat
                             ?
                             <div
                                 ref={wrapperRef}
+                                className={"mainMessagesCaver"}
                             >
                                 <CurrentChat
                                     messages={messages}
@@ -149,6 +172,7 @@ function Messenger(props) {
                                     handleSubmit={handleSubmit}
                                     conversationId={currentChat?.id}
                                     setMessages={setMessages}
+                                    settings={settings}
                                 />
                             </div>
                             : <span className="noConversationText">
