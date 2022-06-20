@@ -134,7 +134,7 @@ function Messenger(props) {
                             ? <>
                                 <h3>Mates</h3>
                                 {matesList}
-                                {isLoading && <div
+                                {(isLoading && matesList?.length === 0) && <div
                                     className={"chatLoader"}
                                 >
                                     <Loader/>

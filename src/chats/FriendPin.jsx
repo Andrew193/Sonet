@@ -84,18 +84,14 @@ function FriendPin(props) {
                                 approved: true
                             }, toast)
 
-                            // setConversations((state)=>{
-                            //     const copy = createCopy(state);
-                            //
-                            //     copy.splice(id, 1)
-                            //
-                            //     console.log(copy)
-                            // })
-                            setPossibleMates((state)=>{
+                            setPossibleMates((state) => {
                                 const copy = createCopy(state);
-                                console.log(JSON.stringify(copy))
+
+                                setConversations((state) => {
+                                    return [...(state || []), copy[id]]
+                                })
+
                                 copy.splice(id, 1)
-                                console.log(copy,"ssdsd")
                                 return copy;
                             })
                         }}
