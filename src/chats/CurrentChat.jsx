@@ -29,7 +29,6 @@ function CurrentChat(props) {
             getConversationById(conversationId,
                 (response) => {
                     setMessages(response?.clearData)
-                    console.log(response)
                 },
                 (errorMessage) => {
                     notify(errorMessage || "Error");

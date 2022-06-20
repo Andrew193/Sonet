@@ -64,6 +64,10 @@
     color: red;
 }
 
+.currentChat > div {
+    box-shadow: rgb(33 119 232 / 80%) 0px 0px 8px;
+}
+
 .noMessagesLabel {
     height: 100%;
     display: flex;

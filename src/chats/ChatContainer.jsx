@@ -8,6 +8,7 @@ import {createChatMessage, getMatesList} from "./chatHelper";
 
 function ChatContainer() {
     const [conversations, setConversations] = useState([]);
+    const [usersInChat, setUsersInChat] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [currentChat, setCurrentChat] = useState(null);
     const [messages, setMessages] = useState([]);
@@ -21,6 +22,7 @@ function ChatContainer() {
 
     useEffect(() => {
         socket.on("getMessageInChat", (data) => {
+            console.log(data)
             setArrivalMessage({
                 sender: data?.senderId,
                 text: data?.text,
@@ -44,7 +46,6 @@ function ChatContainer() {
         async function getMates() {
             getMatesList(userInformation?.id,
                 (response) => {
-                    console.log(response)
                     setConversations(response?.clearData)
                 },
                 (errorMessage) => {
@@ -62,10 +63,12 @@ function ChatContainer() {
         if (userInformation?.id) {
             socket.emit("addUserToChat", userInformation?.id);
             socket.on("getUsersInChat", (users) => {
+                setUsersInChat(users)
             });
         }
     }, [userInformation]);
 
+    console.log(usersInChat)
     const handleSubmit = async (e) => {
         e.preventDefault();
         const message = {

@@ -156,7 +156,6 @@ class Http {
                 okCallback(response?.data?.token);
             })
             .catch((error) => {
-                console.log(error.response.data);
                 if (error) {
                     errorCallback(createErrorsForApiCall(error?.response?.data, error?.response?.data))
                 }

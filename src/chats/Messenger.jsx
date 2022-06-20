@@ -30,8 +30,8 @@ function Messenger(props) {
         setIsLoading(() => false)
         return conversations?.map((friend, index) => {
 
-
             return <div
+                className={currentChat?.currentIndex === index ? "currentChat" : ""}
                 key={index}
                 onClick={() => {
                     if (friend?.approved) {
@@ -39,7 +39,8 @@ function Messenger(props) {
                             members: [+friend?.receiverId, +friend?.requestSendById],
                             id: `${[friend?.receiverId, friend?.requestSendById].sort(function (a, b) {
                                 return a - b;
-                            }).join("")}`
+                            }).join("")}`,
+                            currentIndex: index
                         })
                     }
                 }}
@@ -50,7 +51,8 @@ function Messenger(props) {
                 />
             </div>
         })
-    }, [conversations]);
+    }, [conversations, currentChat?.currentIndex]);
+
     const [possibleMates, setPossibleMates] = useState(null);
     const [chatMode, setChatMode] = useState(false);
 

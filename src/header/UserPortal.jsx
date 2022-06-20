@@ -29,8 +29,6 @@ function Portal(props) {
         click(false);
     })
 
-    console.log(hexToRgb(customStyles?.color))
-    ///rgb(179, 45, 210) 0px 0px 8px 0p
     return createPortal(
         <div
             className={s.UserPortal}

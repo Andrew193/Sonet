@@ -31,7 +31,6 @@ function ClearUsers(props) {
                 avatarUrl = value[3];
             }
 
-            console.log(value[5] === id ? "This is you" : "", value[5], id)
             return <>
                 <div
                     key={"df" + index}
