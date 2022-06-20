@@ -61,12 +61,13 @@ function ChatContainer() {
 
     useEffect(() => {
         if (userInformation?.id) {
+            console.log(userInformation?.id)
             socket.emit("addUserToChat", userInformation?.id);
             socket.on("getUsersInChat", (users) => {
                 setUsersInChat(users)
             });
         }
-    }, [userInformation]);
+    }, [userInformation?.id]);
 
     console.log(usersInChat)
     const handleSubmit = async (e) => {
