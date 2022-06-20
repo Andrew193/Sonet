@@ -88,7 +88,7 @@ function FriendPin(props) {
                                 const copy = createCopy(state);
 
                                 setConversations((state) => {
-                                    return [...(state || []), copy[id]]
+                                    return [...(state || []), {...copy[id], approved: true}]
                                 })
 
                                 copy.splice(id, 1)
