@@ -27,10 +27,9 @@ function Messenger(props) {
     } = props;
 
     const matesList = useMemo(() => {
+        setIsLoading(() => false)
         return conversations?.map((friend, index) => {
-            if (index === conversations?.length - 1) {
-                setIsLoading(() => false)
-            }
+
 
             return <div
                 key={index}
