@@ -3,6 +3,17 @@
     border-top: 1px solid rgb(206, 204, 204);
 }
 
+.Container button {
+    display: flex!important;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.Container button svg {
+    height: 18px;
+    width: 18px;
+}
+
 .InputPostText {
     resize: vertical;
     width: -webkit-fill-available;

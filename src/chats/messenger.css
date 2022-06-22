@@ -68,6 +68,13 @@
     box-shadow: rgb(33 119 232 / 80%) 0px 0px 8px;
 }
 
+.lonelyLine {
+    color: rgb(224, 220, 220);
+    font-size: 26px;
+    display: flex;
+    align-items: center;
+}
+
 .noMessagesLabel {
     height: 100%;
     display: flex;
@@ -280,6 +287,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-wrap: wrap;
 }
 
 .activeChatMode {
@@ -287,21 +295,22 @@
 }
 
 @media screen and (max-width: 768px) {
+    .chatBoxTop {
+        height: 92%;
+    }
+
     .chatMenu {
-        flex: 4 1;
+        flex: 5 1;
     }
 
     .messenger {
         margin: unset;
+        flex-direction: column;
     }
 
     .approvalIsRequired {
         font-size: 10px;
         bottom: 2px;
-    }
-
-    .conversationName {
-        display: none;
     }
 
     .chatMenuInput {
@@ -315,4 +324,53 @@
     .chatOnline {
         flex: 1px;
     }
+}
+
+.chatPostBtn svg {
+    display: none;
+}
+
+@media screen and (max-width: 768px) {
+    .messageText {
+        min-width: unset;
+    }
+
+    .chatPostBtn {
+        display: flex!important;
+        align-items: center;
+        justify-content: center;
+        position: absolute!important;
+        right: 10px;
+        border-radius: 50%!important;
+        padding: 10px!important;
+        max-width: 50px!important;
+        width: 50px!important;
+        animation: unset!important;
+        min-width: 50px!important;
+    }
+
+    .chatPostBtn:before {
+        left: -5px;
+        right: -5px;
+        top: -10px;
+        bottom: -10px;
+    }
+
+    .mainMessagesCaver {
+        height: 78.7%;
+    }
+
+    .chatPostBtn span {
+        display: none;
+    }
+
+    .chatPostBtn svg {
+        display: block;
+        margin-right: unset;
+    }
+
+    .chatBoxBottom {
+        align-items: center;
+    }
+
 }

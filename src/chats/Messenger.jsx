@@ -7,6 +7,13 @@ import {buttonsConfig} from "../createPost/CreatePostLine";
 import {useOutsideClick} from "../hooks";
 import {useRef} from "react";
 import Loader from "../components/common/spinner/Spinner";
+import {AiOutlineClose, MdSentimentVeryDissatisfied} from "react-icons/all";
+import MatesConditions from "./MatesConditions";
+import RequestsConditions from "./RequestsConditions";
+import MatesContainer from "./MatesContainer";
+import RequestsContainer from "./RequestsContainer";
+import PeopleContainer from "./PeopleContainer";
+import SelectedChatMessages from "./SelectedChatMessages";
 
 
 function Messenger(props) {
@@ -123,66 +130,24 @@ function Messenger(props) {
                         >Friend Requests
                         </button>
                     </div>
-                    {
-                        !chatMode
-                        && <input
-                            placeholder="Search for friends"
-                            className="chatMenuInput"
-                        />
-                    }
-                    {
-                        !chatMode
-                            ? <>
-                                <h3>Mates</h3>
-                                {matesList}
-                                {(isLoading && matesList?.length === 0) && <div
-                                    className={"chatLoader"}
-                                >
-                                    <Loader/>
-                                </div>
-                                }
-                            </>
-                            : <>
-                                <h3>Requests</h3>
-                                {possibleMatesList}
-                            </>
-                    }
+                    <PeopleContainer
+                        chatMode={chatMode}
+                        matesList={matesList}
+                        isLoading={isLoading}
+                    />
                 </div>
             </div>
-            <div className="chatBox">
-                <div
-                    className="chatBoxWrapper"
-                    style={{
-                        paddingLeft: '0px',
-                        paddingRight: '0px'
-                    }}
-                >
-                    {
-                        currentChat
-                            ?
-                            <div
-                                ref={wrapperRef}
-                                className={"mainMessagesCaver"}
-                            >
-                                <CurrentChat
-                                    messages={messages}
-                                    newMessage={newMessage}
-                                    setNewMessage={setNewMessage}
-                                    customStyle={settings}
-                                    userInformation={userInformation}
-                                    handleSubmit={handleSubmit}
-                                    conversationId={currentChat?.id}
-                                    setMessages={setMessages}
-                                    settings={settings}
-                                />
-                            </div>
-                            : <span className="noConversationText">
-                                    Open a conversation to start a chat.
-                            </span>
-                    }
-                </div>
-            </div>
-
+            <SelectedChatMessages
+                currentChat={currentChat}
+                wrapperRef={wrapperRef}
+                messages={messages}
+                newMessage={newMessage}
+                setNewMessage={setNewMessage}
+                settings={settings}
+                userInformation={userInformation}
+                handleSubmit={handleSubmit}
+                setMessages={setMessages}
+            />
         </div>
     )
 }

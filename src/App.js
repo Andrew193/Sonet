@@ -25,6 +25,7 @@ function App() {
 
     const [flag, setFlag] = useState(false);
     const history = useHistory();
+    const userInformation = JSON.parse(localStorage.getItem("userInfo"));
 
     function open() {
         modal?.current?.classList?.toggle("Open");
@@ -32,14 +33,20 @@ function App() {
 
     useEffect(() => {
         sessionHelper?.default?.isElive(history);
-
         Script.GetShortUserInfo(notify)?.then((newState) => {
             Script2.SaveInfo(newState?.data);
             setFlag(true);
         });
 
-        setupDb(async () => {});
+        setupDb(async () => {
+        });
     }, []);
+
+    useEffect(() => {
+        if (userInformation?.id) {
+            socket.emit("addUserToChat", userInformation?.id);
+        }
+    }, [userInformation?.id])
 
     return (
         <Context.Provider value={{notify, socket}}>

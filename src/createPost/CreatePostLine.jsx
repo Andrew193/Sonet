@@ -2,6 +2,7 @@ import s from "./create-post.module.css"
 import Script from "./script"
 import {useContext, useRef} from "react";
 import Context from "../helpers/contextHelper"
+import {BiImageAdd, BsPencil} from "react-icons/all";
 
 export const buttonsConfig = {
     "#FF0000": s.RedButton,
@@ -45,12 +46,16 @@ function CreatePost(props) {
                 <button
                     className={`button btn btn-default ${buttonsConfig[customStyle?.color]}`}
                     onClick={() => Script.AddImage(image)}
-                >Attach image
+                >
+                    <BiImageAdd />
+                    Attach image
                 </button>
                 <button
                     className={`button btn btn-default ${buttonsConfig[customStyle?.color]}`}
                     onClick={() => Script.CreatePost(text.value, notify, text, socket, image)}
-                >Create Post
+                >
+                    <BsPencil />
+                    Create Post
                 </button>
             </p>
         </div>

@@ -5,6 +5,7 @@ import {getConversationById} from "./chatHelper";
 import {notify} from "../App";
 import {alpha} from "@mui/material";
 import Loader from "../components/common/spinner/Spinner";
+import {BsPencil} from "react-icons/all";
 
 
 function CurrentChat(props) {
@@ -91,10 +92,11 @@ function CurrentChat(props) {
                       value={newMessage}
                   />
                 <button
-                    className={`button ${buttonsConfig[customStyle?.color]}`}
+                    className={`button ${buttonsConfig[customStyle?.color]} chatPostBtn`}
                     onClick={handleSubmit}
                 >
-                    Send
+                    <BsPencil />
+                    <span>Send</span>
                 </button>
             </div>
         </>
