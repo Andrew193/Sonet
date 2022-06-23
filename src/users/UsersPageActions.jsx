@@ -2,6 +2,7 @@ import s from "./users.module.css"
 import Script from "./script"
 import {toast} from "react-toastify"
 import {buttonsConfig} from "../createPost/CreatePostLine";
+import {AiOutlineEye, AiOutlineUserAdd, AiOutlineUsergroupAdd} from "react-icons/ai";
 
 function UsersPageActions(props) {
     const {
@@ -22,14 +23,18 @@ function UsersPageActions(props) {
                     Script.openUserProfile(value, history)
                 }}
                 className={`button ${buttonsConfig[settings?.configs?.color[settings?.color]]}`}
-            >Open profile
+            >
+                <AiOutlineEye/>
+                Open profile
             </button>
             <button
                 onClick={() => {
                     Script.Subscribe(value, toast, notYouFolCount)
                 }}
                 className={`button ${buttonsConfig[settings?.configs?.color[settings?.color]]}`}
-            >Subscribe
+            >
+                <AiOutlineUsergroupAdd/>
+                Subscribe
             </button>
             <button
                 onClick={() => {
@@ -43,6 +48,7 @@ function UsersPageActions(props) {
                 }}
                 className={`button ${buttonsConfig[settings?.configs?.color[settings?.color]]}`}
             >
+                <AiOutlineUserAdd/>
                 Friend request
             </button>
         </div>

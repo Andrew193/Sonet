@@ -2,19 +2,19 @@ import {AiOutlineClose} from "react-icons/all";
 
 function RequestsConditions(props) {
     const {
-        possibleMatesListLength
+        possibleMatesList
     } = props;
 
     return (
         <>
             {
-                possibleMatesListLength === 0
+                possibleMatesList.every(v => v === null)
                     ?
                     <div className={"lonelyLine"}>
                         <AiOutlineClose/>
                         <span>Out of requests</span>
                     </div>
-                    : null
+                    : <>{possibleMatesList}</>
             }
         </>
     )

@@ -6,7 +6,8 @@ function PeopleContainer(props) {
     const {
         chatMode,
         matesList,
-        isLoading
+        isLoading,
+        possibleMatesList
     } = props;
 
     return(
@@ -25,7 +26,8 @@ function PeopleContainer(props) {
                         isLoading={isLoading}
                     />
                     : <RequestsContainer
-                        possibleMatesList
+                        possibleMatesList={possibleMatesList}
+                        possibleMatesListLength={possibleMatesList?.length}
                     />
             }
         </>

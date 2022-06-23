@@ -13,6 +13,8 @@ import {alpha, hexToRgb, ListItemIcon, ListItemText, Menu, MenuItem} from "@mui/
 import {downloadFile} from "../../utils";
 import {AiOutlineDownload} from "react-icons/ai";
 import {BsPen} from "react-icons/all";
+import AboutYou from "./AboutYou";
+import UsersActivities from "./UsersActivities";
 
 function ClearProfile(props) {
     const {
@@ -147,6 +149,12 @@ function ClearProfile(props) {
                 cr={createdAt}
                 userInfo={userInfo}
             />
+            <div
+                className="Separator"
+                onClick={(e) => e.target.nextElementSibling.classList.toggle("Hide")}
+            />
+            <AboutYou/>
+            <UsersActivities />
         </>
     )
 }

@@ -296,11 +296,16 @@
 
 @media screen and (max-width: 768px) {
     .chatBoxTop {
-        height: 92%;
+        height: 98.1%;
+    }
+
+    .chatMenuWrapper {
+        max-height: 115px;
+        overflow: auto;
     }
 
     .chatMenu {
-        flex: 5 1;
+        flex: 2 1;
     }
 
     .messenger {
@@ -324,29 +329,27 @@
     .chatOnline {
         flex: 1px;
     }
-}
 
-.chatPostBtn svg {
-    display: none;
-}
+    .chatPostBtn svg {
+        display: none;
+    }
 
-@media screen and (max-width: 768px) {
     .messageText {
         min-width: unset;
     }
 
     .chatPostBtn {
-        display: flex!important;
+        display: flex !important;
         align-items: center;
         justify-content: center;
-        position: absolute!important;
+        position: absolute !important;
         right: 10px;
-        border-radius: 50%!important;
-        padding: 10px!important;
-        max-width: 50px!important;
-        width: 50px!important;
-        animation: unset!important;
-        min-width: 50px!important;
+        border-radius: 50% !important;
+        padding: 10px !important;
+        max-width: 50px !important;
+        width: 50px !important;
+        animation: unset !important;
+        min-width: 50px !important;
     }
 
     .chatPostBtn:before {

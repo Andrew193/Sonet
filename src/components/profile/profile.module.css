@@ -3,11 +3,28 @@
     border-right: 1px solid rgb(206, 204, 204);
     margin: 0 0 0 15%;
     max-width: 60%;
-    height: -webkit-fill-available;
+    height: fit-content;
     color: rgb(206, 204, 204);
     text-align: left;
     -webkit-flex: 3 0;
     flex: 3 0;
+}
+
+.AboutMe {
+    color: black;
+    font-size: 16px!important;
+}
+
+.TabsContainer {
+    margin: 0px 10px;
+}
+
+.Tab {
+    min-width: unset!important;
+    color: black!important;
+    max-width: unset!important;
+    border: none!important;
+    margin-left: 20px;
 }
 
 .Left40 {
@@ -55,8 +72,12 @@
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    margin: 0px 5%;
+    margin: 15px 5%;
     transition: all ease 0.7s;
+}
+
+.Container .FlexColl h3 {
+    margin-top: unset!important;
 }
 
 .CommonIcon {

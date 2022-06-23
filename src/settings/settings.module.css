@@ -141,6 +141,12 @@
     justify-content: right;
 }
 
+.Actions button {
+    display: flex!important;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .Default2 {
     background: #858585;
 }

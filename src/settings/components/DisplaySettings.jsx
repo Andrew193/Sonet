@@ -1,7 +1,7 @@
 import {Backdrop, Box, CircularProgress, Slider, Typography} from "@mui/material";
 import s from '../settings.module.css'
 import {useEffect, useMemo, useState} from "react";
-import {AiOutlineCheck} from "react-icons/all";
+import {AiOutlineCheck, FiSettings, GiCheckMark} from "react-icons/all";
 import {getSettings, updateSettings} from "../../db";
 import {buttonsConfig} from "../../createPost/CreatePostLine";
 
@@ -184,12 +184,16 @@ function DisplaySettings() {
                 <button
                     className={`button btn btn-default ${buttonsConfig[settings?.configs?.color[settings?.color]]}`}
                     onClick={defaultSettingsHandler}
-                >Default settings
+                >
+                    <FiSettings />
+                    Default settings
                 </button>
                 <button
                     className={`button btn btn-default  ${buttonsConfig[settings?.configs?.color[settings?.color]]}`}
                     onClick={saveSettingsHandler}
-                >Save
+                >
+                    <GiCheckMark />
+                    Save
                 </button>
             </Box>
         </>

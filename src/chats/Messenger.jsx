@@ -134,6 +134,7 @@ function Messenger(props) {
                         chatMode={chatMode}
                         matesList={matesList}
                         isLoading={isLoading}
+                        possibleMatesList={possibleMatesList}
                     />
                 </div>
             </div>
