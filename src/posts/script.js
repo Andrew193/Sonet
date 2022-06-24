@@ -3,7 +3,7 @@ import HttpHelper from "../helpers/httpHelper"
 import CommonHelper from "../helpers/common";
 
 function refresh(socket, userId) {
-    socket.emit("postUpdate").emit("notMyPostUpdate", { userId }).emit("MyPostUpdate", { userId }).emit("postCreate")
+    socket.emit("postUpdate").emit("notMyPostUpdate", {userId}).emit("MyPostUpdate", {userId}).emit("postCreate")
 }
 
 function getMyPostWithEndpoint(id, set, endpoint) {
@@ -15,7 +15,7 @@ function getPosts() {
 }
 
 function afterEmotion(socket, userId, emtype, notify) {
-    notify(HTMLhelp.createHTML({ title: "Ok", message: `You ${emtype} it` }))
+    notify(HTMLhelp.createHTML({title: "Ok", message: `You ${emtype} it`}))
     refresh(socket, userId);
 }
 
@@ -25,30 +25,39 @@ function getSelectedPost(id, notify) {
         .catch(error => error.response && console.error(error.response))
 }
 
-function like(id, userId, likeCount, notify, dislikeCount, socket) {
-    HttpHelper.emotion(userId, id, likeCount, dislikeCount, () => afterEmotion(socket, userId, "like", notify),
-        (error) => notify(HTMLhelp.createHTML({ title: "Sorry", message: error?.response?.data?.error })), "like")
-}
-
 function getComment(history, id) {
-    CommonHelper.redirect(history, { id }, "/comment")
+    CommonHelper.redirect(history, {id}, "/comment")
 }
 
 function getNotMy(history, id) {
-    CommonHelper.redirect(history, { id }, "/post/notMy")
+    CommonHelper.redirect(history, {id}, "/post/notMy")
 }
 
 function getMy(history, id) {
-    CommonHelper.redirect(history, { id }, "/post/my")
+    CommonHelper.redirect(history, {id}, "/post/my")
 }
 
 function def(hist) {
     CommonHelper.redirect(hist, null, "/posts")
 }
 
-function dislike(id, userId, dislikeCount, notify, likeCount, socket) {
-    HttpHelper.emotion(userId, id, likeCount, dislikeCount, () => afterEmotion(socket, userId, "dislike", notify),
-        (error) => notify(HTMLhelp.createHTML({ title: "Sorry", message: error?.response?.data?.error })), "dislike")
+function dislike(value, userId, notify, socket) {
+    executeEmotion(userId, value, socket, notify, "dislike")
+}
+
+function executeEmotion(userId, value, socket, notify, type) {
+    HttpHelper.emotion(userId, value,
+        () => {
+            afterEmotion(socket, userId, type, notify)
+        },
+        (error) => {
+            notify(HTMLhelp.createHTML({title: "Sorry", message: error?.response?.data?.error}))
+        }, type)
+}
+
+
+function like(value, userId, notify, socket) {
+    executeEmotion(userId, value, socket, notify, "like")
 }
 
 function openPost(e, history, inputId) {

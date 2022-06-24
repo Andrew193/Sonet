@@ -103,12 +103,11 @@ class Http {
             .catch((error) => error?.response && notify(error?.response?.data?.posts))
     }
 
-    emotion(userId, id, likeCount, dislikeCount, callback, callback1, emType) {
+    emotion(userId, value, callback, callback1, emType) {
         axios.put("https://sonet34.herokuapp.com/api/post/" + emType, {
             userId,
-            id,
-            likeCount,
-            dislikeCount
+            ...value,
+            postText: JSON.stringify(value)
         })
             .then((response) => callback())
             .catch((error) => error.response && callback1(error))

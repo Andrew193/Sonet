@@ -17,7 +17,7 @@ function ClearPosts(props) {
     const history = useHistory();
 
     return (
-        <div className={s.PostsCont+" onePostContainer"}>
+        <div className={s.PostsCont + " onePostContainer"}>
             {toMake.posts.map((value) => {
                 return <>
                     <div
@@ -36,16 +36,31 @@ function ClearPosts(props) {
                             <p>
                             <span
                                 onClick={() => {
-                                    Script.like(String(value.id), String(id), value.likeCount, notify, value.dislikeCount, socket)
+                                    Script.like(value, String(id), notify, socket)
                                 }}
                                 className={s.like}
                             >
-                                <AiOutlineLike size={"24px"}/>{value.likeCount}</span>
-                                <span onClick={() => Script.dislike(String(value.id), String(id), value.dislikeCount,
-                                    notify, value.likeCount, socket)} className={s.dislike}>
-                                <AiOutlineDislike size={"24px"}/>{value.dislikeCount}</span>
-                                <span className={s.com} onClick={() => Script.getComment(history, value.id)
-                                }><AiOutlineComment size={"24px"}/>{value.comCount}</span>
+                                <AiOutlineLike size={"24px"}/>
+                                {value.likeCount}
+                            </span>
+                                <span
+                                    onClick={() => {
+                                        Script.dislike(value, String(id), notify, socket)
+                                    }}
+                                    className={s.dislike}
+                                >
+                                <AiOutlineDislike size={"24px"}/>
+                                    {value.dislikeCount}
+                                </span>
+                                <span
+                                    className={s.com}
+                                    onClick={() => {
+                                        Script.getComment(history, value.id)
+                                    }}
+                                >
+                                    <AiOutlineComment size={"24px"}/>
+                                    {value.comCount}
+                                </span>
                             </p>
                         </div>
                         <span className={s.Time}>{DataHelper.fromNow(value.createdAt)}</span>
