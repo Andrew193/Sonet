@@ -1,6 +1,6 @@
 import {useHistory, withRouter} from "react-router";
 import s from "./profile.module.css";
-import Script from "./script.js"
+import Script from "./profileHelper"
 import ClearProfile from "./ClearProfile";
 import {useEffect, useState} from "react";
 import Skeleton from "react-loading-skeleton";

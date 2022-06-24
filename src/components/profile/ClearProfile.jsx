@@ -3,7 +3,7 @@ import VerificationLine from "./VerificationLine";
 import AvatarLine from "./AvatarLine";
 import DateHelper from "../../helpers/dateHelper.js";
 import FlexColl from "./FlexColl.jsx";
-import Script from "./script.js"
+import Script from "./profileHelper"
 import postServ from "../../posts/script.js"
 import {useEffect, useRef, useState} from "react";
 import PageHeader from "../common/navigationLine/NavigationLine.jsx";

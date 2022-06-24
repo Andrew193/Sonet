@@ -12,7 +12,7 @@ import {
     AiOutlineLogout, AiOutlineTeam, AiOutlineFile
 } from "react-icons/ai";
 import PostPortal from "./PostPortal";
-import Script2 from "../components/profile/script";
+import Script2 from "../components/profile/profileHelper";
 import {headerListLinks} from "../vars";
 import {CgGames, IoSettingsOutline} from "react-icons/all";
 import {getSettings} from "../db";

@@ -1,7 +1,7 @@
 import {createPortal} from "react-dom";
 import CreatePost from "../createPost/CreatePostLine";
 import s from "./header.module.css"
-import Script from "../components/profile/script";
+import Script from "../components/profile/profileHelper";
 
 function PostPortal() {
 

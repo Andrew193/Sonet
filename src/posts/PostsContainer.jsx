@@ -1,6 +1,6 @@
 import {useContext, useEffect, useState} from "react";
 import ClearPosts from "./PostsInnerContent";
-import Script from "./script.js"
+import postsHelper from "./script.js"
 import Skeleton from 'react-loading-skeleton';
 import SortLine from "./SortLine.jsx"
 import s from "./posts.module.css"
@@ -24,13 +24,13 @@ function PostsContainer(props) {
         const id = props.match.params.id;
 
         if (id && typeof (+id) === "number") {
-            Script.getSelectedPost(+id)
+            postsHelper.getSelectedPost(+id)
                 .then((postF) => setPosts(postF))
                 .catch((error) => {
                     error && notify(error?.response?.data?.posts)
                 })
         } else {
-            Script.getPosts()
+            postsHelper.getPosts()
                 .then((postF) => setPosts(postF))
                 .catch((error) => {
                     error && notify(error?.response?.data?.error)

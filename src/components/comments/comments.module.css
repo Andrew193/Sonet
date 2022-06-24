@@ -10,7 +10,8 @@
 }
 
 .Comments {
-    max-height: 425px;
+    max-height: 600px;
+    min-height: 500px;
     overflow: auto;
 }
 
@@ -78,6 +79,6 @@
     .CommentLine{
         position: absolute;
         width: 99.7%;
-        bottom: 7%;
+        bottom: 2.497%;
     }
 }

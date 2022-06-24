@@ -1,6 +1,6 @@
 import s from "./profile.module.css"
 import {AiOutlineCalendar, AiOutlineMail, AiOutlineNumber, AiOutlineEye} from "react-icons/ai";
-import Script from "./script"
+import Script from "./profileHelper"
 import {useHistory} from "react-router";
 
 function FlexColl(props) {

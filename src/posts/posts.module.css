@@ -91,14 +91,38 @@
 
 .dislike:hover {
     color: rgb(211, 59, 59);
+    background: rgb(252, 208, 208);
+    border-radius: 50%;
 }
 
 .like:hover {
     color: rgb(46, 153, 46);
+    background: #d8f7d8;
+    border-radius: 50%;
 }
 
 .com:hover {
     color: rgb(73, 73, 248);
+    background: rgb(209, 209, 250);
+    border-radius: 50%;
+}
+
+.com:hover + span {
+    color: rgb(73, 73, 248);
+}
+
+.like:hover + span{
+    color: rgb(46, 153, 46);
+}
+
+.dislike:hover + span{
+    color: rgb(211, 59, 59);
+}
+
+.EmotionLine {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .PostsCont svg {

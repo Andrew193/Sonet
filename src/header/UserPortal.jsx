@@ -3,7 +3,7 @@ import {useHistory} from "react-router";
 import CommonHelper from "../helpers/common"
 import s from "./header.module.css"
 import Script from "./script.js"
-import Script2 from "../components/profile/script.js";
+import Script2 from "../components/profile/profileHelper";
 import {useOutsideClick} from "../hooks";
 import {useRef} from "react";
 import {Divider} from "@mui/material";

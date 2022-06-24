@@ -1,6 +1,6 @@
 import s from "./profile.module.css"
 import s2 from "../common/navigationLine/style.module.css"
-import Script from "./script.js"
+import Script from "./profileHelper"
 import {useRef} from "react";
 import {AiOutlineSafetyCertificate, AiOutlineSecurityScan} from "react-icons/ai";
 import {buttonsConfig} from "../../createPost/CreatePostLine";

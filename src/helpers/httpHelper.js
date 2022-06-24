@@ -51,8 +51,8 @@ class Http {
             .catch((error) => error.response && console.error(error.response))
     }
 
-    getPosts(count) {
-        return axios.get("https://sonet34.herokuapp.com/api/post?token=" + Script.getCookie("token"), {params: {howMany: count}})
+    getPosts(count, prefix, search = "") {
+        return axios.get(`https://sonet34.herokuapp.com/api/post${prefix ? `/${prefix}` : ""}?token=` + Script.getCookie("token") + search, {params: {howMany: count}})
             .then((response) => response?.data)
             .catch((error) => error.response && console.error(error.response))
     }

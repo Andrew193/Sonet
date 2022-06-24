@@ -1,6 +1,7 @@
 import {Box, Tab, Tabs, Typography} from "@mui/material";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import s from "./profile.module.css"
+import HttpHelper from "../../helpers/httpHelper";
 
 function TabPanel(props) {
     const {children, value, index, ...other} = props;
@@ -31,10 +32,28 @@ function a11yProps(index) {
 
 function UsersActivities() {
     const [value, setValue] = useState(0);
+    const [posts, setPosts] = useState([]);
+    const userInformation = JSON.parse(localStorage.getItem("userInfo"));
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
+
+    useEffect(() => {
+        if (userInformation.id) {
+            if (value === 0) {
+                HttpHelper.getPosts(null, "my", `&userId=${userInformation.id}`)
+                    .then(response => {
+                        console.log(response)
+                    })
+                    .catch(error => {
+                        console.error(error)
+                    })
+            } else if (value === 1) {
+
+            }
+        }
+    }, [value])
 
     return (
         <Box sx={{width: '100%'}}>
