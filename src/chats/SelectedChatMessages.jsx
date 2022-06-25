@@ -21,7 +21,8 @@ function SelectedChatMessages(props) {
                     className="chatBoxWrapper"
                     style={{
                         paddingLeft: '0px',
-                        paddingRight: '0px'
+                        paddingRight: '0px',
+                        minHeight: '753px'
                     }}
                 >
                     {

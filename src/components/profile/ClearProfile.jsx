@@ -16,6 +16,7 @@ import {BsPen} from "react-icons/all";
 import AboutYou from "./AboutYou";
 import UsersActivities from "./UsersActivities";
 import style from "./profile.module.css";
+import BackImageMenu from "./BackImageMenu";
 
 function ClearProfile(props) {
     const {
@@ -31,8 +32,6 @@ function ClearProfile(props) {
 
     const createdAt = DateHelper.fromNow(userInfo.createdAt);
     const updatedAt = DateHelper.fromNow(userInfo.updatedAt);
-
-    let image = useRef();
 
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
@@ -67,51 +66,26 @@ function ClearProfile(props) {
                 .${style.UsersPost}:hover {
                 background-color: ${alpha(settings?.configs?.color[settings?.color] || "rgb(231 231 240)", 0.5)} !important;
                 }
+                
+                .react-simple-image-viewer__close {
+                color: ${alpha(settings?.configs?.color[settings?.color] || "rgb(231 231 240)", 1)} !important;
+                opacity: 1;
+                }
+                
+                .react-simple-image-viewer__slide img{
+                min-width: 350px;
+                min-height: 350px;
+                }
                 `}
             </style>
-            <form>
-                <input
-                    ref={(el) => image = el}
-                    onChange={() => UserHelper.updateImage(image, "setBack")}
-                    type="file"
-                    style={{display: "none"}}
-                />
-            </form>
-
-            <Menu
-                className={"menuUserModal"}
+            <BackImageMenu
+                image={JSON.parse(userInfo.back)?.webContentLink}
                 anchorEl={anchorEl}
+                backStyle={`${alpha(settings?.configs?.color[settings?.color] || "rgb(231 231 240)", 0.2)}`}
                 open={open}
-                onClose={handleClose}
-                MenuListProps={{
-                    'aria-labelledby': 'basic-button',
-                }}
-                aria-haspopup="true"
-            >
-                <MenuItem
-                    onClick={(e) => {
-                        handleClose(e)
-                        downloadFile(JSON.parse(userInfo.back)?.webContentLink || spareBacImg)
-                    }}
-                >
-                    <ListItemIcon>
-                        <AiOutlineDownload/>
-                    </ListItemIcon>
-                    <ListItemText>Download</ListItemText>
-                </MenuItem>
-
-                <MenuItem
-                    onClick={(e) => {
-                        handleClose(e)
-                        UserHelper.CallImageInput(image)
-                    }}
-                >
-                    <ListItemIcon>
-                        <BsPen/>
-                    </ListItemIcon>
-                    <ListItemText>Update my Back</ListItemText>
-                </MenuItem>
-            </Menu>
+                userInfoBack={userInfo?.back}
+                handleClose={handleClose}
+            />
 
             <PageHeader historyPath={"/"}>
                 <>
@@ -162,7 +136,9 @@ function ClearProfile(props) {
                 className="Separator"
                 onClick={(e) => e.target.nextElementSibling.classList.toggle("Hide")}
             />
-            <AboutYou/>
+            <AboutYou
+                description={userInfo?.description}
+            />
             <div
                 className="Separator"
                 onClick={(e) => e.target.nextElementSibling.classList.toggle("Hide")}

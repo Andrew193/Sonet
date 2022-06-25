@@ -34,79 +34,7 @@ function a11yProps(index) {
 function getPosts(setPosts, id) {
     HttpHelper.getPosts(null, "my", `&userId=${id}`)
         .then(response => {
-            const r ={
-                "posts": [
-                    {
-                        "id": 1,
-                        "userId": "1",
-                        "text": "fd sa sdfsdfsdf sfs sfd fsdf",
-                        "likeCount": 1,
-                        "dislikeCount": 0,
-                        "createdBy": "Default",
-                        "comCount": 9,
-                        "createdAt": "2022-06-24T11:28:16.311Z",
-                        "updatedAt": "2022-06-24T11:33:51.810Z"
-                    },
-                    {
-                        "id": 2,
-                        "userId": "1",
-                        "text": " fdsfs dfsd sfs sdfsdfsd",
-                        "likeCount": 0,
-                        "dislikeCount": 0,
-                        "createdBy": "Default",
-                        "comCount": 0,
-                        "createdAt": "2022-06-24T14:04:11.964Z",
-                        "updatedAt": "2022-06-24T14:04:11.964Z"
-                    },
-                    {
-                        "id": 3,
-                        "userId": "1",
-                        "text": "f dsfsdf sdfsdfsdfsd",
-                        "likeCount": 0,
-                        "dislikeCount": 0,
-                        "createdBy": "Default",
-                        "comCount": 0,
-                        "createdAt": "2022-06-24T15:13:49.925Z",
-                        "updatedAt": "2022-06-24T15:13:49.925Z"
-                    },
-                    {
-                        "id": 4,
-                        "userId": "1",
-                        "text": "f dsfsdf sdfsdfsdfsd",
-                        "likeCount": 0,
-                        "dislikeCount": 0,
-                        "createdBy": "Default",
-                        "comCount": 0,
-                        "createdAt": "2022-06-24T15:13:49.928Z",
-                        "updatedAt": "2022-06-24T15:13:49.928Z"
-                    },
-                    {
-                        "id": 5,
-                        "userId": "1",
-                        "text": "dsf sdfdsafdsfsdfsadf",
-                        "likeCount": 0,
-                        "dislikeCount": 0,
-                        "createdBy": "Default",
-                        "comCount": 0,
-                        "createdAt": "2022-06-24T15:13:53.221Z",
-                        "updatedAt": "2022-06-24T15:13:53.221Z"
-                    },
-                    {
-                        "id": 6,
-                        "userId": "1",
-                        "text": "sd fsdfsf sdfsdfsdf sfds fsfdsfsf fd sdfsdf",
-                        "likeCount": 0,
-                        "dislikeCount": 0,
-                        "createdBy": "Default",
-                        "comCount": 0,
-                        "createdAt": "2022-06-24T15:14:00.315Z",
-                        "updatedAt": "2022-06-24T15:14:00.315Z"
-                    }
-                ]
-            };
-
-            setPosts(r.posts)
-            console.log(response)
+            setPosts(response.posts)
         })
         .catch(error => {
             console.error(error)
@@ -131,8 +59,6 @@ function UsersActivities(props) {
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
-
-    console.log("userInfo",userInfo)
 
     useEffect(() => {
         if (userInfo.id) {

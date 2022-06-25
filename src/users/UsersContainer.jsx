@@ -60,6 +60,7 @@ function UsersContainer(props) {
                     users={users}
                     setOpen={setOpen}
                     settings={settings}
+                    id={props?.match?.params?.id}
                 />
                 : <Skeleton
                     height={"50px"}

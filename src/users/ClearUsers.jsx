@@ -12,7 +12,8 @@ function ClearUsers(props) {
     const {
         isSearchBarOpened,
         setOpen,
-        settings
+        settings,
+        searchId
     } = props;
 
     const history = useHistory();
@@ -78,7 +79,7 @@ function ClearUsers(props) {
                             <AiOutlineClockCircle/> Joined us {DataHelper.fromNow(value[4])}
                         </span>
                 </div>
-                {value[7] && <UsersPageActions
+                {searchId && <UsersPageActions
                     notYouFolCount={value[6]}
                     value={value[5]}
                     history={history}

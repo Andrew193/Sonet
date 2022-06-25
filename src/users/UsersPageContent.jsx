@@ -11,7 +11,8 @@ function UsersPageContent(props) {
         users,
         setOpen,
         open,
-        settings
+        settings,
+        id
     } = props;
 
     const [isSearchBarOpened, setIsSearchBarOpened] = useState(false);
@@ -93,6 +94,7 @@ function UsersPageContent(props) {
                     isSearchBarOpened={isSearchBarOpened}
                     setOpen={setOpen}
                     settings={settings}
+                    searchId={id}
                 />
 
                 {isSearchBarOpened &&

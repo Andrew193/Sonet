@@ -6,6 +6,7 @@ import {useMemo, useRef, useState} from "react";
 import {alpha, ListItemIcon, ListItemText, Menu, MenuItem} from "@mui/material";
 import {BsPen} from "react-icons/all";
 import {downloadFile} from "../../utils";
+import AvatarImageMenu from "./AvatarImageMenu";
 
 function AvatarLine(props) {
     const {
@@ -14,8 +15,6 @@ function AvatarLine(props) {
         id,
         settings
     } = props;
-
-    let image = useRef();
 
     const avatarUrl = useMemo(() => {
         try {
@@ -51,43 +50,6 @@ function AvatarLine(props) {
                 .menuUserModal div.MuiPaper-elevation svg{
                 font-size: ${settings?.configs?.size[settings?.fontSize] || "16px"} !important;
                 }
-               `}
-            </style>
-            <Menu
-                className={"menuUserModal"}
-                anchorEl={anchorEl}
-                open={open}
-                onClose={handleClose}
-                MenuListProps={{
-                    'aria-labelledby': 'basic-button',
-                }}
-            >
-                <MenuItem
-                    onClick={(e) => {
-                        handleClose(e)
-                        downloadFile(avatarUrl)
-                    }}
-                >
-                    <ListItemIcon>
-                        <AiOutlineDownload/>
-                    </ListItemIcon>
-                    <ListItemText>Download</ListItemText>
-                </MenuItem>
-
-                <MenuItem
-                    onClick={(e) => {
-                        handleClose(e)
-                        UserHelper.CallImageInput(image)
-                    }}
-                >
-                    <ListItemIcon>
-                        <BsPen/>
-                    </ListItemIcon>
-                    <ListItemText>Update my Avatar</ListItemText>
-                </MenuItem>
-            </Menu>
-            <style>
-                {`
                 #updateButton{
                  border-color: ${settings?.configs?.color[settings?.color]} !important;
                  color: ${settings?.configs?.color[settings?.color]} !important;
@@ -95,14 +57,16 @@ function AvatarLine(props) {
                 }
                 `}
             </style>
-            <form>
-                <input
-                    ref={(el) => image = el}
-                    onChange={() => UserHelper.updateImage(image, "setAvatar")}
-                    type="file"
-                    style={{display: "none"}}
-                />
-            </form>
+
+            <AvatarImageMenu
+                anchorEl={anchorEl}
+                open={open}
+                handleClose={handleClose}
+                image={avatarUrl}
+                avatarUrl={avatarUrl}
+                backStyle={`${alpha(settings?.configs?.color[settings?.color] || "rgb(231 231 240)", 0.2)}`}
+            />
+
             <div className={s.FirstLine}>
                 <img
                     alt={"Avatar"}

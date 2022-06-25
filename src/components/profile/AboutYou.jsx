@@ -1,7 +1,10 @@
 import {Box, Typography} from "@mui/material";
 import s from "./profile.module.css"
 
-function AboutYou() {
+function AboutYou(props) {
+    const {
+        description
+    } = props;
 
     return (
         <Box
@@ -11,8 +14,8 @@ function AboutYou() {
                 className={s.Black}
             >About you</h3>
             <Typography
-            className={s.AboutMe}
-            >Nothing</Typography>
+                className={s.AboutMe}
+            >{description}</Typography>
         </Box>
     )
 }
