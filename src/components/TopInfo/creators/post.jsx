@@ -5,6 +5,8 @@ import {v4 as uuidv4} from 'uuid';
 import {Typography} from "@mui/material";
 import {useMemo} from "react";
 import s from "../top-info.module.css"
+import {AiOutlineComment, AiOutlineDislike, AiOutlineLike} from "react-icons/ai";
+import CountUp from "react-countup";
 
 function PostCreator(props) {
     const {
@@ -13,9 +15,7 @@ function PostCreator(props) {
 
     const history = useHistory();
 
-    const postsListToMap = useMemo(() => {
-        return props.toCreate;
-    }, [props?.toCreate]);
+    const postsListToMap = useMemo(() => props.toCreate, [props?.toCreate]);
 
     return (
         <>
@@ -49,7 +49,22 @@ function PostCreator(props) {
                         component="p"
                         className={s.PostLine}
                     >{value.text.slice(0, 75)}</Typography>
-                    <p>Like:{value.likeCount} Dislike:{value.dislikeCount} Comments:{value.comCount}</p>
+                    <p
+                        className={s.ActionsLine}
+                    >
+                        <span>
+                            <AiOutlineLike size={"14px"}/>
+                             <CountUp delay={1} end={value.likeCount}/>
+                        </span>
+                        <span>
+                            <AiOutlineDislike size={"14px"}/>
+                             <CountUp delay={1} end={value.dislikeCount}/>
+                        </span>
+                        <span>
+                            <AiOutlineComment size={"14px"}/>
+                               <CountUp delay={1} end={value.comCount}/>
+                        </span>
+                    </p>
                 </div>
             )}
         </>

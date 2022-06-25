@@ -6,7 +6,6 @@ function getPosts() {
 
 function openFull(history, id) {
     CommonHelper.redirect(history, null, `/posts/${id}`)
-    window.location.reload()
 }
 
 const obj = { getPosts, openFull }

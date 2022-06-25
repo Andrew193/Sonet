@@ -6,6 +6,7 @@ import {AiOutlineMail, AiOutlineUser, AiOutlineClockCircle} from "react-icons/ai
 import Script from "./script.js"
 import UsersPageActions from "./UsersPageActions";
 import {useMemo} from "react";
+import {Avatar} from "@mui/material";
 
 function ClearUsers(props) {
     const {
@@ -40,7 +41,18 @@ function ClearUsers(props) {
                         Script.openUser(e, history)
                     }}
                 >
-                    {value[3] && <img src={avatarUrl} alt={"Avatar"}/>}
+                    {value[3] && <Avatar
+                        src={avatarUrl}
+                        style={{
+                            height: '100%',
+                            width: '75px',
+                            marginRight: '15px',
+                            borderRadius: '5px',
+                            marginLeft: '15px'
+                        }}
+                        alt={"Avatar"}
+                    />
+                    }
                     <div>
                         <h3>
                             <div
@@ -60,7 +72,9 @@ function ClearUsers(props) {
                                 <a href={`mailto:${value[1]}`}>{value[1]}</a>
                             </span>
                     </div>
-                    <span>
+                    <span
+                        className={s.CreatedDate}
+                    >
                             <AiOutlineClockCircle/> Joined us {DataHelper.fromNow(value[4])}
                         </span>
                 </div>

@@ -33,6 +33,13 @@ function ClearMainPage(props) {
                 borderRight: `1px solid ${settings?.configs?.color[settings?.color] || "rgb(206, 204, 204)"}`
             }}
         >
+            <style>
+                {`
+                 html{
+                     background: ${settings?.configs?.background[settings?.background]};
+                 }
+                `}
+            </style>
             <div
                 className={"basicPageHead"}
                 style={{

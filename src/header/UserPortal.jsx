@@ -70,6 +70,7 @@ function Portal(props) {
             <p
                 id={s.Controle}
                 onClick={() => {
+                    window?.document?.body?.querySelector(".App")?.classList?.add("Open")
                     Script2.openModal("Muser")
                 }}
                 style={{

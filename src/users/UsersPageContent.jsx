@@ -44,8 +44,7 @@ function UsersPageContent(props) {
                      }
                      .itemsUsersPage {
                      background: ${settings?.configs?.background[settings?.background]};
-                     border-left: 1px solid ${settings?.configs?.color[settings?.color]};
-                     border-right: 1px solid ${settings?.configs?.color[settings?.color]};
+                     border-bottom: 1px solid ${settings?.configs?.color[settings?.color]}!important;
                      }
                      .itemsUsersPage:nth-child(2n) {
                      background-color: ${alpha(settings?.configs?.color[settings?.color] || "rgb(231 231 240)", 0.3)} !important;

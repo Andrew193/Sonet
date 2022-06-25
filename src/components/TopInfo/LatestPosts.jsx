@@ -47,9 +47,8 @@ function LatestPosts() {
                         toCreate={state?.posts}
                         settings={settings}
                     />
-                    <div
-                        className={s.LastTipItem}
-                    >Show More
+                    <div className={s.LastTipItem}>
+                        Show More
                     </div>
                 </> : <Skeleton height={"50px"} count={5}/>}
         </div>

@@ -121,6 +121,16 @@ class Http {
 
     userUpdate(values) {
         axios.put("https://sonet34.herokuapp.com/api/users/update", values)
+            .then(() => {
+                notify("Updated successfully")
+            })
+            .catch((error) => {
+                const message = createErrorsForApiCall(error?.response?.data, error?.response?.data)
+                const Msg = ({closeToast, toastProps}) => (
+                    <div>{message}</div>
+                )
+                notify(<Msg/>);
+            })
     }
 
     getMe(callback) {

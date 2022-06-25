@@ -1,6 +1,6 @@
 import {useContext, useEffect, useState} from "react";
 import ClearPosts from "./PostsInnerContent";
-import postsHelper from "./script.js"
+import postsHelper from "./postsHelper"
 import Skeleton from 'react-loading-skeleton';
 import SortLine from "./SortLine.jsx"
 import s from "./posts.module.css"
@@ -52,11 +52,16 @@ function PostsContainer(props) {
         <div className={s.Container}>
             <style>
                 {`
+                     .${s.Container} {
+                      background: ${settings?.configs?.background[settings?.background]};
+                     }
                      .itemsPostsPage {
                      background: ${settings?.configs?.background[settings?.background]};
                      border-left: 1px solid ${settings?.configs?.color[settings?.color]};
                      border-right: 1px solid ${settings?.configs?.color[settings?.color]};
+                     border-bottom: 1px solid ${settings?.configs?.color[settings?.color]}!important;
                      cursor: pointer;
+                     display: flex;
                      }
                      .itemsPostsPage:nth-child(2n) {
                      background-color: ${alpha(settings?.configs?.color[settings?.color] || "rgb(231 231 240)", 0.3)} !important;
@@ -89,12 +94,15 @@ function PostsContainer(props) {
                     e.target.nextElementSibling.classList.toggle("Hide")
                 }}
             />
-            {posts
-                ? <>
-                    <ClearPosts id={id} toMake={posts}/>
-                    <SortLine/>
-                </>
-                : <Skeleton height={"60px"} count={10}/>}
+            {
+                posts
+                    ? <>
+                        <ClearPosts id={id} toMake={posts}/>
+                        <div className={s.fixer}/>
+                        <SortLine/>
+                    </>
+                    : <Skeleton height={"60px"} count={10}/>
+            }
         </div>
     )
 }

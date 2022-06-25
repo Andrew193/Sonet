@@ -9,6 +9,7 @@ function PostPortal() {
         <div
             className={s.PostModal + " Hide Mpost"}
             onDoubleClick={() => {
+                window?.document?.body?.querySelector(".App")?.classList?.remove("Open")
                 Script.openModal("Mpost")
             }}
         >

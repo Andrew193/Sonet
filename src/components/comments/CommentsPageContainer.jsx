@@ -3,11 +3,10 @@ import s from "./comments.module.css"
 import Loader from "../common/spinner/Spinner"
 import {useContext, useEffect, useState} from "react";
 import Context from "../../helpers/contextHelper"
-import Script from "../../posts/script"
+import Script from "../../posts/postsHelper"
 import S2 from "./Script.js"
 import ClearComment from "./clearComment";
 import {getSettings} from "../../db";
-import {alpha} from "@mui/material";
 
 function Comments(props) {
     const {
@@ -59,6 +58,9 @@ function Comments(props) {
                      }
                      .basicPageHead {
                       background: ${settings?.configs?.background[settings?.background]};
+                     }
+                     .${s.Comments}{
+                     background: ${settings?.configs?.background[settings?.background]};
                      }
                      .rowPostsContainer {
                      height:inherit;

@@ -2,6 +2,8 @@
   text-align: center;
 }
 
+.App
+
 .genContainer {
   display: flex;
   height: -webkit-fill-available;
@@ -39,6 +41,7 @@
 
 .Open {
   transform: scaleY(1.0)!important;
+  overflow: hidden;
 }
 
 .customTooltip{

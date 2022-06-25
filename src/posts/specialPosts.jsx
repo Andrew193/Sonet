@@ -2,7 +2,7 @@ import {useContext, useEffect, useState} from "react";
 import Skeleton from 'react-loading-skeleton';
 import s from "./posts.module.css"
 import {withRouter} from "react-router-dom";
-import Script from "./script"
+import Script from "./postsHelper"
 import ClearSpecialPost from "./ClearSpecialPost";
 import Context from "../helpers/contextHelper";
 import {alpha} from "@mui/material";

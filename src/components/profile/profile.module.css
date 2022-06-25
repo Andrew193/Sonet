@@ -12,7 +12,7 @@
 
 .AboutMe {
     color: black;
-    font-size: 16px!important;
+    font-size: 16px !important;
 }
 
 .TabsContainer {
@@ -20,15 +20,15 @@
 }
 
 .Tab {
-    min-width: unset!important;
-    color: black!important;
-    max-width: unset!important;
-    border: none!important;
+    min-width: unset !important;
+    color: black !important;
+    max-width: unset !important;
+    border: none !important;
     margin-left: 20px;
 }
 
 .Left40 {
-    left: 40%!important;
+    left: 40% !important;
 }
 
 .Ver {
@@ -77,7 +77,7 @@
 }
 
 .Container .FlexColl h3 {
-    margin-top: unset!important;
+    margin-top: unset !important;
 }
 
 .CommonIcon {
@@ -129,10 +129,10 @@
     transition: all ease 0.7s;
     font-weight: bold;
     height: fit-content;
-    border: 1px solid rgb(108, 108, 195)!important;
+    border: 1px solid rgb(108, 108, 195) !important;
     color: rgb(73, 73, 248) !important;
     border-radius: 20px;
-    display: flex!important;
+    display: flex !important;
     align-items: center;
 }
 
@@ -145,8 +145,49 @@
     flex-direction: column;
 }
 
+.UsersPost {
+    display: flex;
+    color: black;
+    border-bottom: 1px solid rgb(166 162 162);
+    padding: 10px;
+    transition: all ease 0.7s;
+    cursor: pointer;
+}
+
+.ProfileEmotions {
+    display: flex;
+}
+
+.ProfileEmotions p {
+    margin: 0px 10px !important;
+}
+
+.ProfileEmotions svg {
+    height: 22px;
+    width: 22px;
+}
+
+.ProfileEmotions svg {
+    padding: 4px;
+}
+
+.metaBar {
+    display: flex;
+    align-items: baseline;
+    margin-bottom: 5px !important;
+}
+
+.postContent {
+    font-size: 16px !important;
+}
+
+.metaBar h6 {
+    font-weight: bold;
+    margin-right: 15px;
+}
+
 .Black {
-    color: black!important;
+    color: black !important;
     font-size: 20px;
     margin-right: 10px;
 }
@@ -176,10 +217,91 @@
     color: rgb(73, 73, 248);
 }
 
+.lds-ellipsis {
+    display: inline-block;
+    position: relative;
+    width: 100px;
+    height: 100px;
+}
+
+.lds-ellipsis-table {
+    width: 130px;
+    height: 0px;
+}
+
+.lds-ellipsis div {
+    position: absolute;
+    top: 33px;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background: #363434;
+    animation-timing-function: cubic-bezier(0, 1, 1, 0);
+}
+
+.lds-ellipsis div:nth-child(1) {
+    left: 8px;
+    animation: lds-ellipsis1 0.6s infinite;
+}
+
+.lds-ellipsis div:nth-child(2) {
+    left: 8px;
+    animation: lds-ellipsis2 0.6s infinite;
+}
+
+.lds-ellipsis div:nth-child(3) {
+    left: 32px;
+    animation: lds-ellipsis2 0.6s infinite;
+}
+
+.lds-ellipsis div:nth-child(4) {
+    left: 56px;
+    animation: lds-ellipsis3 0.6s infinite;
+}
+
+.lds-ellipsis div:nth-child(5) {
+    left: 56px;
+    animation: lds-ellipsis3 0.6s infinite;
+}
+
+.lds-ellipsis div:nth-child(6) {
+    left: 76px;
+    animation: lds-ellipsis3 0.6s infinite;
+}
+
+@keyframes lds-ellipsis1 {
+    0% {
+        transform: scale(0);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes lds-ellipsis3 {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(0);
+    }
+}
+
+@keyframes lds-ellipsis2 {
+    0% {
+        transform: translate(0, 0);
+    }
+    100% {
+        transform: translate(24px, 0);
+    }
+}
+
+
 .ConfirmLine {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
+    overflow: unset;
 }
 
 
@@ -197,84 +319,101 @@
     color: grey;
 }
 
-@media (min-width:2201px) {
+@media (min-width: 2201px) {
     .Container {
         font-size: 33px;
     }
+
     .PostCount {
         font-size: 26px;
     }
+
     .CommonIcon {
         font-size: 30px;
     }
+
     .FirstLine button {
         font-size: 30px;
         max-width: unset;
     }
+
     .Black {
         font-size: 43px;
     }
+
     .ConfirmLine input {
         font-size: 26px;
     }
 }
 
-@media (max-width:2200px) {
+@media (max-width: 2200px) {
     .Container {
         font-size: 20px;
     }
+
     .FlexColl {
         font-size: 26px;
     }
+
     .PostCount {
         font-size: 16px;
     }
+
     .CommonIcon {
         font-size: 23px;
     }
+
     .FirstLine button {
         font-size: 20px;
     }
+
     .Black {
         font-size: 30px;
     }
 }
 
-@media (max-width:1800px) {
+@media (max-width: 1800px) {
     .Ver svg {
         height: 40px;
     }
+
     .ConfirmLine input {
         font-size: 16px;
     }
+
     .PostCount {
         font-size: 13px;
     }
+
     .FirstLine button {
         font-size: 16px;
         padding: 10px 15px;
     }
+
     .CommonIcon {
         font-size: 20px;
     }
+
     .FlexColl {
         font-size: 20px;
     }
+
     .Back {
         font-size: 23px;
     }
 }
 
-@media (max-width:1024px) {
+@media (max-width: 1024px) {
     .Ver svg {
         height: 30px;
     }
+
     .Container {
         max-width: unset;
     }
 }
 
-@media (max-width:768px) {
+@media (max-width: 768px) {
     .Container {
         margin: unset;
         max-width: unset;
@@ -288,7 +427,7 @@
     }
 }
 
-@media (max-width:475px) {
+@media (max-width: 475px) {
     .Container {
         margin: unset;
         max-width: unset;
@@ -303,16 +442,20 @@
     .FlexColl {
         font-size: 13px;
     }
+
     .PostCount {
         font-size: 10px;
     }
+
     .FirstLine button {
         padding: 5px 10px;
         justify-content: space-around;
     }
+
     .ConfirmLine {
         align-items: center;
     }
+
     .ConfirmLine input {
         width: 70px;
         font-size: 10px;

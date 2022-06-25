@@ -131,6 +131,15 @@ function ChatContainer() {
                  color: ${settings?.configs?.color[settings?.color]};
                  background: ${alpha(settings?.configs?.color[settings?.color] || "#7986cb", 0.7)};
                  }
+                 html, .chatBoxWrapper, .chatMenu, .chatMenuInput{
+                 background: ${settings?.configs?.background[settings?.background]};
+                 }
+                 .noConversationText, .lonelyLine{
+                 color: ${alpha(settings?.configs?.color[settings?.color] || "rgb(224, 220, 220)", 0.5)} !important;
+                 }
+                 .activeChatMode{
+                 color: ${alpha(settings?.configs?.color[settings?.color] || "rgb(224, 220, 220)", 1)} !important;
+                 }
                 `}
             </style>
             <Messenger

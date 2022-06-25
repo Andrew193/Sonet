@@ -28,6 +28,8 @@ function App() {
     const userInformation = JSON.parse(localStorage.getItem("userInfo"));
 
     function open() {
+        console.log("test")
+        window?.document?.body?.querySelector(".App")?.classList?.remove("Open")
         modal?.current?.classList?.toggle("Open");
     }
 

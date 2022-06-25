@@ -71,7 +71,7 @@ function ClearModalUser(props) {
                     onChange={(e) => {
                         setEmail(e.target.value)
                     }}
-                    defaultValue={em}
+                    placeholder={em}
                 />
             </Typography>
             <Typography
@@ -87,7 +87,7 @@ function ClearModalUser(props) {
                     onChange={(e) => {
                         setPassword(e.target.value)
                     }}
-                    defaultValue={pas}
+                    placeholder={pas}
                 />
             </Typography>
             <CardActions>
@@ -97,9 +97,10 @@ function ClearModalUser(props) {
                         Script.UpdateInfo({
                             userName: nm, email: em,
                             password: pas, id: userId
-                        }, click, history)
+                        }, click)
                     }}
-                >Submit
+                >
+                    Submit
                 </button>
             </CardActions>
         </div>

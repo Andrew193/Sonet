@@ -27,6 +27,10 @@
     border-bottom: 1px solid #cecccc;
 }
 
+.PostsCont > div {
+    padding: 2% 5%;
+}
+
 .PostsCont > div h3 {
     margin-top: unset;
 }
@@ -111,11 +115,11 @@
     color: rgb(73, 73, 248);
 }
 
-.like:hover + span{
+.like:hover + span {
     color: rgb(46, 153, 46);
 }
 
-.dislike:hover + span{
+.dislike:hover + span {
     color: rgb(211, 59, 59);
 }
 
@@ -146,7 +150,21 @@
     height: 35px;
 }
 
+.fixer {
+    margin-top: 6.3%;
+}
+
+@media (max-width: 1440px) {
+    .fixer {
+        margin-top: 7.7%;
+    }
+}
+
 @media (max-width: 1024px) {
+    .fixer {
+        margin-top: unset;
+    }
+
     .Container {
         max-width: 100%;
     }
@@ -170,6 +188,10 @@
 
 
 @media (max-width: 768px) {
+    .fixer {
+        margin-top: 7%;
+    }
+
     .Container {
         margin: 0px;
     }
@@ -180,5 +202,23 @@
 
     .PostsCont {
         margin-bottom: 55px;
+    }
+}
+
+.tempHide {
+    display: none;
+}
+
+@media (max-width: 500px) {
+    .fixer {
+        margin-top: 10%;
+    }
+
+    .hide {
+        display: none!important;
+    }
+
+    .open {
+        display: block !important;
     }
 }

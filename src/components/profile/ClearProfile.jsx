@@ -4,7 +4,7 @@ import AvatarLine from "./AvatarLine";
 import DateHelper from "../../helpers/dateHelper.js";
 import FlexColl from "./FlexColl.jsx";
 import Script from "./profileHelper"
-import postServ from "../../posts/script.js"
+import postServ from "../../posts/postsHelper"
 import {useEffect, useRef, useState} from "react";
 import PageHeader from "../common/navigationLine/NavigationLine.jsx";
 import UserHelper from "../../helpers/userHelper";
@@ -15,6 +15,7 @@ import {AiOutlineDownload} from "react-icons/ai";
 import {BsPen} from "react-icons/all";
 import AboutYou from "./AboutYou";
 import UsersActivities from "./UsersActivities";
+import style from "./profile.module.css";
 
 function ClearProfile(props) {
     const {
@@ -57,6 +58,14 @@ function ClearProfile(props) {
                 
                 ::-webkit-scrollbar-track {
                 background-color: ${alpha(hexToRgb(settings?.configs?.color[settings?.color] || "rgb(231 231 240)"), 0.2)};
+                }
+                
+                .profilePostBorder{
+                 border-bottom: 1px solid ${settings?.configs?.color[settings?.color] || "rgb(206, 204, 204)"};
+                }
+                
+                .${style.UsersPost}:hover {
+                background-color: ${alpha(settings?.configs?.color[settings?.color] || "rgb(231 231 240)", 0.5)} !important;
                 }
                 `}
             </style>
@@ -154,7 +163,13 @@ function ClearProfile(props) {
                 onClick={(e) => e.target.nextElementSibling.classList.toggle("Hide")}
             />
             <AboutYou/>
-            <UsersActivities />
+            <div
+                className="Separator"
+                onClick={(e) => e.target.nextElementSibling.classList.toggle("Hide")}
+            />
+            <UsersActivities
+                userInfo={userInfo}
+            />
         </>
     )
 }

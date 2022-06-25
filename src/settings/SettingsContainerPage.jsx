@@ -26,6 +26,13 @@ function SettingsContainerPage() {
                 borderRight: `1px solid ${settings?.configs?.color[settings?.color]}`
             }}
         >
+            <style>
+                {`
+                 html {
+                 background: ${settings?.configs?.background[settings?.background]}
+                 }
+               `}
+            </style>
             <SettingsContent
                 settingsStyles={settings}
             />

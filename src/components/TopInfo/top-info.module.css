@@ -35,24 +35,29 @@
     left: -6px;
 }
 
-.Tip>div {
+.Tip > div {
     position: relative;
     cursor: pointer;
     width: 110%;
     margin-left: -5%;
     transition: all ease 0.7s;
-    margin-top: 10px;
 }
 
-.Tip>div span {
+.ActionsLine {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.Tip > div span {
     display: flex;
     font-size: 10px;
     align-items: center;
+    margin-left: 2px;
 }
 
 .PostLine {
-    margin: 2px 3px!important;
-    max-width: 100%!important;
+    margin: 2px 3px !important;
+    max-width: 100% !important;
     padding-left: 10px;
     font-size: 16px;
 }
@@ -61,17 +66,17 @@
     text-transform: capitalize;
 }
 
-.latestPostFirstLine{
+.latestPostFirstLine {
     display: flex;
     flex-direction: row-reverse;
     justify-content: space-evenly;
 }
 
-.Tip>div>h4 {
+.Tip > div > h4 {
     padding-left: 5%;
 }
 
-.Tip>div:hover {
+.Tip > div:hover {
     background-color: rgb(167, 167, 241);
     border-left: 1px solid #3452f1;
     border-right: 1px solid #3452f1;
@@ -91,7 +96,7 @@
     font-weight: 500;
 }
 
-.Tip>div p {
+.Tip > div p {
     font-size: 13px;
     margin-top: 1%;
     margin-left: 3%;
@@ -99,76 +104,86 @@
     overflow: hidden;
 }
 
-.Tip>div p:last-of-type {
+.Tip > div p:last-of-type {
     text-align: center;
     color: #3452f1;
 }
 
-@media (max-width:1024px) {
+@media (max-width: 1024px) {
     .Container {
         display: none;
     }
+
     .Tip h2 {
         font-size: 16px;
     }
-    .Tip>div {
+
+    .Tip > div {
         font-size: 10px;
         width: 109%;
         margin-left: -4.5%;
     }
 }
 
-@media (min-width:1030px) {
+@media (min-width: 1030px) {
     .Tip h2 {
         font-size: 20px;
     }
-    .Tip>div {
+
+    .Tip > div {
         font-size: 13px;
         width: 109%;
         margin-left: -4.5%;
     }
 }
 
-@media (min-width:1300px) {
+@media (min-width: 1300px) {
     .Tip h2 {
         font-size: 26px;
     }
-    .Tip>div {
+
+    .Tip > div {
         width: 107%;
         margin-left: -3.5%;
     }
 }
 
-@media (min-width:1700px) {
+@media (min-width: 1700px) {
     .Tip h2 {
         font-size: 26px;
     }
-    .Tip>div {
+
+    .Tip > div {
         font-size: 20px;
         width: 105%;
         margin-left: -2.6%;
     }
-    .Tip>div span {
+
+    .Tip > div span {
         font-size: 16px;
     }
-    .Tip>div p {
+
+    .Tip > div p {
         font-size: 16px;
     }
 }
 
-@media (min-width:2101px) {
+@media (min-width: 2101px) {
     .Tip h2 {
         font-size: 46px;
     }
-    .Tip>div {
+
+    .Tip > div {
         font-size: 26px;
         width: 105%;
         margin-left: -2.6%;
     }
-    .Tip>div span {
+
+    .Tip > div span {
         font-size: 26px;
     }
-    .Tip>div p {
+
+    .Tip > div p {
         font-size: 27px;
     }
 }

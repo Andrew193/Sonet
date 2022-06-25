@@ -48,6 +48,13 @@ function UsersContainer(props) {
                 fontSize: settings?.configs?.size[settings?.fontSize]
             }}
         >
+            <style>
+                {`
+                .${s.Container} {
+                      background: ${settings?.configs?.background[settings?.background]};
+                }
+                `}
+            </style>
             {users
                 ? <ClearUsersContainer
                     users={users}

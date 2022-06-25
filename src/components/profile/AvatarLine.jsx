@@ -16,7 +16,6 @@ function AvatarLine(props) {
     } = props;
 
     let image = useRef();
-    let imageToDownload = useRef();
 
     const avatarUrl = useMemo(() => {
         try {
@@ -114,7 +113,10 @@ function AvatarLine(props) {
                 />
                 {myId === id && <button
                     id={"updateButton"}
-                    onClick={() => Script.openModal("Muser")}
+                    onClick={() => {
+                        window?.document?.body?.querySelector(".App")?.classList?.add("Open")
+                        Script.openModal("Muser")
+                    }}
                 >
                     <AiOutlineHighlight className={s.CommonIcon}/>Set up profile
                 </button>}

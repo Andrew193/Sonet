@@ -1,6 +1,6 @@
 import {AiOutlineReload} from "react-icons/ai";
 import {useHistory} from "react-router-dom";
-import Script from "./script.js"
+import Script from "./postsHelper"
 import s from "./posts.module.css";
 
 function SortLine() {
@@ -16,7 +16,7 @@ function SortLine() {
                 }}
             >
                 <AiOutlineReload/>
-                <span>Get my posts</span>
+                 <span>My</span>
             </span>
             <span
                 id={"mainPostBtn"}
@@ -25,7 +25,7 @@ function SortLine() {
                 }}
             >
                 <AiOutlineReload/>
-                <span>Get not my posts</span>
+                <span>Not my</span>
             </span>
             <span
                 id={"mainPostBtn"}
@@ -33,7 +33,7 @@ function SortLine() {
                     Script.def(hist)
                 }}>
                 <AiOutlineReload/>
-                <span>Get all posts</span>
+                <span>All</span>
             </span>
         </div>
     )

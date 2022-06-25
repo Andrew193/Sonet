@@ -3,7 +3,6 @@
     -webkit-flex: 3 0;
     flex: 3 0;
     max-width: 60%;
-    height: -webkit-fill-available;
 }
 
 .ActionLine {
@@ -14,7 +13,7 @@
 }
 
 .ActionLine button {
-    display: flex!important;
+    display: flex !important;
     justify-content: space-between;
     align-items: center;
 }
@@ -27,7 +26,6 @@
 .Item {
     border-bottom: 1px solid #cecccc;
     display: flex;
-    justify-content: space-between;
     cursor: pointer;
     transition: background-color ease 0.5s;
 }
@@ -59,18 +57,23 @@
 .Item > div {
     text-align: left;
     padding: 1% 5%;
-    flex: 2 0;
     position: relative;
 }
 
 .Item img {
-    height: 80px;
-    width: auto;
+    height: 75px;
+    width: 80px;
     max-width: 80px;
-    margin: 5px -20px 5px 20px;
-    border-radius: 10%;
     object-fit: contain;
     box-shadow: 0 5px 10px 0 rgb(107 159 199 / 34%);
+    border-radius: 5px;
+}
+
+.CreatedDate {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    right: 0px;
 }
 
 .Item > div span {
@@ -162,7 +165,7 @@
 .ThisIsYouLabel {
     position: absolute;
     top: 10px;
-    color: red!important;
+    color: red !important;
 }
 
 .FindUserLine span {

@@ -2,10 +2,9 @@ import HttpHelper from "../helpers/httpHelper"
 import Script from "../header/script.js"
 
 
-function UpdateInfo(values, close, history) {
+function UpdateInfo(values, close) {
     HttpHelper.userUpdate(values)
     close();
-    Script.leave(history)
 }
 
 const obj = { UpdateInfo }

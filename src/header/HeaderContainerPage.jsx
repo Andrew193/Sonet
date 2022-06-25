@@ -77,6 +77,7 @@ function Header() {
             style={{
                 background: settings?.configs?.background[settings?.background],
                 fontSize: settings?.configs?.size[settings?.fontSize],
+                borderRight: `1px solid ${settings?.configs?.color[settings?.color] || "rgb(206, 204, 204)"}`,
             }}
         >
             <div
@@ -119,6 +120,7 @@ function Header() {
                         id={"mainPostBtn"}
                         className={"col-sm-7 " + s.PostBtn}
                         onClick={() => {
+                            window?.document?.body?.querySelector(".App")?.classList?.add("Open")
                             Script2.openModal("Mpost")
                         }}
                         style={{
@@ -131,6 +133,10 @@ function Header() {
                 </p>
 
                 <span
+                    onClick={() => {
+                        window?.document?.body?.querySelector(".App")?.classList?.add("Open")
+                        Script2.openModal("Mpost")
+                    }}
                     data-tooltip="Post"
                 >
                     <AiOutlineHighlight id={s.PostBtnS}/>

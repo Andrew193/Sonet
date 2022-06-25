@@ -52,7 +52,10 @@ function CreatePost(props) {
                 </button>
                 <button
                     className={`button btn btn-default ${buttonsConfig[customStyle?.color]}`}
-                    onClick={() => Script.CreatePost(text.value, notify, text, socket, image)}
+                    onClick={() => {
+                        window?.document?.body?.querySelector(".App")?.classList?.remove("Open")
+                        Script.CreatePost(text.value, notify, text, socket, image)
+                    }}
                 >
                     <BsPencil />
                     Create Post
