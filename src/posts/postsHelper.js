@@ -67,7 +67,15 @@ function openPost(e, history, inputId) {
 }
 
 const obj = {
-    openPost, getSelectedPost, getPosts, like, dislike, getNotMy, getMy, def, getComment,
+    openPost,
+    getSelectedPost,
+    getPosts,
+    like,
+    dislike,
+    getNotMy,
+    getMy,
+    def,
+    getComment,
     getMyPostWithEndpoint
 }
 
