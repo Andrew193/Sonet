@@ -8,8 +8,13 @@ html, body, #root, .App {
     min-height: -webkit-fill-available;
 }
 
+#ReactSimpleImageViewer img {
+    max-height: 250px !important;
+    min-height: 250px !important;
+}
+
 .onePostContainer {
-    margin: unset!important;
+    margin: unset !important;
 }
 
 body {
