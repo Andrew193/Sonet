@@ -54,10 +54,10 @@ function CreatePost(props) {
     return (
         <div className={s.Container}>
             <Backdrop
-                sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                sx={{color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1}}
                 open={isOpened}
             >
-                <CircularProgress color="inherit" />
+                <CircularProgress color="inherit"/>
             </Backdrop>
             <form>
                 <input
@@ -66,7 +66,6 @@ function CreatePost(props) {
                     style={{display: "none"}}
                     onChange={() => {
                         Script.createBlob((blob) => {
-                            console.log(blob)
                             setImages((state) => [...state, {
                                 file: image.files[0],
                                 blobUrl: blob
@@ -106,8 +105,13 @@ function CreatePost(props) {
                 <button
                     className={`button btn btn-default ${buttonsConfig[customStyle?.color]}`}
                     onClick={() => {
+                        setIsOpened(true);
                         window?.document?.body?.querySelector(".App")?.classList?.remove("Open")
                         Script.CreatePost(text.value, notify, text, socket, images)
+                            .then(() => {
+                                setImages([]);
+                                setIsOpened(false);
+                            })
                     }}
                 >
                     <BsPencil/>
