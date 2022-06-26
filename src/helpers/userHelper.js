@@ -1,8 +1,10 @@
-import HttpHelper from "./httpHelper"
+import HttpHelper from "./httpHelper";
+
 function updateImage(image, endpoint) {
     let formData = new FormData();
-    formData.append("file", image.files[0])
-    HttpHelper.uploadImg(endpoint, formData)
+    formData.append("file", image.files[0]);
+
+    return HttpHelper.uploadImg(endpoint, formData);
 }
 
 function CallImageInput(inputElement) {

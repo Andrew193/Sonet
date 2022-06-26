@@ -4,9 +4,47 @@
 }
 
 .Container button {
-    display: flex!important;
+    display: flex !important;
     justify-content: space-between;
     align-items: center;
+}
+
+.ImagePreviewContainer {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.ImagePreviewContainer > div {
+    flex: 1 0 40%;
+    position: relative;
+}
+
+.ImagePreviewContainer > div > div {
+    flex: 1 0 40%;
+    min-height: 300px;
+    border-radius: 5px;
+    margin: 10px;
+    width: 95%;
+}
+
+.ImagePreviewContainer > div > div img {
+    object-position: top;
+    cursor: pointer;
+    transition: all ease 0.7s;
+}
+
+.CloseBtn {
+    position: absolute;
+    top: 5%;
+    height: 21px;
+    width: 21px;
+    font-size: 20px;
+    right: 4%;
+    cursor: pointer;
+}
+
+.ImagePreviewContainer > div img:hover {
+    opacity: 0.7;
 }
 
 .Container button svg {

@@ -1,11 +1,8 @@
 import s from "./profile.module.css"
 import Script from "./profileHelper"
-import {AiOutlineDownload, AiOutlineHighlight} from "react-icons/ai";
-import UserHelper from "../../helpers/userHelper"
-import {useMemo, useRef, useState} from "react";
-import {alpha, ListItemIcon, ListItemText, Menu, MenuItem} from "@mui/material";
-import {BsPen} from "react-icons/all";
-import {downloadFile} from "../../utils";
+import {AiOutlineHighlight} from "react-icons/ai";
+import {useMemo, useState} from "react";
+import {alpha } from "@mui/material";
 import AvatarImageMenu from "./AvatarImageMenu";
 
 function AvatarLine(props) {

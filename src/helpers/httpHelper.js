@@ -12,7 +12,7 @@ class Http {
     }
 
     uploadImg(endpoint, data) {
-        fetch("https://sonet34.herokuapp.com/api/img/" + endpoint + "?token=" + Script.getCookie("token"), {
+        return fetch("https://sonet34.herokuapp.com/api/img/" + endpoint + "?token=" + Script.getCookie("token"), {
                 method: "POST",
                 body: data
             }

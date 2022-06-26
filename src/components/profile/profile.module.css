@@ -299,6 +299,7 @@
 
 .ConfirmLine {
     display: flex;
+    flex: 1;
     justify-content: space-between;
     align-items: baseline;
     overflow: unset;
