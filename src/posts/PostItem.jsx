@@ -5,7 +5,8 @@ import {Link} from "react-router-dom";
 import EmotionsLineContainer from "./EmotionsLineContainer";
 import profileHelper from "../components/profile/profileHelper";
 import DataHelper from "../helpers/dateHelper";
-import {useEffect, useState} from "react";
+import {useEffect, useState, useMemo} from "react";
+import {AiOutlineClose} from "react-icons/all";
 
 
 function PostItem(props) {
@@ -15,6 +16,18 @@ function PostItem(props) {
     } = props;
 
     const [userAvatar, setUserAvatar] = useState();
+
+    const previewImages = useMemo(() => {
+        if (JSON.parse(value?.savedImages)?.length) {
+            return JSON.parse(value?.savedImages)?.map((img) =>
+                <Avatar
+                    src={JSON.parse(img)?.webContentLink}
+                    key={img}
+                />
+            )
+        }
+        return [];
+    }, [value?.savedImages])
 
     useEffect(() => {
         async function getUserAvatar() {
@@ -60,6 +73,11 @@ function PostItem(props) {
                         >{value.createdBy}</Link>
                     </h3>
                     <p>{value.text}</p>
+                    <div
+                        className={s.ImagesContainer}
+                    >
+                        {previewImages}
+                    </div>
                     <EmotionsLineContainer
                         value={value}
                         id={id}

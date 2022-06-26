@@ -10,6 +10,17 @@
     flex-direction: column;
 }
 
+.ImagesContainer {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.ImagesContainer > div {
+    min-height: 160px;
+    min-width: 110px;
+    border-radius: 5px;
+}
+
 #HF {
     height: 100%;
     max-width: unset;
@@ -215,7 +226,7 @@
     }
 
     .hide {
-        display: none!important;
+        display: none !important;
     }
 
     .open {
