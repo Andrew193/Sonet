@@ -19,14 +19,19 @@ function EmotionsLineContainer(props) {
 
     return (
         <p
-        className={containerClass}
+            className={containerClass}
         >
             <p
                 className={s.EmotionLine}
             >
                 <span
                     onClick={() => {
-                        postsHelper.like(value, String(id), notify, socket)
+                        console.log(value)
+                        postsHelper.like({
+                            ...value,
+                            id: String(value?.id),
+                            userId: String(value?.userId)
+                        }, String(id), notify, socket)
                     }}
                     className={s.like}
                 >
@@ -39,7 +44,11 @@ function EmotionsLineContainer(props) {
             >
                 <span
                     onClick={() => {
-                        postsHelper.dislike(value, String(id), notify, socket)
+                        postsHelper.dislike({
+                            ...value,
+                            id: String(value?.id),
+                            userId: String(value?.userId)
+                        }, String(id), notify, socket)
                     }}
                     className={s.dislike}
                 >
