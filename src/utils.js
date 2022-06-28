@@ -1,15 +1,20 @@
 import {v4 as uuidv4} from 'uuid';
 
 export function downloadFile(url, name) {
-    console.log(url,"dffdsfs")
     const link = document.createElement('a');
     link.href = url;
     link.download = name || 'Download.jpg';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
-
     return true;
+}
+
+export function downloadFileVersion2(url, name) {
+    const link = document.createElement("a");
+    link.href = url
+    link.download = name || "filename.png";
+    link.click();
 }
 
 export async function createFile(src){

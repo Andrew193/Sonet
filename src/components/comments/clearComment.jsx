@@ -5,6 +5,7 @@ import CommentLine from "./commentLine"
 import ClearPosts from "../../posts/PostsInnerContent";
 import Context from "../../helpers/contextHelper"
 import {useContext} from "react";
+import s from "./comments.module.css";
 
 function ClearComment(props) {
     const {
@@ -25,7 +26,7 @@ function ClearComment(props) {
                         notify={notify}
                         socket={socket}
                         id={userId}
-                        toMake={post}
+                        toMake={{...post, customClass: s.OnePost}}
                     />
                     : <Skeleton height={"60px"}/>
             }

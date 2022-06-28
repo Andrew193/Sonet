@@ -262,6 +262,19 @@
     transition: all ease 0.5s;
 }
 
+.ImageMenu {
+
+}
+
+.ImageMenu svg {
+    font-size: 16px;
+    color: black;
+}
+
+.ImageMenu p {
+    font-size: 14px;
+}
+
 .PostItemsActionsBox > div:hover {
     background: #def0ff;
 }

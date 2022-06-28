@@ -1,7 +1,7 @@
 import s from "./posts.module.css"
 import PostItem from "./PostItem";
 import {useEffect, useState} from "react";
-import {v4 as uuidv4} from 'uuid';
+import commentsStyle from "../components/comments/comments.module.css";
 
 function ClearPosts(props) {
     const {
@@ -18,6 +18,7 @@ function ClearPosts(props) {
                 <PostItem
                     value={value}
                     id={id}
+                    customStyle={toMake?.customClass || commentsStyle.OnePost}
                     settings={settings}
                     key={index}
                 />))

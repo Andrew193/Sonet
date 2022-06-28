@@ -9,6 +9,10 @@
     transition: all ease 0.3s;
 }
 
+.OnePost {
+    display: flex;
+}
+
 .Comments {
     max-height: 600px;
     min-height: 500px;

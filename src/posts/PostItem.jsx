@@ -8,18 +8,17 @@ import {useEffect, useState, useMemo, useCallback, useRef} from "react";
 import ImageViewer from "react-simple-image-viewer";
 import {BsThreeDots} from "react-icons/all";
 import {AiOutlineDownload} from "react-icons/ai";
-import {createFile, downloadFile} from "../utils";
+import {downloadFileVersion2} from "../utils";
 import {useOutsideClick} from "../hooks";
 import PostItemsImages from "./PostItemsImages";
 import React from "react";
-import { downloadZip } from "client-zip/index.js"
-import FileSaver from "file-saver"
 
 function PostItem(props) {
     const {
         value,
         id,
-        settings
+        settings,
+        customStyle
     } = props;
 
     const [userAvatar, setUserAvatar] = useState();
@@ -88,7 +87,7 @@ function PostItem(props) {
                     />
                 )}
             <div
-                className={s.Item + " itemsPostsPage"}
+                className={s.Item + " itemsPostsPage " + customStyle}
                 data-id={value.id}
             >
                 <Avatar
@@ -138,22 +137,27 @@ function PostItem(props) {
                     className={s.PostItemsActionsBox}
                     ref={wrapperRef}
                 >
-                    <Box
-                        onClick={async () => {
-                            const file = await createFile(imagesForPreview[0]);
-                            console.log(file)
-                            const content = await downloadZip([createFile(imagesForPreview[0])]).blob()
-                            FileSaver.saveAs(content, "download.zip");
-                            // for (let i = 0; i < imagesForPreview?.length; i++) {
-                            //     console.log(downloadFile(imagesForPreview[i], `img${i}`))
-                            // }
-                        }}
-                    >
-                        <ListItemIcon>
-                            <AiOutlineDownload/>
-                        </ListItemIcon>
-                        <Typography>Download attachments</Typography>
-                    </Box>
+                    {
+                        imagesForPreview?.length > 0
+                            ? <Box
+                                onClick={async () => {
+                                    let i = 0;
+                                    const interval = setInterval(function () {
+                                        downloadFileVersion2(imagesForPreview[i])
+                                        i++;
+                                        if (i === imagesForPreview?.length) {
+                                            clearInterval(interval)
+                                        }
+                                    }, 1000);
+                                }}
+                            >
+                                <ListItemIcon>
+                                    <AiOutlineDownload/>
+                                </ListItemIcon>
+                                <Typography>Download attachments ( Unsafe )</Typography>
+                            </Box>
+                            : null
+                    }
                 </Box>
 
                 <span className={s.Time}>{DataHelper.fromNow(value.createdAt)}</span>

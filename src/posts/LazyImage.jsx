@@ -31,8 +31,8 @@ function LazyImage(props) {
                         onLoad={() => {
                             setIsLoading(false)
                         }}
-                        onClick={() => {
-                            onClick()
+                        onClick={(e) => {
+                            onClick(e)
                         }}
                         onError={() => {
                             setIsLoading(false)

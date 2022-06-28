@@ -1,5 +1,6 @@
 import MatesContainer from "./MatesContainer";
 import RequestsContainer from "./RequestsContainer";
+import {useMemo, useState} from "react";
 
 
 function PeopleContainer(props) {
@@ -7,16 +8,34 @@ function PeopleContainer(props) {
         chatMode,
         matesList,
         isLoading,
-        possibleMatesList
+        possibleMatesList,
+        setConversations,
+        conversations
     } = props;
 
-    return(
+    const [search, setSearch] = useState("");
+
+    useMemo(() => {
+        setConversations((state) =>
+            search === ""
+                ? conversations?.map((conversation) => ({...conversation, show: true}))
+                : state?.map((conversation) =>
+                    conversation?.receiverName?.includes(search)
+                        ? {...conversation, show: true}
+                        : {...conversation, show: false}
+                ))
+    }, [search])
+
+    return (
         <>
             {
                 !chatMode
                 && <input
                     placeholder="Search for friends"
                     className="chatMenuInput"
+                    onChange={(e) => {
+                        setSearch(e.target?.value)
+                    }}
                 />
             }
             {

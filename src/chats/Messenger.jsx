@@ -36,27 +36,30 @@ function Messenger(props) {
     const matesList = useMemo(() => {
         setIsLoading(() => false)
         return conversations?.map((friend, index) => {
-
-            return <div
-                className={currentChat?.currentIndex === index ? "currentChat" : ""}
-                key={index}
-                onClick={() => {
-                    if (friend?.approved) {
-                        setCurrentChat({
-                            members: [+friend?.receiverId, +friend?.requestSendById],
-                            id: `${[friend?.receiverId, friend?.requestSendById].sort(function (a, b) {
-                                return a - b;
-                            }).join("")}`,
-                            currentIndex: index
-                        })
-                    }
-                }}
-            >
-                <FriendPin
-                    friendName={friend?.receiverName}
-                    approved={friend?.approved}
-                />
-            </div>
+            if(friend?.show === undefined || friend?.show === true) {
+                return <div
+                    className={currentChat?.currentIndex === index ? "currentChat" : ""}
+                    key={index}
+                    onClick={() => {
+                        if (friend?.approved) {
+                            setCurrentChat({
+                                members: [+friend?.receiverId, +friend?.requestSendById],
+                                id: `${[friend?.receiverId, friend?.requestSendById].sort(function (a, b) {
+                                    return a - b;
+                                }).join("")}`,
+                                currentIndex: index
+                            })
+                        }
+                    }}
+                >
+                    <FriendPin
+                        friendName={friend?.receiverName}
+                        approved={friend?.approved}
+                    />
+                </div>
+            } else {
+                return null;
+            }
         })
     }, [conversations, currentChat?.currentIndex]);
 
@@ -134,6 +137,8 @@ function Messenger(props) {
                         chatMode={chatMode}
                         matesList={matesList}
                         isLoading={isLoading}
+                        conversations={conversations}
+                        setConversations={setConversations}
                         possibleMatesList={possibleMatesList}
                     />
                 </div>
