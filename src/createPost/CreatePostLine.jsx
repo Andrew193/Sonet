@@ -5,6 +5,7 @@ import Context from "../helpers/contextHelper"
 import {AiOutlineClose, BiImageAdd, BsPencil} from "react-icons/all";
 import userHelper from "../helpers/userHelper";
 import {Avatar, Backdrop, Box, CircularProgress} from "@mui/material";
+import InputEmoji from 'react-input-emoji';
 
 export const buttonsConfig = {
     "#FF0000": s.RedButton,
@@ -22,9 +23,9 @@ function CreatePost(props) {
         customStyle
     } = props;
 
-    let text = useRef();
     let image = useRef();
 
+    const [text, setText] = useState('')
     const [images, setImages] = useState([]);
     const [isOpened, setIsOpened] = useState(false);
 
@@ -51,6 +52,10 @@ function CreatePost(props) {
             </div>
         ), [images?.length])
 
+    function handleOnEnter(text) {
+        console.log('enter', text)
+    }
+
     return (
         <div className={s.Container}>
             <Backdrop
@@ -59,6 +64,13 @@ function CreatePost(props) {
             >
                 <CircularProgress color="inherit"/>
             </Backdrop>
+            <InputEmoji
+                value={text}
+                onChange={setText}
+                cleanOnEnter
+                onEnter={handleOnEnter}
+                placeholder="Type a message"
+            />
             <form>
                 <input
                     ref={(el) => image = el}
@@ -74,14 +86,6 @@ function CreatePost(props) {
                     }}
                 />
             </form>
-            <textarea
-                ref={(el) => text = el}
-                className={s.InputPostText}
-                placeholder={"Input your post text"}
-                style={{
-                    fontSize: customStyle?.fontSize
-                }}
-            />
             <Box
                 className={s.ImagePreviewContainer}
             >
@@ -107,7 +111,7 @@ function CreatePost(props) {
                     onClick={() => {
                         setIsOpened(true);
                         window?.document?.body?.querySelector(".App")?.classList?.remove("Open")
-                        Script.CreatePost(text.value, notify, text, socket, images)
+                        Script.CreatePost(text, notify, null, socket, images)
                             .then(() => {
                                 setImages([]);
                                 setIsOpened(false);

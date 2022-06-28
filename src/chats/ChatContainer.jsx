@@ -61,7 +61,6 @@ function ChatContainer() {
 
     useEffect(() => {
         if (userInformation?.id) {
-            console.log(userInformation?.id)
             socket.on("getUsersInChat", (users) => {
                 setUsersInChat(users)
             });

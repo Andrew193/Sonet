@@ -16,7 +16,7 @@
     justify-content: space-between;
 }
 
-.ImagesContainer > div > div{
+.ImagesContainer > div > div {
     min-height: 190px;
     min-width: 135px;
     border-radius: 5px;
@@ -234,6 +234,50 @@
 .ImgPreview {
     cursor: pointer;
     transition: all ease 0.5s;
+}
+
+.PostItemsActions {
+    position: absolute;
+    top: 30px;
+    right: 10px;
+    height: 25px !important;
+    width: 25px !important;
+    padding: 3px;
+}
+
+.PostItemsActionsBox {
+    position: absolute;
+    background: aliceblue;
+    padding: 5px 10px;
+    border-radius: 5px;
+    right: 10px;
+    top: 55px;
+}
+
+.PostItemsActionsBox > div {
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    cursor: pointer;
+    transition: all ease 0.5s;
+}
+
+.PostItemsActionsBox > div:hover {
+    background: #def0ff;
+}
+
+.PostItemsActionsBox > div > div {
+    min-width: 0px !important;
+}
+
+.Item {
+    position: relative !important;
+}
+
+.PostItemsActions:hover {
+    color: rgb(73, 73, 248);
+    background: rgb(209, 209, 250);
+    border-radius: 50%;
 }
 
 .ImgPreview:hover {

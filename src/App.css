@@ -1,61 +1,151 @@
 .App {
-  text-align: center;
+    text-align: center;
 }
 
 .App
-
 .genContainer {
-  display: flex;
-  height: -webkit-fill-available;
-  height: stretch;
+    display: flex;
+    height: -webkit-fill-available;
+    height: stretch;
 }
 
 .Toastify__close-button {
-  color: #fff!important;
-  background: transparent!important;
-  outline: none;
-  border: none!important;
-  padding: 0px!important;
-  cursor: pointer;
-  opacity: 0.7!important;
-  transition: 0.3s ease;
-  align-self: flex-start;
-  min-width: unset!important;
+    color: #fff !important;
+    background: transparent !important;
+    outline: none;
+    border: none !important;
+    padding: 0px !important;
+    cursor: pointer;
+    opacity: 0.7 !important;
+    transition: 0.3s ease;
+    align-self: flex-start;
+    min-width: unset !important;
 }
 
 .Separator {
-  border: 1px solid #57b5f3;
-  height: 12px;
-  background: #b7daf1;
-  cursor: pointer;
+    border: 1px solid #57b5f3;
+    height: 12px;
+    background: #b7daf1;
+    cursor: pointer;
 }
 
 .Separator:hover {
-  border: 1px solid #0090ef;
-  background: #80c5f3;
+    border: 1px solid #0090ef;
+    background: #80c5f3;
 }
 
 .Hide {
-  transform: scaleY(0.0);
+    transform: scaleY(0.0);
 }
 
 .Open {
-  transform: scaleY(1.0)!important;
-  overflow: hidden;
+    transform: scaleY(1.0) !important;
+    overflow: hidden;
 }
 
-.customTooltip{
-  position: fixed;
-  padding: 5px 10px;
-  border: 1px solid #009cbe;
-  border-radius: 3px;
-  text-align: center;
-  font: italic 14px/1.3 sans-serif;
-  color: #333;
-  font-weight: bold;
-  background: #c4dbf8;
-  opacity: 0.7;
-  -webkit-box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.3);
-  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.3);
-  z-index: 90;
+.customTooltip {
+    position: fixed;
+    padding: 5px 10px;
+    border: 1px solid #009cbe;
+    border-radius: 3px;
+    text-align: center;
+    font: italic 14px/1.3 sans-serif;
+    color: #333;
+    font-weight: bold;
+    background: #c4dbf8;
+    opacity: 0.7;
+    -webkit-box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.3);
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.3);
+    z-index: 90;
+}
+
+.react-emoji-picker--container {
+    position: absolute;
+    top: 100%;
+    width: 100%;
+    height: 10px;
+}
+
+.react-emoji-picker--wrapper {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 350px;
+    width: 100%;
+    overflow: hidden;
+    z-index: 10;
+}
+
+.emoji-mart-search-icon {
+    position: absolute !important;
+    top: 7px;
+    right: 11px;
+    z-index: 2 !important;
+    padding: 2px 5px 1px !important;
+    border: none !important;
+    background: none !important;
+    min-width: 0px !important;
+}
+
+.emoji-mart-emoji {
+    position: relative !important;
+    display: inline-block !important;
+    font-size: 0 !important;
+    margin: 0;
+    padding: 0 !important;
+    border: none !important;
+    background: none !important;
+    box-shadow: none;
+}
+
+.emoji-mart .emoji-mart-emoji {
+    padding: 6px !important;
+    min-width: 0px !important;
+}
+
+.react-input-emoji--button {
+    position: relative !important;
+    display: block !important;
+    text-align: center;
+    min-width: 0px !important;
+    padding: 0 10px !important;
+    overflow: hidden;
+    transition: color 0.1s ease-out;
+    margin: 0;
+    box-shadow: none;
+    background: none !important;
+    border: none !important;
+    outline: none;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.react-input-emoji--container {
+    border-radius: 5px !important;
+    min-height: 90px !important;
+}
+
+
+.emoji-mart-anchor {
+    position: relative !important;
+    display: block !important;
+    flex: 1 1 auto;
+    color: #858585 !important;
+    text-align: center;
+    padding: 12px 4px !important;
+    overflow: hidden;
+    transition: color .1s ease-out;
+    margin: 0;
+    box-shadow: none;
+    background: none !important;
+    border: none !important;
+    min-width: 0px !important;
+}
+
+.react-emoji-picker--wrapper {
+    position: absolute;
+    right: 0;
+    overflow: hidden;
+    z-index: 10;
+    width: 100%!important;
 }

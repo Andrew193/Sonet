@@ -1,15 +1,19 @@
-import {v4 as uuidv4} from "uuid";
 import s from "./posts.module.css";
-import {alpha, Avatar} from "@mui/material";
+import {alpha, Avatar, Box, hexToRgb, ListItemIcon, Typography} from "@mui/material";
 import {Link} from "react-router-dom";
 import EmotionsLineContainer from "./EmotionsLineContainer";
 import profileHelper from "../components/profile/profileHelper";
 import DataHelper from "../helpers/dateHelper";
-import {useEffect, useState, useMemo} from "react";
-import LazyImage from "./LazyImage";
+import {useEffect, useState, useMemo, useCallback, useRef} from "react";
 import ImageViewer from "react-simple-image-viewer";
-import {useCallback} from "react";
-
+import {BsThreeDots} from "react-icons/all";
+import {AiOutlineDownload} from "react-icons/ai";
+import {createFile, downloadFile} from "../utils";
+import {useOutsideClick} from "../hooks";
+import PostItemsImages from "./PostItemsImages";
+import React from "react";
+import { downloadZip } from "client-zip/index.js"
+import FileSaver from "file-saver"
 
 function PostItem(props) {
     const {
@@ -32,22 +36,6 @@ function PostItem(props) {
         setIsViewerOpen(false);
     };
 
-    const previewImages = useMemo(() => {
-        if (JSON.parse(value?.savedImages)?.length) {
-            return JSON.parse(value?.savedImages)?.map((img, index) =>
-                <LazyImage
-                    onClick={() => {
-                        openImageViewer(index)
-                    }}
-                    imgClass={s.ImgPreview}
-                    imageSrc={JSON.parse(img)?.webContentLink}
-                    key={img}
-                />
-            )
-        }
-        return [];
-    }, [value?.savedImages])
-
     useEffect(() => {
         async function getUserAvatar() {
             if (value?.userId && !userAvatar) {
@@ -65,26 +53,41 @@ function PostItem(props) {
     }, [])
 
     const imagesForPreview = useMemo(() => JSON.parse(value?.savedImages)?.map((image) => JSON.parse(image)?.webContentLink)
-        , [value?.savedImages])
+        , [])
+
+    const [anchorEl, setAnchorEl] = useState(null);
+    const wrapperRef = useRef(null);
+
+    useOutsideClick(wrapperRef, () => {
+        handleClose();
+    })
+
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
 
     return (
         <>
-            {isViewerOpen && (
-                <ImageViewer
-                    backgroundStyle={{
-                        background: `${alpha(settings?.configs?.color[settings?.color] || "rgb(231 231 240)", 0.2)}`,
-                        zIndex: 10
-                    }}
-                    key={imagesForPreview}
-                    src={imagesForPreview}
-                    currentIndex={currentImage}
-                    disableScroll
-                    closeOnClickOutside
-                    onClose={closeImageViewer}
-                />
-            )}
+            {
+                isViewerOpen && (
+                    <ImageViewer
+                        backgroundStyle={{
+                            background: `${alpha(settings?.configs?.color[settings?.color] || "rgb(231 231 240)", 0.2)}`,
+                            zIndex: 10
+                        }}
+                        key={currentImage}
+                        src={imagesForPreview}
+                        currentIndex={currentImage}
+                        disableScroll
+                        closeOnClickOutside
+                        onClose={closeImageViewer}
+                    />
+                )}
             <div
-                key={uuidv4()}
                 className={s.Item + " itemsPostsPage"}
                 data-id={value.id}
             >
@@ -94,7 +97,8 @@ function PostItem(props) {
                         height: '75px',
                         width: '75px',
                         marginRight: '15px',
-                        borderRadius: '5px'
+                        borderRadius: '5px',
+                        boxShadow: `0px 0px 8px 0px ${alpha(hexToRgb(settings?.configs?.color[settings?.color] || "rgb(0,0,0)"), 0.8)}`
                     }}
                 />
                 <div
@@ -109,20 +113,55 @@ function PostItem(props) {
                         >{value.createdBy}</Link>
                     </h3>
                     <p>{value.text}</p>
-                    <div
-                        className={s.ImagesContainer}
-                    >
-                        {previewImages}
-                    </div>
+                    <PostItemsImages
+                        valueSavedImages={value?.savedImages}
+                        openImageViewer={openImageViewer}
+                    />
                     <EmotionsLineContainer
                         value={value}
                         id={id}
                     />
                 </div>
+                <BsThreeDots
+                    onClick={(e) => {
+                        handleClick(e)
+                    }}
+                    className={s.PostItemsActions}
+                />
+
+                <Box
+                    style={{
+                        display: `${!!anchorEl ? "display" : "none"}`
+                    }}
+                    key={anchorEl}
+                    onClick={handleClose}
+                    className={s.PostItemsActionsBox}
+                    ref={wrapperRef}
+                >
+                    <Box
+                        onClick={async () => {
+                            const file = await createFile(imagesForPreview[0]);
+                            console.log(file)
+                            const content = await downloadZip([createFile(imagesForPreview[0])]).blob()
+                            FileSaver.saveAs(content, "download.zip");
+                            // for (let i = 0; i < imagesForPreview?.length; i++) {
+                            //     console.log(downloadFile(imagesForPreview[i], `img${i}`))
+                            // }
+                        }}
+                    >
+                        <ListItemIcon>
+                            <AiOutlineDownload/>
+                        </ListItemIcon>
+                        <Typography>Download attachments</Typography>
+                    </Box>
+                </Box>
+
                 <span className={s.Time}>{DataHelper.fromNow(value.createdAt)}</span>
             </div>
         </>
     )
 }
 
-export default PostItem;
+const MemoizedPostItem = React.memo(PostItem);
+
+export default MemoizedPostItem;

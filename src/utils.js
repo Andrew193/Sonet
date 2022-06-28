@@ -1,12 +1,24 @@
 import {v4 as uuidv4} from 'uuid';
 
-export function downloadFile(url) {
+export function downloadFile(url, name) {
+    console.log(url,"dffdsfs")
     const link = document.createElement('a');
     link.href = url;
-    link.download = 'Download.jpg';
+    link.download = name || 'Download.jpg';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+
+    return true;
+}
+
+export async function createFile(src){
+    let response = await fetch(src);
+    let data = await response.blob();
+    let metadata = {
+        type: 'image/png'
+    };
+    return new File([data], "test.png", metadata);
 }
 
 export function hexToRgb(hex) {

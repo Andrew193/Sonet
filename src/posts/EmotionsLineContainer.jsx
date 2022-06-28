@@ -26,7 +26,6 @@ function EmotionsLineContainer(props) {
             >
                 <span
                     onClick={() => {
-                        console.log(value)
                         postsHelper.like({
                             ...value,
                             id: String(value?.id),

@@ -14,6 +14,7 @@ function LazyImage(props) {
 
     return (
         <LazyLoad
+            key={imageSrc}
             height={200}
             offset={[-50, 0]}
             placeholder={<Placeholder/>}
@@ -24,6 +25,7 @@ function LazyImage(props) {
                     {imageSrc && <Avatar
                         src={imageSrc}
                         alt={""}
+                        key={imageSrc}
                         className={imgClass}
                         style={{display: !!isLoading ? "none" : "block"}}
                         onLoad={() => {

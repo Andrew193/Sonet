@@ -80,9 +80,11 @@
 
 .PostModal > div {
     background-color: white;
-    border-radius: 20px;
+    border-radius: 5px;
     padding: 10px;
     box-shadow: 0 5px 10px 0 rgb(0, 130, 231, 20%);
+    max-height: 500px;
+    overflow: auto;
 }
 
 .userInfo p {
