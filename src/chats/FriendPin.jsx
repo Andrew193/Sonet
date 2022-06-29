@@ -21,6 +21,19 @@ function FriendPin(props) {
 
     const userInformation = JSON.parse(localStorage.getItem("userInfo"));
 
+    function actionsCover() {
+        setPossibleMates((state) => {
+            const copy = createCopy(state);
+
+            setConversations((state) => {
+                return [...(state || []), {...copy[id], approved: true}]
+            })
+
+            copy.splice(id, 1)
+            return copy;
+        })
+    }
+
     return (
         <>
             <div
@@ -59,7 +72,9 @@ function FriendPin(props) {
                             rejectFriendRequest({
                                 receiverId,
                                 requestSendById
-                            }, notify, notify)
+                            }, notify, notify);
+
+                            actionsCover();
                         }}
                     >
                         <ImCancelCircle
@@ -84,16 +99,7 @@ function FriendPin(props) {
                                 approved: true
                             }, toast)
 
-                            setPossibleMates((state) => {
-                                const copy = createCopy(state);
-
-                                setConversations((state) => {
-                                    return [...(state || []), {...copy[id], approved: true}]
-                                })
-
-                                copy.splice(id, 1)
-                                return copy;
-                            })
+                            actionsCover()
                         }}
                     >
                         <IoAddSharp
