@@ -21,13 +21,15 @@ function FriendPin(props) {
 
     const userInformation = JSON.parse(localStorage.getItem("userInfo"));
 
-    function actionsCover() {
+    function actionsCover(flag) {
         setPossibleMates((state) => {
             const copy = createCopy(state);
 
-            setConversations((state) => {
-                return [...(state || []), {...copy[id], approved: true}]
-            })
+            if(flag) {
+                setConversations((state) => {
+                    return [...(state || []), {...copy[id], approved: true}]
+                })
+            }
 
             copy.splice(id, 1)
             return copy;
@@ -99,7 +101,7 @@ function FriendPin(props) {
                                 approved: true
                             }, toast)
 
-                            actionsCover()
+                            actionsCover(true)
                         }}
                     >
                         <IoAddSharp
