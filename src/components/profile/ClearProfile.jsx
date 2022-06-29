@@ -72,6 +72,11 @@ function ClearProfile(props) {
                 opacity: 1;
                 }
                 
+                #ReactSimpleImageViewer img {
+                max-height: unset!important;
+                min-height: unset!important;
+                }
+                
                 .react-simple-image-viewer__slide img{
                 min-width: 350px;
                 min-height: 350px;
