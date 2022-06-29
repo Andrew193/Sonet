@@ -140,7 +140,10 @@ class Http {
     }
 
     createPost(text, callback, callback1, savedImages) {
-        axios.post("https://sonet34.herokuapp.com/api/post?token=" + Script.getCookie("token"), {text, savedImages: JSON.stringify(savedImages || [])})
+        axios.post("https://sonet34.herokuapp.com/api/post?token=" + Script.getCookie("token"), {
+            text,
+            savedImages: JSON.stringify(savedImages || [])
+        })
             .then((response) => callback(response))
             .catch((error) => error && callback1(error))
     }
@@ -202,7 +205,7 @@ class Http {
     }
 
     rejectRequest(values, okCallback, errorCallback) {
-        axios.delete("https://sonet34.herokuapp.com/api/mates/", values)
+        axios.delete("https://sonet34.herokuapp.com/api/mates/", {data: values})
             .then((response) => {
                 okCallback("Rejected")
             })
