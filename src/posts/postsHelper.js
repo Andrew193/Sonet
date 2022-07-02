@@ -6,6 +6,10 @@ function refresh(socket, userId) {
     socket.emit("postUpdate").emit("notMyPostUpdate", {userId}).emit("MyPostUpdate", {userId}).emit("postCreate")
 }
 
+export async function addPhotoToMyGallery(values, okCallback, errorCallback) {
+    HttpHelper.addPhotoToMyGallery(values, okCallback, errorCallback);
+}
+
 function getMyPostWithEndpoint(id, set, endpoint) {
     HttpHelper.getPostWithType(id, set, endpoint)
 }

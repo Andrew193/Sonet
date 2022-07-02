@@ -266,6 +266,20 @@ class Http {
             })
     }
 
+    addPhotoToMyGallery(values, okCallback, errorCallback) {
+        axios.post("https://sonet34.herokuapp.com/api/gallery", values)
+            .then((response) => {
+                okCallback(response?.data);
+            })
+            .catch((error) => {
+                console.error(error?.response?.data);
+
+                if (error) {
+                    errorCallback(createErrorsForApiCall(error?.response?.data, error?.response?.data))
+                }
+            })
+    }
+
     getConversationById(conversationId, okCallback, errorCallback) {
         axios.get("https://sonet34.herokuapp.com/api/chat/conversation", {params: {conversationId}})
             .then((response) => {

@@ -113,6 +113,7 @@ function PostItem(props) {
                     </h3>
                     <p>{value.text}</p>
                     <PostItemsImages
+                        valueUserId={+value.userId}
                         valueSavedImages={value?.savedImages}
                         openImageViewer={openImageViewer}
                     />

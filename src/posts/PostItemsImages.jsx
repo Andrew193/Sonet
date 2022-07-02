@@ -6,14 +6,18 @@ import {ListItemIcon, Menu, MenuItem, Typography} from "@mui/material";
 import {AiOutlineDownload, AiOutlineEye} from "react-icons/ai";
 import {GrGallery} from "react-icons/all";
 import {downloadFileVersion2} from "../utils";
+import {addPhotoToMyGallery} from "./postsHelper";
+import {notify} from "../App";
 
 function PostItemsImages(props) {
     const {
         valueSavedImages,
-        openImageViewer
+        openImageViewer,
+        valueUserId
     } = props;
 
     const [images, setImages] = useState(JSON.parse(valueSavedImages));
+    const id = JSON.parse(localStorage.getItem("userInfo")).id;
 
     const [anchorEl, setAnchorEl] = useState(null);
     const [selectedImage, setSelectedImage] = useState(null);
@@ -41,6 +45,7 @@ function PostItemsImages(props) {
         ))
     }, [])
 
+    console.log(JSON.parse(valueSavedImages)[selectedImage])
     return (
         <div
             className={s.ImagesContainer}
@@ -72,7 +77,19 @@ function PostItemsImages(props) {
                     </ListItemIcon>
                     <Typography>Preview</Typography>
                 </MenuItem>
-                <MenuItem onClick={handleClose}>
+                <MenuItem onClick={() => {
+                    addPhotoToMyGallery({
+                        src: JSON.parse(valueSavedImages)[selectedImage],
+                        userId: id,
+                        shared: true,
+                        sharedUser: valueUserId
+                    }, () => {
+                        notify("Added")
+                    }, (errorMessage) => {
+                        notify(errorMessage || "Error");
+                    })
+                    handleClose()
+                }}>
                     <ListItemIcon>
                         <GrGallery/>
                     </ListItemIcon>
