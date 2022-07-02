@@ -14,7 +14,7 @@ import {
 import PostPortal from "./PostPortal";
 import Script2 from "../components/profile/profileHelper";
 import {headerListLinks} from "../vars";
-import {CgGames, IoSettingsOutline} from "react-icons/all";
+import {CgGames, IoSettingsOutline, RiGalleryLine} from "react-icons/all";
 import {getSettings} from "../db";
 import {alpha} from "@mui/material";
 
@@ -24,6 +24,7 @@ const headerLinksConfig = [
     {path: headerListLinks.chats, img: <AiOutlineComment size={"24px"}/>, label: "Chats"},
     {path: headerListLinks.users, img: <AiOutlineTeam size={"24px"}/>, label: "Users"},
     {path: headerListLinks.posts, img: <AiOutlineFile size={"24px"}/>, label: "Posts"},
+    {path: headerListLinks.gallery, img: <RiGalleryLine size={"24px"}/>, label: "Gallery"},
     {path: headerListLinks.games, img: <CgGames size={"24px"}/>, label: "Games"},
     {path: headerListLinks?.settings, img: <IoSettingsOutline size={"24px"}/>, label: "Settings"}
 ];

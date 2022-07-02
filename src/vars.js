@@ -5,5 +5,6 @@ export const headerListLinks = {
     users: "/users",
     posts: "/posts",
     games: "/games",
-    settings: "/settings"
+    settings: "/settings",
+    gallery: "/gallery"
 }
