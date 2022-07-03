@@ -10,6 +10,7 @@ import {downloadFileVersion2} from "../utils";
 import {AiOutlineDownload, AiOutlineEye} from "react-icons/ai";
 import GalleryActions from "./GalleryActions";
 import ImageViewer from "react-simple-image-viewer";
+import GalleryMode from "./GalleryMode";
 
 function GalleryInnerContent(props) {
     const {
@@ -46,6 +47,8 @@ function GalleryInnerContent(props) {
             </p>
         )
     }, [images])
+
+    console.log(images)
 
     const [anchorEl, setAnchorEl] = useState(null);
     const [isViewerOpen, setIsViewerOpen] = useState(false);
@@ -121,11 +124,17 @@ function GalleryInnerContent(props) {
                     <Typography>Expand</Typography>
                 </MenuItem>
                 <MenuItem onClick={() => {
-                    console.log(images?.clearData[selectedImage]?.src)
                     deleteMyPhoto({
                         userId: userInformation?.id,
                         src: `${images?.clearData[selectedImage]?.src}`
-                    }, () => notify("Deleted"), (error) => notify(error || "Something went wrong"))
+                    }, () => {
+                        setImages((images) => {
+                            debugger
+                            images?.clearData?.splice(selectedImage, 1);
+                            return JSON.parse(JSON.stringify(images));
+                        })
+                        notify("Deleted")
+                    }, (error) => notify(error || "Something went wrong"))
                     handleClose()
                 }}>
                     <ListItemIcon>
@@ -136,13 +145,13 @@ function GalleryInnerContent(props) {
             </Menu>
 
             <GalleryActions/>
-
             <div
                 className={"Separator"}
                 onClick={(e) => {
                     e.target.nextElementSibling.classList.toggle("Hide")
                 }}
             />
+            <GalleryMode />
             <Box
                 className={s.ImagesContainer}
             >
