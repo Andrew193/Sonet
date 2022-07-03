@@ -20,7 +20,10 @@ function SpecialPosts(props) {
     const [posts, setPosts] = useState(false);
     const [settings, setSettings] = useState({});
 
-    socket.on(type === "notMy" ? "notMyPostUpdate" : "MyPostUpdate", (updatedPosts) => setPosts({posts: updatedPosts}));
+    socket.on(type === "notMy" ? "notMyPostUpdate" : "MyPostUpdate", (updatedPosts) => {
+        console.log(updatedPosts, "fsdfsdfdsfsdfsdfsdf")
+        setPosts({posts: updatedPosts})
+    });
 
     useEffect(() => {
         Script.getMyPostWithEndpoint(id, setPosts, type === "notMy" ? "notMy" : "my")

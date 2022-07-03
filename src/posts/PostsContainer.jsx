@@ -18,7 +18,10 @@ function PostsContainer(props) {
 
     const {id} = JSON.parse(localStorage.getItem("userInfo"));
 
-    socket.on("postUpdate", (updatedPosts) => setPosts({posts: updatedPosts}));
+    socket.on("postUpdate", (updatedPosts) => {
+        console.log("test", updatedPosts)
+        setPosts({posts: updatedPosts})
+    });
 
     useEffect(() => {
         const id = props.match.params.id;
