@@ -10,6 +10,13 @@
     flex-direction: column;
 }
 
+.LazyBackground {
+    background: #e6ddf9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .ImagesContainer {
     display: flex;
     flex-wrap: wrap;

@@ -1,0 +1,76 @@
+.Container {
+    margin: 0px 0px 0px 15%;
+    flex: 3 0;
+    max-width: 85%;
+    height: -webkit-fill-available;
+    border-left: 1px solid rgb(206, 204, 204);
+    border-right: 1px solid rgb(206, 204, 204);
+}
+
+.ImagesContainer {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.ImagesContainer > p {
+    position: relative;
+}
+
+.ImagesContainer > p svg {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: red;
+    font-size: 16px;
+}
+
+.ImageMenu {
+
+}
+
+.ImageMenu svg {
+    font-size: 16px;
+    color: black;
+}
+
+.ImageMenu p {
+    font-size: 14px;
+}
+
+.ImagesContainer > p > div > div {
+    min-height: 190px;
+    min-width: 135px;
+    border-radius: 5px;
+    margin: 10px;
+    transition: all ease 0.7s;
+    cursor: pointer;
+}
+
+.ImagesContainer > p > div > div:hover {
+    opacity: 0.7;
+}
+
+.GalleryActions {
+    display: flex;
+    justify-content: right;
+    padding: 5px;
+}
+
+.GalleryActions > svg {
+    padding: 7px;
+    font-size: 30px;
+    transition: all ease 0.5s;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.GalleryActions > svg:hover {
+    background: #7986cb;
+}
+
+@media (max-width: 768px) {
+    .Container {
+        max-width: 100%;
+        margin: unset;
+    }
+}

@@ -1,7 +1,8 @@
-import {alpha} from "@mui/material";
-import {useEffect, useState} from "@types/react";
+import {alpha, Box, hexToRgb} from "@mui/material";
+import {useEffect, useState} from "react";
 import {getSettings} from "../db";
-
+import s from "./gallery.module.css";
+import GalleryInnerContent from "./GalleryInnerContent";
 
 function GalleryContainer() {
     const [settings, setSettings] = useState({});
@@ -16,29 +17,30 @@ function GalleryContainer() {
         getData();
     }, [])
 
-    return(
-        <>
+    return (
+        <Box
+            className={s.Container}
+        >
             <style>
                 {`
-                .chatMenuInput {
-                 border-bottom: 1px solid ${settings?.configs?.color[settings?.color]};
-                 }
-                 .chatMenuWrapper {
-                 border-right: 1px solid ${settings?.configs?.color[settings?.color]};
-                 }
-                 .conversation:hover {
-                 color: ${settings?.configs?.color[settings?.color]};
-                 background: ${alpha(settings?.configs?.color[settings?.color] || "#7986cb", 0.7)};
-                 }
-                 html, .chatBoxWrapper, .chatMenu, .chatMenuInput{
+                 html, .chatBoxWrapper, .chatMenu, .chatMenuInput, .basicPageHead, .${s.ImagesContainer}, .${s.GalleryActions},
+                 .${s.Container} {
                  background: ${settings?.configs?.background[settings?.background]};
                  }
-                 .noConversationText, .lonelyLine{
-                 color: ${alpha(settings?.configs?.color[settings?.color] || "rgb(224, 220, 220)", 0.5)} !important;
+                 .${s.GalleryActions} > svg:hover {
+                 background: ${alpha(hexToRgb(settings?.configs?.color[settings?.color] || "#7986cb"), 0.2)};
+                 color: ${settings?.configs?.color[settings?.color]};
+                 }
+                 #ReactSimpleImageViewer img {
+                 max-height: 550px !important;
+                 min-height: 250px !important;
                  }
                 `}
             </style>
-        </>
+            <GalleryInnerContent
+                settings={settings}
+            />
+        </Box>
     )
 }
 

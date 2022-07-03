@@ -280,6 +280,34 @@ class Http {
             })
     }
 
+    getMyGallery(userId, okCallback, errorCallback) {
+        axios.get("https://sonet34.herokuapp.com/api/gallery", {params: {userId}})
+            .then((response) => {
+                okCallback(response?.data);
+            })
+            .catch((error) => {
+                console.error(error?.response?.data);
+
+                if (error) {
+                    errorCallback(createErrorsForApiCall(error?.response?.data, error?.response?.data))
+                }
+            })
+    }
+
+    deleteMyPhoto({userId, src}, okCallback, errorCallback) {
+        axios.delete("https://sonet34.herokuapp.com/api/gallery", {params: {userId, src}})
+            .then((response) => {
+                okCallback(response?.data);
+            })
+            .catch((error) => {
+                console.error(error?.response?.data);
+
+                if (error) {
+                    errorCallback(createErrorsForApiCall(error?.response?.data, error?.response?.data))
+                }
+            })
+    }
+
     getConversationById(conversationId, okCallback, errorCallback) {
         axios.get("https://sonet34.herokuapp.com/api/chat/conversation", {params: {conversationId}})
             .then((response) => {
