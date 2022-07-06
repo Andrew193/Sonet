@@ -23,7 +23,7 @@ function ClearPosts(props) {
                     key={index}
                 />))
         }
-    }, [])
+    }, [JSON.stringify(toMake)])
 
     return (
         <div className={s.PostsCont + " onePostContainer"}>
