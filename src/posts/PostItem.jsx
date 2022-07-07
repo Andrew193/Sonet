@@ -89,6 +89,7 @@ function PostItem(props) {
             <div
                 className={s.Item + " itemsPostsPage " + customStyle}
                 data-id={value.id}
+                style={settings?.list?.listItemStyles}
             >
                 <Avatar
                     src={userAvatar}

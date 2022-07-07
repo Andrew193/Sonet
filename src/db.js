@@ -30,6 +30,14 @@ const defaultSettingsConfig = {
             6: "#2177e8",
             7: "#b32dd2"
         }
+    },
+    list: {
+        viewType: "plain",
+        borderRadius: 0,
+        listItemStyles: "",
+        margin: 0,
+        padding: 0,
+        boxShadow: false
     }
 }
 

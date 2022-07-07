@@ -6,9 +6,11 @@ import AccordionDetails from "./AccordionDetails";
 import AccordionSummary from "./AccordionSammary";
 import DisplaySettings from "./components/DisplaySettings";
 import s from './settings.module.css';
+import AppearanceSettings from "./components/AppearanceSettings";
 
 const settingsList = [
-    {panelName: "themes", label: "Display", innerContent: <DisplaySettings/>}
+    {panelName: "themes", label: "Display", innerContent: <DisplaySettings/>},
+    {panelName: "appearance", label: "Appearance", innerContent: <AppearanceSettings/>}
 ]
 
 function SettingsContent(props) {

@@ -7,6 +7,38 @@
     border-right: 1px solid rgb(206, 204, 204);
 }
 
+.ListStyleContainer {
+    justify-content: space-evenly !important;
+}
+
+
+.ExampleBlock {
+    width: 100%;
+    height: 150px;
+    background: #d9d5d5;
+    border: 1px solid;
+}
+
+.ExampleBlock div {
+    border: 1px solid red;
+    height: 100%;
+    width: 100%;
+}
+
+.ListStyleContainer div {
+    margin: 5px;
+    padding: 5px;
+    border: 1px solid;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all ease 0.5s;
+}
+
+.ListStyleContainer div:hover {
+    border: 1px solid red;
+    opacity: 0.7;
+}
+
 .Accordion :nth-child(2n) {
     background-color: #f6f2ff;
 }
@@ -142,7 +174,7 @@
 }
 
 .Actions button {
-    display: flex!important;
+    display: flex !important;
     justify-content: space-between;
     align-items: center;
 }

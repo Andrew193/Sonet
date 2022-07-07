@@ -41,6 +41,7 @@ function ClearUsers(props) {
                     onClick={(e) => {
                         Script.openUser(e, history)
                     }}
+                    style={settings?.list?.listItemStyles}
                 >
                     {value[3] && <Avatar
                         src={avatarUrl}
