@@ -11,6 +11,7 @@ import {AiOutlineDownload, AiOutlineEye} from "react-icons/ai";
 import GalleryActions from "./GalleryActions";
 import ImageViewer from "react-simple-image-viewer";
 import GalleryMode from "./GalleryMode";
+import {useTranslation} from "react-i18next";
 
 function GalleryInnerContent(props) {
     const {
@@ -80,6 +81,8 @@ function GalleryInnerContent(props) {
         setAnchorEl(null);
     };
 
+    const {t} = useTranslation();
+
     return (
         <Box>
             {
@@ -112,7 +115,7 @@ function GalleryInnerContent(props) {
                     <ListItemIcon>
                         <AiOutlineDownload/>
                     </ListItemIcon>
-                    <Typography>Download</Typography>
+                    <Typography>{t("Download")}</Typography>
                 </MenuItem>
                 <MenuItem onClick={() => {
                     openImageViewer(selectedImage)
@@ -121,7 +124,7 @@ function GalleryInnerContent(props) {
                     <ListItemIcon>
                         <AiOutlineEye/>
                     </ListItemIcon>
-                    <Typography>Expand</Typography>
+                    <Typography>{t("Expand")}</Typography>
                 </MenuItem>
                 <MenuItem onClick={() => {
                     deleteMyPhoto({
@@ -140,7 +143,7 @@ function GalleryInnerContent(props) {
                     <ListItemIcon>
                         <AiOutlineDelete/>
                     </ListItemIcon>
-                    <Typography>Delete</Typography>
+                    <Typography>{t("Delete")}</Typography>
                 </MenuItem>
             </Menu>
 

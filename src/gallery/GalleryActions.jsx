@@ -4,6 +4,7 @@ import s from "./gallery.module.css";
 import {useMemo, useState} from "react";
 import {downloadFileVersion2} from "../utils";
 import {AiOutlineDownload} from "react-icons/ai";
+import {useTranslation} from "react-i18next";
 
 function GalleryActions() {
 
@@ -28,6 +29,8 @@ function GalleryActions() {
                 `
     }, [size])
 
+    const {t} = useTranslation();
+
     return (
         <Box
             className={s.GalleryActions}
@@ -45,7 +48,7 @@ function GalleryActions() {
                     <ListItemIcon>
                         <AiOutlineDelete/>
                     </ListItemIcon>
-                    <Typography>Clear my gallery</Typography>
+                    <Typography>{t("Clear my gallery")}</Typography>
                 </MenuItem>
                 <MenuItem onClick={() => {
                     setSize({min: 435, max: 320})
@@ -54,7 +57,7 @@ function GalleryActions() {
                     <ListItemIcon>
                         <AiOutlineMedium/>
                     </ListItemIcon>
-                    <Typography>Large images size</Typography>
+                    <Typography>{t("Large images size")}</Typography>
                 </MenuItem>
                 <MenuItem onClick={() => {
                     setSize({min: 350, max: 215})
@@ -63,7 +66,7 @@ function GalleryActions() {
                     <ListItemIcon>
                         <AiOutlineMedium/>
                     </ListItemIcon>
-                    <Typography>Medium images size</Typography>
+                    <Typography>{t("Medium images size")}</Typography>
                 </MenuItem>
                 <MenuItem onClick={() => {
                     setSize({min: 190, max: 135})
@@ -72,7 +75,7 @@ function GalleryActions() {
                     <ListItemIcon>
                         <TbLetterB/>
                     </ListItemIcon>
-                    <Typography>Basic images size</Typography>
+                    <Typography>{t("Basic images size")}</Typography>
                 </MenuItem>
             </Menu>
 

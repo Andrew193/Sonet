@@ -64,11 +64,25 @@ i18n
                     "Add to my Gallery": "Add to my Gallery",
                     "My": "My",
                     "Not my": "Not my",
-                    "All": "All"
+                    "All": "All",
+                    "Expand": "Expand",
+                    "Clear my gallery": "Clear my gallery",
+                    "Large images size": "Large images size",
+                    "Medium images size": "Medium images size",
+                    "Basic images size": "Basic images size",
+                    "Delete": "Delete",
+                    "Folders": "Folders"
                 }
             },
             ua: {
                 translations: {
+                    "Folders": "Папки",
+                    "Delete": "Видалити",
+                    "Basic images size": "Основний розмір зображень",
+                    "Medium images size": "Середній розмір зображень",
+                    "Large images size": "Великий розмір зображень",
+                    "Clear my gallery": "Очистити мою галерею",
+                    "Expand": "Розгорнути",
                     "All": "Всі",
                     "Not my": "Не мої",
                     "My": "Мої",

@@ -1,10 +1,13 @@
 import s from "./gallery.module.css";
 import {Typography} from "@mui/material";
 import {useState} from "react";
+import {useTranslation} from "react-i18next";
 
 
 function GalleryMode() {
     const [selected, setSelected] = useState(0);
+
+    const {t} = useTranslation();
 
     return (
         <Typography
@@ -17,7 +20,8 @@ function GalleryMode() {
                     setSelected(0)
                 }}
             >
-                All</span>
+                {t("All")}
+            </span>
             <span
                 id={"mainPostBtn"}
                 style={{background: !!selected ? "red" : ""}}
@@ -25,7 +29,8 @@ function GalleryMode() {
                     setSelected(1)
                 }}
             >
-                Folders</span>
+                {t("Folders")}
+            </span>
         </Typography>
     )
 }
