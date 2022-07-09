@@ -8,6 +8,7 @@ import {
     Typography
 } from "@mui/material";
 import {useHistory} from "react-router-dom";
+import {useTranslation} from "react-i18next";
 
 function GamePreviewTile(props) {
     const {
@@ -20,6 +21,8 @@ function GamePreviewTile(props) {
     } = props;
 
     const history = useHistory();
+
+    const {t} = useTranslation();
 
     return (
         <Card
@@ -58,8 +61,8 @@ function GamePreviewTile(props) {
             </style>
 
             <CardHeader
-                title={gameName}
-                subheader={"Play now!)"}
+                title={t("" + gameName + "")}
+                subheader={t("Play now!)")}
                 style={{
                     color: styleSettings?.configs?.color[styleSettings?.color],
                     fontSize: styleSettings?.configs?.size[styleSettings?.fontSize]
@@ -88,7 +91,7 @@ function GamePreviewTile(props) {
                         fontSize: styleSettings?.configs?.size[styleSettings?.fontSize]
                     }}
                 >
-                    {description}
+                    {t("" + description + "")}
                 </Typography>
             </CardContent>
         </Card>

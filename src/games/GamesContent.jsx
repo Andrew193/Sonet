@@ -6,6 +6,7 @@ import {useMemo} from "react";
 import TicTacToe from "./tic-tac/TicTacToe";
 import Game2048Container from "./2048/Game2048Container";
 import TetrisContainer from "./tetris/TetrisContainer";
+import {useTranslation} from "react-i18next";
 
 function getSelectedGame(game) {
     return {
@@ -29,6 +30,8 @@ function GamesContent(props) {
         }
     }, [match])
 
+    const {t} = useTranslation();
+
     return (
         <>
             {
@@ -43,7 +46,7 @@ function GamesContent(props) {
                                 fontSize: styleSettings?.configs?.size[styleSettings?.fontSize],
                                 fontWeight:"bold"
                             }}
-                        >Choose a game</Typography>
+                        >{t("Choose a game")}</Typography>
 
                         <GamesList
                             styleSettings={styleSettings}

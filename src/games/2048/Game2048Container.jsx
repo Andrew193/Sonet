@@ -3,6 +3,7 @@ import {useEffect, useMemo, useState} from "react";
 import {ImStarEmpty} from "react-icons/all";
 import {getSettings} from "../../db";
 import {alpha, hexToRgb as muiHexToRgb} from "@mui/material"
+import {useTranslation} from "react-i18next";
 
 let mydata = [];    // Добавляем атрибут mydata для хранения игровых данных
 let score = 0;	  	   // Добавляем атрибут оценки
@@ -334,6 +335,7 @@ function Game2048Container() {
         getData();
     }, [])
 
+    const {t} = useTranslation();
 
     return (
         <div className="marg-2048">
@@ -366,9 +368,9 @@ function Game2048Container() {
                         onClick={() => {
                             start();
                         }}
-                    >New</span>
+                    >{t("New")}</span>
                     <p>
-                        SCORE:
+                        {t("SCORE:")}
                         <ImStarEmpty
                             className={"score2048"}
                         />
@@ -379,7 +381,7 @@ function Game2048Container() {
                     style={{width: '175px'}}
                 >
                     <p>
-                        <span style={{color: 'white'}}>Highest match:</span>
+                        <span style={{color: 'white'}}>{t("Highest match:")}</span>
                         <ImStarEmpty
                             className={"score2048"}
                         />
@@ -410,14 +412,14 @@ function Game2048Container() {
             </div>
             <div className="gameover-2048" id="gameover-2048">
                 <div className="over-2048">
-                    <p>GAME OVER :(</p>
-                    <p>SCORE:<span id="score02-2048"/></p>
+                    <p>{t("GAME OVER :(")}</p>
+                    <p>{t("SCORE:")}<span id="score02-2048"/></p>
                     <span
                         id={'test'}
                         onClick={() => {
                             start();
                         }}
-                    >Try again!</span>
+                    >{t("Try again!")}</span>
                 </div>
             </div>
         </div>

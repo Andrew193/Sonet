@@ -6,10 +6,12 @@ import {useState, useEffect, useRef} from "react";
 import {useOutsideClick} from "../../hooks";
 import {getSettings} from "../../db";
 import {buttonsConfig} from "../../createPost/CreatePostLine";
+import {useTranslation} from "react-i18next";
 
 function TetrisContainer() {
     const [isTipOpened, setIsTipOpened] = useState(false);
     const wrapperRef = useRef(null);
+    const {t} = useTranslation();
 
     useOutsideClick(wrapperRef, () => {
         setIsTipOpened(false);
@@ -89,8 +91,8 @@ function TetrisContainer() {
                                     left: '0px'
                                 }}
                             >
-                                <p>Points: <BiCoinStack/><b>{points}</b></p>
-                                <p>Lines Cleared: <AiOutlineAlignCenter/><b>{linesCleared}</b></p>
+                                <p>{t("Points:")} <BiCoinStack/><b>{points}</b></p>
+                                <p>{t("Lines Cleared:")} <AiOutlineAlignCenter/><b>{linesCleared}</b></p>
                             </div>
 
                             {state === 'LOST' && (
@@ -105,12 +107,12 @@ function TetrisContainer() {
                                         onClick={reset}
                                         id={'mainPostBtn'}
                                         className={`closeBtn-tetris ${buttonsConfig[settings?.configs?.color[settings?.color]]}`}
-                                    >New game</span>
+                                    >{t("New game")}</span>
                                 </div>
                             )}
 
                             <div>
-                                <h4>Game field</h4>
+                                <h4>{t("Game field")}</h4>
                                 <Gameboard
                                     style={{background: 'red'}}
                                 />
@@ -121,7 +123,7 @@ function TetrisContainer() {
                             style={{marginRight: '7%'}}
                             className={"tetris-game-field"}
                         >
-                            <h4>Next blocks</h4>
+                            <h4>{t("Next blocks")}</h4>
                             <PieceQueue/>
                         </div>
 
@@ -134,19 +136,19 @@ function TetrisContainer() {
                                 color: settings?.configs?.color[settings?.color]
                             }}
                         >
-                            <h4>General Tips</h4>
+                            <h4>{t("General Tips")}</h4>
                             <Typography
                                 variant={'h5'}
                                 component={'div'}
-                            >1) Memorize how pieces rotate clockwise and counterclockwise.</Typography>
+                            >1) {t("Memorize how pieces rotate clockwise and counterclockwise.")}</Typography>
                             <Typography
                                 variant={'h5'}
                                 component={'div'}
-                            >2) Look at your next piece while setting your current piece down</Typography>
+                            >2) {t("Look at your next piece while setting your current piece down")}</Typography>
                             <Typography
                                 variant={'h5'}
                                 component={'div'}
-                            >3) Play on marathon mode to learn the level progression</Typography>
+                            >3) {t("Play on marathon mode to learn the level progression")}</Typography>
                         </div>
                         }
                     </div>

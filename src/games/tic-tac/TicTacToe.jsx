@@ -6,6 +6,7 @@ import {alpha, Typography} from "@mui/material";
 import Tic from "../images/check+circle+icon-1320184982103223133.png";
 import Tac from "../images/416-4167052_cross-sign-png-tic-tac-toe-cross-transparent.png";
 import {buttonsConfig} from "../../createPost/CreatePostLine";
+import {useTranslation} from "react-i18next";
 
 const TicTacToe = () => {
     const [turn, setTurn] = useState('X')
@@ -84,6 +85,8 @@ const TicTacToe = () => {
         getData();
     }, [])
 
+    const {t} = useTranslation();
+
     return (
         <div className='container-tic'>
             <style>
@@ -115,7 +118,7 @@ const TicTacToe = () => {
                         color: settings?.configs?.color[settings?.color],
                         fontSize: settings?.configs?.size[settings?.fontSize]
                     }}
-                >Just Play, Have Fun And Enjoy The Game</h3>
+                >{t("Just Play, Have Fun And Enjoy The Game")}</h3>
             </div>
 
             <div
@@ -145,14 +148,14 @@ const TicTacToe = () => {
             </div>
             {winner && (
                 <>
-                    <h3 className='winner-tic'>{winner} is the winner!</h3>
+                    <h3 className='winner-tic'>{winner} {t("is the winner!")}</h3>
                     <span
                         id={'mainPostBtn'}
                         className={`btn-tic ${buttonsConfig[settings?.configs?.color[settings?.color]]}`}
                         onClick={() => {
                             handleRestart();
                         }}
-                    >Start Again</span>
+                    >{t("Start Again")}</span>
                 </>
             )}
             <Typography
@@ -164,7 +167,7 @@ const TicTacToe = () => {
                 }}
                 className={"labelTurn"}
             >
-                Now this is <span style={{color: "red"}}>{turn}</span> turn
+                {t("Now this is")} <span style={{color: "red"}}>{turn}</span> {t("turn")}
             </Typography>
         </div>
     )
