@@ -14,6 +14,7 @@ import MatesContainer from "./MatesContainer";
 import RequestsContainer from "./RequestsContainer";
 import PeopleContainer from "./PeopleContainer";
 import SelectedChatMessages from "./SelectedChatMessages";
+import {useTranslation} from "react-i18next";
 
 
 function Messenger(props) {
@@ -111,6 +112,8 @@ function Messenger(props) {
         setCurrentChat(null)
     })
 
+    const {t} = useTranslation();
+
     return (
         <div className="messenger">
             <div className="chatMenu">
@@ -123,14 +126,14 @@ function Messenger(props) {
                                 setChatMode(false)
                             }}
                             className={`button ${buttonsConfig[settings?.configs?.color[settings?.color]]} ${!chatMode ? "activeChatMode" : ""}`}
-                        >My Friends
+                        >{t("My Friends")}
                         </button>
                         <button
                             onClick={() => {
                                 setChatMode(true)
                             }}
                             className={`button ${buttonsConfig[settings?.configs?.color[settings?.color]]} ${chatMode ? "activeChatMode" : ""}`}
-                        >Friend Requests
+                        >{t("Friend Requests")}
                         </button>
                     </div>
                     <PeopleContainer

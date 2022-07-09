@@ -6,6 +6,7 @@ import {notify} from "../App";
 import {alpha} from "@mui/material";
 import Loader from "../components/common/spinner/Spinner";
 import {BsPencil} from "react-icons/all";
+import {useTranslation} from "react-i18next";
 
 
 function CurrentChat(props) {
@@ -49,26 +50,23 @@ function CurrentChat(props) {
         }, 1000)
     }, [messages]);
 
+    const {t} = useTranslation();
+
     return (
         <>
             <div className="chatBoxTop">
-                {messages.map((m, index) => {
-                    if (messages?.length - 1 === index) {
-                        // setIsLoader(() => false)
-                    }
-
-                    return <div ref={scrollRef}>
+                {messages.map((m) => <div ref={scrollRef}>
                         <Message
                             message={m}
                             own={(+m.sender === +userInformation.id) || (+m.createdById === +userInformation.id)}
                         />
                     </div>
-                })}
+                )}
 
                 {!isLoader && messages?.length === 0
                     ? <div
                         className={"noMessagesLabel"}
-                    >There are no messages yet. Be the first))</div>
+                    >{t("There are no messages yet. Be the first")})</div>
                     : null}
 
                 {isLoader && <div
@@ -95,8 +93,8 @@ function CurrentChat(props) {
                     className={`button ${buttonsConfig[customStyle?.color]} chatPostBtn`}
                     onClick={handleSubmit}
                 >
-                    <BsPencil />
-                    <span>Send</span>
+                    <BsPencil/>
+                    <span>{t("Send")}</span>
                 </button>
             </div>
         </>

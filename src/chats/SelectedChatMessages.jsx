@@ -1,4 +1,5 @@
 import CurrentChat from "./CurrentChat";
+import {useTranslation} from "react-i18next";
 
 
 function SelectedChatMessages(props) {
@@ -13,6 +14,8 @@ function SelectedChatMessages(props) {
         handleSubmit,
         setMessages
     } = props;
+
+    const {t} = useTranslation();
 
     return (
         <>
@@ -45,7 +48,7 @@ function SelectedChatMessages(props) {
                                 />
                             </div>
                             : <span className="noConversationText">
-                                    Open a conversation to start a chat.
+                                    {t("Open a conversation to start a chat.")}
                             </span>
                     }
                 </div>

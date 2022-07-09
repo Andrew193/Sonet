@@ -1,6 +1,7 @@
 import MatesContainer from "./MatesContainer";
 import RequestsContainer from "./RequestsContainer";
 import {useMemo, useState} from "react";
+import {useTranslation} from "react-i18next";
 
 
 function PeopleContainer(props) {
@@ -26,12 +27,14 @@ function PeopleContainer(props) {
                 ))
     }, [search])
 
+    const {t} = useTranslation();
+
     return (
         <>
             {
                 !chatMode
                 && <input
-                    placeholder="Search for friends"
+                    placeholder={t("Search for friend")}
                     className="chatMenuInput"
                     onChange={(e) => {
                         setSearch(e.target?.value)

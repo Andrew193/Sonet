@@ -1,9 +1,12 @@
 import {AiOutlineClose} from "react-icons/all";
+import {useTranslation} from "react-i18next";
 
 function RequestsConditions(props) {
     const {
         possibleMatesList
     } = props;
+
+    const {t} = useTranslation();
 
     return (
         <>
@@ -12,7 +15,7 @@ function RequestsConditions(props) {
                     ?
                     <div className={"lonelyLine"}>
                         <AiOutlineClose/>
-                        <span>Out of requests</span>
+                        <span>{t("Out of requests")}</span>
                     </div>
                     : <>{possibleMatesList}</>
             }

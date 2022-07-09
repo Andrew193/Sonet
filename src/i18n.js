@@ -47,11 +47,29 @@ i18n
                     "About you": "About you",
                     "Nothing": "Nothing",
                     "Comments": "Comments",
-                    "Likes": "Likes"
+                    "Likes": "Likes",
+                    "My Friends": "My Friends",
+                    "Friend Requests": "Friend Requests",
+                    "Search for friend": "Search for friend",
+                    "Mates": "Mates",
+                    "You are lonely": "You are lonely",
+                    "Out of requests": "Out of requests",
+                    "There are no messages yet. Be the first": "There are no messages yet. Be the first",
+                    "Send": "Send",
+                    "Open a conversation to start a chat.": "Open a conversation to start a chat."
                 }
             },
             ua: {
                 translations: {
+                    "Open a conversation to start a chat.": "Відкрийте бесіду, щоб почати чат.",
+                    "Send": "Надіслати",
+                    "There are no messages yet. Be the first": "Ще немає повідомлень. Будь першим",
+                    "Out of requests": "Немає запитів",
+                    "You are lonely": "Ви самотні",
+                    "Mates": "Товариші",
+                    "Search for friend": "Пошук друга",
+                    "Friend Requests": "Запити в друзі",
+                    "My Friends": "Мої друзі",
                     "Likes": "Лайки",
                     "Comments": "Коментарі",
                     "Nothing": "Нічого",

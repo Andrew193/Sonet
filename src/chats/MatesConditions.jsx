@@ -1,5 +1,6 @@
 import Loader from "../components/common/spinner/Spinner";
 import {MdSentimentVeryDissatisfied} from "react-icons/all";
+import {useTranslation} from "react-i18next";
 
 
 function MatesConditions(props) {
@@ -7,6 +8,8 @@ function MatesConditions(props) {
         matesListLength,
         isLoading
     } = props;
+
+    const {t} = useTranslation();
 
     return(
         <>
@@ -22,7 +25,7 @@ function MatesConditions(props) {
                 (!isLoading && !matesListLength) &&
                 <div className={"lonelyLine"}>
                     <MdSentimentVeryDissatisfied/>
-                    <span>You are lonely))</span>
+                    <span>{t("You are lonely")})</span>
                 </div>
             }
         </>

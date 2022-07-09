@@ -1,4 +1,5 @@
 import MatesConditions from "./MatesConditions";
+import {useTranslation} from "react-i18next";
 
 function MatesContainer(props) {
     const {
@@ -6,9 +7,11 @@ function MatesContainer(props) {
         isLoading
     } = props;
 
+    const {t} = useTranslation();
+
     return(
         <>
-            <h3>Mates</h3>
+            <h3>{t("Mates")}</h3>
             {matesList}
             <MatesConditions
                 matesListLength={matesList?.length}
