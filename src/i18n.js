@@ -59,11 +59,21 @@ i18n
                     "Open a conversation to start a chat.": "Open a conversation to start a chat.",
                     "This is you": "This is you",
                     "Input user ID": "Input user ID",
-                    "Find by ID": "Find by ID"
+                    "Find by ID": "Find by ID",
+                    "Download attachments ( Unsafe )": "Download attachments ( Unsafe )",
+                    "Add to my Gallery": "Add to my Gallery",
+                    "My": "My",
+                    "Not my": "Not my",
+                    "All": "All"
                 }
             },
             ua: {
                 translations: {
+                    "All": "Всі",
+                    "Not my": "Не мої",
+                    "My": "Мої",
+                    "Add to my Gallery": "Додати до моєї галереї",
+                    "Download attachments ( Unsafe )": "Завантажити вкладення (ризиковано)",
                     "Find by ID": "Знайти за ID",
                     "Input user ID": "Введіть ID користувача",
                     "This is you": "Це ви",

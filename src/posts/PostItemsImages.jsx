@@ -8,6 +8,7 @@ import {GrGallery} from "react-icons/all";
 import {downloadFileVersion2} from "../utils";
 import {addPhotoToMyGallery} from "./postsHelper";
 import {notify} from "../App";
+import {useTranslation} from "react-i18next";
 
 function PostItemsImages(props) {
     const {
@@ -45,7 +46,8 @@ function PostItemsImages(props) {
         ))
     }, [])
 
-    console.log(JSON.parse(valueSavedImages)[selectedImage])
+    const {t} = useTranslation();
+
     return (
         <div
             className={s.ImagesContainer}
@@ -66,7 +68,7 @@ function PostItemsImages(props) {
                     <ListItemIcon>
                         <AiOutlineDownload/>
                     </ListItemIcon>
-                    <Typography>Download</Typography>
+                    <Typography>{t("Download")}</Typography>
                 </MenuItem>
                 <MenuItem onClick={() => {
                     openImageViewer(selectedImage)
@@ -75,7 +77,7 @@ function PostItemsImages(props) {
                     <ListItemIcon>
                         <AiOutlineEye/>
                     </ListItemIcon>
-                    <Typography>Preview</Typography>
+                    <Typography>{t("Preview")}</Typography>
                 </MenuItem>
                 <MenuItem onClick={() => {
                     addPhotoToMyGallery({
@@ -93,7 +95,7 @@ function PostItemsImages(props) {
                     <ListItemIcon>
                         <GrGallery/>
                     </ListItemIcon>
-                    <Typography>Add to my Gallery ( Testing )</Typography>
+                    <Typography>{t("Add to my Gallery")}</Typography>
                 </MenuItem>
             </Menu>
             {images}

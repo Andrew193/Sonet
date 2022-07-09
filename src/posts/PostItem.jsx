@@ -12,6 +12,7 @@ import {downloadFileVersion2} from "../utils";
 import {useOutsideClick} from "../hooks";
 import PostItemsImages from "./PostItemsImages";
 import React from "react";
+import {useTranslation} from "react-i18next";
 
 function PostItem(props) {
     const {
@@ -68,6 +69,8 @@ function PostItem(props) {
     const handleClose = () => {
         setAnchorEl(null);
     };
+
+    const {t} = useTranslation();
 
     return (
         <>
@@ -156,7 +159,7 @@ function PostItem(props) {
                                 <ListItemIcon>
                                     <AiOutlineDownload/>
                                 </ListItemIcon>
-                                <Typography>Download attachments ( Unsafe )</Typography>
+                                <Typography>{t("Download attachments ( Unsafe )")}</Typography>
                             </Box>
                             : null
                     }
