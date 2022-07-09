@@ -34,7 +34,7 @@ const defaultSettingsConfig = {
     list: {
         viewType: "plain",
         borderRadius: 0,
-        listItemStyles: "",
+        listItemStyles: {},
         margin: 0,
         padding: 0,
         boxShadow: false
