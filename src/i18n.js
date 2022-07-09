@@ -56,11 +56,17 @@ i18n
                     "Out of requests": "Out of requests",
                     "There are no messages yet. Be the first": "There are no messages yet. Be the first",
                     "Send": "Send",
-                    "Open a conversation to start a chat.": "Open a conversation to start a chat."
+                    "Open a conversation to start a chat.": "Open a conversation to start a chat.",
+                    "This is you": "This is you",
+                    "Input user ID": "Input user ID",
+                    "Find by ID": "Find by ID"
                 }
             },
             ua: {
                 translations: {
+                    "Find by ID": "Знайти за ID",
+                    "Input user ID": "Введіть ID користувача",
+                    "This is you": "Це ви",
                     "Open a conversation to start a chat.": "Відкрийте бесіду, щоб почати чат.",
                     "Send": "Надіслати",
                     "There are no messages yet. Be the first": "Ще немає повідомлень. Будь першим",

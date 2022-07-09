@@ -7,6 +7,7 @@ import Script from "./script.js"
 import UsersPageActions from "./UsersPageActions";
 import {useMemo} from "react";
 import {Avatar} from "@mui/material";
+import {useTranslation} from "react-i18next";
 
 function ClearUsers(props) {
     const {
@@ -20,6 +21,8 @@ function ClearUsers(props) {
     const currentWidth = useMemo(() => document?.body.offsetWidth, [document?.body.offsetWidth]);
 
     const {id} = JSON.parse(localStorage.getItem("userInfo"));
+
+    const {t} = useTranslation();
 
     const usersToMake = useMemo(() => {
         setOpen(() => false);
@@ -65,7 +68,7 @@ function ClearUsers(props) {
                                 <AiOutlineUser/> <span className={"usersNamePageName"}>{value[0]}</span>
                                 <span
                                     className={s.ThisIsYouLabel}
-                                >{value[5] === id ? "This is you" : ""}</span>
+                                >{value[5] === id ? t("This is you") : ""}</span>
                             </div>
                             {value[2] && <AiOutlineSafetyCertificate/>}
                         </h3>
