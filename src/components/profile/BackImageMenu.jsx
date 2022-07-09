@@ -7,6 +7,7 @@ import {BsPen} from "react-icons/all";
 import {useCallback, useState} from "react";
 import ImageViewer from 'react-simple-image-viewer';
 import {useRef} from "react";
+import {useTranslation} from "react-i18next";
 
 function BackImageMenu(props) {
     const {
@@ -21,6 +22,7 @@ function BackImageMenu(props) {
     const [currentImage, setCurrentImage] = useState(0);
     const [isViewerOpen, setIsViewerOpen] = useState(false);
     const images = [image];
+    const {t} = useTranslation();
 
     const openImageViewer = useCallback((index) => {
         setCurrentImage(index);
@@ -64,7 +66,7 @@ function BackImageMenu(props) {
                     <ListItemIcon>
                         <AiOutlineDownload/>
                     </ListItemIcon>
-                    <ListItemText>Download</ListItemText>
+                    <ListItemText>{t("Download")}</ListItemText>
                 </MenuItem>
 
                 <MenuItem
@@ -76,7 +78,7 @@ function BackImageMenu(props) {
                     <ListItemIcon>
                         <BsPen/>
                     </ListItemIcon>
-                    <ListItemText>Update my Back</ListItemText>
+                    <ListItemText>{t("Update my Back")}</ListItemText>
                 </MenuItem>
 
                 <MenuItem
@@ -88,7 +90,7 @@ function BackImageMenu(props) {
                     <ListItemIcon>
                         <AiOutlineEye/>
                     </ListItemIcon>
-                    <ListItemText>Preview</ListItemText>
+                    <ListItemText>{t("Preview")}</ListItemText>
                 </MenuItem>
             </Menu>
 

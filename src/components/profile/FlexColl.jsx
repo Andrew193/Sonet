@@ -2,6 +2,7 @@ import s from "./profile.module.css"
 import {AiOutlineCalendar, AiOutlineMail, AiOutlineNumber, AiOutlineEye} from "react-icons/ai";
 import Script from "./profileHelper"
 import {useHistory} from "react-router";
+import {useTranslation} from "react-i18next";
 
 function FlexColl(props) {
     const {
@@ -13,6 +14,8 @@ function FlexColl(props) {
     } = props;
 
     const history = useHistory();
+
+    const {t} = useTranslation();
 
     return (
         <div
@@ -53,7 +56,7 @@ function FlexColl(props) {
                     style={{
                         color: "black"
                     }}
-                /> Joined {cr}
+                /> {t("Joined")} {cr}
             </div>
             <div
                 style={{margin: "10px 0px"}}
@@ -64,7 +67,7 @@ function FlexColl(props) {
                     style={{
                         color: "black"
                     }}
-                /> Last update {cr === up ? "Never" : up}
+                /> {t("Last update")} {cr === up ? t("Never") : up}
             </div>
             <div className={s.LastLine}>
                 <span onClick={() => {
@@ -75,7 +78,7 @@ function FlexColl(props) {
                         style={{
                             color: "black"
                         }}
-                    /> <b className={s.Black}>{userInfo.youFolCount}</b> Following
+                    /> <b className={s.Black}>{userInfo.youFolCount}</b> {t("Following")}
                 </span>
                 <span onClick={() => {
                     Script.getMyFollowers(myId, history)
@@ -85,7 +88,7 @@ function FlexColl(props) {
                         style={{
                             color: "black"
                         }}
-                    /><b className={s.Black}>{userInfo.folCount}</b> Followers
+                    /><b className={s.Black}>{userInfo.folCount}</b> {t("Followers")}
                 </span>
             </div>
         </div>

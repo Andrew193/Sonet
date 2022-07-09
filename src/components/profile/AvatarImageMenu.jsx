@@ -6,6 +6,7 @@ import {BsPen} from "react-icons/all";
 import ImageViewer from "react-simple-image-viewer";
 import {useCallback, useState} from "react";
 import {useRef} from "react";
+import {useTranslation} from "react-i18next";
 
 
 function AvatarImageMenu(props) {
@@ -33,6 +34,8 @@ function AvatarImageMenu(props) {
     };
 
     let imageAvatar = useRef();
+
+    const {t} = useTranslation();
 
     return (
         <>
@@ -63,7 +66,7 @@ function AvatarImageMenu(props) {
                     <ListItemIcon>
                         <AiOutlineDownload/>
                     </ListItemIcon>
-                    <ListItemText>Download</ListItemText>
+                    <ListItemText>{t("Download")}</ListItemText>
                 </MenuItem>
 
                 <MenuItem
@@ -75,7 +78,7 @@ function AvatarImageMenu(props) {
                     <ListItemIcon>
                         <BsPen/>
                     </ListItemIcon>
-                    <ListItemText>Update my Avatar</ListItemText>
+                    <ListItemText>{t("Update my Avatar")}</ListItemText>
                 </MenuItem>
 
                 <MenuItem
@@ -87,7 +90,7 @@ function AvatarImageMenu(props) {
                     <ListItemIcon>
                         <AiOutlineEye/>
                     </ListItemIcon>
-                    <ListItemText>Preview</ListItemText>
+                    <ListItemText>{t("Preview")}</ListItemText>
                 </MenuItem>
             </Menu>
 

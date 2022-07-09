@@ -2,8 +2,9 @@ import s from "./profile.module.css"
 import Script from "./profileHelper"
 import {AiOutlineHighlight} from "react-icons/ai";
 import {useMemo, useState} from "react";
-import {alpha } from "@mui/material";
+import {alpha} from "@mui/material";
 import AvatarImageMenu from "./AvatarImageMenu";
+import {useTranslation} from "react-i18next";
 
 function AvatarLine(props) {
     const {
@@ -31,6 +32,8 @@ function AvatarLine(props) {
     const handleClose = () => {
         setAnchorEl(null);
     };
+
+    const {t} = useTranslation();
 
     return (
         <>
@@ -72,15 +75,17 @@ function AvatarLine(props) {
                         (myId === id) && handleClick(e)
                     }}
                 />
-                {myId === id && <button
-                    id={"updateButton"}
-                    onClick={() => {
-                        window?.document?.body?.querySelector(".App")?.classList?.add("Open")
-                        Script.openModal("Muser")
-                    }}
-                >
-                    <AiOutlineHighlight className={s.CommonIcon}/>Set up profile
-                </button>}
+                {
+                    myId === id && <button
+                        id={"updateButton"}
+                        onClick={() => {
+                            window?.document?.body?.querySelector(".App")?.classList?.add("Open")
+                            Script.openModal("Muser")
+                        }}
+                    >
+                        <AiOutlineHighlight className={s.CommonIcon}/>{t("Set up profile")}
+                    </button>
+                }
             </div>
         </>)
 }

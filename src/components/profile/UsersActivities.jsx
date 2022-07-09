@@ -3,6 +3,7 @@ import {useEffect, useState, useMemo} from "react";
 import s from "./profile.module.css"
 import HttpHelper from "../../helpers/httpHelper";
 import PostsTab from "./PostsTab";
+import {useTranslation} from "react-i18next";
 
 export function TabPanel(props) {
     const {children, value, index, ...other} = props;
@@ -45,6 +46,8 @@ function UsersActivities(props) {
         userInfo
     } = props;
 
+    const {t} = useTranslation();
+
     const [value, setValue] = useState(0);
     const [posts, setPosts] = useState([]);
 
@@ -84,17 +87,17 @@ function UsersActivities(props) {
                 <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
                     <Tab
                         className={s.Tab}
-                        label="Posts"
+                        label={t("Posts")}
                         {...a11yProps(0)}
                     />
                     <Tab
                         className={s.Tab}
-                        label="Comments"
+                        label={t("Comments")}
                         {...a11yProps(1)}
                     />
                     <Tab
                         className={s.Tab}
-                        label="Likes"
+                        label={t("Likes")}
                         {...a11yProps(2)}
                     />
                 </Tabs>

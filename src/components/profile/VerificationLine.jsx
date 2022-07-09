@@ -4,6 +4,7 @@ import Script from "./profileHelper"
 import {useRef} from "react";
 import {AiOutlineSafetyCertificate, AiOutlineSecurityScan} from "react-icons/ai";
 import {buttonsConfig} from "../../createPost/CreatePostLine";
+import {useTranslation} from "react-i18next";
 
 function VerificationLine(props) {
     let text = useRef();
@@ -13,11 +14,13 @@ function VerificationLine(props) {
         settings
     } = props;
 
+    const {t} = useTranslation();
+
     return (
         <div className={s.Ver}>
             <div className={s.ConfirmLine + " Hide Mconfirm"}>
                 <input
-                    placeholder={"Input your email"}
+                    placeholder={t("Input your email")}
                     ref={(el) => text = el}
                     style={{
                         color: settings?.configs?.color[settings?.color],
@@ -33,7 +36,7 @@ function VerificationLine(props) {
                         padding:"3px 5px"
                     }}
                     className={`${buttonsConfig[settings?.configs?.color[settings?.color]]}`}
-                >Confirm</span>
+                >{t("Confirm")}</span>
             </div>
             {userInfo.ver ? <AiOutlineSafetyCertificate className={s.CommonIcon + " " + s2.Icon}/> :
                 myId === userInfo.id ?

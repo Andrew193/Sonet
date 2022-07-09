@@ -17,6 +17,7 @@ import AboutYou from "./AboutYou";
 import UsersActivities from "./UsersActivities";
 import style from "./profile.module.css";
 import BackImageMenu from "./BackImageMenu";
+import {useTranslation} from "react-i18next";
 
 function ClearProfile(props) {
     const {
@@ -27,7 +28,7 @@ function ClearProfile(props) {
     } = props;
 
     const myId = JSON.parse(localStorage.getItem("userInfo")).id;
-
+    const {t} = useTranslation();
     const [count, setCount] = useState(0);
 
     const createdAt = DateHelper.fromNow(userInfo.createdAt);
@@ -103,7 +104,7 @@ function ClearProfile(props) {
                         <span
                             className={s.PostCount}
                             onClick={() => postServ.getMy(history, userInfo.id)}
-                        >{0 || count} Posts
+                        >{0 || count} {t("Posts")}
                         </span>
                     </div>
                     <VerificationLine

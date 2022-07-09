@@ -1,10 +1,13 @@
 import {Box, Typography} from "@mui/material";
 import s from "./profile.module.css"
+import {useTranslation} from "react-i18next";
 
 function AboutYou(props) {
     const {
         description
     } = props;
+
+    const {t} = useTranslation();
 
     return (
         <Box
@@ -12,10 +15,10 @@ function AboutYou(props) {
         >
             <h3
                 className={s.Black}
-            >About you</h3>
+            >{t("About you")}</h3>
             <Typography
                 className={s.AboutMe}
-            >{description}</Typography>
+            >{t(description)}</Typography>
         </Box>
     )
 }
