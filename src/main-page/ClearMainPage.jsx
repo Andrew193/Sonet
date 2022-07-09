@@ -4,12 +4,14 @@ import ConfigLine from "./configLine";
 import s from "./main-page.module.css"
 import {useEffect, useState} from "react";
 import {getSettings} from "../db";
+import {useTranslation} from "react-i18next";
 
 function ClearMainPage(props) {
     const {
         open
     } = props;
 
+    const { t, i18n } = useTranslation();
     const [settings, setSettings] = useState({});
 
     useEffect(() => {
@@ -21,6 +23,10 @@ function ClearMainPage(props) {
 
         getData();
     }, [])
+
+    const changeLanguage = lng => {
+        i18n.changeLanguage(lng);
+    };
 
     return (
         <main
@@ -40,6 +46,8 @@ function ClearMainPage(props) {
                  }
                 `}
             </style>
+            <button onClick={() => changeLanguage("ua")}>ua</button>
+            <button onClick={() => changeLanguage("en")}>en</button>
             <div
                 className={"basicPageHead"}
                 style={{
@@ -53,7 +61,7 @@ function ClearMainPage(props) {
                         fontSize: settings?.configs?.size[settings?.fontSize],
                         background: settings?.configs?.background[settings?.background],
                     }}
-                >Home</Link>
+                >{t("Home")}</Link>
             </div>
             <CreatePost
                 customStyle={{

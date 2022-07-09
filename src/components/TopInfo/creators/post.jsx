@@ -7,6 +7,7 @@ import {useMemo} from "react";
 import s from "../top-info.module.css"
 import {AiOutlineComment, AiOutlineDislike, AiOutlineLike} from "react-icons/ai";
 import CountUp from "react-countup";
+import {useTranslation} from "react-i18next";
 
 function PostCreator(props) {
     const {
@@ -14,7 +15,7 @@ function PostCreator(props) {
     } = props;
 
     const history = useHistory();
-
+    const {t} = useTranslation();
     const postsListToMap = useMemo(() => props.toCreate, [props?.toCreate]);
 
     return (
@@ -42,7 +43,7 @@ function PostCreator(props) {
                             style={{
                                 fontWeight: "bold"
                             }}
-                        >Created by @{value.createdBy}</Typography>
+                        >{t("Created by")} @{value.createdBy}</Typography>
                     </Typography>
                     <Typography
                         variant="p"

@@ -10,6 +10,7 @@ import {Divider} from "@mui/material";
 import Avatar from "@mui/material/Avatar";
 import {AiOutlineSecurityScan} from "react-icons/ai";
 import {hexToRgb} from "../utils";
+import {useTranslation} from "react-i18next";
 
 function Portal(props) {
     const {
@@ -17,11 +18,8 @@ function Portal(props) {
         customStyles
     } = props;
 
-    const {
-        id,
-        userName: name
-    } = Script.GetInfo();
-
+    const {id, userName: name} = Script.GetInfo();
+    const {t} = useTranslation();
     const history = useHistory();
     const wrapperRef = useRef(null);
 
@@ -78,7 +76,7 @@ function Portal(props) {
                     color: customStyles?.color,
                     background: customStyles?.background
                 }}
-            >Set up profile</p>
+            >{t("Set up profile")}</p>
             <p
                 id={s.Controle}
                 onClick={() => {
@@ -89,7 +87,7 @@ function Portal(props) {
                     color: customStyles?.color,
                     background: customStyles?.background
                 }}
-            >Log out @{name}</p>
+            >{t("Log out")} @{name}</p>
         </div>
         , document.body.querySelector(`.${props.s}`))
 }

@@ -11,8 +11,8 @@ import {useEffect, useRef, useState} from "react";
 import {toast} from 'react-toastify';
 import {io} from "socket.io-client";
 import Context from "./helpers/contextHelper"
-import {getSettings, setupDb} from "./db";
-import GalleryContainer from "./gallery/GalleryContainer";
+import {setupDb} from "./db";
+import "./i18n";
 
 const sessionHelper = require("./helpers/sessionHelper")
 const socket = io();

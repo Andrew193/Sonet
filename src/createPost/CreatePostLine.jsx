@@ -6,6 +6,7 @@ import {AiOutlineClose, BiImageAdd, BsPencil} from "react-icons/all";
 import userHelper from "../helpers/userHelper";
 import {Avatar, Backdrop, Box, CircularProgress} from "@mui/material";
 import InputEmoji from 'react-input-emoji';
+import {useTranslation} from "react-i18next";
 
 export const buttonsConfig = {
     "#FF0000": s.RedButton,
@@ -23,6 +24,7 @@ function CreatePost(props) {
         customStyle
     } = props;
 
+    const { t, i18n } = useTranslation();
     let image = useRef();
 
     const [text, setText] = useState('')
@@ -52,10 +54,6 @@ function CreatePost(props) {
             </div>
         ), [images?.length])
 
-    function handleOnEnter(text) {
-        console.log('enter', text)
-    }
-
     return (
         <div className={s.Container}>
             <Backdrop
@@ -68,8 +66,7 @@ function CreatePost(props) {
                 value={text}
                 onChange={setText}
                 cleanOnEnter
-                onEnter={handleOnEnter}
-                placeholder="Type a message"
+                placeholder={t("Type a message")}
             />
             <form>
                 <input
@@ -104,7 +101,7 @@ function CreatePost(props) {
                     disabled={previewImages?.length === 4}
                 >
                     <BiImageAdd/>
-                    Attach image
+                    {t("Attach image")}
                 </button>
                 <button
                     className={`button btn btn-default ${buttonsConfig[customStyle?.color]}`}
@@ -119,7 +116,7 @@ function CreatePost(props) {
                     }}
                 >
                     <BsPencil/>
-                    Create Post
+                    {t("Create Post")}
                 </button>
             </p>
         </div>

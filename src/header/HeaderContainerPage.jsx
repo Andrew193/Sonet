@@ -17,6 +17,7 @@ import {headerListLinks} from "../vars";
 import {CgGames, IoSettingsOutline, RiGalleryLine} from "react-icons/all";
 import {getSettings} from "../db";
 import {alpha} from "@mui/material";
+import {useTranslation} from "react-i18next";
 
 const headerLinksConfig = [
     {path: headerListLinks.base, img: <AiOutlineBank size={"24px"}/>, label: "Home"},
@@ -33,6 +34,7 @@ function Header() {
     const [flag, setFlag] = useState(false);
     const [settings, setSettings] = useState({});
     const history = useHistory();
+    const {t, i18n} = useTranslation();
 
     const headerLinks = useMemo(() => headerLinksConfig?.map((linkConfig) => {
 
@@ -53,12 +55,12 @@ function Header() {
                     style={{
                         fontSize: settings?.configs?.size[settings?.fontSize],
                     }}
-                >{linkConfig.label}</span>
+                >{t("" + linkConfig.label + "")}</span>
             </NavLink>
 
             <span className={"col-sm-3 col-xs-3"}/>
         </p>
-    }), [settings]);
+    }), [settings, i18n?.language]);
 
     useEffect(() => {
         async function getData() {
@@ -110,7 +112,7 @@ function Header() {
                             style={{
                                 fontSize: settings?.configs?.size[settings?.fontSize],
                             }}
-                        >Leave</span>
+                        >{t("Leave")}</span>
                     </span>
                     <span className={"col-sm-3"}/>
                 </p>
@@ -128,8 +130,7 @@ function Header() {
                             fontSize: settings?.configs?.size[settings?.fontSize],
                             color: settings?.configs?.color[settings?.color],
                         }}
-                    >Post
-                    </span>
+                    >{t("Post")}</span>
                     <span className={"col-sm-2"}/>
                 </p>
 
