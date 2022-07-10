@@ -3,6 +3,7 @@ import {useEffect, useState, useMemo} from "react";
 import s from "./profile.module.css"
 import HttpHelper from "../../helpers/httpHelper";
 import PostsTab from "./PostsTab";
+import profileHelper from "./profileHelper";
 import {useTranslation} from "react-i18next";
 
 export function TabPanel(props) {
@@ -50,6 +51,7 @@ function UsersActivities(props) {
 
     const [value, setValue] = useState(0);
     const [posts, setPosts] = useState([]);
+    const [comments, setComments] = useState([]);
 
     const avatarUrl = useMemo(() => {
         try {
@@ -67,6 +69,7 @@ function UsersActivities(props) {
         if (userInfo.id) {
             if (value === 0) {
                 getPosts(setPosts, userInfo?.id)
+                profileHelper.getMyComments(`${userInfo?.id}`, setComments)
             } else if (value === 1) {
 
             }

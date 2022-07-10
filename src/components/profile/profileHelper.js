@@ -4,6 +4,12 @@ function openModal(cl) {
     document.querySelector(`.${cl}`).classList.toggle("Open")
 }
 
+function getMyComments(userId, setComments) {
+    HttpHelper.getAllCommentsByUserId(userId, (response) => {
+        console.log(response)
+    })
+}
+
 function confirmPerson(Class, phone, email) {
     openModal(Class);
     HttpHelper.confirm(phone, email)
@@ -25,6 +31,6 @@ function getUser(id) {
     return HttpHelper.getOneObj(id);
 }
 
-const obj = { openModal, getPCount, confirmPerson, getUser, getMyFollowings, getMyFollowers }
+const obj = {openModal, getPCount, confirmPerson, getUser, getMyFollowings, getMyFollowers, getMyComments}
 
 export default obj;

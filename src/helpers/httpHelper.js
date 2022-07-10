@@ -154,6 +154,12 @@ class Http {
             .catch((error) => error.response && callback())
     }
 
+    getAllCommentsByUserId(userId, callback) {
+        return axios.get("https://sonet34.herokuapp.com/api/post/comment/id?token=" + Script.getCookie("token"), {params: {id: userId}})
+            .then((response) => response)
+            .catch((error) => error.response && callback())
+    }
+
     createComment(value, postId, id, userName, comCount, callback, callback1) {
         axios.post("https://sonet34.herokuapp.com/api/post/comment?token=" + Script.getCookie("token"), {
             text: value, postId, userId: id, createdBy: userName, comCount
