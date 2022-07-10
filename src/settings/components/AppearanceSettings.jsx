@@ -15,6 +15,7 @@ import {useEffect, useMemo, useState} from "react";
 import {AiOutlineCheck, FiSettings, GiCheckMark} from "react-icons/all";
 import {getSettings, updateSettings} from "../../db";
 import {buttonsConfig} from "../../createPost/CreatePostLine";
+import {useTranslation} from "react-i18next";
 
 const marks = [
     {
@@ -47,6 +48,7 @@ function AppearanceSettings() {
     const [boxShadow, setBoxShadow] = useState(false);
     const [viewType, setViewType] = useState("plain");
     const [open, setOpen] = useState(false);
+    const {t} = useTranslation();
 
     const exampleStyles = useMemo(() => ({
         borderRadius: viewType === "fantastic" ? `${borderRadius}px ${borderRadius * 1.5}px 5px ${borderRadius + 20}px` :
@@ -119,13 +121,12 @@ function AppearanceSettings() {
                 <CircularProgress color="inherit"/>
             </Backdrop>
 
-
             <Box
                 className={s.FontMainContainer}
             >
                 <Typography
                     className={s.FontLabel}
-                >Border radius</Typography>
+                >{t("Border radius")}</Typography>
                 <div
                     className={s.FontContainer}
                 >
@@ -148,7 +149,7 @@ function AppearanceSettings() {
             >
                 <Typography
                     className={s.FontLabel}
-                >Margin</Typography>
+                >{t("Margin")}</Typography>
                 <div
                     className={s.FontContainer}
                 >
@@ -171,7 +172,7 @@ function AppearanceSettings() {
             >
                 <Typography
                     className={s.FontLabel}
-                >Padding</Typography>
+                >{t("Padding")}</Typography>
                 <div
                     className={s.FontContainer}
                 >
@@ -194,7 +195,7 @@ function AppearanceSettings() {
             >
                 <Typography
                     className={s.FontLabel}
-                >List item type</Typography>
+                >{t("List item type")}</Typography>
                 <div
                     className={s.FontContainer + ' ' + s.ListStyleContainer}
                 >
@@ -204,7 +205,7 @@ function AppearanceSettings() {
                              setViewType("plain")
                          }}
                     >
-                        Plain
+                        {t("Plain")}
                     </div>
                     <div className={`${buttonsConfig[settings?.configs?.color[settings?.color]]}`}
                          style={{color: `${viewType === "italic" ? "red" : ""}`}}
@@ -212,7 +213,7 @@ function AppearanceSettings() {
                              setViewType("italic")
                          }}
                     >
-                        Italic
+                        {t("Italic")}
                     </div>
                     <div className={`${buttonsConfig[settings?.configs?.color[settings?.color]]}`}
                          style={{color: `${viewType === "fantastic" ? "red" : ""}`}}
@@ -220,7 +221,7 @@ function AppearanceSettings() {
                              setViewType("fantastic")
                          }}
                     >
-                        Fantastic
+                        {t("Fantastic")}
                     </div>
                 </div>
             </Box>
@@ -230,7 +231,7 @@ function AppearanceSettings() {
             >
                 <Typography
                     className={s.FontLabel}
-                >Box shadow</Typography>
+                >{t("Box shadow")}</Typography>
                 <div
                     className={s.FontContainer + ' ' + s.ListStyleContainer}
                 >
@@ -240,7 +241,7 @@ function AppearanceSettings() {
                              setBoxShadow(true)
                          }}
                     >
-                        Yes
+                        {t("Yes")}
                     </div>
                     <div className={`${buttonsConfig[settings?.configs?.color[settings?.color]]}`}
                          style={{color: `${!boxShadow ? "red" : ""}`}}
@@ -248,7 +249,7 @@ function AppearanceSettings() {
                              setBoxShadow(false)
                          }}
                     >
-                        No
+                        {t("No")}
                     </div>
                 </div>
             </Box>
@@ -258,7 +259,7 @@ function AppearanceSettings() {
             >
                 <Typography
                     className={s.FontLabel}
-                >Example</Typography>
+                >{t("Example")}</Typography>
                 <div className={s.ExampleBlock} style={exampleStyles}>
                     <div/>
                 </div>

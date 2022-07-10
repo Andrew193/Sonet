@@ -4,6 +4,7 @@ import {useEffect, useMemo, useState} from "react";
 import {AiOutlineCheck, FiSettings, GiCheckMark} from "react-icons/all";
 import {getSettings, updateSettings} from "../../db";
 import {buttonsConfig} from "../../createPost/CreatePostLine";
+import {useTranslation} from "react-i18next";
 
 const marks = [
     {
@@ -53,6 +54,7 @@ function DisplaySettings() {
     const [selectedBack, setSelectedBack] = useState(-1);
     const [fontSize, setFontSize] = useState(16);
     const [open, setOpen] = useState(false);
+    const {t} = useTranslation();
 
     const colors = useMemo(() => colorsConfig?.map(config =>
         <div
@@ -73,7 +75,7 @@ function DisplaySettings() {
                 setSelectedBack(config?.id)
             }}
         >
-            <span>{config?.label}</span><AiOutlineCheck/>
+            <span>{t("" + config?.label + "")}</span><AiOutlineCheck/>
         </div>
     ), [selectedBack])
 
@@ -134,7 +136,7 @@ function DisplaySettings() {
             >
                 <Typography
                     className={s.FontLabel}
-                >Font Size</Typography>
+                >{t("Font Size")}</Typography>
                 <div
                     className={s.FontContainer}
                 >
@@ -157,7 +159,7 @@ function DisplaySettings() {
             >
                 <Typography
                     className={s.FontLabel}
-                >Color</Typography>
+                >{t("Color")}</Typography>
                 <div
                     className={s.FontContainer + " " + s.ColorsLine}
                 >
@@ -170,7 +172,7 @@ function DisplaySettings() {
             >
                 <Typography
                     className={s.FontLabel}
-                >Background</Typography>
+                >{t("Background")}</Typography>
                 <div
                     className={s.FontContainer + " " + s.ColorsLine}
                 >
@@ -185,15 +187,15 @@ function DisplaySettings() {
                     className={`button btn btn-default ${buttonsConfig[settings?.configs?.color[settings?.color]]}`}
                     onClick={defaultSettingsHandler}
                 >
-                    <FiSettings />
-                    Default settings
+                    <FiSettings/>
+                    {t("Default settings")}
                 </button>
                 <button
                     className={`button btn btn-default  ${buttonsConfig[settings?.configs?.color[settings?.color]]}`}
                     onClick={saveSettingsHandler}
                 >
-                    <GiCheckMark />
-                    Save
+                    <GiCheckMark/>
+                    {t("Save")}
                 </button>
             </Box>
         </>

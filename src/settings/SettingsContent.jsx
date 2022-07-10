@@ -7,6 +7,7 @@ import AccordionSummary from "./AccordionSammary";
 import DisplaySettings from "./components/DisplaySettings";
 import s from './settings.module.css';
 import AppearanceSettings from "./components/AppearanceSettings";
+import {useTranslation} from "react-i18next";
 
 const settingsList = [
     {panelName: "themes", label: "Display", innerContent: <DisplaySettings/>},
@@ -19,6 +20,7 @@ function SettingsContent(props) {
     } = props;
 
     const [expanded, setExpanded] = useState('panel1');
+    const {t} = useTranslation();
 
     const handleChange = (panel) => (event, newExpanded) => {
         setExpanded(newExpanded ? panel : false);
@@ -48,7 +50,7 @@ function SettingsContent(props) {
                             color: `${settingsStyles?.configs?.color[settingsStyles?.color]}!important`
                         }}
                         className={s.Label}
-                    >{config?.label}</Typography>
+                    >{t("" + config?.label + "")}</Typography>
                 </AccordionSummary>
                 <AccordionDetails
                     style={{
