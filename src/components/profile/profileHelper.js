@@ -1,4 +1,5 @@
 import HttpHelper from "../../helpers/httpHelper";
+import {notify} from "../../App";
 
 function openModal(cl) {
     document.querySelector(`.${cl}`).classList.toggle("Open")
@@ -6,8 +7,8 @@ function openModal(cl) {
 
 function getMyComments(userId, setComments) {
     HttpHelper.getAllCommentsByUserId(userId, (response) => {
-        console.log(response)
-    })
+        notify("Something went wrong with your comments")
+    }).then(data => setComments(data?.data?.posts))
 }
 
 function confirmPerson(Class, phone, email) {

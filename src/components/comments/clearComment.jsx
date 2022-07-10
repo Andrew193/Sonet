@@ -13,7 +13,8 @@ function ClearComment(props) {
         comments,
         userId,
         id,
-        settings
+        settings,
+        commentId
     } = props;
 
     const {socket, notify} = useContext(Context)
@@ -38,7 +39,7 @@ function ClearComment(props) {
             />
             {
                 comments
-                    ? <Comment toMake={comments}/>
+                    ? <Comment toMake={comments} commentId={commentId}/>
                     : <Skeleton height={"50px"} count={5}/>
             }
             {

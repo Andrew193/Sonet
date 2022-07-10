@@ -29,8 +29,8 @@ function getSelectedPost(id, notify) {
         .catch(error => error.response && console.error(error.response))
 }
 
-function getComment(history, id) {
-    CommonHelper.redirect(history, {id}, "/comment")
+function getComment(history, postId, commentId) {
+    CommonHelper.redirect(history, {id: postId, commentId}, "/comment")
 }
 
 function getNotMy(history, id) {

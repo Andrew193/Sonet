@@ -5,6 +5,7 @@ import HttpHelper from "../../helpers/httpHelper";
 import PostsTab from "./PostsTab";
 import profileHelper from "./profileHelper";
 import {useTranslation} from "react-i18next";
+import CommentsTab from "./CommentsTab";
 
 export function TabPanel(props) {
     const {children, value, index, ...other} = props;
@@ -42,6 +43,7 @@ function getPosts(setPosts, id) {
             console.error(error)
         })
 }
+
 function UsersActivities(props) {
     const {
         userInfo
@@ -69,9 +71,8 @@ function UsersActivities(props) {
         if (userInfo.id) {
             if (value === 0) {
                 getPosts(setPosts, userInfo?.id)
-                profileHelper.getMyComments(`${userInfo?.id}`, setComments)
             } else if (value === 1) {
-
+                profileHelper.getMyComments(`${userInfo?.id}`, setComments)
             }
         }
     }, [value])
@@ -105,23 +106,21 @@ function UsersActivities(props) {
                     />
                 </Tabs>
             </Box>
-           <PostsTab
-               value={value}
-               postsConfig={posts}
-               avatarUrl={avatarUrl}
-           />
-            <TabPanel value={value} index={1}>
-                Item Two
-            </TabPanel>
+            <PostsTab
+                value={value}
+                postsConfig={posts}
+                avatarUrl={avatarUrl}
+            />
+            <CommentsTab
+                value={value}
+                commentsConfig={comments}
+                avatarUrl={avatarUrl}
+            />
             <TabPanel value={value} index={2}>
                 Item Three
             </TabPanel>
 
-            <div
-                style={{
-                    height: "90px"
-                }}
-            />
+            <div style={{height: "90px"}}/>
         </Box>
     )
 }

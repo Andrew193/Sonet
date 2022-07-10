@@ -10,7 +10,8 @@ import {getSettings} from "../../db";
 
 function Comments(props) {
     const {
-        id
+        id,
+        commentId
     } = props.location.state || props.match.params;
 
     const [post, setPost] = useState(false);
@@ -80,6 +81,7 @@ function Comments(props) {
                         comments={comments}
                         notify={notify}
                         socket={socket}
+                        commentId={commentId}
                         id={id}
                     />
                     : <Loader/>
