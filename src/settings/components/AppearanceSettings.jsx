@@ -276,14 +276,14 @@ function AppearanceSettings() {
                     onClick={defaultSettingsHandler}
                 >
                     <FiSettings/>
-                    Default settings
+                    {t("Default settings")}
                 </button>
                 <button
                     className={`button btn btn-default  ${buttonsConfig[settings?.configs?.color[settings?.color]]}`}
                     onClick={saveSettingsHandler}
                 >
                     <GiCheckMark/>
-                    Save
+                    {t("Save")}
                 </button>
             </Box>
         </>
