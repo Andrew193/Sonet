@@ -45,7 +45,7 @@ function Header() {
                 key={uuidv4()}
                 exact to={{pathname: linkConfig?.path}}
                 activeClassName={s.ActivePage}
-                data-tooltip={linkConfig?.label}
+                data-tooltip={t("" + linkConfig?.label + "")}
                 style={{
                     color: settings?.configs?.color[settings?.color],
                 }}
@@ -105,7 +105,7 @@ function Header() {
                         onClick={() => {
                             Script.leave(history)
                         }}
-                        data-tooltip="Leave"
+                        data-tooltip={t("Leave")}
                     >
                         <AiOutlineLogout size={"24px"} style={{"marginRight": "10px"}}/>
                         <span
@@ -139,7 +139,7 @@ function Header() {
                         window?.document?.body?.querySelector(".App")?.classList?.add("Open")
                         Script2.openModal("Mpost")
                     }}
-                    data-tooltip="Post"
+                    data-tooltip={t("Post")}
                 >
                     <AiOutlineHighlight id={s.PostBtnS}/>
                 </span>
