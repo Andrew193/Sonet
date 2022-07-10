@@ -97,11 +97,15 @@ i18n
                     "General Tips": "General Tips",
                     "Memorize how pieces rotate clockwise and counterclockwise.": "Memorize how pieces rotate clockwise and counterclockwise.",
                     "Look at your next piece while setting your current piece down": "Look at your next piece while setting your current piece down",
-                    "Play on marathon mode to learn the level progression": "Play on marathon mode to learn the level progression"
+                    "Play on marathon mode to learn the level progression": "Play on marathon mode to learn the level progression",
+                    "Comment": "Comment",
+                    "What do you think about it?": "What do you think about it?"
                 }
             },
             ua: {
                 translations: {
+                    "What do you think about it?": "Що ви думаєте про це?",
+                    "Comment": "Прокоментувати",
                     "Play on marathon mode to learn the level progression": "Грайте в режимі марафону, щоб вивчати прогресування рівня",
                     "Look at your next piece while setting your current piece down": "Подивіться на наступну частину, відкладаючи поточну",
                     "Memorize how pieces rotate clockwise and counterclockwise.": "Запам'ятайте, як фігури обертаються за і проти годинникової стрілки.",

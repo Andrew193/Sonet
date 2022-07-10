@@ -3,6 +3,7 @@ import s from "./comments.module.css"
 import Script from "./Script.js"
 import Context from "../../helpers/contextHelper"
 import {buttonsConfig} from "../../createPost/CreatePostLine";
+import {useTranslation} from "react-i18next";
 
 function CommentLine(props) {
     const {
@@ -16,17 +17,17 @@ function CommentLine(props) {
     let input = useRef();
 
     const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+    const {t} = useTranslation();
 
     return (
         <div className={s.CommentLine}>
-            <textarea ref={(el) => input = el}/>
+            <textarea ref={(el) => input = el} placeholder={t("What do you think about it?")}/>
             <button
                 className={`button ${buttonsConfig[settings?.configs?.color[settings?.color]]}`}
                 onClick={() => {
                     Script.createComment(input.value, userInfo, id, comCount, notify, socket)
                 }}
-            >Comment
-            </button>
+            >{t("Comment")}</button>
         </div>
     )
 }
