@@ -9,11 +9,11 @@ import postsHelper from "../../posts/postsHelper"
 import {notify} from "../../App";
 import EmotionsLineContainer from "../../posts/EmotionsLineContainer";
 import {useHistory} from "react-router-dom";
-import {AiOutlineLike} from "react-icons/ai";
+import {AiOutlineDislike} from "react-icons/ai";
 
 forceCheck();
 
-function LikeTab({information, avatarUrl}) {
+function DislikeTab({information, avatarUrl}) {
     const history = useHistory();
     const [relatedPost, setRelatedPost] = useState({});
 
@@ -83,37 +83,37 @@ function LikeTab({information, avatarUrl}) {
                     alignItems: "end"
                 }}
             >
-                <AiOutlineLike size={"30px"}/>
+                <AiOutlineDislike size={"30px"}/>
                 <span> {DateHelper.fromNow(information?.createdAt)}</span>
             </Box>
         </Box>
     )
 }
 
-function LikesTab(props) {
+function DislikesTab(props) {
     const {
         value,
-        likesConfig,
+        dislikeConfig,
         avatarUrl
     } = props;
 
-    const likesLine = useMemo(() => likesConfig?.map((like, index) =>
+    const dislikesLine = useMemo(() => dislikeConfig?.map((dislike, index) =>
         <LazyLoad key={index}>
-            <LikeTab
-                information={like}
+            <DislikeTab
+                information={dislike}
                 avatarUrl={avatarUrl}
             />
         </LazyLoad>
-    ), [likesConfig]);
+    ), [dislikeConfig]);
 
     return (
         <TabPanel
             value={value}
             index={2}
         >
-            {likesLine}
+            {dislikesLine}
         </TabPanel>
     )
 }
 
-export default LikesTab;
+export default DislikesTab;

@@ -7,6 +7,7 @@ import profileHelper from "./profileHelper";
 import {useTranslation} from "react-i18next";
 import CommentsTab from "./CommentsTab";
 import LikesTab from "./LikesTab";
+import DislikesTab from "./DislikesTab";
 
 export function TabPanel(props) {
     const {children, value, index, ...other} = props;
@@ -56,6 +57,7 @@ function UsersActivities(props) {
     const [posts, setPosts] = useState([]);
     const [comments, setComments] = useState([]);
     const [likes, setLikes] = useState([]);
+    const [dislikes, setDislikes] = useState([]);
 
     const avatarUrl = useMemo(() => {
         try {
@@ -77,6 +79,8 @@ function UsersActivities(props) {
                 profileHelper.getMyComments(`${userInfo?.id}`, setComments)
             } else if (value === 2) {
                 profileHelper.getLikes(`${userInfo?.id}`, setLikes)
+            } else if (value === 3) {
+                profileHelper.getDislikes(`${userInfo?.id}`, setDislikes)
             }
         }
     }, [value])
@@ -123,6 +127,11 @@ function UsersActivities(props) {
             <LikesTab
                 value={value}
                 likesConfig={likes}
+                avatarUrl={avatarUrl}
+            />
+            <DislikesTab
+                value={value}
+                dislikeConfig={dislikes}
                 avatarUrl={avatarUrl}
             />
 

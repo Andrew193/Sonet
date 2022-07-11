@@ -5,17 +5,20 @@ function openModal(cl) {
     document.querySelector(`.${cl}`).classList.toggle("Open")
 }
 
-function getLikes(userId) {
+function getLikes(userId, setLikes) {
     HttpHelper.getAllLikesByUserId(userId, () => {
         notify("Something went wrong with your likes")
-    }).then(data => {
-        console.log(data)
-       // setLikes(data?.data?.posts)
+    }).then(response => {
+        setLikes(response?.data?.posts)
     })
 }
 
-function getDislikes() {
-
+function getDislikes(userId, setDislikes) {
+    HttpHelper.getAllDislikesByUserId(userId, () => {
+        notify("Something went wrong with your dislikes")
+    }).then(response => {
+        setDislikes(response?.data?.posts)
+    })
 }
 
 function getMyComments(userId, setComments) {
@@ -45,6 +48,6 @@ function getUser(id) {
     return HttpHelper.getOneObj(id);
 }
 
-const obj = {openModal, getPCount, confirmPerson, getUser, getMyFollowings, getMyFollowers, getMyComments, getLikes}
+const obj = {openModal, getPCount, confirmPerson, getUser, getMyFollowings, getMyFollowers, getMyComments, getLikes, getDislikes}
 
 export default obj;
