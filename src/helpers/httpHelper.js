@@ -161,13 +161,13 @@ class Http {
     }
 
     getAllLikesByUserId(userId, callback) {
-        return axios.get("https://sonet34.herokuapp.com/api/like/all?token=" + Script.getCookie("token"), {params: {id: userId}})
+        return axios.get("https://sonet34.herokuapp.com/api/post/like/all?token=" + Script.getCookie("token"), {params: {id: userId}})
             .then((response) => response)
             .catch((error) => error.response && callback())
     }
 
     getAllDislikesByUserId(userId, callback) {
-        return axios.get("https://sonet34.herokuapp.com/api/dislike/all?token=" + Script.getCookie("token"), {params: {id: userId}})
+        return axios.get("https://sonet34.herokuapp.com/api/post/dislike/all?token=" + Script.getCookie("token"), {params: {id: userId}})
             .then((response) => response)
             .catch((error) => error.response && callback())
     }
