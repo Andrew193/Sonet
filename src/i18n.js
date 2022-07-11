@@ -121,11 +121,15 @@ i18n
                     "Box shadow": "Box shadow",
                     "Example": "Example",
                     "Yes": "Yes",
-                    "No": "No"
+                    "No": "No",
+                    "UI language": "UI language",
+                    "General": "General"
                 }
             },
             ua: {
                 translations: {
+                    "General": "Загальні налаштування",
+                    "UI language": "Мова інтерфейсу",
                     "No": "Ні",
                     "Yes": "Так",
                     "Example": "Приклад",

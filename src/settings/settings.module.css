@@ -7,6 +7,20 @@
     border-right: 1px solid rgb(206, 204, 204);
 }
 
+.Flags > div {
+    position: relative;
+    height: 60px;
+    width: 60px;
+}
+
+.Flags img {
+    height: 50px;
+    width: 60px;
+    position: absolute;
+    top: 4px;
+    left: -1px;
+}
+
 .ListStyleContainer {
     justify-content: space-evenly !important;
 }

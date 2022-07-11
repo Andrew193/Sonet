@@ -11,7 +11,7 @@ function ClearMainPage(props) {
         open
     } = props;
 
-    const { t, i18n } = useTranslation();
+    const { t } = useTranslation();
     const [settings, setSettings] = useState({});
 
     useEffect(() => {
@@ -23,10 +23,6 @@ function ClearMainPage(props) {
 
         getData();
     }, [])
-
-    const changeLanguage = lng => {
-        i18n.changeLanguage(lng);
-    };
 
     return (
         <main
@@ -46,8 +42,6 @@ function ClearMainPage(props) {
                  }
                 `}
             </style>
-            <button onClick={() => changeLanguage("ua")}>ua</button>
-            <button onClick={() => changeLanguage("en")}>en</button>
             <div
                 className={"basicPageHead"}
                 style={{

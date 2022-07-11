@@ -8,10 +8,12 @@ import DisplaySettings from "./components/DisplaySettings";
 import s from './settings.module.css';
 import AppearanceSettings from "./components/AppearanceSettings";
 import {useTranslation} from "react-i18next";
+import GeneralSettings from "./components/GeneralSettings";
 
 const settingsList = [
     {panelName: "themes", label: "Display", innerContent: <DisplaySettings/>},
-    {panelName: "appearance", label: "Appearance", innerContent: <AppearanceSettings/>}
+    {panelName: "appearance", label: "Appearance", innerContent: <AppearanceSettings/>},
+    {panelName: "general", label: "General", innerContent: <GeneralSettings/>}
 ]
 
 function SettingsContent(props) {
@@ -20,7 +22,7 @@ function SettingsContent(props) {
     } = props;
 
     const [expanded, setExpanded] = useState('panel1');
-    const {t} = useTranslation();
+    const {t, i18n} = useTranslation();
 
     const handleChange = (panel) => (event, newExpanded) => {
         setExpanded(newExpanded ? panel : false);
@@ -58,7 +60,7 @@ function SettingsContent(props) {
                     }}
                 >{config?.innerContent}</AccordionDetails>
             </Accordion>)
-    }, [expanded])
+    }, [expanded, i18n?.language])
 
     return (
         <>
