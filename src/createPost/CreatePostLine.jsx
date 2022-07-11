@@ -110,6 +110,7 @@ function CreatePost(props) {
                         window?.document?.body?.querySelector(".App")?.classList?.remove("Open")
                         Script.CreatePost(text, notify, null, socket, images)
                             .then(() => {
+                                setText("")
                                 setImages([]);
                                 setIsOpened(false);
                             })

@@ -173,7 +173,7 @@ class Http {
     }
 
     createComment(value, postId, id, userName, comCount, callback, callback1) {
-        axios.post("https://sonet34.herokuapp.com/api/post/comment?token=" + Script.getCookie("token"), {
+        return axios.post("https://sonet34.herokuapp.com/api/post/comment?token=" + Script.getCookie("token"), {
             text: value, postId, userId: id, createdBy: userName, comCount
         })
             .then((response) => callback(response))

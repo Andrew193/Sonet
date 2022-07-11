@@ -1,7 +1,8 @@
 import dateHelper from "../helpers/dateHelper";
 import {AiOutlineDelete, AiOutlineEdit, FiCopy} from "react-icons/all";
-import {IconButton, Tooltip} from "@mui/material";
-import {useMemo} from "react";
+import {Avatar, Tooltip} from "@mui/material";
+import {useMemo, useEffect, useState} from "react";
+import profileHelper from "../components/profile/profileHelper";
 
 const actionsConfig = [
     {label: "Copy to buffer", icon: <FiCopy/>, type: "copy"},
@@ -14,6 +15,8 @@ function Message(props) {
         message,
         own
     } = props;
+
+    const [avatarUrl, setAvatarUrl] = useState("");
 
     const actions = useMemo(() => {
         return actionsConfig?.map((action) => {
@@ -33,13 +36,28 @@ function Message(props) {
         })
     }, [own])
 
+    useEffect(() => {
+        async function getUserAvatar() {
+            if (message?.createdById && !avatarUrl) {
+                const response = await profileHelper.getUser(message?.createdById);
+
+                try {
+                    setAvatarUrl(JSON.parse(response?.data?.user?.avatar)?.webContentLink)
+                } catch (error) {
+                    setAvatarUrl(response?.data?.user?.avatar)
+                }
+            }
+        }
+
+        getUserAvatar();
+    }, [message]);
+
     return (
         <div className={own ? "message own" : "message"}>
             <div className="messageTop">
-                <img
-                    className="messageImg"
-                    src="https://images.pexels.com/photos/3686769/pexels-photo-3686769.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
-                    alt=""
+                <Avatar
+                    src={avatarUrl}
+                    className={"conversationImg"}
                 />
                 <p className="messageText">
                     {message.text || message?.messageText}

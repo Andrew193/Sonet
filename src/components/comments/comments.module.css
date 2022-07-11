@@ -69,8 +69,18 @@
     font-size: 16px;
 }
 
+.CommentsAvatarLine {
+    display: flex;
+    align-items: self-end;
+    margin-bottom: 10px;
+}
+
+.CommentsAvatarLine > div {
+    margin-right: 10px !important;
+}
+
 .CommentLine button {
-    flex: 2 0;
+    flex: 0;
     align-self: baseline;
 }
 
@@ -80,7 +90,7 @@
         margin: unset;
     }
 
-    .CommentLine{
+    .CommentLine {
         position: absolute;
         width: 99.7%;
         bottom: 2.497%;
