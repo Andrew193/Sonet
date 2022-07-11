@@ -50,8 +50,19 @@ function App() {
         }
     }, [userInformation?.id])
 
+    function height() {
+        return (window.innerHeight) ?
+            window.innerHeight :
+            document.documentElement.clientHeight || document.body.clientHeight || 0;
+    }
+
     return (
         <Context.Provider value={{notify, socket}}>
+            <style>{`
+            .App.Open {
+            height: ${height()}px;
+            } 
+            `}</style>
             <div className="App">
                 {flag && <>
                     <Components.Header/>

@@ -124,11 +124,13 @@ i18n
                     "No": "No",
                     "UI language": "UI language",
                     "General": "General",
-                    "Dislikes": "Dislikes"
+                    "Dislikes": "Dislikes",
+                    "So... What is it?": "So... What is it?"
                 }
             },
             ua: {
                 translations: {
+                    "So... What is it?": "Отже... Що це?",
                     "Dislikes": "Не подобається",
                     "General": "Загальні налаштування",
                     "UI language": "Мова інтерфейсу",

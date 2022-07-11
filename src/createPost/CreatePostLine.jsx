@@ -24,7 +24,7 @@ function CreatePost(props) {
         customStyle
     } = props;
 
-    const { t, i18n } = useTranslation();
+    const { t } = useTranslation();
     let image = useRef();
 
     const [text, setText] = useState('')

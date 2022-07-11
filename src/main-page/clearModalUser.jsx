@@ -2,6 +2,8 @@ import {alpha, CardActions, Typography} from "@mui/material";
 import {buttonsConfig} from "../createPost/CreatePostLine";
 import {useEffect, useState} from "react";
 import {getSettings} from "../db";
+import {useTranslation} from "react-i18next";
+import InputEmoji from 'react-input-emoji';
 
 function ClearModalUser(props) {
     const {
@@ -12,7 +14,6 @@ function ClearModalUser(props) {
         em,
         pas,
         Script,
-        history,
         click,
         userId
     } = props;
@@ -28,6 +29,9 @@ function ClearModalUser(props) {
 
         getData();
     }, [])
+
+    const [text, setText] = useState('')
+    const {t} = useTranslation();
 
     return (
         <div
@@ -46,10 +50,7 @@ function ClearModalUser(props) {
                 gutterBottom
                 component={'div'}
             >
-                <label
-                    htmlFor="name"
-                >
-                    Your name</label>
+                <label htmlFor="name">Your name</label>
                 <input
                     name="name"
                     onChange={(e) => {
@@ -62,10 +63,7 @@ function ClearModalUser(props) {
                 gutterBottom
                 component={'div'}
             >
-                <label
-                    htmlFor="email"
-                >
-                    Your email</label>
+                <label htmlFor="email">Your email</label>
                 <input
                     name="email"
                     onChange={(e) => {
@@ -78,10 +76,7 @@ function ClearModalUser(props) {
                 gutterBottom
                 component={'div'}
             >
-                <label
-                    htmlFor="pass"
-                >
-                    Your password</label>
+                <label htmlFor="pass">Your password</label>
                 <input
                     name="pass"
                     onChange={(e) => {
@@ -90,13 +85,28 @@ function ClearModalUser(props) {
                     placeholder={pas}
                 />
             </Typography>
+            <Typography
+                gutterBottom
+                component={'div'}
+            >
+                <label htmlFor="pass">About you</label>
+                <InputEmoji
+                    value={text}
+                    onChange={setText}
+                    cleanOnEnter
+                    placeholder={t("So... What is it?")}
+                />
+            </Typography>
             <CardActions>
                 <button
                     className={`button ${buttonsConfig[settings?.configs?.color[settings?.color]]}`}
                     onClick={() => {
                         Script.UpdateInfo({
-                            userName: nm, email: em,
-                            password: pas, id: userId
+                            userName: nm,
+                            email: em,
+                            password: pas,
+                            id: userId,
+                            description: text
                         }, click)
                     }}
                 >
