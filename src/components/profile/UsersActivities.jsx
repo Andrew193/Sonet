@@ -6,6 +6,7 @@ import PostsTab from "./PostsTab";
 import profileHelper from "./profileHelper";
 import {useTranslation} from "react-i18next";
 import CommentsTab from "./CommentsTab";
+import LikesTab from "./LikesTab";
 
 export function TabPanel(props) {
     const {children, value, index, ...other} = props;
@@ -54,6 +55,7 @@ function UsersActivities(props) {
     const [value, setValue] = useState(0);
     const [posts, setPosts] = useState([]);
     const [comments, setComments] = useState([]);
+    const [likes, setLikes] = useState([]);
 
     const avatarUrl = useMemo(() => {
         try {
@@ -73,6 +75,8 @@ function UsersActivities(props) {
                 getPosts(setPosts, userInfo?.id)
             } else if (value === 1) {
                 profileHelper.getMyComments(`${userInfo?.id}`, setComments)
+            } else if (value === 2) {
+                profileHelper.getLikes(`${userInfo?.id}`, setLikes)
             }
         }
     }, [value])
@@ -116,9 +120,11 @@ function UsersActivities(props) {
                 commentsConfig={comments}
                 avatarUrl={avatarUrl}
             />
-            <TabPanel value={value} index={2}>
-                Item Three
-            </TabPanel>
+            <LikesTab
+                value={value}
+                likesConfig={likes}
+                avatarUrl={avatarUrl}
+            />
 
             <div style={{height: "90px"}}/>
         </Box>
