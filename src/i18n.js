@@ -123,11 +123,13 @@ i18n
                     "Yes": "Yes",
                     "No": "No",
                     "UI language": "UI language",
-                    "General": "General"
+                    "General": "General",
+                    "Dislikes": "Dislikes"
                 }
             },
             ua: {
                 translations: {
+                    "Dislikes": "Не подобається",
                     "General": "Загальні налаштування",
                     "UI language": "Мова інтерфейсу",
                     "No": "Ні",

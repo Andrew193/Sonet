@@ -109,7 +109,7 @@ function DislikesTab(props) {
     return (
         <TabPanel
             value={value}
-            index={2}
+            index={3}
         >
             {dislikesLine}
         </TabPanel>

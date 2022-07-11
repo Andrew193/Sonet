@@ -112,6 +112,11 @@ function UsersActivities(props) {
                         label={t("Likes")}
                         {...a11yProps(2)}
                     />
+                    <Tab
+                        className={s.Tab}
+                        label={t("Dislikes")}
+                        {...a11yProps(2)}
+                    />
                 </Tabs>
             </Box>
             <PostsTab
