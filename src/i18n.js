@@ -125,11 +125,13 @@ i18n
                     "UI language": "UI language",
                     "General": "General",
                     "Dislikes": "Dislikes",
-                    "So... What is it?": "So... What is it?"
+                    "So... What is it?": "So... What is it?",
+                    "Deleted": "Deleted"
                 }
             },
             ua: {
                 translations: {
+                    "Deleted":"Видалено",
                     "So... What is it?": "Отже... Що це?",
                     "Dislikes": "Не подобається",
                     "General": "Загальні налаштування",

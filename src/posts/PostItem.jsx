@@ -1,5 +1,5 @@
 import s from "./posts.module.css";
-import {alpha, Avatar, Box, hexToRgb, ListItemIcon, Typography} from "@mui/material";
+import {alpha, Avatar, Backdrop, Box, CircularProgress, hexToRgb, ListItemIcon, Typography} from "@mui/material";
 import {Link} from "react-router-dom";
 import EmotionsLineContainer from "./EmotionsLineContainer";
 import profileHelper from "../components/profile/profileHelper";
@@ -13,7 +13,8 @@ import {useOutsideClick} from "../hooks";
 import PostItemsImages from "./PostItemsImages";
 import React from "react";
 import {useTranslation} from "react-i18next";
-import {deletePostById} from "./postsHelper";
+import {deletePostById, refresh} from "./postsHelper";
+import {notify} from "../App";
 
 function PostItem(props) {
     const {
@@ -73,7 +74,6 @@ function PostItem(props) {
 
     const {t} = useTranslation();
 
-    console.log(id)
     return (
         <>
             {
@@ -170,8 +170,11 @@ function PostItem(props) {
                         +value?.userId === id
                         && <Box
                             onClick={() => {
-                                console.log(value)
                                 deletePostById(+value?.id)
+                                    .then(() => {
+                                        notify(t("Deleted"));
+                                        refresh()
+                                    })
                             }}
                         >
                             <ListItemIcon>
