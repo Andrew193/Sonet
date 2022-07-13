@@ -7,7 +7,7 @@ function ClearPosts(props) {
     const {
         toMake,
         id,
-        settings
+        settings,
     } = props;
 
     const [posts, setPost] = useState(false)
@@ -21,7 +21,7 @@ function ClearPosts(props) {
                 settings={settings}
                 key={index}
             />))
-    }, [JSON.stringify(toMake)])
+    }, [JSON.stringify(toMake), settings])
 
     return (
         <div className={s.PostsCont + " onePostContainer"}>

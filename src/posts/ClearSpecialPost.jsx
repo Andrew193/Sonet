@@ -1,8 +1,9 @@
 import withPageHeader from "../hoc/withPageHeader"
 import SortLine from "./SortLine.jsx";
 import ClearPost from "./PostsInnerContent"
-import {useContext} from "react";
-import Context from "../helpers/contextHelper"
+import {useContext, useEffect, useState} from "react";
+import Context from "../helpers/contextHelper";
+import {getSettings} from "../db";
 
 function ClearSpecialPost(props) {
     const {socket, notify} = useContext(Context);
@@ -12,6 +13,18 @@ function ClearSpecialPost(props) {
         id
     } = props;
 
+    const [settings, setSettings] = useState({});
+
+    useEffect(() => {
+        async function getData() {
+            const response = await getSettings();
+
+            setSettings(response[0])
+        }
+
+        getData();
+    }, [])
+
     return (
         <>
             <div className={"Separator"}/>
@@ -20,6 +33,7 @@ function ClearSpecialPost(props) {
                 socket={socket}
                 notify={notify}
                 toMake={posts}
+                settings={settings}
             />
             <SortLine/>
         </>

@@ -13,8 +13,9 @@ import {useOutsideClick} from "../hooks";
 import PostItemsImages from "./PostItemsImages";
 import React from "react";
 import {useTranslation} from "react-i18next";
-import {deletePostById, refresh} from "./postsHelper";
+import {deletePostById, refresh, updatePostById} from "./postsHelper";
 import {notify} from "../App";
+import InputEmoji from 'react-input-emoji';
 
 function PostItem(props) {
     const {
@@ -73,9 +74,52 @@ function PostItem(props) {
     };
 
     const {t} = useTranslation();
+    const [newPostText, setNewPostText] = useState("");
+    const [isTextUpdate, setIsTextUpdate] = useState(false);
 
+    console.log(settings?.configs?.color[settings?.color])
     return (
         <>
+            <style>{`
+            .inputCover {
+            position: absolute!important;
+            z-index: 10;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: ${alpha(hexToRgb(settings?.configs?.color[settings?.color] || "#f6f2ff"), 0.4)}!important;
+            }
+            .inputCover > div{
+             height: 100%;
+            }
+            `}</style>
+
+            {isTextUpdate && <div
+                className={"inputCover"}
+            >
+                <InputEmoji
+                    value={newPostText}
+                    onChange={setNewPostText}
+                    cleanOnEnter
+                    placeholder={t("Type a new post text")}
+                />
+                <span
+                    id={"mainPostBtn"}
+                    onClick={() => {
+                        setIsTextUpdate(false);
+                        updatePostById(+value?.id, newPostText)
+                            .then(() => {
+                                notify(t("Updated"));
+                            })
+                    }
+                    }
+                >Submit</span>
+            </div>
+            }
             {
                 isViewerOpen && (
                     <ImageViewer
@@ -181,6 +225,19 @@ function PostItem(props) {
                                 <AiOutlineDelete/>
                             </ListItemIcon>
                             <Typography>{t("Delete")}</Typography>
+                        </Box>
+                    }
+                    {
+                        +value?.userId === id
+                        && <Box
+                            onClick={() => {
+                                setIsTextUpdate(true);
+                            }}
+                        >
+                            <ListItemIcon>
+                                <AiOutlineDelete/>
+                            </ListItemIcon>
+                            <Typography>{t("Update")}</Typography>
                         </Box>
                     }
                 </Box>

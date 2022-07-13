@@ -11,8 +11,12 @@ export async function addPhotoToMyGallery(values, okCallback, errorCallback) {
 }
 
 export async function deletePostById(id) {
-    HttpHelper.deletePostById(id, (r) => {
-        console.log(r)
+    HttpHelper.deletePostById(id, () => {
+    })
+}
+
+export async function updatePostById(id, text) {
+    HttpHelper.updatePostById({id, newText: text}, () => {
     })
 }
 
@@ -87,7 +91,8 @@ const obj = {
     def,
     getComment,
     getMyPostWithEndpoint,
-    deletePostById
+    deletePostById,
+    updatePostById
 }
 
 export default obj;

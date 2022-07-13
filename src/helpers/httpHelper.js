@@ -125,6 +125,17 @@ class Http {
             .catch((error) => console.log(error))
     }
 
+    updatePostById({id, newText}, setPosts) {
+        axios.put("https://sonet34.herokuapp.com/api/post/" + "?token=" + Script.getCookie("token"), {
+            params: {
+                postId: id,
+                newText
+            }
+        })
+            .then((response) => setPosts({posts: response?.data?.posts}))
+            .catch((error) => console.log(error))
+    }
+
     userUpdate(values) {
         axios.put("https://sonet34.herokuapp.com/api/users/update", values)
             .then(() => {
