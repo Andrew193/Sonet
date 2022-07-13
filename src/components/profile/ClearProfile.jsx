@@ -18,6 +18,7 @@ import UsersActivities from "./UsersActivities";
 import style from "./profile.module.css";
 import BackImageMenu from "./BackImageMenu";
 import {useTranslation} from "react-i18next";
+import {useMemo} from "@types/react";
 
 function ClearProfile(props) {
     const {
@@ -48,6 +49,14 @@ function ClearProfile(props) {
     useEffect(() => {
         Script.getPCount(userInfo.id, setCount);
     }, [userInfo.id]);
+
+    const backId = useMemo(() => {
+        try {
+            return JSON.parse(userInfo.back).fileId;
+        } catch (error) {
+            return "null";
+        }
+    }, [userInfo?.back])
 
     return (<>
             <style>
@@ -91,6 +100,7 @@ function ClearProfile(props) {
                 open={open}
                 userInfoBack={userInfo?.back}
                 handleClose={handleClose}
+                backId={backId}
             />
 
             <PageHeader historyPath={"/"}>

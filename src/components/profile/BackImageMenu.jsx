@@ -17,6 +17,7 @@ function BackImageMenu(props) {
         handleClose,
         image,
         backStyle,
+        backId
     } = props;
 
     const [currentImage, setCurrentImage] = useState(0);
@@ -41,7 +42,7 @@ function BackImageMenu(props) {
             <form>
                 <input
                     ref={(el) => imageRef = el}
-                    onChange={() => UserHelper.updateImage(imageRef, "setBack")}
+                    onChange={() => UserHelper.updateImage(imageRef, "setBack", backId)}
                     type="file"
                     style={{display: "none"}}
                 />
