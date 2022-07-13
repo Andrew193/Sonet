@@ -22,6 +22,14 @@ function AvatarLine(props) {
         }
     }, [imgUrl])
 
+    const avatarId = useMemo(() => {
+        try {
+            return JSON.parse(imgUrl)?.fileId;
+        } catch (error) {
+            return "null";
+        }
+    }, [imgUrl])
+
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
 
@@ -64,6 +72,7 @@ function AvatarLine(props) {
                 handleClose={handleClose}
                 image={avatarUrl}
                 avatarUrl={avatarUrl}
+                avatarId={avatarId}
                 backStyle={`${alpha(settings?.configs?.color[settings?.color] || "rgb(231 231 240)", 0.2)}`}
             />
 

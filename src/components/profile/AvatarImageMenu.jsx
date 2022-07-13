@@ -16,7 +16,8 @@ function AvatarImageMenu(props) {
         handleClose,
         image,
         backStyle,
-        avatarUrl
+        avatarUrl,
+        avatarId
     } = props;
 
     const [currentImage, setCurrentImage] = useState(0);
@@ -42,7 +43,7 @@ function AvatarImageMenu(props) {
             <form>
                 <input
                     ref={(el) => imageAvatar = el}
-                    onChange={() => UserHelper.updateImage(imageAvatar, "setAvatar")}
+                    onChange={() => UserHelper.updateImage(imageAvatar, "setAvatar", avatarId)}
                     type="file"
                     style={{display: "none"}}
                 />
