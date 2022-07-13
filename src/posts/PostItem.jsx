@@ -6,13 +6,14 @@ import profileHelper from "../components/profile/profileHelper";
 import DataHelper from "../helpers/dateHelper";
 import {useEffect, useState, useMemo, useCallback, useRef} from "react";
 import ImageViewer from "react-simple-image-viewer";
-import {BsThreeDots} from "react-icons/all";
+import {AiOutlineDelete, BsThreeDots} from "react-icons/all";
 import {AiOutlineDownload} from "react-icons/ai";
 import {downloadFileVersion2} from "../utils";
 import {useOutsideClick} from "../hooks";
 import PostItemsImages from "./PostItemsImages";
 import React from "react";
 import {useTranslation} from "react-i18next";
+import {deletePostById} from "./postsHelper";
 
 function PostItem(props) {
     const {
@@ -72,6 +73,7 @@ function PostItem(props) {
 
     const {t} = useTranslation();
 
+    console.log(id)
     return (
         <>
             {
@@ -135,7 +137,8 @@ function PostItem(props) {
 
                 <Box
                     style={{
-                        display: `${!!anchorEl ? "display" : "none"}`
+                        display: `${!!anchorEl ? "display" : "none"}`,
+                        boxShadow: `0px 0px 8px 0px ${alpha(settings?.configs?.color[settings?.color] || "#b6c0f3", 0.8)}`
                     }}
                     key={anchorEl}
                     onClick={handleClose}
@@ -162,6 +165,19 @@ function PostItem(props) {
                                 <Typography>{t("Download attachments ( Unsafe )")}</Typography>
                             </Box>
                             : null
+                    }
+                    {
+                        +value?.userId === id
+                        && <Box
+                            onClick={() => {
+                                deletePostById(+value?.id)
+                            }}
+                        >
+                            <ListItemIcon>
+                                <AiOutlineDelete/>
+                            </ListItemIcon>
+                            <Typography>{t("Delete")}</Typography>
+                        </Box>
                     }
                 </Box>
 

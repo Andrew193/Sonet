@@ -5,20 +5,14 @@ import DateHelper from "../../helpers/dateHelper.js";
 import FlexColl from "./FlexColl.jsx";
 import Script from "./profileHelper"
 import postServ from "../../posts/postsHelper"
-import {useEffect, useRef, useState} from "react";
+import {useEffect, useMemo, useState} from "react";
 import PageHeader from "../common/navigationLine/NavigationLine.jsx";
-import UserHelper from "../../helpers/userHelper";
-import spareBacImg from "./img/luxfon.com-4767.jpg";
-import {alpha, hexToRgb, ListItemIcon, ListItemText, Menu, MenuItem} from "@mui/material";
-import {downloadFile} from "../../utils";
-import {AiOutlineDownload} from "react-icons/ai";
-import {BsPen} from "react-icons/all";
+import {alpha, hexToRgb} from "@mui/material";
 import AboutYou from "./AboutYou";
 import UsersActivities from "./UsersActivities";
 import style from "./profile.module.css";
 import BackImageMenu from "./BackImageMenu";
 import {useTranslation} from "react-i18next";
-import {useMemo} from "@types/react";
 
 function ClearProfile(props) {
     const {

@@ -119,6 +119,12 @@ class Http {
             .catch((error) => console.log(error))
     }
 
+    deletePostById(id, setPosts) {
+        axios.delete("https://sonet34.herokuapp.com/api/post/" + "?token=" + Script.getCookie("token"), {params: {postId: id}})
+            .then((response) => setPosts({posts: response?.data?.posts}))
+            .catch((error) => console.log(error))
+    }
+
     userUpdate(values) {
         axios.put("https://sonet34.herokuapp.com/api/users/update", values)
             .then(() => {

@@ -10,6 +10,12 @@ export async function addPhotoToMyGallery(values, okCallback, errorCallback) {
     HttpHelper.addPhotoToMyGallery(values, okCallback, errorCallback);
 }
 
+export async function deletePostById(id) {
+    HttpHelper.deletePostById(id, (r) => {
+        console.log(r)
+    })
+}
+
 function getMyPostWithEndpoint(id, set, endpoint) {
     HttpHelper.getPostWithType(id, set, endpoint)
 }
@@ -80,7 +86,8 @@ const obj = {
     getMy,
     def,
     getComment,
-    getMyPostWithEndpoint
+    getMyPostWithEndpoint,
+    deletePostById
 }
 
 export default obj;
