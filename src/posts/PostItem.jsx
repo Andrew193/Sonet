@@ -170,6 +170,7 @@ function PostItem(props) {
                         +value?.userId === id
                         && <Box
                             onClick={() => {
+                                console.log(value)
                                 deletePostById(+value?.id)
                             }}
                         >
