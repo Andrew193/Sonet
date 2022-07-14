@@ -12,11 +12,14 @@ function ClearPosts(props) {
 
     const [posts, setPost] = useState(false)
 
+    console.log(posts, toMake, "test")
     useEffect(() => {
         setPost(() => toMake.posts.map((value, index) =>
             <PostItem
                 value={value}
                 id={id}
+                index={index}
+                setPost={setPost}
                 customStyle={toMake?.customClass || commentsStyle.OnePost}
                 settings={settings}
                 key={index}

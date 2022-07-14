@@ -263,7 +263,7 @@
 
 .PostItemsActionsBox > div {
     display: flex;
-    align-items: center;
+    align-items: end;
     padding: 5px;
     cursor: pointer;
     transition: all ease 0.5s;

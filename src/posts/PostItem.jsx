@@ -4,30 +4,33 @@ import {Link} from "react-router-dom";
 import EmotionsLineContainer from "./EmotionsLineContainer";
 import profileHelper from "../components/profile/profileHelper";
 import DataHelper from "../helpers/dateHelper";
-import {useEffect, useState, useMemo, useCallback, useRef} from "react";
+import {useEffect, useState, useMemo, useCallback, useRef, useContext} from "react";
 import ImageViewer from "react-simple-image-viewer";
 import {AiOutlineDelete, BsThreeDots} from "react-icons/all";
-import {AiOutlineDownload} from "react-icons/ai";
+import {AiOutlineDownload, AiOutlineHighlight} from "react-icons/ai";
 import {downloadFileVersion2} from "../utils";
 import {useOutsideClick} from "../hooks";
 import PostItemsImages from "./PostItemsImages";
 import React from "react";
 import {useTranslation} from "react-i18next";
 import {deletePostById, refresh, updatePostById} from "./postsHelper";
-import {notify} from "../App";
 import InputEmoji from 'react-input-emoji';
+import Context from "../helpers/contextHelper";
 
 function PostItem(props) {
     const {
         value,
         id,
         settings,
-        customStyle
+        customStyle,
+        setPost,
+        index
     } = props;
 
     const [userAvatar, setUserAvatar] = useState();
     const [currentImage, setCurrentImage] = useState(0);
     const [isViewerOpen, setIsViewerOpen] = useState(false);
+    const {socket, notify} = useContext(Context)
 
     const openImageViewer = useCallback((index) => {
         setCurrentImage(index);
@@ -77,7 +80,6 @@ function PostItem(props) {
     const [newPostText, setNewPostText] = useState("");
     const [isTextUpdate, setIsTextUpdate] = useState(false);
 
-    console.log(settings?.configs?.color[settings?.color])
     return (
         <>
             <style>{`
@@ -216,8 +218,13 @@ function PostItem(props) {
                             onClick={() => {
                                 deletePostById(+value?.id)
                                     .then(() => {
+                                        setPost((state) => {
+                                            debugger
+                                            state.splice(index, 1);
+                                            return state;
+                                        })
                                         notify(t("Deleted"));
-                                        refresh()
+                                        refresh(socket, id)
                                     })
                             }}
                         >
@@ -235,7 +242,7 @@ function PostItem(props) {
                             }}
                         >
                             <ListItemIcon>
-                                <AiOutlineDelete/>
+                                <AiOutlineHighlight/>
                             </ListItemIcon>
                             <Typography>{t("Update")}</Typography>
                         </Box>
