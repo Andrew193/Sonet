@@ -130,7 +130,7 @@ function App() {
                 <Route exact path={"/settings"} render={() => <Components.SettingsContainerPage/>}/>
                 <Route exact path={"/chats"} render={() => <Components.ChatContainer/>}/>
                 <Route exact path={"/auth"} render={() => <Components.ContainerAuth/>}/>
-                <Route exact path={"/gallery"} render={() => <Components.GalleryContainer/>}/>
+                <Route exact path={"/gallery/:folderName?"} render={() => <Components.GalleryContainer/>}/>
             </div>
         </Context.Provider>
     );

@@ -3,6 +3,7 @@ import {useEffect, useState} from "react";
 import {getSettings} from "../db";
 import s from "./gallery.module.css";
 import GalleryInnerContent from "./GalleryInnerContent";
+import {withRouter} from "react-router-dom";
 
 function GalleryContainer() {
     const [settings, setSettings] = useState({});
@@ -44,4 +45,4 @@ function GalleryContainer() {
     )
 }
 
-export default GalleryContainer;
+export default withRouter(GalleryContainer);

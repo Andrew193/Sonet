@@ -1,7 +1,7 @@
 import withPageHeader from "../hoc/withPageHeader";
-import {alpha, Box, ListItemIcon, Menu, MenuItem, Typography} from "@mui/material";
+import {alpha, Box, FormControl, InputLabel, ListItemIcon, Menu, MenuItem, Select, Typography} from "@mui/material";
 import {useCallback, useEffect, useMemo, useState} from "react";
-import {deleteMyPhoto, getMyGallery} from "./galleryHelper";
+import {addPhotoToFolder, deleteMyPhoto, getMyFolders, getMyGallery} from "./galleryHelper";
 import {notify} from "../App";
 import LazyImage from "../posts/LazyImage";
 import s from "./gallery.module.css";
@@ -12,6 +12,8 @@ import GalleryActions from "./GalleryActions";
 import ImageViewer from "react-simple-image-viewer";
 import GalleryMode from "./GalleryMode";
 import {useTranslation} from "react-i18next";
+import Folders from "./Folders";
+import {withRouter} from "react-router-dom";
 
 function GalleryInnerContent(props) {
     const {
@@ -36,7 +38,9 @@ function GalleryInnerContent(props) {
 
     const configuredImages = useMemo(() => {
         return images?.clearData?.map((image, index) =>
-            <p>
+            <p
+                key={JSON.parse(image?.src)?.webContentLink + index}
+            >
                 <LazyImage
                     imageSrc={JSON.parse(image?.src)?.webContentLink}
                     onClick={(e) => {
@@ -80,6 +84,29 @@ function GalleryInnerContent(props) {
     };
 
     const {t} = useTranslation();
+
+    const [selected, setSelected] = useState(0);
+    const [folders, setFolders] = useState([]);
+    const folderName = props?.match?.params?.folderName;
+
+    const parsedFolders = useMemo(() => {
+        const uniqFolders = folders.filter(function (item, pos, self) {
+            return self?.map((item) => item?.name).indexOf(item?.name) === pos;
+        })
+
+        return uniqFolders?.map((folder, index) =>
+            <MenuItem key={folder?.name + index} value={folder?.name}>{folder?.name}</MenuItem>)
+    }, [folders?.length])
+
+    useEffect(() => {
+        if (folders?.length === 0) {
+            if (userInformation?.id) {
+                getMyFolders(userInformation?.id, setFolders, (error) => {
+                    console.error(error)
+                })
+            }
+        }
+    }, [userInformation?.id, folders?.length]);
 
     return (
         <Box>
@@ -125,6 +152,28 @@ function GalleryInnerContent(props) {
                     <Typography>{t("Expand")}</Typography>
                 </MenuItem>
                 <MenuItem onClick={() => {
+                    handleClose()
+                }}>
+                    <FormControl fullWidth>
+                        <InputLabel id="demo-simple-select-label">{t("Add to a folder")}</InputLabel>
+                        <Select
+                            labelId="demo-simple-select-label"
+                            id="demo-simple-select"
+                            label={t("Add to a folder")}
+                            onChange={(e) => {
+                                addPhotoToFolder({
+                                    src: images?.clearData[selectedImage]?.src,
+                                    userId: userInformation?.id,
+                                    shared: false,
+                                    sharedUser: images?.clearData[selectedImage]?.sharedUser,
+                                    name: e.target.value,
+                                    folderBack: ""
+                                }, setFolders)
+                            }}
+                        >{parsedFolders}</Select>
+                    </FormControl>
+                </MenuItem>
+                <MenuItem onClick={() => {
                     deleteMyPhoto({
                         userId: userInformation?.id,
                         src: `${images?.clearData[selectedImage]?.src}`
@@ -152,14 +201,31 @@ function GalleryInnerContent(props) {
                     e.target.nextElementSibling.classList.toggle("Hide")
                 }}
             />
-            <GalleryMode />
-            <Box
-                className={s.ImagesContainer}
-            >
-                {configuredImages}
-            </Box>
+            <GalleryMode
+                selected={selected}
+                setSelected={setSelected}
+            />
+
+            {
+                !selected
+                    ? <Box
+                        className={s.ImagesContainer}
+                    >
+                        {configuredImages}
+                    </Box>
+                    : <Box
+                        className={s.ImagesContainer}
+                    >
+                        <Folders
+                            folderName={folderName}
+                            user={userInformation}
+                            folders={folders}
+                            setFolders={setFolders}
+                        />
+                    </Box>
+            }
         </Box>
     )
 }
 
-export default withPageHeader(GalleryInnerContent, {path: "/gallery", Title: <span>Gallery</span>});
+export default withRouter(withPageHeader(GalleryInnerContent, {path: "/gallery", Title: <span>Gallery</span>}));

@@ -4,8 +4,11 @@ import {useState} from "react";
 import {useTranslation} from "react-i18next";
 
 
-function GalleryMode() {
-    const [selected, setSelected] = useState(0);
+function GalleryMode(props) {
+    const {
+        selected,
+        setSelected
+    } = props;
 
     const {t} = useTranslation();
 

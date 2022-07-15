@@ -356,6 +356,48 @@ class Http {
                 }
             })
     }
+
+    addPhotoToFolder(values, okCallback, errorCallback) {
+        axios.post("https://sonet34.herokuapp.com/api/folder", values)
+            .then((response) => {
+                okCallback(response?.data);
+            })
+            .catch((error) => {
+                console.error(error?.response?.data);
+
+                if (error) {
+                    errorCallback(createErrorsForApiCall(error?.response?.data, error?.response?.data))
+                }
+            })
+    }
+
+    getMyFolders(userId, okCallback, errorCallback) {
+        axios.get("https://sonet34.herokuapp.com/api/folder", {params: {userId}})
+            .then((response) => {
+                okCallback(response?.data?.clearData);
+            })
+            .catch((error) => {
+                console.error(error?.response?.data);
+
+                if (error) {
+                    errorCallback(createErrorsForApiCall(error?.response?.data, error?.response?.data))
+                }
+            })
+    }
+
+    deleteImageFromFolder({userId, src}, okCallback, errorCallback) {
+        axios.delete("https://sonet34.herokuapp.com/api/folder", {params: {userId, src}})
+            .then((response) => {
+                okCallback(response?.data);
+            })
+            .catch((error) => {
+                console.error(error?.response?.data);
+
+                if (error) {
+                    errorCallback(createErrorsForApiCall(error?.response?.data, error?.response?.data))
+                }
+            })
+    }
 }
 
 const Item = new Http();

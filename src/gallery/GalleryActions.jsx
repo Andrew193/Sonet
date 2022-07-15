@@ -2,8 +2,6 @@ import {Box, ListItemIcon, Menu, MenuItem, Typography} from "@mui/material";
 import {AiOutlineDelete, AiOutlineMedium, BsGear, TbLetterB} from "react-icons/all";
 import s from "./gallery.module.css";
 import {useMemo, useState} from "react";
-import {downloadFileVersion2} from "../utils";
-import {AiOutlineDownload} from "react-icons/ai";
 import {useTranslation} from "react-i18next";
 
 function GalleryActions() {
