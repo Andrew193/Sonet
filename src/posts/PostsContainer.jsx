@@ -100,7 +100,7 @@ function PostsContainer(props) {
             {
                 posts
                     ? <>
-                        <ClearPosts id={id} toMake={posts} settings={settings}/>
+                        <ClearPosts id={id} toMake={posts} settings={settings} setParentPosts={setPosts}/>
                         <div className={s.fixer}/>
                         <SortLine/>
                     </>

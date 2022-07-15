@@ -13,6 +13,8 @@ import {io} from "socket.io-client";
 import Context from "./helpers/contextHelper"
 import {setupDb} from "./db";
 import "./i18n";
+import galleryStyles from "./gallery/gallery.module.css";
+import settingsStyles from "./settings/settings.module.css";
 
 const sessionHelper = require("./helpers/sessionHelper")
 const socket = io();
@@ -59,9 +61,30 @@ function App() {
     return (
         <Context.Provider value={{notify, socket}}>
             <style>{`
-            .App.Open {
-            height: ${height()}px;
+            .App {
+            min-height: ${height() - 1}px;
             } 
+            .genContainer {
+            min-height: ${height() - 1}px;
+            }
+             .genContainer div.onePostContainer{
+            min-height: ${height() - 1}px;
+            }
+            .genContainer main {
+            min-height: ${height() - 1}px;
+            } 
+            .genContainer > div {
+            min-height: ${height() - 1}px;
+            } 
+            .${galleryStyles.Container} {
+            min-height: ${height() - 1}px;
+            }
+             .${settingsStyles.Container} {
+            min-height: ${height() - 1}px;
+            }
+            .mainFollowContainer {
+            min-height: ${height() - 1}px;
+            }
             `}</style>
             <div className="App">
                 {flag && <>

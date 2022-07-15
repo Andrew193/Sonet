@@ -21,7 +21,7 @@ function Followers(props) {
 
     return (
         <div
-            className={s.Container}
+            className={s.Container + " mainFollowContainer"}
             style={{
                 background: settings?.configs?.background[settings?.background]
             }}

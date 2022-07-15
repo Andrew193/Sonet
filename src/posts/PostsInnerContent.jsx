@@ -8,6 +8,7 @@ function ClearPosts(props) {
         toMake,
         id,
         settings,
+        setParentPosts
     } = props;
 
     const [posts, setPost] = useState(false)
@@ -20,6 +21,7 @@ function ClearPosts(props) {
                 id={id}
                 index={index}
                 setPost={setPost}
+                setParentPosts={setParentPosts}
                 customStyle={toMake?.customClass || commentsStyle.OnePost}
                 settings={settings}
                 key={index}

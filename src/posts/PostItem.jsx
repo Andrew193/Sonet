@@ -24,7 +24,8 @@ function PostItem(props) {
         settings,
         customStyle,
         setPost,
-        index
+        index,
+        setParentPosts
     } = props;
 
     const [userAvatar, setUserAvatar] = useState();
@@ -115,6 +116,10 @@ function PostItem(props) {
                         setIsTextUpdate(false);
                         updatePostById(+value?.id, newPostText)
                             .then(() => {
+                                setParentPosts((state) => {
+                                    state.posts[index] = {...state.posts[index], text: newPostText}
+                                    return state;
+                                })
                                 notify(t("Updated"));
                             })
                     }
@@ -219,7 +224,6 @@ function PostItem(props) {
                                 deletePostById(+value?.id)
                                     .then(() => {
                                         setPost((state) => {
-                                            debugger
                                             state.splice(index, 1);
                                             return state;
                                         })
