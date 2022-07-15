@@ -21,7 +21,6 @@ function CommentTab({information, avatarUrl}) {
             .then((response) => setRelatedPost(response?.posts))
     }, []);
 
-    console.log(relatedPost)
     return (
         <Box
             className={s.UsersPost + " profilePostBorder"}

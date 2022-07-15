@@ -21,7 +21,6 @@ function SpecialPosts(props) {
     const [settings, setSettings] = useState({});
 
     socket.on(type === "notMy" ? "notMyPostUpdate" : "MyPostUpdate", (updatedPosts) => {
-        console.log(updatedPosts, "fsdfsdfdsfsdfsdfsdf")
         setPosts({posts: updatedPosts})
     });
 

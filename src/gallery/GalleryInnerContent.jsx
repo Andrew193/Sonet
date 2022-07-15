@@ -49,8 +49,6 @@ function GalleryInnerContent(props) {
         )
     }, [images])
 
-    console.log(images)
-
     const [anchorEl, setAnchorEl] = useState(null);
     const [isViewerOpen, setIsViewerOpen] = useState(false);
     const [selectedImage, setSelectedImage] = useState(null);

@@ -25,7 +25,6 @@ function ClearSpecialPost(props) {
         getData();
     }, [])
 
-    console.log("rrrrr", posts)
     return (
         <>
             <div className={"Separator"}/>

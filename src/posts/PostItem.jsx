@@ -118,7 +118,7 @@ function PostItem(props) {
                             .then(() => {
                                 setParentPosts((state) => {
                                     state.posts[index] = {...state.posts[index], text: newPostText}
-                                    return state;
+                                    return JSON.parse(JSON.stringify(state));
                                 })
                                 notify(t("Updated"));
                             })
