@@ -16,6 +16,10 @@ export async function deleteImageFromFolder({userId, src, id}, okCallback, error
     return HttpHelper.deleteImageFromFolder({userId, src, id}, okCallback, errorCallback)
 }
 
+export async function deleteFolder({name}, okCallback, errorCallback) {
+    return HttpHelper.deleteFolder({name}, okCallback, errorCallback)
+}
+
 export async function addPhotoToFolder(values, setFolders) {
     return HttpHelper.addPhotoToFolder(values, (response) => {
         setFolders((state) => {

@@ -406,6 +406,20 @@ class Http {
                 }
             })
     }
+
+    deleteFolder({name}, okCallback, errorCallback) {
+        axios.delete("https://sonet34.herokuapp.com/api/folder/root", {params: {name}})
+            .then((response) => {
+                okCallback(response?.data);
+            })
+            .catch((error) => {
+                console.error(error?.response?.data);
+
+                if (error) {
+                    errorCallback(createErrorsForApiCall(error?.response?.data, error?.response?.data))
+                }
+            })
+    }
 }
 
 const Item = new Http();

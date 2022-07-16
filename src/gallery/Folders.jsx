@@ -8,7 +8,7 @@ import {AiOutlineDelete, BsPen, RiUserShared2Line} from "react-icons/all";
 import {AiOutlineEye} from "react-icons/ai";
 import {useTranslation} from "react-i18next";
 import userHelper from "../helpers/userHelper";
-import {deleteImageFromFolder, deleteMyPhoto, updateFolderBack} from "./galleryHelper";
+import {deleteFolder, deleteImageFromFolder, deleteMyPhoto, updateFolderBack} from "./galleryHelper";
 
 function Folders(props) {
     const {
@@ -196,7 +196,7 @@ function Folders(props) {
                     if (openedFolderImage) {
                         deleteImageFromFolder({userId: user?.id, src: openedFolderImage?.src, id: openedFolderImage?.id})
                     } else {
-
+                        deleteFolder({name: openedFolderImage?.name})
                     }
                     handleClose();
                 }}>
