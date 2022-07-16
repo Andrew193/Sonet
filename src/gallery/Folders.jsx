@@ -8,7 +8,7 @@ import {AiOutlineDelete, BsPen, RiUserShared2Line} from "react-icons/all";
 import {AiOutlineEye} from "react-icons/ai";
 import {useTranslation} from "react-i18next";
 import userHelper from "../helpers/userHelper";
-import {deleteMyPhoto, updateFolderBack} from "./galleryHelper";
+import {deleteImageFromFolder, deleteMyPhoto, updateFolderBack} from "./galleryHelper";
 
 function Folders(props) {
     const {
@@ -194,7 +194,7 @@ function Folders(props) {
                 }
                 <MenuItem onClick={() => {
                     if (openedFolderImage) {
-                        deleteMyPhoto({userId: user?.id, src: openedFolderImage?.src})
+                        deleteImageFromFolder({userId: user?.id, src: openedFolderImage?.src})
                     } else {
 
                     }

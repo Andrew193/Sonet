@@ -371,7 +371,7 @@ class Http {
             })
     }
 
-    updateFolderBack(values, okCallback, errorCallback) {
+    updateFolderBack(values) {
         return fetch("https://sonet34.herokuapp.com/api/folder/folderBack", {
                 method: "POST",
                 body: values

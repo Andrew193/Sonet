@@ -9,8 +9,11 @@ export async function getMyGallery(userId, okCallback, errorCallback) {
 }
 
 export async function deleteMyPhoto({userId, src}, okCallback, errorCallback) {
-    console.log(userId, src)
     return HttpHelper.deleteMyPhoto({userId, src}, okCallback, errorCallback)
+}
+
+export async function deleteImageFromFolder({userId, src}, okCallback, errorCallback) {
+    return HttpHelper.deleteImageFromFolder({userId, src}, okCallback, errorCallback)
 }
 
 export async function addPhotoToFolder(values, setFolders) {
