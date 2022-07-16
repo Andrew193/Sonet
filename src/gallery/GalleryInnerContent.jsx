@@ -179,7 +179,6 @@ function GalleryInnerContent(props) {
                         src: `${images?.clearData[selectedImage]?.src}`
                     }, () => {
                         setImages((images) => {
-                            debugger
                             images?.clearData?.splice(selectedImage, 1);
                             return JSON.parse(JSON.stringify(images));
                         })

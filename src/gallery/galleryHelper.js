@@ -15,7 +15,7 @@ export async function deleteMyPhoto({userId, src}, okCallback, errorCallback) {
 export async function addPhotoToFolder(values, setFolders) {
     return HttpHelper.addPhotoToFolder(values, (response) => {
         setFolders((state) => {
-            return [...(state || []), response?.data]
+            return response?.data?.id ? [...(state || []), response?.data] : state;
         })
     }, (error) => {
         console.log(error)
