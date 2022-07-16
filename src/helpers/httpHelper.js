@@ -393,8 +393,8 @@ class Http {
             })
     }
 
-    deleteImageFromFolder({userId, src}, okCallback, errorCallback) {
-        axios.delete("https://sonet34.herokuapp.com/api/folder", {params: {userId, src}})
+    deleteImageFromFolder({userId, src, id}, okCallback, errorCallback) {
+        axios.delete("https://sonet34.herokuapp.com/api/folder", {params: {userId, src, id}})
             .then((response) => {
                 okCallback(response?.data);
             })

@@ -194,7 +194,7 @@ function Folders(props) {
                 }
                 <MenuItem onClick={() => {
                     if (openedFolderImage) {
-                        deleteImageFromFolder({userId: user?.id, src: openedFolderImage?.src})
+                        deleteImageFromFolder({userId: user?.id, src: openedFolderImage?.src, id: openedFolderImage?.id})
                     } else {
 
                     }
