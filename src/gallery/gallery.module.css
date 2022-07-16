@@ -17,8 +17,6 @@
 
 .FolderInnerContainer > div button {
     height: 40px;
-    max-width: 100px !important;
-    min-width: 100px !important;
 }
 
 .ImagesContainer {
@@ -99,6 +97,8 @@
 
 .folderImagesContainer {
     display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
 }
 
 .ImagesContainer > p > div > div {

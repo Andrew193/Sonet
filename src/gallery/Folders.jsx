@@ -1,11 +1,15 @@
-import {useEffect, useState, useMemo} from "react";
-import {getMyFolders} from "./galleryHelper";
+import {useMemo, useState, useRef} from "react";
 import FoldersActionsBar from "./FoldersActionsBar";
 import s from "./gallery.module.css";
-import {Box, Typography} from "@mui/material";
+import {Box, ListItemIcon, Menu, MenuItem, Typography} from "@mui/material";
 import {useHistory} from "react-router-dom";
 import LazyImage from "../posts/LazyImage";
-import {RiUserShared2Line} from "react-icons/all";
+import {AiOutlineDelete, BsPen, RiUserShared2Line} from "react-icons/all";
+import {AiOutlineEye} from "react-icons/ai";
+import {useTranslation} from "react-i18next";
+import Script from "../createPost/script";
+import userHelper from "../helpers/userHelper";
+import {updateFolderBack} from "./galleryHelper";
 
 function Folders(props) {
     const {
@@ -21,6 +25,19 @@ function Folders(props) {
         history.push(`/gallery/${name}`)
     }
 
+    const [openedFolder, setOpenedFolder] = useState(null);
+    const [images, setImages] = useState([]);
+    const [anchorEl, setAnchorEl] = useState(null);
+    const open = Boolean(anchorEl);
+
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
+
     const configuredFolders = useMemo(() => {
         const uniqFolders = folders.filter(function (item, pos, self) {
             return self?.map((item) => item?.name).indexOf(item?.name) === pos;
@@ -29,9 +46,11 @@ function Folders(props) {
         return uniqFolders?.map((folder, index) =>
             <p
                 key={folder?.id + folder?.name + index}
-                onClick={() => {
-                    openFolder(folder?.name);
+                onClick={(e) => {
+                    setOpenedFolder(folder)
+                    handleClick(e);
                 }}
+
             >
                 <div>
                     <div className={"folderItem"}>
@@ -67,14 +86,72 @@ function Folders(props) {
         return configuredFolderImages?.every((image) => image === null);
     }, [configuredFolderImages])
 
-    console.log(isFolderContent)
+    const {t} = useTranslation();
+    let image = useRef();
+
     return (
         <div
             className={s.FolderInnerContainer}
         >
+            <form>
+                <input
+                    ref={(el) => image = el}
+                    type="file"
+                    style={{display: "none"}}
+                    onChange={() => {
+                        let formData = new FormData();
+                        let fileId;
+                        formData.append("file", image.files[0]);
+                        formData.append("name", openedFolder?.name);
+                        try {
+                            fileId = JSON.parse(openedFolder?.folderBack)?.fileId
+                        } catch (error) {
+                            fileId = null;
+                        }
+
+                        formData.append("fileId", fileId)
+                        updateFolderBack(formData, () => {
+                        }, () => {
+                        })
+                    }}
+                />
+            </form>
+            <Menu
+                anchorEl={anchorEl}
+                open={open}
+                onClose={handleClose}
+                className={s.ImageMenu}
+            >
+                <MenuItem onClick={() => {
+                    openFolder(openedFolder?.name);
+                    handleClose();
+                }}>
+                    <ListItemIcon>
+                        <AiOutlineEye/>
+                    </ListItemIcon>
+                    <Typography>{t("Open this folder")}</Typography>
+                </MenuItem>
+                <MenuItem onClick={() => {
+
+                    handleClose();
+                }}>
+                    <ListItemIcon>
+                        <AiOutlineDelete/>
+                    </ListItemIcon>
+                    <Typography>{t("Delete this folder ( with all images inside it )")}</Typography>
+                </MenuItem>
+                <MenuItem onClick={() => {
+                    userHelper.CallImageInput(image)
+                    handleClose()
+                }}>
+                    <ListItemIcon>
+                        <BsPen/>
+                    </ListItemIcon>
+                    <Typography>{t("Update background")}</Typography>
+                </MenuItem>
+            </Menu>
             {
                 !folderName && <FoldersActionsBar
-
                     userId={user.id}
                     setFolders={setFolders}
                 />

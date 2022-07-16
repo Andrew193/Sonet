@@ -1,5 +1,16 @@
 import withPageHeader from "../hoc/withPageHeader";
-import {alpha, Box, FormControl, InputLabel, ListItemIcon, Menu, MenuItem, Select, Typography} from "@mui/material";
+import {
+    alpha,
+    Backdrop,
+    Box, CircularProgress,
+    FormControl,
+    InputLabel,
+    ListItemIcon,
+    Menu,
+    MenuItem,
+    Select,
+    Typography
+} from "@mui/material";
 import {useCallback, useEffect, useMemo, useState} from "react";
 import {addPhotoToFolder, deleteMyPhoto, getMyFolders, getMyGallery} from "./galleryHelper";
 import {notify} from "../App";
@@ -87,6 +98,7 @@ function GalleryInnerContent(props) {
 
     const [selected, setSelected] = useState(0);
     const [folders, setFolders] = useState([]);
+    const [isOpened, setIsOpened] = useState(false);
     const folderName = props?.match?.params?.folderName;
 
     const parsedFolders = useMemo(() => {
@@ -110,6 +122,12 @@ function GalleryInnerContent(props) {
 
     return (
         <Box>
+            <Backdrop
+                sx={{color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1}}
+                open={isOpened}
+            >
+                <CircularProgress color="inherit"/>
+            </Backdrop>
             {
                 isViewerOpen && (
                     <ImageViewer
@@ -161,6 +179,7 @@ function GalleryInnerContent(props) {
                             id="demo-simple-select"
                             label={t("Add to a folder")}
                             onChange={(e) => {
+                                setIsOpened(() => true)
                                 addPhotoToFolder({
                                     src: images?.clearData[selectedImage]?.src,
                                     userId: userInformation?.id,
@@ -169,6 +188,9 @@ function GalleryInnerContent(props) {
                                     name: e.target.value,
                                     folderBack: ""
                                 }, setFolders)
+                                    .then(() => {
+                                        setTimeout(() => setIsOpened(() => false), 1000)
+                                    })
                             }}
                         >{parsedFolders}</Select>
                     </FormControl>

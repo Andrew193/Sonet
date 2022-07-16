@@ -371,6 +371,14 @@ class Http {
             })
     }
 
+    updateFolderBack(values, okCallback, errorCallback) {
+        return fetch("https://sonet34.herokuapp.com/api/folder/folderBack", {
+                method: "POST",
+                body: values
+            }
+        )
+    }
+
     getMyFolders(userId, okCallback, errorCallback) {
         axios.get("https://sonet34.herokuapp.com/api/folder", {params: {userId}})
             .then((response) => {

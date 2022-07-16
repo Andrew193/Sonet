@@ -32,6 +32,9 @@ function FoldersActionsBar(props) {
     return (
         <Box
             className={s.Actions}
+            style={{
+                alignItems: 'end'
+            }}
         >
             <style>{`
             .inputCover {
@@ -53,34 +56,67 @@ function FoldersActionsBar(props) {
             cursor: pointer;
             background: ${alpha(hexToRgb(settings?.configs?.color[settings?.color] || "#7986cb"), 0.5)};
             }
+            .react-emoji > .react-input-emoji--button {
+            max-width: 45px !important;
+            min-width: 45px !important;
+            }
             `}</style>
 
             {isTextUpdate && <div
                 className={"inputCover"}
             >
-                <InputEmoji
-                    value={newFolderText}
-                    onChange={setNewFolderText}
-                    cleanOnEnter
-                    placeholder={t("Type a new post text")}
-                />
-                <span
-                    id={"mainPostBtn"}
-                    onClick={() => {
-                        setIsTextUpdate(false);
-                        addPhotoToFolder({
-                            src: "",
-                            userId: userId,
-                            shared: false,
-                            sharedUser: "",
-                            name: newFolderText,
-                            folderBack: ""
-                        }, setFolders)
+                <div
+                    style={{
+                        width: "100%",
+                        display: 'flex',
+                        alignItems: 'center',
+                        flexDirection: 'column',
+                        padding: '15px',
                     }}
-                >Create Folder</span>
+                    onDoubleClick={() => {
+                        setIsTextUpdate(false)
+                    }}
+                >
+                    <InputEmoji
+                        value={newFolderText}
+                        onChange={setNewFolderText}
+                        cleanOnEnter
+                        placeholder={t("Type a new post text")}
+                    />
+                    <div
+                        style={{
+                            flex: '5 0',
+                            padding: "10px"
+                        }}
+                    >
+                    <span
+                        id={"mainPostBtn"}
+                        style={{
+                            padding: "10px"
+                        }}
+                        onClick={() => {
+                            setIsTextUpdate(false);
+                            if (!!newFolderText) {
+                                addPhotoToFolder({
+                                    src: "",
+                                    userId: userId,
+                                    shared: false,
+                                    sharedUser: "",
+                                    name: newFolderText,
+                                    folderBack: ""
+                                }, setFolders)
+                            }
+                        }}
+                    >Create Folder</span>
+                    </div>
+                </div>
             </div>
             }
             <button
+                style={{
+                    display: "flex",
+                    justifyContent: 'space-evenly'
+                }}
                 className={`button btn btn-default  ${buttonsConfig[settings?.configs?.color[settings?.color]]}`}
                 onClick={() => {
                     setIsTextUpdate(true)
