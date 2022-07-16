@@ -122,6 +122,11 @@ function GalleryInnerContent(props) {
 
     return (
         <Box>
+            <style>{`
+            .folderItem, .lazyload-wrapper > div {
+             box-shadow: 0px 0px 8px 0px ${alpha(settings?.configs?.color[settings?.color] || "#b6c0f3", 0.8)};
+            }
+            `}</style>
             <Backdrop
                 sx={{color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1}}
                 open={isOpened}
@@ -238,6 +243,7 @@ function GalleryInnerContent(props) {
                         className={s.ImagesContainer}
                     >
                         <Folders
+                            settings={settings}
                             folderName={folderName}
                             user={userInformation}
                             folders={folders}

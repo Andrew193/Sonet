@@ -89,6 +89,7 @@
     margin: 10px;
     transition: all ease 0.7s;
     cursor: pointer;
+    position: relative;
 }
 
 .ImagesContainer > div.folderImagesContainer > p > div > div:hover {
