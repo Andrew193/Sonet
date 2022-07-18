@@ -123,7 +123,7 @@ function GalleryInnerContent(props) {
     return (
         <Box>
             <style>{`
-            .folderItem, .lazyload-wrapper > div {
+            .folderItem, .lazyload-wrapper > div, .${s.FolderDescription} {
              box-shadow: 0px 0px 8px 0px ${alpha(settings?.configs?.color[settings?.color] || "#b6c0f3", 0.8)};
             }
             `}</style>
@@ -194,7 +194,10 @@ function GalleryInnerContent(props) {
                                     folderBack: ""
                                 }, setFolders)
                                     .then(() => {
-                                        setTimeout(() => setIsOpened(() => false), 1000)
+                                        setTimeout(() => {
+                                            notify(t("Added"))
+                                            setIsOpened(() => false)
+                                        }, 1000)
                                     })
                             }}
                         >{parsedFolders}</Select>
@@ -245,7 +248,6 @@ function GalleryInnerContent(props) {
                         <Folders
                             settings={settings}
                             folderName={folderName}
-                            user={userInformation}
                             folders={folders}
                             setFolders={setFolders}
                         />

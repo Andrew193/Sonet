@@ -1,7 +1,7 @@
 import s from "../settings/settings.module.css";
 import {buttonsConfig} from "../createPost/CreatePostLine";
 import {MdOutlineCreate, VscEmptyWindow} from "react-icons/all";
-import {alpha, Box, hexToRgb} from "@mui/material";
+import {alpha, Box, hexToRgb, Typography} from "@mui/material";
 import {useEffect, useState} from "react";
 import {useTranslation} from "react-i18next";
 import {getSettings} from "../db";
@@ -31,10 +31,7 @@ function FoldersActionsBar(props) {
 
     return (
         <Box
-            className={s.Actions}
-            style={{
-                alignItems: 'end'
-            }}
+            className={s.Actions + " " + s.FoldersActions}
         >
             <style>{`
             .inputCover {
@@ -112,6 +109,18 @@ function FoldersActionsBar(props) {
                 </div>
             </div>
             }
+            <div>
+                <Typography
+                    variant={"h4"}
+                    component={"h4"}
+                >
+                    Folders
+                </Typography>
+                <Typography
+                    variant={"h6"}
+                    component={"p"}
+                >Create, delete, update back image.</Typography>
+            </div>
             <button
                 style={{
                     display: "flex",

@@ -8,6 +8,7 @@ function GalleryActions() {
 
     const [anchorEl, setAnchorEl] = useState(null);
     const [size, setSize] = useState({min: 190, max: 135})
+    const [hideDescription, setHideDescription] = useState(false)
     const open = Boolean(anchorEl);
 
     const handleClick = (event) => {
@@ -24,8 +25,11 @@ function GalleryActions() {
                 min-height: ${size.min}px;
                 min-width: ${size.max}px;
                 }
+                .${s.FolderDescription} {
+                ${hideDescription ? "width: 0px !important;padding: 0px !important;overflow: hidden;" : ""}
+                }
                 `
-    }, [size])
+    }, [size, hideDescription])
 
     const {t} = useTranslation();
 
@@ -75,8 +79,16 @@ function GalleryActions() {
                     </ListItemIcon>
                     <Typography>{t("Basic images size")}</Typography>
                 </MenuItem>
+                <MenuItem onClick={() => {
+                    setHideDescription((state) => !state)
+                    handleClose();
+                }}>
+                    <ListItemIcon>
+                        <TbLetterB/>
+                    </ListItemIcon>
+                    <Typography>{t("Toggle description")}</Typography>
+                </MenuItem>
             </Menu>
-
             <BsGear
                 onClick={(e) => {
                     handleClick(e)

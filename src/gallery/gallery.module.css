@@ -50,10 +50,10 @@
 }
 
 .ImagesContainer > div.folderImagesContainer > p {
-   position: relative;
+    position: relative;
 }
 
-.ImagesContainer > div.folderImagesContainer > p svg{
+.ImagesContainer > div.folderImagesContainer > p svg {
     position: absolute;
     top: 10px;
     right: 10px;
@@ -90,6 +90,16 @@
     transition: all ease 0.7s;
     cursor: pointer;
     position: relative;
+}
+
+.FolderDescription {
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+    height: fit-content;
+    padding: 5px;
+    border-radius: 3px;
+    transition: all ease 0.5s;
 }
 
 .ImagesContainer > div.folderImagesContainer > p > div > div:hover {

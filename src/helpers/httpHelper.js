@@ -393,32 +393,12 @@ class Http {
             })
     }
 
-    deleteImageFromFolder({userId, src, id}, okCallback, errorCallback) {
-        axios.delete("https://sonet34.herokuapp.com/api/folder", {params: {userId, src, id}})
-            .then((response) => {
-                okCallback(response?.data);
-            })
-            .catch((error) => {
-                console.error(error?.response?.data);
-
-                if (error) {
-                    errorCallback(createErrorsForApiCall(error?.response?.data, error?.response?.data))
-                }
-            })
+    deleteImageFromFolder({userId, src, id}) {
+        return axios.delete("https://sonet34.herokuapp.com/api/folder", {params: {userId, src, id}})
     }
 
-    deleteFolder({name}, okCallback, errorCallback) {
-        axios.delete("https://sonet34.herokuapp.com/api/folder/root", {params: {name}})
-            .then((response) => {
-                okCallback(response?.data);
-            })
-            .catch((error) => {
-                console.error(error?.response?.data);
-
-                if (error) {
-                    errorCallback(createErrorsForApiCall(error?.response?.data, error?.response?.data))
-                }
-            })
+    deleteFolder({name}) {
+      return   axios.delete("https://sonet34.herokuapp.com/api/folder/root", {params: {name}})
     }
 }
 

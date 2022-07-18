@@ -7,6 +7,19 @@
     border-right: 1px solid rgb(206, 204, 204);
 }
 
+.FoldersActions {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+}
+
+.FoldersActions > div {
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+}
+
 .Flags > div {
     position: relative;
     height: 60px;

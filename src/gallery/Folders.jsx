@@ -1,18 +1,18 @@
 import {useMemo, useState, useRef} from "react";
-import FoldersActionsBar from "./FoldersActionsBar";
 import s from "./gallery.module.css";
-import {alpha, Backdrop, Box, CircularProgress, ListItemIcon, Menu, MenuItem, Typography} from "@mui/material";
+import {alpha, Backdrop, CircularProgress, ListItemIcon, Menu, MenuItem, Typography} from "@mui/material";
 import {useHistory} from "react-router-dom";
 import LazyImage from "../posts/LazyImage";
 import {AiOutlineDelete, BsPen, RiUserShared2Line} from "react-icons/all";
 import {AiOutlineEye} from "react-icons/ai";
 import {useTranslation} from "react-i18next";
 import userHelper from "../helpers/userHelper";
-import {deleteFolder, deleteImageFromFolder, deleteMyPhoto, updateFolderBack} from "./galleryHelper";
+import {deleteFolder, deleteImageFromFolder, updateBackCover} from "./galleryHelper";
+import FoldersInnerContent from "./FoldersInnerContent";
+import dateHelper from "../helpers/dateHelper";
 
 function Folders(props) {
     const {
-        user,
         folderName,
         folders,
         setFolders,
@@ -20,6 +20,7 @@ function Folders(props) {
     } = props;
 
     const history = useHistory();
+    const user = JSON.parse(localStorage.getItem("userInfo"));
 
     function openFolder(name) {
         history.push(`/gallery/${name}`)
@@ -52,7 +53,11 @@ function Folders(props) {
             }
 
             return <p
-                key={folder?.id + folder?.name + index}
+                style={{
+                    display: 'flex',
+                    flexDirection: 'row-reverse'
+                }}
+                key={folder?.id}
                 onClick={(e) => {
                     setOpenedFolder(folder)
                     handleClick(e);
@@ -67,34 +72,26 @@ function Folders(props) {
                                 onClick={() => {
                                 }}
                             />
-                            <span
-                                style={{
-                                    color: "white",
-                                    position: 'absolute',
-                                    top: '10px',
-                                    left: '45%'
-                                }}
-                            >{folder?.name}</span>
+                            <div
+                                className={s.FolderDescription}
+                            >
+                                <span>Created date: {dateHelper.fromNow(folder?.createdAt)}</span>
+                                <span>Folder name: {folder?.name}</span>
+                            </div>
                         </>
                         : <div>
-                            <div className={"folderItem"}>
-                                {folder?.name}
-                            </div>
+                            <div className={"folderItem"}>{folder?.name}</div>
                         </div>
                 }
             </p>
         })
     }, [folders])
 
-    const selectedFolder = useMemo(() => {
-        return folders?.filter((folder) => {
-            return folder?.name === folderName
-        })
-    }, [folderName]);
+    const selectedFolder = useMemo(() => folders?.filter((folder) => folder?.name === folderName), [folderName, folders]);
 
-    const configuredFolderImages = useMemo(() => {
-        return selectedFolder?.map((image, index) => {
-            return !!image?.src
+    const configuredFolderImages = useMemo(() =>
+        selectedFolder?.map((image, index) =>
+            !!image?.src
                 ? <p
                     key={JSON.parse(image?.src)?.webContentLink + index}
                     onClick={(e) => {
@@ -109,40 +106,11 @@ function Folders(props) {
                     />
                     {image?.shared && <RiUserShared2Line/>}
                 </p>
-                : null
-        })
-    }, [selectedFolder])
+                : null), [selectedFolder])
 
     const isFolderContent = useMemo(() => {
         return configuredFolderImages?.every((image) => image === null);
     }, [configuredFolderImages])
-
-    function updateBackCover() {
-        let formData = new FormData();
-        let fileId;
-        formData.append("file", image.files[0]);
-        formData.append("name", openedFolder?.name);
-        try {
-            fileId = JSON.parse(openedFolder?.folderBack)?.fileId
-        } catch (error) {
-            fileId = null;
-        }
-
-        formData.append("fileId", fileId)
-        updateFolderBack(formData)
-            .then(async (response) => {
-                const newBack = await response?.json();
-                const newFolders = folders?.map((folder) => folder?.name === openedFolder?.name
-                    ? {...folder, folderBack: JSON.stringify(newBack?.reason)}
-                    : folder
-                )
-
-                setFolders(() => JSON.parse(JSON.stringify(newFolders)))
-                setTimeout(() => {
-                    setIsOpened(() => false)
-                }, 1000)
-            })
-    }
 
     const {t} = useTranslation();
     let image = useRef();
@@ -170,7 +138,7 @@ function Folders(props) {
                     style={{display: "none"}}
                     onChange={() => {
                         setIsOpened(() => true);
-                        updateBackCover()
+                        updateBackCover(image, openedFolder, setIsOpened, folders, setFolders)
                     }}
                 />
             </form>
@@ -193,10 +161,27 @@ function Folders(props) {
                     </MenuItem>
                 }
                 <MenuItem onClick={() => {
+                    setIsOpened(() => true);
                     if (openedFolderImage) {
-                        deleteImageFromFolder({userId: user?.id, src: openedFolderImage?.src, id: openedFolderImage?.id})
+                        deleteImageFromFolder({
+                            userId: user?.id,
+                            src: openedFolderImage?.src,
+                            id: openedFolderImage?.id
+                        }).then(() => {
+                            setFolders((state) => {
+                                const newState = state?.filter((folder) => folder?.id !== openedFolderImage?.id);
+                                return JSON.parse(JSON.stringify(newState));
+                            })
+                            setTimeout(() => setIsOpened(() => false), 1000)
+                        })
                     } else {
-                        deleteFolder({name: openedFolderImage?.name})
+                        deleteFolder({name: openedFolder?.name}).then(() => {
+                            setFolders((state) => {
+                                const newState = state?.filter((folder) => folder?.name !== openedFolder?.name);
+                                return JSON.parse(JSON.stringify(newState));
+                            })
+                            setTimeout(() => setIsOpened(() => false), 1000)
+                        })
                     }
                     handleClose();
                 }}>
@@ -218,47 +203,14 @@ function Folders(props) {
                     </MenuItem>
                 }
             </Menu>
-            {
-                !folderName && <FoldersActionsBar
-                    userId={user.id}
-                    setFolders={setFolders}
-                />
-            }
-            <Box
-                className={s.ImagesContainer}
-            >
-                {folderName && <Typography
-                    variant={"p"}
-                    component={"h4"}
-                >{folderName} Folder</Typography>}
-
-                {
-                    (folderName && isFolderContent)
-                        ? <p>
-                            This folder is empty. You still can go
-                            <span
-                                id={"mainPostBtn"}
-                                onClick={() => {
-                                    history.push("/gallery")
-                                }}
-                            >back</span>
-                        </p>
-                        : (folderName && !isFolderContent)
-                            ? <span
-                                id={"mainPostBtn"}
-                                onClick={() => {
-                                    history.push("/gallery")
-                                }}
-                            >Back</span>
-                            : null
-                }
-
-                <div
-                    className={s.folderImagesContainer}
-                >
-                    {folderName ? configuredFolderImages : configuredFolders}
-                </div>
-            </Box>
+            <FoldersInnerContent
+                folderName={folderName}
+                isFolderContent={isFolderContent}
+                setOpenedFolderImage={setOpenedFolderImage}
+                configuredFolderImages={configuredFolderImages}
+                configuredFolders={configuredFolders}
+                setFolders={setFolders}
+            />
         </div>
     )
 }
