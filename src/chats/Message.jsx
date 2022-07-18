@@ -13,10 +13,9 @@ const actionsConfig = [
 function Message(props) {
     const {
         message,
-        own
+        own,
+        avatar
     } = props;
-
-    const [avatarUrl, setAvatarUrl] = useState("");
 
     const actions = useMemo(() => {
         return actionsConfig?.map((action) => {
@@ -36,27 +35,11 @@ function Message(props) {
         })
     }, [own])
 
-    useEffect(() => {
-        async function getUserAvatar() {
-            if (message?.createdById && !avatarUrl) {
-                const response = await profileHelper.getUser(message?.createdById);
-
-                try {
-                    setAvatarUrl(JSON.parse(response?.data?.user?.avatar)?.webContentLink)
-                } catch (error) {
-                    setAvatarUrl(response?.data?.user?.avatar)
-                }
-            }
-        }
-
-        getUserAvatar();
-    }, [message]);
-
     return (
         <div className={own ? "message own" : "message"}>
             <div className="messageTop">
                 <Avatar
-                    src={avatarUrl}
+                    src={avatar}
                     className={"conversationImg"}
                 />
                 <p className="messageText">

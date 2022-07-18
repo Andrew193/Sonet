@@ -1,8 +1,7 @@
 import s from "./posts.module.css";
-import {alpha, Avatar, Backdrop, Box, CircularProgress, hexToRgb, ListItemIcon, Typography} from "@mui/material";
+import {alpha, Avatar, Box, hexToRgb, ListItemIcon, Typography} from "@mui/material";
 import {Link} from "react-router-dom";
 import EmotionsLineContainer from "./EmotionsLineContainer";
-import profileHelper from "../components/profile/profileHelper";
 import DataHelper from "../helpers/dateHelper";
 import {useEffect, useState, useMemo, useCallback, useRef, useContext} from "react";
 import ImageViewer from "react-simple-image-viewer";
@@ -16,6 +15,19 @@ import {useTranslation} from "react-i18next";
 import {deletePostById, refresh, updatePostById} from "./postsHelper";
 import InputEmoji from 'react-input-emoji';
 import Context from "../helpers/contextHelper";
+import profileHelper from "../components/profile/profileHelper";
+
+export async function getUserAvatar(userAvatar, setUserAvatar, userId) {
+    if (userId && !userAvatar) {
+        const response = await profileHelper.getUser(userId);
+
+        try {
+            setUserAvatar(JSON.parse(response?.data?.user?.avatar)?.webContentLink)
+        } catch (error) {
+            setUserAvatar(response?.data?.user?.avatar)
+        }
+    }
+}
 
 function PostItem(props) {
     const {
@@ -44,19 +56,7 @@ function PostItem(props) {
     };
 
     useEffect(() => {
-        async function getUserAvatar() {
-            if (value?.userId && !userAvatar) {
-                const response = await profileHelper.getUser(value?.userId);
-
-                try {
-                    setUserAvatar(JSON.parse(response?.data?.user?.avatar)?.webContentLink)
-                } catch (error) {
-                    setUserAvatar(response?.data?.user?.avatar)
-                }
-            }
-        }
-
-        getUserAvatar();
+        getUserAvatar(userAvatar, setUserAvatar, value?.userId)
     }, [])
 
     const imagesForPreview = useMemo(() => JSON.parse(value?.savedImages)?.map((image) => JSON.parse(image)?.webContentLink)

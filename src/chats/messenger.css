@@ -9,8 +9,28 @@
     display: flex;
 }
 
+.noConversationImage {
+    position: absolute;
+    top: 100%;
+    margin: 15px;
+    font-size: 185px;
+    color: rgb(224, 220, 220);
+    cursor: default;
+    left: calc(50% - 92.5px);
+}
+
 .mainMessagesCaver {
     height: 88%;
+}
+
+.chatPostBtn {
+    padding: 10px;
+    display: flex;
+    margin: 5px;
+    border-radius: 50px;
+    border: 1px solid;
+    cursor: pointer;
+    position: relative;
 }
 
 .conversation {
@@ -76,7 +96,7 @@
 }
 
 .noMessagesLabel {
-    height: 100%;
+    height: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -243,7 +263,7 @@
 .chatBoxBottom {
     margin-top: 5px;
     display: flex;
-    align-items: flex-end;
+    align-items: center;
     justify-content: space-between;
 }
 
@@ -330,46 +350,12 @@
         flex: 1px;
     }
 
-    .chatPostBtn svg {
-        display: none;
-    }
-
     .messageText {
         min-width: unset;
     }
 
-    .chatPostBtn {
-        display: flex !important;
-        align-items: center;
-        justify-content: center;
-        position: absolute !important;
-        right: 10px;
-        border-radius: 50% !important;
-        padding: 10px !important;
-        max-width: 50px !important;
-        width: 50px !important;
-        animation: unset !important;
-        min-width: 50px !important;
-    }
-
-    .chatPostBtn:before {
-        left: -5px;
-        right: -5px;
-        top: -10px;
-        bottom: -10px;
-    }
-
     .mainMessagesCaver {
-        height: 78.7%;
-    }
-
-    .chatPostBtn span {
-        display: none;
-    }
-
-    .chatPostBtn svg {
-        display: block;
-        margin-right: unset;
+        height: calc(753px - 90px - 57px);
     }
 
     .chatBoxBottom {

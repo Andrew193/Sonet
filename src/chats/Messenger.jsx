@@ -1,21 +1,14 @@
 import FriendPin from "./FriendPin";
-import CurrentChat from "./CurrentChat";
 import {useEffect, useMemo, useState} from "react";
 import {getForApprovalMatesList} from "./chatHelper";
 import {notify} from "../App";
 import {buttonsConfig} from "../createPost/CreatePostLine";
 import {useOutsideClick} from "../hooks";
 import {useRef} from "react";
-import Loader from "../components/common/spinner/Spinner";
-import {AiOutlineClose, MdSentimentVeryDissatisfied} from "react-icons/all";
-import MatesConditions from "./MatesConditions";
-import RequestsConditions from "./RequestsConditions";
-import MatesContainer from "./MatesContainer";
-import RequestsContainer from "./RequestsContainer";
 import PeopleContainer from "./PeopleContainer";
 import SelectedChatMessages from "./SelectedChatMessages";
 import {useTranslation} from "react-i18next";
-
+import MatePin from "./MatePin";
 
 function Messenger(props) {
     const {
@@ -36,32 +29,12 @@ function Messenger(props) {
 
     const matesList = useMemo(() => {
         setIsLoading(() => false)
-        return conversations?.map((friend, index) => {
-            if(friend?.show === undefined || friend?.show === true) {
-                return <div
-                    className={currentChat?.currentIndex === index ? "currentChat" : ""}
-                    key={index}
-                    onClick={() => {
-                        if (friend?.approved) {
-                            setCurrentChat({
-                                members: [+friend?.receiverId, +friend?.requestSendById],
-                                id: `${[friend?.receiverId, friend?.requestSendById].sort(function (a, b) {
-                                    return a - b;
-                                }).join("")}`,
-                                currentIndex: index
-                            })
-                        }
-                    }}
-                >
-                    <FriendPin
-                        friendName={friend?.receiverName}
-                        approved={friend?.approved}
-                    />
-                </div>
-            } else {
-                return null;
-            }
-        })
+        return conversations?.map((friend, index) => (friend?.show === undefined || friend?.show === true) ? <MatePin
+            currentChat={currentChat}
+            index={index}
+            friend={friend}
+            setCurrentChat={setCurrentChat}
+        /> : null)
     }, [conversations, currentChat?.currentIndex]);
 
     const [possibleMates, setPossibleMates] = useState(null);

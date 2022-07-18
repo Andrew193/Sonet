@@ -3,11 +3,34 @@ import Message from "./Message";
 import {useEffect, useRef, useState} from "react";
 import {getConversationById} from "./chatHelper";
 import {notify} from "../App";
-import {alpha} from "@mui/material";
+import {alpha, Tooltip} from "@mui/material";
 import Loader from "../components/common/spinner/Spinner";
-import {BsPencil} from "react-icons/all";
+import {BsPencil, TiMessages} from "react-icons/all";
 import {useTranslation} from "react-i18next";
+import {getUserAvatar} from "../posts/PostItem";
+import React from "react";
+import InputEmoji from 'react-input-emoji';
 
+const PostButtonCover = React.forwardRef(function MyComponent(props, ref) {
+    //  Spread the props to the underlying DOM element.
+    return <div {...props} ref={ref} style={{display: "flex"}}><BsPencil/></div>
+});
+
+function MessageCover(props) {
+    const {
+        m,
+        userId,
+        avatar
+    } = props;
+
+    return (
+        <Message
+            message={m}
+            avatar={avatar}
+            own={(+m.sender === +userId) || (+m.createdById === +userId)}
+        />
+    )
+}
 
 function CurrentChat(props) {
     const {
@@ -23,8 +46,8 @@ function CurrentChat(props) {
     } = props;
 
     const scrollRef = useRef();
-    const [length, setLength] = useState(0);
     const [isLoader, setIsLoader] = useState(true);
+    const [avatars, setAvatars] = useState([]);
 
     useEffect(() => {
         async function getData() {
@@ -44,6 +67,23 @@ function CurrentChat(props) {
     }, [conversationId])
 
     useEffect(() => {
+        if (messages) {
+            const usedId = [];
+            for (let i = 0; i < messages?.length; i++) {
+                if (usedId?.length < 2) {
+                    if (!usedId?.includes(messages[i]?.createdById)) {
+                        usedId.push(messages[i]?.createdById)
+                        getUserAvatar(null, (newAvatar) => setAvatars((state) => [...state, {
+                            avatar: newAvatar,
+                            id: messages[i]?.createdById
+                        }]), messages[i]?.createdById)
+                    }
+                } else {
+                    break;
+                }
+            }
+        }
+
         setTimeout(() => {
             scrollRef.current?.scrollIntoView({behavior: "smooth"});
             setIsLoader(false)
@@ -55,18 +95,26 @@ function CurrentChat(props) {
     return (
         <>
             <div className="chatBoxTop">
-                {messages.map((m) => <div ref={scrollRef}>
-                        <Message
-                            message={m}
-                            own={(+m.sender === +userInformation.id) || (+m.createdById === +userInformation.id)}
-                        />
-                    </div>
-                )}
+                {messages?.map((m, index) => <div ref={scrollRef} key={index}>
+                    <MessageCover
+                        m={m}
+                        avatar={avatars[0]?.id === m?.createdById ? avatars[0]?.avatar : avatars[1]?.avatar}
+                        userId={userInformation?.id}
+                    />
+                </div>)}
 
                 {!isLoader && messages?.length === 0
                     ? <div
                         className={"noMessagesLabel"}
-                    >{t("There are no messages yet. Be the first")})</div>
+                    >
+                        {t("There are no messages yet. Be the first")})
+                        <TiMessages
+                            style={{
+                                top: '35%'
+                            }}
+                            className={"noConversationImage"}
+                        />
+                    </div>
                     : null}
 
                 {isLoader && <div
@@ -82,20 +130,18 @@ function CurrentChat(props) {
                 }}
                 className="chatBoxBottom"
             >
-                  <textarea
-                      className="chatMessageInput"
-                      onChange={(e) => {
-                          setNewMessage(e.target.value)
-                      }}
-                      value={newMessage}
-                  />
-                <button
-                    className={`button ${buttonsConfig[customStyle?.color]} chatPostBtn`}
+                <InputEmoji
+                    value={newMessage}
+                    onChange={setNewMessage}
+                    cleanOnEnter
+                    placeholder={t("So... What is it?")}
+                />
+                <span
+                    className={`${buttonsConfig[customStyle?.color]} chatPostBtn`}
                     onClick={handleSubmit}
                 >
-                    <BsPencil/>
-                    <span>{t("Send")}</span>
-                </button>
+                    <Tooltip title={t("Post")} arrow placement="top"><PostButtonCover/></Tooltip>
+                </span>
             </div>
         </>
     )

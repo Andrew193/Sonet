@@ -5,6 +5,7 @@ import {notify} from "../App";
 import {toast} from "react-toastify";
 import {friendRequest} from "../users/script";
 import {createCopy} from "../utils";
+import LazyImage from "../posts/LazyImage";
 
 
 function FriendPin(props) {
@@ -16,7 +17,8 @@ function FriendPin(props) {
         requestSendById,
         setConversations,
         setPossibleMates,
-        id
+        id,
+        userAvatar
     } = props;
 
     const userInformation = JSON.parse(localStorage.getItem("userInfo"));
@@ -25,7 +27,7 @@ function FriendPin(props) {
         setPossibleMates((state) => {
             const copy = createCopy(state);
 
-            if(flag) {
+            if (flag) {
                 setConversations((state) => {
                     return [...(state || []), {...copy[id], approved: true}]
                 })
@@ -41,12 +43,8 @@ function FriendPin(props) {
             <div
                 className={`conversation ${!approved ? "closedFriendPin" : ""} ${requestMode ? "closedFriendPin" : ""}`}
             >
-                <Avatar
-                    src={""}
-                    className={"conversationImg"}
-                >
-                    {friendName[0]}
-                </Avatar>
+                <LazyImage imageSrc={userAvatar} onClick={() => {
+                }} imgClass={"conversationImg"} />
                 <span className="conversationName">{friendName}</span>
                 {
                     !approved

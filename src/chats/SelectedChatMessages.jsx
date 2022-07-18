@@ -1,6 +1,6 @@
 import CurrentChat from "./CurrentChat";
 import {useTranslation} from "react-i18next";
-
+import {BiConversation} from "react-icons/all";
 
 function SelectedChatMessages(props) {
     const {
@@ -49,6 +49,9 @@ function SelectedChatMessages(props) {
                             </div>
                             : <span className="noConversationText">
                                     {t("Open a conversation to start a chat.")}
+                                <BiConversation
+                                    className="noConversationImage"
+                                />
                             </span>
                     }
                 </div>
