@@ -30,7 +30,9 @@ function ChatContainer() {
                 createdAt: Date.now(),
             });
         });
+    }, [socket]);
 
+    useEffect(()=>{
         socket.on("updateMessages", (data) => {
             if (!!data?.refresh) {
                 console.log(currentChat)
@@ -52,7 +54,7 @@ function ChatContainer() {
                 }
             }
         })
-    }, [socket, currentChat]);
+    },[socket, currentChat])
 
     useEffect(() => {
         try {

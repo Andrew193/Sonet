@@ -21,6 +21,7 @@
 
 .mainMessagesCaver {
     height: 88%;
+    max-height: 720px;
 }
 
 .chatPostBtn {
