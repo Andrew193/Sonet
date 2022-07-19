@@ -4,7 +4,8 @@ import "./messenger.css";
 import {getSettings} from "../db";
 import {alpha} from "@mui/material";
 import Messenger from "./Messenger";
-import {createChatMessage, getMatesList} from "./chatHelper";
+import {createChatMessage, getConversationById, getMatesList} from "./chatHelper";
+import {notify} from "../App";
 
 function ChatContainer() {
     const [conversations, setConversations] = useState([]);
@@ -31,7 +32,19 @@ function ChatContainer() {
         });
 
         socket.on("updateMessages", (data) => {
-            console.log("updateMessages", data)
+            if (!!data?.refresh) {
+                getConversationById(currentChat?.id,
+                    (response) => {
+                        setMessages((state) => {
+                            console.log("old", state);
+                            console.log("new", JSON.parse(JSON.stringify(response?.clearData)))
+                            return JSON.parse(JSON.stringify(response?.clearData))
+                        })
+                    },
+                    (errorMessage) => {
+                        notify(errorMessage || "Error");
+                    })
+            }
         })
     }, [socket]);
 
@@ -71,8 +84,8 @@ function ChatContainer() {
     }, [userInformation?.id]);
 
     const receiverId = useMemo(() => {
-        if(currentChat) {
-            return  currentChat?.members?.find(
+        if (currentChat) {
+            return currentChat?.members?.find(
                 (member) => member !== userInformation.id
             )
         }
