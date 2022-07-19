@@ -33,6 +33,7 @@ function ChatContainer() {
 
         socket.on("updateMessages", (data) => {
             if (!!data?.refresh) {
+                console.log(currentChat)
                 getConversationById(currentChat?.id,
                     (response) => {
                         setMessages((state) => {
@@ -46,7 +47,7 @@ function ChatContainer() {
                     })
             }
         })
-    }, [socket]);
+    }, [socket, currentChat]);
 
     useEffect(() => {
         try {
