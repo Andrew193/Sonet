@@ -11,8 +11,13 @@ export function copyToClipboard(text) {
     }, () => notify('Could not copy text'));
 }
 
-export async function deleteMessageById(id, okCallback, errorCallback) {
-    HttpHelper.deleteChatMessage({id}, okCallback, errorCallback);
+export async function deleteMessageById(id, socket, receiverId) {
+    HttpHelper.deleteChatMessage({id})
+        .then((response) => {
+            if (response?.data?.data?.deleted) {
+                socket.emit("updateAfterDeleting", {id: receiverId});
+            }
+        })
 }
 
 export async function getConversationById(conversationId, okCallback, errorCallback) {

@@ -24,7 +24,8 @@ function Messenger(props) {
         userInformation,
         handleSubmit,
         setMessages,
-        conversations
+        conversations,
+        receiverId
     } = props;
 
     const matesList = useMemo(() => {
@@ -130,6 +131,7 @@ function Messenger(props) {
                 userInformation={userInformation}
                 handleSubmit={handleSubmit}
                 setMessages={setMessages}
+                receiverId={receiverId}
             />
         </div>
     )

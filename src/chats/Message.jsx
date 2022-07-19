@@ -1,14 +1,17 @@
 import dateHelper from "../helpers/dateHelper";
 import {AiOutlineDelete, AiOutlineEdit, FiCopy} from "react-icons/all";
 import {Avatar, Tooltip} from "@mui/material";
-import {useMemo, useEffect, useState, useCallback} from "react";
-import profileHelper from "../components/profile/profileHelper";
+import {useCallback, useContext} from "react";
 import {copyToClipboard, deleteMessageById} from "./chatHelper";
+import Context from "../helpers/contextHelper";
 
 const actionsConfig = [
     {label: "Copy to buffer", icon: <FiCopy/>, type: "copy", onClick: ({messageText}) => copyToClipboard(messageText)},
     {
-        label: "Delete the message", icon: <AiOutlineDelete/>, type: "delete", onClick: ({id}) => deleteMessageById(id)
+        label: "Delete the message",
+        icon: <AiOutlineDelete/>,
+        type: "delete",
+        onClick: ({id}, socket, receiverId) => deleteMessageById(id, socket, receiverId)
     },
     {
         label: "Edit the message", icon: <AiOutlineEdit/>, type: "edit", onClick: () => {
@@ -20,8 +23,11 @@ function Message(props) {
     const {
         message,
         own,
-        avatar
+        avatar,
+        receiverId
     } = props;
+
+    const {socket} = useContext(Context);
 
     const actions = useCallback(() => {
         return message => actionsConfig?.map((action) => {
@@ -33,7 +39,7 @@ function Message(props) {
                 <button
                     id={"dropStylesForMessagesActions"}
                     onClick={() => {
-                        action?.onClick(message)
+                        action?.onClick(message, socket, receiverId)
                     }}
                 >
                     {action?.icon}

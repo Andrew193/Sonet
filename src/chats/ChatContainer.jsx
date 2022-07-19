@@ -1,4 +1,4 @@
-import {useEffect, useContext, useState} from "react";
+import {useEffect, useContext, useState, useMemo} from "react";
 import Context from "../helpers/contextHelper";
 import "./messenger.css";
 import {getSettings} from "../db";
@@ -30,6 +30,9 @@ function ChatContainer() {
             });
         });
 
+        socket.on("updateMessages", (data) => {
+            console.log("updateMessages", data)
+        })
     }, [socket]);
 
     useEffect(() => {
@@ -67,7 +70,10 @@ function ChatContainer() {
         }
     }, [userInformation?.id]);
 
-    console.log(usersInChat)
+    const receiverId = useMemo(() => currentChat.members.find(
+        (member) => member !== userInformation.id
+    ), [currentChat])
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         const message = {
@@ -75,10 +81,6 @@ function ChatContainer() {
             text: newMessage,
             conversationId: currentChat.id,
         };
-
-        const receiverId = currentChat.members.find(
-            (member) => member !== userInformation.id
-        );
 
         socket.emit("sendMessageToChat", {
             senderId: userInformation.id,
@@ -156,6 +158,7 @@ function ChatContainer() {
                 setConversations={setConversations}
                 setIsLoading={setIsLoading}
                 isLoading={isLoading}
+                receiverId={receiverId}
             />
         </>
     );

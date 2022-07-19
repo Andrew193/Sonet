@@ -12,7 +12,8 @@ function SelectedChatMessages(props) {
         settings,
         userInformation,
         handleSubmit,
-        setMessages
+        setMessages,
+        receiverId
     } = props;
 
     const {t} = useTranslation();
@@ -45,6 +46,7 @@ function SelectedChatMessages(props) {
                                     conversationId={currentChat?.id}
                                     setMessages={setMessages}
                                     settings={settings}
+                                    receiverId={receiverId}
                                 />
                             </div>
                             : <span className="noConversationText">

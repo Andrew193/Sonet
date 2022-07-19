@@ -20,11 +20,13 @@ function MessageCover(props) {
     const {
         m,
         userId,
-        avatar
+        avatar,
+        receiverId
     } = props;
 
     return (
         <Message
+            receiverId={receiverId}
             key={m?.id}
             message={m}
             avatar={avatar}
@@ -43,7 +45,8 @@ function CurrentChat(props) {
         handleSubmit,
         conversationId,
         setMessages,
-        settings
+        settings,
+        receiverId
     } = props;
 
     const scrollRef = useRef();
@@ -101,6 +104,7 @@ function CurrentChat(props) {
                         m={m}
                         avatar={avatars[0]?.id === m?.createdById ? avatars[0]?.avatar : avatars[1]?.avatar}
                         userId={userInformation?.id}
+                        receiverId={receiverId}
                     />
                 </div>)}
 
