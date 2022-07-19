@@ -25,6 +25,7 @@ function MessageCover(props) {
 
     return (
         <Message
+            key={m?.id}
             message={m}
             avatar={avatar}
             own={(+m.sender === +userId) || (+m.createdById === +userId)}

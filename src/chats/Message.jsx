@@ -1,13 +1,19 @@
 import dateHelper from "../helpers/dateHelper";
 import {AiOutlineDelete, AiOutlineEdit, FiCopy} from "react-icons/all";
 import {Avatar, Tooltip} from "@mui/material";
-import {useMemo, useEffect, useState} from "react";
+import {useMemo, useEffect, useState, useCallback} from "react";
 import profileHelper from "../components/profile/profileHelper";
+import {copyToClipboard, deleteMessageById} from "./chatHelper";
 
 const actionsConfig = [
-    {label: "Copy to buffer", icon: <FiCopy/>, type: "copy"},
-    {label: "Delete the message", icon: <AiOutlineDelete/>, type: "delete"},
-    {label: "Edit the message", icon: <AiOutlineEdit/>, type: "edit"}
+    {label: "Copy to buffer", icon: <FiCopy/>, type: "copy", onClick: ({messageText}) => copyToClipboard(messageText)},
+    {
+        label: "Delete the message", icon: <AiOutlineDelete/>, type: "delete", onClick: ({id}) => deleteMessageById(id)
+    },
+    {
+        label: "Edit the message", icon: <AiOutlineEdit/>, type: "edit", onClick: () => {
+        }
+    }
 ]
 
 function Message(props) {
@@ -17,8 +23,8 @@ function Message(props) {
         avatar
     } = props;
 
-    const actions = useMemo(() => {
-        return actionsConfig?.map((action) => {
+    const actions = useCallback(() => {
+        return message => actionsConfig?.map((action) => {
             if (action?.type !== "copy" && own === false) {
                 return null
             }
@@ -26,14 +32,17 @@ function Message(props) {
             return <Tooltip title={action?.label}>
                 <button
                     id={"dropStylesForMessagesActions"}
+                    onClick={() => {
+                        action?.onClick(message)
+                    }}
                 >
                     {action?.icon}
                 </button>
-
             </Tooltip>
-
         })
-    }, [own])
+    }, [own])()
+
+    console.log(actions)
 
     return (
         <div className={own ? "message own" : "message"}>
@@ -45,7 +54,7 @@ function Message(props) {
                 <p className="messageText">
                     {message.text || message?.messageText}
                     <div className={"chatActionsBar"}>
-                        {actions}
+                        {actions(message)}
                     </div>
                 </p>
             </div>

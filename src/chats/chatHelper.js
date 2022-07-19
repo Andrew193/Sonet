@@ -1,7 +1,18 @@
 import HttpHelper from "../helpers/httpHelper";
+import {notify} from "../App";
 
 export async function createChatMessage(values, okCallback, errorCallback) {
     HttpHelper.createChatMessage(values, okCallback, errorCallback);
+}
+
+export function copyToClipboard(text) {
+    navigator.clipboard.writeText(text).then(() => {
+        notify('Copying to clipboard was successful!');
+    }, () => notify('Could not copy text'));
+}
+
+export async function deleteMessageById(id, okCallback, errorCallback) {
+    HttpHelper.deleteChatMessage({id}, okCallback, errorCallback);
 }
 
 export async function getConversationById(conversationId, okCallback, errorCallback) {

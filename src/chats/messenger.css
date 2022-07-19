@@ -236,7 +236,9 @@
     left: 1%;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    border-top: 1px solid;
+    width: 98%;
+    margin-top: 2px;
 }
 
 .chatActionsBar svg {
@@ -258,6 +260,7 @@
 .message.own .messageText {
     background-color: rgb(245, 241, 241);
     color: black;
+    min-width: 70px;
 }
 
 .chatBoxBottom {

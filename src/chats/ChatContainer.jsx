@@ -136,8 +136,12 @@ function ChatContainer() {
                  .noConversationText, .lonelyLine{
                  color: ${alpha(settings?.configs?.color[settings?.color] || "rgb(224, 220, 220)", 0.5)} !important;
                  }
+                 .react-emoji-picker--container {
+                 top: -260px!important;
+                 }
                 `}
             </style>
+
             <Messenger
                 settings={settings}
                 setCurrentChat={setCurrentChat}

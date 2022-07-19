@@ -30,6 +30,7 @@ function Messenger(props) {
     const matesList = useMemo(() => {
         setIsLoading(() => false)
         return conversations?.map((friend, index) => (friend?.show === undefined || friend?.show === true) ? <MatePin
+            key={index}
             currentChat={currentChat}
             index={index}
             friend={friend}

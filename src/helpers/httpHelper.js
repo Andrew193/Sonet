@@ -7,19 +7,15 @@ import {notify} from "../App";
 
 const axios = require('axios').default;
 
-class Http {
-    constructor() {
-    }
-
-    uploadImg(endpoint, data) {
+const Http = {
+    uploadImg: (endpoint, data) => {
         return fetch("https://sonet34.herokuapp.com/api/img/" + endpoint + "?token=" + Script.getCookie("token"), {
                 method: "POST",
                 body: data
             }
         )
-    }
-
-    configToken(token, history) {
+    },
+    configToken: (token, history) => {
         axios.get("https://sonet34.herokuapp.com/api/token/configToken", {params: {token}})
             .then(_ => {
             }).catch((error) => {
@@ -28,82 +24,70 @@ class Http {
                 CommonHelper.redirect(history, null, "/auth")
             }
         })
-    }
-
-    subscribe(id, otherUserFolCount, toast) {
+    },
+    subscribe: (id, otherUserFolCount, toast) => {
         axios.post("https://sonet34.herokuapp.com/api/subscribe?token=" + Script.getCookie("token"), {
             userId: id,
             otherUserFolCount
         })
             .then((response) => toast(response?.data?.message))
             .catch((error) => error.response && console.error(error.response))
-    }
-
-    getOneUser(id) {
+    },
+    getOneUser: (id) => {
         return axios.get("https://sonet34.herokuapp.com/api/users/getOne", {params: {id}})
             .then((response) => response?.data)
             .catch((error) => error.response && console.error(error.response))
-    }
-
-    getAllUsers() {
+    },
+    getAllUsers: () => {
         return axios.get("https://sonet34.herokuapp.com/api/users")
             .then((response) => response?.data)
             .catch((error) => error.response && console.error(error.response))
-    }
-
-    getPosts(count, prefix, search = "") {
+    },
+    getPosts: (count, prefix, search = "") => {
         return axios.get(`https://sonet34.herokuapp.com/api/post${prefix ? `/${prefix}` : ""}?token=` + Script.getCookie("token") + search, {params: {howMany: count}})
             .then((response) => response?.data)
             .catch((error) => error.response && console.error(error.response))
-    }
-
-    confirm(phone, email) {
+    },
+    confirm: (phone, email) => {
         axios.post("https://sonet34.herokuapp.com/api/users/confirm?token=" + Script.getCookie("token"), {phone, email})
-    }
-
-    getPCount(id, set) {
+    },
+    getPCount: (id, set) => {
         axios.get("https://sonet34.herokuapp.com/api/post/count?token=" + Script.getCookie("token"), {params: {id}})
             .then((response) => set(response?.data?.count))
             .catch((error) => error.response && console.error(error.response))
-    }
-
-    getOneObj(id) {
+    },
+    getOneObj: (id) => {
         return axios.get("https://sonet34.herokuapp.com/api/users/getOneObj?token=" + Script.getCookie("token"), {params: {id}})
             .then((response) => response)
             .catch((error) => error)
-    }
-
-    follow(idArray, history, type) {
+    },
+    follow: (idArray, history, type) => {
         axios.get("https://sonet34.herokuapp.com/api/follow?token=" + Script.getCookie("token"), {params: {idArray: JSON.stringify(idArray)}})
             .then((response) => CommonHelper.redirect(history, response?.data, "/followers" + type))
             .catch((error) => error.response && console.error(error?.response?.data?.error))
-    }
-
-    followingArray(callback, history, myId) {
+    },
+    followingArray: (callback, history, myId) => {
         axios.get("https://sonet34.herokuapp.com/api/follow/followingsArray?token=" + Script.getCookie("token"), {params: {myId}})
             .then((response) => {
                 const idArray = response?.data?.length?.reduce((prev, curr) => [...prev, +curr.userId], [])
                 callback(idArray, history)
             })
             .catch((error) => error.response && console.error(error?.response?.data?.error))
-    }
-
-    followersArray(callback, history, myId) {
+    },
+    followersArray: (callback, history, myId) => {
         axios.get("https://sonet34.herokuapp.com/api/follow/followersArray?token=" + Script.getCookie("token"), {params: {myId}})
             .then((response) => {
                 const idArray = response?.data?.length?.reduce((prev, curr) => [...prev, +curr.userId], [])
                 callback(idArray, history)
             })
             .catch((error) => error?.response && console.error(error?.response?.data?.error))
-    }
-
-    getOnePost(id, notify) {
+    },
+    getOnePost: (id, notify) => {
         return axios.get("https://sonet34.herokuapp.com/api/post/getOne?token=" + Script.getCookie("token"), {params: {id}})
             .then((response) => response?.data)
             .catch((error) => error?.response && notify(error?.response?.data?.posts))
-    }
-
-    emotion(userId, value, callback, callback1, emType) {
+    },
+    emotion: (userId, value, callback, callback1, emType) => {
         axios.put("https://sonet34.herokuapp.com/api/post/" + emType, {
             userId,
             ...value,
@@ -111,21 +95,18 @@ class Http {
         })
             .then((response) => callback())
             .catch((error) => error.response && callback1(error))
-    }
-
-    getPostWithType(id, setPosts, endpoint) {
+    },
+    getPostWithType: (id, setPosts, endpoint) => {
         axios.get("https://sonet34.herokuapp.com/api/post/" + endpoint + "?token=" + Script.getCookie("token"), {params: {userId: id}})
             .then((response) => setPosts({posts: response?.data?.posts}))
             .catch((error) => console.log(error))
-    }
-
-    deletePostById(id, setPosts) {
+    },
+    deletePostById: (id, setPosts) => {
         axios.delete("https://sonet34.herokuapp.com/api/post/" + "?token=" + Script.getCookie("token"), {params: {postId: id}})
             .then((response) => setPosts({posts: response?.data?.posts}))
             .catch((error) => console.log(error))
-    }
-
-    updatePostById({id, newText}, setPosts) {
+    },
+    updatePostById: ({id, newText}, setPosts) => {
         axios.put("https://sonet34.herokuapp.com/api/post/" + "?token=" + Script.getCookie("token"), {
             params: {
                 postId: id,
@@ -134,9 +115,8 @@ class Http {
         })
             .then((response) => setPosts({posts: response?.data?.posts}))
             .catch((error) => console.log(error))
-    }
-
-    userUpdate(values) {
+    },
+    userUpdate: (values) => {
         axios.put("https://sonet34.herokuapp.com/api/users/update", values)
             .then(() => {
                 notify("Updated successfully")
@@ -148,56 +128,48 @@ class Http {
                 )
                 notify(<Msg/>);
             })
-    }
-
-    getMe(callback) {
+    },
+    getMe: (callback) => {
         return axios.get("https://sonet34.herokuapp.com/api/users/me?token=" + Script.getCookie("token"))
             .then((response) => response)
             .catch((error) => error.response && callback(error.response))
-    }
-
-    createPost(text, callback, callback1, savedImages) {
+    },
+    createPost: (text, callback, callback1, savedImages) => {
         axios.post("https://sonet34.herokuapp.com/api/post?token=" + Script.getCookie("token"), {
             text,
             savedImages: JSON.stringify(savedImages || [])
         })
             .then((response) => callback(response))
             .catch((error) => error && callback1(error))
-    }
-
-    getAllComments(id, callback) {
+    },
+    getAllComments: (id, callback) => {
         return axios.get("https://sonet34.herokuapp.com/api/post/comment?token=" + Script.getCookie("token"), {params: {id}})
             .then((response) => response)
             .catch((error) => error.response && callback())
-    }
-
-    getAllCommentsByUserId(userId, callback) {
+    },
+    getAllCommentsByUserId: (userId, callback) => {
         return axios.get("https://sonet34.herokuapp.com/api/post/comment/id?token=" + Script.getCookie("token"), {params: {id: userId}})
             .then((response) => response)
             .catch((error) => error.response && callback())
-    }
-
-    getAllLikesByUserId(userId, callback) {
+    },
+    getAllLikesByUserId: (userId, callback) => {
         return axios.get("https://sonet34.herokuapp.com/api/post/like/all?token=" + Script.getCookie("token"), {params: {userId}})
             .then((response) => response)
             .catch((error) => error.response && callback())
-    }
-
-    getAllDislikesByUserId(userId, callback) {
+    },
+    getAllDislikesByUserId: (userId, callback) => {
         return axios.get("https://sonet34.herokuapp.com/api/post/dislike/all?token=" + Script.getCookie("token"), {params: {userId}})
             .then((response) => response)
             .catch((error) => error.response && callback())
-    }
-
-    createComment(value, postId, id, userName, comCount, callback, callback1) {
+    },
+    createComment: (value, postId, id, userName, comCount, callback, callback1) => {
         return axios.post("https://sonet34.herokuapp.com/api/post/comment?token=" + Script.getCookie("token"), {
             text: value, postId, userId: id, createdBy: userName, comCount
         })
             .then((response) => callback(response))
             .catch((error) => error.response && callback1())
-    }
-
-    createUser(values, okCallback, errorCallback) {
+    },
+    createUser: (values, okCallback, errorCallback) => {
         axios.post("https://sonet34.herokuapp.com/api/users", values)
             .then((response) => {
                 okCallback(response?.data?.token);
@@ -207,15 +179,13 @@ class Http {
                     errorCallback(createErrorsForApiCall(error?.response?.data, error?.response?.data))
                 }
             })
-    }
-
-    authUser(values, callback, callback1) {
+    },
+    authUser: (values, callback, callback1) => {
         axios.get("https://sonet34.herokuapp.com/api/users/auth", {params: values})
             .then((response) => callback(response?.data?.token))
             .catch((error) => error?.response && callback1(error?.response?.data?.error))
-    }
-
-    friendRequest(values, okCallback, errorCallback) {
+    },
+    friendRequest: (values, okCallback, errorCallback) => {
         axios.post("https://sonet34.herokuapp.com/api/mates", values)
             .then((response) => {
                 okCallback(response?.data);
@@ -225,9 +195,8 @@ class Http {
                     errorCallback(createErrorsForApiCall(error?.response?.data, error?.response?.data))
                 }
             })
-    }
-
-    approveRequest(values, okCallback, errorCallback) {
+    },
+    approveRequest: (values, okCallback, errorCallback) => {
         axios.post("https://sonet34.herokuapp.com/api/mates/approve", values)
             .then((response) => {
                 okCallback("Added")
@@ -237,9 +206,8 @@ class Http {
                     errorCallback("Canceled")
                 }
             })
-    }
-
-    rejectRequest(values, okCallback, errorCallback) {
+    },
+    rejectRequest: (values, okCallback, errorCallback) => {
         axios.delete("https://sonet34.herokuapp.com/api/mates/", {data: values})
             .then((response) => {
                 okCallback("Rejected")
@@ -249,9 +217,8 @@ class Http {
                     errorCallback("Canceled")
                 }
             })
-    }
-
-    getForApprovalMatesList(receiverId, okCallback, errorCallback) {
+    },
+    getForApprovalMatesList: (receiverId, okCallback, errorCallback) => {
         axios.get("https://sonet34.herokuapp.com/api/mates/forMe", {params: {receiverId}})
             .then((response) => {
                 okCallback(response?.data);
@@ -261,9 +228,8 @@ class Http {
                     errorCallback(createErrorsForApiCall(error?.response?.data, error?.response?.data))
                 }
             })
-    }
-
-    getApprovedByMeMatesList(receiverId, okCallback, errorCallback) {
+    },
+    getApprovedByMeMatesList: (receiverId, okCallback, errorCallback) => {
         axios.get("https://sonet34.herokuapp.com/api/mates/approvedByMe", {params: {receiverId}})
             .then((response) => {
                 okCallback(response?.data);
@@ -273,9 +239,8 @@ class Http {
                     errorCallback(createErrorsForApiCall(error?.response?.data, error?.response?.data))
                 }
             })
-    }
-
-    getMatesList(requestSendById, okCallback, errorCallback) {
+    },
+    getMatesList: (requestSendById, okCallback, errorCallback) => {
         axios.get("https://sonet34.herokuapp.com/api/mates/my", {params: {requestSendById}})
             .then((response) => {
                 okCallback(response?.data);
@@ -285,9 +250,8 @@ class Http {
                     errorCallback(createErrorsForApiCall(error?.response?.data, error?.response?.data))
                 }
             })
-    }
-
-    createChatMessage(values, okCallback, errorCallback) {
+    },
+    createChatMessage: (values, okCallback, errorCallback) => {
         axios.post("https://sonet34.herokuapp.com/api/chat", values)
             .then((response) => {
                 okCallback(response?.data);
@@ -299,9 +263,8 @@ class Http {
                     errorCallback(createErrorsForApiCall(error?.response?.data, error?.response?.data))
                 }
             })
-    }
-
-    addPhotoToMyGallery(values, okCallback, errorCallback) {
+    },
+    addPhotoToMyGallery: (values, okCallback, errorCallback) => {
         axios.post("https://sonet34.herokuapp.com/api/gallery", values)
             .then((response) => {
                 okCallback(response?.data);
@@ -313,9 +276,8 @@ class Http {
                     errorCallback(createErrorsForApiCall(error?.response?.data, error?.response?.data))
                 }
             })
-    }
-
-    getMyGallery(userId, okCallback, errorCallback) {
+    },
+    getMyGallery: (userId, okCallback, errorCallback) => {
         axios.get("https://sonet34.herokuapp.com/api/gallery", {params: {userId}})
             .then((response) => {
                 okCallback(response?.data);
@@ -327,9 +289,8 @@ class Http {
                     errorCallback(createErrorsForApiCall(error?.response?.data, error?.response?.data))
                 }
             })
-    }
-
-    deleteMyPhoto({userId, src}, okCallback, errorCallback) {
+    },
+    deleteMyPhoto: ({userId, src}, okCallback, errorCallback) => {
         axios.delete("https://sonet34.herokuapp.com/api/gallery", {params: {userId, src}})
             .then((response) => {
                 okCallback(response?.data);
@@ -341,9 +302,8 @@ class Http {
                     errorCallback(createErrorsForApiCall(error?.response?.data, error?.response?.data))
                 }
             })
-    }
-
-    getConversationById(conversationId, okCallback, errorCallback) {
+    },
+    getConversationById: (conversationId, okCallback, errorCallback) => {
         axios.get("https://sonet34.herokuapp.com/api/chat/conversation", {params: {conversationId}})
             .then((response) => {
                 okCallback(response?.data);
@@ -355,9 +315,8 @@ class Http {
                     errorCallback(createErrorsForApiCall(error?.response?.data, error?.response?.data))
                 }
             })
-    }
-
-    addPhotoToFolder(values, okCallback, errorCallback) {
+    },
+    addPhotoToFolder: (values, okCallback, errorCallback) => {
         axios.post("https://sonet34.herokuapp.com/api/folder", values)
             .then((response) => {
                 okCallback(response?.data);
@@ -369,17 +328,15 @@ class Http {
                     errorCallback(createErrorsForApiCall(error?.response?.data, error?.response?.data))
                 }
             })
-    }
-
-    updateFolderBack(values) {
+    },
+    updateFolderBack: (values) => {
         return fetch("https://sonet34.herokuapp.com/api/folder/folderBack", {
                 method: "POST",
                 body: values
             }
         )
-    }
-
-    getMyFolders(userId, okCallback, errorCallback) {
+    },
+    getMyFolders: (userId, okCallback, errorCallback) => {
         axios.get("https://sonet34.herokuapp.com/api/folder", {params: {userId}})
             .then((response) => {
                 okCallback(response?.data?.clearData);
@@ -391,17 +348,16 @@ class Http {
                     errorCallback(createErrorsForApiCall(error?.response?.data, error?.response?.data))
                 }
             })
-    }
-
-    deleteImageFromFolder({userId, src, id}) {
+    },
+    deleteImageFromFolder: ({userId, src, id}) => {
         return axios.delete("https://sonet34.herokuapp.com/api/folder", {params: {userId, src, id}})
-    }
-
-    deleteFolder({name}) {
-      return   axios.delete("https://sonet34.herokuapp.com/api/folder/root", {params: {name}})
-    }
+    },
+    deleteFolder: ({name}) => {
+        return axios.delete("https://sonet34.herokuapp.com/api/folder/root", {params: {name}})
+    },
+    deleteChatMessage: ({id}) => {
+        return axios.delete("https://sonet34.herokuapp.com/api/chat/message", {params: {id}})
+    },
 }
 
-const Item = new Http();
-
-export default Item;
+export default Http;
