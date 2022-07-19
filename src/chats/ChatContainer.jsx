@@ -70,9 +70,14 @@ function ChatContainer() {
         }
     }, [userInformation?.id]);
 
-    const receiverId = useMemo(() => currentChat.members.find(
-        (member) => member !== userInformation.id
-    ), [currentChat])
+    const receiverId = useMemo(() => {
+        if(currentChat) {
+            return  currentChat?.members?.find(
+                (member) => member !== userInformation.id
+            )
+        }
+        return null;
+    }, [currentChat])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
