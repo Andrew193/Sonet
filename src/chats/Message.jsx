@@ -48,8 +48,6 @@ function Message(props) {
         })
     }, [own])()
 
-    console.log(actions)
-
     return (
         <div className={own ? "message own" : "message"}>
             <div className="messageTop">

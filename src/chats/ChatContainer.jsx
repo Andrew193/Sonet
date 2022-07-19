@@ -34,17 +34,22 @@ function ChatContainer() {
         socket.on("updateMessages", (data) => {
             if (!!data?.refresh) {
                 console.log(currentChat)
-                getConversationById(currentChat?.id,
-                    (response) => {
-                        setMessages((state) => {
-                            console.log("old", state);
-                            console.log("new", JSON.parse(JSON.stringify(response?.clearData)))
-                            return JSON.parse(JSON.stringify(response?.clearData))
+                if (!!currentChat?.id) {
+                    getConversationById(currentChat?.id,
+                        (response) => {
+                            console.log("testtttttttt")
+                            if (currentChat?.id) {
+                                setMessages((state) => {
+                                    console.log("old", state);
+                                    console.log("new", JSON.parse(JSON.stringify(response?.clearData)))
+                                    return JSON.parse(JSON.stringify(response?.clearData))
+                                })
+                            }
+                        },
+                        (errorMessage) => {
+                            notify(errorMessage || "Error");
                         })
-                    },
-                    (errorMessage) => {
-                        notify(errorMessage || "Error");
-                    })
+                }
             }
         })
     }, [socket, currentChat]);
