@@ -19,6 +19,13 @@
     left: calc(50% - 92.5px);
 }
 
+.deleteExistingFriend {
+    position: absolute;
+    z-index: 1;
+    top: 5px;
+    right: 5px;
+}
+
 .mainMessagesCaver {
     height: 88%;
     max-height: 720px;

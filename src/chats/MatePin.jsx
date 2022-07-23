@@ -7,7 +7,8 @@ function MatePin(props) {
         currentChat,
         friend,
         setCurrentChat,
-        index
+        index,
+        setConversations
     } = props;
 
     const userInformation = JSON.parse(localStorage.getItem("userInfo"));
@@ -22,7 +23,7 @@ function MatePin(props) {
     return (
         <div
             className={currentChat?.currentIndex === index ? "currentChat" : ""}
-            onClick={() => {
+            onClick={(e) => {
                 if (friend?.approved) {
                     setCurrentChat({
                         members: [+friend?.receiverId, +friend?.requestSendById],
@@ -35,9 +36,11 @@ function MatePin(props) {
             }}
         >
             <FriendPin
+                {...friend}
                 userAvatar={userAvatar}
                 friendName={friend?.receiverName}
                 approved={friend?.approved}
+                setConversations={setConversations}
             />
         </div>
     )

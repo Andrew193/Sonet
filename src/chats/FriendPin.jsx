@@ -1,4 +1,3 @@
-import {Avatar} from "@mui/material";
 import {AiOutlineLock, ImCancelCircle, IoAddSharp} from "react-icons/all";
 import {approveFriendRequest, rejectFriendRequest} from "./chatHelper";
 import {notify} from "../App";
@@ -6,7 +5,6 @@ import {toast} from "react-toastify";
 import {friendRequest} from "../users/script";
 import {createCopy} from "../utils";
 import LazyImage from "../posts/LazyImage";
-
 
 function FriendPin(props) {
     const {
@@ -43,8 +41,40 @@ function FriendPin(props) {
             <div
                 className={`conversation ${!approved ? "closedFriendPin" : ""} ${requestMode ? "closedFriendPin" : ""}`}
             >
+                {
+                    approved &&
+                    <span
+                        className={"deleteExistingFriend"}
+                        onClick={(e) => {
+                            e.stopPropagation();
+
+                            rejectFriendRequest({
+                                receiverId,
+                                requestSendById
+                            })
+                                .then(() => {
+                                    notify("Deleted successfully");
+                                    setConversations((state) => {
+                                        return JSON.parse(JSON.stringify(state?.filter((friend) => {
+                                            return friend?.receiverId !== receiverId
+                                        })))
+                                    })
+                                });
+                            rejectFriendRequest({
+                                receiverId: requestSendById,
+                                requestSendById: receiverId
+                            });
+                        }}
+                    >
+                    <ImCancelCircle
+                        style={{
+                            color: "red"
+                        }}
+                    />
+                </span>
+                }
                 <LazyImage imageSrc={userAvatar} onClick={() => {
-                }} imgClass={"conversationImg"} />
+                }} imgClass={"conversationImg"}/>
                 <span className="conversationName">{friendName}</span>
                 {
                     !approved

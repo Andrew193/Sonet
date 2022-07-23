@@ -43,7 +43,9 @@ export async function approveFriendRequest(info, okCallback, errorCallback) {
     HttpHelper.approveRequest(info, okCallback, errorCallback)
 }
 
-export async function rejectFriendRequest(info, okCallback, errorCallback) {
+export async function rejectFriendRequest(info, okCallback = () => {
+}, errorCallback = () => {
+}) {
     HttpHelper.rejectRequest(info, okCallback, errorCallback)
 }
 

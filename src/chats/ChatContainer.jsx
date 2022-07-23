@@ -23,7 +23,6 @@ function ChatContainer() {
 
     useEffect(() => {
         socket.on("getMessageInChat", (data) => {
-            console.log(data)
             setArrivalMessage({
                 sender: data?.senderId,
                 text: data?.text,

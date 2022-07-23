@@ -21,7 +21,6 @@ function UpdateChatMessageModal(props) {
     const [text, setText] = useState('')
     const [isBackdoor, setIsBackdoor] = useState(false);
 
-    console.log(messageToUpdateId)
     return (
         <>
             {

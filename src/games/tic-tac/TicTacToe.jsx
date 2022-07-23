@@ -35,7 +35,6 @@ const TicTacToe = () => {
 
         for (let combo in combos) {
             combos[combo].forEach((pattern) => {
-                debugger
                 if (
                     squares[pattern[0]]?.props?.alt === "" ||
                     squares[pattern[1]]?.props?.alt === "" ||

@@ -36,6 +36,7 @@ function Messenger(props) {
             index={index}
             friend={friend}
             setCurrentChat={setCurrentChat}
+            setConversations={setConversations}
         /> : null)
     }, [conversations, currentChat?.currentIndex]);
 
