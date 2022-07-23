@@ -359,7 +359,7 @@ const Http = {
         return axios.delete("https://sonet34.herokuapp.com/api/chat/message", {params: {id}})
     },
     updateChatMessage: (id, value) => {
-        return axios.put("https://sonet34.herokuapp.com/api/chat/message", {
+        return axios.put("https://sonet34.herokuapp.com/api/chat/", {
             id,
             newText: value
         })
