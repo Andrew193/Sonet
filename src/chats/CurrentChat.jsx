@@ -21,7 +21,8 @@ function MessageCover(props) {
         m,
         userId,
         avatar,
-        receiverId
+        receiverId,
+        setMessages
     } = props;
 
     return (
@@ -30,6 +31,7 @@ function MessageCover(props) {
             key={m?.id}
             message={m}
             avatar={avatar}
+            setMessages={setMessages}
             own={(+m.sender === +userId) || (+m.createdById === +userId)}
         />
     )
@@ -105,6 +107,7 @@ function CurrentChat(props) {
                         avatar={avatars[0]?.id === m?.createdById ? avatars[0]?.avatar : avatars[1]?.avatar}
                         userId={userInformation?.id}
                         receiverId={receiverId}
+                        setMessages={setMessages}
                     />
                 </div>)}
 

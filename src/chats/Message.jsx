@@ -4,6 +4,7 @@ import {Avatar, Tooltip} from "@mui/material";
 import {useCallback, useContext} from "react";
 import {copyToClipboard, deleteMessageById} from "./chatHelper";
 import Context from "../helpers/contextHelper";
+import {notify} from "../App";
 
 const actionsConfig = [
     {label: "Copy to buffer", icon: <FiCopy/>, type: "copy", onClick: ({messageText}) => copyToClipboard(messageText)},
@@ -11,7 +12,13 @@ const actionsConfig = [
         label: "Delete the message",
         icon: <AiOutlineDelete/>,
         type: "delete",
-        onClick: ({id}, socket, receiverId) => deleteMessageById(id, socket, receiverId)
+        onClick: ({id}, socket, receiverId, setMessages) => {
+            deleteMessageById(id, socket, receiverId)
+                .then(() => {
+                    notify("Deleted")
+                    setMessages((state) => JSON.parse(JSON.stringify(state?.filter((message) => message?.id !== id))))
+                });
+        }
     },
     {
         label: "Edit the message", icon: <AiOutlineEdit/>, type: "edit", onClick: () => {
@@ -24,7 +31,8 @@ function Message(props) {
         message,
         own,
         avatar,
-        receiverId
+        receiverId,
+        setMessages
     } = props;
 
     const {socket} = useContext(Context);
@@ -39,7 +47,7 @@ function Message(props) {
                 <button
                     id={"dropStylesForMessagesActions"}
                     onClick={() => {
-                        action?.onClick(message, socket, receiverId)
+                        action?.onClick(message, socket, receiverId, setMessages)
                     }}
                 >
                     {action?.icon}
