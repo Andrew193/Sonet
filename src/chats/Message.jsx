@@ -1,10 +1,11 @@
 import dateHelper from "../helpers/dateHelper";
 import {AiOutlineDelete, AiOutlineEdit, FiCopy} from "react-icons/all";
 import {Avatar, Tooltip} from "@mui/material";
-import {useCallback, useContext} from "react";
+import {useCallback, useContext, useState} from "react";
 import {copyToClipboard, deleteMessageById} from "./chatHelper";
 import Context from "../helpers/contextHelper";
 import {notify} from "../App";
+import UpdateChatMessageModal from "./UpdateChatMessageModal";
 
 const actionsConfig = [
     {label: "Copy to buffer", icon: <FiCopy/>, type: "copy", onClick: ({messageText}) => copyToClipboard(messageText)},
@@ -15,13 +16,18 @@ const actionsConfig = [
         onClick: ({id}, socket, receiverId, setMessages) => {
             deleteMessageById(id, socket, receiverId)
                 .then(() => {
-                    notify("Deleted")
+                    notify("Deleted");
                     setMessages((state) => JSON.parse(JSON.stringify(state?.filter((message) => message?.id !== id))))
                 });
         }
     },
     {
-        label: "Edit the message", icon: <AiOutlineEdit/>, type: "edit", onClick: () => {
+        label: "Edit the message",
+        icon: <AiOutlineEdit/>,
+        type: "edit",
+        onClick: ({id}, socket, receiverId, setMessages, setIsOpened, setMessageToUpdateId) => {
+            setIsOpened(() => true);
+            setMessageToUpdateId(() => id)
         }
     }
 ]
@@ -36,6 +42,8 @@ function Message(props) {
     } = props;
 
     const {socket} = useContext(Context);
+    const [isOpened, setIsOpened] = useState(false);
+    const [messageToUpdateId, setMessageToUpdateId] = useState();
 
     const actions = useCallback(() => {
         return message => actionsConfig?.map((action) => {
@@ -47,7 +55,7 @@ function Message(props) {
                 <button
                     id={"dropStylesForMessagesActions"}
                     onClick={() => {
-                        action?.onClick(message, socket, receiverId, setMessages)
+                        action?.onClick(message, socket, receiverId, setMessages, setIsOpened, setMessageToUpdateId)
                     }}
                 >
                     {action?.icon}
@@ -58,6 +66,15 @@ function Message(props) {
 
     return (
         <div className={own ? "message own" : "message"}>
+            <UpdateChatMessageModal
+                setMessages={setMessages}
+                receiverId={receiverId}
+                socket={socket}
+                isOpened={isOpened}
+                setIsOpened={setIsOpened}
+                notify={notify}
+                messageToUpdateId={messageToUpdateId}
+            />
             <div className="messageTop">
                 <Avatar
                     src={avatar}

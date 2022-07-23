@@ -28,8 +28,8 @@
 
 .userInfo {
     border: 1px solid transparent;
-    margin: 0px 10%;
     border-radius: 50px;
+    margin: 0px 10%;
     cursor: pointer;
     display: flex;
     padding: 12px;
@@ -216,7 +216,7 @@
 }
 
 #Controle {
-    margin: unset!important;
+    margin: unset !important;
     justify-content: flex-start;
     transition: all ease 0.5s;
 }
@@ -373,6 +373,12 @@
     }
 }
 
+@media (max-width: 1200px) {
+    .userInfo > span {
+        display: none;
+    }
+}
+
 @media (max-width: 1024px) {
 
     #PostBtnS {
@@ -390,6 +396,7 @@
     .PostModal {
         padding: 5% 10%;
     }
+
     .NavBar div:first-of-type {
         height: unset;
     }

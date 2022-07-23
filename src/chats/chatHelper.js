@@ -20,6 +20,13 @@ export async function deleteMessageById(id, socket, receiverId) {
         })
 }
 
+export async function updateMessageById(id, newText, socket, receiverId) {
+    HttpHelper.updateChatMessage(id, newText)
+        .then(() => {
+            socket.emit("updateAfterDeleting", {id: receiverId});
+        })
+}
+
 export async function getConversationById(conversationId, okCallback, errorCallback) {
     HttpHelper.getConversationById(conversationId, okCallback, errorCallback);
 }

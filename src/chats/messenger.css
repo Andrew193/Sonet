@@ -24,6 +24,16 @@
     max-height: 720px;
 }
 
+.chatUpdateModal {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.chatUpdateModal p {
+    border-top: unset !important;
+}
+
 .chatPostBtn {
     padding: 10px;
     display: flex;
