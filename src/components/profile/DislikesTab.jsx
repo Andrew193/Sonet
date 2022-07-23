@@ -10,6 +10,7 @@ import {notify} from "../../App";
 import EmotionsLineContainer from "../../posts/EmotionsLineContainer";
 import {useHistory} from "react-router-dom";
 import {AiOutlineDislike} from "react-icons/ai";
+import {TbHeartBroken} from "react-icons/all";
 
 forceCheck();
 
@@ -111,7 +112,20 @@ function DislikesTab(props) {
             value={value}
             index={3}
         >
-            {dislikesLine}
+            {
+                !!dislikesLine?.length
+                    ? dislikesLine
+                    : <p
+                        className={s.EmptyLine}
+                    >
+                        <Typography
+                            variant={"h3"}
+                            component={"h3"}
+                        >You don’t have any dislikes yet</Typography>
+                        Tap the dislike icon on any Post to take back some love. When you do, it’ll show up here.
+                        <TbHeartBroken/>
+                    </p>
+            }
         </TabPanel>
     )
 }

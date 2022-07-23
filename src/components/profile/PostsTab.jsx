@@ -6,6 +6,7 @@ import s from "./profile.module.css"
 import {forceCheck} from 'react-lazyload';
 import DateHelper from "../../helpers/dateHelper";
 import EmotionsLineContainer from "../../posts/EmotionsLineContainer";
+import {MdOutlinePostAdd} from "react-icons/all";
 
 forceCheck();
 
@@ -73,7 +74,20 @@ function PostsTab(props) {
             value={value}
             index={0}
         >
-            {postsLine}
+            {
+                !!postsLine?.length
+                    ? postsLine
+                    : <p
+                        className={s.EmptyLine}
+                    >
+                        <Typography
+                            variant={"h3"}
+                            component={"h3"}
+                        >You don’t have any posts yet</Typography>
+                        Create a post in any way. When you do, it’ll show up here.
+                        <MdOutlinePostAdd/>
+                    </p>
+            }
         </TabPanel>
     )
 }

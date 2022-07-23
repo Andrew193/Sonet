@@ -9,6 +9,7 @@ import postsHelper from "../../posts/postsHelper"
 import {notify} from "../../App";
 import EmotionsLineContainer from "../../posts/EmotionsLineContainer";
 import {useHistory} from "react-router-dom";
+import {BiMessageMinus} from "react-icons/all";
 
 forceCheck();
 
@@ -115,12 +116,26 @@ function CommentsTab(props) {
         </LazyLoad>
     ), [commentsConfig]);
 
+    console.log(commentsLine)
     return (
         <TabPanel
             value={value}
             index={1}
         >
-            {commentsLine}
+            {
+                !!commentsLine?.length
+                    ? commentsLine
+                    : <p
+                        className={s.EmptyLine}
+                    >
+                        <Typography
+                            variant={"h3"}
+                            component={"h3"}
+                        >You don’t have any comments yet</Typography>
+                        Tap the comment icon on any Post to comment it out. When you do, it’ll show up here.
+                        <BiMessageMinus/>
+                    </p>
+            }
         </TabPanel>
     )
 }

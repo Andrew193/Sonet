@@ -9,7 +9,7 @@ import postsHelper from "../../posts/postsHelper"
 import {notify} from "../../App";
 import EmotionsLineContainer from "../../posts/EmotionsLineContainer";
 import {useHistory} from "react-router-dom";
-import {AiOutlineLike} from "react-icons/ai";
+import {AiOutlineHeart, AiOutlineLike} from "react-icons/ai";
 
 forceCheck();
 
@@ -111,7 +111,20 @@ function LikesTab(props) {
             value={value}
             index={2}
         >
-            {likesLine}
+            {
+                !!likesLine?.length
+                    ? likesLine
+                    : <p
+                        className={s.EmptyLine}
+                    >
+                        <Typography
+                            variant={"h3"}
+                            component={"h3"}
+                        >You don’t have any likes yet</Typography>
+                        Tap the like icon on any Post to show it some love. When you do, it’ll show up here.
+                        <AiOutlineHeart/>
+                    </p>
+            }
         </TabPanel>
     )
 }
