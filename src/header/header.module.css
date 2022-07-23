@@ -28,13 +28,18 @@
 
 .userInfo {
     border: 1px solid transparent;
-    border-radius: 50px;
-    margin: 0px 10%;
+    border-radius: 5px;
     cursor: pointer;
     display: flex;
-    padding: 12px;
+    padding: 7px 5px;
     transition: all ease 0.5s;
     align-items: center;
+    justify-content: inherit;
+    margin: 10px;
+}
+
+.userInfo span {
+    font-size: 11px!important;
 }
 
 .userInfo > p {

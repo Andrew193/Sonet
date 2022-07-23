@@ -31,7 +31,7 @@ function UserPostTab({information, avatarUrl}) {
                     >
                         {information?.createdBy}
                     </Typography>
-                    <Typography>
+                    <Typography className={"fromNow"}>
                         {DateHelper.fromNow(information.createdAt)}
                     </Typography>
                 </Typography>

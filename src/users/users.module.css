@@ -74,6 +74,15 @@
     align-items: center;
     position: absolute;
     right: 5px;
+    min-width: 125px;
+}
+
+.CreatedDate span {
+    font-size: 13px !important;
+}
+
+.CreatedDate svg {
+    margin-right: 10px;
 }
 
 .Item > div span {

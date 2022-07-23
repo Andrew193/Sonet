@@ -8,6 +8,23 @@ html, body, #root, .App {
     min-height: -webkit-fill-available;
 }
 
+.fromNow {
+    position: relative;
+}
+
+.fromNow:before {
+    position: absolute;
+    content: '';
+    display: block;
+    top: 7px;
+    left: -5px;
+    background: #686868;
+    border-radius: 50%;
+    height: 1px;
+    width: 1px;
+    padding: 2px;
+}
+
 #ReactSimpleImageViewer img {
     max-height: 250px !important;
     min-height: 250px !important;
@@ -189,10 +206,11 @@ a {
     .basicPageHead {
         font-size: 20px;
         padding: 10px 20px;
+        align-items: center;
     }
 
     .basicPageHead a {
-        font-size: 30px;
+        font-size: 20px;
     }
 }
 

@@ -75,7 +75,7 @@ function Folders(props) {
                             <div
                                 className={s.FolderDescription}
                             >
-                                <span>Created date: {dateHelper.fromNow(folder?.createdAt)}</span>
+                                <span>Created date: <span>{dateHelper.fromNow(folder?.createdAt)}</span></span>
                                 <span>Folder name: {folder?.name}</span>
                             </div>
                         </>

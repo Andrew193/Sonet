@@ -48,7 +48,7 @@ function CommentTab({information, avatarUrl}) {
                         >
                             {information?.createdBy}
                         </Typography>
-                        <Typography>
+                        <Typography className={"fromNow"}>
                             {DateHelper.fromNow(information.createdAt)}
                         </Typography>
                     </Typography>
@@ -79,7 +79,7 @@ function CommentTab({information, avatarUrl}) {
                         >
                             {relatedPost[0]?.createdBy}
                         </Typography>
-                        <Typography>
+                        <Typography className={"fromNow"}>
                             {DateHelper.fromNow(relatedPost[0]?.createdAt)}
                         </Typography>
                     </Typography>

@@ -80,7 +80,7 @@ function ClearUsers(props) {
                     <span
                         className={s.CreatedDate}
                     >
-                            <AiOutlineClockCircle/> Joined us {DataHelper.fromNow(value[4])}
+                        <AiOutlineClockCircle/><span className={"fromNow"}>{DataHelper.fromNow(value[4])}</span>
                         </span>
                 </div>
                 {searchId && <UsersPageActions

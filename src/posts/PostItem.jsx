@@ -99,6 +99,9 @@ function PostItem(props) {
             .inputCover > div{
              height: 100%;
             }
+            .${s.Item} .fromNow:before {
+            top: 11px !important;
+            }
             `}</style>
 
             {isTextUpdate && <div
@@ -253,7 +256,7 @@ function PostItem(props) {
                     }
                 </Box>
 
-                <span className={s.Time}>{DataHelper.fromNow(value.createdAt)}</span>
+                <span className={s.Time + " fromNow"}>{DataHelper.fromNow(value.createdAt)}</span>
             </div>
         </>
     )

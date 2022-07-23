@@ -368,7 +368,7 @@
     }
 }
 
-@media (max-width: 2200px) {
+@media (min-width: 2200px) {
     .Container {
         font-size: 20px;
     }

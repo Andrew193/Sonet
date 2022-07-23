@@ -36,7 +36,7 @@ function PostCreator(props) {
                         component="div"
                         className={s.latestPostFirstLine}
                     >
-                        <span>{dateHelper.fromNow(value.createdAt)}</span>
+                        <span className={"fromNow"}>{dateHelper.fromNow(value.createdAt)}</span>
                         <Typography
                             variant="h5"
                             component="h4"

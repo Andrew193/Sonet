@@ -58,7 +58,7 @@ function DislikeTab({information, avatarUrl}) {
                             >
                                 {relatedPost[0]?.createdBy}
                             </Typography>
-                            <Typography>
+                            <Typography className={"fromNow"}>
                                 {DateHelper.fromNow(relatedPost[0]?.createdAt)}
                             </Typography>
                         </Typography>
@@ -85,7 +85,7 @@ function DislikeTab({information, avatarUrl}) {
                 }}
             >
                 <AiOutlineDislike size={"30px"}/>
-                <span> {DateHelper.fromNow(information?.createdAt)}</span>
+                <span className={"fromNow"}>{DateHelper.fromNow(information?.createdAt)}</span>
             </Box>
         </Box>
     )
