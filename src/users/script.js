@@ -2,11 +2,11 @@ import HttpHelper from "../helpers/httpHelper"
 import CommonHelper from "../helpers/common"
 
 function getUsers() {
-    return HttpHelper.getAllUsers();
+    return HttpHelper.USERS.getAllUsers();
 }
 
 function getSelectedUser(id) {
-    return HttpHelper.getOneUser(id)
+    return HttpHelper.USERS.getOneUser(id)
 }
 
 function openUser(e, history, inputId, setLoader) {
@@ -42,7 +42,7 @@ function Subscribe(id, toast, otherUserFolCount) {
 }
 
 export function friendRequest(values, callback) {
-    HttpHelper.friendRequest(values,
+    HttpHelper.MATES.friendRequest(values,
         (e) => {
             callback("Success");
         }, (error) => {

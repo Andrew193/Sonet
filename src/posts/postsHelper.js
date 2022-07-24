@@ -7,25 +7,25 @@ export function refresh(socket, userId) {
 }
 
 export async function addPhotoToMyGallery(values, okCallback, errorCallback) {
-    HttpHelper.addPhotoToMyGallery(values, okCallback, errorCallback);
+    HttpHelper.GALLERY.addPhotoToMyGallery(values, okCallback, errorCallback);
 }
 
 export async function deletePostById(id) {
-    HttpHelper.deletePostById(id, () => {
+    HttpHelper.POSTS.deletePostById(id, () => {
     })
 }
 
 export async function updatePostById(id, text) {
-    HttpHelper.updatePostById({id, newText: text}, () => {
+    HttpHelper.POSTS.updatePostById({id, newText: text}, () => {
     })
 }
 
 function getMyPostWithEndpoint(id, set, endpoint) {
-    HttpHelper.getPostWithType(id, set, endpoint)
+    HttpHelper.POSTS.getPostWithType(id, set, endpoint)
 }
 
 function getPosts() {
-    return HttpHelper.getPosts(null);
+    return HttpHelper.POSTS.getPosts(null);
 }
 
 function afterEmotion(socket, userId, emtype, notify) {
@@ -34,7 +34,7 @@ function afterEmotion(socket, userId, emtype, notify) {
 }
 
 function getSelectedPost(id, notify) {
-    return HttpHelper.getOnePost(id, notify)
+    return HttpHelper.POSTS.getOnePost(id, notify)
         .then(response => response)
         .catch(error => error.response && console.error(error.response))
 }
@@ -60,7 +60,7 @@ function dislike(value, userId, notify, socket) {
 }
 
 function executeEmotion(userId, value, socket, notify, type) {
-    HttpHelper.emotion(userId, value,
+    HttpHelper.POSTS.emotion(userId, value,
         () => {
             afterEmotion(socket, userId, type, notify)
         },

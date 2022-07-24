@@ -2,7 +2,7 @@ import HTMLhelp from "../../helpers/htmlHelper"
 import HttpHelper from "../../helpers/httpHelper"
 
 function createComment(value, userInfo, postId, comCount, notify, socket) {
-    return HttpHelper.createComment(value, postId, userInfo.id, userInfo.userName, comCount, (response) => {
+    return HttpHelper.POSTS.createComment(value, postId, userInfo.id, userInfo.userName, comCount, (response) => {
         socket.emit("CommentAdd", { id: postId }).emit("refreshPost", { id: postId })
         notify(HTMLhelp.createHTML({ title: "Ok", message: response?.data?.message }))
     },
@@ -10,7 +10,7 @@ function createComment(value, userInfo, postId, comCount, notify, socket) {
 }
 
 function getAllComments(id, notify) {
-    return HttpHelper.getAllComments(id, () => notify(HTMLhelp.createHTML({ title: "Sorry", message: "Could not get comment" })))
+    return HttpHelper.POSTS.getAllComments(id, () => notify(HTMLhelp.createHTML({ title: "Sorry", message: "Could not get comment" })))
 }
 
 const obj = { createComment, getAllComments }

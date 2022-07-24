@@ -1,7 +1,7 @@
 import HttpHelper from "../../helpers/httpHelper"
 import CommonHelper from "../../helpers/common"
 function getPosts() {
-    return HttpHelper.getPosts(5)
+    return HttpHelper.POSTS.getPosts(5)
 }
 
 function openFull(history, id) {

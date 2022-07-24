@@ -15,6 +15,7 @@ import {setupDb} from "./db";
 import "./i18n";
 import galleryStyles from "./gallery/gallery.module.css";
 import settingsStyles from "./settings/settings.module.css";
+import {headerListLinks} from "./vars";
 
 const sessionHelper = require("./helpers/sessionHelper")
 const socket = io();
@@ -90,32 +91,34 @@ function App() {
                 {flag && <>
                     <Components.Header/>
                     <Switch>
-                        <Route exact path={"/"} render={() =>
+                        <Route exact path={headerListLinks.base} render={() =>
                             <div className={"genContainer"}>
                                 <Components.MainPage open={open}/>
                                 <Components.TopInfo/>
                             </div>}>
                         </Route>
-                        <Route exact path={"/auth"} render={() => <Components.ContainerAuth/>}/>
-                        <Route exact path={"/users/:id?"} render={() =>
+                        <Route exact path={headerListLinks.auth} render={() => <Components.ContainerAuth/>}/>
+                        <Route exact path={headerListLinks.users + "/:id?"} render={() =>
                             <div className={"genContainer"}>
                                 <Components.UsersContainer/>
                                 <Components.TopInfo/>
                             </div>}/>
-                        <Route exact path={"/profile/:id?"} render={() =>
+                        <Route exact path={headerListLinks.profile + "/:id?"} render={() =>
                             <div className={"genContainer"}>
                                 <Components.Profile/>
                                 <Components.TopInfo/>
                             </div>}/>
-                        <Route exact path={"/posts/:id?"} render={() =>
+                        <Route exact path={headerListLinks.posts + "/:id?"} render={() =>
                             <div className={"genContainer"}>
                                 <Components.PostsContainer/>
                                 <Components.TopInfo/>
                             </div>}/>
-                        <Route exact path={"/post/:type"} render={() => <Components.SpecialPosts/>}/>
-                        <Route exact path={"/comment/:id?"} render={() => <Components.Comment/>}/>
-                        <Route exact path={"/followers/Followings"} render={() => <Components.Followings/>}/>
-                        <Route exact path={"/followers/Followers"} render={() => <Components.Followers/>}/>
+                        <Route exact path={headerListLinks.post + "/:type"} render={() => <Components.SpecialPosts/>}/>
+                        <Route exact path={headerListLinks.comment + "/:id?"} render={() => <Components.Comment/>}/>
+                        <Route exact path={headerListLinks.followers + "/Followings"}
+                               render={() => <Components.Followings/>}/>
+                        <Route exact path={headerListLinks.followers + "/Followers"}
+                               render={() => <Components.Followers/>}/>
                     </Switch>
                     <Components.Footer/>
                     <ToastContainer
@@ -126,11 +129,12 @@ function App() {
                     />
                     <Components.ModalUser ref={modal} click={open}/>
                 </>}
-                <Route exact path={'/games/:gameType?'} render={() => <Components.GamesContainer/>}/>
-                <Route exact path={"/settings"} render={() => <Components.SettingsContainerPage/>}/>
-                <Route exact path={"/chats"} render={() => <Components.ChatContainer/>}/>
-                <Route exact path={"/auth"} render={() => <Components.ContainerAuth/>}/>
-                <Route exact path={"/gallery/:folderName?"} render={() => <Components.GalleryContainer/>}/>
+                <Route exact path={headerListLinks.games + "/:gameType?"} render={() => <Components.GamesContainer/>}/>
+                <Route exact path={headerListLinks.settings} render={() => <Components.SettingsContainerPage/>}/>
+                <Route exact path={headerListLinks.chats} render={() => <Components.ChatContainer/>}/>
+                <Route exact path={headerListLinks.auth} render={() => <Components.ContainerAuth/>}/>
+                <Route exact path={headerListLinks.gallery + "/:folderName?"}
+                       render={() => <Components.GalleryContainer/>}/>
             </div>
         </Context.Provider>
     );

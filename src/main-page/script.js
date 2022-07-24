@@ -1,9 +1,7 @@
 import HttpHelper from "../helpers/httpHelper"
-import Script from "../header/script.js"
-
 
 function UpdateInfo(values, close) {
-    HttpHelper.userUpdate(values)
+    HttpHelper.USERS.userUpdate(values)
     close();
 }
 

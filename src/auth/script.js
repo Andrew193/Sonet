@@ -15,13 +15,13 @@ function sendReq(values, resetForm, isRegisterUser, setRedirect, toast) {
     values.userName = "Default";
 
     if (isRegisterUser) {
-        HttpHelper.createUser(values, (token) => {
+        HttpHelper.USERS.createUser(values, (token) => {
             comboReset(token, setRedirect, resetForm);
         }, (error) => {
             toast(error || "User already exist");
         })
     } else {
-        HttpHelper.authUser(values, (token) => {
+        HttpHelper.USERS.authUser(values, (token) => {
             comboReset(token, setRedirect, resetForm);
         }, (error) => {
             toast(error);

@@ -2,7 +2,7 @@ import htmlHelper from "../helpers/htmlHelper";
 import HttpHelper from "../helpers/httpHelper";
 
 function createPostService(element, notify, socket, text, savedImages) {
-    HttpHelper.createPost(text, (response) => {
+    HttpHelper.POSTS.createPost(text, (response) => {
         document.querySelector(".Mpost").classList.remove("Open");
 
         notify(htmlHelper.createHTML({title: "Ok", message: response?.data?.message}));

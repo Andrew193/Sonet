@@ -12,7 +12,7 @@ function GetShortUserInfo(notify) {
     const token = Script.getCookie("token");
 
     if (token) {
-        return HttpHelper.getMe((error) => {
+        return HttpHelper.USERS.getMe((error) => {
             const inner = htmlHelper.stringFromJSON(error?.data);
             inner[0] !== "<" &&
                 notify(htmlHelper.createHTML({ title: "Error", message: inner }));

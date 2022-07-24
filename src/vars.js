@@ -6,5 +6,12 @@ export const headerListLinks = {
     posts: "/posts",
     games: "/games",
     settings: "/settings",
-    gallery: "/gallery"
+    gallery: "/gallery",
+    auth: "/auth",
+    followers: "/followers",
+    comment: "/comment",
+    post: "/post"
 }
+
+export const API = "https://sonet34.herokuapp.com/api/";
+export const img_api = API + "img/";
