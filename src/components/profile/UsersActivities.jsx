@@ -37,7 +37,7 @@ function a11yProps(index) {
 }
 
 function getPosts(setPosts, id) {
-    HttpHelper.getPosts(null, "my", `&userId=${id}`)
+    HttpHelper.POSTS.getPosts(null, "my", `&userId=${id}`)
         .then(response => {
             setPosts(response.posts)
         })

@@ -1,0 +1,61 @@
+.Container {
+    transition: all ease 0.5s;
+    height: 450px;
+    display: flex;
+    flex-basis: auto;
+    flex-direction: column;
+    flex-shrink: 0;
+    margin: 0px;
+    min-height: 0px;
+    min-width: 300px;
+    padding: 0px;
+    position: fixed;
+    z-index: 10000;
+    bottom: -400px;
+    right: 20px;
+    background: #fdfcfb;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.Header {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    height: 50px;
+    font-size: 20px !important;
+    border-bottom: 1px solid;
+    justify-content: space-between;
+}
+
+.HeaderActions {
+    width: 75px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.HeaderActions svg {
+    padding: 5px;
+    height: 32px;
+    width: 30px;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: all ease 0.5s;
+}
+
+.HeaderActions svg:hover {
+    background: #c4c4c6;
+    color: white;
+}
+
+@media (min-width: 2100px) {
+
+}
+
+@media (max-width: 2099px) {
+
+}
+
+@media (max-width: 1700px) {
+
+}

@@ -16,6 +16,7 @@ import "./i18n";
 import galleryStyles from "./gallery/gallery.module.css";
 import settingsStyles from "./settings/settings.module.css";
 import {headerListLinks} from "./vars";
+import FastMessageContainer from "./fastMessage/FastMessageContainer";
 
 const sessionHelper = require("./helpers/sessionHelper")
 const socket = io();
@@ -135,6 +136,7 @@ function App() {
                 <Route exact path={headerListLinks.auth} render={() => <Components.ContainerAuth/>}/>
                 <Route exact path={headerListLinks.gallery + "/:folderName?"}
                        render={() => <Components.GalleryContainer/>}/>
+                <Route npath={headerListLinks.chats} render={()=><FastMessageContainer />}/>
             </div>
         </Context.Provider>
     );

@@ -116,7 +116,6 @@ function CommentsTab(props) {
         </LazyLoad>
     ), [commentsConfig]);
 
-    console.log(commentsLine)
     return (
         <TabPanel
             value={value}
