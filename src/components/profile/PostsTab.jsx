@@ -18,10 +18,19 @@ function UserPostTab({information, avatarUrl}) {
         >
             <Avatar
                 src={avatarUrl}
+                style={{
+                    marginLeft: '20px',
+                    height: '60px',
+                    width: '60px'
+                }}
                 className={"conversationImg"}
             >
             </Avatar>
-            <Box>
+            <Box
+                style={{
+                    width: '100%'
+                }}
+            >
                 <Typography
                     className={s.metaBar}
                 >

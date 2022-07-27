@@ -87,6 +87,7 @@
     background-color: #ccc;
     transition: all ease 0.7s;
     cursor: pointer;
+    margin-top: 75px;
 }
 
 .FlexColl {
@@ -177,6 +178,7 @@
 
 .ProfileEmotions {
     display: flex;
+    justify-content: space-around;
 }
 
 .ProfileEmotions p {
@@ -184,8 +186,8 @@
 }
 
 .ProfileEmotions svg {
-    height: 22px;
-    width: 22px;
+    height: 27px;
+    width: 27px;
 }
 
 .ProfileEmotions svg {
@@ -196,6 +198,7 @@
     display: flex;
     align-items: baseline;
     margin-bottom: 5px !important;
+    justify-content: space-between;
 }
 
 .postContent {

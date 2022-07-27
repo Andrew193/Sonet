@@ -85,6 +85,28 @@ function ClearProfile(props) {
                 min-width: 350px;
                 min-height: 350px;
                 }
+                
+                .basicPageHead {
+                position: fixed;
+                z-index: 10000;
+                width: 85%;
+                background: rgba(255, 255, 255, 0.95);
+                border-right: 1px solid ${settings?.configs?.color[settings?.color] || "rgb(206, 204, 204)"};
+                }
+                
+                .fromNow:before {
+                top: 5px;
+                }
+    
+                @media (max-width: 2000px) {
+                .basicPageHead {
+                width: 60%!important;
+                }}
+                
+                @media (max-width: 1024px) {
+                .basicPageHead {
+                width: 85%!important;
+                }}
                 `}
             </style>
             <BackImageMenu
@@ -96,6 +118,7 @@ function ClearProfile(props) {
                 handleClose={handleClose}
                 backId={backId}
             />
+
 
             <PageHeader historyPath={"/"}>
                 <>
