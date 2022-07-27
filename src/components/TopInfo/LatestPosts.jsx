@@ -7,9 +7,12 @@ import Context from "../../helpers/contextHelper";
 import {getSettings} from "../../db";
 import {alpha} from "@mui/material";
 import {useTranslation} from "react-i18next";
+import {headerListLinks} from "../../vars";
+import {useHistory} from "react-router-dom";
 
 function LatestPosts() {
     const [state, setState] = useState(false);
+    const history = useHistory();
     const [settings, setSettings] = useState({});
     const {socket} = useContext(Context);
 
@@ -50,7 +53,12 @@ function LatestPosts() {
                         toCreate={state?.posts}
                         settings={settings}
                     />
-                    <div className={s.LastTipItem}>{t("Show More")}</div>
+                    <div
+                        className={s.LastTipItem}
+                        onClick={() => {
+                            history.push(headerListLinks.posts)
+                        }}
+                    >{t("Show More")}</div>
                 </> : <Skeleton height={"50px"} count={5}/>}
         </div>
     )

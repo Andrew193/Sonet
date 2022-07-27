@@ -12,6 +12,17 @@ import {AiOutlineSecurityScan} from "react-icons/ai";
 import {hexToRgb} from "../utils";
 import {useTranslation} from "react-i18next";
 
+const colorPair = {
+    "#2177e8": "rgb(226 237 250)",
+    "#b32dd2": "rgb(240 219 245)",
+    "#bd9d33": "rgb(255 251 236)",
+    "#FF7F50": "rgb(253 244 241)",
+    "#0a00ce": "rgb(227 226 251)",
+    "#008000": "rgb(238 247 238)",
+    "#FFA500": "rgb(255 251 246)",
+    "#FF0000": "rgb(248 236 236)"
+}
+
 function Portal(props) {
     const {
         click,
@@ -35,7 +46,7 @@ function Portal(props) {
             style={{
                 fontSize: customStyles?.fontSize,
                 color: customStyles?.color,
-                background: customStyles?.background,
+                background: colorPair[customStyles?.color],
                 boxShadow: `0px 0px 8px 0px rgb(${hexToRgb(customStyles?.color)?.r} ${hexToRgb(customStyles?.color)?.g} ${hexToRgb(customStyles?.color)?.b} / 80%)`
             }}
         >
