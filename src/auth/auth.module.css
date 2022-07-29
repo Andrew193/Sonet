@@ -23,11 +23,12 @@
   justify-content: center;
 }
 
-.Container a{
+.Container .updatePassword{
   color: #2525ac;
+  cursor: pointer;
 }
 
-.Container a:hover{
+.Container .updatePassword:hover{
   color: #060680;
 }
 
