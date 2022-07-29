@@ -62,6 +62,17 @@ function FastMessageContainer() {
                 padding-top:3px;
                 padding-bottom: 25px;
                 }
+                @media (max-width: 1024px) {
+                .fast_m_up {
+                display: none;
+                }
+                .${s.Container} {
+                min-width:${isOpened ? "300px!important" : "50px"};
+                }
+                .${s.Header} > span:not(.${s.HeaderActions}), .fast_m_up {
+                display: ${isOpened ? "block!important" : "none"};
+                }
+                }
                 `}
             </style>
             <Typography
@@ -75,6 +86,7 @@ function FastMessageContainer() {
                     <Tooltip title={t("Write a message")} arrow placement="top">
                                 <TooltipButtonCover>
                                     <BiMessageRoundedDots
+                                        className={"fast_m_up"}
                                         onClick={() => {
                                             history.push(headerListLinks.chats);
                                             setIsOpened(false);

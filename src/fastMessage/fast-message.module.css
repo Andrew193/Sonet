@@ -56,6 +56,13 @@
 
 }
 
-@media (max-width: 1700px) {
+@media (max-width: 1024px) {
+    .Container {
+        max-width: 50px;
+        min-width: 50px;
+    }
 
+    .Header > span:not(.HeaderActions) {
+        display: none;
+    }
 }
