@@ -145,7 +145,7 @@ function Auth(props) {
                                 type="submit"
                                 id={"btnEnter"}
                                 className={s.welcB}
-                                onClick={()=>{
+                                onClick={() => {
                                     axios.get(API + "users/newPassword")
                                         .then((response) => {
 
