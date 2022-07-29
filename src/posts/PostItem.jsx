@@ -83,27 +83,6 @@ function PostItem(props) {
 
     return (
         <>
-            <style>{`
-            .inputCover {
-            position: absolute!important;
-            z-index: 10;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: ${alpha(hexToRgb(settings?.configs?.color[settings?.color] || "#f6f2ff"), 0.4)}!important;
-            }
-            .inputCover > div{
-             height: 100%;
-            }
-            .${s.Item} .fromNow:before {
-            top: 11px !important;
-            }
-            `}</style>
-
             {isTextUpdate && <div
                 className={"inputCover"}
             >

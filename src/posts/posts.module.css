@@ -59,8 +59,8 @@
     word-break: break-all;
 }
 
-.PostsCont > div:nth-child(2n) {
-    background-color: #f6f2ff;
+.Item:hover {
+    background-color: #d6cbf0 !important;
 }
 
 .PostsCont a {
@@ -292,6 +292,7 @@
 
 .Item {
     position: relative !important;
+    transition: all ease 0.5s;
 }
 
 .PostItemsActions:hover {

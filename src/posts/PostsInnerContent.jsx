@@ -2,6 +2,7 @@ import s from "./posts.module.css"
 import PostItem from "./PostItem";
 import {useEffect, useState} from "react";
 import commentsStyle from "../components/comments/comments.module.css";
+import {alpha, hexToRgb} from "@mui/material";
 
 function ClearPosts(props) {
     const {
