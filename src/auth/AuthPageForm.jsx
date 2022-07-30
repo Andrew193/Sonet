@@ -117,25 +117,11 @@ function Auth(props) {
                         </form>
                     </>
                     : <>
-                        <form
-                            onSubmit={Formik.handleSubmit}
-                        >
-                            <article>
-                                <h2
-                                    className={s.Active}
-                                    id={"modeLinks"}
-                                >Password recovery</h2>
-                            </article>
-
+                        <form>
+                            <article><h2 className={s.Active} id={"modeLinks"}>Password recovery</h2></article>
                             <div>
-                                <input
-                                    type="email"
-                                    id="email"
-                                    {...Formik.getFieldProps("email")}
-                                />
-                                <span
-                                    className={s.Tip}
-                                >Email</span>
+                                <input type="email" id="email"{...Formik.getFieldProps("email")}/>
+                                <span className={s.Tip}>Email</span>
                             </div>
 
                             {Formik.touched.email && Formik.errors.email &&
