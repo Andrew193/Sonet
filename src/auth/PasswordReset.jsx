@@ -6,7 +6,8 @@ import {notify} from "../App";
 
 function PasswordReset(props) {
     const {
-        styleSettings
+        styleSettings,
+        setRecreatePasswordMode
     } = props;
 
     const Formik = useFormik({
@@ -49,7 +50,11 @@ function PasswordReset(props) {
                         padding: 'unset'
                     }}
                 >
-                    Your new password will be sent to this email address
+                    Your new password will be sent to this email address.
+                    <span
+                        className={s.updatePassword}
+                        onClick={() => setRecreatePasswordMode(false)}
+                    >Go back</span>
                 </Typography>
 
             </form>

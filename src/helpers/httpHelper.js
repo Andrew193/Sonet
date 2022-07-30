@@ -53,6 +53,7 @@ const Http = {
                 .catch((error) => error.response && console.error(error.response))
         },
         resetPassword: (email) => {
+            notify("Your request has been sent successfully")
             return axios.get(API + "users/newPassword", {params: {email}})
                 .then((response) => response)
                 .catch((error) => error)

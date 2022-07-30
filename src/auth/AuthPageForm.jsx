@@ -56,6 +56,7 @@ function Auth(props) {
                         setRecreatePasswordMode={setRecreatePasswordMode}
                     />
                     : <PasswordReset
+                        setRecreatePasswordMode={setRecreatePasswordMode}
                         styleSettings={styleSettings}
                     />
             }
