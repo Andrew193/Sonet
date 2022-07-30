@@ -40,9 +40,6 @@ function PasswordReset(props) {
                     type="submit"
                     id={"btnEnter"}
                     className={s.welcB}
-                    onClick={() => {
-                        HttpHelper.USERS.resetPassword(Formik.values.email)
-                    }}
                 >►
                 </button>
 
