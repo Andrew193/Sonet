@@ -34,9 +34,7 @@ function ContainerAuth() {
         onSubmit: (values, {resetForm}) => {
             Script.sendReq(values, resetForm, isRegisterUser, setRedirect, (message) => {
                 const Msg = ({closeToast, toastProps}) => (
-                    <div>
-                        {message}
-                    </div>
+                    <div>{message}</div>
                 )
                 notify(<Msg/>);
             })
