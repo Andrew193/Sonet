@@ -1,10 +1,8 @@
 import s from "./auth.module.css";
-import {alpha, hexToRgb, Typography} from "@mui/material";
+import {alpha, Typography} from "@mui/material";
 import {hexToRgb as muiHexToRgb} from "@mui/system/colorManipulator";
 import {useState} from "react";
-import {default as axios} from "axios";
-import {API} from "../vars";
-import {createErrorsForApiCall} from "../utils";
+import HttpHelper from "../helpers/httpHelper";
 
 function Auth(props) {
     const {
@@ -117,7 +115,7 @@ function Auth(props) {
                         </form>
                     </>
                     : <>
-                        <form>
+                        <form  onSubmit={Formik.handleSubmit}>
                             <article><h2 className={s.Active} id={"modeLinks"}>Password recovery</h2></article>
                             <div>
                                 <input type="email" id="email"{...Formik.getFieldProps("email")}/>
@@ -132,15 +130,7 @@ function Auth(props) {
                                 id={"btnEnter"}
                                 className={s.welcB}
                                 onClick={() => {
-                                    axios.get(API + "users/newPassword")
-                                        .then((response) => {
-
-                                        })
-                                        .catch((error) => {
-                                            if (error) {
-                                                //errorCallback(createErrorsForApiCall(error?.response?.data, error?.response?.data))
-                                            }
-                                        })
+                                    HttpHelper.USERS.resetPassword(Formik.values.email)
                                 }}
                             >►
                             </button>

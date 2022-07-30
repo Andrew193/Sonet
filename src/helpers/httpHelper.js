@@ -52,6 +52,11 @@ const Http = {
                 .then((response) => response?.data)
                 .catch((error) => error.response && console.error(error.response))
         },
+        resetPassword: (email) => {
+            return axios.get(API + "users/newPassword", {params: {email}})
+                .then((response) => response)
+                .catch((error) => error)
+        },
         userUpdate: (values) => {
             axios.put(API + "users/update", values)
                 .then(() => {
@@ -87,7 +92,7 @@ const Http = {
                 .catch((error) => error?.response && callback1(error?.response?.data?.error))
         },
     },
-    FOLLOW:{
+    FOLLOW: {
         follow: (idArray, history, type) => {
             axios.get(API + "follow?token=" + Script.getCookie("token"), {params: {idArray: JSON.stringify(idArray)}})
                 .then((response) => CommonHelper.redirect(history, response?.data, "/followers" + type))
@@ -110,7 +115,7 @@ const Http = {
                 .catch((error) => error?.response && console.error(error?.response?.data?.error))
         },
     },
-    POSTS:{
+    POSTS: {
         getPosts: (count, prefix, search = "") => {
             return axios.get(API + `post${prefix ? `/${prefix}` : ""}?token=` + Script.getCookie("token") + search, {params: {howMany: count}})
                 .then((response) => response?.data)
