@@ -5,8 +5,8 @@ import Context from "../helpers/contextHelper"
 import {AiOutlineClose, BiImageAdd, BsPencil} from "react-icons/all";
 import userHelper from "../helpers/userHelper";
 import {Avatar, Backdrop, Box, CircularProgress} from "@mui/material";
-import InputEmoji from 'react-input-emoji';
 import {useTranslation} from "react-i18next";
+import MainCover from "../components/solid-textarea/MainCover";
 
 export const buttonsConfig = {
     "#FF0000": s.RedButton,
@@ -24,14 +24,13 @@ function CreatePost(props) {
         customStyle
     } = props;
 
-    const { t } = useTranslation();
+    const {t} = useTranslation();
     let image = useRef();
 
-    const [text, setText] = useState('')
     const [images, setImages] = useState([]);
     const [isOpened, setIsOpened] = useState(false);
 
-    const {socket, notify} = useContext(Context);
+    const {socket} = useContext(Context);
 
     const previewImages = useMemo(() =>
         images?.map((image, index) =>
@@ -62,11 +61,11 @@ function CreatePost(props) {
             >
                 <CircularProgress color="inherit"/>
             </Backdrop>
-            <InputEmoji
-                value={text}
-                onChange={setText}
-                cleanOnEnter
-                placeholder={t("Type a message")}
+            <MainCover
+                customStyle={customStyle}
+                setIsOpened={setIsOpened}
+                images={images}
+                setImages={setImages}
             />
             <form>
                 <input
@@ -102,22 +101,6 @@ function CreatePost(props) {
                 >
                     <BiImageAdd/>
                     {t("Attach image")}
-                </button>
-                <button
-                    className={`button btn btn-default ${buttonsConfig[customStyle?.color]}`}
-                    onClick={() => {
-                        setIsOpened(true);
-                        window?.document?.body?.querySelector(".App")?.classList?.remove("Open")
-                        Script.CreatePost(text, notify, null, socket, images)
-                            .then(() => {
-                                setText("")
-                                setImages([]);
-                                setIsOpened(false);
-                            })
-                    }}
-                >
-                    <BsPencil/>
-                    {t("Create Post")}
                 </button>
             </p>
         </div>

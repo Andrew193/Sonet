@@ -1,0 +1,41 @@
+.Container {
+    color: #4b4b4b;
+    background-color: #fff;
+    border-radius: 5px;
+    margin: 10px;
+    box-sizing: border-box;
+    font-size: 15px;
+    font-family: sans-serif;
+    font-weight: 400;
+    min-height: 75px;
+    min-width: 0;
+    outline: none;
+    border: 1px solid #eaeaea;
+}
+
+.MainCover textarea {
+    flex: 11 0;
+}
+
+.MainCover > div {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10000;
+}
+
+.MainCover svg {
+    flex: 1 0;
+    height: 25px;
+    cursor: pointer;
+}
+
+.MainCover svg:hover {
+    opacity: 0.7;
+}
+
+.MainCover {
+    position: relative;
+    display: flex;
+    align-items: center;
+}

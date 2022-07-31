@@ -1,0 +1,199 @@
+.Editor {
+    display: block;
+    transition: all ease 0.5s;
+    font-size: 19px;
+    position: relative;
+    width: 97%;
+    overflow: hidden;
+    text-align: left;
+    padding: 10px 5px;
+    box-sizing: border-box;
+    color: #4b4b4b;
+    background-color: #fff;
+    border-radius: 5px;
+    margin: 10px;
+    font-family: sans-serif;
+    font-weight: 400;
+    min-height: 75px;
+    min-width: 0;
+    outline: none;
+    border: 1px solid #eaeaea;
+}
+
+.deleteButton {
+    position: absolute;
+    top: 8px;
+    right: 6px;
+    font-size: 16px;
+}
+
+.Editor__Clear {
+    position: absolute;
+    top: 0;
+    right: 10px;
+    font-size: 13px;
+    cursor: pointer;
+    border-radius: 50%;
+    padding: 5px;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all ease 0.5s;
+}
+
+.Editor__Clear:hover {
+    background: #c4c1fc;
+}
+
+.Editor__Clear svg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.Editor__Highlight {
+    cursor: not-allowed;
+    color: #0088ff;
+    background: #cce7ff;
+    padding: 3px;
+    border-radius: 3px;
+    margin-left: 5px;
+}
+
+.Editor__OverLimit {
+    background-color: #fd9bb0;
+}
+
+.public-DraftEditorPlaceholder-root {
+    z-index: -1;
+    position: absolute;
+}
+
+.ActionBar {
+    display: flex;
+    justify-content: space-between;
+}
+
+.ActionBar__Submit {
+    display: flex;
+}
+
+.ThematicBreak {
+    display: block;
+    padding: 8px 5px;
+}
+
+.ThematicBreak::after {
+    content: "";
+    display: block;
+    height: 1px;
+    width: 100%;
+    background-color: rgb(235, 238, 240);
+}
+
+.ThematicBreakVertical {
+    display: block;
+    padding: 5px 8px;
+}
+
+.ThematicBreakVertical::after {
+    content: "";
+    display: block;
+    height: 100%;
+    width: 1px;
+    background-color: rgb(235, 238, 240);
+}
+
+.ReactJsonViewer {
+    text-align: left;
+    margin-top: 16px;
+    padding: 10px;
+    background-color: #002b36;
+    border-radius: 10px;
+}
+
+.Info {
+    padding: 24px;
+    margin-top: 24px;
+    background-color: #e7ebec;
+}
+
+.Info p {
+    color: #268bd2;
+}
+
+.Info h1 {
+    font-size: 24px;
+}
+
+.Info h1,
+a {
+    color: #798f0b;
+    font-weight: 700;
+}
+
+.ProgressRingBar {
+    transition: transform 0.2s ease-in-out;
+    will-change: transform;
+}
+
+.Submit {
+    padding: 0px 24px;
+    outline: none;
+    border-radius: 50px;
+    cursor: pointer;
+    border: 0;
+    background: none;
+    display: flex;
+    align-items: center;
+    font-weight: 800;
+    color: white;
+    background-color: rgb(26, 145, 218);
+    flex-shrink: 0;
+}
+
+.Submit:disabled {
+    cursor: initial;
+    background-color: rgb(142, 208, 249);
+}
+
+.Submit:enabled:hover {
+    background-color: rgb(19, 122, 185);
+}
+
+
+.ProgressRingBar[data-ui="smallRing"] {
+    transform: scale(0.8);
+}
+
+.ProgressRingBar[data-ui="bigRing"] {
+    transform: scale(1);
+}
+
+
+.UploadMediaBar {
+    display: flex;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
