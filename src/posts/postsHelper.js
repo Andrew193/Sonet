@@ -10,6 +10,27 @@ export async function addPhotoToMyGallery(values, okCallback, errorCallback) {
     HttpHelper.GALLERY.addPhotoToMyGallery(values, okCallback, errorCallback);
 }
 
+export function getHashtags(text) {
+    return text.replace(/[\.,:;-]/g, '').split(' ').filter(e => e.toLowerCase()[0] === '#')
+}
+
+export function getFilteredPostsByTags(posts, history) {
+    return {
+        posts: posts?.posts?.map((post) => {
+            const currentHashtags = history?.location?.hash?.split("#")?.map((e) => "#" + e);
+            const postHashtags = JSON.parse(post?.tags);
+            let shouldShow = false;
+            for (let i = 0; i < currentHashtags?.length; i++) {
+                if (postHashtags?.includes(currentHashtags[i])) {
+                    shouldShow = true;
+                    break;
+                }
+            }
+            return {...post, show: shouldShow};
+        })
+    }
+}
+
 export async function deletePostById(id) {
     HttpHelper.POSTS.deletePostById(id, () => {
     })

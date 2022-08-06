@@ -37,7 +37,6 @@
 
 .PostsCont {
     margin-bottom: 70px;
-    overflow-y: scroll;
 }
 
 .PostsCont > div > div {
@@ -63,6 +62,37 @@
     background-color: #d6cbf0 !important;
 }
 
+.HashtagsContainer {
+    margin: 10px 0px;
+    display: flex;
+    background: rgb(203, 203, 243);
+    border-radius: 5px;
+    flex-wrap: wrap;
+}
+
+.FiltersBar {
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.HashtagsContainer span {
+    color: #0088ff;
+    background: #cce7ff;
+    border-radius: 2px;
+    padding: 2px 3px !important;
+    height: fit-content;
+    cursor: pointer !important;
+    transition: all ease 0.5s !important;
+    margin: 3px;
+    flex: 1 0 10%;
+}
+
+.HashtagsContainer span:hover {
+    opacity: 0.5;
+}
+
 .PostsCont a {
     text-decoration: none;
     color: black;
@@ -72,6 +102,10 @@
 
 .PostsCont a:hover {
     color: rgb(73, 73, 248);
+}
+
+.EmotionContainer {
+    border-top: 1px solid;
 }
 
 .PostsCont > div > div div p:last-of-type {

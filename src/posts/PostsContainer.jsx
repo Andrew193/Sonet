@@ -1,17 +1,20 @@
 import {useContext, useEffect, useState} from "react";
 import ClearPosts from "./PostsInnerContent";
-import postsHelper from "./postsHelper"
+import postsHelper, {getFilteredPostsByTags} from "./postsHelper"
 import Skeleton from 'react-loading-skeleton';
 import SortLine from "./SortLine.jsx"
 import s from "./posts.module.css"
-import {Link, withRouter} from "react-router-dom";
+import {Link, useHistory, withRouter} from "react-router-dom";
 import PageHeader from "../components/common/navigationLine/NavigationLine.jsx";
 import Context from "../helpers/contextHelper";
 import {getSettings} from "../db";
 import {alpha, hexToRgb} from "@mui/material";
+import FiltersBar from "./FiltersBar";
 
 function PostsContainer(props) {
     const [posts, setPosts] = useState(false);
+    const [isSetup, setIsSetup] = useState(false);
+    const history = useHistory();
     const [settings, setSettings] = useState({});
 
     const {socket, notify} = useContext(Context);
@@ -50,6 +53,23 @@ function PostsContainer(props) {
         getData();
     }, [])
 
+    useEffect(() => {
+        if (!!history?.location?.hash) {
+            setPosts(getFilteredPostsByTags(posts, history))
+        } else {
+            setPosts((posts) => ({
+                posts: posts?.posts?.map((post) => ({...post, show: undefined}))
+            }))
+        }
+    }, [history?.location?.hash]);
+
+    useEffect(() => {
+        if (posts?.posts && !isSetup && !!history?.location?.hash) {
+            setIsSetup(() => true);
+            setPosts(getFilteredPostsByTags(posts, history))
+        }
+    }, [posts, history?.location?.hash]);
+
     return (
         <div className={s.Container}>
             <style>{`
@@ -76,8 +96,6 @@ function PostsContainer(props) {
             }
             .itemsPostsPage {
             background: ${settings?.configs?.background[settings?.background]};
-            border-left: 1px solid ${settings?.configs?.color[settings?.color]};
-            border-right: 1px solid ${settings?.configs?.color[settings?.color]};
             border-bottom: 1px solid ${settings?.configs?.color[settings?.color]}!important;
             cursor: pointer;
             display: flex;
@@ -90,8 +108,6 @@ function PostsContainer(props) {
             }
             .basicPageHead {
             background: ${settings?.configs?.background[settings?.background]};
-            border-left: 1px solid ${settings?.configs?.color[settings?.color]};
-            border-right: 1px solid ${settings?.configs?.color[settings?.color]};
             }
             .rowPostsContainer {
             height:inherit;
@@ -116,6 +132,7 @@ function PostsContainer(props) {
             {
                 posts
                     ? <>
+                        <FiltersBar settings={settings}/>
                         <ClearPosts id={id} toMake={posts} settings={settings} setParentPosts={setPosts}/>
                         <div className={s.fixer}/>
                         <SortLine/>

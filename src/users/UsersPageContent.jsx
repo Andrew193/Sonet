@@ -55,8 +55,6 @@ function UsersPageContent(props) {
                      }
                      .basicPageHead {
                       background: ${settings?.configs?.background[settings?.background]};
-                      border-left: 1px solid ${settings?.configs?.color[settings?.color]};
-                      border-right: 1px solid ${settings?.configs?.color[settings?.color]};
                      }
                      .rowUsersContainer {
                      height:inherit;

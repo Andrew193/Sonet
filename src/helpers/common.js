@@ -1,5 +1,5 @@
 function redirect(hist, params, path) {
-    hist.push({ pathname: path, state: params })
+    hist.push({...hist.location, pathname: path, state: params })
 }
 
 const obj = { redirect }

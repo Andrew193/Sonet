@@ -18,12 +18,14 @@ import InputEmoji from 'react-input-emoji';
 import reactStringReplace from 'react-string-replace';
 import Context from "../helpers/contextHelper";
 import profileHelper from "../components/profile/profileHelper";
+import HashtagsLine from "./HashtagsLine";
 
 export function replaceTags(text) {
     const regExp = /(?:\s|^)(#[\w]+\b)/gi;
 
     return reactStringReplace(text, regExp, (match, i) => (
-        <span key={i} className={textareaStyle.Editor__Highlight} style={{display: 'inline-block'}}>{match}</span>
+        <span key={i} className={textareaStyle.Editor__Highlight}
+              style={{display: "inline-block", padding: "0px", marginBottom: "3px"}}>{match}</span>
     ))
 }
 
@@ -161,12 +163,14 @@ function PostItem(props) {
                         >{value.createdBy}</Link>
                     </h3>
                     <p>{replaceTags(value.text)}</p>
+                    <HashtagsLine text={value.text}/>
                     <PostItemsImages
                         valueUserId={+value.userId}
                         valueSavedImages={value?.savedImages}
                         openImageViewer={openImageViewer}
                     />
                     <EmotionsLineContainer
+                        containerClass={s.EmotionContainer}
                         value={value}
                         id={id}
                     />

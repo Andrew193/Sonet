@@ -53,8 +53,6 @@ function SpecialPosts(props) {
                 {`
                      .itemsPostsPage {
                      background: ${settings?.configs?.background[settings?.background]};
-                     border-left: 1px solid ${settings?.configs?.color[settings?.color]};
-                     border-right: 1px solid ${settings?.configs?.color[settings?.color]};
                      cursor: pointer;
                      }
                      .itemsPostsPage:nth-child(2n) {
@@ -65,8 +63,6 @@ function SpecialPosts(props) {
                      }
                      .basicPageHead {
                       background: ${settings?.configs?.background[settings?.background]};
-                      border-left: 1px solid ${settings?.configs?.color[settings?.color]};
-                      border-right: 1px solid ${settings?.configs?.color[settings?.color]};
                      }
                      .rowPostsContainer {
                      height:inherit;

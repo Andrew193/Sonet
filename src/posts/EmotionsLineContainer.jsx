@@ -6,7 +6,6 @@ import {useHistory} from "react-router-dom";
 import {useContext} from "react";
 import Context from "../helpers/contextHelper";
 
-
 function EmotionsLineContainer(props) {
     const {
         value,

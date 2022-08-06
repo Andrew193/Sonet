@@ -17,17 +17,19 @@ function ClearPosts(props) {
     const [posts, setPost] = useState(false)
 
     useEffect(() => {
-        setPost(() => toMake.posts.map((value, index) =>
-            <PostItem
-                value={value}
-                id={id}
-                index={index}
-                setPost={setPost}
-                setParentPosts={setParentPosts}
-                customStyle={toMake?.customClass || commentsStyle.OnePost}
-                settings={settings}
-                key={index}
-            />
+        setPost(() => (toMake?.posts || [])?.map((value, index) =>
+            (value?.show === true || value?.show === undefined)
+                ? <PostItem
+                    value={value}
+                    id={id}
+                    index={index}
+                    setPost={setPost}
+                    setParentPosts={setParentPosts}
+                    customStyle={toMake?.customClass || commentsStyle.OnePost}
+                    settings={settings}
+                    key={index}
+                />
+                : null
         ))
     }, [JSON.stringify(toMake), settings])
 

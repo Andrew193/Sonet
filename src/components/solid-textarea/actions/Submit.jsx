@@ -57,7 +57,6 @@ export const Submit = (props) => {
     const {isValid, pristine, state} = useForm();
     const isEmpty = !state.editor?.plainText && !state.media && !state.gif;
 
-    console.log(state)
     useEffect(() => {
         dispatch(setPostInformation({value: state?.editor?.plainText, length: state?.editor?.plainText?.length}))
     }, [state?.editor?.plainText])
