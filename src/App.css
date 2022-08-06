@@ -9,6 +9,10 @@
     height: stretch;
 }
 
+.public-DraftStyleDefault-ltr {
+    line-height: 30px;
+}
+
 .Toastify__close-button {
     color: #fff !important;
     background: transparent !important;
@@ -147,5 +151,5 @@
     right: 0;
     overflow: hidden;
     z-index: 10;
-    width: 100%!important;
+    width: 100% !important;
 }

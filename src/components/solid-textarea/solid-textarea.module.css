@@ -62,6 +62,15 @@
     margin-left: 5px;
 }
 
+.Editor__Highlight__Link {
+    cursor: not-allowed;
+    color: #007c00;
+    background: #c9ffc9;
+    padding: 3px;
+    border-radius: 3px;
+    margin-left: 5px;
+}
+
 .Editor__OverLimit {
     background-color: #fd9bb0;
 }

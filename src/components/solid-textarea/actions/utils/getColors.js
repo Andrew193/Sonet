@@ -1,13 +1,17 @@
-const colors = { warning: "#ffad1f", error: "#e0245e", success: "#1da1f2" };
-export function getColors(numOfChars, max, warning) {
-    switch (true) {
-        case numOfChars >= 0 && numOfChars < max - warning: {
-            return colors.success;
-        }
-        case numOfChars >= max - warning && numOfChars <= max: {
-            return colors.warning;
-        }
-        default:
-            return colors.error;
+const colors = {
+    warning_level1: "#ffd21f",
+    warning_level2: "#ee6f4c",
+    error: "#ff0000",
+    success: "#6bbbfc"
+};
+
+export function getColors(numOfChars, max, warning1, warning2) {
+    if (numOfChars > max) {
+        return colors.error
+    } else if (numOfChars > max - warning1) {
+        return colors.warning_level2
+    } else if (numOfChars > max - warning2) {
+        return colors.warning_level1
     }
+    return colors.success
 }

@@ -45,7 +45,7 @@ export const PrivacyPicker = () => {
             <div ref={refPicker} data-visible={visible} className={s.PrivacySelection}>
                 <div className={s.PrivacySelection__Header}>Who can reply?</div>
                 <div className={s.PrivacySelection__Hint}>
-                    Choose who can reply to this Tweet. Anyone mentioned can always reply.
+                    Choose who can reply to this Post. Anyone mentioned can always reply.
                 </div>
                 <div className={s.PrivacySelection__Radios}>
                     <RadioWithLabel img={PrivacySVG_0} id="everyone" value="0" checked>
