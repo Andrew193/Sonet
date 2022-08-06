@@ -1,8 +1,10 @@
 import s from "./posts.module.css"
 import PostItem from "./PostItem";
-import {useEffect, useState} from "react";
+import {useEffect, useState, useMemo} from "react";
 import commentsStyle from "../components/comments/comments.module.css";
-import {alpha, hexToRgb} from "@mui/material";
+import LazyLoad, {forceCheck} from 'react-lazyload';
+
+forceCheck();
 
 function ClearPosts(props) {
     const {
@@ -25,12 +27,24 @@ function ClearPosts(props) {
                 customStyle={toMake?.customClass || commentsStyle.OnePost}
                 settings={settings}
                 key={index}
-            />))
+            />
+        ))
     }, [JSON.stringify(toMake), settings])
+
+    const postsLine = useMemo(() => {
+        if (!!posts) {
+            return posts?.map((post, index) =>
+                <LazyLoad key={index}>
+                    {post}
+                </LazyLoad>
+            )
+        }
+        return [];
+    }, [posts]);
 
     return (
         <div className={s.PostsCont + " onePostContainer"}>
-            {posts}
+            {postsLine}
         </div>
     )
 }

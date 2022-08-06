@@ -83,10 +83,10 @@ function PostsContainer(props) {
             display: flex;
             }
             .itemsPostsPage:nth-child(2n) {
-            background-color: ${alpha(settings?.configs?.color[settings?.color] || "rgb(231 231 240)", 0.3)} !important;
+            background-color: ${alpha(settings?.configs?.color[settings?.color] || "#f6f2ff", 0.3)} !important;
             }
             .itemsPostsPage:hover {
-            background-color: ${alpha(settings?.configs?.color[settings?.color] || "rgb(231 231 240)", 0.5)} !important;
+            background-color: ${alpha(settings?.configs?.color[settings?.color] || "#f6f2ff", 0.5)} !important;
             }
             .basicPageHead {
             background: ${settings?.configs?.background[settings?.background]};
