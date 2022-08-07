@@ -5,6 +5,9 @@ import {AiOutlineCheck, FiSettings, GiCheckMark} from "react-icons/all";
 import {getSettings, updateSettings} from "../../db";
 import {buttonsConfig} from "../../createPost/CreatePostLine";
 import {useTranslation} from "react-i18next";
+import {useDragAndDrop} from "../../drag-drop/useDragAndDrop";
+import OuterDragAndDropContainer from "../../drag-drop/OuterDragAndDropContainer";
+import HeaderLink from "../../header/HeaderLink";
 
 const marks = [
     {
@@ -48,6 +51,20 @@ const backgroundConfig = [
     {class: s.Blue, id: 2, label: "Blue"},
 ]
 
+function HeaderListPageRow(props) {
+    const {t} = useTranslation();
+    return (
+        <>
+            <HeaderLink
+                linkConfig={props?.item}
+                t={t}
+                settings={{}}
+                key={props?.item?.label}
+            />
+        </>
+    )
+}
+
 function DisplaySettings() {
     const [settings, setSettings] = useState({})
     const [selectedColor, setSelectedColor] = useState(-1);
@@ -78,15 +95,6 @@ function DisplaySettings() {
             <span>{t("" + config?.label + "")}</span><AiOutlineCheck/>
         </div>
     ), [selectedBack])
-
-    function saveSettingsHandler() {
-        settingsCover(() => updateSettings({
-            color: selectedColor,
-            background: selectedBack,
-            fontSize: fontSize === 16 ? -1 : fontSize,
-            configs: settings?.configs
-        }, 1))
-    }
 
     function defaultSettingsHandler() {
         settingsCover(() => updateSettings({
@@ -121,7 +129,28 @@ function DisplaySettings() {
         getSettingsConfig();
     }, [])
 
+    const [headerFields, setHeaderFields] = useState([]);
+    const DragAndDropConfig = useDragAndDrop(setHeaderFields, headerFields, {
+        isOrderChangeMode: true,
+        formId: 0,
+        buttons: []
+    }, HeaderListPageRow);
 
+    function saveSettingsHandler() {
+        settingsCover(() => updateSettings({
+            color: selectedColor,
+            background: selectedBack,
+            fontSize: fontSize === 16 ? -1 : fontSize,
+            configs: settings?.configs,
+            headerConfig: headerFields
+        }, 1))
+    }
+
+    useEffect(() => {
+        if (settings?.headerConfig) {
+            setHeaderFields(() => settings?.headerConfig)
+        }
+    }, [settings?.headerConfig])
     return (
         <>
             <Backdrop
@@ -178,6 +207,18 @@ function DisplaySettings() {
                 >
                     {backs}
                 </div>
+            </Box>
+
+            <Box
+                className={s.FontMainContainer}
+            >
+                <Typography
+                    className={s.FontLabel}
+                >{t("Header order")}</Typography>
+                <OuterDragAndDropContainer
+                    isOrderChangeMode={true}
+                    DragAndDropConfig={DragAndDropConfig}
+                />
             </Box>
 
             <Box

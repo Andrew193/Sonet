@@ -1,4 +1,4 @@
-import {Link, NavLink, useHistory} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 import s from "./header.module.css";
 import Script from "./script";
 import Logo from "./img/icon.ico";
@@ -6,28 +6,24 @@ import ProfileContainer from "../user/ProfileContainerForNavbar";
 import {useEffect, useMemo, useState} from "react";
 import Portal from "./UserPortal";
 import {AiOutlineHighlight} from "react-icons/ai";
-import {v4 as uuidv4} from "uuid";
-import {
-    AiOutlineUser, AiOutlineBank, AiOutlineComment,
-    AiOutlineLogout, AiOutlineTeam, AiOutlineFile
-} from "react-icons/ai";
+import {AiOutlineLogout} from "react-icons/ai";
 import PostPortal from "./PostPortal";
 import Script2 from "../components/profile/profileHelper";
 import {headerListLinks} from "../vars";
-import {CgGames, IoSettingsOutline, RiGalleryLine} from "react-icons/all";
 import {getSettings} from "../db";
 import {alpha} from "@mui/material";
 import {useTranslation} from "react-i18next";
+import HeaderLink from "./HeaderLink";
 
-const headerLinksConfig = [
-    {path: headerListLinks.base, img: <AiOutlineBank size={"24px"}/>, label: "Home"},
-    {path: headerListLinks.profile, img: <AiOutlineUser size={"24px"}/>, label: "Profile"},
-    {path: headerListLinks.chats, img: <AiOutlineComment size={"24px"}/>, label: "Chats"},
-    {path: headerListLinks.users, img: <AiOutlineTeam size={"24px"}/>, label: "Users"},
-    {path: headerListLinks.posts, img: <AiOutlineFile size={"24px"}/>, label: "Posts"},
-    {path: headerListLinks.gallery, img: <RiGalleryLine size={"24px"}/>, label: "Gallery"},
-    {path: headerListLinks.games, img: <CgGames size={"24px"}/>, label: "Games"},
-    {path: headerListLinks?.settings, img: <IoSettingsOutline size={"24px"}/>, label: "Settings"}
+export const headerLinksConfig = [
+    {path: headerListLinks.base, label: "Home"},
+    {path: headerListLinks.profile, label: "Profile"},
+    {path: headerListLinks.chats, label: "Chats"},
+    {path: headerListLinks.users, label: "Users"},
+    {path: headerListLinks.posts, label: "Posts"},
+    {path: headerListLinks.gallery, label: "Gallery"},
+    {path: headerListLinks.games, label: "Games"},
+    {path: headerListLinks?.settings, label: "Settings"}
 ];
 
 function Header() {
@@ -36,36 +32,16 @@ function Header() {
     const history = useHistory();
     const {t, i18n} = useTranslation();
 
-    const headerLinks = useMemo(() => headerLinksConfig?.map((linkConfig) => {
-
-        return <p className={"wrap-link-line"}>
-            <span className={"col-sm-2 col-xs-2"}/>
-            <NavLink
-                className={"col-sm-7 col-xs-7"}
-                key={uuidv4()}
-                exact to={{pathname: linkConfig?.path}}
-                activeClassName={s.ActivePage}
-                data-tooltip={t("" + linkConfig?.label + "")}
-                style={{
-                    color: settings?.configs?.color[settings?.color],
-                }}
-            >
-                {linkConfig?.img}
-                <span
-                    style={{
-                        fontSize: settings?.configs?.size[settings?.fontSize],
-                    }}
-                >{t("" + linkConfig.label + "")}</span>
-            </NavLink>
-
-            <span className={"col-sm-3 col-xs-3"}/>
-        </p>
-    }), [settings, i18n?.language]);
+    const headerLinks = useMemo(() => settings?.headerConfig?.map((linkConfig) => <HeaderLink
+        linkConfig={linkConfig}
+        t={t}
+        settings={settings}
+        key={linkConfig.label}
+    />), [settings, i18n?.language]);
 
     useEffect(() => {
         async function getData() {
             const response = await getSettings();
-
             setSettings(response[0])
         }
 

@@ -9,6 +9,8 @@ import s from './settings.module.css';
 import AppearanceSettings from "./components/AppearanceSettings";
 import {useTranslation} from "react-i18next";
 import GeneralSettings from "./components/GeneralSettings";
+import {useDragAndDrop} from "../drag-drop/useDragAndDrop";
+import OuterDragAndDropContainer from "../drag-drop/OuterDragAndDropContainer";
 
 const settingsList = [
     {panelName: "themes", label: "Display", innerContent: <DisplaySettings/>},

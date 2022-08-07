@@ -6,6 +6,7 @@ import Script2 from "./user/script.js";
 import 'react-toastify/dist/ReactToastify.css';
 import './res/bootstrap/bootstrap.min.css';
 import './res/grid/styles.scss';
+import './res/grid/drag-drop.scss';
 import {ToastContainer} from 'react-toastify';
 import {useEffect, useRef, useState} from "react";
 import {toast} from 'react-toastify';

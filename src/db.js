@@ -1,4 +1,5 @@
 import Dexie from 'dexie';
+import {headerLinksConfig} from "./header/HeaderContainerPage";
 
 const defaultSettingsConfig = {
     fontSize: -1,
@@ -38,7 +39,8 @@ const defaultSettingsConfig = {
         margin: 0,
         padding: 0,
         boxShadow: false
-    }
+    },
+    headerConfig: headerLinksConfig
 }
 
 export const INDEX_DB_NAME = "SONET_34";

@@ -1,0 +1,156 @@
+.drag-item {
+  cursor: move !important;
+}
+
+
+.drag-cover {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: unset;
+
+  > label {
+    white-space: nowrap;
+    margin-bottom: 5px !important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+}
+
+.header-audit label {
+  margin-bottom: 5px;
+}
+
+.label-field {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.draggable-category-tr {
+  td {
+    flex: 1 0 !important;
+    position: relative;
+
+    &:after {
+      content: "";
+      height: 100%;
+      width: 1px;
+      background-color: #ddd;
+      display: block;
+      top: 0;
+      left: -1px;
+      position: absolute;
+    }
+  }
+}
+
+.category-drag-table {
+  display: flex;
+
+  th {
+    flex: 1 0;
+  }
+}
+
+.drag-input-text {
+  background-color: #eeeeee;
+  border: 1px solid black;
+  height: 30px;
+}
+
+.drag-tip {
+  position: absolute;
+  top: 25%;
+  left: -20px;
+}
+
+.drag-input-textarea {
+  background-color: #eeeeee;
+  border: 1px solid black;
+  height: 70px;
+}
+
+.table-header-draggable-item {
+  padding: 3px;
+  cursor: move;
+  font-weight: 600;
+  margin: 0 3px;
+  flex: 1 0 19%;
+  text-align: center;
+  overflow: unset !important;
+}
+
+.groups-checkbox-v-2 {
+  top: 15% !important;
+  left: calc(60% - 20px) !important;
+}
+
+.groups-checkbox-v-3 {
+  top: 15% !important;
+  left: 50% !important;
+}
+
+.droppable-table {
+  position: relative;
+  z-index: 0;
+  background-color: #f3f3f3;
+  border: 1px solid #efefef;
+  border-radius: 3px;
+  outline: none;
+  width: 100%;
+}
+
+.draggable-tr {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  background-color: #fff;
+  color: #333;
+  font-weight: 400;
+  position: relative;
+  border: 1px solid #efefef;
+
+  > td {
+    flex: 1 0 50%;
+  }
+
+  > p > a {
+    display: flex;
+    align-items: end;
+    width: 100%;
+
+    > svg {
+      margin-right: 10px;
+    }
+  }
+
+  > svg {
+    cursor: pointer;
+  }
+}
+
+.font-400 {
+  font-weight: 400 !important;
+}
+
+.draggable-table-thead-tr {
+  display: flex;
+  width: 100%;
+  background-color: #fff;
+  color: #333;
+  font-weight: 400;
+
+  > th {
+    flex: 1 0 50%;
+  }
+}
+
+
+.header-place {
+  min-height: 300px;
+  overflow: hidden;
+}
+
+
