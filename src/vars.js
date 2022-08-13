@@ -10,7 +10,8 @@ export const headerListLinks = {
     auth: "/auth",
     followers: "/followers",
     comment: "/comment",
-    post: "/post"
+    post: "/post",
+    music: "/music"
 }
 
 export const API = "https://sonet34.herokuapp.com/api/";

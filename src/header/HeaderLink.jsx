@@ -2,7 +2,7 @@ import {NavLink} from "react-router-dom";
 import {v4 as uuidv4} from "uuid";
 import s from "./header.module.css";
 import {AiOutlineBank, AiOutlineComment, AiOutlineFile, AiOutlineTeam, AiOutlineUser} from "react-icons/ai";
-import {CgGames, IoSettingsOutline, RiGalleryLine} from "react-icons/all";
+import {CgGames, IoSettingsOutline, MdQueueMusic, RiGalleryLine} from "react-icons/all";
 
 const linksImages = {
     Home: <AiOutlineBank size={"24px"}/>,
@@ -13,6 +13,7 @@ const linksImages = {
     Gallery: <RiGalleryLine size={"24px"}/>,
     Games: <CgGames size={"24px"}/>,
     Settings: <IoSettingsOutline size={"24px"}/>,
+    Music: <MdQueueMusic size={"24px"}/>
 }
 
 function HeaderLink(props) {

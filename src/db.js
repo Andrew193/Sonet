@@ -40,7 +40,8 @@ const defaultSettingsConfig = {
         padding: 0,
         boxShadow: false
     },
-    headerConfig: headerLinksConfig
+    headerConfig: headerLinksConfig,
+    music: []
 }
 
 export const INDEX_DB_NAME = "SONET_34";

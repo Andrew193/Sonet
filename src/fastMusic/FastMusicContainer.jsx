@@ -1,29 +1,35 @@
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import {getSettings} from "../db";
-import s from "./fast-message.module.css";
+import s from "./fast-music.module.css";
 import {alpha, Box, Tooltip, Typography} from "@mui/material";
-import {BiMessageRoundedDots, BiUpArrowAlt, FiArrowDown} from "react-icons/all";
+import {BiUpArrowAlt, FiArrowDown} from "react-icons/all";
 import React from "react"
 import {useTranslation} from "react-i18next";
-import FriendsContainer from "./FriendsContainer";
 import {useHistory} from "react-router-dom";
 import {headerListLinks} from "../vars";
+import {MusicContext} from "../App";
+import MusicContainerMemo from "./MusicContainer";
 
 export const TooltipButtonCover = React.forwardRef(function MyComponent(props, ref) {
-    //  Spread the props to the underlying DOM element.
     return <div {...props} ref={ref} style={{display: "flex"}}>{props?.children}</div>
 });
 
-function FastMessageContainer() {
+function FastMusicContainer() {
     const [settings, setSettings] = useState({});
+    const [musicContext, setMusicContext] = useContext(MusicContext);
     const [isOpened, setIsOpened] = useState(false);
-    const [conversation, setConversations] = useState([]);
     const history = useHistory();
     const {t} = useTranslation();
 
     useEffect(() => {
         async function getData() {
             const response = await getSettings();
+            setMusicContext((context) => ({
+                ...context,
+                tracks: response[0]?.music,
+                tracksLength: response[0]?.music?.length,
+                selectedTrack: null
+            }))
             setSettings(response[0])
         }
 
@@ -33,13 +39,15 @@ function FastMessageContainer() {
     return (
         <Box
             className={s.Container}
+            style={{
+                bottom: isOpened ? "0px" : "-400px",
+                minWidth: isOpened ? "300px" : "50px"
+            }}
         >
             <style>
                 {`
                 .${s.Container} {
-                display: ${history?.location?.pathname === headerListLinks.chats
-                || history?.location?.pathname === headerListLinks.auth
-                || history?.location?.pathname === headerListLinks.music ? "none" : "flex"}
+                display: ${history?.location?.pathname === headerListLinks.auth ? "none" : "flex"}
                 }
                 .${s.Container} {
                 box-shadow: 0px 0px 8px 0px ${alpha(settings?.configs?.color[settings?.color] || "#b6c0f3", 0.8)} !important;
@@ -47,8 +55,8 @@ function FastMessageContainer() {
                 .${s.HeaderActions} svg:hover {
                 background: ${alpha(settings?.configs?.color[settings?.color] || "#b6c0f3", 0.8)};
                 }
-                .${s.Container} {
-                bottom: ${isOpened ? "0px" : "-400px"};
+                .${s.FastTrack} > svg:hover {
+                  background: ${alpha(settings?.configs?.color[settings?.color] || "#b6c0f3", 0.8)};
                 }
                 .${s.Container} .chatBoxTop {
                 height: 300px;
@@ -69,10 +77,7 @@ function FastMessageContainer() {
                 display: none;
                 }
                 .${s.Container} {
-                min-width:${isOpened ? "300px!important" : "50px"};
-                }
-                .${s.Header} > span:not(.${s.HeaderActions}), .fast_m_up {
-                display: ${isOpened ? "block!important" : "none"};
+                min-width:300px};
                 }
                 }
                 `}
@@ -81,21 +86,14 @@ function FastMessageContainer() {
                 component={"p"}
                 className={s.Header}
             >
-                <span>Messages</span>
+                <p
+                    style={{
+                        display: isOpened ? "block" : "none"
+                    }}
+                >Tracks</p>
                 <span
                     className={s.HeaderActions}
                 >
-                    <Tooltip title={t("Write a message")} arrow placement="top">
-                                <TooltipButtonCover>
-                                    <BiMessageRoundedDots
-                                        className={"fast_m_up"}
-                                        onClick={() => {
-                                            history.push(headerListLinks.chats);
-                                            setIsOpened(false);
-                                        }}
-                                    />
-                                </TooltipButtonCover>
-                            </Tooltip>
                     {
                         !isOpened
                             ? <Tooltip title={t("Expand")} arrow placement="top">
@@ -120,17 +118,15 @@ function FastMessageContainer() {
                     }
                 </span>
             </Typography>
-            <div>
-                {
-                    isOpened
-                    && <FriendsContainer
-                        conversation={conversation}
-                        setConversations={setConversations}
-                    />
-                }
+            <div
+                style={{
+                    overflow: "auto"
+                }}
+            >
+                <MusicContainerMemo/>
             </div>
         </Box>
     )
 }
 
-export default FastMessageContainer;
+export default FastMusicContainer;

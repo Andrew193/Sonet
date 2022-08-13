@@ -1,0 +1,97 @@
+.Container {
+    transition: all ease 0.5s;
+    height: 450px;
+    display: flex;
+    flex-basis: auto;
+    flex-direction: column;
+    flex-shrink: 0;
+    margin: 0px;
+    min-height: 0px;
+    min-width: 300px;
+    padding: 0px;
+    position: fixed;
+    z-index: 10000;
+    bottom: -400px;
+    left: 20px;
+    background: #fdfcfb;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.FastTrack {
+    border-bottom: 1px solid rgb(206, 204, 204);
+    display: flex;
+    align-items: center;
+    min-height: 40px;
+    justify-content: space-evenly;
+}
+
+.FastTrack > span {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    display: inline-block;
+    width: 250px;
+}
+
+.FastTrack > svg {
+    padding: 5px;
+    height: 30px;
+    width: 30px;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: all ease 0.5s;
+}
+
+.Header {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    height: 50px;
+    font-size: 20px !important;
+    border-bottom: 1px solid;
+    justify-content: space-between;
+}
+
+.FastReactPlayer {
+
+}
+
+.HeaderActions {
+    width: 75px;
+    display: flex;
+    justify-content: end;
+}
+
+.HeaderActions svg {
+    padding: 5px;
+    height: 32px;
+    width: 30px;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: all ease 0.5s;
+}
+
+.HeaderActions svg:hover {
+    background: #c4c4c6;
+    color: white;
+}
+
+@media (min-width: 2100px) {
+
+}
+
+@media (max-width: 2099px) {
+
+}
+
+@media (max-width: 1024px) {
+    .Container {
+        max-width: 50px;
+        min-width: 50px;
+    }
+
+    .Header > span:not(.HeaderActions) {
+        display: none;
+    }
+}

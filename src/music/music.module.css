@@ -1,0 +1,129 @@
+.Container {
+    margin: 0px 0px 0px 15%;
+    flex: 3 0;
+    max-width: 85%;
+    height: -webkit-fill-available;
+    border-left: 1px solid rgb(206, 204, 204);
+    border-right: 1px solid rgb(206, 204, 204);
+}
+
+.MusicTip {
+    color: rgb(0 0 0 / 50%) !important;
+    margin-top: 1%;
+    transition: all ease 0.5s;
+}
+
+.HideTipTransform {
+    transform: translateY(-250px);
+}
+
+.Track {
+    padding: 10px 10%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: all ease 0.5s;
+    cursor: pointer;
+    border-top: 1px solid rgb(206, 204, 204);
+}
+
+.TrackName {
+    flex: 10 0;
+}
+
+.TrackIndex {
+    font-weight: 600;
+    flex: 1 0;
+    border-right: 1px solid rgb(206, 204, 204);
+}
+
+.TrackActions {
+    display: flex;
+    width: 75px;
+    justify-content: space-evenly;
+    align-items: center;
+    border-left: 1px solid rgb(206, 204, 204);
+    height: 20px;
+}
+
+.Track:last-of-type {
+    border-bottom: 1px solid rgb(206, 204, 204);
+}
+
+.Track:hover {
+    opacity: 0.7;
+}
+
+.playerWrapper {
+    position: relative;
+    flex: 8 0;
+    height: 75px;
+}
+
+.PlayerActions {
+    display: flex;
+    justify-content: space-evenly;
+    flex: 4 0;
+}
+
+.UploadContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px;
+}
+
+.PlayerActions span {
+    border-radius: 4px;
+    border: 1px solid;
+    padding: 7px 5px;
+    cursor: pointer;
+    height: fit-content;
+    transition: all ease 0.7s;
+}
+
+.PlayerActions span:hover {
+    opacity: 0.7;
+}
+
+.reactPlayer {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.reactPlayer video {
+    width: 100% !important;
+    height: 65px !important;
+}
+
+.HideTipFully {
+    height: 0px !important;
+    margin: 0px !important;
+}
+
+
+.MusicTip svg {
+    height: 155px;
+    width: 155px;
+}
+
+@media (max-width: 768px) {
+    .Container {
+        max-width: 100%;
+        margin: unset;
+    }
+
+    .PlayerActions {
+        justify-content: space-around;
+        width: 250px;
+    }
+
+    .reactPlayer {
+        height: 1px !important;
+    }
+
+    .playerWrapper {
+        width: 95%;
+    }
+}

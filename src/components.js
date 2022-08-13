@@ -15,8 +15,10 @@ import SettingsContainerPage from "./settings/SettingsContainerPage";
 import Followers from "./followers/FollowersPageContainer";
 import ChatContainer from "./chats/ChatContainer";
 import GalleryContainer from "./gallery/GalleryContainer";
+import MusicContainerPage from "./music/MusicContainerPage";
 
 const obj = {
+    MusicContainerPage,
     GamesContainer,
     ContainerAuth,
     GalleryContainer,
