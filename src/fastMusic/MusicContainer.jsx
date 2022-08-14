@@ -17,10 +17,11 @@ function MusicContainer() {
                     selectedTrack: index
                 }))
             }}
+            selected={musicContext?.selectedTrack === index}
             track={track}
             key={index}
         />
-    ), [musicContext?.tracks]);
+    ), [musicContext?.tracks, musicContext?.selectedTrack]);
 
     return (
         <>
@@ -70,9 +71,9 @@ function MusicContainer() {
     )
 }
 
-const areEqual = (prevProps, nextProps) => true;
+const areEqual = () => true;
 
-const MusicContainerMemo = React.memo(props => {
+const MusicContainerMemo = React.memo(() => {
     return <MusicContainer />
 }, areEqual);
 

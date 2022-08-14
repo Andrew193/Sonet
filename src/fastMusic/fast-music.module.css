@@ -10,7 +10,7 @@
     min-width: 300px;
     padding: 0px;
     position: fixed;
-    z-index: 10000;
+    z-index: 10;
     bottom: -400px;
     left: 20px;
     background: #fdfcfb;
@@ -19,11 +19,20 @@
 }
 
 .FastTrack {
-    border-bottom: 1px solid rgb(206, 204, 204);
+    border-bottom: 1px solid rgb(206, 204, 204) !important;
     display: flex;
     align-items: center;
     min-height: 40px;
     justify-content: space-evenly;
+    cursor: pointer;
+    transition: all ease 0.5s;
+    padding: 5px;
+    border-radius: 3px;
+    margin: 3px;
+}
+
+.FastTrack:last-of-type {
+    margin-bottom: 10px;
 }
 
 .FastTrack > span {
@@ -34,7 +43,7 @@
     width: 250px;
 }
 
-.FastTrack > svg {
+.FastTrack  svg {
     padding: 5px;
     height: 30px;
     width: 30px;

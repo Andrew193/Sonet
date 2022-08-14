@@ -16,7 +16,7 @@ export const TooltipButtonCover = React.forwardRef(function MyComponent(props, r
 
 function FastMusicContainer() {
     const [settings, setSettings] = useState({});
-    const [musicContext, setMusicContext] = useContext(MusicContext);
+    const [, setMusicContext] = useContext(MusicContext);
     const [isOpened, setIsOpened] = useState(false);
     const history = useHistory();
     const {t} = useTranslation();
@@ -55,7 +55,10 @@ function FastMusicContainer() {
                 .${s.HeaderActions} svg:hover {
                 background: ${alpha(settings?.configs?.color[settings?.color] || "#b6c0f3", 0.8)};
                 }
-                .${s.FastTrack} > svg:hover {
+                .${s.FastTrack}:hover {
+                background: ${alpha(settings?.configs?.color[settings?.color] || "#b6c0f3", 0.5)};
+                }
+                .${s.FastTrack}  svg:hover {
                   background: ${alpha(settings?.configs?.color[settings?.color] || "#b6c0f3", 0.8)};
                 }
                 .${s.Container} .chatBoxTop {
@@ -76,6 +79,9 @@ function FastMusicContainer() {
                 .fast_m_up {
                 display: none;
                 }
+                .${s.Header} > p {
+                  display: ${isOpened ? "block!important" : "none"};
+                }
                 .${s.Container} {
                 min-width:300px};
                 }
@@ -86,11 +92,7 @@ function FastMusicContainer() {
                 component={"p"}
                 className={s.Header}
             >
-                <p
-                    style={{
-                        display: isOpened ? "block" : "none"
-                    }}
-                >Tracks</p>
+                <p>Tracks</p>
                 <span
                     className={s.HeaderActions}
                 >

@@ -1,42 +1,47 @@
 import s from "../settings/settings.module.css";
 import {Box} from "@mui/material";
 import {useCallback, useEffect, useState} from "react";
-import {getSettings, updateSettings} from "../db";
+import {updateSettings} from "../db";
 import {notify} from "../App";
 import MusicInnerContainer from "./MusicInnerContainer";
+import {useSettings} from "../hooks";
 
 function MusicContainerPage() {
-    const [settings, setSettings] = useState({});
     const [videoFilePath, setVideoFilePath] = useState(null);
     const [file, setFile] = useState();
+    const [search, setSearch] = useState("");
     const [allFiles, setAllFiles] = useState([]);
+    const settingsConfig = useSettings(allFiles?.length);
 
     useEffect(() => {
-        async function getData() {
-            const response = await getSettings();
-
-            setSettings(response[0])
+        if (settingsConfig?.settings?.music && settingsConfig?.settings?.music[0]) {
+            setAllFiles(() => {
+                return search === ""
+                    ? settingsConfig?.settings?.music?.map((track) => ({track, show: true}))
+                    : settingsConfig?.settings?.music?.map((track, index) =>
+                        settingsConfig?.settings?.musicDescriptions[index]?.category?.includes(search)
+                            ? {track, show: true}
+                            : {track, show: false}
+                    )
+            });
         }
-
-        getData();
-    }, []);
-
-    useEffect(() => {
-        if (settings?.music && settings?.music[0]) {
-            setAllFiles(() => settings?.music);
-            setVideoFilePath(URL.createObjectURL(settings?.music[0]));
-        }
-    }, [settings])
+    }, [settingsConfig?.settings, search]);
 
     const createNewSong = useCallback(() => {
         function readFile() {
+            debugger
             updateSettings({
-                ...settings,
-                music: [...settings?.music, file]
+                ...settingsConfig.settings,
+                music: [...settingsConfig.settings?.music, file],
+                musicDescriptions: [...settingsConfig.settings?.musicDescriptions, {
+                    name: file?.name,
+                    category: null,
+                    marks: []
+                }]
             }, 1)
                 .finally(() => {
-                    setFile(null);
-                    setVideoFilePath(null);
+                    setFile(() => null);
+                    setVideoFilePath(() => null);
                     setAllFiles((state) => [...state, file]);
                     notify("Added")
                 })
@@ -57,15 +62,17 @@ function MusicContainerPage() {
         <Box
             className={s.Container}
             style={{
-                background: settings?.configs?.background[settings?.background],
+                background: settingsConfig?.settings?.configs?.background[settingsConfig?.settings?.background],
+                marginBottom: "54px"
             }}
         >
             <MusicInnerContainer
+                setSearch={setSearch}
                 setFile={setFile}
                 setVideoFilePath={setVideoFilePath}
                 videoFilePath={videoFilePath}
                 dropPreviewMusic={dropPreviewMusic}
-                settings={settings}
+                settings={settingsConfig?.settings}
                 createNewSong={createNewSong}
                 allFiles={allFiles}
                 setAllFiles={setAllFiles}

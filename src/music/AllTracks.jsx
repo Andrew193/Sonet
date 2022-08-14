@@ -1,20 +1,43 @@
 import s from "./music.module.css";
-import {useMemo} from "react";
+import {useMemo, useRef, useState} from "react";
 import {Tooltip, Typography} from "@mui/material";
 import {AiTwotoneDelete, AiTwotoneEdit} from "react-icons/all";
 import {TooltipButtonCover} from "../fastMessage/FastMessageContainer";
 import {useTranslation} from "react-i18next";
 import {updateSettings} from "../db";
 import {notify} from "../App";
+import {buttonsConfig} from "../createPost/CreatePostLine";
+import {useOutsideClick} from "../hooks";
+import TrackUpdateModal from "./TrackUpdateModal";
+import SearchBar from "./SearchBar";
 
 function deleteTrack(settings, index, callback) {
     settings?.music?.splice(index, 1);
+    settings?.musicDescriptions?.splice(index, 1);
     updateSettings({
         ...settings,
-        music: settings?.music
+        music: settings?.music,
+        musicDescriptions: settings?.musicDescriptions
     }, 1)
         .then(() => {
             notify("Deleted");
+            callback(settings?.music)
+        })
+}
+
+function updateTrackDescription(settings, index, callback, newName, trackCategory) {
+    settings.musicDescriptions[index] = {
+        ...settings?.musicDescriptions[index],
+        name: newName || settings?.musicDescriptions[index]?.name,
+        category: trackCategory || settings?.musicDescriptions[index]?.category
+    }
+
+    updateSettings({
+        ...settings,
+        musicDescriptions: settings?.musicDescriptions
+    }, 1)
+        .then(() => {
+            notify("Updated");
             callback(settings?.music)
         })
 }
@@ -23,18 +46,25 @@ function AllTracks(props) {
     const {
         allFiles,
         settings,
-        setAllFiles
+        setAllFiles,
+        setSearch
     } = props;
 
     const {t} = useTranslation();
+    const [editConfig, setEditConfig] = useState({isOpened: false});
+    const [newName, setNewName] = useState(null);
+    const [trackCategory, setTrackCategory] = useState(null);
 
     const allTracks = useMemo(() => {
-        return allFiles?.map((file, index) => <li key={index} className={s.Track}>
-                <span className={s.TrackIndex}>{index + 1}</span>
-                <span className={s.TrackName}>{file?.name}</span>
-                <span className={s.TrackActions}>
+        return allFiles?.map((file, index) =>
+            (file?.show === undefined || file?.show === true)
+                ? <li className={s.Track}>
+                    <span className={s.TrackIndex}>{index + 1}</span>
+                    <span className={s.TrackName}>{settings?.musicDescriptions[index]?.name}</span>
+                    <span className={s.TrackCategory}>{settings?.musicDescriptions[index]?.category}</span>
+                    <span className={s.TrackActions}>
                      <Tooltip
-                         title={t("Delete this track")}
+                         title={"Delete this track"}
                          arrow
                          placement="top"
                      >
@@ -51,18 +81,34 @@ function AllTracks(props) {
                                 </TooltipButtonCover>
                      </Tooltip>
                      <Tooltip
-                         title={t("Edit this track")}
+                         title={"Edit this track"}
                          arrow
                          placement="top"
                      >
                                 <TooltipButtonCover>
-                                    <AiTwotoneEdit/>
+                                    <AiTwotoneEdit
+                                        onClick={() => {
+                                            setEditConfig(() => ({
+                                                index,
+                                                isOpened: true
+                                            }))
+                                        }}
+                                    />
                                 </TooltipButtonCover>
                      </Tooltip>
                 </span>
-            </li>
+                </li>
+                : null
         )
     }, [allFiles]);
+
+    const wrapperRef = useRef(null);
+
+    useOutsideClick(wrapperRef, () => {
+        setEditConfig(() => ({
+            isOpened: false
+        }));
+    })
 
     return (
         <div>
@@ -72,9 +118,33 @@ function AllTracks(props) {
             >
                 All tracks
             </Typography>
+            <SearchBar
+                setSearch={setSearch}
+            />
+            <div
+                className={`${s.TracksHeader} ${buttonsConfig[settings?.configs?.color[settings?.color]]}`}
+            >
+                <p className={s.TrackIndex}>№</p>
+                <p className={s.TrackName}>Name</p>
+                <p className={s.TrackCategory}>Category</p>
+                <p className={s.TrackActions}>Actions</p>
+            </div>
             <ul>
                 {allTracks}
             </ul>
+
+            <TrackUpdateModal
+                editConfig={editConfig}
+                wrapperRef={wrapperRef}
+                setNewName={setNewName}
+                updateTrackDescription={updateTrackDescription}
+                settings={settings}
+                setAllFiles={setAllFiles}
+                setEditConfig={setEditConfig}
+                newName={newName}
+                trackCategory={trackCategory}
+                setTrackCategory={setTrackCategory}
+            />
         </div>
     )
 }

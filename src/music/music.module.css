@@ -17,8 +17,37 @@
     transform: translateY(-250px);
 }
 
+.TracksHeader {
+    display: flex;
+    padding: 10px;
+    font-weight: 600;
+}
+
+.SearchBar {
+    display: flex;
+    margin: 10px;
+}
+
+.SearchBar input {
+    display: block;
+    transition: all ease 0.5s;
+    position: relative;
+    overflow: hidden;
+    text-align: left;
+    padding: 10px 5px;
+    box-sizing: border-box;
+    color: #4b4b4b;
+    background-color: #fff;
+    border-radius: 5px;
+    font-family: sans-serif;
+    font-weight: 400;
+    min-width: 0;
+    outline: none;
+    border: 1px solid #eaeaea;
+}
+
 .Track {
-    padding: 10px 10%;
+    padding: 10px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -28,7 +57,13 @@
 }
 
 .TrackName {
-    flex: 10 0;
+    flex: 5 0;
+    border-right: 1px solid rgb(206, 204, 204);
+    overflow: hidden;
+}
+
+.TrackCategory {
+    flex: 5 0;
 }
 
 .TrackIndex {
@@ -39,7 +74,7 @@
 
 .TrackActions {
     display: flex;
-    width: 75px;
+    flex: 1 0;
     justify-content: space-evenly;
     align-items: center;
     border-left: 1px solid rgb(206, 204, 204);
@@ -106,6 +141,34 @@
 .MusicTip svg {
     height: 155px;
     width: 155px;
+}
+
+.TrackUpdateContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.TrackTextarea {
+    display: block;
+    transition: all ease 0.5s;
+    font-size: 19px;
+    position: relative;
+    width: 95%;
+    overflow: hidden;
+    text-align: left;
+    padding: 10px 5px;
+    box-sizing: border-box;
+    color: #4b4b4b;
+    background-color: #fff;
+    border-radius: 5px;
+    margin: 10px;
+    font-family: sans-serif;
+    font-weight: 400;
+    min-height: 75px;
+    min-width: 0;
+    outline: none;
+    border: 1px solid #eaeaea;
 }
 
 @media (max-width: 768px) {

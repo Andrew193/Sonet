@@ -9,6 +9,7 @@ import AllTracks from "./AllTracks";
 
 function MusicInnerContainer(props) {
     const {
+        setSearch,
         setFile,
         setVideoFilePath,
         videoFilePath,
@@ -51,6 +52,7 @@ function MusicInnerContainer(props) {
                 </div>
             }
             <AllTracks
+                setSearch={setSearch}
                 allFiles={allFiles}
                 settings={settings}
                 setAllFiles={setAllFiles}

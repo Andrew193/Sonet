@@ -1,4 +1,5 @@
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
+import {getSettings} from "./db";
 
 export function useOutsideClick(ref, onOutsideClick) {
     useEffect(() => {
@@ -13,4 +14,23 @@ export function useOutsideClick(ref, onOutsideClick) {
             document.removeEventListener("mousedown", outsideClickHandler);
         };
     }, [ref]);
+}
+
+export function useSettings(updateKey) {
+    const [settings, setSettings] = useState({});
+
+    useEffect(() => {
+        async function getSettingsCover() {
+            const response = await getSettings();
+
+            setSettings(response[0])
+        }
+
+        getSettingsCover();
+    }, [updateKey]);
+
+    return {
+        settings,
+        setSettings
+    }
 }
