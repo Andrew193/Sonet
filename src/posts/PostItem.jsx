@@ -16,9 +16,9 @@ import {useTranslation} from "react-i18next";
 import {deletePostById, refresh, updatePostById} from "./postsHelper";
 import InputEmoji from 'react-input-emoji';
 import reactStringReplace from 'react-string-replace';
-import Context from "../helpers/contextHelper";
 import profileHelper from "../components/profile/profileHelper";
 import HashtagsLine from "./HashtagsLine";
+import {Context} from "../App";
 
 export function replaceTags(text) {
     const regExp = /(?:\s|^)(#[\w]+\b)/gi;

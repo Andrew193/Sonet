@@ -1,11 +1,11 @@
 import {useContext, useState} from "react";
 import s from "./comments.module.css"
 import Script from "./Script.js"
-import Context from "../../helpers/contextHelper"
 import {buttonsConfig} from "../../createPost/CreatePostLine";
 import {useTranslation} from "react-i18next";
 import {Backdrop, CircularProgress} from "@mui/material";
 import InputEmoji from 'react-input-emoji';
+import {Context} from "../../App";
 
 function CommentLine(props) {
     const {

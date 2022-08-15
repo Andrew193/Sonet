@@ -2,11 +2,11 @@ import {withRouter} from "react-router";
 import s from "./comments.module.css"
 import Loader from "../common/spinner/Spinner"
 import {useContext, useEffect, useState} from "react";
-import Context from "../../helpers/contextHelper"
 import Script from "../../posts/postsHelper"
 import S2 from "./Script.js"
 import ClearComment from "./clearComment";
 import {getSettings} from "../../db";
+import {Context} from "../../App";
 
 function Comments(props) {
     const {
@@ -20,7 +20,7 @@ function Comments(props) {
 
     const userId = JSON.parse(localStorage.getItem("userInfo")).id;
 
-    const {socket, notify} = useContext(Context)
+    const {socket, notify} = useContext(Context);
 
     socket.on("CommentAdd", (updatedComment) => setComments(updatedComment));
     socket.on("refreshPost", (e) => setPost({posts: [e]}));

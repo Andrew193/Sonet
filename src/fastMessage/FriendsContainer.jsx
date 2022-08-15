@@ -1,8 +1,7 @@
 import {useEffect, useMemo, useState, useContext, useRef} from "react";
 import {createChatMessage, getConversationById, getMatesList} from "../chats/chatHelper";
-import {notify} from "../App";
+import {Context, notify} from "../App";
 import FriendPin from "./FriendPin";
-import Context from "../helpers/contextHelper";
 import {getSettings} from "../db";
 import SelectedChatMessages from "../chats/SelectedChatMessages";
 import {useOutsideClick} from "../hooks";

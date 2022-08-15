@@ -1,12 +1,12 @@
 import s from "./create-post.module.css"
 import Script from "./script"
 import {useContext, useMemo, useRef, useState} from "react";
-import Context from "../helpers/contextHelper"
-import {AiOutlineClose, BiImageAdd, BsPencil} from "react-icons/all";
+import {AiOutlineClose, BiImageAdd} from "react-icons/all";
 import userHelper from "../helpers/userHelper";
 import {Avatar, Backdrop, Box, CircularProgress} from "@mui/material";
 import {useTranslation} from "react-i18next";
 import MainCover from "../components/solid-textarea/MainCover";
+import {Context} from "../App";
 
 export const buttonsConfig = {
     "#FF0000": s.RedButton,

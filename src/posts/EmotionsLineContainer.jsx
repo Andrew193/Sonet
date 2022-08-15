@@ -4,7 +4,7 @@ import {AiOutlineComment, AiOutlineDislike, AiOutlineLike} from "react-icons/ai"
 import CountUp from "react-countup";
 import {useHistory} from "react-router-dom";
 import {useContext} from "react";
-import Context from "../helpers/contextHelper";
+import {Context} from "../App";
 
 function EmotionsLineContainer(props) {
     const {

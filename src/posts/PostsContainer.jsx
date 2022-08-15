@@ -6,10 +6,10 @@ import SortLine from "./SortLine.jsx"
 import s from "./posts.module.css"
 import {Link, useHistory, withRouter} from "react-router-dom";
 import PageHeader from "../components/common/navigationLine/NavigationLine.jsx";
-import Context from "../helpers/contextHelper";
 import {getSettings} from "../db";
 import {alpha, hexToRgb} from "@mui/material";
 import FiltersBar from "./FiltersBar";
+import {Context} from "../App";
 
 function PostsContainer(props) {
     const [posts, setPosts] = useState(false);

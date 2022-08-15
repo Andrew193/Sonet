@@ -3,12 +3,12 @@ import s from "./top-info.module.css"
 import Script from "./script.js"
 import Skeleton from 'react-loading-skeleton';
 import PostCreator from "./creators/post";
-import Context from "../../helpers/contextHelper";
 import {getSettings} from "../../db";
 import {alpha} from "@mui/material";
 import {useTranslation} from "react-i18next";
 import {headerListLinks} from "../../vars";
 import {useHistory} from "react-router-dom";
+import {Context} from "../../App";
 
 function LatestPosts() {
     const [state, setState] = useState(false);

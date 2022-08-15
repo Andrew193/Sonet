@@ -1,11 +1,10 @@
 import {useEffect, useContext, useState, useMemo} from "react";
-import Context from "../helpers/contextHelper";
 import "./messenger.css";
 import {getSettings} from "../db";
 import {alpha} from "@mui/material";
 import Messenger from "./Messenger";
 import {createChatMessage, getConversationById, getMatesList} from "./chatHelper";
-import {notify} from "../App";
+import {Context} from "../App";
 
 function ChatContainer() {
     const [conversations, setConversations] = useState([]);

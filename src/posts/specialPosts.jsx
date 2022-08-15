@@ -4,9 +4,9 @@ import s from "./posts.module.css"
 import {withRouter} from "react-router-dom";
 import Script from "./postsHelper"
 import ClearSpecialPost from "./ClearSpecialPost";
-import Context from "../helpers/contextHelper";
 import {alpha} from "@mui/material";
 import {getSettings} from "../db";
+import {Context} from "../App";
 
 function SpecialPosts(props) {
     const id = props.location.state.id;

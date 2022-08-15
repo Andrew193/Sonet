@@ -3,8 +3,7 @@ import {AiOutlineDelete, AiOutlineEdit, FiCopy} from "react-icons/all";
 import {Avatar, Tooltip} from "@mui/material";
 import {useCallback, useContext, useState} from "react";
 import {copyToClipboard, deleteMessageById} from "./chatHelper";
-import Context from "../helpers/contextHelper";
-import {notify} from "../App";
+import {Context, notify} from "../App";
 import UpdateChatMessageModal from "./UpdateChatMessageModal";
 
 const actionsConfig = [

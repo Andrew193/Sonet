@@ -16,7 +16,7 @@ export function useOutsideClick(ref, onOutsideClick) {
     }, [ref]);
 }
 
-export function useSettings(updateKey) {
+export function useSettings(updateKey = 1) {
     const [settings, setSettings] = useState({});
 
     useEffect(() => {

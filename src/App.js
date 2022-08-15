@@ -11,18 +11,14 @@ import {ToastContainer} from 'react-toastify';
 import {useEffect, useRef, useState} from "react";
 import {toast} from 'react-toastify';
 import {io} from "socket.io-client";
-import Context from "./helpers/contextHelper"
 import {setupDb} from "./db";
 import "./i18n";
 import galleryStyles from "./gallery/gallery.module.css";
 import settingsStyles from "./settings/settings.module.css";
 import {headerListLinks} from "./vars";
-import FastMessageContainer from "./fastMessage/FastMessageContainer";
-import FastMusicContainer from "./fastMusic/FastMusicContainer";
 import store from "./app/store";
 import {Provider} from 'react-redux';
 import React from "react";
-import MusicContainerPage from "./music/MusicContainerPage";
 
 const sessionHelper = require("./helpers/sessionHelper")
 const socket = io();
@@ -32,6 +28,7 @@ export function notify(content) {
 }
 
 export const MusicContext = React.createContext({});
+export const Context = React.createContext({});
 
 function App() {
     let modal = useRef();
@@ -72,8 +69,8 @@ function App() {
 
     return (
         <MusicContext.Provider value={[musicContext, setMusicContext]}>
-            <Provider store={store}>
-                <Context.Provider value={{notify, socket}}>
+            <Context.Provider value={{notify, socket}}>
+                <Provider store={store}>
                     <style>{`
             .App {
             min-height: ${height() - 1}px;
@@ -153,11 +150,10 @@ function App() {
                         <Route exact path={headerListLinks.auth} render={() => <Components.ContainerAuth/>}/>
                         <Route exact path={headerListLinks.gallery + "/:folderName?"}
                                render={() => <Components.GalleryContainer/>}/>
-                        <Route npath={headerListLinks.chats} render={() => <FastMessageContainer/>}/>
                     </div>
-                </Context.Provider>
-                <FastMusicContainer/>
-            </Provider>
+                    <Components.FastActionsContainer/>
+                </Provider>
+            </Context.Provider>
         </MusicContext.Provider>
     );
 }

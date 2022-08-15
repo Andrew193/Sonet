@@ -2,6 +2,7 @@ import {useContext, useEffect, useState} from "react";
 import {getSettings} from "../db";
 import s from "./fast-music.module.css";
 import {alpha, Box, Tooltip, Typography} from "@mui/material";
+import fastActionsStyles from "../fast-actions/fast-actions.module.css";
 import {BiUpArrowAlt, FiArrowDown} from "react-icons/all";
 import React from "react"
 import {useTranslation} from "react-i18next";
@@ -14,7 +15,12 @@ export const TooltipButtonCover = React.forwardRef(function MyComponent(props, r
     return <div {...props} ref={ref} style={{display: "flex"}}>{props?.children}</div>
 });
 
-function FastMusicContainer() {
+function FastMusicContainer(props) {
+    const {
+        opened,
+        dropSelection
+    } = props;
+
     const [settings, setSettings] = useState({});
     const [, setMusicContext] = useContext(MusicContext);
     const [isOpened, setIsOpened] = useState(false);
@@ -41,19 +47,26 @@ function FastMusicContainer() {
             className={s.Container}
             style={{
                 bottom: isOpened ? "0px" : "-400px",
-                minWidth: isOpened ? "300px" : "50px"
+                minWidth: isOpened ? "300px" : "50px",
+                visibility: !!opened ? "visible" : "hidden"
             }}
         >
+            {dropSelection}
             <style>
                 {`
                 .${s.Container} {
-                display: ${history?.location?.pathname === headerListLinks.auth ? "none" : "flex"}
+                display: ${history?.location?.pathname === headerListLinks.auth ? "none" : "flex"};
+                z-index:${!!opened ? "100" : "10"};
                 }
                 .${s.Container} {
                 box-shadow: 0px 0px 8px 0px ${alpha(settings?.configs?.color[settings?.color] || "#b6c0f3", 0.8)} !important;
                 }
                 .${s.HeaderActions} svg:hover {
                 background: ${alpha(settings?.configs?.color[settings?.color] || "#b6c0f3", 0.8)};
+                }
+                 .${fastActionsStyles.ResetFastConfigButton}:hover {
+                background: ${alpha(settings?.configs?.color[settings?.color] || "#b6c0f3", 0.5)};
+                color: white;
                 }
                 .${s.FastTrack}:hover {
                 background: ${alpha(settings?.configs?.color[settings?.color] || "#b6c0f3", 0.5)};

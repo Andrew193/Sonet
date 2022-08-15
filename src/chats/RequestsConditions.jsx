@@ -11,7 +11,7 @@ function RequestsConditions(props) {
     return (
         <>
             {
-                possibleMatesList.every(v => v === null)
+                possibleMatesList?.every(v => v === null)
                     ?
                     <div className={"lonelyLine"}>
                         <AiOutlineClose/>

@@ -3,9 +3,9 @@ import Comment from "./comments"
 import Skeleton from "react-loading-skeleton";
 import CommentLine from "./commentLine"
 import ClearPosts from "../../posts/PostsInnerContent";
-import Context from "../../helpers/contextHelper"
 import {useContext} from "react";
 import s from "./comments.module.css";
+import {Context} from "../../App";
 
 function ClearComment(props) {
     const {

@@ -14,7 +14,12 @@ export const TooltipButtonCover = React.forwardRef(function MyComponent(props, r
     return <div {...props} ref={ref} style={{display: "flex"}}>{props?.children}</div>
 });
 
-function FastMessageContainer() {
+function FastMessageContainer(props) {
+    const {
+        opened,
+        dropSelection
+    } = props;
+
     const [settings, setSettings] = useState({});
     const [isOpened, setIsOpened] = useState(false);
     const [conversation, setConversations] = useState([]);
@@ -33,7 +38,11 @@ function FastMessageContainer() {
     return (
         <Box
             className={s.Container}
+            style={{
+                visibility: !!opened ? "visible" : "hidden"
+            }}
         >
+            {dropSelection}
             <style>
                 {`
                 .${s.Container} {
@@ -41,8 +50,12 @@ function FastMessageContainer() {
                 || history?.location?.pathname === headerListLinks.auth
                 || history?.location?.pathname === headerListLinks.music ? "none" : "flex"}
                 }
+                .messageText {
+                min-width: 200px;
+                }
                 .${s.Container} {
                 box-shadow: 0px 0px 8px 0px ${alpha(settings?.configs?.color[settings?.color] || "#b6c0f3", 0.8)} !important;
+                z-index:${!!opened ? "100" : "10"};
                 }
                 .${s.HeaderActions} svg:hover {
                 background: ${alpha(settings?.configs?.color[settings?.color] || "#b6c0f3", 0.8)};

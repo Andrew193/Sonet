@@ -4,11 +4,11 @@ import Script from "../../../createPost/script";
 import {BsPencil} from "react-icons/all";
 import {buttonsConfig} from "../../../createPost/CreatePostLine";
 import {useContext, useEffect} from "react";
-import Context from "../../../helpers/contextHelper";
 import {useTranslation} from "react-i18next";
 import {setPostInformation} from "../../../app/postReducer";
 import {useDispatch} from "react-redux";
 import {getStore} from "../../../app/store";
+import {Context} from "../../../App";
 
 function PostButton(props) {
     const {
