@@ -16,9 +16,9 @@ import Followers from "./followers/FollowersPageContainer";
 import ChatContainer from "./chats/ChatContainer";
 import GalleryContainer from "./gallery/GalleryContainer";
 import MusicContainerPage from "./music/MusicContainerPage";
-import FastMessageContainer from "./fastMessage/FastMessageContainer";
+import FastMessageContainer from "./fast-message/FastMessageContainer";
 import FastActionsContainer from "./fast-actions/FastActionsContainer";
-import FastMusicContainer from "./fastMusic/FastMusicContainer";
+import FastMusicContainer from "./fast-music/FastMusicContainer";
 
 const obj = {
     FastMusicContainer,

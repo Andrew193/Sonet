@@ -28,7 +28,11 @@ export function notify(content: string | React.ReactNode) {
     toast(content);
 }
 
-export const MusicContext = React.createContext<[{}, React.Dispatch<SetStateAction<{}>>]>([{}, () => {
+type MusicContextType = {
+    [key: string]: any
+}
+
+export const MusicContext = React.createContext<[MusicContextType, React.Dispatch<SetStateAction<{}>>]>([{}, () => {
 }]);
 
 export const Context = React.createContext<{ notify: typeof notify, socket: typeof socket }>({socket, notify});

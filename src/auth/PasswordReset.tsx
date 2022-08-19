@@ -3,8 +3,11 @@ import HttpHelper from "../helpers/httpHelper";
 import {Typography} from "@mui/material";
 import {useFormik} from "formik";
 import {notify} from "../App";
+import {AuthInnerContainerType} from "./AuthInnerContainer";
 
-function PasswordReset(props) {
+type PasswordReset = Pick<AuthInnerContainerType<true>, "styleSettings" | "setRecreatePasswordMode">
+
+function PasswordReset(props: PasswordReset) {
     const {
         styleSettings,
         setRecreatePasswordMode

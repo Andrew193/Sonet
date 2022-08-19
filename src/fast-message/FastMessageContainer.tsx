@@ -77,6 +77,11 @@ function FastMessageContainer(props: FastElementsPropsType) {
                 padding-top:3px;
                 padding-bottom: 25px;
                 }
+                .react-emoji-picker {
+                position: absolute;
+                width: 118%;
+                top: -315%;
+                }
                 @media (max-width: 1024px) {
                 .fast_m_up {
                 display: none;

@@ -56,13 +56,14 @@ function AllTracks(props) {
     const [trackCategory, setTrackCategory] = useState(null);
 
     const allTracks = useMemo(() => {
-        return allFiles?.map((file, index) =>
-            (file?.show === undefined || file?.show === true)
-                ? <li className={s.Track}>
-                    <span className={s.TrackIndex}>{index + 1}</span>
-                    <span className={s.TrackName}>{settings?.musicDescriptions[index]?.name}</span>
-                    <span className={s.TrackCategory}>{settings?.musicDescriptions[index]?.category}</span>
-                    <span className={s.TrackActions}>
+        try {
+            return allFiles?.map((file, index) =>
+                (file?.show === undefined || file?.show === true)
+                    ? <li className={s.Track}>
+                        <span className={s.TrackIndex}>{index + 1}</span>
+                        <span className={s.TrackName}>{settings?.musicDescriptions[index]?.name}</span>
+                        <span className={s.TrackCategory}>{settings?.musicDescriptions[index]?.category}</span>
+                        <span className={s.TrackActions}>
                      <Tooltip
                          title={"Delete this track"}
                          arrow
@@ -97,9 +98,12 @@ function AllTracks(props) {
                                 </TooltipButtonCover>
                      </Tooltip>
                 </span>
-                </li>
-                : null
-        )
+                    </li>
+                    : null
+            )
+        } catch (error) {
+            return [];
+        }
     }, [allFiles]);
 
     const wrapperRef = useRef(null);

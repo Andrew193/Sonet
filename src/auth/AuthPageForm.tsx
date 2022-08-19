@@ -3,9 +3,11 @@ import {alpha} from "@mui/material";
 import {hexToRgb as muiHexToRgb} from "@mui/system/colorManipulator";
 import {useState} from "react";
 import PasswordReset from "./PasswordReset";
-import AuthInnerContainer from "./AuthInnerContainer";
+import AuthInnerContainer, {AuthInnerContainerType} from "./AuthInnerContainer";
 
-function Auth(props) {
+type AuthType = Omit<AuthInnerContainerType<"">, "setRecreatePasswordMode">
+
+function Auth(props: AuthType) {
     const {
         Formik,
         setIsRegisterUser,
@@ -18,7 +20,6 @@ function Auth(props) {
     return (
         <div
             className={s.Container}
-            testId="Auth"
             style={{
                 color: styleSettings?.configs?.color[styleSettings?.color],
                 fontSize: styleSettings?.configs?.size[styleSettings?.fontSize],

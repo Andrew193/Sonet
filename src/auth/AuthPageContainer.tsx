@@ -2,29 +2,18 @@ import {useFormik} from "formik";
 import AuthPageForm from "./AuthPageForm"
 import {ToastContainer} from 'react-toastify';
 import Script from "./script.js"
-import {useEffect, useState} from "react";
+import {ReactNode, useEffect, useState} from "react";
 import {useHistory} from "react-router";
 import {notify} from "../App";
-import {getSettings} from "../db";
-
+import {useSettings} from "../hooks";
 
 function ContainerAuth() {
-    const [isRegisterUser, setIsRegisterUser] = useState(true);
-    const [redirect, setRedirect] = useState(false)
+    const [isRegisterUser, setIsRegisterUser] = useState<boolean>(true);
+    const [redirect, setRedirect] = useState<boolean>(false)
 
     const history = useHistory();
 
-    const [settings, setSettings] = useState({});
-
-    useEffect(() => {
-        async function getData() {
-            const response = await getSettings();
-
-            setSettings(response[0])
-        }
-
-        getData();
-    }, [])
+    const {settings} = useSettings();
 
     const Formik = useFormik({
         initialValues: {
@@ -32,8 +21,8 @@ function ContainerAuth() {
             password: ""
         },
         onSubmit: (values, {resetForm}) => {
-            Script.sendReq(values, resetForm, isRegisterUser, setRedirect, (message) => {
-                const Msg = ({closeToast, toastProps}) => (
+            Script.sendReq(values, resetForm, isRegisterUser, setRedirect, (message: ReactNode | string) => {
+                const Msg = () => (
                     <div>{message}</div>
                 )
                 notify(<Msg/>);

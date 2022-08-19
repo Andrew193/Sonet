@@ -1,6 +1,6 @@
 import {MusicContext} from "../App";
 import {useMemo, useContext} from "react";
-import TrackPin from "./TrackPin";
+import TrackPin, {TrackType} from "./TrackPin";
 import {Typography} from "@mui/material";
 import s from "./fast-music.module.css";
 import ReactPlayer from "react-player";
@@ -10,7 +10,7 @@ import React from "react";
 function MusicContainer() {
     const [musicContext, setMusicContext] = useContext(MusicContext);
 
-    const tracks = useMemo(() => musicContext?.tracks?.map((track, index) => <TrackPin
+    const tracks = useMemo(() => musicContext?.tracks?.map((track: TrackType, index: number) => <TrackPin
             onTrackSelect={() => {
                 setMusicContext((context) => ({
                     ...context,
@@ -74,7 +74,7 @@ function MusicContainer() {
 const areEqual = () => true;
 
 const MusicContainerMemo = React.memo(() => {
-    return <MusicContainer />
+    return <MusicContainer/>
 }, areEqual);
 
 export default MusicContainerMemo;

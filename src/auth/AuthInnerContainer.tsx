@@ -1,8 +1,23 @@
 import s from "./auth.module.css";
 import {Typography} from "@mui/material";
+import {UseSettingsInterface} from "../hooks";
+import React from "react"
 
+type RecreatePasswordModeType<T> = T extends false
+    ? (fn: () => boolean) => void
+    : T extends true
+        ? (newState: boolean) => void
+        : any
 
-function AuthInnerContainer(props) {
+export type AuthInnerContainerType<T> = {
+    isRegisterUser: boolean,
+    Formik: any,
+    setIsRegisterUser: React.Dispatch<React.SetStateAction<boolean>>,
+    setRecreatePasswordMode: RecreatePasswordModeType<T>,
+    styleSettings: UseSettingsInterface
+}
+
+function AuthInnerContainer(props: AuthInnerContainerType<false>) {
     const {
         Formik,
         isRegisterUser,
@@ -11,20 +26,20 @@ function AuthInnerContainer(props) {
         setRecreatePasswordMode
     } = props;
 
-    return(
+    return (
         <>
             <form
                 onSubmit={Formik.handleSubmit}
             >
                 <article>
                     <h2
-                        className={isRegisterUser && s.Active}
+                        className={isRegisterUser ? s.Active : ""}
                         onClick={() => setIsRegisterUser(true)}
                         id={"modeLinks"}
                     >Log up</h2>
                     <h2
                         id={"modeLinks"}
-                        className={!isRegisterUser && s.Active}
+                        className={!isRegisterUser ? s.Active : ""}
                         onClick={() => setIsRegisterUser(false)}
                     >Log in</h2>
                 </article>
