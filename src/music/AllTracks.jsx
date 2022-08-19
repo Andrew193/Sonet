@@ -2,7 +2,7 @@ import s from "./music.module.css";
 import {useMemo, useRef, useState} from "react";
 import {Tooltip, Typography} from "@mui/material";
 import {AiTwotoneDelete, AiTwotoneEdit} from "react-icons/all";
-import {TooltipButtonCover} from "../fastMessage/FastMessageContainer";
+import {TooltipButtonCover} from "../components/tooltip-cover/TooltipButtonCover";
 import {useTranslation} from "react-i18next";
 import {updateSettings} from "../db";
 import {notify} from "../App";

@@ -1,23 +1,45 @@
-import {useEffect, useMemo, useState, useContext, useRef} from "react";
+import {useEffect, useMemo, useState, useContext, useRef, ReactNode} from "react";
 import {createChatMessage, getConversationById, getMatesList} from "../chats/chatHelper";
 import {Context, notify} from "../App";
-import FriendPin from "./FriendPin";
-import {getSettings} from "../db";
+import FriendPin, {FriendTypeForConversations} from "./FriendPin";
 import SelectedChatMessages from "../chats/SelectedChatMessages";
-import {useOutsideClick} from "../hooks";
+import {useOutsideClick, useSettings} from "../hooks";
+import React from "react";
+import {ConversationType} from "./FastMessageContainer";
 
-function FriendsContainer(props) {
+type FriendsContainerProps = {
+    conversation: FriendTypeForConversations[]
+    setConversations: React.Dispatch<React.SetStateAction<ConversationType[]>>
+}
+
+type UserInformationType = {
+    [key: string]: any,
+    id: number
+}
+
+type ArrivalMessageType = {
+    sender: number | string,
+    text: string,
+    createdAt: Date | number,
+}
+
+type CurrentChatType = {
+    id: number | string,
+    members: number | string[]
+}
+
+function FriendsContainer(props: FriendsContainerProps) {
     const {
         conversation,
         setConversations
     } = props;
 
-    const userInformation = JSON.parse(localStorage.getItem("userInfo"));
-    const [currentChat, setCurrentChat] = useState(null);
-    const [messages, setMessages] = useState([]);
+    const userInformation: UserInformationType = JSON.parse(localStorage.getItem("userInfo") || "{}");
+    const [currentChat, setCurrentChat] = useState<CurrentChatType | null>(null);
+    const [messages, setMessages] = useState<ArrivalMessageType[]>([]);
     const [newMessage, setNewMessage] = useState("");
-    const [arrivalMessage, setArrivalMessage] = useState(null);
-    const [settings, setSettings] = useState({});
+    const [arrivalMessage, setArrivalMessage] = useState<ArrivalMessageType | null>(null);
+    const {settings} = useSettings();
     const [usersInChat, setUsersInChat] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
 
@@ -26,10 +48,10 @@ function FriendsContainer(props) {
     useEffect(() => {
         async function getMates() {
             getMatesList(userInformation?.id,
-                (response) => {
+                (response: { clearData: ConversationType[] }) => {
                     setConversations(response?.clearData)
                 },
-                (errorMessage) => {
+                (errorMessage: ReactNode | string) => {
                     notify(errorMessage || "Error");
                 })
         }
@@ -65,30 +87,31 @@ function FriendsContainer(props) {
         });
     }, [socket]);
 
-    useEffect(()=>{
+    useEffect(() => {
         socket.on("updateMessages", (data) => {
             if (!!data?.refresh) {
                 if (!!currentChat?.id) {
                     getConversationById(currentChat?.id,
-                        (response) => {
+                        (response: { clearData: ArrivalMessageType[] }) => {
                             if (currentChat?.id) {
                                 setMessages((state) => {
                                     return JSON.parse(JSON.stringify(response?.clearData))
                                 })
                             }
                         },
-                        (errorMessage) => {
+                        (errorMessage: ReactNode | string) => {
                             notify(errorMessage || "Error");
                         })
                 }
             }
         })
-    },[socket, currentChat])
+    }, [socket, currentChat])
 
     useEffect(() => {
         try {
-            if (arrivalMessage && currentChat?.members.includes(arrivalMessage.sender)) {
-                setMessages((prev) => [...prev, arrivalMessage]);
+            // @ts-ignore
+            if (arrivalMessage && currentChat?.members?.includes(arrivalMessage.sender)) {
+                setMessages((prev: ArrivalMessageType[]) => [...prev, arrivalMessage]);
             }
         } catch (error) {
             console.error(error)
@@ -98,10 +121,10 @@ function FriendsContainer(props) {
     useEffect(() => {
         async function getMates() {
             getMatesList(userInformation?.id,
-                (response) => {
+                (response: { clearData: ConversationType[] }) => {
                     setConversations(response?.clearData)
                 },
-                (errorMessage) => {
+                (errorMessage: ReactNode | string) => {
                     notify(errorMessage || "Error");
                 })
         }
@@ -122,19 +145,20 @@ function FriendsContainer(props) {
 
     const receiverId = useMemo(() => {
         if (currentChat) {
+            // @ts-ignore
             return currentChat?.members?.find(
-                (member) => member !== userInformation.id
+                (member: number) => member !== userInformation.id
             )
         }
         return null;
     }, [currentChat])
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e: React.MouseEvent<HTMLElement>) => {
         e.preventDefault();
         const message = {
             sender: userInformation.id,
             text: newMessage,
-            conversationId: currentChat.id,
+            conversationId: currentChat?.id,
         };
 
         socket.emit("sendMessageToChat", {
@@ -149,12 +173,12 @@ function FriendsContainer(props) {
                     messageText: message?.text,
                     createdById: userInformation?.id
                 },
-                (res) => {
+                (res: { data: ArrivalMessageType }) => {
 
                     setMessages((currentMessages) => [...currentMessages, res.data]);
                     setNewMessage("");
                 },
-                (errorMessage) => {
+                (errorMessage: ReactNode | string) => {
                     notify(errorMessage || "Error");
                 })
 
@@ -162,16 +186,6 @@ function FriendsContainer(props) {
             console.error(err);
         }
     };
-
-    useEffect(() => {
-        async function getData() {
-            const response = await getSettings();
-
-            setSettings(response[0])
-        }
-
-        getData();
-    }, [])
 
     const wrapperRef = useRef(null);
 

@@ -8,7 +8,7 @@ import './res/bootstrap/bootstrap.min.css';
 import './res/grid/styles.scss';
 import './res/grid/drag-drop.scss';
 import {ToastContainer} from 'react-toastify';
-import {useEffect, useRef, useState} from "react";
+import {SetStateAction, useEffect, useRef, useState} from "react";
 import {toast} from 'react-toastify';
 import {io} from "socket.io-client";
 import {setupDb} from "./db";
@@ -19,23 +19,26 @@ import {headerListLinks} from "./vars";
 import store from "./app/store";
 import {Provider} from 'react-redux';
 import React from "react";
+import {Dispatch} from "@reduxjs/toolkit";
 
 const sessionHelper = require("./helpers/sessionHelper")
 const socket = io();
 
-export function notify(content) {
+export function notify(content: string | React.ReactNode) {
     toast(content);
 }
 
-export const MusicContext = React.createContext({});
-export const Context = React.createContext({});
+export const MusicContext = React.createContext<[{}, React.Dispatch<SetStateAction<{}>>]>([{}, () => {
+}]);
+
+export const Context = React.createContext<{ notify: typeof notify, socket: typeof socket }>({socket, notify});
 
 function App() {
-    let modal = useRef();
+    let modal = useRef<HTMLDivElement>(null);
 
     const [flag, setFlag] = useState(false);
     const history = useHistory();
-    const userInformation = JSON.parse(localStorage.getItem("userInfo"));
+    const userInformation = JSON.parse(localStorage.getItem("userInfo") || "{}");
 
     function open() {
         window?.document?.body?.querySelector(".App")?.classList?.remove("Open")

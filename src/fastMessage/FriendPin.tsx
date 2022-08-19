@@ -5,8 +5,21 @@ import LazyImage from "../posts/LazyImage";
 import {useEffect, useState} from "react";
 import {getUserAvatar} from "../posts/PostItem";
 
+type FriendPinProps = {
+    index: number,
+    setConversations: Function,
+    setCurrentChat: Function,
+    receiverName?: string,
+    receiverId: number,
+    requestSendById?: number,
+    userId: number,
+}
 
-function FriendPin(props) {
+export type FriendTypeForConversations = Pick<FriendPinProps, "receiverId"> & {
+    [key: string]: any
+}
+
+function FriendPin(props: FriendPinProps) {
     const {
         index,
         setConversations,
@@ -17,10 +30,11 @@ function FriendPin(props) {
         setCurrentChat
     } = props;
 
-    const [avatar, setAvatar] = useState(null);
+    const [avatar, setAvatar] = useState<string | null>(null);
 
-    useEffect(() => getUserAvatar(avatar, setAvatar, userId === receiverId ? requestSendById : receiverId)
-        , [userId, receiverId, requestSendById]);
+    useEffect(() => {
+        getUserAvatar(avatar, setAvatar, userId === receiverId ? requestSendById : receiverId)
+    }, [userId, receiverId, requestSendById]);
 
     return (
         <>
@@ -28,10 +42,8 @@ function FriendPin(props) {
                 className={`conversation`}
                 onClick={() => {
                     setCurrentChat({
-                        members: [+receiverId, +requestSendById],
-                        id: `${[receiverId, requestSendById].sort(function (a, b) {
-                            return a - b;
-                        }).join("")}`,
+                        members: [+receiverId, +requestSendById!],
+                        id: `${[receiverId, requestSendById].sort((a, b): number => a! - b!).join("")}`,
                         currentIndex: index
                     })
                 }}
@@ -47,8 +59,8 @@ function FriendPin(props) {
                             })
                                 .then(() => {
                                     notify("Deleted successfully");
-                                    setConversations((state) => {
-                                        return JSON.parse(JSON.stringify(state?.filter((friend) => {
+                                    setConversations((state: FriendTypeForConversations[]) => {
+                                        return JSON.parse(JSON.stringify(state?.filter((friend): boolean => {
                                             return friend?.receiverId !== receiverId
                                         })))
                                     })

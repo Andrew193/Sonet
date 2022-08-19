@@ -1,4 +1,4 @@
-import {forwardRef, useState} from "react";
+import {forwardRef, Ref, useState} from "react";
 import {createPortal} from "react-dom";
 import {useHistory} from "react-router";
 import ClearModalUser from "./clearModalUser";
@@ -6,12 +6,16 @@ import s from "./main-page.module.css"
 import Script from "./script.js"
 import {CardContent, Paper} from "@mui/material";
 
-const ModalUser = forwardRef((props, ref) => {
+type ModalUserInterface = {
+    click: Function
+}
+
+const ModalUser = forwardRef<HTMLDivElement, ModalUserInterface>((props, ref) => {
     const {
         userName,
         email,
         id
-    } = JSON.parse(localStorage.getItem("userInfo"));
+    } = JSON.parse(localStorage.getItem("userInfo") || "{}");
 
     const [name, setName] = useState(userName);
     const [userEmail, setEmail] = useState(email);

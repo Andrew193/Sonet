@@ -5,27 +5,37 @@ import {alpha, Box, Tooltip, Typography} from "@mui/material";
 import s from "./fast-actions.module.css";
 import {headerListLinks} from "../vars";
 import {AiOutlineStar, BiUpArrowAlt, BsChatDots, FiArrowDown, MdQueueMusic} from "react-icons/all";
-import {TooltipButtonCover} from "../fastMusic/FastMusicContainer";
 import {useSettings} from "../hooks";
 import Components from "../components";
+import {TooltipButtonCover} from "../components/tooltip-cover/TooltipButtonCover";
 
-const fastEntities = {
+type FastEntitiesInterface = {
+    music: number;
+    messages: number;
+}
+
+export type FastElementsPropsType = {
+    opened: boolean,
+    dropSelection: React.ReactNode
+}
+
+const fastEntities: FastEntitiesInterface = {
     music: 1,
     messages: 2
 }
 
+
 function FastActionsContainer() {
     const settingsConfig = useSettings();
-    const [isOpened, setIsOpened] = useState(false);
+    const [isOpened, setIsOpened] = useState<boolean>(false);
     const history = useHistory();
-    const [selectedMode, setSelectedMode] = useState(0)
+    const [selectedMode, setSelectedMode] = useState<number>(0)
     const {t} = useTranslation();
 
     useEffect(() => {
         setIsOpened(false);
     }, [selectedMode])
 
-    console.log(settingsConfig)
     return (
         <>
             <Box

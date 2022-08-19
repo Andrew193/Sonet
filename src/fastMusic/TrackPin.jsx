@@ -1,7 +1,7 @@
 import s from "./fast-music.module.css";
 import {AiFillPlayCircle} from "react-icons/all";
 import {Tooltip} from "@mui/material";
-import {TooltipButtonCover} from "./FastMusicContainer";
+import {TooltipButtonCover} from "../components/tooltip-cover/TooltipButtonCover";
 
 function TrackPin(props) {
     const {

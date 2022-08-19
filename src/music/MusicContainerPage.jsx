@@ -29,7 +29,6 @@ function MusicContainerPage() {
 
     const createNewSong = useCallback(() => {
         function readFile() {
-            debugger
             updateSettings({
                 ...settingsConfig.settings,
                 music: [...settingsConfig.settings?.music, file],

@@ -1,7 +1,7 @@
 import Dexie from 'dexie';
 import {headerLinksConfig} from "./header/HeaderContainerPage";
 
-const defaultSettingsConfig = {
+export const defaultSettingsConfig = {
     fontSize: -1,
     color: -1,
     background: -1,
