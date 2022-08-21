@@ -1,7 +1,7 @@
 import {useContext, useState} from "react";
 import s from "./comments.module.css"
 import Script from "./Script.js"
-import {buttonsConfig} from "../../createPost/CreatePostLine";
+import {buttonsConfig} from "../../create-post/CreatePostLine";
 import {useTranslation} from "react-i18next";
 import {Backdrop, CircularProgress} from "@mui/material";
 import InputEmoji from 'react-input-emoji';

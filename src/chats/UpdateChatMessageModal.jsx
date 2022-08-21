@@ -1,6 +1,6 @@
 import {useTranslation} from "react-i18next";
 import {Backdrop, CircularProgress} from "@mui/material";
-import s from "../createPost/create-post.module.css";
+import s from "../create-post/create-post.module.css";
 import {BsPencil} from "react-icons/all";
 import InputEmoji from 'react-input-emoji';
 import {useState} from "react";

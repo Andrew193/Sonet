@@ -1,5 +1,5 @@
 import {alpha, CardActions, Typography} from "@mui/material";
-import {buttonsConfig} from "../createPost/CreatePostLine";
+import {buttonsConfig} from "../create-post/CreatePostLine";
 import {useEffect, useState} from "react";
 import {getSettings} from "../db";
 import {useTranslation} from "react-i18next";

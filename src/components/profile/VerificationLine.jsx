@@ -3,7 +3,7 @@ import s2 from "../common/navigationLine/style.module.css"
 import Script from "./profileHelper"
 import {useRef} from "react";
 import {AiOutlineSafetyCertificate, AiOutlineSecurityScan} from "react-icons/ai";
-import {buttonsConfig} from "../../createPost/CreatePostLine";
+import {buttonsConfig} from "../../create-post/CreatePostLine";
 import {useTranslation} from "react-i18next";
 
 function VerificationLine(props) {

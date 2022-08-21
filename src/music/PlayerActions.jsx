@@ -1,4 +1,4 @@
-import {buttonsConfig} from "../createPost/CreatePostLine";
+import {buttonsConfig} from "../create-post/CreatePostLine";
 import {alpha, Box, hexToRgb} from "@mui/material";
 import {useTranslation} from "react-i18next";
 import s from "./music.module.css";

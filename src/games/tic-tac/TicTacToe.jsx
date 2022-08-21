@@ -5,7 +5,7 @@ import {getSettings} from "../../db";
 import {alpha, Typography} from "@mui/material";
 import Tic from "../images/check+circle+icon-1320184982103223133.png";
 import Tac from "../images/416-4167052_cross-sign-png-tic-tac-toe-cross-transparent.png";
-import {buttonsConfig} from "../../createPost/CreatePostLine";
+import {buttonsConfig} from "../../create-post/CreatePostLine";
 import {useTranslation} from "react-i18next";
 
 const TicTacToe = () => {

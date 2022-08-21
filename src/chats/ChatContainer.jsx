@@ -1,7 +1,7 @@
 import {useEffect, useContext, useState, useMemo} from "react";
 import "./messenger.css";
 import {getSettings} from "../db";
-import {alpha} from "@mui/material";
+import {alpha, hexToRgb} from "@mui/material";
 import Messenger from "./Messenger";
 import {createChatMessage, getConversationById, getMatesList} from "./chatHelper";
 import {Context} from "../App";
@@ -145,6 +145,9 @@ function ChatContainer() {
                 .chatMenuInput {
                  border-bottom: 1px solid ${settings?.configs?.color[settings?.color]};
                  }
+                 .messenger {
+                  border-right: 1px solid ${hexToRgb(settings?.configs?.color[settings?.color] || "rgb(231 231 240)")};
+                  }
                  .chatMenuWrapper {
                  border-right: 1px solid ${settings?.configs?.color[settings?.color]};
                  }

@@ -12,7 +12,8 @@ function HashtagsLine(props) {
     const history = useHistory();
     const hashtags = useMemo(() => getHashtags(text), [text]);
 
-    const hashtagsLines = useMemo(() => hashtags?.map((hashtag) => <span
+    const hashtagsLines = useMemo(() => hashtags?.map((hashtag, index) => <span
+        key={index}
         onClick={() => {
             history.replace({
                 pathname: history?.location?.pathname,

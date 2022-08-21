@@ -27,8 +27,6 @@ function GamesContainer() {
             className={s.Container}
             style={{
                 background: settings?.configs?.background[settings?.background],
-                borderLeft: `1px solid ${settings?.configs?.color[settings?.color]}`,
-                borderRight: `1px solid ${settings?.configs?.color[settings?.color]}`,
                 height: `${!!gameType ? "-webkit-fill-available" : "unset"}`
             }}
         >

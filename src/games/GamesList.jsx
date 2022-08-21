@@ -36,7 +36,8 @@ function GamesList(props) {
     } = props;
 
     const games = useMemo(() => {
-        return gamesLisConfig?.map((gameConfig) => <GamePreviewTile
+        return gamesLisConfig?.map((gameConfig, index) => <GamePreviewTile
+            key={index}
             {...gameConfig}
             styleSettings={styleSettings}
         />)

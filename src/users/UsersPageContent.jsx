@@ -58,8 +58,6 @@ function UsersPageContent(props) {
                      }
                      .rowUsersContainer {
                      height:inherit;
-                     border-left: 1px solid ${settings?.configs?.color[settings?.color]};
-                     border-right: 1px solid ${settings?.configs?.color[settings?.color]};
                      }
                      .rowUsersContainer .usersNamePageName {
                      color: ${settings?.configs?.color[settings?.color]};
@@ -71,7 +69,7 @@ function UsersPageContent(props) {
             <div
                 className={"Separator"}
                 onClick={(e) => {
-                    e.target.nextElementSibling.classList.toggle("Hide")
+                    e?.target?.nextElementSibling?.classList.toggle("Hide")
                 }}
             />
             <span

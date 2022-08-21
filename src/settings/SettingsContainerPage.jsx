@@ -1,4 +1,4 @@
-import {Box} from "@mui/material";
+import {Box, hexToRgb} from "@mui/material";
 import s from './settings.module.css';
 import SettingsContent from "./SettingsContent";
 import {useEffect, useState} from "react";
@@ -22,10 +22,15 @@ function SettingsContainerPage() {
             className={s.Container}
             style={{
                 background: settings?.configs?.background[settings?.background],
+                borderRight: `1px solid ${hexToRgb(settings?.configs?.color[settings?.color] || "rgb(231 231 240)")}`,
             }}
         >
             <style>
                 {`
+                 .css-1fjvggn-MuiPaper-root-MuiAccordion-root {
+                 border: unset;
+                 border-bottom: 1px solid ${hexToRgb(settings?.configs?.color[settings?.color] || "rgb(231 231 240)")}!important;
+                 }
                  html {
                  background: ${settings?.configs?.background[settings?.background]}
                  }

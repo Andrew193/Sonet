@@ -1,14 +1,25 @@
 import {useHistory} from "react-router";
 import s from "./main-page.module.css"
-import {buttonsConfig} from "../createPost/CreatePostLine";
+import {buttonsConfig} from "../create-post/CreatePostLine";
 import {useTranslation} from "react-i18next";
 
-function ConfigLine(props) {
+export type CustomStyleType = {
+    fontSize: string,
+    color: string,
+    background: string
+}
+type ConfigLineType = {
+    customStyle: CustomStyleType,
+    open?: () => void
+}
+
+function ConfigLine(props: ConfigLineType) {
     const {
-        customStyle
+        customStyle,
+        open
     } = props;
 
-    const { t, i18n } = useTranslation();
+    const {t} = useTranslation();
     const history = useHistory();
 
     return (
@@ -31,7 +42,7 @@ function ConfigLine(props) {
             <p>
                 <button
                     className={`button ${buttonsConfig[customStyle?.color]}`}
-                    onClick={() => props.open()}
+                    onClick={() => open!()}
                 >
                     {t("Update your information")}
                 </button>

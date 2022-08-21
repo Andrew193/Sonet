@@ -1,6 +1,10 @@
 import ClearMainPage from "./ClearMainPage";
 
-function MainPage(props) {
+export type MainPageType = {
+    open?: () => void
+}
+
+function MainPage(props: MainPageType) {
     const {open} = props;
 
     return (

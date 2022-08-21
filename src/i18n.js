@@ -6,7 +6,6 @@ i18n
     .use(LanguageDetector)
     .use(initReactI18next)
     .init({
-        // We init with resources
         resources: {
             en: {
                 translations: {
@@ -126,12 +125,34 @@ i18n
                     "General": "General",
                     "Dislikes": "Dislikes",
                     "So... What is it?": "So... What is it?",
-                    "Deleted": "Deleted"
+                    "Deleted": "Deleted",
+                    "Update": "Update",
+                    "Music": "Music",
+                    "Write a message": "Write a message",
+                    "Add to a folder": "Add to a folder",
+                    "Toggle description": "Toggle description",
+                    "Open this folder": "Open this folder",
+                    "Delete this folder ( with all images inside it )": "Delete this folder ( with all images inside it )",
+                    "Update background": "Update background",
+                    "Create": "Create",
+                    "Header order":"Header order",
+                    "Collapse":"Collapse"
                 }
             },
             ua: {
                 translations: {
-                    "Deleted":"Видалено",
+                    "Collapse":"Згорнути",
+                    "Header order":"Порядок заголовків",
+                    "Create": "Створити",
+                    "Update background": "Оновити фон",
+                    "Delete this folder ( with all images inside it )": "Видалити цю папку (з усіма зображеннями в ній)",
+                    "Open this folder": "Відкрити цю папку",
+                    "Toggle description": "Переключити опис",
+                    "Add to a folder": "Додати до папки",
+                    "Write a message": "Відправити повідомлення",
+                    "Music": "Музика",
+                    "Update": "Оновити",
+                    "Deleted": "Видалено",
                     "So... What is it?": "Отже... Що це?",
                     "Dislikes": "Не подобається",
                     "General": "Загальні налаштування",

@@ -40,7 +40,6 @@ function Profile(props) {
         <div
             className={s.Container}
             style={{
-                borderLeft: `1px solid ${hexToRgb(settings?.configs?.color[settings?.color] || "rgb(231 231 240)")}`,
                 borderRight: `1px solid ${hexToRgb(settings?.configs?.color[settings?.color] || "rgb(231 231 240)")}`,
                 background: hexToRgb(settings?.configs?.background[settings?.background] || "rgb(231 231 240)")
             }}

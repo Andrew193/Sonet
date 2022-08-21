@@ -1,8 +1,8 @@
 import React from "react";
 import {useForm} from "usetheform";
-import Script from "../../../createPost/script";
+import Script from "../../../create-post/script";
 import {BsPencil} from "react-icons/all";
-import {buttonsConfig} from "../../../createPost/CreatePostLine";
+import {buttonsConfig} from "../../../create-post/CreatePostLine";
 import {useContext, useEffect} from "react";
 import {useTranslation} from "react-i18next";
 import {setPostInformation} from "../../../app/postReducer";

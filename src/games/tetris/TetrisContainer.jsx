@@ -5,7 +5,7 @@ import {AiOutlineAlignCenter, AiOutlineArrowLeft, BiCoinStack} from "react-icons
 import {useState, useEffect, useRef} from "react";
 import {useOutsideClick} from "../../hooks";
 import {getSettings} from "../../db";
-import {buttonsConfig} from "../../createPost/CreatePostLine";
+import {buttonsConfig} from "../../create-post/CreatePostLine";
 import {useTranslation} from "react-i18next";
 
 function TetrisContainer() {

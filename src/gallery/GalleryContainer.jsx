@@ -24,6 +24,9 @@ function GalleryContainer() {
         >
             <style>
                 {`
+                .${s.Container} {
+                border-right:1px solid ${hexToRgb(settings?.configs?.color[settings?.color] || "rgb(231 231 240)")};
+                }
                  html, .chatBoxWrapper, .chatMenu, .chatMenuInput, .basicPageHead, .${s.ImagesContainer}, .${s.GalleryActions},
                  .${s.Container} {
                  background: ${settings?.configs?.background[settings?.background]};

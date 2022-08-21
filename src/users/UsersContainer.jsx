@@ -5,9 +5,10 @@ import s from "./users.module.css"
 import {withRouter} from "react-router-dom";
 import ClearUsersContainer from './UsersPageContent';
 import {getSettings} from "../db";
+import {hexToRgb} from "@mui/material";
 
 function UsersContainer(props) {
-    const [users, setUsers] = useState(false);
+    const [usersConfig, setUsers] = useState({users: []});
     const [open, setOpen] = useState(false);
     const [settings, setSettings] = useState({});
 
@@ -45,7 +46,8 @@ function UsersContainer(props) {
         <div
             className={s.Container}
             style={{
-                fontSize: settings?.configs?.size[settings?.fontSize]
+                fontSize: settings?.configs?.size[settings?.fontSize],
+                borderRight: `1px solid ${hexToRgb(settings?.configs?.color[settings?.color] || "rgb(231 231 240)")}`,
             }}
         >
             <style>
@@ -55,9 +57,9 @@ function UsersContainer(props) {
                 }
                 `}
             </style>
-            {users
+            {usersConfig.users?.length > 0
                 ? <ClearUsersContainer
-                    users={users}
+                    users={usersConfig}
                     setOpen={setOpen}
                     settings={settings}
                     id={props?.match?.params?.id}

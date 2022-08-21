@@ -14,7 +14,7 @@ import s from '../settings.module.css'
 import {useEffect, useMemo, useState} from "react";
 import {AiOutlineCheck, FiSettings, GiCheckMark} from "react-icons/all";
 import {getSettings, updateSettings} from "../../db";
-import {buttonsConfig} from "../../createPost/CreatePostLine";
+import {buttonsConfig} from "../../create-post/CreatePostLine";
 import {useTranslation} from "react-i18next";
 
 const marks = [

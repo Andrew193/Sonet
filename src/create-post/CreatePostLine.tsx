@@ -1,14 +1,18 @@
 import s from "./create-post.module.css"
 import Script from "./script"
-import {useContext, useMemo, useRef, useState} from "react";
+import {useMemo, useRef, useState} from "react";
 import {AiOutlineClose, BiImageAdd} from "react-icons/all";
 import userHelper from "../helpers/userHelper";
 import {Avatar, Backdrop, Box, CircularProgress} from "@mui/material";
 import {useTranslation} from "react-i18next";
 import MainCover from "../components/solid-textarea/MainCover";
-import {Context} from "../App";
+import {CustomStyleType} from "../main-page/configLine";
 
-export const buttonsConfig = {
+type buttonsConfigType = {
+    [i: string | number]: any
+}
+
+export const buttonsConfig: buttonsConfigType = {
     "#FF0000": s.RedButton,
     "#FFA500": s.YellowButton,
     "#008000": s.GreenButton,
@@ -19,21 +23,25 @@ export const buttonsConfig = {
     "#b32dd2": s.PurpleButton
 }
 
-function CreatePost(props) {
+type CreatePostType = {
+    customStyle: CustomStyleType
+}
+
+type ImageType = { file: File | undefined | null, blobUrl: string }
+
+function CreatePost(props: CreatePostType) {
     const {
         customStyle
     } = props;
 
     const {t} = useTranslation();
-    let image = useRef();
+    let image = useRef<HTMLInputElement>(null);
 
-    const [images, setImages] = useState([]);
-    const [isOpened, setIsOpened] = useState(false);
-
-    const {socket} = useContext(Context);
+    const [images, setImages] = useState<ImageType[]>([]);
+    const [isOpened, setIsOpened] = useState<boolean>(false);
 
     const previewImages = useMemo(() =>
-        images?.map((image, index) =>
+        images?.map((image: ImageType, index: number) =>
             <div>
                 <Avatar
                     src={image?.blobUrl}
@@ -69,16 +77,16 @@ function CreatePost(props) {
             />
             <form>
                 <input
-                    ref={(el) => image = el}
+                    ref={image}
                     type="file"
                     style={{display: "none"}}
                     onChange={() => {
-                        Script.createBlob((blob) => {
-                            setImages((state) => [...state, {
-                                file: image.files[0],
+                        Script.createBlob((blob: string) => {
+                            setImages((state: ImageType[]) => [...state, {
+                                file: image?.current?.files![0],
                                 blobUrl: blob
                             }])
-                        }, image.files[0])
+                        }, (image?.current as HTMLInputElement)?.files![0])
                     }}
                 />
             </form>
@@ -95,7 +103,7 @@ function CreatePost(props) {
                 <button
                     className={`button btn btn-default ${buttonsConfig[customStyle?.color]}`}
                     onClick={() => {
-                        userHelper.CallImageInput(image)
+                        userHelper.CallImageInput(image?.current)
                     }}
                     disabled={previewImages?.length === 4}
                 >

@@ -11,7 +11,8 @@ function FiltersBar(props) {
     const history = useHistory();
 
     const styledHashtags = useMemo(() => history?.location?.hash?.split("#")?.filter((element) => !!element)
-            ?.map((hashtag) => <span
+            ?.map((hashtag, index) => <span
+                key={index}
                 onClick={() => {
                     history.replace({
                         pathname: history?.location?.pathname,
@@ -59,7 +60,7 @@ function FiltersBar(props) {
             <div
                 className={"Separator"}
                 onClick={(e) => {
-                    e.target.nextElementSibling.classList.toggle("Hide")
+                    e?.target?.nextElementSibling?.classList.toggle("Hide")
                 }}
             />
         </>

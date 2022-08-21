@@ -26,7 +26,7 @@ function PostsContainer(props) {
     });
 
     useEffect(() => {
-        const id = props.match.params.id;
+        const id = props?.match?.params?.id;
 
         if (id && typeof (+id) === "number") {
             postsHelper.getSelectedPost(+id)
@@ -41,7 +41,7 @@ function PostsContainer(props) {
                     error && notify(error?.response?.data?.error)
                 })
         }
-    }, [notify, props.match.params.id]);
+    }, [notify, props?.match?.params?.id]);
 
     useEffect(() => {
         async function getData() {
@@ -93,6 +93,7 @@ function PostsContainer(props) {
             }
             .${s.Container} {
             background: ${settings?.configs?.background[settings?.background]};
+             border-right:1px solid ${hexToRgb(settings?.configs?.color[settings?.color] || "rgb(231 231 240)")};
             }
             .itemsPostsPage {
             background: ${settings?.configs?.background[settings?.background]};
@@ -126,7 +127,7 @@ function PostsContainer(props) {
             <div
                 className={"Separator"}
                 onClick={(e) => {
-                    e.target.nextElementSibling.classList.toggle("Hide")
+                    e?.target?.nextElementSibling?.classList.toggle("Hide")
                 }}
             />
             {

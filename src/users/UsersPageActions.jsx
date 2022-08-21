@@ -1,7 +1,7 @@
 import s from "./users.module.css"
 import Script from "./script"
 import {toast} from "react-toastify"
-import {buttonsConfig} from "../createPost/CreatePostLine";
+import {buttonsConfig} from "../create-post/CreatePostLine";
 import {AiOutlineEye, AiOutlineUserAdd, AiOutlineUsergroupAdd} from "react-icons/ai";
 
 function UsersPageActions(props) {

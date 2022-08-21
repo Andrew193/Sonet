@@ -1,4 +1,4 @@
-import {buttonsConfig} from "../createPost/CreatePostLine";
+import {buttonsConfig} from "../create-post/CreatePostLine";
 import Message from "./Message";
 import {useEffect, useRef, useState} from "react";
 import {getConversationById} from "./chatHelper";
@@ -101,7 +101,7 @@ function CurrentChat(props) {
     return (
         <>
             <div className="chatBoxTop">
-                {messages?.map((m, index) => <div ref={scrollRef} key={index}>
+                {messages?.sort((a,b)=>a.id-b.id)?.map((m, index) => <div ref={scrollRef} key={index}>
                     <MessageCover
                         m={m}
                         avatar={avatars[0]?.id === m?.createdById ? avatars[0]?.avatar : avatars[1]?.avatar}

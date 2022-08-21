@@ -6,7 +6,7 @@ import {TooltipButtonCover} from "../components/tooltip-cover/TooltipButtonCover
 import {useTranslation} from "react-i18next";
 import {updateSettings} from "../db";
 import {notify} from "../App";
-import {buttonsConfig} from "../createPost/CreatePostLine";
+import {buttonsConfig} from "../create-post/CreatePostLine";
 import {useOutsideClick} from "../hooks";
 import TrackUpdateModal from "./TrackUpdateModal";
 import SearchBar from "./SearchBar";

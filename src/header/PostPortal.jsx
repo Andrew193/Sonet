@@ -1,5 +1,5 @@
 import {createPortal} from "react-dom";
-import CreatePost from "../createPost/CreatePostLine";
+import CreatePost from "../create-post/CreatePostLine";
 import s from "./header.module.css"
 import Script from "../components/profile/profileHelper";
 

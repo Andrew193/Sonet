@@ -1,28 +1,16 @@
 import {Link} from "react-router-dom";
-import CreatePost from "../createPost/CreatePostLine";
+import CreatePost from "../create-post/CreatePostLine";
 import ConfigLine from "./configLine";
 import s from "./main-page.module.css"
-import {useEffect, useState} from "react";
-import {getSettings} from "../db";
+import React from "react";
 import {useTranslation} from "react-i18next";
+import {useSettings} from "../hooks";
+import {MainPageType} from "./MainPageContainer";
 
-function ClearMainPage(props) {
-    const {
-        open
-    } = props;
-
-    const { t } = useTranslation();
-    const [settings, setSettings] = useState({});
-
-    useEffect(() => {
-        async function getData() {
-            const response = await getSettings();
-
-            setSettings(response[0])
-        }
-
-        getData();
-    }, [])
+function ClearMainPage(props: MainPageType) {
+    const {open} = props;
+    const {t} = useTranslation();
+    const {settings} = useSettings();
 
     return (
         <main
@@ -31,7 +19,6 @@ function ClearMainPage(props) {
                 fontSize: settings?.configs?.size[settings?.fontSize],
                 color: settings?.configs?.color[settings?.color],
                 background: settings?.configs?.background[settings?.background],
-                borderLeft: `1px solid ${settings?.configs?.color[settings?.color] || "rgb(206, 204, 204)"}`,
                 borderRight: `1px solid ${settings?.configs?.color[settings?.color] || "rgb(206, 204, 204)"}`
             }}
         >
@@ -66,8 +53,9 @@ function ClearMainPage(props) {
             />
             <div
                 className={"Separator"}
-                onClick={(e) => {
-                    e.target.nextElementSibling.classList.toggle("Hide")
+                onClick={(e: React.MouseEvent<HTMLDivElement>) => {
+                    const nextElementSibling = (e.target as HTMLDivElement).nextElementSibling;
+                    nextElementSibling!.classList.toggle("Hide")
                 }}
             />
             <ConfigLine

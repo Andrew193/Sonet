@@ -45,12 +45,12 @@ function Message(props) {
     const [messageToUpdateId, setMessageToUpdateId] = useState();
 
     const actions = useCallback(() => {
-        return message => actionsConfig?.map((action) => {
+        return message => actionsConfig?.map((action, index) => {
             if (action?.type !== "copy" && own === false) {
                 return null
             }
 
-            return <Tooltip title={action?.label}>
+            return <Tooltip title={action?.label} key={index}>
                 <button
                     id={"dropStylesForMessagesActions"}
                     onClick={() => {

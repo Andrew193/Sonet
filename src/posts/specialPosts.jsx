@@ -9,11 +9,11 @@ import {getSettings} from "../db";
 import {Context} from "../App";
 
 function SpecialPosts(props) {
-    const id = props.location.state.id;
+    const id = props?.location?.state?.id;
 
     const {
         type
-    } = props.match.params;
+    } = props?.match?.params;
 
     const {socket} = useContext(Context);
 
@@ -45,8 +45,6 @@ function SpecialPosts(props) {
             style={{
                 height: '-webkit-fill-available',
                 background: settings?.configs?.background[settings?.background],
-                borderLeft: `1px solid ${settings?.configs?.color[settings?.color]}`,
-                borderRight: `1px solid ${settings?.configs?.color[settings?.color]}`
             }}
         >
             <style>

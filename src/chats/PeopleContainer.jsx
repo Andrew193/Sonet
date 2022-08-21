@@ -1,6 +1,6 @@
 import MatesContainer from "./MatesContainer";
 import RequestsContainer from "./RequestsConditions";
-import {useMemo, useState} from "react";
+import {useEffect, useState} from "react";
 import {useTranslation} from "react-i18next";
 
 
@@ -16,7 +16,7 @@ function PeopleContainer(props) {
 
     const [search, setSearch] = useState("");
 
-    useMemo(() => {
+    useEffect(() => {
         setConversations((state) =>
             search === ""
                 ? conversations?.map((conversation) => ({...conversation, show: true}))

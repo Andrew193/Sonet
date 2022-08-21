@@ -1,6 +1,6 @@
 import headerStyle from "../header/header.module.css";
 import s from "./music.module.css";
-import {buttonsConfig} from "../createPost/CreatePostLine";
+import {buttonsConfig} from "../create-post/CreatePostLine";
 
 
 function TrackUpdateModal(props) {

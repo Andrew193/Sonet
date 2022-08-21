@@ -2,7 +2,7 @@ import {Box, Typography} from "@mui/material";
 import s from '../settings.module.css'
 import {useEffect, useState} from "react";
 import {getSettings} from "../../db";
-import {buttonsConfig} from "../../createPost/CreatePostLine";
+import {buttonsConfig} from "../../create-post/CreatePostLine";
 import {useTranslation} from "react-i18next";
 import UK from "../images/uk.png";
 import UA from "../images/ua.png";

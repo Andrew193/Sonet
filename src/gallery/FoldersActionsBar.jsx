@@ -1,5 +1,5 @@
 import s from "../settings/settings.module.css";
-import {buttonsConfig} from "../createPost/CreatePostLine";
+import {buttonsConfig} from "../create-post/CreatePostLine";
 import {MdOutlineCreate, VscEmptyWindow} from "react-icons/all";
 import {alpha, Box, hexToRgb, Typography} from "@mui/material";
 import {useEffect, useState} from "react";

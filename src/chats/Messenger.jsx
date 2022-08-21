@@ -2,7 +2,7 @@ import FriendPin from "./FriendPin";
 import {useEffect, useMemo, useState} from "react";
 import {getForApprovalMatesList} from "./chatHelper";
 import {notify} from "../App";
-import {buttonsConfig} from "../createPost/CreatePostLine";
+import {buttonsConfig} from "../create-post/CreatePostLine";
 import {useOutsideClick} from "../hooks";
 import {useRef} from "react";
 import PeopleContainer from "./PeopleContainer";
@@ -28,23 +28,26 @@ function Messenger(props) {
         receiverId
     } = props;
 
-    const matesList = useMemo(() => {
+    const [matesList, setMatesList] = useState([]);
+    const [possibleMatesList, setPossibleMatesList] = useState([]);
+    useEffect(() => {
         setIsLoading(() => false)
-        return conversations?.map((friend, index) => (friend?.show === undefined || friend?.show === true) ? <MatePin
-            key={index}
-            currentChat={currentChat}
-            index={index}
-            friend={friend}
-            setCurrentChat={setCurrentChat}
-            setConversations={setConversations}
-        /> : null)
+        setMatesList(() => conversations?.map((friend, index) => (friend?.show === undefined || friend?.show === true) ?
+            <MatePin
+                key={index}
+                currentChat={currentChat}
+                index={index}
+                friend={friend}
+                setCurrentChat={setCurrentChat}
+                setConversations={setConversations}
+            /> : null))
     }, [conversations, currentChat?.currentIndex]);
 
     const [possibleMates, setPossibleMates] = useState(null);
     const [chatMode, setChatMode] = useState(false);
 
-    const possibleMatesList = useMemo(() => {
-        return possibleMates?.map((friend, index) => {
+    useEffect(() => {
+        setPossibleMatesList(() => possibleMates?.map((friend, index) => {
             if (friend?.approved) {
                 return null;
             }
@@ -63,7 +66,7 @@ function Messenger(props) {
                     friend={friend}
                 />
             </div>
-        })
+        }))
     }, [possibleMates]);
 
     useEffect(() => {
