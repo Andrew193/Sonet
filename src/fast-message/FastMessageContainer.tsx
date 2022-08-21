@@ -69,8 +69,11 @@ function FastMessageContainer(props: FastElementsPropsType) {
                 .${s.Container} .fromNow {
                 width: max-content;
                 }
-                .${s.Container} .noConversationText {
+                .${s.Container} .noConversationText, .noConversationImage {
                 display: none;
+                }
+                .noMessagesLabel {
+                font-size: 35px;
                 }
                 .${s.Container} .messageText {
                 text-align: left!important;
@@ -80,7 +83,8 @@ function FastMessageContainer(props: FastElementsPropsType) {
                 .react-emoji-picker {
                 position: absolute;
                 width: 118%;
-                top: -315%;
+                top: -310px;
+                z-index: 10;
                 }
                 @media (max-width: 1024px) {
                 .fast_m_up {

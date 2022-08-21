@@ -1,27 +1,24 @@
-import {withRouter} from "react-router-dom";
+import {RouteComponentProps, withRouter} from "react-router-dom";
 import FollowersPageContent from "./FollowersPageContent";
 import s from "../followings/followers.module.css"
 import {alpha} from "@mui/material";
-import {useEffect, useState} from "react";
-import {getSettings} from "../db";
+import {useSettings} from "../hooks";
 
-function Followers(props) {
+export type FollowersUsers = { userName: string, email: string, id: number }[]
+
+export type FollowersPropsType = {
+    users: FollowersUsers,
+}
+
+export type FollowersType = RouteComponentProps<{}, {}, FollowersPropsType>;
+
+function Followers(props: FollowersType) {
     const users = props.location.state.users;
-    const [settings, setSettings] = useState({});
-
-    useEffect(() => {
-        async function getData() {
-            const response = await getSettings();
-
-            setSettings(response[0])
-        }
-
-        getData();
-    }, [])
+    const {settings} = useSettings();
 
     return (
         <div
-            className={s.Container+" mainFollowContainer"}
+            className={s.Container + " mainFollowContainer"}
             style={{
                 background: settings?.configs?.background[settings?.background]
             }}

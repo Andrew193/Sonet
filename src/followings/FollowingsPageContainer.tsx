@@ -2,22 +2,12 @@ import {withRouter} from "react-router-dom";
 import FollowingsPageContent from "./FollowingsPageContent";
 import s from "./followers.module.css"
 import {alpha} from "@mui/material";
-import {useEffect, useState} from "react";
-import {getSettings} from "../db";
+import {FollowersType} from "../followers/FollowersPageContainer";
+import {useSettings} from "../hooks";
 
-function Followers(props) {
+function Followers(props: FollowersType) {
     const users = props.location.state.users;
-    const [settings, setSettings] = useState({});
-
-    useEffect(() => {
-        async function getData() {
-            const response = await getSettings();
-
-            setSettings(response[0])
-        }
-
-        getData();
-    }, [])
+    const {settings} = useSettings();
 
     return (
         <div
