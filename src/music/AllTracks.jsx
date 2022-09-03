@@ -1,46 +1,16 @@
 import s from "./music.module.css";
-import {useMemo, useRef, useState} from "react";
-import {Tooltip, Typography} from "@mui/material";
+import {useContext, useEffect, useMemo, useRef, useState} from "react";
+import {alpha, Tooltip, Typography} from "@mui/material";
 import {AiTwotoneDelete, AiTwotoneEdit} from "react-icons/all";
 import {TooltipButtonCover} from "../components/tooltip-cover/TooltipButtonCover";
-import {useTranslation} from "react-i18next";
-import {updateSettings} from "../db";
-import {notify} from "../App";
+import {MusicContext,} from "../App";
 import {buttonsConfig} from "../create-post/CreatePostLine";
 import {useOutsideClick} from "../hooks";
 import TrackUpdateModal from "./TrackUpdateModal";
 import SearchBar from "./SearchBar";
-
-function deleteTrack(settings, index, callback) {
-    settings?.music?.splice(index, 1);
-    settings?.musicDescriptions?.splice(index, 1);
-    updateSettings({
-        ...settings,
-        music: settings?.music,
-        musicDescriptions: settings?.musicDescriptions
-    }, 1)
-        .then(() => {
-            notify("Deleted");
-            callback(settings?.music)
-        })
-}
-
-function updateTrackDescription(settings, index, callback, newName, trackCategory) {
-    settings.musicDescriptions[index] = {
-        ...settings?.musicDescriptions[index],
-        name: newName || settings?.musicDescriptions[index]?.name,
-        category: trackCategory || settings?.musicDescriptions[index]?.category
-    }
-
-    updateSettings({
-        ...settings,
-        musicDescriptions: settings?.musicDescriptions
-    }, 1)
-        .then(() => {
-            notify("Updated");
-            callback(settings?.music)
-        })
-}
+import Loader from "../components/common/spinner/Spinner";
+import {deleteTrack, updateTrackDescription} from "./musicHelper";
+import ReactPlayer from "react-player";
 
 function AllTracks(props) {
     const {
@@ -50,16 +20,33 @@ function AllTracks(props) {
         setSearch
     } = props;
 
-    const {t} = useTranslation();
+    const [musicContext, setMusicContext] = useContext(MusicContext);
     const [editConfig, setEditConfig] = useState({isOpened: false});
+    const [selectedTrack, setSelectedTrack] = useState(null);
     const [newName, setNewName] = useState(null);
     const [trackCategory, setTrackCategory] = useState(null);
+
+    useEffect(() => {
+        setMusicContext((context) => ({
+            ...context,
+            selectedTrack: selectedTrack
+        }))
+    }, [selectedTrack]);
 
     const allTracks = useMemo(() => {
         try {
             return allFiles?.map((file, index) =>
                 (file?.show === undefined || file?.show === true)
-                    ? <li className={s.Track}>
+                    ? <li
+                        key={index}
+                        className={s.Track}
+                        onClick={() => {
+                            setSelectedTrack(() => index)
+                        }}
+                        style={{
+                            background: selectedTrack === index && "#f9d4d4"
+                        }}
+                    >
                         <span className={s.TrackIndex}>{index + 1}</span>
                         <span className={s.TrackName}>{settings?.musicDescriptions[index]?.name}</span>
                         <span className={s.TrackCategory}>{settings?.musicDescriptions[index]?.category}</span>
@@ -104,7 +91,7 @@ function AllTracks(props) {
         } catch (error) {
             return [];
         }
-    }, [allFiles]);
+    }, [allFiles, selectedTrack]);
 
     const wrapperRef = useRef(null);
 
@@ -116,6 +103,14 @@ function AllTracks(props) {
 
     return (
         <div>
+            <style>{`
+            .${s.Track}:hover {
+            background-color: ${alpha(settings?.configs?.color[settings?.color] || "rgb(231 231 240)", 0.5)} !important;
+            }
+            .react-player__preview {
+            margin-top: 20px;
+            }
+            `}</style>
             <Typography
                 component={"h4"}
                 variant={"h4"}
@@ -126,16 +121,20 @@ function AllTracks(props) {
                 setSearch={setSearch}
             />
             <div
-                className={`${s.TracksHeader} ${buttonsConfig[settings?.configs?.color[settings?.color]]}`}
+                className={s.MusicContainer}
             >
-                <p className={s.TrackIndex}>№</p>
-                <p className={s.TrackName}>Name</p>
-                <p className={s.TrackCategory}>Category</p>
-                <p className={s.TrackActions}>Actions</p>
+                <div
+                    className={`${s.TracksHeader} ${buttonsConfig[settings?.configs?.color[settings?.color]]}`}
+                >
+                    <p className={s.TrackIndex}>№</p>
+                    <p className={s.TrackName}>Name</p>
+                    <p className={s.TrackCategory}>Category</p>
+                    <p className={s.TrackActions}>Actions</p>
+                </div>
+                <ul>
+                    {allTracks.length === 0 ? <Loader/> : allTracks}
+                </ul>
             </div>
-            <ul>
-                {allTracks}
-            </ul>
 
             <TrackUpdateModal
                 editConfig={editConfig}
@@ -149,6 +148,31 @@ function AllTracks(props) {
                 trackCategory={trackCategory}
                 setTrackCategory={setTrackCategory}
             />
+
+            <>
+                {
+                    musicContext?.tracks?.length > 0 && musicContext?.selectedTrack !== null && <ReactPlayer
+                        url={URL.createObjectURL(musicContext?.tracks[musicContext?.selectedTrack])}
+                        className={s.Player}
+                        onEnded={() => {
+                            if (musicContext?.selectedTrack < musicContext?.tracksLength - 1) {
+                                setMusicContext((context) => ({
+                                    ...context,
+                                    selectedTrack: musicContext?.selectedTrack + 1
+                                }))
+                                setSelectedTrack(musicContext?.selectedTrack + 1)
+                            }
+                        }
+                        }
+                        playing
+                        controls
+                        muted
+                        light
+                        pip
+                        stopOnUnmount={false}
+                    />
+                }
+            </>
         </div>
     )
 }
