@@ -4,7 +4,6 @@
     font-size: 19px;
     position: relative;
     width: 97%;
-    overflow: hidden;
     text-align: left;
     padding: 10px 5px;
     box-sizing: border-box;
@@ -55,20 +54,43 @@
 
 .Editor__Highlight {
     cursor: not-allowed;
-    color: #0088ff;
-    background: #cce7ff;
-    padding: 3px;
+    padding: 0px;
     border-radius: 3px;
     margin-left: 5px;
+    margin-bottom: 3px;
 }
 
-.Editor__Highlight__Link {
-    cursor: not-allowed;
+.Editor_hashtag {
+    color: #0088ff;
+    background: #cce7ff;
+}
+
+.PossiblePeople {
+    position: absolute;
+    z-index: 100;
+    top: 0;
+    background: antiquewhite;
+    width: 200px;
+    border-radius: 5px;
+    left: 32%;
+    max-height: 200px;
+    overflow: auto;
+}
+
+.PossiblePeople p {
+    cursor: pointer;
+    transition: all ease 0.5s;
+    padding: 5px !important;
+}
+
+.Editor_link {
     color: #007c00;
     background: #c9ffc9;
-    padding: 3px;
-    border-radius: 3px;
-    margin-left: 5px;
+}
+
+.Editor_mention {
+    color: #9f9500;
+    background: #faffc9;
 }
 
 .Editor__OverLimit {

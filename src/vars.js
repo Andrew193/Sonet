@@ -14,5 +14,5 @@ export const headerListLinks = {
     music: "/music"
 }
 
-export const API = "https://sonet34.herokuapp.com/api/";
+export const API = "http://localhost:3123/api/" || "https://sonet34.herokuapp.com/api/";
 export const img_api = API + "img/";

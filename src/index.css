@@ -34,6 +34,20 @@ html, body, #root, .App {
     margin: unset !important;
 }
 
+.SmallUserAvatar {
+    height: 60px !important;
+    width: 60px !important;
+}
+
+.SmallUserAvatar img {
+    width: 100% !important;
+    height: 100% !important;
+    text-align: center !important;
+    object-fit: cover !important;
+    color: transparent !important;
+    text-indent: 10000px !important;
+}
+
 body {
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;

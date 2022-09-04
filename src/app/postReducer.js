@@ -4,7 +4,10 @@ const initialState = {
     postInformation: {
         length: 0,
         value: '',
-        shouldClear: false
+        shouldClear: false,
+        possibleMentions: [],
+        selectedMention: '',
+        focusPosition: null
     },
 };
 
@@ -16,7 +19,13 @@ const postReducer = createSlice({
             state.postInformation = initialState?.postInformation;
         },
         setPostInformation: (state, action) => {
-            state.postInformation = {...state?.postInformation, ...action?.payload};
+            if (Array.isArray(action?.payload)) {
+                const newState = {...state?.postInformation};
+                action?.payload?.forEach((value) => Object.assign(newState, value))
+                state.postInformation = {...newState};
+            } else {
+                state.postInformation = {...state?.postInformation, ...action?.payload};
+            }
         }
     },
     extraReducers: ({})

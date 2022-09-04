@@ -1,7 +1,7 @@
 import htmlHelper from "../helpers/htmlHelper";
 import HttpHelper from "../helpers/httpHelper";
 
-function createPostService(element, notify, socket, text, savedImages) {
+function createPostService(element, notify, socket, text, savedImages, possibleMentions) {
     HttpHelper.POSTS.createPost(text, (response) => {
         document.querySelector(".Mpost").classList.remove("Open");
 
@@ -11,10 +11,10 @@ function createPostService(element, notify, socket, text, savedImages) {
     }, (error) => {
         const inner = htmlHelper.stringFromJSON(error?.response?.data)
         notify(htmlHelper.createHTML({title: "Error", message: inner}));
-    }, savedImages)
+    }, savedImages, possibleMentions)
 }
 
-async function CreatePost(text, notify, element, socket, images) {
+async function CreatePost(text, notify, element, socket, images, possibleMentions = []) {
     if (images?.length > 0) {
         const savedImages = [];
 
@@ -28,9 +28,9 @@ async function CreatePost(text, notify, element, socket, images) {
             savedImages.push(JSON.stringify(parsedResponse?.reason))
         }
 
-        createPostService(element, notify, socket, text, savedImages)
+        createPostService(element, notify, socket, text, savedImages, possibleMentions)
     } else {
-        createPostService(element, notify, socket, text)
+        createPostService(element, notify, socket, text, null, possibleMentions)
     }
 }
 

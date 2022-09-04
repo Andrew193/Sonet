@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
-import {getUserAvatar} from "../posts/PostItem";
 import FriendPin from "./FriendPin";
+import {getUserAvatar} from "../posts/postsHelper";
 
 function MatePin(props) {
     const {

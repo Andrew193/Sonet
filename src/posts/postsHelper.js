@@ -1,6 +1,99 @@
 import HTMLhelp from "../helpers/htmlHelper.js"
 import HttpHelper from "../helpers/httpHelper"
 import CommonHelper from "../helpers/common";
+import textareaStyle from "../components/solid-textarea/solid-textarea.module.css";
+import reactStringReplace from "react-string-replace";
+import s from "./posts.module.css";
+import profileHelper from "../components/profile/profileHelper";
+import {useState} from "react";
+import {useHistory} from "react-router-dom";
+import {openUserProfile} from "../users/script";
+
+function MentionPerson(props) {
+    const {
+        mention
+    } = props;
+
+    const [avatar, setAvatar] = useState(null);
+    const history = useHistory();
+    getParsedUserAvatar(avatar, setAvatar, mention);
+
+    return (
+        <p
+            className={s.MentionPerson}
+            onClick={() => {
+                openUserProfile(mention.id, history)
+            }}
+        >
+            <span className={"SmallUserAvatar"}>
+                <img src={avatar}/>
+            </span>
+            <span>{mention.userName}</span>
+        </p>
+    )
+}
+
+function ComponentToReplace(props) {
+    const [isHovered, setIsHovered] = useState(false);
+    return (
+        <span key={props.i}
+              onMouseOver={() => {
+                  setIsHovered(() => true)
+              }}
+              onMouseLeave={() => {
+                  setIsHovered(() => false)
+              }}
+              className={textareaStyle.Editor__Highlight + " " + props.className}
+              style={{
+                  display: "inline-block",
+                  padding: "0px",
+                  marginBottom: "3px",
+                  position: "relative"
+              }}>
+            {props.match}
+            <>
+            {isHovered && props.mention && <MentionPerson mention={props.mention}/>}
+            </>
+        </span>
+    )
+}
+
+export function replaceTags(text, possibleMentions) {
+    const regExpTags = /(?:\s|^)(#[\w]+\b)/gi;
+    let possibleMentionsIndex = -1;
+    const regExpMentions = /(?:\s|^)(@[\w]+\b)/gi;
+    const parsedPossibleMentions = JSON.parse(possibleMentions);
+
+    return reactStringReplace(reactStringReplace(text, regExpTags, (match, i) => (
+        <ComponentToReplace i={i} className={textareaStyle.Editor_hashtag} match={match}/>
+    )), regExpMentions, (match, i) => {
+        possibleMentionsIndex++;
+        return <ComponentToReplace i={i} className={textareaStyle.Editor_mention} match={match}
+                                   mention={parsedPossibleMentions[possibleMentionsIndex]}/>
+    })
+}
+
+export async function getUserAvatar(userAvatar, setUserAvatar, userId) {
+    if (userId && !userAvatar) {
+        const response = await profileHelper.getUser(userId);
+
+        try {
+            setUserAvatar(JSON.parse(response?.data?.user?.avatar)?.webContentLink)
+        } catch (error) {
+            setUserAvatar(response?.data?.user?.avatar)
+        }
+    }
+}
+
+export async function getParsedUserAvatar(userAvatar, setUserAvatar, user) {
+    if (!userAvatar) {
+        try {
+            setUserAvatar(JSON.parse(user?.avatar)?.webContentLink)
+        } catch (error) {
+            setUserAvatar(user?.avatar)
+        }
+    }
+}
 
 export function refresh(socket, userId) {
     socket.emit("postUpdate").emit("notMyPostUpdate", {userId}).emit("MyPostUpdate", {userId}).emit("postCreate")

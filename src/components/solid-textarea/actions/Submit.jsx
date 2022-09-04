@@ -6,7 +6,7 @@ import {buttonsConfig} from "../../../create-post/CreatePostLine";
 import {useContext, useEffect} from "react";
 import {useTranslation} from "react-i18next";
 import {setPostInformation} from "../../../app/postReducer";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {getStore} from "../../../app/store";
 import {Context} from "../../../App";
 
@@ -22,6 +22,7 @@ function PostButton(props) {
 
     const {socket, notify} = useContext(Context);
     const {t} = useTranslation();
+    const postInformation = useSelector((store) => store.post.postInformation)
 
     return (
         <button
@@ -30,7 +31,7 @@ function PostButton(props) {
             onClick={() => {
                 setIsOpened(true);
                 window?.document?.body?.querySelector(".App")?.classList?.remove("Open")
-                Script.CreatePost(text, notify, null, socket, images)
+                Script.CreatePost(text, notify, null, socket, images, postInformation.possibleMentions)
                     .then(() => {
                         const dispatch = getStore().dispatch;
                         dispatch(setPostInformation({shouldClear: true}))

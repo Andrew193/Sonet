@@ -7,9 +7,9 @@ import {alpha, Tooltip} from "@mui/material";
 import Loader from "../components/common/spinner/Spinner";
 import {BsPencil, TiMessages} from "react-icons/all";
 import {useTranslation} from "react-i18next";
-import {getUserAvatar} from "../posts/PostItem";
 import React from "react";
 import InputEmoji from 'react-input-emoji';
+import {getUserAvatar} from "../posts/postsHelper";
 
 const PostButtonCover = React.forwardRef(function MyComponent(props, ref) {
     //  Spread the props to the underlying DOM element.

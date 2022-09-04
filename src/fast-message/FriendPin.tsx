@@ -3,7 +3,7 @@ import {notify} from "../App";
 import {ImCancelCircle} from "react-icons/all";
 import LazyImage from "../posts/LazyImage";
 import {useEffect, useState} from "react";
-import {getUserAvatar} from "../posts/PostItem";
+import {getUserAvatar} from "../posts/postsHelper";
 
 type FriendPinProps = {
     index: number,

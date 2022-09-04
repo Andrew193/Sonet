@@ -1,5 +1,4 @@
 import {NavLink} from "react-router-dom";
-import {v4 as uuidv4} from "uuid";
 import s from "./header.module.css";
 import {AiOutlineBank, AiOutlineComment, AiOutlineFile, AiOutlineTeam, AiOutlineUser} from "react-icons/ai";
 import {CgGames, IoSettingsOutline, MdQueueMusic, RiGalleryLine} from "react-icons/all";
@@ -28,8 +27,8 @@ function HeaderLink(props) {
             <span className={"col-sm-2 col-xs-2"}/>
             <NavLink
                 className={"col-sm-7 col-xs-7"}
-                key={uuidv4()}
-                exact to={{pathname: linkConfig?.path}}
+                exact={linkConfig?.path === "/"}
+                to={{pathname: linkConfig?.path}}
                 activeClassName={s.ActivePage}
                 data-tooltip={t("" + linkConfig?.label + "")}
                 style={{

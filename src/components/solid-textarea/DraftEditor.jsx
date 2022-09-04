@@ -3,37 +3,47 @@ import {composeDecorators} from "./utils/composeDecorators";
 import {useField} from "usetheform";
 import {Editor, EditorState} from "draft-js";
 import s from "./solid-textarea.module.css";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {BiTrash} from "react-icons/all";
 import {getStore} from "../../app/store";
 import {setPostInformation} from "../../app/postReducer";
+import {withDelay} from "../../app/helpers";
+import PossibleMentions from "./PossibleMentions";
 
 export const DraftEditor = ({maxChars, name = "editorState"}) => {
     const postInformation = useSelector(store => store?.post?.postInformation);
+    const [focusPosition, setFocusPosition] = useState(null);
+    const dispatch = useDispatch();
+    const [possibleMentions, setPossibleMentions] = useState([]);
+    const onChangeHandler = withDelay(500,
+        (callback) => {
+            const selectedMention = getStore().getState().post.postInformation.selectedMention
+            callback(selectedMention || "").then((users) => {
+                setPossibleMentions(() => users);
+            })
+        })
 
-    const initialState = useMemo(
-        () => EditorState.createEmpty(composeDecorators(maxChars)),
-        [maxChars]
-    );
-
-    const {value, setValue} = useField({
-        type: "custom",
-        name,
-        value: initialState
-    });
-
-    const onInputChange = useCallback((editorState) => setValue(editorState), [setValue]);
+    const initialState = useMemo(() => EditorState.createEmpty(composeDecorators(onChangeHandler)),
+        [maxChars]);
+    const {value, setValue} = useField({type: "custom", name, value: initialState});
+    const onInputChange = useCallback((editorState) => {
+        setFocusPosition(() => editorState._immutable.selection.focusOffset)
+        setValue(editorState)
+    }, [setValue]);
 
     const refEditor = useRef(null);
-    useField({
-        type: "custom",
-        name: "refEditor",
-        value: refEditor
-    });
+    useField({type: "custom", name: "refEditor", value: refEditor});
 
     const ref = useRef(null);
     const [maxWidth, setMaxWidth] = useState(10000);
-    const clear = () => setValue(EditorState.createEmpty(composeDecorators(maxChars)))
+    const clear = () => {
+        setValue(EditorState.createEmpty(composeDecorators(onChangeHandler)));
+        const timer = setTimeout(() => {
+            dispatch(setPostInformation({selectedMention: ""}));
+            setPossibleMentions([])
+            clearTimeout(timer);
+        }, 500)
+    }
 
     useEffect(() => {
         setMaxWidth(ref.current ? ref.current.offsetWidth : 0)
@@ -46,6 +56,10 @@ export const DraftEditor = ({maxChars, name = "editorState"}) => {
             dispatch(setPostInformation({shouldClear: false}))
         }
     }, [postInformation?.shouldClear])
+
+    useEffect(() => {
+        dispatch(setPostInformation({focusPosition: focusPosition}));
+    }, [focusPosition])
 
     return (
         <div
@@ -68,6 +82,15 @@ export const DraftEditor = ({maxChars, name = "editorState"}) => {
                 editorState={value}
                 onChange={onInputChange}
                 placeholder=""
+            />
+            <PossibleMentions
+                possibleMentions={possibleMentions}
+                value={value}
+                setValue={setValue}
+                onChangeHandler={onChangeHandler}
+                postInformation={postInformation}
+                setPossibleMentions={setPossibleMentions}
+                selectedMention={postInformation.selectedMention}
             />
         </div>
     );

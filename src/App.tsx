@@ -148,7 +148,7 @@ function App() {
                             />
                             <Components.ModalUser ref={modal} click={open}/>
                         </>}
-                        <Route exact path={headerListLinks.games + "/:gameType?"}
+                        <Route path={headerListLinks.games + "/:gameType?"}
                                render={() => <Components.GamesContainer/>}/>
                         <Route exact path={headerListLinks.settings}
                                render={() => <Components.SettingsContainerPage/>}/>

@@ -1,7 +1,6 @@
 import s from "./posts.module.css";
 import {alpha, Avatar, Box, hexToRgb, ListItemIcon, Typography} from "@mui/material";
 import {Link} from "react-router-dom";
-import textareaStyle from "../components/solid-textarea/solid-textarea.module.css"
 import EmotionsLineContainer from "./EmotionsLineContainer";
 import DataHelper from "../helpers/dateHelper";
 import {useEffect, useState, useMemo, useCallback, useRef, useContext} from "react";
@@ -13,33 +12,10 @@ import {useOutsideClick} from "../hooks";
 import PostItemsImages from "./PostItemsImages";
 import React from "react";
 import {useTranslation} from "react-i18next";
-import {deletePostById, refresh, updatePostById} from "./postsHelper";
+import {deletePostById, getUserAvatar, refresh, replaceTags, updatePostById} from "./postsHelper";
 import InputEmoji from 'react-input-emoji';
-import reactStringReplace from 'react-string-replace';
-import profileHelper from "../components/profile/profileHelper";
 import HashtagsLine from "./HashtagsLine";
 import {Context} from "../App";
-
-export function replaceTags(text) {
-    const regExp = /(?:\s|^)(#[\w]+\b)/gi;
-
-    return reactStringReplace(text, regExp, (match, i) => (
-        <span key={i} className={textareaStyle.Editor__Highlight}
-              style={{display: "inline-block", padding: "0px", marginBottom: "3px"}}>{match}</span>
-    ))
-}
-
-export async function getUserAvatar(userAvatar, setUserAvatar, userId) {
-    if (userId && !userAvatar) {
-        const response = await profileHelper.getUser(userId);
-
-        try {
-            setUserAvatar(JSON.parse(response?.data?.user?.avatar)?.webContentLink)
-        } catch (error) {
-            setUserAvatar(response?.data?.user?.avatar)
-        }
-    }
-}
 
 function PostItem(props) {
     const {
@@ -162,7 +138,7 @@ function PostItem(props) {
                             className={"authorName"}
                         >{value.createdBy}</Link>
                     </h3>
-                    <p>{replaceTags(value.text)}</p>
+                    <p>{replaceTags(value.text, value.possibleMentions)}</p>
                     <HashtagsLine text={value.text}/>
                     <PostItemsImages
                         valueUserId={+value.userId}

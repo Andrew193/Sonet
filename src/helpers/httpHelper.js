@@ -47,6 +47,11 @@ const Http = {
                 .then((response) => response)
                 .catch((error) => error)
         },
+        getUserByName: (name) => {
+            return axios.get(API + "users/getUserByName?token=" + Script.getCookie("token"), {params: {name}})
+                .then((response) => response)
+                .catch((error) => error)
+        },
         getOneUser: (id) => {
             return axios.get(API + "users/getOne", {params: {id}})
                 .then((response) => response?.data)
@@ -161,10 +166,11 @@ const Http = {
                 .then((response) => setPosts({posts: response?.data?.posts}))
                 .catch((error) => console.log(error))
         },
-        createPost: (text, callback, callback1, savedImages) => {
+        createPost: (text, callback, callback1, savedImages, possibleMentions) => {
             axios.post(API + "post?token=" + Script.getCookie("token"), {
                 text,
-                savedImages: JSON.stringify(savedImages || [])
+                savedImages: JSON.stringify(savedImages || []),
+                possibleMentions: JSON.stringify(possibleMentions || [])
             })
                 .then((response) => callback(response))
                 .catch((error) => error && callback1(error))

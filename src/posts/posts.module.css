@@ -10,6 +10,24 @@
     flex-direction: column;
 }
 
+.MentionPerson {
+    position: absolute;
+    top: 0;
+    z-index: 100;
+    width: 100%;
+    background: #faffc9;
+    border-radius: 5px;
+}
+
+.MentionPerson img {
+    border-radius: 5px;
+    box-shadow: 0 5px 10px 0 rgb(107 159 199 / 34%);
+}
+
+.MentionPerson span {
+    font-weight: 600;
+}
+
 .LazyBackground {
     background: #e6ddf9;
     display: flex;

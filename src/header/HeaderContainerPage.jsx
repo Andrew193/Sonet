@@ -3,17 +3,17 @@ import s from "./header.module.css";
 import Script from "./script";
 import Logo from "./img/icon.ico";
 import ProfileContainer from "../user/ProfileContainerForNavbar";
-import {useEffect, useMemo, useState} from "react";
+import {useMemo, useState} from "react";
 import Portal from "./UserPortal";
 import {AiOutlineHighlight} from "react-icons/ai";
 import {AiOutlineLogout} from "react-icons/ai";
 import PostPortal from "./PostPortal";
 import Script2 from "../components/profile/profileHelper";
 import {headerListLinks} from "../vars";
-import {getSettings} from "../db";
 import {alpha} from "@mui/material";
 import {useTranslation} from "react-i18next";
 import HeaderLink from "./HeaderLink";
+import {useSettings} from "../hooks";
 
 export const headerLinksConfig = [
     {path: headerListLinks.base, label: "Home"},
@@ -29,7 +29,7 @@ export const headerLinksConfig = [
 
 function Header() {
     const [flag, setFlag] = useState(false);
-    const [settings, setSettings] = useState({});
+    const {settings} = useSettings();
     const history = useHistory();
     const {t, i18n} = useTranslation();
 
@@ -39,15 +39,6 @@ function Header() {
         settings={settings}
         key={linkConfig.label}
     />), [settings, i18n?.language]);
-
-    useEffect(() => {
-        async function getData() {
-            const response = await getSettings();
-            setSettings(response[0])
-        }
-
-        getData();
-    }, [])
 
     const currentWidth = useMemo(() => document?.body.offsetWidth, [document?.body.offsetWidth]);
 

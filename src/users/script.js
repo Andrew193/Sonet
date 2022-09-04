@@ -21,7 +21,7 @@ function openUser(e, history, inputId, setLoader) {
     CommonHelper.redirect(history, null, `/users/${id}`)
 }
 
-function openUserProfile(id, hist) {
+export function openUserProfile(id, hist) {
     CommonHelper.redirect(hist, null, `/profile/${id}`)
 }
 
