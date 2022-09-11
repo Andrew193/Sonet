@@ -1,7 +1,6 @@
 .messenger {
     border-left: 1px solid rgb(206, 204, 204);
     border-right: 1px solid rgb(206, 204, 204);
-    margin: 0 0 0 15%;
     height: -webkit-fill-available;
     text-align: left;
     -webkit-flex: 3 0;

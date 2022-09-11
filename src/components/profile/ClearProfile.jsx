@@ -100,12 +100,17 @@ function ClearProfile(props) {
     
                 @media (max-width: 2000px) {
                 .basicPageHead {
-                width: 60%!important;
+                width: 57%!important;
                 }}
                 
                 @media (max-width: 1024px) {
                 .basicPageHead {
-                width: 85%!important;
+                width: 80%!important;
+                }}
+                
+                @media (max-width: 768px) {
+                .basicPageHead {
+                width: 100%!important;
                 }}
                 `}
             </style>

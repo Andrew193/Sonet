@@ -5,8 +5,8 @@ import {useContext, useEffect, useState} from "react";
 import Script from "../../posts/postsHelper"
 import S2 from "./Script.js"
 import ClearComment from "./clearComment";
-import {getSettings} from "../../db";
 import {Context} from "../../App";
+import {useSettings} from "../../hooks";
 
 function Comments(props) {
     const {
@@ -16,8 +16,7 @@ function Comments(props) {
 
     const [post, setPost] = useState(false);
     const [comments, setComments] = useState(false);
-    const [settings, setSettings] = useState({});
-
+    const {settings} = useSettings();
     const userId = JSON.parse(localStorage.getItem("userInfo")).id;
 
     const {socket, notify} = useContext(Context);
@@ -32,22 +31,11 @@ function Comments(props) {
             .then((response) => setComments(response?.data?.posts))
     }, [id, notify])
 
-    useEffect(() => {
-        async function getData() {
-            const response = await getSettings();
-
-            setSettings(response[0])
-        }
-
-        getData();
-    }, [])
-
     return (
         <div className={s.Container + " commentsPage"}>
             <style>
                 {`
                      .commentsPage {
-                     border-left: 1px solid ${settings?.configs?.color[settings?.color]};
                      border-right: 1px solid ${settings?.configs?.color[settings?.color]};
                      }
                      .commentsPage .onePostContainer {

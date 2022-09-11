@@ -1,9 +1,9 @@
 import {alpha, CardActions, Typography} from "@mui/material";
 import {buttonsConfig} from "../create-post/CreatePostLine";
-import {useEffect, useState} from "react";
-import {getSettings} from "../db";
+import {useState} from "react";
 import {useTranslation} from "react-i18next";
 import InputEmoji from 'react-input-emoji';
+import {useSettings} from "../hooks";
 
 function ClearModalUser(props) {
     const {
@@ -18,18 +18,7 @@ function ClearModalUser(props) {
         userId
     } = props;
 
-    const [settings, setSettings] = useState({});
-
-    useEffect(() => {
-        async function getData() {
-            const response = await getSettings();
-
-            setSettings(response[0])
-        }
-
-        getData();
-    }, [])
-
+    const {settings} = useSettings();
     const [text, setText] = useState('')
     const {t} = useTranslation();
 

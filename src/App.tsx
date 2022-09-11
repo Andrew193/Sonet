@@ -82,6 +82,9 @@ function App() {
             .App {
             min-height: ${height() - 1}px;
             } 
+            .App.Open {
+            height: ${height() - 1}px!important;
+            }
             .genContainer {
             min-height: ${height() - 1}px;
             }

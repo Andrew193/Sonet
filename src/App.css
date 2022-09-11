@@ -1,12 +1,13 @@
 .App {
     text-align: center;
+    display: flex;
 }
 
-.App
-.genContainer {
+.App .genContainer {
     display: flex;
     height: -webkit-fill-available;
     height: stretch;
+    width: 80%;
 }
 
 .public-DraftStyleDefault-ltr {

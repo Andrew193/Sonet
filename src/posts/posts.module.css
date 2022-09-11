@@ -1,8 +1,7 @@
 .Container {
-    margin: 0 0 0 15%;
     -webkit-flex: 3 0;
     flex: 3 0;
-    max-width: 60%;
+    max-width: 80%;
     height: -webkit-fill-available;
     border-left: 1px solid #cecccc;
     border-right: 1px solid #cecccc;
@@ -152,7 +151,7 @@
     display: flex;
     flex-wrap: wrap;
     position: fixed;
-    width: 60%;
+    width: 47.9%;
     background: aliceblue;
     bottom: 0;
     height: 7%;

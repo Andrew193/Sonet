@@ -71,7 +71,7 @@ function FastActionsContainer() {
                 .${s.FastElement}:hover {
                 background: ${alpha(settingsConfig?.settings?.configs?.color[settingsConfig?.settings?.color] || "#b6c0f3", 0.5)};
                 }
-                .${s.Header} > p {
+                .${s.Header} > .p {
                   display: ${isOpened ? "block!important" : "none"};
                 }
                 .${s.Container} {
@@ -84,7 +84,7 @@ function FastActionsContainer() {
                     component={"p"}
                     className={s.Header}
                 >
-                    <p>Fast actions</p>
+                    <span className={"p"}>Fast actions</span>
                     <span
                         className={s.HeaderActions}
                     >

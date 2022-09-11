@@ -47,10 +47,9 @@
 }
 
 .Container {
-    margin-left: 15%;
     height: auto;
     min-height: 100%;
-    border-left: 1px solid gray;
+    width: 80%;
 }
 
 .Container > div:nth-child(2) {

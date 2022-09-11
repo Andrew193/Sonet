@@ -2,9 +2,8 @@ import {MdKeyboardBackspace} from "react-icons/md";
 import {useHistory} from "react-router-dom";
 import s from "./style.module.css";
 import CommonHelper from "../../../helpers/common";
-import {useEffect, useState} from "react";
-import {getSettings} from "../../../db";
 import {hexToRgb} from "@mui/material";
+import {useSettings} from "../../../hooks";
 
 function PageHeader(props) {
     const {
@@ -12,18 +11,7 @@ function PageHeader(props) {
     } = props;
 
     const history = useHistory();
-
-    const [settings, setSettings] = useState({});
-
-    useEffect(() => {
-        async function getData() {
-            const response = await getSettings();
-
-            setSettings(response[0])
-        }
-
-        getData();
-    }, [])
+    const {settings} = useSettings()
 
     return (
         <div

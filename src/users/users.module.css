@@ -1,8 +1,7 @@
 .Container {
-    margin: 0 0 0 15%;
     -webkit-flex: 3 0;
     flex: 3 0;
-    max-width: 60%;
+    max-width: 80%;
 }
 
 .ActionLine {

@@ -41,7 +41,8 @@ function PostCreator(props) {
                             variant="h5"
                             component="h4"
                             style={{
-                                fontWeight: "bold"
+                                fontWeight: "bold",
+                                fontSize: '13px'
                             }}
                         >{t("Created by")} @{value.createdBy}</Typography>
                     </Typography>

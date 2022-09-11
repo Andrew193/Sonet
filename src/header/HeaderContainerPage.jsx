@@ -14,6 +14,7 @@ import {alpha} from "@mui/material";
 import {useTranslation} from "react-i18next";
 import HeaderLink from "./HeaderLink";
 import {useSettings} from "../hooks";
+import UserShortBar from "./UserShortBar";
 
 export const headerLinksConfig = [
     {path: headerListLinks.base, label: "Home"},
@@ -40,8 +41,6 @@ function Header() {
         key={linkConfig.label}
     />), [settings, i18n?.language]);
 
-    const currentWidth = useMemo(() => document?.body.offsetWidth, [document?.body.offsetWidth]);
-
     return (
         <nav
             className={s.NavBar}
@@ -51,45 +50,38 @@ function Header() {
                 borderRight: `1px solid ${settings?.configs?.color[settings?.color] || "rgb(206, 204, 204)"}`,
             }}
         >
+            <UserShortBar/>
             <div
                 style={{
                     color: settings?.configs?.color[settings?.color],
-                    boxShadow: currentWidth < 768 ? `0px 0px 8px 0px ${alpha(settings?.configs?.color[settings?.color] || "#b6c0f3", 0.8)}` : "",
+                    boxShadow: `0px 0px 8px 0px ${alpha(settings?.configs?.color[settings?.color] || "#b6c0f3", 0.8)}`,
                 }}
+                className={s.HeadersLinksPaper}
             >
                 <p className={"wrap-link-line logotype"}>
-                    <span className={"col-sm-2"}/>
-                    <Link to={{pathname: "/"}} className={"col-sm-7 logotype"}>
+                    <Link to={{pathname: "/"}} className={"col-sm-12 logotype"}>
                         <img alt="Logotype" src={Logo}/>
                     </Link>
-                    <span className={"col-sm-3"}/>
                 </p>
                 {headerLinks}
-
-                <p className={"wrap-link-line"}>
-                    <span className={"col-sm-2"}/>
+                <p className={"wrap-link-line " + s.ExitLink} data-tooltip={t("Leave")}>
+                    <span className={"col-sm-5"}/>
                     <span
                         className={s.LeaveBtn + " col-sm-7"}
-                        onClick={() => {
-                            Script.leave(history)
-                        }}
+                        onClick={() => Script.leave(history)}
                         data-tooltip={t("Leave")}
                     >
                         <AiOutlineLogout size={"24px"} style={{"marginRight": "10px"}}/>
-                        <span
-                            style={{
-                                fontSize: settings?.configs?.size[settings?.fontSize],
-                            }}
+                        <span data-tooltip={t("Leave")}
+                              style={{fontSize: settings?.configs?.size[settings?.fontSize],}}
                         >{t("Leave")}</span>
                     </span>
-                    <span className={"col-sm-3"}/>
                 </p>
 
                 <p className={"wrap-link-line post-btn-nav "}>
-                    <span className={"col-sm-2"}/>
                     <span
                         id={"mainPostBtn"}
-                        className={"col-sm-7 " + s.PostBtn}
+                        className={"col-sm-12 " + s.PostBtn}
                         onClick={() => {
                             window?.document?.body?.querySelector(".App")?.classList?.add("Open")
                             Script2.openModal("Mpost")
@@ -99,7 +91,6 @@ function Header() {
                             color: settings?.configs?.color[settings?.color],
                         }}
                     >{t("Post")}</span>
-                    <span className={"col-sm-2"}/>
                 </p>
 
                 <span
@@ -116,9 +107,7 @@ function Header() {
 
             <div
                 className={s.userInfo}
-                onClick={() => {
-                    Script.ToggleStateValue(setFlag)
-                }}
+                onClick={() => Script.ToggleStateValue(setFlag)}
             >
                 <ProfileContainer
                     customStyles={{
@@ -131,16 +120,13 @@ function Header() {
 
             {flag && <Portal
                 s={s.userInfo}
-                click={() => {
-                    setFlag(!flag)
-                }}
+                click={() => setFlag(!flag)}
                 customStyles={{
                     fontSize: settings?.configs?.size[settings?.fontSize],
                     color: settings?.configs?.color[settings?.color],
                     background: settings?.configs?.background[settings?.background],
                 }}
             />}
-
             <PostPortal/>
         </nav>
     )

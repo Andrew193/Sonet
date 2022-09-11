@@ -3,32 +3,22 @@ import s from "./top-info.module.css"
 import Script from "./script.js"
 import Skeleton from 'react-loading-skeleton';
 import PostCreator from "./creators/post";
-import {getSettings} from "../../db";
 import {alpha} from "@mui/material";
 import {useTranslation} from "react-i18next";
 import {headerListLinks} from "../../vars";
 import {useHistory} from "react-router-dom";
 import {Context} from "../../App";
+import {useSettings} from "../../hooks";
 
 function LatestPosts() {
     const [state, setState] = useState(false);
     const history = useHistory();
-    const [settings, setSettings] = useState({});
+    const {settings } = useSettings()
     const {socket} = useContext(Context);
 
     socket.on("postCreate", (updatedPosts) => {
         setState({posts: updatedPosts})
     })
-
-    useEffect(() => {
-        async function getData() {
-            const response = await getSettings();
-
-            setSettings(response[0])
-        }
-
-        getData();
-    }, [])
 
     useEffect(() => {
         Script.getPosts()

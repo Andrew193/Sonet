@@ -1,7 +1,6 @@
 .Container {
-    margin: 0px 0px 0px 15%;
     flex: 3 0;
-    max-width: 60%;
+    max-width: 80%;
     height: -webkit-fill-available;
     border-right: 1px solid rgb(206, 204, 204);
 }
