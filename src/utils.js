@@ -1,4 +1,5 @@
 import {v4 as uuidv4} from 'uuid';
+import {alpha} from "@mui/material";
 
 export function downloadFile(url, name) {
     const link = document.createElement('a');
@@ -10,6 +11,21 @@ export function downloadFile(url, name) {
     return true;
 }
 
+const defaultPropertiesConfig = {
+    isBoxShadow: true,
+    boxShadowColor: ""
+}
+
+export function getElementsThemeConfig(config, propertiesConfig = defaultPropertiesConfig) {
+    return {
+        boxShadow: propertiesConfig?.isBoxShadow ?
+            `0px 0px 8px 0px ${alpha(propertiesConfig.boxShadowColor ?
+                propertiesConfig.boxShadowColor
+                : config?.configs?.color[config?.color] || "#b6c0f3", 0.8)}`
+            : "",
+    }
+}
+
 export function downloadFileVersion2(url, name) {
     const link = document.createElement("a");
     link.href = url
@@ -17,7 +33,7 @@ export function downloadFileVersion2(url, name) {
     link.click();
 }
 
-export async function createFile(src){
+export async function createFile(src) {
     let response = await fetch(src);
     let data = await response.blob();
     let metadata = {

@@ -16,6 +16,7 @@ import {AiOutlineCheck, FiSettings, GiCheckMark} from "react-icons/all";
 import {getSettings, updateSettings} from "../../db";
 import {buttonsConfig} from "../../create-post/CreatePostLine";
 import {useTranslation} from "react-i18next";
+import {getElementsThemeConfig} from "../../utils";
 
 const marks = [
     {
@@ -55,7 +56,7 @@ function AppearanceSettings() {
             viewType === "italic" ? `${borderRadius}px ${borderRadius + 10}px` : `${borderRadius}px`,
         margin: `${margin}px`,
         padding: `${padding}px`,
-        boxShadow: !!boxShadow ? `0px 0px 8px 0px ${alpha(hexToRgb(settings?.configs?.color[settings?.color] || "#000"), 0.8)}` : ""
+        ...getElementsThemeConfig(settings, {isBoxShadow:!!boxShadow}),
     }), [borderRadius, viewType, margin, padding, boxShadow])
 
     function saveSettingsHandler() {

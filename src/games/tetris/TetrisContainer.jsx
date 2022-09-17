@@ -7,6 +7,7 @@ import {useOutsideClick} from "../../hooks";
 import {getSettings} from "../../db";
 import {buttonsConfig} from "../../create-post/CreatePostLine";
 import {useTranslation} from "react-i18next";
+import {getElementsThemeConfig} from "../../utils";
 
 function TetrisContainer() {
     const [isTipOpened, setIsTipOpened] = useState(false);
@@ -131,7 +132,7 @@ function TetrisContainer() {
                             className={'tetris-tips'}
                             ref={wrapperRef}
                             style={{
-                                boxShadow: `0px 0px 8px 0px ${alpha(settings?.configs?.color[settings?.color] || "rgb(0,0,0)", 0.8)}`,
+                                ...getElementsThemeConfig(settings),
                                 backgroundColor: settings?.configs?.background[settings?.background],
                                 color: settings?.configs?.color[settings?.color]
                             }}

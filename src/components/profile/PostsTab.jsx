@@ -7,6 +7,7 @@ import {forceCheck} from 'react-lazyload';
 import DateHelper from "../../helpers/dateHelper";
 import EmotionsLineContainer from "../../posts/EmotionsLineContainer";
 import {MdOutlinePostAdd} from "react-icons/all";
+import {getElementsThemeConfig} from "../../utils";
 
 forceCheck();
 
@@ -21,7 +22,8 @@ function UserPostTab({information, avatarUrl}) {
                 style={{
                     marginLeft: '20px',
                     height: '60px',
-                    width: '60px'
+                    width: '60px',
+                    ...getElementsThemeConfig({}, {isBoxShadow: true, boxShadowColor: "rgb(0,0,0)"})
                 }}
                 className={"conversationImg"}
             >
@@ -36,7 +38,10 @@ function UserPostTab({information, avatarUrl}) {
                 >
                     <Typography
                         variant={"h6"}
-                        component={"h6"}
+                        component={"span"}
+                        style={{
+                            fontWeight: '600'
+                        }}
                     >
                         {information?.createdBy}
                     </Typography>
@@ -91,7 +96,7 @@ function PostsTab(props) {
                     >
                         <Typography
                             variant={"h3"}
-                            component={"h3"}
+                            component={"span"}
                         >You don’t have any posts yet</Typography>
                         Create a post in any way. When you do, it’ll show up here.
                         <MdOutlinePostAdd/>

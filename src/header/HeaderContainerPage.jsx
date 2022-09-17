@@ -15,6 +15,7 @@ import {useTranslation} from "react-i18next";
 import HeaderLink from "./HeaderLink";
 import {useSettings} from "../hooks";
 import UserShortBar from "./UserShortBar";
+import {getElementsThemeConfig} from "../utils";
 
 export const headerLinksConfig = [
     {path: headerListLinks.base, label: "Home"},
@@ -54,7 +55,7 @@ function Header() {
             <div
                 style={{
                     color: settings?.configs?.color[settings?.color],
-                    boxShadow: `0px 0px 8px 0px ${alpha(settings?.configs?.color[settings?.color] || "#b6c0f3", 0.8)}`,
+                    ...getElementsThemeConfig(settings)
                 }}
                 className={s.HeadersLinksPaper}
             >

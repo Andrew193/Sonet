@@ -453,11 +453,23 @@ p.wrap-link-line {
 
 @media (max-width: 768px) {
 
+    .App {
+        display: block !important;
+    }
+
+    .App .genContainer {
+        width: 100% !important;
+    }
+
     .users-box {
         margin: 75px;
         margin-left: unset;
         margin-right: unset;
         margin-top: unset;
+    }
+
+    .userShortBar {
+        display: none !important;
     }
 
     .logotype {

@@ -13,9 +13,7 @@ function AboutYou(props) {
         <Box
             className={s.FlexColl}
         >
-            <h3
-                className={s.Black}
-            >{t("About you")}</h3>
+            <h3 className={s.Black}>{t("About you")}</h3>
             <Typography
                 className={s.AboutMe}
             >{t(description)}</Typography>

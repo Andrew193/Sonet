@@ -10,6 +10,7 @@ import {useTranslation} from "react-i18next";
 import React from "react";
 import InputEmoji from 'react-input-emoji';
 import {getUserAvatar} from "../posts/postsHelper";
+import {getElementsThemeConfig} from "../utils";
 
 const PostButtonCover = React.forwardRef(function MyComponent(props, ref) {
     //  Spread the props to the underlying DOM element.
@@ -133,9 +134,7 @@ function CurrentChat(props) {
                 }
             </div>
             <div
-                style={{
-                    boxShadow: `0px 0px 8px 0px ${alpha(settings?.configs?.color[settings?.color] || "#b6c0f3", 0.8)}`,
-                }}
+                style={getElementsThemeConfig(settings)}
                 className="chatBoxBottom"
             >
                 <InputEmoji

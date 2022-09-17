@@ -5,6 +5,7 @@ import LazyImage from "../posts/LazyImage";
 import s from "./header.module.css"
 import {useSettings} from "../hooks";
 import {useHistory} from "react-router-dom";
+import {getElementsThemeConfig} from "../utils";
 
 function UserShortBar() {
     const [userAvatar, setUserAvatar] = useState();
@@ -19,12 +20,9 @@ function UserShortBar() {
     }, [userInformation.id])
 
     return (
-        <aside
-            style={{
-                boxShadow: `0px 0px 8px 0px ${alpha(settings?.configs?.color[settings?.color] || "#b6c0f3", 0.8)}`,
-            }}
-        >
-            <LazyImage imgClass={s.ShortUserAvatar} imageSrc={userAvatar}/>
+        <aside style={getElementsThemeConfig(settings)} className={"userShortBar"}>
+            <LazyImage imgClass={s.ShortUserAvatar} imageSrc={userAvatar}
+                       wrapperStyle={getElementsThemeConfig({}, {isBoxShadow: true, boxShadowColor: "rgb(0,0,0)"})}/>
             <p>
                 <span onClick={() => history.push("/profile")} className={s.ShortName}>{userInformation.userName}</span>
                 <span>{userInformation.email}</span>

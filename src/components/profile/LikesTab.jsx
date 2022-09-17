@@ -9,11 +9,12 @@ import postsHelper from "../../posts/postsHelper"
 import {notify} from "../../App";
 import EmotionsLineContainer from "../../posts/EmotionsLineContainer";
 import {useHistory} from "react-router-dom";
-import {AiOutlineHeart, AiOutlineLike} from "react-icons/ai";
+import {AiOutlineDislike, AiOutlineHeart, AiOutlineLike} from "react-icons/ai";
+import {getElementsThemeConfig} from "../../utils";
 
 forceCheck();
 
-function LikeTab({information, avatarUrl}) {
+export function LikeDislikeTab({information, avatarUrl, isLike}) {
     const history = useHistory();
     const [relatedPost, setRelatedPost] = useState({});
 
@@ -29,31 +30,31 @@ function LikeTab({information, avatarUrl}) {
         >
             <Box
                 style={{display: "flex"}}
-                onClick={() => {
-                    postsHelper.getComment(history, information.postId, information?.id)
-                }}
+                onClick={() => postsHelper.getComment(history, information.postId, information?.id)}
             >
                 <Avatar
+                    style={{
+                        height: '60px',
+                        width: '60px',
+                        ...getElementsThemeConfig({}, {isBoxShadow: true, boxShadowColor: "rgb(0,0,0)"})
+                    }}
                     src={avatarUrl}
                     className={"conversationImg"}
                 >
                 </Avatar>
                 <Box
                     className={s.UsersPost + " profilePostBorder"}
-                    style={{
-                        width: "100%"
-                    }}
+                    style={{width: "100%"}}
                 >
-                    <Avatar
-                        className={"conversationImg"}
-                    >{relatedPost[0]?.createdBy[0]}</Avatar>
-                    <Box>
-                        <Typography
-                            className={s.metaBar}
-                        >
+                    <Avatar className={"conversationImg"} style={{flex: '1'}}>{relatedPost[0]?.createdBy[0]}</Avatar>
+                    <Box style={{flex: '11'}}>
+                        <Typography className={s.metaBar}>
                             <Typography
                                 variant={"h6"}
-                                component={"h6"}
+                                component={"span"}
+                                style={{
+                                    fontWeight: '600'
+                                }}
                             >
                                 {relatedPost[0]?.createdBy}
                             </Typography>
@@ -61,11 +62,7 @@ function LikeTab({information, avatarUrl}) {
                                 {DateHelper.fromNow(relatedPost[0]?.createdAt)}
                             </Typography>
                         </Typography>
-                        <Typography
-                            className={s.postContent}
-                        >
-                            {relatedPost[0]?.text}
-                        </Typography>
+                        <Typography className={s.postContent}>{relatedPost[0]?.text}</Typography>
 
                         <EmotionsLineContainer
                             containerClass={s.ProfileEmotions}
@@ -80,14 +77,34 @@ function LikeTab({information, avatarUrl}) {
                     marginLeft: "7%",
                     padding: "5px",
                     display: "flex",
-                    alignItems: "end"
+                    alignItems: "unset"
                 }}
             >
-                <AiOutlineLike size={"30px"}/>
+                {isLike ? <AiOutlineLike size={"30px"} style={{
+                        marginRight: '5px',
+                        height: '16px'
+                    }}/>
+                    : <AiOutlineDislike size={"30px"} style={{
+                        marginRight: '5px',
+                        height: '16px'
+                    }}/>
+                }
                 <span className={"fromNow"}>{DateHelper.fromNow(information?.createdAt)}</span>
             </Box>
         </Box>
     )
+}
+
+export function useEmotionConfig(config, avatarUrl, isLike) {
+    return useMemo(() => config?.map((configElement, index) =>
+        <LazyLoad key={index}>
+            <LikeDislikeTab
+                information={configElement}
+                avatarUrl={avatarUrl}
+                isLike={isLike}
+            />
+        </LazyLoad>
+    ), [config]);
 }
 
 function LikesTab(props) {
@@ -97,14 +114,7 @@ function LikesTab(props) {
         avatarUrl
     } = props;
 
-    const likesLine = useMemo(() => likesConfig?.map((like, index) =>
-        <LazyLoad key={index}>
-            <LikeTab
-                information={like}
-                avatarUrl={avatarUrl}
-            />
-        </LazyLoad>
-    ), [likesConfig]);
+    const likesLine = useEmotionConfig(likesConfig, avatarUrl, true)
 
     return (
         <TabPanel
@@ -119,7 +129,7 @@ function LikesTab(props) {
                     >
                         <Typography
                             variant={"h3"}
-                            component={"h3"}
+                            component={"span"}
                         >You don’t have any likes yet</Typography>
                         Tap the like icon on any Post to show it some love. When you do, it’ll show up here.
                         <AiOutlineHeart/>

@@ -10,6 +10,7 @@ import {notify} from "../../App";
 import EmotionsLineContainer from "../../posts/EmotionsLineContainer";
 import {useHistory} from "react-router-dom";
 import {BiMessageMinus} from "react-icons/all";
+import {getElementsThemeConfig} from "../../utils";
 
 forceCheck();
 
@@ -36,6 +37,7 @@ function CommentTab({information, avatarUrl}) {
                 <Avatar
                     src={avatarUrl}
                     className={"conversationImg"}
+                    style={getElementsThemeConfig({}, {isBoxShadow: true, boxShadowColor: "rgb(0,0,0)"})}
                 >
                 </Avatar>
                 <Box>
@@ -44,7 +46,10 @@ function CommentTab({information, avatarUrl}) {
                     >
                         <Typography
                             variant={"h6"}
-                            component={"h6"}
+                            component={"span"}
+                            style={{
+                                fontWeight: '600'
+                            }}
                         >
                             {information?.createdBy}
                         </Typography>
@@ -75,7 +80,10 @@ function CommentTab({information, avatarUrl}) {
                     >
                         <Typography
                             variant={"h6"}
-                            component={"h6"}
+                            component={"span"}
+                            style={{
+                                fontWeight: '600'
+                            }}
                         >
                             {relatedPost[0]?.createdBy}
                         </Typography>
@@ -129,7 +137,7 @@ function CommentsTab(props) {
                     >
                         <Typography
                             variant={"h3"}
-                            component={"h3"}
+                            component={"span"}
                         >You don’t have any comments yet</Typography>
                         Tap the comment icon on any Post to comment it out. When you do, it’ll show up here.
                         <BiMessageMinus/>

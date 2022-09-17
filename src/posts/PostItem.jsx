@@ -7,7 +7,7 @@ import {useEffect, useState, useMemo, useCallback, useRef, useContext} from "rea
 import ImageViewer from "react-simple-image-viewer";
 import {AiOutlineDelete, BsThreeDots} from "react-icons/all";
 import {AiOutlineDownload, AiOutlineHighlight} from "react-icons/ai";
-import {downloadFileVersion2} from "../utils";
+import {downloadFileVersion2, getElementsThemeConfig} from "../utils";
 import {useOutsideClick} from "../hooks";
 import PostItemsImages from "./PostItemsImages";
 import React from "react";
@@ -124,7 +124,7 @@ function PostItem(props) {
                         width: '75px',
                         marginRight: '15px',
                         borderRadius: '5px',
-                        boxShadow: `0px 0px 8px 0px ${alpha(hexToRgb(settings?.configs?.color[settings?.color] || "rgb(0,0,0)"), 0.8)}`
+                        ...getElementsThemeConfig(settings)
                     }}
                 />
                 <div
@@ -161,7 +161,7 @@ function PostItem(props) {
                 <Box
                     style={{
                         display: `${!!anchorEl ? "display" : "none"}`,
-                        boxShadow: `0px 0px 8px 0px ${alpha(settings?.configs?.color[settings?.color] || "#b6c0f3", 0.8)}`
+                        ...getElementsThemeConfig(settings)
                     }}
                     key={anchorEl}
                     onClick={handleClose}
