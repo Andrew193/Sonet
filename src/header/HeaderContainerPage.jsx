@@ -15,7 +15,7 @@ import {useTranslation} from "react-i18next";
 import HeaderLink from "./HeaderLink";
 import {useSettings} from "../hooks";
 import UserShortBar from "./UserShortBar";
-import {getElementsThemeConfig} from "../utils";
+import {getElementsThemeConfig, getPropertiesConfig} from "../utils";
 
 export const headerLinksConfig = [
     {path: headerListLinks.base, label: "Home"},
@@ -55,7 +55,7 @@ function Header() {
             <div
                 style={{
                     color: settings?.configs?.color[settings?.color],
-                    ...getElementsThemeConfig(settings)
+                    ...getElementsThemeConfig(settings, getPropertiesConfig(true, null, false, '', null, null))
                 }}
                 className={s.HeadersLinksPaper}
             >

@@ -6,16 +6,16 @@ import SortLine from "./SortLine.jsx"
 import s from "./posts.module.css"
 import {Link, useHistory, withRouter} from "react-router-dom";
 import PageHeader from "../components/common/navigationLine/NavigationLine.jsx";
-import {getSettings} from "../db";
 import {alpha, hexToRgb} from "@mui/material";
 import FiltersBar from "./FiltersBar";
 import {Context} from "../App";
+import {useSettings} from "../hooks";
 
 function PostsContainer(props) {
     const [posts, setPosts] = useState(false);
     const [isSetup, setIsSetup] = useState(false);
     const history = useHistory();
-    const [settings, setSettings] = useState({});
+    const {settings} = useSettings();
 
     const {socket, notify} = useContext(Context);
 
@@ -42,16 +42,6 @@ function PostsContainer(props) {
                 })
         }
     }, [notify, props?.match?.params?.id]);
-
-    useEffect(() => {
-        async function getData() {
-            const response = await getSettings();
-
-            setSettings(response[0])
-        }
-
-        getData();
-    }, [])
 
     useEffect(() => {
         if (!!history?.location?.hash) {

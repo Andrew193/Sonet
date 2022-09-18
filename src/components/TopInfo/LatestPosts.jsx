@@ -9,6 +9,7 @@ import {headerListLinks} from "../../vars";
 import {useHistory} from "react-router-dom";
 import {Context} from "../../App";
 import {useSettings} from "../../hooks";
+import {getElementsThemeConfig, getPropertiesConfig} from "../../utils";
 
 function LatestPosts() {
     const [state, setState] = useState(false);
@@ -33,7 +34,8 @@ function LatestPosts() {
         <div
             className={!state ? s.Tip + " " + s.Center : s.Tip}
             style={{
-                background: alpha(settings?.configs?.color[settings?.color] || "rgb(203, 203, 243)", 0.2)
+                ...getElementsThemeConfig(settings, getPropertiesConfig(false, '', false, '',
+                    null, alpha(settings?.configs?.color[settings?.color] || "rgb(203, 203, 243)", 0.2)))
             }}
         >
             <h2>{t("Latest Posts")}</h2>

@@ -59,6 +59,10 @@ function ClearProfile(props) {
                 background-color: ${alpha(hexToRgb(settings?.configs?.color[settings?.color] || "rgb(231 231 240)"), 0.6)};
                 }
                 
+                .SmallUserAvatar {
+                padding: 5px;
+                }
+                
                 ::-webkit-scrollbar-track {
                 background-color: ${alpha(hexToRgb(settings?.configs?.color[settings?.color] || "rgb(231 231 240)"), 0.2)};
                 }

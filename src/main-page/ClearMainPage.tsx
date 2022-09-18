@@ -6,6 +6,8 @@ import React from "react";
 import {useTranslation} from "react-i18next";
 import {useSettings} from "../hooks";
 import {MainPageType} from "./MainPageContainer";
+import PageHeader from "../components/common/navigationLine/NavigationLine";
+import {getElementsThemeConfig, getPropertiesConfig} from "../utils";
 
 function ClearMainPage(props: MainPageType) {
     const {open} = props;
@@ -15,12 +17,8 @@ function ClearMainPage(props: MainPageType) {
     return (
         <main
             className={s.Container}
-            style={{
-                fontSize: settings?.configs?.size[settings?.fontSize],
-                color: settings?.configs?.color[settings?.color],
-                background: settings?.configs?.background[settings?.background],
-                borderRight: `1px solid ${settings?.configs?.color[settings?.color] || "rgb(206, 204, 204)"}`
-            }}
+            style={{...getElementsThemeConfig(settings, getPropertiesConfig(false, '', true, '',
+                    null, null))}}
         >
             <style>
                 {`
@@ -29,28 +27,13 @@ function ClearMainPage(props: MainPageType) {
                  }
                 `}
             </style>
-            <div
-                className={"basicPageHead"}
-                style={{
-                    borderBottom: `1px solid ${settings?.configs?.color[settings?.color] || "rgb(206, 204, 204)"}`,
-                    color: settings?.configs?.color[settings?.color],
-                }}
-            >
-                <Link
-                    to={{pathname: "/"}}
-                    style={{
-                        fontSize: settings?.configs?.size[settings?.fontSize],
-                        background: settings?.configs?.background[settings?.background],
-                    }}
-                >{t("Home")}</Link>
-            </div>
-            <CreatePost
-                customStyle={{
-                    fontSize: settings?.configs?.size[settings?.fontSize],
-                    color: settings?.configs?.color[settings?.color],
-                    background: settings?.configs?.background[settings?.background],
-                }}
-            />
+            <PageHeader> <Link
+                to={{pathname: "/"}}
+                style={{...getElementsThemeConfig(settings, getPropertiesConfig(false, '', false, '',
+                        "rgb(0, 0, 0)"))}}
+            >{t("Home")}</Link></PageHeader>
+            <CreatePost customStyle={{...getElementsThemeConfig(settings, getPropertiesConfig(false, '',
+                    false, '', null, null))}}/>
             <div
                 className={"Separator"}
                 onClick={(e: React.MouseEvent<HTMLDivElement>) => {
@@ -60,11 +43,8 @@ function ClearMainPage(props: MainPageType) {
             />
             <ConfigLine
                 open={open}
-                customStyle={{
-                    fontSize: settings?.configs?.size[settings?.fontSize],
-                    color: settings?.configs?.color[settings?.color],
-                    background: settings?.configs?.background[settings?.background],
-                }}
+                customStyle={{...getElementsThemeConfig(settings, getPropertiesConfig(false, '',
+                        false, '', null, null))}}
             />
         </main>
     )

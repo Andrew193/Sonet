@@ -7,23 +7,26 @@ import {forceCheck} from 'react-lazyload';
 import DateHelper from "../../helpers/dateHelper";
 import EmotionsLineContainer from "../../posts/EmotionsLineContainer";
 import {MdOutlinePostAdd} from "react-icons/all";
-import {getElementsThemeConfig} from "../../utils";
+import {getElementsThemeConfig, getPropertiesConfig} from "../../utils";
+import {replaceTags} from "../../posts/postsHelper";
+import {getTabsImageStyle} from "./LikesTab";
+import {useSettings} from "../../hooks";
 
 forceCheck();
 
 function UserPostTab({information, avatarUrl}) {
+    const {settings} = useSettings();
 
     return (
         <Box
             className={s.UsersPost + " profilePostBorder"}
+            style={settings?.list?.listItemStyles}
         >
             <Avatar
                 src={avatarUrl}
                 style={{
-                    marginLeft: '20px',
-                    height: '60px',
-                    width: '60px',
-                    ...getElementsThemeConfig({}, {isBoxShadow: true, boxShadowColor: "rgb(0,0,0)"})
+                    ...getTabsImageStyle(),
+                    ...getElementsThemeConfig({}, getPropertiesConfig(true, "rgb(0,0,0)"))
                 }}
                 className={"conversationImg"}
             >
@@ -49,10 +52,8 @@ function UserPostTab({information, avatarUrl}) {
                         {DateHelper.fromNow(information.createdAt)}
                     </Typography>
                 </Typography>
-                <Typography
-                    className={s.postContent}
-                >
-                    {information?.text}
+                <Typography className={s.postContent}>
+                    {replaceTags(information?.text || "", information?.possibleMentions || JSON.stringify([]))}
                 </Typography>
 
                 <EmotionsLineContainer
@@ -73,9 +74,7 @@ function PostsTab(props) {
     } = props;
 
     const postsLine = useMemo(() => postsConfig?.map((post, index) =>
-        <LazyLoad
-            key={index}
-        >
+        <LazyLoad key={index}>
             <UserPostTab
                 information={post}
                 avatarUrl={avatarUrl}

@@ -133,10 +133,8 @@ function PostItem(props) {
                     }}
                 >
                     <h3>
-                        <Link
-                            to={{pathname: `/users/${+value.userId}`}}
-                            className={"authorName"}
-                        >{value.createdBy}</Link>
+                        <Link to={{pathname: `/users/${+value.userId}`}}
+                              className={"authorName"}>{value.createdBy}</Link>
                     </h3>
                     <p>{replaceTags(value.text, value.possibleMentions)}</p>
                     <HashtagsLine text={value.text}/>
@@ -152,9 +150,7 @@ function PostItem(props) {
                     />
                 </div>
                 <BsThreeDots
-                    onClick={(e) => {
-                        handleClick(e)
-                    }}
+                    onClick={(e) => handleClick(e)}
                     className={s.PostItemsActions}
                 />
 

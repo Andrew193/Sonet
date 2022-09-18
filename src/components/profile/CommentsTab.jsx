@@ -5,17 +5,20 @@ import LazyLoad from 'react-lazyload';
 import s from "./profile.module.css"
 import {forceCheck} from 'react-lazyload';
 import DateHelper from "../../helpers/dateHelper";
-import postsHelper from "../../posts/postsHelper"
+import postsHelper, {replaceTags} from "../../posts/postsHelper"
 import {notify} from "../../App";
 import EmotionsLineContainer from "../../posts/EmotionsLineContainer";
 import {useHistory} from "react-router-dom";
 import {BiMessageMinus} from "react-icons/all";
-import {getElementsThemeConfig} from "../../utils";
+import {getElementsThemeConfig, getPropertiesConfig} from "../../utils";
+import {getTabsImageStyle} from "./LikesTab";
+import {useSettings} from "../../hooks";
 
 forceCheck();
 
 function CommentTab({information, avatarUrl}) {
     const history = useHistory();
+    const {settings} = useSettings();
     const [relatedPost, setRelatedPost] = useState({});
 
     useEffect(() => {
@@ -26,7 +29,7 @@ function CommentTab({information, avatarUrl}) {
     return (
         <Box
             className={s.UsersPost + " profilePostBorder"}
-            style={{flexDirection: "column"}}
+            style={{flexDirection: "column", ...settings?.list?.listItemStyles}}
         >
             <Box
                 style={{display: "flex"}}
@@ -37,10 +40,13 @@ function CommentTab({information, avatarUrl}) {
                 <Avatar
                     src={avatarUrl}
                     className={"conversationImg"}
-                    style={getElementsThemeConfig({}, {isBoxShadow: true, boxShadowColor: "rgb(0,0,0)"})}
+                    style={{
+                        ...getTabsImageStyle(),
+                        ...getElementsThemeConfig({}, getPropertiesConfig(true, "rgb(0,0,0)"))
+                    }}
                 >
                 </Avatar>
-                <Box>
+                <Box style={{width:'100%'}}>
                     <Typography
                         className={s.metaBar}
                     >
@@ -57,24 +63,24 @@ function CommentTab({information, avatarUrl}) {
                             {DateHelper.fromNow(information.createdAt)}
                         </Typography>
                     </Typography>
-                    <Typography
-                        className={s.postContent}
-                    >
-                        {information?.text}
+                    <Typography className={s.postContent}>
+                        {replaceTags(information?.text || "", information?.possibleMentions || JSON.stringify([]))}
                     </Typography>
                 </Box>
             </Box>
             <Box
                 className={s.UsersPost + " profilePostBorder"}
                 style={{
-                    marginLeft: "15%",
+                    marginLeft: "20%",
                     padding: "5px"
                 }}
             >
                 <Avatar
                     className={"conversationImg"}
                 >{relatedPost[0]?.createdBy[0]}</Avatar>
-                <Box>
+                <Box
+                    style={{width: "100%"}}
+                >
                     <Typography
                         className={s.metaBar}
                     >
@@ -94,7 +100,7 @@ function CommentTab({information, avatarUrl}) {
                     <Typography
                         className={s.postContent}
                     >
-                        {relatedPost[0]?.text}
+                        {replaceTags(relatedPost[0]?.text || "", relatedPost[0]?.possibleMentions || JSON.stringify([]))}
                     </Typography>
 
                     <EmotionsLineContainer

@@ -5,6 +5,7 @@ import {useMemo, useState} from "react";
 import {alpha} from "@mui/material";
 import AvatarImageMenu from "./AvatarImageMenu";
 import {useTranslation} from "react-i18next";
+import Script2 from "./profileHelper";
 
 function AvatarLine(props) {
     const {
@@ -89,7 +90,7 @@ function AvatarLine(props) {
                         id={"updateButton"}
                         onClick={() => {
                             window?.document?.body?.querySelector(".App")?.classList?.add("Open")
-                            Script.openModal("Muser")
+                            Script2.openModal("Muser")
                         }}
                     >
                         <AiOutlineHighlight className={s.CommonIcon}/>{t("Set up profile")}

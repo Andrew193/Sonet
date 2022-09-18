@@ -42,7 +42,10 @@ function ConfigLine(props: ConfigLineType) {
             <p>
                 <button
                     className={`button ${buttonsConfig[customStyle?.color]}`}
-                    onClick={() => open!()}
+                    onClick={() => {
+                        open!()
+                        window?.document?.body?.querySelector(".App")?.classList?.add("Open")
+                    }}
                 >
                     {t("Update your information")}
                 </button>

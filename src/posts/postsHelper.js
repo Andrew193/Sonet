@@ -8,6 +8,7 @@ import profileHelper from "../components/profile/profileHelper";
 import {useState} from "react";
 import {useHistory} from "react-router-dom";
 import {openUserProfile} from "../users/script";
+import {detectHashtag, detectPerson, detectURL} from "../components/solid-textarea/utils/composeDecorators";
 
 function MentionPerson(props) {
     const {
@@ -36,41 +37,47 @@ function MentionPerson(props) {
 function ComponentToReplace(props) {
     const [isHovered, setIsHovered] = useState(false);
     return (
-        <span key={props.i}
-              onMouseOver={() => {
-                  setIsHovered(() => true)
-              }}
-              onMouseLeave={() => {
-                  setIsHovered(() => false)
-              }}
-              className={textareaStyle.Editor__Highlight + " " + props.className}
-              style={{
-                  display: "inline-block",
-                  padding: "0px",
-                  marginBottom: "3px",
-                  position: "relative"
-              }}>
+        <>
+            {
+                props?.link
+                    ? <a
+                        href={props.match}
+                        target="_blank" rel="noopener noreferrer"
+                        key={props.i} className={textareaStyle.Editor__Highlight + " " + props.className}>{props.match}</a>
+                    : <span key={props.i}
+                            onMouseOver={() => setIsHovered(() => true)}
+                            onMouseLeave={() => setIsHovered(() => false)}
+                            className={textareaStyle.Editor__Highlight + " " + props.className}
+                            style={{
+                                display: "inline-block",
+                                padding: "0px",
+                                marginBottom: "3px",
+                                position: "relative"
+                            }}>
             {props.match}
-            <>
+                        <>
             {isHovered && props.mention && <MentionPerson mention={props.mention}/>}
             </>
         </span>
+            }
+        </>
     )
 }
 
 export function replaceTags(text, possibleMentions) {
-    const regExpTags = /(?:\s|^)(#[\w]+\b)/gi;
+    debugger
     let possibleMentionsIndex = -1;
-    const regExpMentions = /(?:\s|^)(@[\w]+\b)/gi;
     const parsedPossibleMentions = JSON.parse(possibleMentions);
 
-    return reactStringReplace(reactStringReplace(text, regExpTags, (match, i) => (
+    return reactStringReplace(reactStringReplace(reactStringReplace(text, detectHashtag, (match, i) => (
         <ComponentToReplace i={i} className={textareaStyle.Editor_hashtag} match={match}/>
-    )), regExpMentions, (match, i) => {
+    )), detectPerson, (match, i) => {
         possibleMentionsIndex++;
         return <ComponentToReplace i={i} className={textareaStyle.Editor_mention} match={match}
                                    mention={parsedPossibleMentions[possibleMentionsIndex]}/>
-    })
+    }), detectURL, (match, i) => (
+        <ComponentToReplace i={i} className={textareaStyle.Editor_link} match={match} link/>
+    ))
 }
 
 export async function getUserAvatar(userAvatar, setUserAvatar, userId) {

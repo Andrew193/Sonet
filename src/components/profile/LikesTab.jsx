@@ -5,17 +5,21 @@ import LazyLoad from 'react-lazyload';
 import s from "./profile.module.css"
 import {forceCheck} from 'react-lazyload';
 import DateHelper from "../../helpers/dateHelper";
-import postsHelper from "../../posts/postsHelper"
+import postsHelper, {replaceTags} from "../../posts/postsHelper"
 import {notify} from "../../App";
 import EmotionsLineContainer from "../../posts/EmotionsLineContainer";
 import {useHistory} from "react-router-dom";
 import {AiOutlineDislike, AiOutlineHeart, AiOutlineLike} from "react-icons/ai";
-import {getElementsThemeConfig} from "../../utils";
+import {getElementsThemeConfig, getPropertiesConfig} from "../../utils";
+import {useSettings} from "../../hooks";
 
 forceCheck();
 
+export const getTabsImageStyle = () => ({height: '60px', width: '60px', marginLeft: '20px'})
+
 export function LikeDislikeTab({information, avatarUrl, isLike}) {
     const history = useHistory();
+    const {settings} = useSettings();
     const [relatedPost, setRelatedPost] = useState({});
 
     useEffect(() => {
@@ -26,7 +30,7 @@ export function LikeDislikeTab({information, avatarUrl, isLike}) {
     return (
         <Box
             className={s.UsersPost + " profilePostBorder"}
-            style={{flexDirection: "column"}}
+            style={{flexDirection: "column", ...settings?.list?.listItemStyles}}
         >
             <Box
                 style={{display: "flex"}}
@@ -34,9 +38,8 @@ export function LikeDislikeTab({information, avatarUrl, isLike}) {
             >
                 <Avatar
                     style={{
-                        height: '60px',
-                        width: '60px',
-                        ...getElementsThemeConfig({}, {isBoxShadow: true, boxShadowColor: "rgb(0,0,0)"})
+                        ...getTabsImageStyle(),
+                        ...getElementsThemeConfig({}, getPropertiesConfig(true, "rgb(0,0,0)"))
                     }}
                     src={avatarUrl}
                     className={"conversationImg"}
@@ -46,7 +49,7 @@ export function LikeDislikeTab({information, avatarUrl, isLike}) {
                     className={s.UsersPost + " profilePostBorder"}
                     style={{width: "100%"}}
                 >
-                    <Avatar className={"conversationImg"} style={{flex: '1'}}>{relatedPost[0]?.createdBy[0]}</Avatar>
+                    <Avatar className={"conversationImg"}>{relatedPost[0]?.createdBy[0]}</Avatar>
                     <Box style={{flex: '11'}}>
                         <Typography className={s.metaBar}>
                             <Typography
@@ -62,7 +65,8 @@ export function LikeDislikeTab({information, avatarUrl, isLike}) {
                                 {DateHelper.fromNow(relatedPost[0]?.createdAt)}
                             </Typography>
                         </Typography>
-                        <Typography className={s.postContent}>{relatedPost[0]?.text}</Typography>
+                        <Typography
+                            className={s.postContent}>{replaceTags(relatedPost[0]?.text || "", relatedPost[0]?.possibleMentions || JSON.stringify([]))}</Typography>
 
                         <EmotionsLineContainer
                             containerClass={s.ProfileEmotions}
@@ -72,24 +76,26 @@ export function LikeDislikeTab({information, avatarUrl, isLike}) {
                     </Box>
                 </Box>
             </Box>
-            <Box
-                style={{
-                    marginLeft: "7%",
-                    padding: "5px",
-                    display: "flex",
-                    alignItems: "unset"
-                }}
-            >
-                {isLike ? <AiOutlineLike size={"30px"} style={{
-                        marginRight: '5px',
-                        height: '16px'
-                    }}/>
-                    : <AiOutlineDislike size={"30px"} style={{
-                        marginRight: '5px',
-                        height: '16px'
-                    }}/>
-                }
-                <span className={"fromNow"}>{DateHelper.fromNow(information?.createdAt)}</span>
+            <Box style={{display: "flex"}}>
+                <div style={{width: '85px'}}/>
+                <Box
+                    style={{
+                        padding: "5px",
+                        display: "flex",
+                        alignItems: "unset"
+                    }}
+                >
+                    {isLike ? <AiOutlineLike size={"30px"} style={{
+                            marginRight: '5px',
+                            height: '16px'
+                        }}/>
+                        : <AiOutlineDislike size={"30px"} style={{
+                            marginRight: '5px',
+                            height: '16px'
+                        }}/>
+                    }
+                    <span className={"fromNow"}>{DateHelper.fromNow(information?.createdAt)}</span>
+                </Box>
             </Box>
         </Box>
     )

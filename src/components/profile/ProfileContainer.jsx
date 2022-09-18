@@ -4,13 +4,11 @@ import Script from "./profileHelper"
 import ClearProfile from "./ClearProfile";
 import {useEffect, useState} from "react";
 import Skeleton from "react-loading-skeleton";
-import {getSettings} from "../../db";
-import {hexToRgb} from "@mui/material";
-
+import {getElementsThemeConfig, getPropertiesConfig} from "../../utils";
+import {useSettings} from "../../hooks";
 
 function Profile(props) {
     const userId = props.match.params.id;
-
     const history = useHistory();
     const [userInfo, setUserInfo] = useState(false);
 
@@ -24,25 +22,12 @@ function Profile(props) {
         }
     }, [userId]);
 
-    const [settings, setSettings] = useState({});
-
-    useEffect(() => {
-        async function getData() {
-            const response = await getSettings();
-
-            setSettings(response[0])
-        }
-
-        getData();
-    }, [])
+    const {settings} = useSettings();
 
     return (
         <div
             className={s.Container}
-            style={{
-                borderRight: `1px solid ${hexToRgb(settings?.configs?.color[settings?.color] || "rgb(231 231 240)")}`,
-                background: hexToRgb(settings?.configs?.background[settings?.background] || "rgb(231 231 240)")
-            }}
+            style={{...getElementsThemeConfig(settings, getPropertiesConfig(false, '', true, ''))}}
         >
             {userInfo ?
                 <ClearProfile

@@ -16,6 +16,9 @@
     width: 100%;
     background: #faffc9;
     border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .MentionPerson img {
@@ -151,7 +154,7 @@
     display: flex;
     flex-wrap: wrap;
     position: fixed;
-    width: 47.9%;
+    width: 57.5%;
     background: aliceblue;
     bottom: 0;
     height: 7%;

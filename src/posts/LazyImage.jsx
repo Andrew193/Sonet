@@ -28,6 +28,9 @@ function LazyImage(props) {
             .${s.LazyBackground} {
             background: ${alpha(hexToRgb(settings?.configs?.color[settings?.color] || "#e6ddf9"), 0.4)}!important;
             }
+            .lazyImg {
+             position: ${!isLoading ? "static!important" : ""}
+            }
             `}</style>
             {
                 <>
@@ -36,9 +39,14 @@ function LazyImage(props) {
                         src={imageSrc}
                         alt={""}
                         key={imageSrc}
-                        className={imgClass}
-                        style={{display: !!isLoading ? "none" : "block", ...wrapperStyle}}
-                        onLoad={() => setIsLoading(false)}
+                        className={"lazyImg " + imgClass}
+                        style={{
+                            display: !!isLoading ? "none" : "block",
+                            ...wrapperStyle
+                        }}
+                        onLoad={() => {
+                            setIsLoading(false)
+                        }}
                         onClick={(e) => onClick(e)}
                         onError={() => setIsLoading(false)}
                     />

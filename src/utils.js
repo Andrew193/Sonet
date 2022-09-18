@@ -13,7 +13,22 @@ export function downloadFile(url, name) {
 
 const defaultPropertiesConfig = {
     isBoxShadow: true,
-    boxShadowColor: ""
+    boxShadowColor: "",
+    isBorderRight: false,
+    borderRightColor: "rgb(206, 204, 204)",
+    color: "rgb(0, 0, 0)",
+    background: "rgb(203, 203, 243)"
+}
+
+export function getPropertiesConfig(isBoxShadow, boxShadowColor, isBorderRight, borderRightColor, color, background) {
+    return {
+        isBoxShadow: isBoxShadow,
+        boxShadowColor: boxShadowColor,
+        isBorderRight: isBorderRight,
+        borderRightColor: borderRightColor,
+        color: color,
+        background: background
+    }
 }
 
 export function getElementsThemeConfig(config, propertiesConfig = defaultPropertiesConfig) {
@@ -23,6 +38,14 @@ export function getElementsThemeConfig(config, propertiesConfig = defaultPropert
                 propertiesConfig.boxShadowColor
                 : config?.configs?.color[config?.color] || "#b6c0f3", 0.8)}`
             : "",
+        fontSize: config?.configs?.size[config?.fontSize],
+        color: propertiesConfig.color || config?.configs?.color[config?.color],
+        background: propertiesConfig.background || config?.configs?.background[config?.background],
+        borderRight: propertiesConfig?.isBorderRight ?
+            `1px solid ${propertiesConfig?.borderRightColor ?
+                propertiesConfig?.borderRightColor
+                : config?.configs?.color[config?.color] || "rgb(206, 204, 204)"}`
+            : ""
     }
 }
 

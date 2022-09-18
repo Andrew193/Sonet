@@ -7,11 +7,7 @@ export type MainPageType = {
 function MainPage(props: MainPageType) {
     const {open} = props;
 
-    return (
-        <>
-            <ClearMainPage open={open}/>
-        </>
-    )
+    return (<ClearMainPage open={open}/>)
 }
 
 export default MainPage;
