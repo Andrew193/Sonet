@@ -6,8 +6,6 @@ import fastActionsStyles from "../fast-actions/fast-actions.module.css";
 import {BiUpArrowAlt, FiArrowDown} from "react-icons/all";
 import React from "react"
 import {useTranslation} from "react-i18next";
-import {useHistory} from "react-router-dom";
-import {headerListLinks} from "../vars";
 import {MusicContext} from "../App";
 import MusicContainerMemo from "./MusicContainer";
 import {TooltipButtonCover} from "../components/tooltip-cover/TooltipButtonCover";
@@ -23,7 +21,6 @@ function FastMusicContainer(props: FastElementsPropsType) {
     const {settings} = useSettings();
     const [, setMusicContext] = useContext(MusicContext);
     const [isOpened, setIsOpened] = useState(false);
-    const history = useHistory();
     const {t} = useTranslation();
 
     useEffect(() => {
@@ -53,7 +50,6 @@ function FastMusicContainer(props: FastElementsPropsType) {
             <style>
                 {`
                 .${s.Container} {
-                display: ${history?.location?.pathname === headerListLinks.auth ? "none" : "flex"};
                 z-index:${!!opened ? "100" : "10"};
                 }
                 .${s.Container} {

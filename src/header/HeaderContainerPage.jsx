@@ -10,12 +10,12 @@ import {AiOutlineLogout} from "react-icons/ai";
 import PostPortal from "./PostPortal";
 import Script2 from "../components/profile/profileHelper";
 import {headerListLinks} from "../vars";
-import {alpha} from "@mui/material";
 import {useTranslation} from "react-i18next";
 import HeaderLink from "./HeaderLink";
 import {useSettings} from "../hooks";
 import UserShortBar from "./UserShortBar";
 import {getElementsThemeConfig, getPropertiesConfig} from "../utils";
+import {height} from "../App";
 
 export const headerLinksConfig = [
     {path: headerListLinks.base, label: "Home"},
@@ -49,6 +49,7 @@ function Header() {
                 background: settings?.configs?.background[settings?.background],
                 fontSize: settings?.configs?.size[settings?.fontSize],
                 borderRight: `1px solid ${settings?.configs?.color[settings?.color] || "rgb(206, 204, 204)"}`,
+                maxHeight:`${height()-2}px`
             }}
         >
             <UserShortBar/>

@@ -23,81 +23,88 @@ export function LikeDislikeTab({information, avatarUrl, isLike}) {
     const [relatedPost, setRelatedPost] = useState({});
 
     useEffect(() => {
-        postsHelper.getSelectedPost(information?.postId || 1, notify)
+        postsHelper.getSelectedPost(information?.postId, notify)
             .then((response) => setRelatedPost(response?.posts))
     }, []);
 
     return (
-        <Box
-            className={s.UsersPost + " profilePostBorder"}
-            style={{flexDirection: "column", ...settings?.list?.listItemStyles}}
-        >
-            <Box
-                style={{display: "flex"}}
-                onClick={() => postsHelper.getComment(history, information.postId, information?.id)}
-            >
-                <Avatar
-                    style={{
-                        ...getTabsImageStyle(),
-                        ...getElementsThemeConfig({}, getPropertiesConfig(true, "rgb(0,0,0)"))
-                    }}
-                    src={avatarUrl}
-                    className={"conversationImg"}
-                >
-                </Avatar>
-                <Box
-                    className={s.UsersPost + " profilePostBorder"}
-                    style={{width: "100%"}}
-                >
-                    <Avatar className={"conversationImg"}>{relatedPost[0]?.createdBy[0]}</Avatar>
-                    <Box style={{flex: '11'}}>
-                        <Typography className={s.metaBar}>
-                            <Typography
-                                variant={"h6"}
-                                component={"span"}
+        <>
+            {
+                relatedPost[0]
+                    ? <Box
+                        className={s.UsersPost + " profilePostBorder"}
+                        style={{flexDirection: "column", ...settings?.list?.listItemStyles}}
+                    >
+                        <Box
+                            style={{display: "flex"}}
+                            onClick={() => postsHelper.getComment(history, information.postId, information?.id)}
+                        >
+                            <Avatar
                                 style={{
-                                    fontWeight: '600'
+                                    ...getTabsImageStyle(),
+                                    ...getElementsThemeConfig({}, getPropertiesConfig(true, "rgb(0,0,0)"))
+                                }}
+                                src={avatarUrl}
+                                className={"conversationImg"}
+                            >
+                            </Avatar>
+                            <Box
+                                className={s.UsersPost + " profilePostBorder"}
+                                style={{width: "100%"}}
+                            >
+                                <Avatar className={"conversationImg"}>{relatedPost[0]?.createdBy[0]}</Avatar>
+                                <Box style={{flex: '11'}}>
+                                    <Typography className={s.metaBar}>
+                                        <Typography
+                                            variant={"h6"}
+                                            component={"span"}
+                                            style={{
+                                                fontWeight: '600'
+                                            }}
+                                        >
+                                            {relatedPost[0]?.createdBy}
+                                        </Typography>
+                                        <Typography className={"fromNow"}>
+                                            {DateHelper.fromNow(relatedPost[0]?.createdAt)}
+                                        </Typography>
+                                    </Typography>
+                                    <Typography
+                                        className={s.postContent}>{replaceTags(relatedPost[0]?.text || "", relatedPost[0]?.possibleMentions || JSON.stringify([]))}</Typography>
+
+                                    <EmotionsLineContainer
+                                        containerClass={s.ProfileEmotions}
+                                        value={relatedPost[0] || {}}
+                                        id={relatedPost[0]?.id}
+                                    />
+                                </Box>
+                            </Box>
+                        </Box>
+                        <Box style={{display: "flex"}}>
+                            <div style={{width: '85px'}}/>
+                            <Box
+                                style={{
+                                    padding: "5px",
+                                    display: "flex",
+                                    alignItems: "unset"
                                 }}
                             >
-                                {relatedPost[0]?.createdBy}
-                            </Typography>
-                            <Typography className={"fromNow"}>
-                                {DateHelper.fromNow(relatedPost[0]?.createdAt)}
-                            </Typography>
-                        </Typography>
-                        <Typography
-                            className={s.postContent}>{replaceTags(relatedPost[0]?.text || "", relatedPost[0]?.possibleMentions || JSON.stringify([]))}</Typography>
-
-                        <EmotionsLineContainer
-                            containerClass={s.ProfileEmotions}
-                            value={relatedPost[0] || {}}
-                            id={relatedPost[0]?.id}
-                        />
+                                {isLike ? <AiOutlineLike size={"30px"} style={{
+                                        marginRight: '5px',
+                                        height: '16px'
+                                    }}/>
+                                    : <AiOutlineDislike size={"30px"} style={{
+                                        marginRight: '5px',
+                                        height: '16px'
+                                    }}/>
+                                }
+                                <span className={"fromNow"}>{DateHelper.fromNow(information?.createdAt)}</span>
+                            </Box>
+                        </Box>
                     </Box>
-                </Box>
-            </Box>
-            <Box style={{display: "flex"}}>
-                <div style={{width: '85px'}}/>
-                <Box
-                    style={{
-                        padding: "5px",
-                        display: "flex",
-                        alignItems: "unset"
-                    }}
-                >
-                    {isLike ? <AiOutlineLike size={"30px"} style={{
-                            marginRight: '5px',
-                            height: '16px'
-                        }}/>
-                        : <AiOutlineDislike size={"30px"} style={{
-                            marginRight: '5px',
-                            height: '16px'
-                        }}/>
-                    }
-                    <span className={"fromNow"}>{DateHelper.fromNow(information?.createdAt)}</span>
-                </Box>
-            </Box>
-        </Box>
+                    : <Box className={s.UsersPost + " profilePostBorder"} style={{flexDirection: "column"}}
+                    >User has deleted this post</Box>
+            }
+        </>
     )
 }
 

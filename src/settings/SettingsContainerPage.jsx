@@ -1,21 +1,10 @@
 import {Box, hexToRgb} from "@mui/material";
 import s from './settings.module.css';
 import SettingsContent from "./SettingsContent";
-import {useEffect, useState} from "react";
-import {getSettings} from "../db";
+import {useSettings} from "../hooks";
 
 function SettingsContainerPage() {
-    const [settings, setSettings] = useState({});
-
-    useEffect(() => {
-        async function getData() {
-            const response = await getSettings();
-
-            setSettings(response[0])
-        }
-
-        getData();
-    }, [])
+    const {settings} = useSettings();
 
     return (
         <Box
@@ -36,9 +25,7 @@ function SettingsContainerPage() {
                  }
                `}
             </style>
-            <SettingsContent
-                settingsStyles={settings}
-            />
+            <SettingsContent settingsStyles={settings}/>
         </Box>
     )
 }

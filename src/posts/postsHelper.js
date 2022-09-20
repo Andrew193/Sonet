@@ -65,7 +65,6 @@ function ComponentToReplace(props) {
 }
 
 export function replaceTags(text, possibleMentions) {
-    debugger
     let possibleMentionsIndex = -1;
     const parsedPossibleMentions = JSON.parse(possibleMentions);
 

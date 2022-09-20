@@ -39,7 +39,6 @@ function ClearUsers(props) {
                 key={index}
                 index={index}
                 value={value}
-                settings={settings}
                 avatarUrl={avatarUrl}
                 searchId={searchId}
                 id={id}

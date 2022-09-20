@@ -2,6 +2,10 @@ import {useFormik} from "formik";
 import AuthPageForm from "./AuthPageForm"
 import {ToastContainer} from 'react-toastify';
 import Script from "./script.js"
+import s from "../header/header.module.css";
+import fastActions from "../fast-actions/fast-actions.module.css";
+import fastMessages from "../fast-message/fast-message.module.css";
+import fastMusic from "../fast-music/fast-music.module.css";
 import {ReactNode, useEffect, useState} from "react";
 import {useHistory} from "react-router";
 import {notify} from "../App";
@@ -38,6 +42,14 @@ function ContainerAuth() {
 
     return (
         <>
+            <style>{`
+             .${s.HeadersLinksPaper} {
+             height:0px!important;
+             }
+             .${fastActions.Container}, .${fastMessages.Container}, .${fastMusic.Container} {
+             display: none!important;
+             }
+            `}</style>
             <AuthPageForm
                 Formik={Formik}
                 isRegisterUser={isRegisterUser}

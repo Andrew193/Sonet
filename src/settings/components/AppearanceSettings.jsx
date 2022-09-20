@@ -1,18 +1,7 @@
-import {
-    alpha,
-    Backdrop,
-    Box,
-    CircularProgress,
-    FormControlLabel,
-    FormGroup,
-    hexToRgb,
-    Slider,
-    Switch,
-    Typography
-} from "@mui/material";
+import {Backdrop, Box, CircularProgress, Slider, Typography} from "@mui/material";
 import s from '../settings.module.css'
 import {useEffect, useMemo, useState} from "react";
-import {AiOutlineCheck, FiSettings, GiCheckMark} from "react-icons/all";
+import {FiSettings, GiCheckMark} from "react-icons/all";
 import {getSettings, updateSettings} from "../../db";
 import {buttonsConfig} from "../../create-post/CreatePostLine";
 import {useTranslation} from "react-i18next";
@@ -56,7 +45,7 @@ function AppearanceSettings() {
             viewType === "italic" ? `${borderRadius}px ${borderRadius + 10}px` : `${borderRadius}px`,
         margin: `${margin}px`,
         padding: `${padding}px`,
-        ...getElementsThemeConfig(settings, {isBoxShadow:!!boxShadow}),
+        ...getElementsThemeConfig(settings, {isBoxShadow: !!boxShadow}),
     }), [borderRadius, viewType, margin, padding, boxShadow])
 
     function saveSettingsHandler() {
@@ -122,15 +111,9 @@ function AppearanceSettings() {
                 <CircularProgress color="inherit"/>
             </Backdrop>
 
-            <Box
-                className={s.FontMainContainer}
-            >
-                <Typography
-                    className={s.FontLabel}
-                >{t("Border radius")}</Typography>
-                <div
-                    className={s.FontContainer}
-                >
+            <Box className={s.FontMainContainer}>
+                <Typography className={s.FontLabel}>{t("Border radius")}</Typography>
+                <div className={s.FontContainer}>
                     <Slider
                         defaultValue={borderRadius}
                         step={null}
@@ -138,22 +121,14 @@ function AppearanceSettings() {
                         min={0}
                         max={20}
                         value={borderRadius}
-                        onChange={(e, value) => {
-                            setBorderRadius(value)
-                        }}
+                        onChange={(e, value) => setBorderRadius(value)}
                     />
                 </div>
             </Box>
 
-            <Box
-                className={s.FontMainContainer}
-            >
-                <Typography
-                    className={s.FontLabel}
-                >{t("Margin")}</Typography>
-                <div
-                    className={s.FontContainer}
-                >
+            <Box className={s.FontMainContainer}>
+                <Typography className={s.FontLabel}>{t("Margin")}</Typography>
+                <div className={s.FontContainer}>
                     <Slider
                         defaultValue={margin}
                         step={null}
@@ -168,15 +143,9 @@ function AppearanceSettings() {
                 </div>
             </Box>
 
-            <Box
-                className={s.FontMainContainer}
-            >
-                <Typography
-                    className={s.FontLabel}
-                >{t("Padding")}</Typography>
-                <div
-                    className={s.FontContainer}
-                >
+            <Box className={s.FontMainContainer}>
+                <Typography className={s.FontLabel}>{t("Padding")}</Typography>
+                <div className={s.FontContainer}>
                     <Slider
                         defaultValue={padding}
                         step={null}
@@ -184,58 +153,38 @@ function AppearanceSettings() {
                         min={0}
                         max={20}
                         value={padding}
-                        onChange={(e, value) => {
-                            setPadding(value)
-                        }}
+                        onChange={(e, value) => setPadding(value)}
                     />
                 </div>
             </Box>
 
-            <Box
-                className={s.FontMainContainer}
-            >
-                <Typography
-                    className={s.FontLabel}
-                >{t("List item type")}</Typography>
-                <div
-                    className={s.FontContainer + ' ' + s.ListStyleContainer}
-                >
+            <Box className={s.FontMainContainer}>
+                <Typography className={s.FontLabel}>{t("List item type")}</Typography>
+                <div className={s.FontContainer + ' ' + s.ListStyleContainer}>
                     <div className={`${buttonsConfig[settings?.configs?.color[settings?.color]]}`}
                          style={{color: `${viewType === "plain" ? "red" : ""}`}}
-                         onClick={() => {
-                             setViewType("plain")
-                         }}
+                         onClick={() => setViewType("plain")}
                     >
                         {t("Plain")}
                     </div>
                     <div className={`${buttonsConfig[settings?.configs?.color[settings?.color]]}`}
                          style={{color: `${viewType === "italic" ? "red" : ""}`}}
-                         onClick={() => {
-                             setViewType("italic")
-                         }}
+                         onClick={() => setViewType("italic")}
                     >
                         {t("Italic")}
                     </div>
                     <div className={`${buttonsConfig[settings?.configs?.color[settings?.color]]}`}
                          style={{color: `${viewType === "fantastic" ? "red" : ""}`}}
-                         onClick={() => {
-                             setViewType("fantastic")
-                         }}
+                         onClick={() => setViewType("fantastic")}
                     >
                         {t("Fantastic")}
                     </div>
                 </div>
             </Box>
 
-            <Box
-                className={s.FontMainContainer}
-            >
-                <Typography
-                    className={s.FontLabel}
-                >{t("Box shadow")}</Typography>
-                <div
-                    className={s.FontContainer + ' ' + s.ListStyleContainer}
-                >
+            <Box className={s.FontMainContainer}>
+                <Typography className={s.FontLabel}>{t("Box shadow")}</Typography>
+                <div className={s.FontContainer + ' ' + s.ListStyleContainer}>
                     <div className={`${buttonsConfig[settings?.configs?.color[settings?.color]]}`}
                          style={{color: `${boxShadow ? "red" : ""}`}}
                          onClick={() => {
@@ -255,12 +204,8 @@ function AppearanceSettings() {
                 </div>
             </Box>
 
-            <Box
-                className={s.FontMainContainer}
-            >
-                <Typography
-                    className={s.FontLabel}
-                >{t("Example")}</Typography>
+            <Box className={s.FontMainContainer}>
+                <Typography className={s.FontLabel}>{t("Example")}</Typography>
                 <div className={s.ExampleBlock} style={exampleStyles}>
                     <div/>
                 </div>
@@ -269,9 +214,7 @@ function AppearanceSettings() {
                 </div>
             </Box>
 
-            <Box
-                className={s.Actions}
-            >
+            <Box className={s.Actions}>
                 <button
                     className={`button btn btn-default ${buttonsConfig[settings?.configs?.color[settings?.color]]}`}
                     onClick={defaultSettingsHandler}

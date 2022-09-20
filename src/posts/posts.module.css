@@ -9,6 +9,11 @@
     flex-direction: column;
 }
 
+.SharedPostContainer {
+    display: flex;
+    position: relative;
+}
+
 .MentionPerson {
     position: absolute;
     top: 0;
@@ -314,6 +319,7 @@
     border-radius: 5px;
     right: 10px;
     top: 55px;
+    z-index: 1;
 }
 
 .PostItemsActionsBox > div {

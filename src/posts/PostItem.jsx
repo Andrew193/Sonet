@@ -1,21 +1,22 @@
 import s from "./posts.module.css";
-import {alpha, Avatar, Box, hexToRgb, ListItemIcon, Typography} from "@mui/material";
+import {alpha, Avatar} from "@mui/material";
 import {Link} from "react-router-dom";
 import EmotionsLineContainer from "./EmotionsLineContainer";
 import DataHelper from "../helpers/dateHelper";
 import {useEffect, useState, useMemo, useCallback, useRef, useContext} from "react";
 import ImageViewer from "react-simple-image-viewer";
-import {AiOutlineDelete, BsThreeDots} from "react-icons/all";
-import {AiOutlineDownload, AiOutlineHighlight} from "react-icons/ai";
-import {downloadFileVersion2, getElementsThemeConfig} from "../utils";
+import {BsThreeDots, RiShareForwardLine} from "react-icons/all";
+import {getElementsThemeConfig} from "../utils";
 import {useOutsideClick} from "../hooks";
 import PostItemsImages from "./PostItemsImages";
 import React from "react";
 import {useTranslation} from "react-i18next";
-import {deletePostById, getUserAvatar, refresh, replaceTags, updatePostById} from "./postsHelper";
+import {getUserAvatar, replaceTags} from "./postsHelper";
 import InputEmoji from 'react-input-emoji';
 import HashtagsLine from "./HashtagsLine";
 import {Context} from "../App";
+import PostItemActions from "./PostItemActions";
+import SharedPost from "./SharedPost";
 
 function PostItem(props) {
     const {
@@ -31,7 +32,7 @@ function PostItem(props) {
     const [userAvatar, setUserAvatar] = useState();
     const [currentImage, setCurrentImage] = useState(0);
     const [isViewerOpen, setIsViewerOpen] = useState(false);
-    const {socket, notify} = useContext(Context)
+    const {socket} = useContext(Context)
 
     const openImageViewer = useCallback((index) => {
         setCurrentImage(index);
@@ -53,17 +54,14 @@ function PostItem(props) {
     const [anchorEl, setAnchorEl] = useState(null);
     const wrapperRef = useRef(null);
 
-    useOutsideClick(wrapperRef, () => {
-        handleClose();
-    })
+    useOutsideClick(wrapperRef, () => handleClose())
 
     const handleClick = (event) => {
+        window?.document?.body?.querySelector(".App")?.classList?.add("Open")
         setAnchorEl(event.currentTarget);
     };
 
-    const handleClose = () => {
-        setAnchorEl(null);
-    };
+    const handleClose = () => setAnchorEl(null)
 
     const {t} = useTranslation();
     const [newPostText, setNewPostText] = useState("");
@@ -71,29 +69,19 @@ function PostItem(props) {
 
     return (
         <>
-            {isTextUpdate && <div
-                className={"inputCover"}
-            >
+            {isTextUpdate && <div className={"inputCover"}>
                 <InputEmoji
                     value={newPostText}
                     onChange={setNewPostText}
                     cleanOnEnter
-                    placeholder={t("Type a new post text")}
+                    placeholder={t(isTextUpdate.label)}
                 />
                 <span
                     id={"mainPostBtn"}
                     onClick={() => {
+                        isTextUpdate.callback(newPostText);
                         setIsTextUpdate(false);
-                        updatePostById(+value?.id, newPostText)
-                            .then(() => {
-                                setParentPosts((state) => {
-                                    state.posts[index] = {...state.posts[index], text: newPostText}
-                                    return JSON.parse(JSON.stringify(state));
-                                })
-                                notify(t("Updated"));
-                            })
-                    }
-                    }
+                    }}
                 >Submit</span>
             </div>
             }
@@ -117,20 +105,29 @@ function PostItem(props) {
                 data-id={value.id}
                 style={settings?.list?.listItemStyles}
             >
-                <Avatar
-                    src={userAvatar}
-                    style={{
-                        height: '75px',
-                        width: '75px',
-                        marginRight: '15px',
-                        borderRadius: '5px',
-                        ...getElementsThemeConfig(settings)
+                <div style={{position: "relative"}}>
+                    <Avatar
+                        src={userAvatar}
+                        style={{
+                            height: '75px',
+                            width: '75px',
+                            marginRight: '15px',
+                            borderRadius: '5px',
+                            ...getElementsThemeConfig(settings)
+                        }}
+                    />
+                    {value?.shared === "{}" ? null : <RiShareForwardLine style={{
+                        color: "red",
+                        height: "30px",
+                        width: "30px",
+                        position: "absolute",
+                        left: "50%",
+                        bottom: "50%"
                     }}
-                />
+                    />}
+                </div>
                 <div
-                    style={{
-                        flex: '10 0',
-                    }}
+                    style={{flex: '10 0'}}
                 >
                     <h3>
                         <Link to={{pathname: `/users/${+value.userId}`}}
@@ -143,6 +140,7 @@ function PostItem(props) {
                         valueSavedImages={value?.savedImages}
                         openImageViewer={openImageViewer}
                     />
+                    <SharedPost shared={value.shared}/>
                     <EmotionsLineContainer
                         containerClass={s.EmotionContainer}
                         value={value}
@@ -154,72 +152,21 @@ function PostItem(props) {
                     className={s.PostItemsActions}
                 />
 
-                <Box
-                    style={{
-                        display: `${!!anchorEl ? "display" : "none"}`,
-                        ...getElementsThemeConfig(settings)
-                    }}
-                    key={anchorEl}
-                    onClick={handleClose}
-                    className={s.PostItemsActionsBox}
-                    ref={wrapperRef}
-                >
-                    {
-                        imagesForPreview?.length > 0
-                            ? <Box
-                                onClick={async () => {
-                                    let i = 0;
-                                    const interval = setInterval(function () {
-                                        downloadFileVersion2(imagesForPreview[i])
-                                        i++;
-                                        if (i === imagesForPreview?.length) {
-                                            clearInterval(interval)
-                                        }
-                                    }, 1000);
-                                }}
-                            >
-                                <ListItemIcon>
-                                    <AiOutlineDownload/>
-                                </ListItemIcon>
-                                <Typography>{t("Download attachments ( Unsafe )")}</Typography>
-                            </Box>
-                            : null
-                    }
-                    {
-                        +value?.userId === id
-                        && <Box
-                            onClick={() => {
-                                deletePostById(+value?.id)
-                                    .then(() => {
-                                        setPost((state) => {
-                                            state.splice(index, 1);
-                                            return state;
-                                        })
-                                        notify(t("Deleted"));
-                                        refresh(socket, id)
-                                    })
-                            }}
-                        >
-                            <ListItemIcon>
-                                <AiOutlineDelete/>
-                            </ListItemIcon>
-                            <Typography>{t("Delete")}</Typography>
-                        </Box>
-                    }
-                    {
-                        +value?.userId === id
-                        && <Box
-                            onClick={() => {
-                                setIsTextUpdate(true);
-                            }}
-                        >
-                            <ListItemIcon>
-                                <AiOutlineHighlight/>
-                            </ListItemIcon>
-                            <Typography>{t("Update")}</Typography>
-                        </Box>
-                    }
-                </Box>
+                <PostItemActions
+                    anchorEl={anchorEl}
+                    settings={settings}
+                    handleClose={handleClose}
+                    wrapperRef={wrapperRef}
+                    imagesForPreview={imagesForPreview}
+                    t={t}
+                    setPost={setPost}
+                    socket={socket}
+                    setIsTextUpdate={setIsTextUpdate}
+                    setParentPosts={setParentPosts}
+                    value={value}
+                    id={id}
+                    index={index}
+                />
 
                 <span className={s.Time + " fromNow"}>{DataHelper.fromNow(value.createdAt)}</span>
             </div>

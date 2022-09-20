@@ -8,7 +8,7 @@ import './res/bootstrap/bootstrap.min.css';
 import './res/grid/styles.scss';
 import './res/grid/drag-drop.scss';
 import {ToastContainer} from 'react-toastify';
-import {SetStateAction, useEffect, useRef, useState} from "react";
+import {SetStateAction, useEffect, useMemo, useRef, useState} from "react";
 import {toast} from 'react-toastify';
 import {io} from "socket.io-client";
 import {setupDb} from "./db";
@@ -19,7 +19,11 @@ import {headerListLinks} from "./vars";
 import store from "./app/store";
 import {Provider} from 'react-redux';
 import React from "react";
-import {Dispatch} from "@reduxjs/toolkit";
+import fastActions from "./fast-actions/fast-actions.module.css";
+import fastMessages from "./fast-message/fast-message.module.css";
+import fastMusic from "./fast-music/fast-music.module.css";
+import {getFastDisplay} from "./fast-actions/FastActionsContainer";
+import {useLocation} from "react-router-dom";
 
 const sessionHelper = require("./helpers/sessionHelper")
 const socket = io();
@@ -34,6 +38,12 @@ type MusicContextType = {
 
 export const MusicContext = React.createContext<[MusicContextType, React.Dispatch<SetStateAction<{}>>]>([{}, () => {
 }]);
+
+export function height() {
+    return (window.innerHeight) ?
+        window.innerHeight :
+        document.documentElement.clientHeight || document.body.clientHeight || 0;
+}
 
 export const Context = React.createContext<{ notify: typeof notify, socket: typeof socket }>({socket, notify});
 
@@ -66,19 +76,22 @@ function App() {
         }
     }, [userInformation?.id])
 
-    function height() {
-        return (window.innerHeight) ?
-            window.innerHeight :
-            document.documentElement.clientHeight || document.body.clientHeight || 0;
-    }
-
     const [musicContext, setMusicContext] = useState({});
+    const [containerDisplay, setContainerDisplay] = useState<"flex" | "none">("flex");
+    const location = useLocation();
+
+    useEffect(() => {
+        setContainerDisplay(() => getFastDisplay(history))
+    }, [location?.pathname])
 
     return (
         <MusicContext.Provider value={[musicContext, setMusicContext]}>
             <Context.Provider value={{notify, socket}}>
                 <Provider store={store}>
                     <style>{`
+            .${fastActions.Container}, .${fastMessages.Container}, .${fastMusic.Container} {
+            display: ${containerDisplay}!important;
+            }
             .App {
             min-height: ${height() - 1}px;
             } 
@@ -117,7 +130,6 @@ function App() {
                                         <Components.TopInfo/>
                                     </div>}>
                                 </Route>
-                                <Route exact path={headerListLinks.auth} render={() => <Components.ContainerAuth/>}/>
                                 <Route exact path={headerListLinks.users + "/:id?"} render={() =>
                                     <div className={"genContainer"}>
                                         <Components.UsersContainer/>

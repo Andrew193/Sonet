@@ -45,11 +45,6 @@ function FastMessageContainer(props: FastElementsPropsType) {
             {dropSelection}
             <style>
                 {`
-                .${s.Container} {
-                display: ${history?.location?.pathname === headerListLinks.chats
-                || history?.location?.pathname === headerListLinks.auth
-                || history?.location?.pathname === headerListLinks.music ? "none" : "flex"}
-                }
                 .messageText {
                 min-width: 200px;
                 }

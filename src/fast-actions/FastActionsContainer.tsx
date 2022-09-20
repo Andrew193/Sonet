@@ -24,11 +24,13 @@ const fastEntities: FastEntitiesInterface = {
     messages: 2
 }
 
+export const getFastDisplay = (history: any) => history?.location?.pathname === headerListLinks.chats
+|| history?.location?.pathname === headerListLinks.auth
+|| history?.location?.pathname === headerListLinks.music ? "none" : "flex"
 
 function FastActionsContainer() {
     const settingsConfig = useSettings();
     const [isOpened, setIsOpened] = useState<boolean>(false);
-    const history = useHistory();
     const [selectedMode, setSelectedMode] = useState<number>(0)
     const {t} = useTranslation();
 
@@ -49,7 +51,6 @@ function FastActionsContainer() {
                 <style>
                     {`
                 .${s.Container} {
-                display: ${history?.location?.pathname === headerListLinks.auth ? "none" : "flex"};
                 z-index:${selectedMode === 0 ? "100" : "10"};
                 }
                 .${s.Container} {

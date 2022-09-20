@@ -33,6 +33,7 @@ function SettingsContent(props) {
     const settings = useMemo(() => {
         return settingsList?.map((config) =>
             <Accordion
+                key={config?.panelName}
                 expanded={expanded === config?.panelName}
                 onChange={handleChange(config?.panelName)}
             >
@@ -44,7 +45,7 @@ function SettingsContent(props) {
                         color: settingsStyles?.configs?.color[settingsStyles?.color],
                         fontSize: settingsStyles?.configs?.size[settingsStyles?.fontSize],
                     }}
-                    iconStyle={{
+                    iconstyle={{
                         color: settingsStyles?.configs?.color[settingsStyles?.color],
                         fontSize: settingsStyles?.configs?.size[settingsStyles?.fontSize]
                     }}
@@ -67,9 +68,7 @@ function SettingsContent(props) {
     return (
         <>
             {settings}
-            <div
-                className={s.Divider}
-            />
+            <div className={s.Divider}/>
         </>
     )
 }

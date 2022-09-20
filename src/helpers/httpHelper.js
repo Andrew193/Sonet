@@ -175,6 +175,14 @@ const Http = {
                 .then((response) => callback(response))
                 .catch((error) => error && callback1(error))
         },
+        sharePost: (text, sharedPost, callback) => {
+            axios.post(API + "post/share?token=" + Script.getCookie("token"), {
+                text,
+                shared: JSON.stringify(sharedPost)
+            })
+                .then((response) => callback(response))
+                .catch((error) => console.error(error))
+        },
         getAllComments: (id, callback) => {
             return axios.get(API + "post/comment?token=" + Script.getCookie("token"), {params: {id}})
                 .then((response) => response)

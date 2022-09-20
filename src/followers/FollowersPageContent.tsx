@@ -7,11 +7,7 @@ function FollowersPageContent(props: FollowersPropsType) {
         users
     } = props;
 
-    return (
-        <>
-            <FollowersCreator usersList={users}/>
-        </>
-    )
+    return (<FollowersCreator usersList={users}/>)
 }
 
 export default withPageHeader(FollowersPageContent, {path: "/profile", Title: "Followers"})

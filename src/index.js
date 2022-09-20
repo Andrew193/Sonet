@@ -9,11 +9,9 @@ import s from "./helpers/tipHelper.js";
 s.rel();
 localStorage.removeItem("userInfo")
 ReactDOM.render(
-  <React.StrictMode>
     <BrowserRouter>
         <App />
-    </BrowserRouter>
-  </React.StrictMode>,
+    </BrowserRouter>,
   document.getElementById('root')
 );
 

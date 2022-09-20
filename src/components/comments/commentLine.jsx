@@ -46,8 +46,8 @@ function CommentLine(props) {
                     placeholder={t("What do you think about it?")}
                     className={"test"}
                 />
-                <button
-                    className={`button ${buttonsConfig[settings?.configs?.color[settings?.color]]}`}
+                <span
+                    className={`button ${s.noBefore} ${buttonsConfig[settings?.configs?.color[settings?.color]]}`}
                     onClick={() => {
                         setIsOpened(true);
                         Script.createComment(text, userInfo, id, comCount, notify, socket)
@@ -56,7 +56,7 @@ function CommentLine(props) {
                                 setIsOpened(false);
                             })
                     }}
-                >{t("Comment")}</button>
+                >{t("Comment")}</span>
             </div>
 
         </>

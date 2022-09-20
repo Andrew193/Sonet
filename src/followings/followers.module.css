@@ -1,8 +1,6 @@
 .Container {
-    margin: 0px 0px 0px 15%;
-    border-left: 1px solid #ccc;
+    width: 100%;
     min-height: 100%;
-    border-left: 1px solid #cecccc;
     border-right: 1px solid #cecccc;
 }
 
@@ -13,6 +11,11 @@
     padding: 1% 5%;
     position: relative;
     transition: all ease 0.5s;
+    display: flex;
+}
+
+.authorName {
+    margin: 15px 15px 15px 0px !important;
 }
 
 .Container > div:nth-child(2n) {
@@ -56,7 +59,12 @@
     color: #3452f1;
 }
 
-.Container span:last-of-type {
+.UserName {
+    font-weight: bold;
+    color: #3452f1;
+}
+
+.UserId:last-of-type {
     color: gray;
     position: absolute;
     top: 10%;

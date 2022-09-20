@@ -126,6 +126,10 @@ function GalleryInnerContent(props) {
             .folderItem, .lazyload-wrapper > div, .${s.FolderDescription} {
              box-shadow: 0px 0px 8px 0px ${alpha(settings?.configs?.color[settings?.color] || "#b6c0f3", 0.8)};
             }
+            
+            .react-emoji-picker {
+            top:0px!important;
+            }
             `}</style>
             <Backdrop
                 sx={{color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1}}

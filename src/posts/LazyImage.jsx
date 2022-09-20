@@ -23,13 +23,22 @@ function LazyImage(props) {
             key={imageSrc}
             height={200}
             offset={[-50, 0]}
+            style={{
+                position: "relative",
+                minHeight: "80px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center"
+            }}
         >
             <style>{`
             .${s.LazyBackground} {
             background: ${alpha(hexToRgb(settings?.configs?.color[settings?.color] || "#e6ddf9"), 0.4)}!important;
             }
             .lazyImg {
-             position: ${!isLoading ? "static!important" : ""}
+             position: ${!isLoading ? "static!important" : "absolute!important"};
+             top:0;
+             left:0;
             }
             `}</style>
             {

@@ -53,16 +53,12 @@ const backgroundConfig = [
 
 function HeaderListPageRow(props) {
     const {t} = useTranslation();
-    return (
-        <>
-            <HeaderLink
-                linkConfig={props?.item}
-                t={t}
-                settings={{}}
-                key={props?.item?.label}
-            />
-        </>
-    )
+    return (<HeaderLink
+        linkConfig={props?.item}
+        t={t}
+        settings={{}}
+        key={props?.item?.label}
+    />)
 }
 
 function DisplaySettings() {
@@ -75,22 +71,20 @@ function DisplaySettings() {
 
     const colors = useMemo(() => colorsConfig?.map(config =>
         <div
+            key={config?.id}
             className={config?.class + " " + s.Badge + ` ${selectedColor === config?.id ? s.SelectedBadge : ""}`}
             id={config?.id}
-            onClick={() => {
-                setSelectedColor(config?.id)
-            }}
+            onClick={() => setSelectedColor(config?.id)}
         >
             <AiOutlineCheck/>
         </div>), [selectedColor])
 
     const backs = useMemo(() => backgroundConfig?.map(config =>
         <div
+            key={config?.id}
             className={config?.class + " " + s.Badge + " " + s.BackBadge + ` ${selectedBack === config?.id ? s.SelectedBadge : ""}`}
             id={config?.id}
-            onClick={() => {
-                setSelectedBack(config?.id)
-            }}
+            onClick={() => setSelectedBack(config?.id)}
         >
             <span>{t("" + config?.label + "")}</span><AiOutlineCheck/>
         </div>
@@ -160,15 +154,9 @@ function DisplaySettings() {
                 <CircularProgress color="inherit"/>
             </Backdrop>
 
-            <Box
-                className={s.FontMainContainer}
-            >
-                <Typography
-                    className={s.FontLabel}
-                >{t("Font Size")}</Typography>
-                <div
-                    className={s.FontContainer}
-                >
+            <Box className={s.FontMainContainer}>
+                <Typography className={s.FontLabel}>{t("Font Size")}</Typography>
+                <div className={s.FontContainer}>
                     <Slider
                         defaultValue={fontSize === -1 ? 16 : fontSize}
                         step={null}
@@ -183,47 +171,25 @@ function DisplaySettings() {
                 </div>
             </Box>
 
-            <Box
-                className={s.FontMainContainer}
-            >
-                <Typography
-                    className={s.FontLabel}
-                >{t("Color")}</Typography>
-                <div
-                    className={s.FontContainer + " " + s.ColorsLine}
-                >
-                    {colors}
-                </div>
+            <Box className={s.FontMainContainer}>
+                <Typography className={s.FontLabel}>{t("Color")}</Typography>
+                <div className={s.FontContainer + " " + s.ColorsLine}>{colors}</div>
             </Box>
 
-            <Box
-                className={s.FontMainContainer}
-            >
-                <Typography
-                    className={s.FontLabel}
-                >{t("Background")}</Typography>
-                <div
-                    className={s.FontContainer + " " + s.ColorsLine}
-                >
-                    {backs}
-                </div>
+            <Box className={s.FontMainContainer}>
+                <Typography className={s.FontLabel}>{t("Background")}</Typography>
+                <div className={s.FontContainer + " " + s.ColorsLine}>{backs}</div>
             </Box>
 
-            <Box
-                className={s.FontMainContainer}
-            >
-                <Typography
-                    className={s.FontLabel}
-                >{t("Header order")}</Typography>
+            <table className={s.FontMainContainer}>
+                <Typography className={s.FontLabel}>{t("Header order")}</Typography>
                 <OuterDragAndDropContainer
                     isOrderChangeMode={true}
                     DragAndDropConfig={DragAndDropConfig}
                 />
-            </Box>
+            </table>
 
-            <Box
-                className={s.Actions}
-            >
+            <Box className={s.Actions}>
                 <button
                     className={`button btn btn-default ${buttonsConfig[settings?.configs?.color[settings?.color]]}`}
                     onClick={defaultSettingsHandler}

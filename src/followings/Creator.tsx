@@ -1,11 +1,66 @@
-import {AiOutlineMail, AiOutlineNumber, AiOutlineUser} from "react-icons/ai";
+import {AiOutlineMail, AiOutlineNumber} from "react-icons/ai";
 import {useHistory} from "react-router";
 import Script from "../users/script"
-import {useMemo} from "react";
+import {useEffect, useMemo, useState} from "react";
 import {FollowersUsers} from "../followers/FollowersPageContainer";
+import LazyImage from "../posts/LazyImage";
+import s from "../header/header.module.css";
+import followersS from "../followings/followers.module.css";
+import {getElementsThemeConfig, getPropertiesConfig} from "../utils";
+import {getUserAvatar} from "../posts/postsHelper";
+import {useSettings} from "../hooks";
 
 type FollowersCreatorType = {
     usersList: FollowersUsers
+}
+
+type ItemPropsType = {
+    index: number,
+    value: { [key: string]: any }
+}
+
+function Item(props: ItemPropsType) {
+    const {
+        index,
+        value
+    } = props;
+    const history = useHistory();
+    const [userAvatar, setUserAvatar] = useState();
+    const {settings} = useSettings();
+
+    useEffect(() => {
+        if (value?.id) {
+            getUserAvatar(userAvatar, setUserAvatar, value?.id)
+        }
+    }, [value?.id])
+
+    return (
+        <div
+            key={index}
+            style={settings.list.listItemStyles}
+            className={"followerOrFollowingContainer"}
+            onClick={() => Script.openUserProfile(+value.id, history)}
+        >
+            <h3 className={"authorName " + followersS.authorName}>
+                <LazyImage imgClass={s.ShortUserAvatar} imageSrc={userAvatar}
+                           wrapperStyle={getElementsThemeConfig({}, getPropertiesConfig(true, "rgb(0,0,0)",
+                               false, '', null, null))}/>
+            </h3>
+
+            <p>
+                <span className={followersS.UserName}>{value.userName}</span>
+                <span>
+                    <AiOutlineMail/>
+                    <a href={`mailto:${value.email}`} onClick={(e)=>{
+                        e.stopPropagation();
+                    }}>{value.email}</a>
+                </span>
+            </p>
+            <span className={followersS.UserId}>
+                    <AiOutlineNumber/>{value.id}
+            </span>
+        </div>
+    )
 }
 
 function FollowersCreator(props: FollowersCreatorType) {
@@ -13,29 +68,8 @@ function FollowersCreator(props: FollowersCreatorType) {
         usersList
     } = props;
 
-    const history = useHistory();
-
-    const mappedUsersList = useMemo(() => {
-        return usersList.map((value: FollowersUsers[number], index: number) =>
-            <div
-                key={index}
-                className={"followerOrFollowingContainer"}
-                onClick={() => {
-                    Script.openUserProfile(+value.id, history)
-                }}
-            >
-                <h3 className={"authorName"}>
-                    <AiOutlineUser/>{value.userName}
-                </h3>
-                <span>
-                    <AiOutlineMail/>
-                    <a href={`mailto:${value.email}`}>{value.email}</a>
-                </span>
-                <span>
-                    <AiOutlineNumber/>{value.id}
-                </span>
-            </div>)
-    }, [history, usersList]);
+    const mappedUsersList = useMemo(() => usersList.map((value: FollowersUsers[number], index: number) => <Item
+        index={index} value={value}/>), [usersList]);
 
     return (<>{mappedUsersList}</>)
 }

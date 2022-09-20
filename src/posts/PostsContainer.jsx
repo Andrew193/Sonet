@@ -26,21 +26,12 @@ function PostsContainer(props) {
     });
 
     useEffect(() => {
-        const id = props?.match?.params?.id;
+        const getData = (id) => id && typeof (+id) === "number" ? postsHelper.getSelectedPost(+id) : postsHelper.getPosts()
 
-        if (id && typeof (+id) === "number") {
-            postsHelper.getSelectedPost(+id)
-                .then((postF) => setPosts(postF))
-                .catch((error) => {
-                    error && notify(error?.response?.data?.posts)
-                })
-        } else {
-            postsHelper.getPosts()
-                .then((postF) => setPosts(postF))
-                .catch((error) => {
-                    error && notify(error?.response?.data?.error)
-                })
-        }
+        getData(+props?.match?.params?.id).then((postF) => setPosts(postF))
+            .catch((error) => {
+                error && notify(error?.response?.data?.posts)
+            })
     }, [notify, props?.match?.params?.id]);
 
     useEffect(() => {
@@ -74,9 +65,6 @@ function PostsContainer(props) {
             align-items: center;
             justify-content: center;
             background-color: ${alpha(hexToRgb(settings?.configs?.color[settings?.color] || "#f6f2ff"), 0.4)}!important;
-            }
-            .inputCover > div{
-             height: 100%;
             }
             .${s.Item} .fromNow:before {
             top: 11px !important;

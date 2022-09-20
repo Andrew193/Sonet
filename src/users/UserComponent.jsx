@@ -6,13 +6,12 @@ import {AiOutlineClockCircle, AiOutlineMail, AiOutlineSafetyCertificate, AiOutli
 import DataHelper from "../helpers/dateHelper";
 import UsersPageActions from "./UsersPageActions";
 import {useHistory} from "react-router-dom";
-
+import {useSettings} from "../hooks";
 
 function UserComponent(props) {
     const {
         index,
         value,
-        settings,
         avatarUrl,
         searchId,
         id,
@@ -20,6 +19,7 @@ function UserComponent(props) {
     } = props;
 
     const history = useHistory();
+    const {settings} = useSettings();
 
     return(
         <div>
@@ -28,9 +28,7 @@ function UserComponent(props) {
                     key={"df" + index}
                     className={s.Item + " itemsUsersPage"}
                     data-id={value[5]}
-                    onClick={(e) => {
-                        Script.openUser(e, history)
-                    }}
+                    onClick={(e) => Script.openUser(e, history)}
                     style={settings?.list?.listItemStyles}
                 >
                     {value[3] && <Avatar

@@ -7,8 +7,8 @@ const AccordionSummary = styled((props) => {
         expandIcon={<AiOutlineArrowRight
             sx={{fontSize: '0.9rem'}}
             style={{
-                color: props?.iconStyle?.color,
-                fontSize: props?.iconStyle?.fontSize
+                color: props?.iconstyle?.color,
+                fontSize: props?.iconstyle?.fontSize
             }}
         />}
         {...props}

@@ -1,7 +1,6 @@
 .messenger {
     border-left: 1px solid rgb(206, 204, 204);
     border-right: 1px solid rgb(206, 204, 204);
-    height: -webkit-fill-available;
     text-align: left;
     -webkit-flex: 3 0;
     flex: 3 0;
@@ -60,6 +59,7 @@
     border-radius: 5px;
     position: relative;
     background: #7986cb;
+    max-height: 60px;
 }
 
 .closedFriendPin {
@@ -176,7 +176,7 @@
 }
 
 .chatBoxTop {
-    height: 100%;
+    height: 98.7%;
     overflow-y: scroll;
     padding-right: 10px;
     padding-left: 10px;
@@ -374,7 +374,7 @@
     }
 
     .mainMessagesCaver {
-        height: calc(753px - 100px - 58px);
+        height: calc(753px - 100px - 175px);
     }
 
     .chatBoxBottom {

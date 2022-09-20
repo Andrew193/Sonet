@@ -1,5 +1,6 @@
 import htmlHelper from "../helpers/htmlHelper";
 import HttpHelper from "../helpers/httpHelper";
+import {notify} from "../App";
 
 function createPostService(element, notify, socket, text, savedImages, possibleMentions) {
     HttpHelper.POSTS.createPost(text, (response) => {
@@ -14,7 +15,13 @@ function createPostService(element, notify, socket, text, savedImages, possibleM
     }, savedImages, possibleMentions)
 }
 
-async function CreatePost(text, notify, element, socket, images, possibleMentions = []) {
+export async function SharePost(text, sharedPost) {
+    HttpHelper.POSTS.sharePost(text, sharedPost, (response) => {
+        notify(htmlHelper.createHTML({title: "Ok", message: response?.data?.message}));
+    })
+}
+
+export async function CreatePost(text, notify, element, socket, images, possibleMentions = []) {
     if (images?.length > 0) {
         const savedImages = [];
 
