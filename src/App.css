@@ -26,15 +26,13 @@
 }
 
 .Separator {
-    border: 1px solid #57b5f3;
-    height: 12px;
-    background: #b7daf1;
+    border: 6px solid #b7daf1;
     cursor: pointer;
 }
 
 .Separator:hover {
-    border: 1px solid #0090ef;
-    background: #80c5f3;
+    border: 6px solid #0090ef;
+    cursor: pointer;
 }
 
 .Hide {

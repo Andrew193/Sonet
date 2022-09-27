@@ -3,11 +3,12 @@ import {useMemo} from "react";
 import {Avatar, Box, Typography} from "@mui/material";
 import LazyLoad from 'react-lazyload';
 import s from "./profile.module.css"
+import postS from "../../posts/posts.module.css";
 import {forceCheck} from 'react-lazyload';
 import DateHelper from "../../helpers/dateHelper";
 import EmotionsLineContainer from "../../posts/EmotionsLineContainer";
 import {MdOutlinePostAdd} from "react-icons/all";
-import {getElementsThemeConfig, getPropertiesConfig} from "../../utils";
+import {getTabElementsThemeConfig} from "../../utils";
 import {replaceTags} from "../../posts/postsHelper";
 import {getTabsImageStyle} from "./LikesTab";
 import {useSettings} from "../../hooks";
@@ -24,10 +25,7 @@ function UserPostTab({information, avatarUrl}) {
         >
             <Avatar
                 src={avatarUrl}
-                style={{
-                    ...getTabsImageStyle(),
-                    ...getElementsThemeConfig({}, getPropertiesConfig(true, "rgb(0,0,0)"))
-                }}
+                style={{...getTabsImageStyle(), ...getTabElementsThemeConfig()}}
                 className={"conversationImg"}
             >
             </Avatar>
@@ -56,11 +54,13 @@ function UserPostTab({information, avatarUrl}) {
                     {replaceTags(information?.text || "", information?.possibleMentions || JSON.stringify([]))}
                 </Typography>
 
-                <EmotionsLineContainer
-                    containerClass={s.ProfileEmotions}
-                    value={information}
-                    id={information?.id}
-                />
+                <div className={postS.PostsCont}>
+                    <EmotionsLineContainer
+                        containerClass={postS.EmotionContainer}
+                        value={information}
+                        id={information?.id}
+                    />
+                </div>
             </Box>
         </Box>
     )

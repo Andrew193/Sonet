@@ -1,34 +1,18 @@
 import {alpha, Box, hexToRgb} from "@mui/material";
-import {useEffect, useState} from "react";
-import {getSettings} from "../db";
 import s from "./gallery.module.css";
 import GalleryInnerContent from "./GalleryInnerContent";
 import {withRouter} from "react-router-dom";
+import {useSettings} from "../hooks";
+import {getEmptyElementsThemeConfig} from "../utils";
 
 function GalleryContainer() {
-    const [settings, setSettings] = useState({});
-
-    useEffect(() => {
-        async function getData() {
-            const response = await getSettings();
-
-            setSettings(response[0])
-        }
-
-        getData();
-    }, [])
+    const {settings} = useSettings();
 
     return (
-        <Box
-            className={s.Container}
-        >
+        <Box className={s.Container} style={getEmptyElementsThemeConfig(settings)}>
             <style>
                 {`
-                .${s.Container} {
-                border-right:1px solid ${hexToRgb(settings?.configs?.color[settings?.color] || "rgb(231 231 240)")};
-                }
-                 html, .chatBoxWrapper, .chatMenu, .chatMenuInput, .basicPageHead, .${s.ImagesContainer}, .${s.GalleryActions},
-                 .${s.Container} {
+                 html, .chatBoxWrapper, .chatMenu, .chatMenuInput, .basicPageHead, .${s.ImagesContainer}, .${s.GalleryActions} {
                  background: ${settings?.configs?.background[settings?.background]};
                  }
                  .${s.GalleryActions} > svg:hover {

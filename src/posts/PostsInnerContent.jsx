@@ -9,6 +9,7 @@ forceCheck();
 function ClearPosts(props) {
     const {
         toMake,
+        ignoreAppOpen,
         id,
         settings,
         setParentPosts
@@ -22,6 +23,7 @@ function ClearPosts(props) {
                 ? <PostItem
                     value={value}
                     id={id}
+                    ignoreAppOpen={ignoreAppOpen}
                     index={index}
                     setPost={setPost}
                     setParentPosts={setParentPosts}

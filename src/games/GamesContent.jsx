@@ -24,9 +24,7 @@ function GamesContent(props) {
 
     const Game = useMemo(() => {
         if (match?.params?.gameType) {
-            const Component = getSelectedGame(match?.params?.gameType);
-
-            return Component;
+            return getSelectedGame(match?.params?.gameType);
         }
     }, [match])
 
@@ -43,14 +41,11 @@ function GamesContent(props) {
                             component={'h4'}
                             style={{
                                 margin: '10px',
-                                fontSize: styleSettings?.configs?.size[styleSettings?.fontSize],
                                 fontWeight:"bold"
                             }}
                         >{t("Choose a game")}</Typography>
 
-                        <GamesList
-                            styleSettings={styleSettings}
-                        />
+                        <GamesList styleSettings={styleSettings}/>
                     </>
             }
         </>

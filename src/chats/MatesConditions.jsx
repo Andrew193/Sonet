@@ -11,15 +11,11 @@ function MatesConditions(props) {
 
     const {t} = useTranslation();
 
-    return(
+    return (
         <>
             {
                 (isLoading && !matesListLength) &&
-                <div
-                    className={"chatLoader"}
-                >
-                    <Loader/>
-                </div>
+                <div className={"chatLoader"}><Loader/></div>
             }
             {
                 (!isLoading && !matesListLength) &&

@@ -58,6 +58,10 @@ function Comments(props) {
                      color: ${settings?.configs?.color[settings?.color]} !important;
                      font-weight: bold;
                      }
+                     .react-emoji-picker {
+                     top: 0px!important;
+                     width: 100%!important;
+                     }
                 `}
             </style>
             {

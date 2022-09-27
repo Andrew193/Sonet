@@ -10,7 +10,7 @@ import {notify} from "../../App";
 import EmotionsLineContainer from "../../posts/EmotionsLineContainer";
 import {useHistory} from "react-router-dom";
 import {AiOutlineDislike, AiOutlineHeart, AiOutlineLike} from "react-icons/ai";
-import {getElementsThemeConfig, getPropertiesConfig} from "../../utils";
+import {getTabElementsThemeConfig} from "../../utils";
 import {useSettings} from "../../hooks";
 
 forceCheck();
@@ -40,10 +40,7 @@ export function LikeDislikeTab({information, avatarUrl, isLike}) {
                             onClick={() => postsHelper.getComment(history, information.postId, information?.id)}
                         >
                             <Avatar
-                                style={{
-                                    ...getTabsImageStyle(),
-                                    ...getElementsThemeConfig({}, getPropertiesConfig(true, "rgb(0,0,0)"))
-                                }}
+                                style={{...getTabsImageStyle(), ...getTabElementsThemeConfig()}}
                                 src={avatarUrl}
                                 className={"conversationImg"}
                             >

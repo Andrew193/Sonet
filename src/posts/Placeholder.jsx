@@ -1,4 +1,4 @@
-import s from "./posts.module.css";
+import Spinner from "../res/img/Spinner-1s-200px.gif";
 
 function Placeholder(props) {
     const {
@@ -6,24 +6,8 @@ function Placeholder(props) {
     } = props;
 
     return (
-        <div
-            className={s.ldsRoller}
-            id={id}
-            style={{
-                marginLeft: '0%',
-                marginTop: '0%',
-                minHeight: 'unset',
-                minWidth: 'unset'
-            }}
-        >
-            <div/>
-            <div/>
-            <div/>
-            <div/>
-            <div/>
-            <div/>
-            <div/>
-            <div/>
+        <div id={id}>
+           <img src={Spinner} width={"60px"} alt={"Spinner"}/>
         </div>
     );
 }

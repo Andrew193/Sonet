@@ -6,7 +6,7 @@ import {FollowersUsers} from "../followers/FollowersPageContainer";
 import LazyImage from "../posts/LazyImage";
 import s from "../header/header.module.css";
 import followersS from "../followings/followers.module.css";
-import {getElementsThemeConfig, getPropertiesConfig} from "../utils";
+import {getLazyImagesElementsThemeConfig} from "../utils";
 import {getUserAvatar} from "../posts/postsHelper";
 import {useSettings} from "../hooks";
 
@@ -43,8 +43,7 @@ function Item(props: ItemPropsType) {
         >
             <h3 className={"authorName " + followersS.authorName}>
                 <LazyImage imgClass={s.ShortUserAvatar} imageSrc={userAvatar}
-                           wrapperStyle={getElementsThemeConfig({}, getPropertiesConfig(true, "rgb(0,0,0)",
-                               false, '', null, null))}/>
+                           wrapperStyle={getLazyImagesElementsThemeConfig()}/>
             </h3>
 
             <p>

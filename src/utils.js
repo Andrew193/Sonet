@@ -11,44 +11,6 @@ export function downloadFile(url, name) {
     return true;
 }
 
-const defaultPropertiesConfig = {
-    isBoxShadow: true,
-    boxShadowColor: "",
-    isBorderRight: false,
-    borderRightColor: "rgb(206, 204, 204)",
-    color: "rgb(0, 0, 0)",
-    background: "rgb(203, 203, 243)"
-}
-
-export function getPropertiesConfig(isBoxShadow, boxShadowColor, isBorderRight, borderRightColor, color, background) {
-    return {
-        isBoxShadow: isBoxShadow,
-        boxShadowColor: boxShadowColor,
-        isBorderRight: isBorderRight,
-        borderRightColor: borderRightColor,
-        color: color,
-        background: background
-    }
-}
-
-export function getElementsThemeConfig(config, propertiesConfig = defaultPropertiesConfig) {
-    return {
-        boxShadow: propertiesConfig?.isBoxShadow ?
-            `0px 0px 8px 0px ${alpha(propertiesConfig.boxShadowColor ?
-                propertiesConfig.boxShadowColor
-                : config?.configs?.color[config?.color] || "#b6c0f3", 0.8)}`
-            : "",
-        fontSize: config?.configs?.size[config?.fontSize],
-        color: propertiesConfig.color || config?.configs?.color[config?.color],
-        background: propertiesConfig.background || config?.configs?.background[config?.background],
-        borderRight: propertiesConfig?.isBorderRight ?
-            `1px solid ${propertiesConfig?.borderRightColor ?
-                propertiesConfig?.borderRightColor
-                : config?.configs?.color[config?.color] || "rgb(206, 204, 204)"}`
-            : ""
-    }
-}
-
 export function downloadFileVersion2(url, name) {
     const link = document.createElement("a");
     link.href = url
@@ -101,4 +63,61 @@ export function createErrorsForApiCall(parsedResponse, oneErrorMessage) {
 
 export function createCopy(item) {
     return JSON.parse(JSON.stringify(item))
+}
+
+//Theme config
+
+const defaultPropertiesConfig = {
+    isBoxShadow: true,
+    boxShadowColor: "",
+    isBorderRight: false,
+    isBorderLeft: false,
+    borderRightColor: "rgb(206, 204, 204)",
+    color: "rgb(0, 0, 0)",
+    background: "rgb(203, 203, 243)"
+}
+
+export function getPropertiesConfig(isBoxShadow, boxShadowColor, isBorderRight, borderRightColor, color, background, isBorderLeft) {
+    return {
+        isBoxShadow: isBoxShadow,
+        boxShadowColor: boxShadowColor,
+        isBorderRight: isBorderRight,
+        borderRightColor: borderRightColor,
+        color: color,
+        background: background,
+        isBorderLeft: isBorderLeft
+    }
+}
+
+export const getLazyImagesElementsThemeConfig = () => getElementsThemeConfig({}, getPropertiesConfig(true, "rgb(0,0,0)",
+    false, '', null, null))
+
+export const getTabElementsThemeConfig = () => getElementsThemeConfig({}, getPropertiesConfig(true, "rgb(0,0,0)"))
+
+export function getEmptyElementsThemeConfig(settings) {
+    return getElementsThemeConfig(settings, getPropertiesConfig(false, '', true, '',
+        null, null, true))
+}
+
+export function getElementsThemeConfig(config, propertiesConfig = defaultPropertiesConfig) {
+    return {
+        boxShadow: propertiesConfig?.isBoxShadow ?
+            `0px 0px 8px 0px ${alpha(propertiesConfig.boxShadowColor ?
+                propertiesConfig.boxShadowColor
+                : config?.configs?.color[config?.color] || "#b6c0f3", 0.8)}`
+            : "",
+        fontSize: config?.configs?.size[config?.fontSize],
+        color: propertiesConfig.color || config?.configs?.color[config?.color],
+        background: propertiesConfig.background || config?.configs?.background[config?.background],
+        borderRight: propertiesConfig?.isBorderRight ?
+            `1px solid ${propertiesConfig?.borderRightColor ?
+                propertiesConfig?.borderRightColor
+                : config?.configs?.color[config?.color] || "rgb(206, 204, 204)"}`
+            : "",
+        borderLeft: propertiesConfig?.isBorderLeft ?
+            `1px solid ${propertiesConfig?.borderRightColor ?
+                propertiesConfig?.borderRightColor
+                : config?.configs?.color[config?.color] || "rgb(206, 204, 204)"}`
+            : ""
+    }
 }

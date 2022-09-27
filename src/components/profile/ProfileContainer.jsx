@@ -4,7 +4,7 @@ import Script from "./profileHelper"
 import ClearProfile from "./ClearProfile";
 import {useEffect, useState} from "react";
 import Skeleton from "react-loading-skeleton";
-import {getElementsThemeConfig, getPropertiesConfig} from "../../utils";
+import {getEmptyElementsThemeConfig} from "../../utils";
 import {useSettings} from "../../hooks";
 
 function Profile(props) {
@@ -27,7 +27,7 @@ function Profile(props) {
     return (
         <div
             className={s.Container}
-            style={{...getElementsThemeConfig(settings, getPropertiesConfig(false, '', true, ''))}}
+            style={{...getEmptyElementsThemeConfig(settings)}}
         >
             {userInfo ?
                 <ClearProfile

@@ -48,7 +48,6 @@ function Header() {
             style={{
                 background: settings?.configs?.background[settings?.background],
                 fontSize: settings?.configs?.size[settings?.fontSize],
-                borderRight: `1px solid ${settings?.configs?.color[settings?.color] || "rgb(206, 204, 204)"}`,
                 maxHeight:`${height()-2}px`
             }}
         >

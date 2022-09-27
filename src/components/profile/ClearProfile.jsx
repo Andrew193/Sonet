@@ -58,60 +58,48 @@ function ClearProfile(props) {
                 ::-webkit-scrollbar-thumb {
                 background-color: ${alpha(hexToRgb(settings?.configs?.color[settings?.color] || "rgb(231 231 240)"), 0.6)};
                 }
-                
                 .SmallUserAvatar {
                 padding: 5px;
                 }
-                
                 ::-webkit-scrollbar-track {
                 background-color: ${alpha(hexToRgb(settings?.configs?.color[settings?.color] || "rgb(231 231 240)"), 0.2)};
                 }
-                
                 .profilePostBorder{
                  border-bottom: 1px solid ${settings?.configs?.color[settings?.color] || "rgb(206, 204, 204)"};
                 }
-                
                 .${style.UsersPost}:hover {
                 background-color: ${alpha(settings?.configs?.color[settings?.color] || "rgb(231 231 240)", 0.5)} !important;
                 }
-                
                 .react-simple-image-viewer__close {
                 color: ${alpha(settings?.configs?.color[settings?.color] || "rgb(231 231 240)", 1)} !important;
                 opacity: 1;
                 }
-                
                 #ReactSimpleImageViewer img {
                 max-height: unset!important;
                 min-height: unset!important;
                 }
-                
                 .react-simple-image-viewer__slide img{
                 min-width: 350px;
                 min-height: 350px;
                 }
-                
                 .basicPageHead {
                 position: fixed;
                 z-index: 10000;
                 width: 85%;
-                background: rgba(255, 255, 255, 0.95);
+                background: ${alpha(settings?.configs?.background[settings?.background] || "rgb(255, 255, 255)",0.95)};
                 border-right: 1px solid ${settings?.configs?.color[settings?.color] || "rgb(206, 204, 204)"};
                 }
-                
                 .fromNow:before {
                 top: 5px;
                 }
-    
                 @media (max-width: 2000px) {
                 .basicPageHead {
                 width: 57%!important;
                 }}
-                
                 @media (max-width: 1024px) {
                 .basicPageHead {
                 width: 80%!important;
                 }}
-                
                 @media (max-width: 768px) {
                 .basicPageHead {
                 width: 100%!important;
@@ -132,10 +120,7 @@ function ClearProfile(props) {
             <PageHeader historyPath={"/"}>
                 <>
                     <div>
-                        <Link
-                            to={{pathname: "/profile"}}
-                        >
-                            {userInfo.userName}</Link>
+                        <Link to={{pathname: "/profile"}}>{userInfo.userName}</Link>
                         <br/>
                         <span
                             className={s.PostCount}
@@ -152,9 +137,7 @@ function ClearProfile(props) {
             </PageHeader>
             <div
                 className={s.Back}
-                onClick={(e) => {
-                    (myId === userInfo.id) && handleClick(e)
-                }}
+                onClick={(e) => (myId === userInfo.id) && handleClick(e)}
                 style={userInfo.back && {backgroundImage: `url(${JSON.parse(userInfo.back)?.webContentLink})`}}
             />
             <AvatarLine
@@ -185,9 +168,7 @@ function ClearProfile(props) {
                 className="Separator"
                 onClick={(e) => e.target.nextElementSibling.classList.toggle("Hide")}
             />
-            <UsersActivities
-                userInfo={userInfo}
-            />
+            <UsersActivities userInfo={userInfo}/>
         </>
     )
 }

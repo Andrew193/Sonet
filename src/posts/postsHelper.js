@@ -69,13 +69,13 @@ export function replaceTags(text, possibleMentions) {
     const parsedPossibleMentions = JSON.parse(possibleMentions);
 
     return reactStringReplace(reactStringReplace(reactStringReplace(text, detectHashtag, (match, i) => (
-        <ComponentToReplace i={i} className={textareaStyle.Editor_hashtag} match={match}/>
+        <ComponentToReplace i={i} className={textareaStyle.Editor_hashtag} match={match} key={i}/>
     )), detectPerson, (match, i) => {
         possibleMentionsIndex++;
         return <ComponentToReplace i={i} className={textareaStyle.Editor_mention} match={match}
-                                   mention={parsedPossibleMentions[possibleMentionsIndex]}/>
+                                   mention={parsedPossibleMentions[possibleMentionsIndex]} key={i}/>
     }), detectURL, (match, i) => (
-        <ComponentToReplace i={i} className={textareaStyle.Editor_link} match={match} link/>
+        <ComponentToReplace i={i} className={textareaStyle.Editor_link} match={match} link key={i}/>
     ))
 }
 
@@ -157,6 +157,13 @@ function getSelectedPost(id, notify) {
     return HttpHelper.POSTS.getOnePost(id, notify)
         .then(response => response)
         .catch(error => error.response && console.error(error.response))
+}
+
+export function setEmotion(userId, value, emotionType, emotionCount, socket) {
+    return HttpHelper.POSTS.complexEmotions({userId, value, emotionType, emotionCount}, () => {
+        refresh(socket, userId)
+    }, () => {
+    })
 }
 
 function getComment(history, postId, commentId) {

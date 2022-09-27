@@ -5,6 +5,7 @@ import {updateSettings} from "../db";
 import {notify} from "../App";
 import MusicInnerContainer from "./MusicInnerContainer";
 import {useSettings} from "../hooks";
+import {getEmptyElementsThemeConfig} from "../utils";
 
 function MusicContainerPage() {
     const [videoFilePath, setVideoFilePath] = useState(null);
@@ -61,7 +62,7 @@ function MusicContainerPage() {
         <Box
             className={s.Container}
             style={{
-                background: settingsConfig?.settings?.configs?.background[settingsConfig?.settings?.background],
+                ...getEmptyElementsThemeConfig(settingsConfig.settings),
                 marginBottom: "54px"
             }}
         >

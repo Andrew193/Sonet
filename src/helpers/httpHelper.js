@@ -137,6 +137,17 @@ const Http = {
                 .then((response) => response?.data)
                 .catch((error) => error?.response && notify(error?.response?.data?.posts))
         },
+        complexEmotions: ({emotionType, userId, value, emotionCount}, okCallback, errorCallback) => {
+            return axios.put(API + "post/complexEmotion", {
+                ...value,
+                emotionType,
+                selectedEmotionCount: emotionCount,
+                postText: JSON.stringify(value),
+                userId,
+            })
+                .then((response) => okCallback())
+                .catch((error) => error.response && errorCallback(error))
+        },
         emotion: (userId, value, callback, callback1, emType) => {
             axios.put(API + "post/" + emType, {
                 userId,

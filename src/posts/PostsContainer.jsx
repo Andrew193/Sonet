@@ -10,6 +10,8 @@ import {alpha, hexToRgb} from "@mui/material";
 import FiltersBar from "./FiltersBar";
 import {Context} from "../App";
 import {useSettings} from "../hooks";
+import MaintainedPageHeader from "../components/MaintainedPageHeader";
+import {getEmptyElementsThemeConfig} from "../utils";
 
 function PostsContainer(props) {
     const [posts, setPosts] = useState(false);
@@ -52,7 +54,7 @@ function PostsContainer(props) {
     }, [posts, history?.location?.hash]);
 
     return (
-        <div className={s.Container}>
+        <div className={s.Container} style={{...getEmptyElementsThemeConfig(settings)}}>
             <style>{`
             .inputCover {
             position: absolute!important;
@@ -62,16 +64,18 @@ function PostsContainer(props) {
             width: 100%;
             height: 100%;
             display: flex;
-            align-items: center;
+            align-items: unset;
+            flex-direction: column;
             justify-content: center;
             background-color: ${alpha(hexToRgb(settings?.configs?.color[settings?.color] || "#f6f2ff"), 0.4)}!important;
             }
             .${s.Item} .fromNow:before {
             top: 11px !important;
             }
-            .${s.Container} {
-            background: ${settings?.configs?.background[settings?.background]};
-             border-right:1px solid ${hexToRgb(settings?.configs?.color[settings?.color] || "rgb(231 231 240)")};
+            .${s.Container} .react-emoji-picker {
+            top:0px!important;
+            width:100%!important;
+            }
             }
             .itemsPostsPage {
             background: ${settings?.configs?.background[settings?.background]};
@@ -99,9 +103,7 @@ function PostsContainer(props) {
             }
             `}
             </style>
-            <PageHeader historyPath={"/"}>
-                <Link to={{pathname: "/posts"}}>Posts</Link>
-            </PageHeader>
+            <MaintainedPageHeader path={"/"} linkPath={"/posts"} linkTitle={"Posts"}/>
             <div
                 className={"Separator"}
                 onClick={(e) => {

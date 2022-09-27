@@ -4,7 +4,7 @@ import s from "../header/header.module.css";
 import postS from "./posts.module.css";
 import LazyImage from "./LazyImage";
 import DataHelper from "../helpers/dateHelper";
-import {getElementsThemeConfig, getPropertiesConfig} from "../utils";
+import {getLazyImagesElementsThemeConfig} from "../utils";
 
 function SharedPost(props) {
     const {
@@ -37,8 +37,7 @@ function SharedPost(props) {
                         <LazyImage
                             imgClass={s.ShortUserAvatar}
                             imageSrc={userAvatar}
-                            wrapperStyle={getElementsThemeConfig({}, getPropertiesConfig(true, "rgb(0,0,0)",
-                                false, '', null, null))}
+                            wrapperStyle={getLazyImagesElementsThemeConfig()}
                         />
                         <div style={{marginLeft: "15px"}}>
                             <h3>

@@ -44,6 +44,8 @@ video {
     padding: 10px;
     font-weight: 600;
     border-bottom: 1px solid;
+    color: black;
+    background: rgb(203, 203, 243);
 }
 
 .SearchBar {
@@ -83,18 +85,19 @@ video {
 
 .TrackName {
     flex: 5 0;
-    border-right: 1px solid rgb(206, 204, 204);
+    border-right: 1px solid rgb(115 113 113);
     overflow: hidden;
 }
 
 .TrackCategory {
     flex: 5 0;
+    border-right: 1px solid rgb(115 113 113);
 }
 
 .TrackIndex {
     font-weight: 600;
     flex: 1 0;
-    border-right: 1px solid rgb(206, 204, 204);
+    border-right: 1px solid rgb(115 113 113);
 }
 
 .TrackActions {

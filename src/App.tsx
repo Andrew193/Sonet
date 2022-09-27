@@ -8,7 +8,7 @@ import './res/bootstrap/bootstrap.min.css';
 import './res/grid/styles.scss';
 import './res/grid/drag-drop.scss';
 import {ToastContainer} from 'react-toastify';
-import {SetStateAction, useEffect, useMemo, useRef, useState} from "react";
+import {SetStateAction, useEffect, useRef, useState} from "react";
 import {toast} from 'react-toastify';
 import {io} from "socket.io-client";
 import {setupDb} from "./db";
@@ -24,6 +24,7 @@ import fastMessages from "./fast-message/fast-message.module.css";
 import fastMusic from "./fast-music/fast-music.module.css";
 import {getFastDisplay} from "./fast-actions/FastActionsContainer";
 import {useLocation} from "react-router-dom";
+import {useSettings} from "./hooks";
 
 const sessionHelper = require("./helpers/sessionHelper")
 const socket = io();
@@ -49,9 +50,9 @@ export const Context = React.createContext<{ notify: typeof notify, socket: type
 
 function App() {
     let modal = useRef<HTMLDivElement>(null);
-
     const [flag, setFlag] = useState(false);
     const history = useHistory();
+    const {settings} = useSettings();
     const userInformation = JSON.parse(localStorage.getItem("userInfo") || "{}");
 
     function open() {
@@ -94,6 +95,7 @@ function App() {
             }
             .App {
             min-height: ${height() - 1}px;
+            background:${settings?.configs?.background[settings?.background]};
             } 
             .App.Open {
             height: ${height() - 1}px!important;

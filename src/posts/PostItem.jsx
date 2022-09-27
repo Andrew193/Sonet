@@ -11,7 +11,7 @@ import {useOutsideClick} from "../hooks";
 import PostItemsImages from "./PostItemsImages";
 import React from "react";
 import {useTranslation} from "react-i18next";
-import {getUserAvatar, replaceTags} from "./postsHelper";
+import {getUserAvatar, replaceTags, setEmotion} from "./postsHelper";
 import InputEmoji from 'react-input-emoji';
 import HashtagsLine from "./HashtagsLine";
 import {Context} from "../App";
@@ -26,7 +26,8 @@ function PostItem(props) {
         customStyle,
         setPost,
         index,
-        setParentPosts
+        setParentPosts,
+        ignoreAppOpen
     } = props;
 
     const [userAvatar, setUserAvatar] = useState();
@@ -57,7 +58,9 @@ function PostItem(props) {
     useOutsideClick(wrapperRef, () => handleClose())
 
     const handleClick = (event) => {
-        window?.document?.body?.querySelector(".App")?.classList?.add("Open")
+        if (!ignoreAppOpen) {
+            window?.document?.body?.querySelector(".App")?.classList?.add("Open")
+        }
         setAnchorEl(event.currentTarget);
     };
 

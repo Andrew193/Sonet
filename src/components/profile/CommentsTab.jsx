@@ -10,7 +10,7 @@ import {notify} from "../../App";
 import EmotionsLineContainer from "../../posts/EmotionsLineContainer";
 import {useHistory} from "react-router-dom";
 import {BiMessageMinus} from "react-icons/all";
-import {getElementsThemeConfig, getPropertiesConfig} from "../../utils";
+import {getTabElementsThemeConfig} from "../../utils";
 import {getTabsImageStyle} from "./LikesTab";
 import {useSettings} from "../../hooks";
 
@@ -40,13 +40,10 @@ function CommentTab({information, avatarUrl}) {
                 <Avatar
                     src={avatarUrl}
                     className={"conversationImg"}
-                    style={{
-                        ...getTabsImageStyle(),
-                        ...getElementsThemeConfig({}, getPropertiesConfig(true, "rgb(0,0,0)"))
-                    }}
+                    style={{...getTabsImageStyle(), ...getTabElementsThemeConfig()}}
                 >
                 </Avatar>
-                <Box style={{width:'100%'}}>
+                <Box style={{width: '100%'}}>
                     <Typography
                         className={s.metaBar}
                     >

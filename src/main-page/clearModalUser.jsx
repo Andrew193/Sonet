@@ -33,6 +33,10 @@ function ClearModalUser(props) {
                   .Muser {
                    background:${alpha(settings?.configs?.color[settings?.color] || "rgb(177 175 175)", 0.3)}
                   }
+                  .react-emoji-picker{
+                  width:100%;
+                  top:0px;
+                  }
                 `}
             </style>
             <Typography

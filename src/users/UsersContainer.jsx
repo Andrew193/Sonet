@@ -4,13 +4,14 @@ import Skeleton from 'react-loading-skeleton';
 import s from "./users.module.css"
 import {withRouter} from "react-router-dom";
 import ClearUsersContainer from './UsersPageContent';
-import {getSettings} from "../db";
 import {hexToRgb} from "@mui/material";
+import {useSettings} from "../hooks";
+import {getEmptyElementsThemeConfig} from "../utils";
 
 function UsersContainer(props) {
     const [usersConfig, setUsers] = useState({users: []});
     const [open, setOpen] = useState(false);
-    const [settings, setSettings] = useState({});
+    const {settings} = useSettings();
 
     useEffect(() => {
         const id = props?.match?.params?.id;
@@ -32,31 +33,11 @@ function UsersContainer(props) {
         }
     }, [props?.match?.params?.id])
 
-    useEffect(() => {
-        async function getData() {
-            const response = await getSettings();
-
-            setSettings(response[0])
-        }
-
-        getData();
-    }, [])
-
     return (
         <div
             className={s.Container}
-            style={{
-                fontSize: settings?.configs?.size[settings?.fontSize],
-                borderRight: `1px solid ${hexToRgb(settings?.configs?.color[settings?.color] || "rgb(231 231 240)")}`,
-            }}
+            style={{...getEmptyElementsThemeConfig(settings)}}
         >
-            <style>
-                {`
-                .${s.Container} {
-                      background: ${settings?.configs?.background[settings?.background]};
-                }
-                `}
-            </style>
             {usersConfig.users?.length > 0
                 ? <ClearUsersContainer
                     users={usersConfig}

@@ -3,7 +3,6 @@ import RequestsContainer from "./RequestsConditions";
 import {useEffect, useState} from "react";
 import {useTranslation} from "react-i18next";
 
-
 function PeopleContainer(props) {
     const {
         chatMode,

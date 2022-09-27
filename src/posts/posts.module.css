@@ -131,6 +131,9 @@
 
 .EmotionContainer {
     border-top: 1px solid;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
 }
 
 .PostsCont > div > div div p:last-of-type {
@@ -173,46 +176,86 @@
     justify-content: space-evenly;
 }
 
-.dislike:hover {
+.dislike svg:hover {
     color: rgb(211, 59, 59);
     background: rgb(252, 208, 208);
     border-radius: 50%;
 }
 
-.like:hover {
+.complicatedEmotion:hover {
+    color: rgb(63 49 96);
+    background: rgb(208, 214, 252);
+    border-radius: 50% !important;
+}
+
+.complicatedEmotion {
+    padding: 3px !important;
+    margin: unset !important;
+}
+
+.complicatedEmotion svg {
+    margin-right: unset !important;
+}
+
+
+.complicatedEmotion:hover + span {
+    color: rgb(27, 15, 70);
+}
+
+.like svg:hover {
     color: rgb(46, 153, 46);
     background: #d8f7d8;
     border-radius: 50%;
 }
 
-.com:hover {
+.com svg:hover {
     color: rgb(73, 73, 248);
     background: rgb(209, 209, 250);
     border-radius: 50%;
 }
 
-.com:hover + span {
+.com:hover + span, .com:hover {
     color: rgb(73, 73, 248);
 }
 
-.like:hover + span {
+.like:hover + span, .like:hover {
     color: rgb(46, 153, 46);
 }
 
-.dislike:hover + span {
+.dislike:hover + span, .dislike:hover {
     color: rgb(211, 59, 59);
+}
+
+.EmotionContainer:first-of-type .EmotionLine {
+    margin: unset;
+}
+
+.EmotionContainer:last-of-type .EmotionLine {
+    margin: 5px 0px 0px 0px !important;
+    background: #f0f0ff;
 }
 
 .EmotionLine {
     display: flex;
     align-items: center;
     justify-content: center;
+    margin: 3px !important;
+    border-radius: 20px;
+    padding: 2px 5px;
+    border: 1px solid;
+}
+
+.EmotionLine span {
+    margin: 0px 5px;
+    padding: unset;
 }
 
 .PostsCont svg {
     cursor: pointer;
     height: 18px;
     width: 18px;
+    margin-right: 2px;
+    padding: 1px;
 }
 
 .Time {
@@ -289,15 +332,6 @@
     display: none;
 }
 
-.ldsRoller {
-    display: inline-block;
-    position: relative;
-    width: 80px;
-    height: 80px;
-    margin-left: 25%;
-    margin-top: 20%;
-}
-
 .ImgPreview {
     cursor: pointer;
     transition: all ease 0.5s;
@@ -330,10 +364,6 @@
     transition: all ease 0.5s;
 }
 
-.ImageMenu {
-
-}
-
 .ImageMenu svg {
     font-size: 16px;
     color: black;
@@ -364,103 +394,6 @@
 
 .ImgPreview:hover {
     opacity: 0.7;
-}
-
-.ldsRoller div {
-    animation: ldsRoller 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-    transform-origin: 40px 40px;
-}
-
-.ldsRoller div:after {
-    content: " ";
-    display: block;
-    position: absolute;
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: #363434;
-    margin: -4px 0 0 -4px;
-}
-
-.ldsRoller div:nth-child(1) {
-    animation-delay: -0.036s;
-}
-
-.ldsRoller div:nth-child(1):after {
-    top: 63px;
-    left: 63px;
-}
-
-.ldsRoller div:nth-child(2) {
-    animation-delay: -0.072s;
-}
-
-.ldsRoller div:nth-child(2):after {
-    top: 68px;
-    left: 56px;
-}
-
-.ldsRoller div:nth-child(3) {
-    animation-delay: -0.108s;
-}
-
-.ldsRoller div:nth-child(3):after {
-    top: 71px;
-    left: 48px;
-}
-
-.ldsRoller div:nth-child(4) {
-    animation-delay: -0.144s;
-}
-
-.ldsRoller div:nth-child(4):after {
-    top: 72px;
-    left: 40px;
-}
-
-.ldsRoller div:nth-child(5) {
-    animation-delay: -0.18s;
-}
-
-.ldsRoller div:nth-child(5):after {
-    top: 71px;
-    left: 32px;
-}
-
-.ldsRoller div:nth-child(6) {
-    animation-delay: -0.216s;
-}
-
-.ldsRoller div:nth-child(6):after {
-    top: 68px;
-    left: 24px;
-}
-
-.ldsRoller div:nth-child(7) {
-    animation-delay: -0.252s;
-}
-
-.ldsRoller div:nth-child(7):after {
-    top: 63px;
-    left: 17px;
-}
-
-.ldsRoller div:nth-child(8) {
-    animation-delay: -0.288s;
-}
-
-.ldsRoller div:nth-child(8):after {
-    top: 56px;
-    left: 12px;
-}
-
-@keyframes ldsRoller {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
 }
 
 @media (max-width: 500px) {

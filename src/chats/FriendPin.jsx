@@ -38,9 +38,7 @@ function FriendPin(props) {
 
     return (
         <>
-            <div
-                className={`conversation ${!approved ? "closedFriendPin" : ""} ${requestMode ? "closedFriendPin" : ""}`}
-            >
+            <div className={`conversation ${!approved ? "closedFriendPin" : ""} ${requestMode ? "closedFriendPin" : ""}`}>
                 {
                     approved &&
                     <span
@@ -85,18 +83,14 @@ function FriendPin(props) {
 
                 {
                     !requestMode
-                    && <span
-                        className={`${!approved ? "approvalIsRequired" : "hide"}`}
-                    >Approval Is Required</span>
+                    && <span className={`${!approved ? "approvalIsRequired" : "hide"}`}>Approval Is Required</span>
                 }
             </div>
 
             {
                 requestMode
                 &&
-                <div
-                    className={"matesActions"}
-                >
+                <div className={"matesActions"}>
                     <span
                         onClick={() => {
                             rejectFriendRequest({

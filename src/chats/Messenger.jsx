@@ -1,5 +1,5 @@
 import FriendPin from "./FriendPin";
-import {useEffect, useMemo, useState} from "react";
+import {useEffect, useState} from "react";
 import {getForApprovalMatesList} from "./chatHelper";
 import {notify} from "../App";
 import {buttonsConfig} from "../create-post/CreatePostLine";

@@ -24,6 +24,7 @@ function ClearComment(props) {
             {
                 post
                     ? <ClearPosts
+                        ignoreAppOpen
                         notify={notify}
                         socket={socket}
                         id={userId}
