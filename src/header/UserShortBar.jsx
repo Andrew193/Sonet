@@ -6,12 +6,13 @@ import s from "./header.module.css"
 import {useSettings} from "../hooks";
 import {useHistory} from "react-router-dom";
 import {getElementsThemeConfig, getPropertiesConfig} from "../utils";
+import {getItemFromLocalStorage} from "../localStorageService";
 
 function UserShortBar() {
     const [userAvatar, setUserAvatar] = useState();
     const history = useHistory();
     const {settings} = useSettings();
-    const userInformation = JSON.parse(localStorage.getItem("userInfo") || "{}");
+    const userInformation = getItemFromLocalStorage("userInfo");
 
     useEffect(() => {
         if (userInformation.id) {

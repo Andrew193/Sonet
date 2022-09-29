@@ -6,6 +6,9 @@ import {deletePostById, refresh, updatePostById} from "./postsHelper";
 import {AiOutlineDelete, BiShare} from "react-icons/all";
 import {SharePost} from "../create-post/script";
 import {notify} from "../App";
+import {useEffect, useState} from "react";
+import HttpHelper from "../helpers/httpHelper";
+import {getItemFromLocalStorage} from "../localStorageService";
 
 function PostItemActions(props) {
     const {
@@ -20,9 +23,30 @@ function PostItemActions(props) {
         setIsTextUpdate,
         setParentPosts,
         value,
-        id,
         index
     } = props;
+
+    const [isSharePossible, setIsSharePossible] = useState(false);
+    const id = getItemFromLocalStorage("userInfo", "id");
+
+    useEffect(() => {
+        if (value.userId) {
+            if (value.sharedInfo === "follow") {
+                HttpHelper.FOLLOW.followerById(id, value.userId)
+                    .then((response) => setIsSharePossible(() => +value?.userId !== id && !!response.length.length))
+            } else if (value.sharedInfo === "mentions") {
+                const mentions = JSON.parse(value.possibleMentions);
+                for (let i = 0; i < mentions.length; i++) {
+                    if(mentions[i].id === id) {
+                        setIsSharePossible(true);
+                        break;
+                    }
+                }
+            } else if (value.sharedInfo === "all") {
+                setIsSharePossible(() => +value?.userId !== id)
+            }
+        }
+    }, [value.userId])
 
     return (
         <Box
@@ -103,13 +127,17 @@ function PostItemActions(props) {
                 </Box>
             }
             {
-                +value?.userId !== id
+                isSharePossible
                 && <Box
                     onClick={() => {
-                        setIsTextUpdate({
-                            callback: (newPostText) => SharePost(newPostText, value),
-                            label: "Shared post comment"
-                        })
+                        if (value.sharedInfo === "all") {
+                            setIsTextUpdate({
+                                callback: (newPostText) => SharePost(newPostText, value),
+                                label: "Shared post comment"
+                            })
+                        } else if (value.sharedInfo === "follow") {
+
+                        }
                     }}
                 >
                     <ListItemIcon>

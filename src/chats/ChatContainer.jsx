@@ -5,6 +5,7 @@ import {alpha, hexToRgb} from "@mui/material";
 import Messenger from "./Messenger";
 import {createChatMessage, getConversationById, getMatesList} from "./chatHelper";
 import {Context} from "../App";
+import {getItemFromLocalStorage} from "../localStorageService";
 
 function ChatContainer() {
     const [conversations, setConversations] = useState([]);
@@ -16,7 +17,7 @@ function ChatContainer() {
     const [arrivalMessage, setArrivalMessage] = useState(null);
     const [settings, setSettings] = useState({});
 
-    const userInformation = JSON.parse(localStorage.getItem("userInfo"));
+    const userInformation = getItemFromLocalStorage("userInfo");
 
     const {socket, notify} = useContext(Context);
 

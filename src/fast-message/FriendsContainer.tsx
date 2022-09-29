@@ -6,6 +6,7 @@ import SelectedChatMessages from "../chats/SelectedChatMessages";
 import {useOutsideClick, useSettings} from "../hooks";
 import React from "react";
 import {ConversationType} from "./FastMessageContainer";
+import {getItemFromLocalStorage} from "../localStorageService";
 
 type FriendsContainerProps = {
     conversation: FriendTypeForConversations[]
@@ -34,7 +35,7 @@ function FriendsContainer(props: FriendsContainerProps) {
         setConversations
     } = props;
 
-    const userInformation: UserInformationType = JSON.parse(localStorage.getItem("userInfo") || "{}");
+    const userInformation: UserInformationType = getItemFromLocalStorage("userInfo");
     const [currentChat, setCurrentChat] = useState<CurrentChatType | null>(null);
     const [messages, setMessages] = useState<ArrivalMessageType[]>([]);
     const [newMessage, setNewMessage] = useState("");

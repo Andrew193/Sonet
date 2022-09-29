@@ -2,17 +2,15 @@ import htmlHelper from "../helpers/htmlHelper";
 import HttpHelper from "../helpers/httpHelper";
 import {notify} from "../App";
 
-function createPostService(element, notify, socket, text, savedImages, possibleMentions) {
+function createPostService(element, notify, socket, text, savedImages, possibleMentions, sharedInfo) {
     HttpHelper.POSTS.createPost(text, (response) => {
         document.querySelector(".Mpost").classList.remove("Open");
-
         notify(htmlHelper.createHTML({title: "Ok", message: response?.data?.message}));
-
         socket.emit("postCreate");
     }, (error) => {
         const inner = htmlHelper.stringFromJSON(error?.response?.data)
         notify(htmlHelper.createHTML({title: "Error", message: inner}));
-    }, savedImages, possibleMentions)
+    }, savedImages, possibleMentions, sharedInfo)
 }
 
 export async function SharePost(text, sharedPost) {
@@ -21,23 +19,19 @@ export async function SharePost(text, sharedPost) {
     })
 }
 
-export async function CreatePost(text, notify, element, socket, images, possibleMentions = []) {
+export async function CreatePost(text, notify, element, socket, images, possibleMentions = [], sharedInfo) {
     if (images?.length > 0) {
         const savedImages = [];
-
         for (let i = 0; i < images?.length; i++) {
             let formData = new FormData();
             formData.append("file", images[i]?.file);
-
             const response = await HttpHelper.uploadImg("postImage", formData);
             const parsedResponse = await response.json();
-
             savedImages.push(JSON.stringify(parsedResponse?.reason))
         }
-
-        createPostService(element, notify, socket, text, savedImages, possibleMentions)
+        createPostService(element, notify, socket, text, savedImages, possibleMentions, sharedInfo)
     } else {
-        createPostService(element, notify, socket, text, null, possibleMentions)
+        createPostService(element, notify, socket, text, null, possibleMentions, sharedInfo)
     }
 }
 

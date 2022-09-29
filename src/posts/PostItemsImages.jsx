@@ -18,7 +18,7 @@ function PostItemsImages(props) {
     } = props;
 
     const [images, setImages] = useState(JSON.parse(valueSavedImages));
-    const id = JSON.parse(localStorage.getItem("userInfo")).id;
+    const id =  JSON.parse(localStorage.getItem("userInfo")).id;
 
     const [anchorEl, setAnchorEl] = useState(null);
     const [selectedImage, setSelectedImage] = useState(null);

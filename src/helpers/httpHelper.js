@@ -120,6 +120,16 @@ const Http = {
                 })
                 .catch((error) => error?.response && console.error(error?.response?.data?.error))
         },
+        followerById: (myId, followerId) => {
+            return axios.get(API + "follow/followerById?token=" + Script.getCookie("token"), {
+                params: {
+                    myId,
+                    followerId
+                }
+            })
+                .then((response) => response.data)
+                .catch((error) => error?.response && console.error(error?.response?.data?.error))
+        },
     },
     POSTS: {
         getPosts: (count, prefix, search = "") => {
@@ -177,11 +187,12 @@ const Http = {
                 .then((response) => setPosts({posts: response?.data?.posts}))
                 .catch((error) => console.log(error))
         },
-        createPost: (text, callback, callback1, savedImages, possibleMentions) => {
+        createPost: (text, callback, callback1, savedImages, possibleMentions, sharedInfo) => {
             axios.post(API + "post?token=" + Script.getCookie("token"), {
                 text,
                 savedImages: JSON.stringify(savedImages || []),
-                possibleMentions: JSON.stringify(possibleMentions || [])
+                possibleMentions: JSON.stringify(possibleMentions || []),
+                sharedInfo: sharedInfo
             })
                 .then((response) => callback(response))
                 .catch((error) => error && callback1(error))

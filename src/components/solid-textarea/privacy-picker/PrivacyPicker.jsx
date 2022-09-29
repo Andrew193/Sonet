@@ -1,11 +1,12 @@
-import React, { useState, useEffect, useRef } from "react";
-import { Input, useSelector } from "usetheform";
+import React, {useState, useEffect, useRef} from "react";
+import {Input, useSelector} from "usetheform";
 import s from "./privacy-picker.module.css";
-
 import WorlSVG from "./images/world.svg";
 import PrivacySVG_0 from "./images/privacy-world.svg";
 import PrivacySVG_1 from "./images/privacy-following.svg";
 import PrivacySVG_2 from "./images/privacy-mentioned.svg";
+import {setPostInformation} from "../../../app/postReducer";
+import {useDispatch} from "react-redux";
 
 const labels = {
     0: "Everyone",
@@ -14,6 +15,7 @@ const labels = {
 };
 
 export const PrivacyPicker = () => {
+    const dispatch = useDispatch();
     const [visible, setVisibility] = useState(() => false);
     const [postPrivacy] = useSelector((state) => state.postPrivacy);
 
@@ -29,9 +31,9 @@ export const PrivacyPicker = () => {
         setVisibility((prev) => !prev);
     };
 
-    // for each value change it closes the Picker
     useEffect(() => {
         if (postPrivacy !== undefined) {
+            dispatch(setPostInformation({sharedInfo: +postPrivacy === 0 ? "all" : +postPrivacy === 1 ? "follow" : "mentions"}));
             setVisibility(false);
         }
     }, [postPrivacy]);
@@ -39,7 +41,7 @@ export const PrivacyPicker = () => {
     return (
         <div className={s.PrivacyPicker}>
             <button type="button" className={s.PrivacyPicker_Btn} onClick={toggle}>
-                <img alt={bntLabel} src={WorlSVG} />
+                <img alt={bntLabel} src={WorlSVG}/>
                 <span>{bntLabel}</span>
             </button>
             <div ref={refPicker} data-visible={visible} className={s.PrivacySelection}>
@@ -73,9 +75,9 @@ function RadioWithLabel({
                         }) {
     return (
         <div className={s.RadioWithLabel}>
-            <Input type="radio" id={id} name={name} value={value} checked={checked} />
+            <Input type="radio" id={id} name={name} value={value} checked={checked}/>
             <label className={s.RadioWithLabel__Label} htmlFor={id}>
-                <img alt="privacy" src={img} />
+                <img alt="privacy" src={img}/>
                 <span>{children}</span>
             </label>
         </div>

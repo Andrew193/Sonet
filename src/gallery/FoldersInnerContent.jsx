@@ -2,6 +2,7 @@ import s from "./gallery.module.css";
 import {Box, Typography} from "@mui/material";
 import FoldersActionsBar from "./FoldersActionsBar";
 import {useHistory} from "react-router-dom";
+import {getItemFromLocalStorage} from "../localStorageService";
 
 
 function FoldersInnerContent(props) {
@@ -14,7 +15,7 @@ function FoldersInnerContent(props) {
         setFolders
     } = props;
 
-    const user = JSON.parse(localStorage.getItem("userInfo"));
+    const user = getItemFromLocalStorage("userInfo");
     const history = useHistory();
 
     return (

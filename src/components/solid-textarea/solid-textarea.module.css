@@ -81,6 +81,12 @@
     cursor: pointer;
     transition: all ease 0.5s;
     padding: 5px !important;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.PossiblePeople p > div {
+    min-height: 40px!important;
 }
 
 .Editor_link {

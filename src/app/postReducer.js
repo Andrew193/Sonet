@@ -7,7 +7,8 @@ const initialState = {
         shouldClear: false,
         possibleMentions: [],
         selectedMention: '',
-        focusPosition: null
+        focusPosition: null,
+        sharedInfo: 'all'
     },
 };
 

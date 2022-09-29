@@ -25,13 +25,14 @@ import GalleryMode from "./GalleryMode";
 import {useTranslation} from "react-i18next";
 import Folders from "./Folders";
 import {withRouter} from "react-router-dom";
+import {getItemFromLocalStorage} from "../localStorageService";
 
 function GalleryInnerContent(props) {
     const {
         settings
     } = props;
 
-    const userInformation = JSON.parse(localStorage.getItem("userInfo"));
+    const userInformation = getItemFromLocalStorage("userInfo");
 
     const [images, setImages] = useState();
 

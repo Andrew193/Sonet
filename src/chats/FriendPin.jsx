@@ -5,6 +5,7 @@ import {toast} from "react-toastify";
 import {friendRequest} from "../users/script";
 import {createCopy} from "../utils";
 import LazyImage from "../posts/LazyImage";
+import {getItemFromLocalStorage} from "../localStorageService";
 
 function FriendPin(props) {
     const {
@@ -19,7 +20,7 @@ function FriendPin(props) {
         userAvatar
     } = props;
 
-    const userInformation = JSON.parse(localStorage.getItem("userInfo"));
+    const userInformation = getItemFromLocalStorage("userInfo");
 
     function actionsCover(flag) {
         setPossibleMates((state) => {

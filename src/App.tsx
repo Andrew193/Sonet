@@ -25,6 +25,7 @@ import fastMusic from "./fast-music/fast-music.module.css";
 import {getFastDisplay} from "./fast-actions/FastActionsContainer";
 import {useLocation} from "react-router-dom";
 import {useSettings} from "./hooks";
+import {getItemFromLocalStorage} from "./localStorageService";
 
 const sessionHelper = require("./helpers/sessionHelper")
 const socket = io();
@@ -53,7 +54,7 @@ function App() {
     const [flag, setFlag] = useState(false);
     const history = useHistory();
     const {settings} = useSettings();
-    const userInformation = JSON.parse(localStorage.getItem("userInfo") || "{}");
+    const userInformation = getItemFromLocalStorage("userInfo");
 
     function open() {
         window?.document?.body?.querySelector(".App")?.classList?.remove("Open")

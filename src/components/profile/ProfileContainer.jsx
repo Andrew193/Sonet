@@ -6,6 +6,7 @@ import {useEffect, useState} from "react";
 import Skeleton from "react-loading-skeleton";
 import {getEmptyElementsThemeConfig} from "../../utils";
 import {useSettings} from "../../hooks";
+import {getItemFromLocalStorage} from "../../localStorageService";
 
 function Profile(props) {
     const userId = props.match.params.id;
@@ -14,7 +15,7 @@ function Profile(props) {
 
     useEffect(() => {
         if (!userId) {
-            setUserInfo(JSON.parse(localStorage.getItem("userInfo")))
+            setUserInfo(getItemFromLocalStorage("userInfo"))
         } else {
             Script.getUser(userId)
                 .then((response) => setUserInfo(response?.data?.user))

@@ -3,6 +3,8 @@ import s from "./solid-textarea.module.css";
 import {alpha} from "@mui/material";
 import {useSettings} from "../../hooks";
 import {handleOnMentionSelect} from "./possibleMentionsHelper";
+import {getItemFromLocalStorage} from "../../localStorageService";
+import LazyImage from "../../posts/LazyImage";
 
 function PossibleMentions(props) {
     const {
@@ -15,11 +17,16 @@ function PossibleMentions(props) {
         selectedMention,
     } = props;
 
+    const id = getItemFromLocalStorage("userInfo", "id");
     const {settings} = useSettings();
     const possibleMentionsConfig = useMemo(() => possibleMentions.map((person) =>
-        <p key={person.id}
-           onClick={() => handleOnMentionSelect(selectedMention, person, setValue, onChangeHandler, postInformation, setPossibleMentions, value)}
-        >{person.userName}</p>), [possibleMentions])
+        person.id !== id
+            ? <p key={person.id}
+                 onClick={() => handleOnMentionSelect(selectedMention, person, setValue, onChangeHandler, postInformation, setPossibleMentions, value)}
+            >
+                <LazyImage imageSrc={person.avatar} onClick={() => {
+                }} imgClass={"conversationImg"}/>
+                {person.userName}</p> : null), [possibleMentions])
 
     return (
         <>

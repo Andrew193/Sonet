@@ -36,7 +36,7 @@ function FoldersActionsBar(props) {
             <style>{`
             .inputCover {
             position: absolute!important;
-            z-index: 10;
+            z-index: 11;
             top: 0;
             left: 0;
             width: 100%;

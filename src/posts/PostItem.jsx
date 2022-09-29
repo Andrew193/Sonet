@@ -11,7 +11,7 @@ import {useOutsideClick} from "../hooks";
 import PostItemsImages from "./PostItemsImages";
 import React from "react";
 import {useTranslation} from "react-i18next";
-import {getUserAvatar, replaceTags, setEmotion} from "./postsHelper";
+import {getUserAvatar, replaceTags} from "./postsHelper";
 import InputEmoji from 'react-input-emoji';
 import HashtagsLine from "./HashtagsLine";
 import {Context} from "../App";
@@ -57,8 +57,8 @@ function PostItem(props) {
 
     useOutsideClick(wrapperRef, () => handleClose())
 
-    const handleClick = (event) => {
-        if (!ignoreAppOpen) {
+    const handleClick = (event, ignoreAppOpenCallback) => {
+        if (!ignoreAppOpen && !ignoreAppOpenCallback) {
             window?.document?.body?.querySelector(".App")?.classList?.add("Open")
         }
         setAnchorEl(event.currentTarget);
@@ -151,7 +151,7 @@ function PostItem(props) {
                     />
                 </div>
                 <BsThreeDots
-                    onClick={(e) => handleClick(e)}
+                    onClick={(e) => handleClick(e, true)}
                     className={s.PostItemsActions}
                 />
 

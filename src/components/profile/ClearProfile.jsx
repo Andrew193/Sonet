@@ -13,6 +13,7 @@ import UsersActivities from "./UsersActivities";
 import style from "./profile.module.css";
 import BackImageMenu from "./BackImageMenu";
 import {useTranslation} from "react-i18next";
+import {getItemFromLocalStorage} from "../../localStorageService";
 
 function ClearProfile(props) {
     const {
@@ -22,7 +23,7 @@ function ClearProfile(props) {
         settings
     } = props;
 
-    const myId = JSON.parse(localStorage.getItem("userInfo")).id;
+    const myId = getItemFromLocalStorage("userInfo", "id");
     const {t} = useTranslation();
     const [count, setCount] = useState(0);
 
@@ -86,7 +87,7 @@ function ClearProfile(props) {
                 position: fixed;
                 z-index: 10000;
                 width: 85%;
-                background: ${alpha(settings?.configs?.background[settings?.background] || "rgb(255, 255, 255)",0.95)};
+                background: ${alpha(settings?.configs?.background[settings?.background] || "rgb(255, 255, 255)", 0.95)};
                 border-right: 1px solid ${settings?.configs?.color[settings?.color] || "rgb(206, 204, 204)"};
                 }
                 .fromNow:before {

@@ -7,6 +7,7 @@ import S2 from "./Script.js"
 import ClearComment from "./clearComment";
 import {Context} from "../../App";
 import {useSettings} from "../../hooks";
+import {getItemFromLocalStorage} from "../../localStorageService";
 
 function Comments(props) {
     const {
@@ -17,7 +18,7 @@ function Comments(props) {
     const [post, setPost] = useState(false);
     const [comments, setComments] = useState(false);
     const {settings} = useSettings();
-    const userId = JSON.parse(localStorage.getItem("userInfo")).id;
+    const userId = getItemFromLocalStorage("userInfo","id");
 
     const {socket, notify} = useContext(Context);
 

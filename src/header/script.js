@@ -2,6 +2,7 @@ import Script from "../helpers/cookieHelper";
 import htmlHelper from "../helpers/htmlHelper";
 import HttpHelper from "../helpers/httpHelper";
 import CommonHelper from "../helpers/common";
+import {getItemFromLocalStorage} from "../localStorageService";
 
 function leave(history) {
     Script.removeCookie("token");
@@ -23,8 +24,8 @@ function ToggleStateValue(setFlag) {
     setFlag((prev) => !prev.flag)
 }
 
-function GetInfo() {
-    const { userName, id } = JSON.parse(localStorage.getItem("userInfo"));
+export function GetInfo() {
+    const { userName, id } = getItemFromLocalStorage("userInfo");
     return { userName, id };
 }
 
