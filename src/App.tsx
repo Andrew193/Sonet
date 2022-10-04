@@ -15,7 +15,7 @@ import {setupDb} from "./db";
 import "./i18n";
 import galleryStyles from "./gallery/gallery.module.css";
 import settingsStyles from "./settings/settings.module.css";
-import {headerListLinks} from "./vars";
+import {headerListLinks, USER_INFORMATION} from "./vars";
 import store from "./app/store";
 import {Provider} from 'react-redux';
 import React from "react";
@@ -54,7 +54,7 @@ function App() {
     const [flag, setFlag] = useState(false);
     const history = useHistory();
     const {settings} = useSettings();
-    const userInformation = getItemFromLocalStorage("userInfo");
+    const userInformation = getItemFromLocalStorage(USER_INFORMATION);
 
     function open() {
         window?.document?.body?.querySelector(".App")?.classList?.remove("Open")
@@ -168,6 +168,8 @@ function App() {
                         </>}
                         <Route path={headerListLinks.games + "/:gameType?"}
                                render={() => <Components.GamesContainer/>}/>
+                        <Route path={headerListLinks.bookmarks}
+                               render={() => <Components.Bookmarks/>}/>
                         <Route exact path={headerListLinks.settings}
                                render={() => <Components.SettingsContainerPage/>}/>
                         <Route exact path={headerListLinks.chats} render={() => <Components.ChatContainer/>}/>

@@ -7,6 +7,7 @@ import {Backdrop, CircularProgress} from "@mui/material";
 import InputEmoji from 'react-input-emoji';
 import {Context} from "../../App";
 import {getItemFromLocalStorage} from "../../localStorageService";
+import {USER_INFORMATION} from "../../vars";
 
 function CommentLine(props) {
     const {
@@ -20,7 +21,7 @@ function CommentLine(props) {
     const [text, setText] = useState('')
     const [isOpened, setIsOpened] = useState(false);
 
-    const userInfo = getItemFromLocalStorage("userInfo");
+    const userInfo = getItemFromLocalStorage(USER_INFORMATION);
     const {t} = useTranslation();
 
     return (

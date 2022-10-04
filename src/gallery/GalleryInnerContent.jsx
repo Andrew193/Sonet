@@ -26,13 +26,14 @@ import {useTranslation} from "react-i18next";
 import Folders from "./Folders";
 import {withRouter} from "react-router-dom";
 import {getItemFromLocalStorage} from "../localStorageService";
+import {USER_INFORMATION} from "../vars";
 
 function GalleryInnerContent(props) {
     const {
         settings
     } = props;
 
-    const userInformation = getItemFromLocalStorage("userInfo");
+    const userInformation = getItemFromLocalStorage(USER_INFORMATION);
 
     const [images, setImages] = useState();
 

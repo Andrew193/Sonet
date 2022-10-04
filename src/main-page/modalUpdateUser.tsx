@@ -6,6 +6,7 @@ import s from "./main-page.module.css"
 import Script from "./script.js"
 import {CardContent, Paper} from "@mui/material";
 import {getItemFromLocalStorage} from "../localStorageService";
+import {USER_INFORMATION} from "../vars";
 
 type ModalUserInterface = {
     click: Function
@@ -16,7 +17,7 @@ const ModalUser = forwardRef<HTMLDivElement, ModalUserInterface>((props, ref) =>
         userName,
         email,
         id
-    } = getItemFromLocalStorage("userInfo");
+    } = getItemFromLocalStorage(USER_INFORMATION);
 
     const [name, setName] = useState(userName);
     const [userEmail, setEmail] = useState(email);

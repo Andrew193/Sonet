@@ -9,6 +9,8 @@ import {downloadFileVersion2} from "../utils";
 import {addPhotoToMyGallery} from "./postsHelper";
 import {notify} from "../App";
 import {useTranslation} from "react-i18next";
+import {USER_INFORMATION} from "../vars";
+import {getItemFromLocalStorage} from "../localStorageService";
 
 function PostItemsImages(props) {
     const {
@@ -18,7 +20,7 @@ function PostItemsImages(props) {
     } = props;
 
     const [images, setImages] = useState(JSON.parse(valueSavedImages));
-    const id =  JSON.parse(localStorage.getItem("userInfo")).id;
+    const id =  getItemFromLocalStorage(USER_INFORMATION,"id");
 
     const [anchorEl, setAnchorEl] = useState(null);
     const [selectedImage, setSelectedImage] = useState(null);

@@ -19,9 +19,11 @@ import MusicContainerPage from "./music/MusicContainerPage";
 import FastMessageContainer from "./fast-message/FastMessageContainer";
 import FastActionsContainer from "./fast-actions/FastActionsContainer";
 import FastMusicContainer from "./fast-music/FastMusicContainer";
+import Bookmarks from "./bookmarks/BookmarksPageContainer";
 
 const obj = {
     FastMusicContainer,
+    Bookmarks,
     FastMessageContainer,
     FastActionsContainer,
     MusicContainerPage,

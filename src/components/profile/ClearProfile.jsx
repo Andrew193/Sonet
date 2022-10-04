@@ -14,6 +14,7 @@ import style from "./profile.module.css";
 import BackImageMenu from "./BackImageMenu";
 import {useTranslation} from "react-i18next";
 import {getItemFromLocalStorage} from "../../localStorageService";
+import {USER_INFORMATION} from "../../vars";
 
 function ClearProfile(props) {
     const {
@@ -23,7 +24,7 @@ function ClearProfile(props) {
         settings
     } = props;
 
-    const myId = getItemFromLocalStorage("userInfo", "id");
+    const myId = getItemFromLocalStorage(USER_INFORMATION, "id");
     const {t} = useTranslation();
     const [count, setCount] = useState(0);
 

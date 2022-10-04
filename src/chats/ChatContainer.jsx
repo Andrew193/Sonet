@@ -6,6 +6,7 @@ import Messenger from "./Messenger";
 import {createChatMessage, getConversationById, getMatesList} from "./chatHelper";
 import {Context} from "../App";
 import {getItemFromLocalStorage} from "../localStorageService";
+import {USER_INFORMATION} from "../vars";
 
 function ChatContainer() {
     const [conversations, setConversations] = useState([]);
@@ -17,7 +18,7 @@ function ChatContainer() {
     const [arrivalMessage, setArrivalMessage] = useState(null);
     const [settings, setSettings] = useState({});
 
-    const userInformation = getItemFromLocalStorage("userInfo");
+    const userInformation = getItemFromLocalStorage(USER_INFORMATION);
 
     const {socket, notify} = useContext(Context);
 

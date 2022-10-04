@@ -3,6 +3,8 @@ import Script from "./script"
 import {toast} from "react-toastify"
 import {buttonsConfig} from "../create-post/CreatePostLine";
 import {AiOutlineEye, AiOutlineUserAdd, AiOutlineUsergroupAdd} from "react-icons/ai";
+import {USER_INFORMATION} from "../vars";
+import {getItemFromLocalStorage} from "../localStorageService";
 
 function UsersPageActions(props) {
     const {
@@ -14,7 +16,7 @@ function UsersPageActions(props) {
         userAvatarLink
     } = props;
 
-    const userInformation = JSON.parse(localStorage.getItem("userInfo"));
+    const userInformation = getItemFromLocalStorage(USER_INFORMATION);
 
     return (
         <div className={s.ActionLine}>

@@ -3,7 +3,7 @@ import CommonHelper from "./common"
 import Script from "./cookieHelper";
 import {createErrorsForApiCall} from "../utils";
 import {notify} from "../App";
-import {API, img_api} from "../vars";
+import {img_api} from "../vars";
 
 const axios = require('axios').default;
 
@@ -16,7 +16,7 @@ const Http = {
         )
     },
     configToken: (token, history) => {
-        axios.get(API + "token/configToken", {params: {token}})
+        axios.get("/api/token/configToken", {params: {token}})
             .then(_ => {
             }).catch((error) => {
             if (error) {
@@ -26,7 +26,7 @@ const Http = {
         })
     },
     subscribe: (id, otherUserFolCount, toast) => {
-        axios.post(API + "subscribe?token=" + Script.getCookie("token"), {
+        axios.post("/api/subscribe?token=" + Script.getCookie("token"), {
             userId: id,
             otherUserFolCount
         })
@@ -35,36 +35,36 @@ const Http = {
     },
     USERS: {
         getAllUsers: () => {
-            return axios.get(API + "users")
+            return axios.get("/api/users")
                 .then((response) => response?.data)
                 .catch((error) => error.response && console.error(error.response))
         },
         confirm: (phone, email) => {
-            axios.post(API + "users/confirm?token=" + Script.getCookie("token"), {phone, email})
+            axios.post("/api/users/confirm?token=" + Script.getCookie("token"), {phone, email})
         },
         getOneObj: (id) => {
-            return axios.get(API + "users/getOneObj?token=" + Script.getCookie("token"), {params: {id}})
+            return axios.get("/api/users/getOneObj?token=" + Script.getCookie("token"), {params: {id}})
                 .then((response) => response)
                 .catch((error) => error)
         },
         getUserByName: (name) => {
-            return axios.get(API + "users/getUserByName?token=" + Script.getCookie("token"), {params: {name}})
+            return axios.get("/api/users/getUserByName?token=" + Script.getCookie("token"), {params: {name}})
                 .then((response) => response)
                 .catch((error) => error)
         },
         getOneUser: (id) => {
-            return axios.get(API + "users/getOne", {params: {id}})
+            return axios.get("/api/users/getOne", {params: {id}})
                 .then((response) => response?.data)
                 .catch((error) => error.response && console.error(error.response))
         },
         resetPassword: (email) => {
             notify("Your request has been sent successfully")
-            return axios.get(API + "users/newPassword", {params: {email}})
+            return axios.get("/api/users/newPassword", {params: {email}})
                 .then((response) => response)
                 .catch((error) => error)
         },
         userUpdate: (values) => {
-            axios.put(API + "users/update", values)
+            axios.put("/api/users/update", values)
                 .then(() => {
                     notify("Updated successfully")
                 })
@@ -77,14 +77,14 @@ const Http = {
                 })
         },
         getMe: (callback) => {
-            return axios.get(API + "users/me?token=" + Script.getCookie("token"))
+            return axios.get("/api/users/me?token=" + Script.getCookie("token"))
                 .then((response) => response)
                 .catch((error) => error.response && callback(error.response))
         },
         createUser: (values, okCallback, errorCallback) => {
-            axios.post(API + "users", values)
+            axios.post("/api/users", values)
                 .then((response) => {
-                    okCallback(response?.data?.token);
+                    //okCallback(response?.data?.token);
                 })
                 .catch((error) => {
                     if (error) {
@@ -93,19 +93,19 @@ const Http = {
                 })
         },
         authUser: (values, callback, callback1) => {
-            axios.get(API + "users/auth", {params: values})
+            axios.get("/api/users/auth", {params: values})
                 .then((response) => callback(response?.data?.token))
                 .catch((error) => error?.response && callback1(error?.response?.data?.error))
         },
     },
     FOLLOW: {
         follow: (idArray, history, type) => {
-            axios.get(API + "follow?token=" + Script.getCookie("token"), {params: {idArray: JSON.stringify(idArray)}})
+            axios.get("/api/follow?token=" + Script.getCookie("token"), {params: {idArray: JSON.stringify(idArray)}})
                 .then((response) => CommonHelper.redirect(history, response?.data, "/followers" + type))
                 .catch((error) => error.response && console.error(error?.response?.data?.error))
         },
         followingArray: (callback, history, myId) => {
-            axios.get(API + "follow/followingsArray?token=" + Script.getCookie("token"), {params: {myId}})
+            axios.get("/api/follow/followingsArray?token=" + Script.getCookie("token"), {params: {myId}})
                 .then((response) => {
                     const idArray = response?.data?.length?.reduce((prev, curr) => [...prev, +curr.userId], [])
                     callback(idArray, history)
@@ -113,7 +113,7 @@ const Http = {
                 .catch((error) => error.response && console.error(error?.response?.data?.error))
         },
         followersArray: (callback, history, myId) => {
-            axios.get(API + "follow/followersArray?token=" + Script.getCookie("token"), {params: {myId}})
+            axios.get("/api/follow/followersArray?token=" + Script.getCookie("token"), {params: {myId}})
                 .then((response) => {
                     const idArray = response?.data?.length?.reduce((prev, curr) => [...prev, +curr.userId], [])
                     callback(idArray, history)
@@ -121,7 +121,7 @@ const Http = {
                 .catch((error) => error?.response && console.error(error?.response?.data?.error))
         },
         followerById: (myId, followerId) => {
-            return axios.get(API + "follow/followerById?token=" + Script.getCookie("token"), {
+            return axios.get("/api/follow/followerById?token=" + Script.getCookie("token"), {
                 params: {
                     myId,
                     followerId
@@ -133,22 +133,22 @@ const Http = {
     },
     POSTS: {
         getPosts: (count, prefix, search = "") => {
-            return axios.get(API + `post${prefix ? `/${prefix}` : ""}?token=` + Script.getCookie("token") + search, {params: {howMany: count}})
+            return axios.get(`/api/post${prefix ? `/${prefix}` : ""}?token=` + Script.getCookie("token") + search, {params: {howMany: count}})
                 .then((response) => response?.data)
                 .catch((error) => error.response && console.error(error.response))
         },
         getPCount: (id, set) => {
-            axios.get(API + "post/count?token=" + Script.getCookie("token"), {params: {id}})
+            axios.get("/api/post/count?token=" + Script.getCookie("token"), {params: {id}})
                 .then((response) => set(response?.data?.count))
                 .catch((error) => error.response && console.error(error.response))
         },
         getOnePost: (id, notify) => {
-            return axios.get(API + "post/getOne?token=" + Script.getCookie("token"), {params: {id}})
+            return axios.get("/api/post/getOne?token=" + Script.getCookie("token"), {params: {id}})
                 .then((response) => response?.data)
                 .catch((error) => error?.response && notify(error?.response?.data?.posts))
         },
         complexEmotions: ({emotionType, userId, value, emotionCount}, okCallback, errorCallback) => {
-            return axios.put(API + "post/complexEmotion", {
+            return axios.put("/api/post/complexEmotion", {
                 ...value,
                 emotionType,
                 selectedEmotionCount: emotionCount,
@@ -159,7 +159,7 @@ const Http = {
                 .catch((error) => error.response && errorCallback(error))
         },
         emotion: (userId, value, callback, callback1, emType) => {
-            axios.put(API + "post/" + emType, {
+            axios.put("/api/post/" + emType, {
                 userId,
                 ...value,
                 postText: JSON.stringify(value)
@@ -168,17 +168,17 @@ const Http = {
                 .catch((error) => error.response && callback1(error))
         },
         getPostWithType: (id, setPosts, endpoint) => {
-            axios.get(API + "post/" + endpoint + "?token=" + Script.getCookie("token"), {params: {userId: id}})
+            axios.get("/api/post/" + endpoint + "?token=" + Script.getCookie("token"), {params: {userId: id}})
                 .then((response) => setPosts({posts: response?.data?.posts}))
                 .catch((error) => console.log(error))
         },
         deletePostById: (id, setPosts) => {
-            axios.delete(API + "post/" + "?token=" + Script.getCookie("token"), {params: {postId: id}})
+            axios.delete("/api/post/" + "?token=" + Script.getCookie("token"), {params: {postId: id}})
                 .then((response) => setPosts({posts: response?.data?.posts}))
                 .catch((error) => console.log(error))
         },
         updatePostById: ({id, newText}, setPosts) => {
-            axios.put(API + "post/" + "?token=" + Script.getCookie("token"), {
+            axios.put("/api/post/" + "?token=" + Script.getCookie("token"), {
                 params: {
                     postId: id,
                     newText
@@ -188,7 +188,7 @@ const Http = {
                 .catch((error) => console.log(error))
         },
         createPost: (text, callback, callback1, savedImages, possibleMentions, sharedInfo) => {
-            axios.post(API + "post?token=" + Script.getCookie("token"), {
+            axios.post("/api/post?token=" + Script.getCookie("token"), {
                 text,
                 savedImages: JSON.stringify(savedImages || []),
                 possibleMentions: JSON.stringify(possibleMentions || []),
@@ -198,7 +198,7 @@ const Http = {
                 .catch((error) => error && callback1(error))
         },
         sharePost: (text, sharedPost, callback) => {
-            axios.post(API + "post/share?token=" + Script.getCookie("token"), {
+            axios.post("/api/post/share?token=" + Script.getCookie("token"), {
                 text,
                 shared: JSON.stringify(sharedPost)
             })
@@ -206,27 +206,27 @@ const Http = {
                 .catch((error) => console.error(error))
         },
         getAllComments: (id, callback) => {
-            return axios.get(API + "post/comment?token=" + Script.getCookie("token"), {params: {id}})
+            return axios.get("/api/post/comment?token=" + Script.getCookie("token"), {params: {id}})
                 .then((response) => response)
                 .catch((error) => error.response && callback())
         },
         getAllCommentsByUserId: (userId, callback) => {
-            return axios.get(API + "post/comment/id?token=" + Script.getCookie("token"), {params: {id: userId}})
+            return axios.get("/api/post/comment/id?token=" + Script.getCookie("token"), {params: {id: userId}})
                 .then((response) => response)
                 .catch((error) => error.response && callback())
         },
         getAllLikesByUserId: (userId, callback) => {
-            return axios.get(API + "post/like/all?token=" + Script.getCookie("token"), {params: {userId}})
+            return axios.get("/api/post/like/all?token=" + Script.getCookie("token"), {params: {userId}})
                 .then((response) => response)
                 .catch((error) => error.response && callback())
         },
         getAllDislikesByUserId: (userId, callback) => {
-            return axios.get(API + "post/dislike/all?token=" + Script.getCookie("token"), {params: {userId}})
+            return axios.get("/api/post/dislike/all?token=" + Script.getCookie("token"), {params: {userId}})
                 .then((response) => response)
                 .catch((error) => error.response && callback())
         },
         createComment: (value, postId, id, userName, comCount, callback, callback1) => {
-            return axios.post(API + "post/comment?token=" + Script.getCookie("token"), {
+            return axios.post("/api/post/comment?token=" + Script.getCookie("token"), {
                 text: value, postId, userId: id, createdBy: userName, comCount
             })
                 .then((response) => callback(response))
@@ -235,7 +235,7 @@ const Http = {
     },
     MATES: {
         friendRequest: (values, okCallback, errorCallback) => {
-            axios.post(API + "mates", values)
+            axios.post("/api/mates", values)
                 .then((response) => okCallback(response?.data))
                 .catch((error) => {
                     if (error) {
@@ -244,7 +244,7 @@ const Http = {
                 })
         },
         approveRequest: (values, okCallback, errorCallback) => {
-            axios.post(API + "mates/approve", values)
+            axios.post("/api/mates/approve", values)
                 .then(() => okCallback("Added"))
                 .catch((error) => {
                     if (error) {
@@ -253,7 +253,7 @@ const Http = {
                 })
         },
         rejectRequest: (values, okCallback, errorCallback) => {
-            axios.delete(API + "mates/", {data: values})
+            axios.delete("/api/mates/", {data: values})
                 .then(() => okCallback("Rejected"))
                 .catch((error) => {
                     if (error) {
@@ -262,7 +262,7 @@ const Http = {
                 })
         },
         getForApprovalMatesList: (receiverId, okCallback, errorCallback) => {
-            axios.get(API + "mates/forMe", {params: {receiverId}})
+            axios.get("/api/mates/forMe", {params: {receiverId}})
                 .then((response) => okCallback(response?.data))
                 .catch((error) => {
                     if (error) {
@@ -271,7 +271,7 @@ const Http = {
                 })
         },
         getApprovedByMeMatesList: (receiverId, okCallback, errorCallback) => {
-            axios.get(API + "mates/approvedByMe", {params: {receiverId}})
+            axios.get("/api/mates/approvedByMe", {params: {receiverId}})
                 .then((response) => okCallback(response?.data))
                 .catch((error) => {
                     if (error) {
@@ -280,7 +280,36 @@ const Http = {
                 })
         },
         getMatesList: (requestSendById, okCallback, errorCallback) => {
-            axios.get(API + "mates/my", {params: {requestSendById}})
+            axios.get("/api/mates/my", {params: {requestSendById}})
+                .then((response) => okCallback(response?.data))
+                .catch((error) => {
+                    if (error) {
+                        errorCallback(createErrorsForApiCall(error?.response?.data, error?.response?.data))
+                    }
+                })
+        },
+    },
+    BOOKMARKS: {
+        addItemToBookmarks: (values, okCallback, errorCallback) => {
+            axios.post("/api/bookmarks", values)
+                .then((response) => okCallback(response?.data))
+                .catch((error) => {
+                    if (error) {
+                        errorCallback(createErrorsForApiCall(error?.response?.data, error?.response?.data))
+                    }
+                })
+        },
+        getMyBookmarks: (userId, okCallback, errorCallback) => {
+            axios.get("/api/bookmarks", {params: {userId}})
+                .then((response) => okCallback(response?.data.clearData))
+                .catch((error) => {
+                    if (error) {
+                        errorCallback(createErrorsForApiCall(error?.response?.data, error?.response?.data))
+                    }
+                })
+        },
+        deleteMyBookmarkById: (id, okCallback, errorCallback) => {
+            axios.delete("/api/bookmarks", {params: {id}})
                 .then((response) => okCallback(response?.data))
                 .catch((error) => {
                     if (error) {
@@ -291,7 +320,7 @@ const Http = {
     },
     GALLERY: {
         addPhotoToMyGallery: (values, okCallback, errorCallback) => {
-            axios.post(API + "gallery", values)
+            axios.post("/api/gallery", values)
                 .then((response) => okCallback(response?.data))
                 .catch((error) => {
                     if (error) {
@@ -300,7 +329,7 @@ const Http = {
                 })
         },
         getMyGallery: (userId, okCallback, errorCallback) => {
-            axios.get(API + "gallery", {params: {userId}})
+            axios.get("/api/gallery", {params: {userId}})
                 .then((response) => okCallback(response?.data))
                 .catch((error) => {
                     if (error) {
@@ -309,7 +338,7 @@ const Http = {
                 })
         },
         deleteMyPhoto: ({userId, src}, okCallback, errorCallback) => {
-            axios.delete(API + "gallery", {params: {userId, src}})
+            axios.delete("/api/gallery", {params: {userId, src}})
                 .then((response) => okCallback(response?.data))
                 .catch((error) => {
                     if (error) {
@@ -320,7 +349,7 @@ const Http = {
     },
     FOLDER: {
         addPhotoToFolder: (values, okCallback, errorCallback) => {
-            axios.post(API + "folder", values)
+            axios.post("/api/folder", values)
                 .then((response) => {
                     okCallback(response?.data);
                 })
@@ -333,14 +362,14 @@ const Http = {
                 })
         },
         updateFolderBack: (values) => {
-            return fetch(API + "folder/folderBack", {
+            return fetch("/api/folder/folderBack", {
                     method: "POST",
                     body: values
                 }
             )
         },
         getMyFolders: (userId, okCallback, errorCallback) => {
-            axios.get(API + "folder", {params: {userId}})
+            axios.get("/api/folder", {params: {userId}})
                 .then((response) => {
                     okCallback(response?.data?.clearData);
                 })
@@ -353,24 +382,24 @@ const Http = {
                 })
         },
         deleteImageFromFolder: ({userId, src, id}) => {
-            return axios.delete(API + "folder", {params: {userId, src, id}})
+            return axios.delete("/api/folder", {params: {userId, src, id}})
         },
         deleteFolder: ({name}) => {
-            return axios.delete(API + "folder/root", {params: {name}})
+            return axios.delete("/api/folder/root", {params: {name}})
         },
     },
     CHAT: {
         deleteChatMessage: ({id}) => {
-            return axios.delete(API + "chat/message", {params: {id}})
+            return axios.delete("/api/chat/message", {params: {id}})
         },
         updateChatMessage: (id, value) => {
-            return axios.put(API + "chat/", {
+            return axios.put("/api/chat/", {
                 id,
                 newText: value
             })
         },
         createChatMessage: (values, okCallback, errorCallback) => {
-            axios.post(API + "chat", values)
+            axios.post("/api/chat", values)
                 .then((response) => {
                     okCallback(response?.data);
                 })
@@ -383,7 +412,7 @@ const Http = {
                 })
         },
         getConversationById: (conversationId, okCallback, errorCallback) => {
-            axios.get(API + "chat/conversation", {params: {conversationId}})
+            axios.get("/api/chat/conversation", {params: {conversationId}})
                 .then((response) => {
                     okCallback(response?.data);
                 })

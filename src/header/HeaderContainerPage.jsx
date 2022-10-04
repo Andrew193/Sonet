@@ -24,6 +24,7 @@ export const headerLinksConfig = [
     {path: headerListLinks.users, label: "Users"},
     {path: headerListLinks.posts, label: "Posts"},
     {path: headerListLinks.gallery, label: "Gallery"},
+    {path: headerListLinks.bookmarks, label: "Bookmarks"},
     {path: headerListLinks.games, label: "Games"},
     {path: headerListLinks.music, label: "Music"},
     {path: headerListLinks?.settings, label: "Settings"}

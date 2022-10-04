@@ -3,10 +3,12 @@ import {useHistory} from "react-router-dom";
 import Script from "./postsHelper"
 import s from "./posts.module.css";
 import {useTranslation} from "react-i18next";
+import {USER_INFORMATION} from "../vars";
+import {getItemFromLocalStorage} from "../localStorageService";
 
 function SortLine() {
     const hist = useHistory();
-    const id = JSON.parse(localStorage.getItem("userInfo")).id;
+    const id = getItemFromLocalStorage(USER_INFORMATION, "id");
 
     const {t} = useTranslation();
 

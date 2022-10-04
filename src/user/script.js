@@ -1,6 +1,7 @@
+import {USER_INFORMATION} from "../vars";
 
 function SaveInfo(info) {
-    localStorage.setItem("userInfo", JSON.stringify(info))
+    localStorage.setItem(USER_INFORMATION, JSON.stringify(info))
 }
 
 const obj={ SaveInfo }

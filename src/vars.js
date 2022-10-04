@@ -11,8 +11,10 @@ export const headerListLinks = {
     followers: "/followers",
     comment: "/comment",
     post: "/post",
+    bookmarks: "/bookmarks",
     music: "/music"
 }
 
-export const API = "http://localhost:3123/api/" || "https://sonet34.herokuapp.com/api/";
-export const img_api = API + "img/";
+//export const API = "http://localhost:3123/api/" || "https://sonet34.herokuapp.com/api/";
+export const img_api = "/api/img/";
+export const USER_INFORMATION = "userInfo";

@@ -11,6 +11,7 @@ import {deleteFolder, deleteImageFromFolder, updateBackCover} from "./galleryHel
 import FoldersInnerContent from "./FoldersInnerContent";
 import dateHelper from "../helpers/dateHelper";
 import {getItemFromLocalStorage} from "../localStorageService";
+import {USER_INFORMATION} from "../vars";
 
 function Folders(props) {
     const {
@@ -21,7 +22,7 @@ function Folders(props) {
     } = props;
 
     const history = useHistory();
-    const user = getItemFromLocalStorage("userInfo");
+    const user = getItemFromLocalStorage(USER_INFORMATION);
 
     function openFolder(name) {
         history.push(`/gallery/${name}`)

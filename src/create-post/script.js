@@ -19,6 +19,18 @@ export async function SharePost(text, sharedPost) {
     })
 }
 
+export function BookmarkItem(bookmarkConfig) {
+    HttpHelper.BOOKMARKS.addItemToBookmarks(bookmarkConfig, (response) => {
+        notify(htmlHelper.createHTML({title: "Ok", message: response?.data?.message}));
+    })
+}
+
+export function DeleteBookmarkItem(bookmarkId) {
+    HttpHelper.BOOKMARKS.deleteMyBookmarkById(bookmarkId, (response) => {
+        notify(htmlHelper.createHTML({title: "Ok", message: response?.data?.message}));
+    })
+}
+
 export async function CreatePost(text, notify, element, socket, images, possibleMentions = [], sharedInfo) {
     if (images?.length > 0) {
         const savedImages = [];

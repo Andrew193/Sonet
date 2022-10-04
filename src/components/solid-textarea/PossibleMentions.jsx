@@ -5,6 +5,7 @@ import {useSettings} from "../../hooks";
 import {handleOnMentionSelect} from "./possibleMentionsHelper";
 import {getItemFromLocalStorage} from "../../localStorageService";
 import LazyImage from "../../posts/LazyImage";
+import {USER_INFORMATION} from "../../vars";
 
 function PossibleMentions(props) {
     const {
@@ -17,7 +18,7 @@ function PossibleMentions(props) {
         selectedMention,
     } = props;
 
-    const id = getItemFromLocalStorage("userInfo", "id");
+    const id = getItemFromLocalStorage(USER_INFORMATION, "id");
     const {settings} = useSettings();
     const possibleMentionsConfig = useMemo(() => possibleMentions.map((person) =>
         person.id !== id

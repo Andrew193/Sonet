@@ -347,13 +347,14 @@
 }
 
 .PostItemsActionsBox {
-    position: absolute;
+    position: absolute !important;
     background: aliceblue;
     padding: 5px 10px;
     border-radius: 5px;
     right: 10px;
     top: 55px;
     z-index: 1;
+    height: min-content !important;
 }
 
 .PostItemsActionsBox > div {

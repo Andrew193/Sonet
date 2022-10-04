@@ -3,15 +3,17 @@ import s from "./posts.module.css";
 import {Box, ListItemIcon, Typography} from "@mui/material";
 import {AiOutlineDownload, AiOutlineHighlight} from "react-icons/ai";
 import {deletePostById, refresh, updatePostById} from "./postsHelper";
-import {AiOutlineDelete, BiShare} from "react-icons/all";
-import {SharePost} from "../create-post/script";
+import {AiOutlineDelete, BiShare, BsBookmarkDash, BsBookmarkPlus} from "react-icons/all";
+import {BookmarkItem, DeleteBookmarkItem, SharePost} from "../create-post/script";
 import {notify} from "../App";
 import {useEffect, useState} from "react";
 import HttpHelper from "../helpers/httpHelper";
 import {getItemFromLocalStorage} from "../localStorageService";
+import {USER_INFORMATION} from "../vars";
 
 function PostItemActions(props) {
     const {
+        bookmark,
         anchorEl,
         settings,
         handleClose,
@@ -27,7 +29,7 @@ function PostItemActions(props) {
     } = props;
 
     const [isSharePossible, setIsSharePossible] = useState(false);
-    const id = getItemFromLocalStorage("userInfo", "id");
+    const id = getItemFromLocalStorage(USER_INFORMATION, "id");
 
     useEffect(() => {
         if (value.userId) {
@@ -37,7 +39,7 @@ function PostItemActions(props) {
             } else if (value.sharedInfo === "mentions") {
                 const mentions = JSON.parse(value.possibleMentions);
                 for (let i = 0; i < mentions.length; i++) {
-                    if(mentions[i].id === id) {
+                    if (mentions[i].id === id) {
                         setIsSharePossible(true);
                         break;
                     }
@@ -126,18 +128,35 @@ function PostItemActions(props) {
                     <Typography>{t("Update")}</Typography>
                 </Box>
             }
+            {!bookmark && <Box
+                onClick={() => {
+                    BookmarkItem({
+                        userId: id,
+                        markText: JSON.stringify(value)
+                    })
+                }}
+            >
+                <ListItemIcon>
+                    <BsBookmarkPlus/>
+                </ListItemIcon>
+                <Typography>{t("Bookmark")}</Typography>
+            </Box>
+            }
+            {bookmark && <Box onClick={() => DeleteBookmarkItem(bookmark)}>
+                <ListItemIcon>
+                    <BsBookmarkDash/>
+                </ListItemIcon>
+                <Typography>{t("Delete this Bookmark")}</Typography>
+            </Box>
+            }
             {
                 isSharePossible
                 && <Box
                     onClick={() => {
-                        if (value.sharedInfo === "all") {
-                            setIsTextUpdate({
-                                callback: (newPostText) => SharePost(newPostText, value),
-                                label: "Shared post comment"
-                            })
-                        } else if (value.sharedInfo === "follow") {
-
-                        }
+                        setIsTextUpdate({
+                            callback: (newPostText) => SharePost(newPostText, value),
+                            label: "Shared post comment"
+                        })
                     }}
                 >
                     <ListItemIcon>

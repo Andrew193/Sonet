@@ -4,6 +4,8 @@ import {useEffect, useMemo, useState} from "react";
 import {useTranslation} from "react-i18next";
 import {forceCheck} from 'react-lazyload';
 import UserComponent from "./UserComponent";
+import {USER_INFORMATION} from "../vars";
+import {getItemFromLocalStorage} from "../localStorageService";
 
 forceCheck();
 
@@ -19,7 +21,7 @@ function ClearUsers(props) {
     const [parsedUsers, setParsedUsers] = useState([]);
     const currentWidth = useMemo(() => document?.body.offsetWidth, [document?.body.offsetWidth]);
 
-    const {id} = JSON.parse(localStorage.getItem("userInfo"));
+    const id = getItemFromLocalStorage(USER_INFORMATION, "id");
 
     const {t} = useTranslation();
 

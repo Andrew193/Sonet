@@ -12,6 +12,8 @@ import {Context} from "../App";
 import {useSettings} from "../hooks";
 import MaintainedPageHeader from "../components/MaintainedPageHeader";
 import {getEmptyElementsThemeConfig} from "../utils";
+import {USER_INFORMATION} from "../vars";
+import {getItemFromLocalStorage} from "../localStorageService";
 
 function PostsContainer(props) {
     const [posts, setPosts] = useState(false);
@@ -20,8 +22,7 @@ function PostsContainer(props) {
     const {settings} = useSettings();
 
     const {socket, notify} = useContext(Context);
-
-    const {id} = JSON.parse(localStorage.getItem("userInfo"));
+    const id = getItemFromLocalStorage(USER_INFORMATION, "id");
 
     socket.on("postUpdate", (updatedPosts) => {
         setPosts({posts: updatedPosts})

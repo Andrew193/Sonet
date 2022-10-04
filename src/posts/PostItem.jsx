@@ -20,6 +20,7 @@ import SharedPost from "./SharedPost";
 
 function PostItem(props) {
     const {
+        bookmark,
         value,
         id,
         settings,
@@ -46,7 +47,7 @@ function PostItem(props) {
     };
 
     useEffect(() => {
-        getUserAvatar(userAvatar, setUserAvatar, value?.userId)
+        getUserAvatar(userAvatar, setUserAvatar, value?.userId);
     }, [])
 
     const imagesForPreview = useMemo(() => JSON.parse(value?.savedImages)?.map((image) => JSON.parse(image)?.webContentLink)
@@ -59,7 +60,7 @@ function PostItem(props) {
 
     const handleClick = (event, ignoreAppOpenCallback) => {
         if (!ignoreAppOpen && !ignoreAppOpenCallback) {
-            window?.document?.body?.querySelector(".App")?.classList?.add("Open")
+            window?.document?.body?.querySelector(".App")?.classList?.add("Open");
         }
         setAnchorEl(event.currentTarget);
     };
@@ -156,6 +157,7 @@ function PostItem(props) {
                 />
 
                 <PostItemActions
+                    bookmark={bookmark}
                     anchorEl={anchorEl}
                     settings={settings}
                     handleClose={handleClose}

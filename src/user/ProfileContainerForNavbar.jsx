@@ -1,12 +1,13 @@
 import Avatar from '@mui/material/Avatar';
 import {BsThreeDots} from "react-icons/all";
+import {GetInfo} from "../header/script";
 
 function ProfileContainer(props) {
     const {
         customStyles
     } = props;
 
-    const {userName, id} = JSON.parse(localStorage.getItem("userInfo"));
+    const {userName, id} = GetInfo()
 
     return (
         <>

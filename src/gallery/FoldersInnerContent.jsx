@@ -3,6 +3,7 @@ import {Box, Typography} from "@mui/material";
 import FoldersActionsBar from "./FoldersActionsBar";
 import {useHistory} from "react-router-dom";
 import {getItemFromLocalStorage} from "../localStorageService";
+import {USER_INFORMATION} from "../vars";
 
 
 function FoldersInnerContent(props) {
@@ -15,7 +16,7 @@ function FoldersInnerContent(props) {
         setFolders
     } = props;
 
-    const user = getItemFromLocalStorage("userInfo");
+    const user = getItemFromLocalStorage(USER_INFORMATION);
     const history = useHistory();
 
     return (

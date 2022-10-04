@@ -1,0 +1,21 @@
+.BookmarksContainer > div {
+    display: flex;
+}
+
+.BookmarksContainer > div > div {
+    padding: 1%;
+}
+
+.BookmarksContainer > div > div p {
+    pointer-events: none;
+}
+
+.BookmarksContainer > div > div:first-of-type {
+    padding: 2% 3% !important;
+    display: flex;
+    justify-content: center;
+}
+
+.BookmarksContainer > div > div:first-of-type > div {
+    margin-right: unset !important;
+}

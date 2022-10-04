@@ -2,6 +2,7 @@ import {useEffect, useState} from "react";
 import FriendPin from "./FriendPin";
 import {getUserAvatar} from "../posts/postsHelper";
 import {getItemFromLocalStorage} from "../localStorageService";
+import {USER_INFORMATION} from "../vars";
 
 function MatePin(props) {
     const {
@@ -12,7 +13,7 @@ function MatePin(props) {
         setConversations
     } = props;
 
-    const userInformation = getItemFromLocalStorage("userInfo");
+    const userInformation = getItemFromLocalStorage(USER_INFORMATION);
     const [userAvatar, setUserAvatar] = useState();
 
     useEffect(() => {

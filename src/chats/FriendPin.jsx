@@ -6,6 +6,7 @@ import {friendRequest} from "../users/script";
 import {createCopy} from "../utils";
 import LazyImage from "../posts/LazyImage";
 import {getItemFromLocalStorage} from "../localStorageService";
+import {USER_INFORMATION} from "../vars";
 
 function FriendPin(props) {
     const {
@@ -20,7 +21,7 @@ function FriendPin(props) {
         userAvatar
     } = props;
 
-    const userInformation = getItemFromLocalStorage("userInfo");
+    const userInformation = getItemFromLocalStorage(USER_INFORMATION);
 
     function actionsCover(flag) {
         setPossibleMates((state) => {
