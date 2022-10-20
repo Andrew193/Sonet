@@ -1,9 +1,10 @@
 import {WhatsHappeningBar} from "./WhatsHappeningBar";
-import { Form } from "usetheform";
+import {Form} from "usetheform";
 import s from "./solid-textarea.module.css"
 import {PrivacyPicker} from "./privacy-picker/PrivacyPicker";
 import {SolidTextareaActions} from "./actions/SolidTextareaActions";
 import {useState} from "react";
+import AddQuizBar from "../quizBar/AddQuizBar";
 
 function MainCover(props) {
     const {
@@ -19,8 +20,10 @@ function MainCover(props) {
         <>
             <Form onSubmit={onSubmit}>
                 <WhatsHappeningBar maxChars={maxLength} setMaxLength={setMaxLength}/>
-                <PrivacyPicker />
-                <span className={s.ThematicBreak} />
+                <PrivacyPicker>
+                    <AddQuizBar/>
+                </PrivacyPicker>
+                <span className={s.ThematicBreak}/>
                 <SolidTextareaActions
                     customStyle={customStyle}
                     setIsOpened={setIsOpened}

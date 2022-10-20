@@ -149,7 +149,11 @@ function getPosts() {
 }
 
 function afterEmotion(socket, userId, emtype, notify) {
-    notify(HTMLhelp.createHTML({title: "Ok", message: `You ${emtype} it`}))
+    refreshWithUpdate(`You ${emtype} it`, socket, userId, notify)
+}
+
+export function refreshWithUpdate(message, socket, userId, notify) {
+    notify(HTMLhelp.createHTML({title: "Ok", message: message}))
     refresh(socket, userId);
 }
 

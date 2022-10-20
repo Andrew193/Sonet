@@ -33,6 +33,19 @@ const Http = {
             .then((response) => toast(response?.data?.message))
             .catch((error) => error.response && console.error(error.response))
     },
+    QUIZ: {
+        setQuiz: (postId, answer, parsedQuiz, userId, selectedQuizAnswerCount) => {
+            return axios.put("/api/post/quiz", {
+                id: postId,
+                userId: userId,
+                quizAnswer: answer,
+                quiz: parsedQuiz,
+                selectedQuizAnswerCount
+            })
+                .then((response) => response)
+                .catch((error) => error.response)
+        },
+    },
     USERS: {
         getAllUsers: () => {
             return axios.get("/api/users")
@@ -83,9 +96,7 @@ const Http = {
         },
         createUser: (values, okCallback, errorCallback) => {
             axios.post("/api/users", values)
-                .then((response) => {
-                    //okCallback(response?.data?.token);
-                })
+                .then((response) => okCallback(response?.data?.token))
                 .catch((error) => {
                     if (error) {
                         errorCallback(createErrorsForApiCall(error?.response?.data, error?.response?.data))
@@ -187,12 +198,13 @@ const Http = {
                 .then((response) => setPosts({posts: response?.data?.posts}))
                 .catch((error) => console.log(error))
         },
-        createPost: (text, callback, callback1, savedImages, possibleMentions, sharedInfo) => {
+        createPost: (text, callback, callback1, savedImages, possibleMentions, sharedInfo, quiz) => {
             axios.post("/api/post?token=" + Script.getCookie("token"), {
                 text,
                 savedImages: JSON.stringify(savedImages || []),
                 possibleMentions: JSON.stringify(possibleMentions || []),
-                sharedInfo: sharedInfo
+                sharedInfo: sharedInfo,
+                quiz: quiz
             })
                 .then((response) => callback(response))
                 .catch((error) => error && callback1(error))

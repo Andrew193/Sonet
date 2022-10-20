@@ -5,6 +5,7 @@ import EmotionsLineContainer from "./EmotionsLineContainer";
 import DataHelper from "../helpers/dateHelper";
 import {useEffect, useState, useMemo, useCallback, useRef, useContext} from "react";
 import ImageViewer from "react-simple-image-viewer";
+import QuizBar from "./QuizBar";
 import {BsThreeDots, RiShareForwardLine} from "react-icons/all";
 import {getElementsThemeConfig} from "../utils";
 import {useOutsideClick} from "../hooks";
@@ -138,6 +139,7 @@ function PostItem(props) {
                               className={"authorName"}>{value.createdBy}</Link>
                     </h3>
                     <p>{replaceTags(value.text, value.possibleMentions)}</p>
+                    <QuizBar quiz={value.quiz} createdBy={value.createdBy} postId={value.id} id={id}/>
                     <HashtagsLine text={value.text}/>
                     <PostItemsImages
                         valueUserId={+value.userId}

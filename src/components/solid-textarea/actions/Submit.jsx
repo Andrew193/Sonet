@@ -31,7 +31,7 @@ function PostButton(props) {
             onClick={() => {
                 setIsOpened(true);
                 window?.document?.body?.querySelector(".App")?.classList?.remove("Open")
-                Script.CreatePost(text, notify, null, socket, images, postInformation.possibleMentions, postInformation.sharedInfo)
+                Script.CreatePost(text, notify, null, socket, images, postInformation)
                     .then(() => {
                         const dispatch = getStore().dispatch;
                         dispatch(setPostInformation({shouldClear: true}))

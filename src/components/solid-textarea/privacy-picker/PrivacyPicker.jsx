@@ -14,7 +14,7 @@ const labels = {
     2: "Only people you mention"
 };
 
-export const PrivacyPicker = () => {
+export const PrivacyPicker = ({children}) => {
     const dispatch = useDispatch();
     const [visible, setVisibility] = useState(() => false);
     const [postPrivacy] = useSelector((state) => state.postPrivacy);
@@ -44,6 +44,7 @@ export const PrivacyPicker = () => {
                 <img alt={bntLabel} src={WorlSVG}/>
                 <span>{bntLabel}</span>
             </button>
+            {children}
             <div ref={refPicker} data-visible={visible} className={s.PrivacySelection}>
                 <div className={s.PrivacySelection__Header}>Who can reply?</div>
                 <div className={s.PrivacySelection__Hint}>

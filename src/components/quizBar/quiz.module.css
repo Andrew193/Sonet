@@ -1,0 +1,105 @@
+.Container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 10px;
+}
+
+.LabelContainer {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: all ease 0.5s;
+    padding: 5px;
+    border-radius: 20px;
+    font-weight: 600;
+}
+
+.LabelContainer:hover {
+    background: #c4c1ff;
+}
+
+.LabelContainer svg {
+    margin-right: 4px;
+}
+
+.QuizBodyContainer {
+    width: 100%;
+    min-height: auto !important;
+}
+
+.QuizBodyContainer h3 {
+    display: flex;
+    justify-content: center;
+}
+
+.NewFieldContainer {
+    border-radius: 5px;
+}
+
+.NewFieldContainer input {
+    outline: none;
+    padding: 2px;
+    border-radius: 2px;
+}
+
+.NewFieldContainer label {
+    text-align: left;
+}
+
+.CreateOptionButton {
+    flex: 1 0;
+    height: 22px;
+    transition: all ease 0.5s;
+    cursor: pointer;
+}
+
+.CreateOptionButton:hover {
+    color: #2e992e;
+}
+
+.NewFieldContainer p {
+    border: unset !important;
+    align-items: center;
+}
+
+.OptionsContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    margin: 15px 5px;
+}
+
+.ParsedQuizContainer ul {
+    list-style-type: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.ParsedQuizContainer h4 {
+    border-bottom: 1px solid rgb(206, 204, 204);
+    text-align: center;
+    padding-bottom: 5px;
+    font-weight: 600;
+}
+
+.ParsedQuizContainer h4:first-letter {
+    text-transform: uppercase;
+}
+
+.ParsedQuizContainer li {
+    padding: 5px;
+    margin: 2px;
+    background: #dbdbf9;
+    cursor: pointer;
+    border-radius: 5px;
+    flex: 1 0 100%;
+    transition: all ease 0.5s;
+}
+
+.ParsedQuizContainer li:hover {
+    background: rgb(203, 203, 243);
+}
