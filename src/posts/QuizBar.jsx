@@ -15,7 +15,8 @@ function QuizBar(props) {
         quiz,
         createdBy,
         postId,
-        id
+        id,
+        bookmark
     } = props;
 
     const parsedQuiz = useMemo(() => JSON.parse(quiz), [quiz]);
@@ -30,7 +31,7 @@ function QuizBar(props) {
         <div className={quizStyle.ParsedQuizContainer}>
             <span>{createdBy} asks:</span>
             <h4>{parsedQuiz.question}</h4>
-            <ul>
+            <ul className={`${bookmark && "disabled"}`}>
                 {parsedQuiz?.options?.sort((a, b) => b?.optionVotes - a?.optionVotes)?.map((option, index) =>
                     <li
                         key={index}

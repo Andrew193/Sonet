@@ -86,7 +86,7 @@ function Message(props) {
                     </div>
                 </p>
             </div>
-            <div className="messageBottom fromNow">{dateHelper.fromNow(message.createdAt)}</div>
+            <li className="messageBottom">{dateHelper.fromNow(message.createdAt)}</li>
         </div>
     )
 }

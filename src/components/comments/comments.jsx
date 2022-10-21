@@ -45,7 +45,7 @@ function CommentItem(props) {
                 <h2 className={"authorName"}>{value.createdBy}</h2>
             </Box>
             <p>{value.text}</p>
-            <span className={"fromNow"}>{DataHelper.fromNow(value.createdAt)}</span>
+            <li>{DataHelper.fromNow(value.createdAt)}</li>
         </div>
     )
 }

@@ -9,8 +9,10 @@ import {useOutsideClick} from "../hooks";
 import TrackUpdateModal from "./TrackUpdateModal";
 import SearchBar from "./SearchBar";
 import Loader from "../components/common/spinner/Spinner";
-import {deleteTrack, updateTrackDescription} from "./musicHelper";
+import {deleteTrack, getPlayerPath, updateTrackDescription} from "./musicHelper";
 import ReactPlayer from "react-player";
+import EmptySection from "../components/common/empty-section/EmptySection";
+import {getSettings} from "../db";
 
 function AllTracks(props) {
     const {
@@ -25,30 +27,35 @@ function AllTracks(props) {
     const [selectedTrack, setSelectedTrack] = useState(null);
     const [newName, setNewName] = useState(null);
     const [trackCategory, setTrackCategory] = useState(null);
+    const [isEmpty, setIsEmpty] = useState(false);
 
     useEffect(() => {
-        setMusicContext((context) => ({
-            ...context,
-            selectedTrack: selectedTrack
-        }))
-    }, [selectedTrack]);
+        async function getData() {
+            const response = await getSettings();
+            setMusicContext(() => ({
+                tracks: response[0]?.music,
+                tracksLength: response[0]?.music?.length,
+                selectedTrack: selectedTrack
+            }))
+        }
+
+        getData();
+    }, [selectedTrack, allFiles])
 
     const allTracks = useMemo(() => {
         try {
-            return allFiles?.map((file, index) =>
-                (file?.show === undefined || file?.show === true)
+            return allFiles?.map((file, index) => {
+                return (file?.show === undefined || file?.show === true)
                     ? <li
                         key={index}
                         className={s.Track}
-                        onClick={() => {
-                            setSelectedTrack(() => index)
-                        }}
+                        onClick={() => setSelectedTrack(() => index)}
                         style={{
                             background: selectedTrack === index && "#f9d4d4"
                         }}
                     >
                         <span className={s.TrackIndex}>{index + 1}</span>
-                        <span className={s.TrackName}>{settings?.musicDescriptions[index]?.name}</span>
+                        <span className={s.TrackName}>{settings?.musicDescriptions[index]?.name || file.name}</span>
                         <span className={s.TrackCategory}>{settings?.musicDescriptions[index]?.category}</span>
                         <span className={s.TrackActions}>
                      <Tooltip
@@ -58,11 +65,14 @@ function AllTracks(props) {
                      >
                                 <TooltipButtonCover>
                                     <AiTwotoneDelete
-                                        onClick={() => {
+                                        onClick={(e) => {
+                                            e.preventDefault();
+                                            e.stopPropagation();
                                             deleteTrack(settings, index, (newFiles) => {
-                                                setAllFiles(() => {
-                                                    return [...newFiles]
-                                                })
+                                                if (!newFiles?.length) {
+                                                    setIsEmpty(true)
+                                                }
+                                                setAllFiles(() => [...newFiles])
                                             })
                                         }}
                                     />
@@ -75,7 +85,9 @@ function AllTracks(props) {
                      >
                                 <TooltipButtonCover>
                                     <AiTwotoneEdit
-                                        onClick={() => {
+                                        onClick={(e) => {
+                                            e.preventDefault();
+                                            e.stopPropagation();
                                             setEditConfig(() => ({
                                                 index,
                                                 isOpened: true
@@ -87,7 +99,7 @@ function AllTracks(props) {
                 </span>
                     </li>
                     : null
-            )
+            })
         } catch (error) {
             return [];
         }
@@ -100,6 +112,9 @@ function AllTracks(props) {
             isOpened: false
         }));
     })
+
+    const previewUrl = useMemo(() => getPlayerPath(allFiles, selectedTrack, musicContext)
+        , [musicContext, allFiles, selectedTrack])
 
     return (
         <div>
@@ -117,22 +132,28 @@ function AllTracks(props) {
             >
                 All tracks
             </Typography>
-            <SearchBar
-                setSearch={setSearch}
-            />
-            <div
-                className={s.MusicContainer}
-            >
-                <div
-                    className={`${s.TracksHeader} ${buttonsConfig[settings?.configs?.color[settings?.color]]}`}
-                >
+            <SearchBar setSearch={setSearch}/>
+            <div className={s.MusicContainer}>
+                <div className={`${s.TracksHeader} ${buttonsConfig[settings?.configs?.color[settings?.color]]}`}>
                     <p className={s.TrackIndex}>№</p>
                     <p className={s.TrackName}>Name</p>
                     <p className={s.TrackCategory}>Category</p>
                     <p className={s.TrackActions}>Actions</p>
                 </div>
                 <ul>
-                    {allTracks.length === 0 ? <Loader/> : allTracks}
+                    {
+                        allTracks?.length === 0
+                            ? isEmpty
+                                ? <EmptySection
+                                    title={"Nothing to show here yet"}
+                                    message={"You haven't created any Songs yet. When you do, they'll show up here."}
+                                />
+                                : <Loader/>
+                            : Array.isArray(allTracks) ? allTracks : <EmptySection
+                                title={"Nothing to show here yet"}
+                                message={"You haven't created any Songs yet. When you do, they'll show up here."}
+                            />
+                    }
                 </ul>
             </div>
 
@@ -151,8 +172,8 @@ function AllTracks(props) {
 
             <>
                 {
-                    musicContext?.tracks?.length > 0 && musicContext?.selectedTrack !== null && <ReactPlayer
-                        url={URL.createObjectURL(musicContext?.tracks[musicContext?.selectedTrack])}
+                    <ReactPlayer
+                        url={!!previewUrl ? URL.createObjectURL(previewUrl) : ""}
                         className={s.Player}
                         onEnded={() => {
                             if (musicContext?.selectedTrack < musicContext?.tracksLength - 1) {

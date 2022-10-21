@@ -1,6 +1,16 @@
 import {updateSettings} from "../db";
 import {notify} from "../App";
 
+export function getPlayerPath(allFiles, selectedTrack, musicContext) {
+    const realAllFields = allFiles || [];
+    const realSelectedTrack = selectedTrack ?? musicContext?.selectedTrack;
+    if (musicContext.tracks) {
+        return musicContext?.tracks[realSelectedTrack] || realAllFields[realSelectedTrack]?.track
+            || realAllFields[realSelectedTrack] || realAllFields[realSelectedTrack || musicContext?.tracks[realSelectedTrack]]
+    }
+    return "";
+}
+
 export function deleteTrack(settings, index, callback) {
     settings?.music?.splice(index, 1);
     settings?.musicDescriptions?.splice(index, 1);

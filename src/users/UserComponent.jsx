@@ -65,7 +65,7 @@ function UserComponent(props) {
                     <span
                         className={s.CreatedDate}
                     >
-                        <AiOutlineClockCircle/><span className={"fromNow"}>{DataHelper.fromNow(value[4])}</span>
+                        <AiOutlineClockCircle/><li>{DataHelper.fromNow(value[4])}</li>
                         </span>
                 </div>
                 {searchId && <UsersPageActions

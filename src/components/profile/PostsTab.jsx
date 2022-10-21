@@ -46,9 +46,7 @@ function UserPostTab({information, avatarUrl}) {
                     >
                         {information?.createdBy}
                     </Typography>
-                    <Typography className={"fromNow"}>
-                        {DateHelper.fromNow(information.createdAt)}
-                    </Typography>
+                    <li>{DateHelper.fromNow(information.createdAt)}</li>
                 </Typography>
                 <Typography className={s.postContent}>
                     {replaceTags(information?.text || "", information?.possibleMentions || JSON.stringify([]))}

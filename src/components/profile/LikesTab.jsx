@@ -61,9 +61,7 @@ export function LikeDislikeTab({information, avatarUrl, isLike}) {
                                         >
                                             {relatedPost[0]?.createdBy}
                                         </Typography>
-                                        <Typography className={"fromNow"}>
-                                            {DateHelper.fromNow(relatedPost[0]?.createdAt)}
-                                        </Typography>
+                                        <li>{DateHelper.fromNow(relatedPost[0]?.createdAt)}</li>
                                     </Typography>
                                     <Typography
                                         className={s.postContent}>{replaceTags(relatedPost[0]?.text || "", relatedPost[0]?.possibleMentions || JSON.stringify([]))}</Typography>
@@ -94,7 +92,7 @@ export function LikeDislikeTab({information, avatarUrl, isLike}) {
                                         height: '16px'
                                     }}/>
                                 }
-                                <span className={"fromNow"}>{DateHelper.fromNow(information?.createdAt)}</span>
+                                <li>{DateHelper.fromNow(information?.createdAt)}</li>
                             </Box>
                         </Box>
                     </Box>

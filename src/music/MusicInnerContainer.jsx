@@ -41,14 +41,12 @@ function MusicInnerContainer(props) {
                     >
                         Selected track
                     </Typography>
-                    <div>
-                        <MusicPlayer videoFilePath={videoFilePath}/>
-                        <PlayerActions
-                            dropPreviewMusic={dropPreviewMusic}
-                            createNewSong={createNewSong}
-                            color={settings?.configs?.color[settings?.color]}
-                        />
-                    </div>
+                    <PlayerActions
+                        dropPreviewMusic={dropPreviewMusic}
+                        createNewSong={createNewSong}
+                        color={settings?.configs?.color[settings?.color]}
+                    />
+                    <MusicPlayer videoFilePath={videoFilePath}/>
                 </div>
             }
             <AllTracks

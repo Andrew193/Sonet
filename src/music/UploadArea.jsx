@@ -14,12 +14,13 @@ function UploadArea(props) {
         >
             <style>{`
             #custom-button {
-            padding: 10px!important;
+            padding: 5px!important;
             color: white!important;
             background-color: #009578!important;
             border: 1px solid #000!important;
             border-radius: 5px;
             cursor: pointer;
+            min-width: 100px!important;
             }
 
             #custom-button:hover {

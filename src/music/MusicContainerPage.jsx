@@ -11,7 +11,7 @@ function MusicContainerPage() {
     const [videoFilePath, setVideoFilePath] = useState(null);
     const [file, setFile] = useState();
     const [search, setSearch] = useState("");
-    const [allFiles, setAllFiles] = useState([]);
+    const [allFiles, setAllFiles] = useState(null);
     const settingsConfig = useSettings(allFiles?.length);
 
     useEffect(() => {
@@ -42,7 +42,7 @@ function MusicContainerPage() {
                 .finally(() => {
                     setFile(() => null);
                     setVideoFilePath(() => null);
-                    setAllFiles((state) => [...state, file]);
+                    setAllFiles((state) => [...(state || []), file]);
                     notify("Added")
                 })
         }

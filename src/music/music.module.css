@@ -10,6 +10,7 @@
 .MusicContainer {
     margin: 0px 5%;
     border: 1px solid;
+    border-radius: 5px 5px 0px 0px;
 }
 
 .Player {
@@ -19,8 +20,8 @@
 
 video {
     width: 90% !important;
-    height: 40px !important;
-    margin: 50px 5% 0px 5%;
+    height: 100px !important;
+    margin: 0px !important;
 }
 
 .MusicContainer ul {
@@ -46,6 +47,7 @@ video {
     border-bottom: 1px solid;
     color: black;
     background: rgb(203, 203, 243);
+    border-radius: 5px 5px 0px 0px;
 }
 
 .SearchBar {
@@ -71,6 +73,10 @@ video {
     width: 100%;
     margin: 0px 4%;
     border: 1px solid #eaeaea;
+}
+
+.SearchBar input:focus {
+    box-shadow: inset 0px 0px 5px 1px rgb(182 192 243);
 }
 
 .Track {
@@ -116,16 +122,19 @@ video {
 }
 
 .PlayerActions {
+    width: 100%;
     display: flex;
-    justify-content: space-evenly;
-    flex: 4 0;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row !important;
 }
 
 .UploadContainer {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: end;
     margin: 10px;
+    font-size: 10px;
 }
 
 .PlayerActions span {
@@ -135,6 +144,7 @@ video {
     cursor: pointer;
     height: fit-content;
     transition: all ease 0.7s;
+    margin: 5px;
 }
 
 .PlayerActions span:hover {

@@ -6,14 +6,17 @@
 .MusicCover {
     display: flex;
     align-items: center;
-    height: 95px;
+    height: auto;
     flex-direction: column;
+    min-height: 150px;
 }
 
 .MusicCover > div {
     width: 100%;
     display: flex;
     align-items: center;
+    flex-direction: column;
+    padding: 10px;
 }
 
 .FoldersActions {
@@ -242,10 +245,5 @@
 
     .MusicCover {
         height: 135px;
-    }
-
-    .MusicCover > div {
-        flex-direction: column;
-        height: 100%;
     }
 }

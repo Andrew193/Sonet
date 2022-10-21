@@ -6,8 +6,14 @@ import s from "./fast-music.module.css";
 import ReactPlayer from "react-player";
 import Fallback from "../music/img/fallback.png";
 import React from "react";
+import {getPlayerPath} from "../music/musicHelper";
 
-function MusicContainer() {
+function MusicContainer(props: any) {
+    const {
+        allFiles = [],
+        selectedTrack = 0
+    } = props;
+
     const [musicContext, setMusicContext] = useContext(MusicContext);
 
     const tracks = useMemo(() => musicContext?.tracks?.map((track: TrackType, index: number) => <TrackPin
@@ -23,6 +29,10 @@ function MusicContainer() {
         />
     ), [musicContext?.tracks, musicContext?.selectedTrack]);
 
+    const previewUrl = useMemo(() => getPlayerPath(allFiles, selectedTrack, musicContext)
+        , [musicContext, allFiles, selectedTrack])
+
+
     return (
         <>
             {
@@ -33,15 +43,15 @@ function MusicContainer() {
                         variant={"h4"}
                     >Playing now</Typography>
                     {
-                        musicContext?.tracks?.length > 0 && musicContext?.selectedTrack !== null && <ReactPlayer
+                        <ReactPlayer
                             className={s.FastReactPlayer}
-                            url={URL.createObjectURL(musicContext?.tracks[musicContext?.selectedTrack])}
+                            url={!!previewUrl ? URL.createObjectURL(previewUrl) : ""}
                             width="100%"
                             style={{
                                 marginBottom: "1%",
                                 height: "unset",
                             }}
-                            playIcon={<img style={{width: "100%"}} src={Fallback}/>}
+                            playIcon={<img style={{width: "100%"}} src={Fallback} alt={"Fallback"}/>}
                             onEnded={() => {
                                 if (musicContext?.selectedTrack < musicContext?.tracksLength - 1) {
                                     setMusicContext((context) => ({

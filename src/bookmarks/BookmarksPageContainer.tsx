@@ -9,6 +9,7 @@ import HttpHelper from "../helpers/httpHelper";
 import {getItemFromLocalStorage} from "../localStorageService";
 import {USER_INFORMATION} from "../vars";
 import PostItem from "../posts/PostItem";
+import EmptySection from "../components/common/empty-section/EmptySection";
 
 function Bookmarks() {
     const {t} = useTranslation();
@@ -26,8 +27,7 @@ function Bookmarks() {
     }, [])
 
     const parsedBookmarks = useMemo(() => {
-        return bookmarks ? bookmarks!.map((bookmark, index) => {
-            return <PostItem
+        return bookmarks ? bookmarks!.map((bookmark, index) => <PostItem
                 key={index}
                 value={JSON.parse(bookmark.markText)}
                 id={id}
@@ -40,7 +40,7 @@ function Bookmarks() {
                 ignoreAppOpen
                 bookmark={bookmark.id}
             />
-        }) : null;
+        ) : null
     }, [bookmarks])
 
     return (
@@ -48,7 +48,10 @@ function Bookmarks() {
             <MaintainedPageHeader path={"/"} linkPath={"/bookmarks"} linkTitle={t("Bookmarks")}/>
             <div className={"Separator"}/>
             <main className={s.PostsCont + " onePostContainer " + bookmarksStyles.BookmarksContainer}>
-                {parsedBookmarks}
+                {parsedBookmarks?.length ? parsedBookmarks : <EmptySection
+                    title={"Nothing to show here yet"}
+                    message={"You haven't created any Songs yet. When you do, they'll show up here."}
+                />}
             </main>
         </div>
     )

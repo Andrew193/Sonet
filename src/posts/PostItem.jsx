@@ -139,7 +139,7 @@ function PostItem(props) {
                               className={"authorName"}>{value.createdBy}</Link>
                     </h3>
                     <p>{replaceTags(value.text, value.possibleMentions)}</p>
-                    <QuizBar quiz={value.quiz} createdBy={value.createdBy} postId={value.id} id={id}/>
+                    <QuizBar quiz={value.quiz} createdBy={value.createdBy} postId={value.id} id={id} bookmark={bookmark}/>
                     <HashtagsLine text={value.text}/>
                     <PostItemsImages
                         valueUserId={+value.userId}
@@ -175,7 +175,7 @@ function PostItem(props) {
                     index={index}
                 />
 
-                <span className={s.Time + " fromNow"}>{DataHelper.fromNow(value.createdAt)}</span>
+                <li className={s.Time}>{DataHelper.fromNow(value.createdAt)}</li>
             </div>
         </>
     )

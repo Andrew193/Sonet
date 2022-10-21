@@ -56,9 +56,7 @@ function CommentTab({information, avatarUrl}) {
                         >
                             {information?.createdBy}
                         </Typography>
-                        <Typography className={"fromNow"}>
-                            {DateHelper.fromNow(information.createdAt)}
-                        </Typography>
+                        <li>{DateHelper.fromNow(information.createdAt)}</li>
                     </Typography>
                     <Typography className={s.postContent}>
                         {replaceTags(information?.text || "", information?.possibleMentions || JSON.stringify([]))}
@@ -90,9 +88,7 @@ function CommentTab({information, avatarUrl}) {
                         >
                             {relatedPost[0]?.createdBy}
                         </Typography>
-                        <Typography className={"fromNow"}>
-                            {DateHelper.fromNow(relatedPost[0]?.createdAt)}
-                        </Typography>
+                        <li>{DateHelper.fromNow(relatedPost[0]?.createdAt)}</li>
                     </Typography>
                     <Typography
                         className={s.postContent}

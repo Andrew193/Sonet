@@ -46,7 +46,7 @@ function SharedPost(props) {
                             </h3>
                             <p>{parsedPost?.text}</p>
                         </div>
-                        <span className={postS.Time + " fromNow"}>{DataHelper.fromNow(parsedPost?.createdAt)}</span>
+                        <li className={postS.Time}>{DataHelper.fromNow(parsedPost?.createdAt)}</li>
                     </div>
             }
         </>
