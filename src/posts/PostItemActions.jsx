@@ -86,7 +86,7 @@ function PostItemActions(props) {
                 +value?.userId === id
                 && <Box
                     onClick={() => {
-                        deletePostById(+value?.id)
+                        deletePostById(+value?.id, value.savedImages)
                             .then(() => {
                                 setPost((state) => {
                                     state.splice(index, 1);

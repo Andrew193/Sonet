@@ -98,6 +98,8 @@
     border-radius: 5px;
     flex: 1 0 100%;
     transition: all ease 0.5s;
+    font-weight: 600;
+    color: black;
 }
 
 .ParsedQuizContainer li:hover {

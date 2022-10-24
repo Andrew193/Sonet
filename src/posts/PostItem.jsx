@@ -110,7 +110,7 @@ function PostItem(props) {
                 data-id={value.id}
                 style={settings?.list?.listItemStyles}
             >
-                <div style={{position: "relative"}}>
+                <div style={{position: "relative", borderRight: "1px solid #cecccc"}}>
                     <Avatar
                         src={userAvatar}
                         style={{
@@ -132,14 +132,15 @@ function PostItem(props) {
                     />}
                 </div>
                 <div
-                    style={{flex: '10 0'}}
+                    style={{flex: "10 0", padding: "10px"}}
                 >
                     <h3>
                         <Link to={{pathname: `/users/${+value.userId}`}}
                               className={"authorName"}>{value.createdBy}</Link>
                     </h3>
-                    <p>{replaceTags(value.text, value.possibleMentions)}</p>
-                    <QuizBar quiz={value.quiz} createdBy={value.createdBy} postId={value.id} id={id} bookmark={bookmark}/>
+                    <p className={s.PostTest}>{replaceTags(value.text, value.possibleMentions)}</p>
+                    <QuizBar quiz={value.quiz} createdBy={value.createdBy} postId={value.id} id={id}
+                             bookmark={bookmark}/>
                     <HashtagsLine text={value.text}/>
                     <PostItemsImages
                         valueUserId={+value.userId}

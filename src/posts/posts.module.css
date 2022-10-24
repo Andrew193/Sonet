@@ -9,6 +9,12 @@
     flex-direction: column;
 }
 
+.PostTest {
+    border-left: 1px solid;
+    border-right: 1px solid;
+    padding: 5px;
+}
+
 .SharedPostContainer {
     display: flex;
     position: relative;

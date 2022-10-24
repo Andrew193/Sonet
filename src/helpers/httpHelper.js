@@ -183,8 +183,13 @@ const Http = {
                 .then((response) => setPosts({posts: response?.data?.posts}))
                 .catch((error) => console.log(error))
         },
-        deletePostById: (id, setPosts) => {
-            axios.delete("/api/post/" + "?token=" + Script.getCookie("token"), {params: {postId: id}})
+        deletePostById: (id, setPosts, savedImages) => {
+            axios.delete("/api/post/" + "?token=" + Script.getCookie("token"), {
+                params: {
+                    postId: id,
+                    savedImages: savedImages
+                }
+            })
                 .then((response) => setPosts({posts: response?.data?.posts}))
                 .catch((error) => console.log(error))
         },

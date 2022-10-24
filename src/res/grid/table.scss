@@ -6,6 +6,60 @@
   padding: 10px;
 }
 
+.tabs-custom button {
+  min-width: unset !important;
+  color: black !important;
+  max-width: unset !important;
+  border: none !important;
+  height: 10px !important;
+  display: flex !important;
+  min-height: unset !important;
+}
+
+.tabs-custom {
+  margin: 0px 10px;
+  width: 100%;
+  min-height: unset !important;
+  max-height: 35px !important;
+  padding: 5px 0px;
+}
+
+.tabs-custom > div > div {
+  justify-content: space-evenly;
+}
+
+.tab-content {
+  width: 100%;
+}
+
+.highlight-tab {
+  position: relative;
+}
+
+.disabled {
+  pointer-events: none !important;
+}
+
+.highlight-tab:after {
+  position: absolute;
+  display: block;
+  content: "";
+  width: 100%;
+  height: 3.5px;
+  background: #2aabd2;
+  bottom: 0px;
+  left: 0;
+}
+
+.tabs-custom > div {
+  min-height: unset !important;
+  max-height: 30px !important;
+}
+
+.tabs-custom span {
+  display: none;
+}
+
 .empty-table svg {
   height: 30%;
   width: 25%;
@@ -60,16 +114,18 @@ tr.synced {
 
 tr.finishedNotSynced {
   background: #FFFFDD;
+
   &:hover {
-    background: #FFFFDD!important;
+    background: #FFFFDD !important;
     opacity: 0.9;
   }
 }
 
 tr.notCompleted {
   background: #f2bba9;
+
   &:hover {
-    background: #f2bba9!important;
+    background: #f2bba9 !important;
     opacity: 0.9;
   }
 }
@@ -95,14 +151,14 @@ tr.notCompleted {
   //and also table rows can be deleted/added in border-collapse:collapse mode ***
 
   @-moz-document url-prefix() {
-    &.separate-table-for-mozilla{
-      border-collapse: separate  !important;
+    &.separate-table-for-mozilla {
+      border-collapse: separate !important;
       border-spacing: 1px !important;
     }
   }
   //*** //
 
-  th > a{
+  th > a {
     text-decoration: none;
   }
 
@@ -207,7 +263,7 @@ tr.notCompleted {
 
   thead > tr > td,
   thead > tr > th,
-  tr > th{
+  tr > th {
     padding: 0 5px;
     height: 30px;
     margin: 0;
@@ -289,11 +345,12 @@ tr.notCompleted {
       padding: 3px 2px;
     }
 
-    select{
+    select {
       padding-right: 24px;
     }
   }
-  .fs_input-text{
+
+  .fs_input-text {
     height: 30px;
     display: inline-block;
     line-height: 30px;
@@ -315,10 +372,11 @@ tr.notCompleted {
   display: flex;
   margin-bottom: 40px;
 
-  .td-heading{
+  .td-heading {
     padding-left: 2px;
     padding-right: 2px;
   }
+
   .fs_left-table,
   .fs_middle-table,
   .fs_right-table {
@@ -329,7 +387,7 @@ tr.notCompleted {
 
   .fs_left-table,
   .fs_right-table {
-    z-index:1;
+    z-index: 1;
     position: relative;
   }
 
@@ -379,6 +437,7 @@ tr.notCompleted {
       }
     }
   }
+
   .fs_left-table.add-warning-icon {
     flex-basis: 231px;
     padding-left: 20px;
@@ -509,13 +568,15 @@ tr.notCompleted {
         border-bottom: 1px solid $default-dark-color;
         border-top: none;
 
-        &.width-50{
+        &.width-50 {
           flex: 0 1 50%;
         }
-        &.width-75{
+
+        &.width-75 {
           flex: 0 1 75%;
         }
-        &.width-100{
+
+        &.width-100 {
           flex: 0 1 100%;
         }
 

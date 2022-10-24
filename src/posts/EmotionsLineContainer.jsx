@@ -3,9 +3,11 @@ import postsHelper, {setEmotion} from "./postsHelper";
 import {AiOutlineComment, AiOutlineDislike, AiOutlineFire, AiOutlineHeart, AiOutlineLike} from "react-icons/ai";
 import CountUp from "react-countup";
 import {useHistory} from "react-router-dom";
-import {useContext, useMemo} from "react";
+import {useContext, useMemo, useState} from "react";
 import {Context, notify} from "../App";
 import {AiOutlineStar, BiAngry, CgSmile, CgSmileSad, GiBoombox} from "react-icons/all";
+import {TabPanel} from "../components/profile/UsersActivities";
+import {Tab, Tabs} from "@mui/material";
 
 const emotionsConfig = [
     {
@@ -73,7 +75,14 @@ function getParsedConfig(config, value, socket, id, history) {
                 <span onClick={() => emotion.eventHandler(value, socket, notify, id, history)}
                       className={emotion.class || s.complicatedEmotion}>{emotion.img}{emotion?.showLabel}</span>
         <CountUp delay={1} end={value[emotion.label]}/>
-    </p>)
+    </p>);
+}
+
+function a11yProps(index) {
+    return {
+        id: `simple-tab-${index}`,
+        'aria-controls': `simple-tabpanel-${index}`,
+    };
 }
 
 function EmotionsLineContainer(props) {
@@ -88,14 +97,32 @@ function EmotionsLineContainer(props) {
     const emotionsParsedConfig = useMemo(() => getParsedConfig(emotionsConfig, value, socket, id, history), [])
     const complexEmotionsParsedConfig = useMemo(() => getParsedConfig(complexEmotions, value, socket, id, history), [])
 
+    const [activeTab, setActiveTab] = useState(0);
+
+    const handleChange = (event, newValue) => {
+        setActiveTab(newValue);
+    };
+
     return (
         <>
-            <p className={containerClass}>
-                {emotionsParsedConfig}
+            <p style={{pointerEvents:"auto"}}>
+                <Tabs value={activeTab} onChange={handleChange} aria-label="basic tabs example" className={"tabs-custom"}>
+                    <Tab label="Common emotions" {...a11yProps(0)}
+                         classes={{root: activeTab === 0 ? "highlight-tab":""}}/>
+                    <Tab label="Complex emotions" {...a11yProps(1)}
+                         classes={{root: activeTab === 1 ? "highlight-tab":""}}/>
+                </Tabs>
             </p>
-            <p className={containerClass}>
-                {complexEmotionsParsedConfig}
-            </p>
+            <TabPanel value={activeTab} index={0}>
+                <p className={containerClass + " tab-content"}>
+                    {emotionsParsedConfig}
+                </p>
+            </TabPanel>
+            <TabPanel value={activeTab} index={1}>
+                <p className={containerClass + " tab-content"}>
+                    {complexEmotionsParsedConfig}
+                </p>
+            </TabPanel>
         </>
     )
 }

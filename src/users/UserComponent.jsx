@@ -21,7 +21,7 @@ function UserComponent(props) {
     const history = useHistory();
     const {settings} = useSettings();
 
-    return(
+    return (
         <div>
             <LazyLoad key={"as" + index}>
                 <div
@@ -43,17 +43,20 @@ function UserComponent(props) {
                         alt={"Avatar"}
                     />
                     }
-                    <div>
+                    <div
+                        style={{
+                            borderLeft: '1px solid #ccc'
+                        }}
+                    >
                         <h3>
                             <div
                                 className={s.users_a}
                                 onClick={() => {
                                     history.push(`/users/${value[0]}`)
                                 }}>
-                                <AiOutlineUser/> <span className={"usersNamePageName"}>{value[0]}</span>
-                                <span
-                                    className={s.ThisIsYouLabel}
-                                >{value[5] === id ? t("This is you") : ""}</span>
+                                <AiOutlineUser style={{color: value[5] === id ? "red" : ""}}/>
+                                <span style={{color: value[5] === id ? "red" : ""}}
+                                      className={"usersNamePageName"}>{value[0]}</span>
                             </div>
                             {value[2] && <AiOutlineSafetyCertificate/>}
                         </h3>

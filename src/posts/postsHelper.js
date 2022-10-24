@@ -130,9 +130,9 @@ export function getFilteredPostsByTags(posts, history) {
     }
 }
 
-export async function deletePostById(id) {
+export async function deletePostById(id, savedImages) {
     HttpHelper.POSTS.deletePostById(id, () => {
-    })
+    }, savedImages)
 }
 
 export async function updatePostById(id, text) {
