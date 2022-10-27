@@ -18,6 +18,7 @@ import HashtagsLine from "./HashtagsLine";
 import {Context} from "../App";
 import PostItemActions from "./PostItemActions";
 import SharedPost from "./SharedPost";
+import {AiOutlineClockCircle} from "react-icons/ai";
 
 function PostItem(props) {
     const {
@@ -57,7 +58,7 @@ function PostItem(props) {
     const [anchorEl, setAnchorEl] = useState(null);
     const wrapperRef = useRef(null);
 
-    useOutsideClick(wrapperRef, () => handleClose())
+    useOutsideClick(wrapperRef, () => handleClose());
 
     const handleClick = (event, ignoreAppOpenCallback) => {
         if (!ignoreAppOpen && !ignoreAppOpenCallback) {
@@ -110,16 +111,11 @@ function PostItem(props) {
                 data-id={value.id}
                 style={settings?.list?.listItemStyles}
             >
-                <div style={{position: "relative", borderRight: "1px solid #cecccc"}}>
+                <div className={s.PostItemBar}>
                     <Avatar
                         src={userAvatar}
-                        style={{
-                            height: '75px',
-                            width: '75px',
-                            marginRight: '15px',
-                            borderRadius: '5px',
-                            ...getElementsThemeConfig(settings)
-                        }}
+                        className={s.PostAvatar}
+                        style={{...getElementsThemeConfig(settings)}}
                     />
                     {value?.shared === "{}" ? null : <RiShareForwardLine style={{
                         color: "red",
@@ -176,7 +172,9 @@ function PostItem(props) {
                     index={index}
                 />
 
-                <li className={s.Time}>{DataHelper.fromNow(value.createdAt)}</li>
+                <span className={s.Time + " d-flex-c-c"}>
+                    <AiOutlineClockCircle/>{DataHelper.fromNow(value.createdAt)}
+                </span>
             </div>
         </>
     )

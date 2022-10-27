@@ -9,7 +9,7 @@ import postsHelper, {replaceTags} from "../../posts/postsHelper"
 import {notify} from "../../App";
 import EmotionsLineContainer from "../../posts/EmotionsLineContainer";
 import {useHistory} from "react-router-dom";
-import {AiOutlineDislike, AiOutlineHeart, AiOutlineLike} from "react-icons/ai";
+import {AiOutlineClockCircle, AiOutlineDislike, AiOutlineHeart, AiOutlineLike} from "react-icons/ai";
 import {getTabElementsThemeConfig} from "../../utils";
 import {useSettings} from "../../hooks";
 
@@ -61,7 +61,12 @@ export function LikeDislikeTab({information, avatarUrl, isLike}) {
                                         >
                                             {relatedPost[0]?.createdBy}
                                         </Typography>
-                                        <li>{DateHelper.fromNow(relatedPost[0]?.createdAt)}</li>
+                                        <span className={"d-flex-c-c"}>
+                                            <AiOutlineClockCircle style={{
+                                                fontSize: '13px',
+                                                marginRight: '3px'
+                                            }}/>{DateHelper.fromNow(relatedPost[0]?.createdAt)}
+                                        </span>
                                     </Typography>
                                     <Typography
                                         className={s.postContent}>{replaceTags(relatedPost[0]?.text || "", relatedPost[0]?.possibleMentions || JSON.stringify([]))}</Typography>
@@ -92,7 +97,12 @@ export function LikeDislikeTab({information, avatarUrl, isLike}) {
                                         height: '16px'
                                     }}/>
                                 }
-                                <li>{DateHelper.fromNow(information?.createdAt)}</li>
+                                <span className={"d-flex-c-c"}>
+                                    <AiOutlineClockCircle style={{
+                                        fontSize: '13px',
+                                        marginRight: '3px'
+                                    }}/>{DateHelper.fromNow(information?.createdAt)}
+                                </span>
                             </Box>
                         </Box>
                     </Box>

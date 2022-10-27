@@ -28,19 +28,23 @@ function QuizBar(props) {
     const {socket, notify} = useContext(Context);
 
     return (
-        <div className={quizStyle.ParsedQuizContainer}>
-            <span>{createdBy} asks:</span>
-            <h4>{parsedQuiz.question}</h4>
-            <ul className={`${bookmark && "disabled"}`}>
-                {parsedQuiz?.options?.sort((a, b) => b?.optionVotes - a?.optionVotes)?.map((option, index) =>
-                    <li
-                        key={index}
-                        onClick={() => setMyQuizAnswer(option?.optionName, postId, parsedQuiz, id, option?.optionVotes, socket, notify)}
-                    ><ProgressBar percent={(+option?.optionVotes * 100) / realFullAnswersCount}
-                                  label={option?.optionName}/></li>
-                )}
-            </ul>
-        </div>
+        <>
+            {parsedQuiz.question ?
+                <div className={quizStyle.ParsedQuizContainer}>
+                    <span>{createdBy} asks:</span>
+                    <h4>{parsedQuiz.question}</h4>
+                    <ul className={`${bookmark && "disabled"}`}>
+                        {parsedQuiz?.options?.sort((a, b) => b?.optionVotes - a?.optionVotes)?.map((option, index) =>
+                            <li
+                                key={index}
+                                onClick={() => setMyQuizAnswer(option?.optionName, postId, parsedQuiz, id, option?.optionVotes, socket, notify)}
+                            ><ProgressBar percent={(+option?.optionVotes * 100) / realFullAnswersCount}
+                                          label={option?.optionName}/></li>
+                        )}
+                    </ul>
+                </div>
+                : null}
+        </>
     )
 }
 

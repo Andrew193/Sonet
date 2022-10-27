@@ -158,6 +158,12 @@ $prefix: fs_;
   display: flex;
 }
 
+.d-flex-c-c {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .list-unstyled {
   padding-left: 0;
   list-style: none;

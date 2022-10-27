@@ -2,12 +2,13 @@ import Script from "../helpers/cookieHelper";
 import htmlHelper from "../helpers/htmlHelper";
 import HttpHelper from "../helpers/httpHelper";
 import CommonHelper from "../helpers/common";
-import {getItemFromLocalStorage} from "../localStorageService";
+import {deleteItemFromLocalStorage, getItemFromLocalStorage} from "../localStorageService";
 import {USER_INFORMATION} from "../vars";
 
 function leave(history) {
     Script.removeCookie("token");
-    CommonHelper.redirect(history, null, "/auth")
+    deleteItemFromLocalStorage(USER_INFORMATION);
+    CommonHelper.redirect(history, null, "/auth");
 }
 
 function GetShortUserInfo(notify) {
@@ -17,19 +18,20 @@ function GetShortUserInfo(notify) {
         return HttpHelper.USERS.getMe((error) => {
             const inner = htmlHelper.stringFromJSON(error?.data);
             inner[0] !== "<" &&
-                notify(htmlHelper.createHTML({ title: "Error", message: inner }));
+            notify(htmlHelper.createHTML({title: "Error", message: inner}));
         })
     }
 }
+
 function ToggleStateValue(setFlag) {
     setFlag((prev) => !prev.flag)
 }
 
 export function GetInfo() {
-    const { userName, id } = getItemFromLocalStorage(USER_INFORMATION);
-    return { userName, id };
+    const {userName, id} = getItemFromLocalStorage(USER_INFORMATION);
+    return {userName: userName || "", id: id || null};
 }
 
-const obj = { leave, GetShortUserInfo, ToggleStateValue, GetInfo }
+const obj = {leave, GetShortUserInfo, ToggleStateValue, GetInfo}
 
 export default obj;

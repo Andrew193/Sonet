@@ -65,11 +65,9 @@ function UserComponent(props) {
                                 <a href={`mailto:${value[1]}`}>{value[1]}</a>
                             </span>
                     </div>
-                    <span
-                        className={s.CreatedDate}
-                    >
-                        <AiOutlineClockCircle/><li>{DataHelper.fromNow(value[4])}</li>
-                        </span>
+                    <span className={s.CreatedDate + " d-flex-c-c"}>
+                            <AiOutlineClockCircle/>{DataHelper.fromNow(value[4])}
+                    </span>
                 </div>
                 {searchId && <UsersPageActions
                     notYouFolCount={value[6]}

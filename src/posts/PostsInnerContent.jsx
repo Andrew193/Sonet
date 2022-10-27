@@ -3,6 +3,7 @@ import PostItem from "./PostItem";
 import {useEffect, useState, useMemo} from "react";
 import commentsStyle from "../components/comments/comments.module.css";
 import LazyLoad, {forceCheck} from 'react-lazyload';
+import {v4 as uuidv4} from 'uuid';
 
 forceCheck();
 
@@ -29,22 +30,14 @@ function ClearPosts(props) {
                     setParentPosts={setParentPosts}
                     customStyle={toMake?.customClass || commentsStyle.OnePost}
                     settings={settings}
-                    key={index}
+                    key={uuidv4()}
                 />
                 : null
         ))
     }, [JSON.stringify(toMake), settings])
 
-    const postsLine = useMemo(() => {
-        if (!!posts) {
-            return posts?.map((post, index) =>
-                <LazyLoad key={index}>
-                    {post}
-                </LazyLoad>
-            )
-        }
-        return [];
-    }, [posts]);
+    const postsLine = useMemo(() => !!posts ? posts?.map((post) => <LazyLoad
+        key={uuidv4()}>{post}</LazyLoad>) : [], [posts]);
 
     return (
         <div className={s.PostsCont + " onePostContainer"}>

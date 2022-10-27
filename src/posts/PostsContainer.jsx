@@ -4,8 +4,7 @@ import postsHelper, {getFilteredPostsByTags} from "./postsHelper"
 import Skeleton from 'react-loading-skeleton';
 import SortLine from "./SortLine.jsx"
 import s from "./posts.module.css"
-import {Link, useHistory, withRouter} from "react-router-dom";
-import PageHeader from "../components/common/navigationLine/NavigationLine.jsx";
+import {useHistory, withRouter} from "react-router-dom";
 import {alpha, hexToRgb} from "@mui/material";
 import FiltersBar from "./FiltersBar";
 import {Context} from "../App";
@@ -24,9 +23,7 @@ function PostsContainer(props) {
     const {socket, notify} = useContext(Context);
     const id = getItemFromLocalStorage(USER_INFORMATION, "id");
 
-    socket.on("postUpdate", (updatedPosts) => {
-        setPosts({posts: updatedPosts})
-    });
+    socket.on("postUpdate", (updatedPosts) => setPosts({posts: updatedPosts}));
 
     useEffect(() => {
         const getData = (id) => id && typeof (+id) === "number" ? postsHelper.getSelectedPost(+id) : postsHelper.getPosts()

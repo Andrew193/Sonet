@@ -9,6 +9,7 @@ import {Context} from "../../App";
 import {useSettings} from "../../hooks";
 import {getItemFromLocalStorage} from "../../localStorageService";
 import {USER_INFORMATION} from "../../vars";
+import {getEmptyElementsThemeConfig} from "../../utils";
 
 function Comments(props) {
     const {
@@ -34,7 +35,10 @@ function Comments(props) {
     }, [id, notify])
 
     return (
-        <div className={s.Container + " commentsPage"}>
+        <div
+            className={s.Container + " commentsPage"}
+            style={{...getEmptyElementsThemeConfig(settings)}}
+        >
             <style>
                 {`
                      .commentsPage {

@@ -6,5 +6,5 @@ export function getItemFromLocalStorage(key, neededValue) {
 }
 
 export function deleteItemFromLocalStorage(key) {
-    return localStorage.getItem(key);
+    return localStorage.removeItem(key);
 }

@@ -51,9 +51,7 @@ function GalleryInnerContent(props) {
 
     const configuredImages = useMemo(() => {
         return images?.clearData?.map((image, index) =>
-            <p
-                key={JSON.parse(image?.src)?.webContentLink + index}
-            >
+            <p key={JSON.parse(image?.src)?.webContentLink + index}>
                 <LazyImage
                     imageSrc={JSON.parse(image?.src)?.webContentLink}
                     onClick={(e) => {
@@ -180,35 +178,35 @@ function GalleryInnerContent(props) {
                     </ListItemIcon>
                     <Typography>{t("Expand")}</Typography>
                 </MenuItem>
-                <MenuItem onClick={() => {
-                    handleClose()
-                }}>
-                    <FormControl fullWidth>
-                        <InputLabel id="demo-simple-select-label">{t("Add to a folder")}</InputLabel>
-                        <Select
-                            labelId="demo-simple-select-label"
-                            id="demo-simple-select"
-                            label={t("Add to a folder")}
-                            onChange={(e) => {
-                                setIsOpened(() => true)
-                                addPhotoToFolder({
-                                    src: images?.clearData[selectedImage]?.src,
-                                    userId: userInformation?.id,
-                                    shared: false,
-                                    sharedUser: images?.clearData[selectedImage]?.sharedUser,
-                                    name: e.target.value,
-                                    folderBack: ""
-                                }, setFolders)
-                                    .then(() => {
-                                        setTimeout(() => {
-                                            notify(t("Added"))
-                                            setIsOpened(() => false)
-                                        }, 1000)
-                                    })
-                            }}
-                        >{parsedFolders}</Select>
-                    </FormControl>
-                </MenuItem>
+                {parsedFolders?.length ?
+                    <MenuItem onClick={() => handleClose()}>
+                        <FormControl fullWidth>
+                            <InputLabel id="demo-simple-select-label">{t("Add to a folder")}</InputLabel>
+                            <Select
+                                labelId="demo-simple-select-label"
+                                id="demo-simple-select"
+                                label={t("Add to a folder")}
+                                onChange={(e) => {
+                                    setIsOpened(() => true)
+                                    addPhotoToFolder({
+                                        src: images?.clearData[selectedImage]?.src,
+                                        userId: userInformation?.id,
+                                        shared: false,
+                                        sharedUser: images?.clearData[selectedImage]?.sharedUser,
+                                        name: e.target.value,
+                                        folderBack: ""
+                                    }, setFolders)
+                                        .then(() => {
+                                            setTimeout(() => {
+                                                notify(t("Added"))
+                                                setIsOpened(() => false)
+                                            }, 1000)
+                                        })
+                                }}
+                            >{parsedFolders}</Select>
+                        </FormControl>
+                    </MenuItem>
+                    : null}
                 <MenuItem onClick={() => {
                     deleteMyPhoto({
                         userId: userInformation?.id,
@@ -232,9 +230,7 @@ function GalleryInnerContent(props) {
             <GalleryActions/>
             <div
                 className={"Separator"}
-                onClick={(e) => {
-                    e.target.nextElementSibling.classList.toggle("Hide")
-                }}
+                onClick={(e) => e.target.nextElementSibling.classList.toggle("Hide")}
             />
             <GalleryMode
                 selected={selected}

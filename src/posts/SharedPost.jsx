@@ -5,6 +5,7 @@ import postS from "./posts.module.css";
 import LazyImage from "./LazyImage";
 import DataHelper from "../helpers/dateHelper";
 import {getLazyImagesElementsThemeConfig} from "../utils";
+import {AiOutlineClockCircle} from "react-icons/ai";
 
 function SharedPost(props) {
     const {
@@ -46,7 +47,9 @@ function SharedPost(props) {
                             </h3>
                             <p>{parsedPost?.text}</p>
                         </div>
-                        <li className={postS.Time}>{DataHelper.fromNow(parsedPost?.createdAt)}</li>
+                        <span className={postS.Time + " d-flex-c-c"}>
+                            <AiOutlineClockCircle/>{DataHelper.fromNow(parsedPost?.createdAt)}
+                        </span>
                     </div>
             }
         </>

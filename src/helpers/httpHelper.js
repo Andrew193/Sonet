@@ -171,8 +171,8 @@ const Http = {
         },
         emotion: (userId, value, callback, callback1, emType) => {
             axios.put("/api/post/" + emType, {
-                userId,
                 ...value,
+                userId,
                 postText: JSON.stringify(value)
             })
                 .then((response) => callback())

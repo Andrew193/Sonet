@@ -14,7 +14,7 @@ const emotionsConfig = [
         img: <AiOutlineLike size={"24px"}/>, eventHandler: (value, socket, notify, id) => postsHelper.like({
             ...value,
             id: String(value?.id),
-            userId: String(value?.userId)
+            userId: String(id)
         }, String(id), notify, socket),
         class: s.like, label: "likeCount", showLabel: "Like"
     },
@@ -22,7 +22,7 @@ const emotionsConfig = [
         img: <AiOutlineDislike size={"24px"}/>, eventHandler: (value, socket, notify, id) => postsHelper.dislike({
             ...value,
             id: String(value?.id),
-            userId: String(value?.userId)
+            userId: String(id)
         }, String(id), notify, socket),
         class: s.dislike, label: "dislikeCount", showLabel: "Dislike"
     },

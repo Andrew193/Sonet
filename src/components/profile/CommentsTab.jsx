@@ -13,6 +13,7 @@ import {BiMessageMinus} from "react-icons/all";
 import {getTabElementsThemeConfig} from "../../utils";
 import {getTabsImageStyle} from "./LikesTab";
 import {useSettings} from "../../hooks";
+import {AiOutlineClockCircle} from "react-icons/ai";
 
 forceCheck();
 
@@ -56,7 +57,12 @@ function CommentTab({information, avatarUrl}) {
                         >
                             {information?.createdBy}
                         </Typography>
-                        <li>{DateHelper.fromNow(information.createdAt)}</li>
+                        <span className={"d-flex-c-c"}>
+                            <AiOutlineClockCircle style={{
+                                fontSize: '13px',
+                                marginRight: '3px'
+                            }}/>{DateHelper.fromNow(information.createdAt)}
+                        </span>
                     </Typography>
                     <Typography className={s.postContent}>
                         {replaceTags(information?.text || "", information?.possibleMentions || JSON.stringify([]))}
@@ -88,7 +94,12 @@ function CommentTab({information, avatarUrl}) {
                         >
                             {relatedPost[0]?.createdBy}
                         </Typography>
-                        <li>{DateHelper.fromNow(relatedPost[0]?.createdAt)}</li>
+                        <span className={"d-flex-c-c"}>
+                            <AiOutlineClockCircle style={{
+                                fontSize: '13px',
+                                marginRight: '3px'
+                            }}/>{DateHelper.fromNow(relatedPost[0]?.createdAt)}
+                        </span>
                     </Typography>
                     <Typography
                         className={s.postContent}

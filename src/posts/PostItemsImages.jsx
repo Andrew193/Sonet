@@ -11,6 +11,7 @@ import {notify} from "../App";
 import {useTranslation} from "react-i18next";
 import {USER_INFORMATION} from "../vars";
 import {getItemFromLocalStorage} from "../localStorageService";
+import {v4 as uuidv4} from 'uuid';
 
 function PostItemsImages(props) {
     const {
@@ -41,7 +42,7 @@ function PostItemsImages(props) {
                     setSelectedImage(index)
                     handleClick(e);
                 }}
-                key={JSON.parse(img)?.webContentLink}
+                key={uuidv4()}
                 imgClass={s.ImgPreview}
                 imageSrc={JSON.parse(img)?.webContentLink}
             />
