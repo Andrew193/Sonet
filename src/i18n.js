@@ -135,14 +135,22 @@ i18n
                     "Delete this folder ( with all images inside it )": "Delete this folder ( with all images inside it )",
                     "Update background": "Update background",
                     "Create": "Create",
-                    "Header order":"Header order",
-                    "Collapse":"Collapse"
+                    "Header order": "Header order",
+                    "Collapse": "Collapse",
+                    "Bookmarks": "Bookmarks",
+                    "We are loading your pretty content": "We are loading your pretty content",
+                    "Share": "Share",
+                    "Bookmark": "Bookmark"
                 }
             },
             ua: {
                 translations: {
-                    "Collapse":"Згорнути",
-                    "Header order":"Порядок заголовків",
+                    "Bookmark": "Закладка",
+                    "Share": "Поділіться",
+                    "We are loading your pretty content": "Ми завантажуємо ваші чудові дані",
+                    "Bookmarks": "Закладки",
+                    "Collapse": "Згорнути",
+                    "Header order": "Порядок заголовків",
                     "Create": "Створити",
                     "Update background": "Оновити фон",
                     "Delete this folder ( with all images inside it )": "Видалити цю папку (з усіма зображеннями в ній)",

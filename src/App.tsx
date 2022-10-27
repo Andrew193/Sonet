@@ -49,6 +49,25 @@ export function height() {
 
 export const Context = React.createContext<{ notify: typeof notify, socket: typeof socket }>({socket, notify});
 
+function Test() {
+    return (<Components.FastActionsContainer/>)
+}
+
+function AppCover() {
+    const [musicContext, setMusicContext] = useState({});
+
+    return (
+        <MusicContext.Provider value={[musicContext, setMusicContext]}>
+            <Context.Provider value={{notify, socket}}>
+                <Provider store={store}>
+                    <Test/>
+                    <App/>
+                </Provider>
+            </Context.Provider>
+        </MusicContext.Provider>
+    )
+}
+
 function App() {
     let modal = useRef<HTMLDivElement>(null);
     const [flag, setFlag] = useState(false);
@@ -78,7 +97,6 @@ function App() {
         }
     }, [userInformation?.id])
 
-    const [musicContext, setMusicContext] = useState({});
     const [containerDisplay, setContainerDisplay] = useState<"flex" | "none">("flex");
     const location = useLocation();
 
@@ -87,10 +105,8 @@ function App() {
     }, [location?.pathname])
 
     return (
-        <MusicContext.Provider value={[musicContext, setMusicContext]}>
-            <Context.Provider value={{notify, socket}}>
-                <Provider store={store}>
-                    <style>{`
+        <>
+            <style>{`
             .${fastActions.Container}, .${fastMessages.Container}, .${fastMusic.Container} {
             display: ${containerDisplay}!important;
             }
@@ -123,66 +139,63 @@ function App() {
             min-height: ${height() - 1}px;
             }
             `}</style>
-                    <div className="App">
-                        {flag && <>
-                            <Components.Header/>
-                            <Switch>
-                                <Route exact path={headerListLinks.base} render={() =>
-                                    <div className={"genContainer"}>
-                                        <Components.MainPage open={open}/>
-                                        <Components.TopInfo/>
-                                    </div>}>
-                                </Route>
-                                <Route exact path={headerListLinks.users + "/:id?"} render={() =>
-                                    <div className={"genContainer"}>
-                                        <Components.UsersContainer/>
-                                        <Components.TopInfo/>
-                                    </div>}/>
-                                <Route exact path={headerListLinks.profile + "/:id?"} render={() =>
-                                    <div className={"genContainer"}>
-                                        <Components.Profile/>
-                                        <Components.TopInfo/>
-                                    </div>}/>
-                                <Route exact path={headerListLinks.posts + "/:id?"} render={() =>
-                                    <div className={"genContainer"}>
-                                        <Components.PostsContainer/>
-                                        <Components.TopInfo/>
-                                    </div>}/>
-                                <Route exact path={headerListLinks.post + "/:type"}
-                                       render={() => <Components.SpecialPosts/>}/>
-                                <Route exact path={headerListLinks.comment + "/:id?"}
-                                       render={() => <Components.Comment/>}/>
-                                <Route exact path={headerListLinks.followers + "/Followings"}
-                                       render={() => <Components.Followings/>}/>
-                                <Route exact path={headerListLinks.followers + "/Followers"}
-                                       render={() => <Components.Followers/>}/>
-                            </Switch>
-                            <Components.Footer/>
-                            <ToastContainer
-                                toastStyle={{background: "black", borderRadius: "15px"}}
-                                hideProgressBar={true}
-                                autoClose={2000}
-                                position="top-right"
-                            />
-                            <Components.ModalUser ref={modal} click={open}/>
-                        </>}
-                        <Route path={headerListLinks.games + "/:gameType?"}
-                               render={() => <Components.GamesContainer/>}/>
-                        <Route path={headerListLinks.bookmarks}
-                               render={() => <Components.Bookmarks/>}/>
-                        <Route exact path={headerListLinks.settings}
-                               render={() => <Components.SettingsContainerPage/>}/>
-                        <Route exact path={headerListLinks.chats} render={() => <Components.ChatContainer/>}/>
-                        <Route exact path={headerListLinks.music} render={() => <Components.MusicContainerPage/>}/>
-                        <Route exact path={headerListLinks.auth} render={() => <Components.ContainerAuth/>}/>
-                        <Route exact path={headerListLinks.gallery + "/:folderName?"}
-                               render={() => <Components.GalleryContainer/>}/>
-                    </div>
-                    <Components.FastActionsContainer/>
-                </Provider>
-            </Context.Provider>
-        </MusicContext.Provider>
+            <div className="App">
+                {flag && <>
+                    <Components.Header/>
+                    <Switch>
+                        <Route exact path={headerListLinks.base} render={() =>
+                            <div className={"genContainer"}>
+                                <Components.MainPage open={open}/>
+                                <Components.TopInfo/>
+                            </div>}>
+                        </Route>
+                        <Route exact path={headerListLinks.users + "/:id?"} render={() =>
+                            <div className={"genContainer"}>
+                                <Components.UsersContainer/>
+                                <Components.TopInfo/>
+                            </div>}/>
+                        <Route exact path={headerListLinks.profile + "/:id?"} render={() =>
+                            <div className={"genContainer"}>
+                                <Components.Profile/>
+                                <Components.TopInfo/>
+                            </div>}/>
+                        <Route exact path={headerListLinks.posts + "/:id?"} render={() =>
+                            <div className={"genContainer"}>
+                                <Components.PostsContainer/>
+                                <Components.TopInfo/>
+                            </div>}/>
+                        <Route exact path={headerListLinks.post + "/:type"}
+                               render={() => <Components.SpecialPosts/>}/>
+                        <Route exact path={headerListLinks.comment + "/:id?"}
+                               render={() => <Components.Comment/>}/>
+                        <Route exact path={headerListLinks.followers + "/Followings"}
+                               render={() => <Components.Followings/>}/>
+                        <Route exact path={headerListLinks.followers + "/Followers"}
+                               render={() => <Components.Followers/>}/>
+                    </Switch>
+                    <Components.Footer/>
+                    <ToastContainer
+                        toastStyle={{background: "black", borderRadius: "15px"}}
+                        hideProgressBar={true}
+                        autoClose={2000}
+                        position="top-right"
+                    />
+                    <Components.ModalUser ref={modal} click={open}/>
+                </>}
+                <Route path={headerListLinks.games + "/:gameType?"}
+                       render={() => <Components.GamesContainer/>}/>
+                <Route path={headerListLinks.bookmarks}
+                       render={() => <Components.Bookmarks/>}/>
+                <Route exact path={headerListLinks.settings}
+                       render={() => <Components.SettingsContainerPage/>}/>
+                <Route exact path={headerListLinks.chats} render={() => <Components.ChatContainer/>}/>
+                <Route exact path={headerListLinks.music} render={() => <Components.MusicContainerPage/>}/>
+                <Route exact path={headerListLinks.auth} render={() => <Components.ContainerAuth/>}/>
+                <Route exact path={headerListLinks.gallery + "/:folderName?"}
+                       render={() => <Components.GalleryContainer/>}/>
+            </div>
+        </>
     );
 }
 
-export default App;
+export default AppCover;

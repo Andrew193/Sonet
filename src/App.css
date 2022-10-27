@@ -8,6 +8,10 @@
     width: 80%;
 }
 
+#NoHover:hover {
+    background-color: transparent !important;
+}
+
 .public-DraftStyleDefault-ltr {
     line-height: 30px;
 }

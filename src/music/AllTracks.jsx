@@ -19,7 +19,8 @@ function AllTracks(props) {
         allFiles,
         settings,
         setAllFiles,
-        setSearch
+        setSearch,
+        ignoreActions
     } = props;
 
     const [musicContext, setMusicContext] = useContext(MusicContext);
@@ -57,7 +58,7 @@ function AllTracks(props) {
                         <span className={s.TrackIndex}>{index + 1}</span>
                         <span className={s.TrackName}>{settings?.musicDescriptions[index]?.name || file.name}</span>
                         <span className={s.TrackCategory}>{settings?.musicDescriptions[index]?.category}</span>
-                        <span className={s.TrackActions}>
+                        {!ignoreActions ? <span className={s.TrackActions}>
                      <Tooltip
                          title={"Delete this track"}
                          arrow
@@ -96,7 +97,7 @@ function AllTracks(props) {
                                     />
                                 </TooltipButtonCover>
                      </Tooltip>
-                </span>
+                </span> : null}
                     </li>
                     : null
             })
@@ -113,8 +114,7 @@ function AllTracks(props) {
         }));
     })
 
-    const previewUrl = useMemo(() => getPlayerPath(allFiles, selectedTrack, musicContext)
-        , [musicContext, allFiles, selectedTrack])
+    const previewUrl = useMemo(() => getPlayerPath(allFiles, selectedTrack, musicContext), [musicContext, allFiles, selectedTrack])
 
     return (
         <div>
@@ -138,7 +138,7 @@ function AllTracks(props) {
                     <p className={s.TrackIndex}>№</p>
                     <p className={s.TrackName}>Name</p>
                     <p className={s.TrackCategory}>Category</p>
-                    <p className={s.TrackActions}>Actions</p>
+                    {!ignoreActions ? <p className={s.TrackActions}>Actions</p> : null}
                 </div>
                 <ul>
                     {

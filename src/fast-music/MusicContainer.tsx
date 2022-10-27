@@ -1,82 +1,37 @@
-import {MusicContext} from "../App";
-import {useMemo, useContext} from "react";
-import TrackPin, {TrackType} from "./TrackPin";
-import {Typography} from "@mui/material";
-import s from "./fast-music.module.css";
-import ReactPlayer from "react-player";
-import Fallback from "../music/img/fallback.png";
+import {useState, useEffect} from "react";
 import React from "react";
-import {getPlayerPath} from "../music/musicHelper";
+import {useSettings} from "../hooks";
+import AllTracks from "../music/AllTracks";
 
-function MusicContainer(props: any) {
-    const {
-        allFiles = [],
-        selectedTrack = 0
-    } = props;
+function MusicContainer() {
+    const [search, setSearch] = useState("");
+    const [allFiles, setAllFiles] = useState<any>(null);
 
-    const [musicContext, setMusicContext] = useContext(MusicContext);
+    const {settings} = useSettings(allFiles?.length);
 
-    const tracks = useMemo(() => musicContext?.tracks?.map((track: TrackType, index: number) => <TrackPin
-            onTrackSelect={() => {
-                setMusicContext((context) => ({
-                    ...context,
-                    selectedTrack: index
-                }))
-            }}
-            selected={musicContext?.selectedTrack === index}
-            track={track}
-            key={index}
-        />
-    ), [musicContext?.tracks, musicContext?.selectedTrack]);
-
-    const previewUrl = useMemo(() => getPlayerPath(allFiles, selectedTrack, musicContext)
-        , [musicContext, allFiles, selectedTrack])
-
+    useEffect(() => {
+        if (settings?.music && settings?.music[0]) {
+            setAllFiles(() => {
+                return search === ""
+                    ? settings?.music?.map((track) => ({track, show: true}))
+                    : settings?.music?.map((track, index) =>
+                        settings?.musicDescriptions[index]?.category?.includes(search)
+                            ? {track, show: true}
+                            : {track, show: false}
+                    )
+            });
+        }
+    }, [settings?.music?.length, search]);
 
     return (
         <>
-            {
-                musicContext?.selectedTrack !== null &&
-                <>
-                    <Typography
-                        component={"h4"}
-                        variant={"h4"}
-                    >Playing now</Typography>
-                    {
-                        <ReactPlayer
-                            className={s.FastReactPlayer}
-                            url={!!previewUrl ? URL.createObjectURL(previewUrl) : ""}
-                            width="100%"
-                            style={{
-                                marginBottom: "1%",
-                                height: "unset",
-                            }}
-                            playIcon={<img style={{width: "100%"}} src={Fallback} alt={"Fallback"}/>}
-                            onEnded={() => {
-                                if (musicContext?.selectedTrack < musicContext?.tracksLength - 1) {
-                                    setMusicContext((context) => ({
-                                        ...context,
-                                        selectedTrack: musicContext?.selectedTrack + 1
-                                    }))
-                                }
-                            }
-                            }
-                            playing
-                            controls
-                            muted
-                            light
-                            pip
-                            stopOnUnmount={false}
-                        />
-                    }
-                    <br/>
-                    <Typography
-                        component={"h4"}
-                        variant={"h4"}
-                    >Other tracks</Typography>
-                </>
-            }
-            {tracks}
+            <AllTracks
+                allFiles={allFiles}
+                settings={settings}
+                ignoreActions
+                setAllFiles={setAllFiles}
+                setSearch={setSearch}
+            />
         </>
     )
 }

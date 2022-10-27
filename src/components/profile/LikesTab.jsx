@@ -12,15 +12,25 @@ import {useHistory} from "react-router-dom";
 import {AiOutlineClockCircle, AiOutlineDislike, AiOutlineHeart, AiOutlineLike} from "react-icons/ai";
 import {getTabElementsThemeConfig} from "../../utils";
 import {useSettings} from "../../hooks";
+import TableLoader from "../table-loader/TableLoader";
+import {useTranslation} from "react-i18next";
 
 forceCheck();
+
+const actionIconSetup = (() => ({
+    style: {
+        marginRight: '5px',
+        height: '16px'
+    },
+    size: "30px"
+}))()
 
 export const getTabsImageStyle = () => ({height: '60px', width: '60px', marginLeft: '20px'})
 
 export function LikeDislikeTab({information, avatarUrl, isLike}) {
     const history = useHistory();
     const {settings} = useSettings();
-    const [relatedPost, setRelatedPost] = useState({});
+    const [relatedPost, setRelatedPost] = useState(null);
 
     useEffect(() => {
         postsHelper.getSelectedPost(information?.postId, notify)
@@ -30,7 +40,7 @@ export function LikeDislikeTab({information, avatarUrl, isLike}) {
     return (
         <>
             {
-                relatedPost[0]
+                relatedPost
                     ? <Box
                         className={s.UsersPost + " profilePostBorder"}
                         style={{flexDirection: "column", ...settings?.list?.listItemStyles}}
@@ -47,6 +57,7 @@ export function LikeDislikeTab({information, avatarUrl, isLike}) {
                             </Avatar>
                             <Box
                                 className={s.UsersPost + " profilePostBorder"}
+                                id={"NoHover"}
                                 style={{width: "100%"}}
                             >
                                 <Avatar className={"conversationImg"}>{relatedPost[0]?.createdBy[0]}</Avatar>
@@ -88,15 +99,7 @@ export function LikeDislikeTab({information, avatarUrl, isLike}) {
                                     alignItems: "unset"
                                 }}
                             >
-                                {isLike ? <AiOutlineLike size={"30px"} style={{
-                                        marginRight: '5px',
-                                        height: '16px'
-                                    }}/>
-                                    : <AiOutlineDislike size={"30px"} style={{
-                                        marginRight: '5px',
-                                        height: '16px'
-                                    }}/>
-                                }
+                                {isLike ? <AiOutlineLike {...actionIconSetup}/> : <AiOutlineDislike {...actionIconSetup}/>}
                                 <span className={"d-flex-c-c"}>
                                     <AiOutlineClockCircle style={{
                                         fontSize: '13px',
@@ -106,15 +109,16 @@ export function LikeDislikeTab({information, avatarUrl, isLike}) {
                             </Box>
                         </Box>
                     </Box>
-                    : <Box className={s.UsersPost + " profilePostBorder"} style={{flexDirection: "column"}}
-                    >User has deleted this post</Box>
+                    : relatedPost === null ? null :
+                        <Box className={s.UsersPost + " profilePostBorder"} style={{flexDirection: "column"}}
+                        >User has deleted this post</Box>
             }
         </>
     )
 }
 
 export function useEmotionConfig(config, avatarUrl, isLike) {
-    return useMemo(() => config?.map((configElement, index) =>
+    return useMemo(() => !!config?.length ? config?.map((configElement, index) =>
         <LazyLoad key={index}>
             <LikeDislikeTab
                 information={configElement}
@@ -122,7 +126,36 @@ export function useEmotionConfig(config, avatarUrl, isLike) {
                 isLike={isLike}
             />
         </LazyLoad>
-    ), [config]);
+    ) : null, [config]);
+}
+
+export function TabContainer(props) {
+    const {
+        valueLine,
+        children
+    } = props;
+
+    const [spareLoader, setSpareLoader] = useState(true);
+    const {t} = useTranslation();
+
+    useEffect(() => {
+        const id = setTimeout(() => {
+            clearTimeout(id);
+            setSpareLoader(() => false);
+        }, 3000)
+    }, [])
+
+    return (
+        <>
+            {
+                !!valueLine?.length
+                    ? valueLine
+                    : valueLine === null && spareLoader ?
+                        <TableLoader loaderLabel={t("We are loading your pretty content")}/> :
+                        <p className={s.EmptyLine}>{children}</p>
+            }
+        </>
+    )
 }
 
 function LikesTab(props) {
@@ -139,20 +172,14 @@ function LikesTab(props) {
             value={value}
             index={2}
         >
-            {
-                !!likesLine?.length
-                    ? likesLine
-                    : <p
-                        className={s.EmptyLine}
-                    >
-                        <Typography
-                            variant={"h3"}
-                            component={"span"}
-                        >You don’t have any likes yet</Typography>
-                        Tap the like icon on any Post to show it some love. When you do, it’ll show up here.
-                        <AiOutlineHeart/>
-                    </p>
-            }
+            <TabContainer valueLine={likesLine}>
+                <Typography
+                    variant={"h3"}
+                    component={"span"}
+                >You don’t have any likes yet</Typography>
+                Tap the like icon on any Post to show it some love. When you do, it’ll show up here.
+                <AiOutlineHeart/>
+            </TabContainer>
         </TabPanel>
     )
 }
