@@ -88,11 +88,20 @@
   justify-content: space-between;
 }
 
+.Span {
+  margin: 5px 25px;
+  border-radius: 2px;
+  transition: all ease 0.5s;
+}
+
+.Span:hover {
+  box-shadow: inset 0px 0px 5px 1px rgb(182 192 243);
+}
+
 .Container form input {
-  border-bottom: 1px solid black;
   outline: none;
-  padding: 5px 40px;
-  margin: 5px 10px;
+  padding: 5px;
+  margin: 5px;
   border: none;
   background: #1c1e21;
   box-shadow: inset -100px -100px 0 #1c1e21;

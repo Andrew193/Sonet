@@ -14,17 +14,11 @@ function PasswordReset(props: PasswordReset) {
     } = props;
 
     const Formik = useFormik({
-        initialValues: {
-            email: "",
-        },
+        initialValues: {email: ""},
         onSubmit: (values) => {
             HttpHelper.USERS.resetPassword(values.email)
-                .then(() => {
-                    notify("Check you email")
-                })
-                .catch(() => {
-                    notify("Something went wrong")
-                })
+                .then(() => notify("Check you email"))
+                .catch(() => notify("Something went wrong"))
         }
     })
 
@@ -33,7 +27,9 @@ function PasswordReset(props: PasswordReset) {
             <form onSubmit={Formik.handleSubmit}>
                 <article><h2 className={s.Active} id={"modeLinks"}>Password recovery</h2></article>
                 <div>
-                    <input type="email" id="email"{...Formik.getFieldProps("email")}/>
+                     <span className={s.Span}>
+                         <input type="email" id="email" {...Formik.getFieldProps("email")}/>
+                     </span>
                     <span className={s.Tip}>Email</span>
                 </div>
 

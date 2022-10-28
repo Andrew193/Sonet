@@ -1,4 +1,4 @@
-import {Box} from "@mui/material";
+import {Box, Typography} from "@mui/material";
 import {useMemo} from "react";
 import {getHashtags} from "./postsHelper";
 import s from "./posts.module.css"
@@ -23,9 +23,16 @@ function HashtagsLine(props) {
     >{hashtag}</span>), [hashtags]);
 
     return (
-        <Box className={s.HashtagsContainer}>
-            {hashtagsLines}
-        </Box>
+        <>
+            {hashtagsLines.length ?
+                <Box>
+                    <Typography variant={"h5"} component={"p"}
+                                style={{borderBottom: "1px solid rgb(206, 204, 204)"}}>Hashtags</Typography>
+                    <Box className={s.HashtagsContainer}>
+                        {hashtagsLines}
+                    </Box>
+                </Box> : null}
+        </>
     )
 }
 

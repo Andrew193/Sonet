@@ -1,7 +1,6 @@
 import {withRouter} from "react-router";
 import s from "./comments.module.css"
-import Loader from "../common/spinner/Spinner"
-import {useContext, useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import Script from "../../posts/postsHelper"
 import S2 from "./Script.js"
 import ClearComment from "./clearComment";
@@ -10,6 +9,9 @@ import {useSettings} from "../../hooks";
 import {getItemFromLocalStorage} from "../../localStorageService";
 import {USER_INFORMATION} from "../../vars";
 import {getEmptyElementsThemeConfig} from "../../utils";
+import TableLoader from "../table-loader/TableLoader";
+import {useTranslation} from "react-i18next";
+import MaintainedPageHeader from "../MaintainedPageHeader";
 
 function Comments(props) {
     const {
@@ -20,9 +22,10 @@ function Comments(props) {
     const [post, setPost] = useState(false);
     const [comments, setComments] = useState(false);
     const {settings} = useSettings();
-    const userId = getItemFromLocalStorage(USER_INFORMATION,"id");
+    const userId = getItemFromLocalStorage(USER_INFORMATION, "id");
 
     const {socket, notify} = useContext(Context);
+    const {t} = useTranslation();
 
     socket.on("CommentAdd", (updatedComment) => setComments(updatedComment));
     socket.on("refreshPost", (e) => setPost({posts: [e]}));
@@ -37,10 +40,18 @@ function Comments(props) {
     return (
         <div
             className={s.Container + " commentsPage"}
-            style={{...getEmptyElementsThemeConfig(settings)}}
+            style={{
+                ...getEmptyElementsThemeConfig(settings),
+                justifyContent: post && comments ? "space-between" : "unset"
+            }}
         >
+            <MaintainedPageHeader path={"/"} linkPath={"/posts"} linkTitle={t("Posts")}/>
             <style>
                 {`
+                     .highlight-tab:after {
+                     height: 0.5px;
+                     bottom: 4px;
+                     }
                      .commentsPage {
                      border-right: 1px solid ${settings?.configs?.color[settings?.color]};
                      }
@@ -82,7 +93,7 @@ function Comments(props) {
                         commentId={commentId}
                         id={id}
                     />
-                    : <Loader/>
+                    : <TableLoader loaderLabel={t("We are loading this comment")}/>
             }
         </div>
     )

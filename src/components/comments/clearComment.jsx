@@ -1,4 +1,3 @@
-import withPageHeader from "../../hoc/withPageHeader"
 import Comment from "./comments"
 import Skeleton from "react-loading-skeleton";
 import CommentLine from "./commentLine"
@@ -56,4 +55,4 @@ function ClearComment(props) {
     )
 }
 
-export default withPageHeader(ClearComment, {path: "/posts", Title: "Posts"});
+export default ClearComment;

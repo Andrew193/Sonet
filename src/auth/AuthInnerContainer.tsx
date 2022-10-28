@@ -45,25 +45,24 @@ function AuthInnerContainer(props: AuthInnerContainerType<false>) {
                 </article>
 
                 <div>
-                    <input
-                        type="email"
-                        id="email"
-                        {...Formik.getFieldProps("email")}
-                    />
-                    <span
-                        className={s.Tip}
-                    >Email</span>
+                    <span className={s.Span}>
+                        <input
+                            type="email"
+                            {...Formik.getFieldProps("email")}
+                        />
+                    </span>
+                    <span className={s.Tip}>Email</span>
                 </div>
 
                 {Formik.touched.email && Formik.errors.email &&
                     <span className={s.Error + " " + s.f1}>{Formik.errors.email}</span>}
-
                 <div>
-                    <input
-                        type="password"
-                        id="password"
-                        {...Formik.getFieldProps("password")}
-                    />
+                    <span className={s.Span}>
+                        <input
+                            type="password"
+                            {...Formik.getFieldProps("password")}
+                        />
+                    </span>
                     <span
                         className={s.Tip}
                     >Password</span>

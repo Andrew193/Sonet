@@ -75,10 +75,6 @@ video {
     border: 1px solid #eaeaea;
 }
 
-.SearchBar input:focus {
-    box-shadow: inset 0px 0px 5px 1px rgb(182 192 243);
-}
-
 .Track {
     padding: 10px;
     display: flex;

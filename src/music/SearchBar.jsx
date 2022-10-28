@@ -10,9 +10,8 @@ function SearchBar(props) {
             className={s.SearchBar}
         >
             <input
-                onInput={(e) => {
-                    setSearch(e.target.value)
-                }}
+                onInput={(e) => setSearch(e.target.value)}
+                id={"FocusInput"}
                 placeholder={"Search by category"}
             />
         </div>

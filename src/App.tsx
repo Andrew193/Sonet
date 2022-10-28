@@ -22,6 +22,7 @@ import React from "react";
 import fastActions from "./fast-actions/fast-actions.module.css";
 import fastMessages from "./fast-message/fast-message.module.css";
 import fastMusic from "./fast-music/fast-music.module.css";
+import bookmarksStyle from "./bookmarks/bookmarks.module.css";
 import {getFastDisplay} from "./fast-actions/FastActionsContainer";
 import {useLocation} from "react-router-dom";
 import {useSettings} from "./hooks";
@@ -114,6 +115,12 @@ function App() {
             min-height: ${height() - 1}px;
             background:${settings?.configs?.background[settings?.background]};
             } 
+            .${bookmarksStyle.BookmarksContainer} {
+             min-height: ${height() - 84}px;
+             }
+            .${bookmarksStyle.BookmarksContainer} .empty-table {
+            color:${settings?.configs?.color[settings?.color]};
+            }
             .App.Open {
             height: ${height() - 1}px!important;
             }
