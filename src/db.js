@@ -5,6 +5,7 @@ export const defaultSettingsConfig = {
     fontSize: -1,
     color: -1,
     background: -1,
+    headerColor: "#ffffff00",
     configs: {
         size: {
             '-1': "",

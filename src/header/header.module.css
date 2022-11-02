@@ -5,6 +5,10 @@
     overflow: auto;
 }
 
+.logotype {
+    border: none;
+}
+
 .HeadersLinksPaper {
     border-radius: 10px;
     border: 1px solid;
@@ -165,7 +169,6 @@
 }
 
 .NavBar a:first-of-type {
-    padding: 0px;
     margin: 0px;
     height: 32px;
 }
@@ -188,6 +191,7 @@
     position: relative;
     width: fit-content;
     border: 1px solid transparent;
+    border-radius: 50px;
 }
 
 .NavBar a svg {
@@ -195,7 +199,7 @@
     border-radius: 50%;
 }
 
-.NavBar a:hover, .LeaveBtn:hover {
+.LeaveBtn:hover {
     color: rgb(73, 73, 248);
     border-radius: 25px;
     cursor: pointer;
@@ -342,10 +346,6 @@
         width: 40px;
     }
 
-    .NavBar div:first-of-type a {
-        padding: 7px;
-    }
-
     .NavBar a:first-of-type {
         font-size: 16px;
     }
@@ -414,10 +414,6 @@
         justify-content: space-around;
     }
 
-    .NavBar div:first-of-type a {
-        padding: 7px;
-    }
-
     .NavBar a:first-of-type img {
         width: 30px;
     }
@@ -456,10 +452,6 @@
 
     .NavBar div:first-of-type a svg, .NavBar div:first-of-type p > span {
         display: none;
-    }
-
-    .NavBar div:first-of-type a {
-        padding: unset !important;
     }
 
     .NavBar p:not(.logotype) {
@@ -517,10 +509,6 @@
     .NavBar div:first-of-type > span {
         border-bottom-left-radius: 10px;
         border-bottom-right-radius: 10px;
-    }
-
-    .NavBar div:first-of-type a {
-        padding: 7px;
     }
 
     .PostBtn {

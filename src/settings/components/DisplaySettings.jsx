@@ -2,12 +2,13 @@ import {Backdrop, Box, CircularProgress, Slider, Typography} from "@mui/material
 import s from '../settings.module.css'
 import {useEffect, useMemo, useState} from "react";
 import {AiOutlineCheck, FiSettings, GiCheckMark} from "react-icons/all";
-import {getSettings, updateSettings} from "../../db";
+import {updateSettings} from "../../db";
 import {buttonsConfig} from "../../create-post/CreatePostLine";
 import {useTranslation} from "react-i18next";
 import {useDragAndDrop} from "../../drag-drop/useDragAndDrop";
 import OuterDragAndDropContainer from "../../drag-drop/OuterDragAndDropContainer";
 import HeaderLink from "../../header/HeaderLink";
+import {useSettings} from "../../hooks";
 
 const marks = [
     {
@@ -62,10 +63,11 @@ function HeaderListPageRow(props) {
 }
 
 function DisplaySettings() {
-    const [settings, setSettings] = useState({})
+    const {settings} = useSettings();
     const [selectedColor, setSelectedColor] = useState(-1);
     const [selectedBack, setSelectedBack] = useState(-1);
     const [fontSize, setFontSize] = useState(16);
+    const [selectHeaderColor, setSelectedHeaderColor] = useState("#ffffff00");
     const [open, setOpen] = useState(false);
     const {t} = useTranslation();
 
@@ -87,8 +89,7 @@ function DisplaySettings() {
             onClick={() => setSelectedBack(config?.id)}
         >
             <span>{t("" + config?.label + "")}</span><AiOutlineCheck/>
-        </div>
-    ), [selectedBack])
+        </div>), [selectedBack])
 
     function defaultSettingsHandler() {
         settingsCover(() => updateSettings({
@@ -110,19 +111,6 @@ function DisplaySettings() {
         }, 1000);
     }
 
-    useEffect(() => {
-        async function getSettingsConfig() {
-            const response = await getSettings();
-
-            setSettings(response[0])
-            setSelectedBack(response[0]?.background);
-            setSelectedColor(response[0]?.color);
-            setFontSize(response[0]?.fontSize);
-        }
-
-        getSettingsConfig();
-    }, [])
-
     const [headerFields, setHeaderFields] = useState([]);
     const DragAndDropConfig = useDragAndDrop(setHeaderFields, headerFields, {
         isOrderChangeMode: true,
@@ -136,6 +124,7 @@ function DisplaySettings() {
             background: selectedBack,
             fontSize: fontSize === 16 ? -1 : fontSize,
             configs: settings?.configs,
+            headerColor: selectHeaderColor,
             headerConfig: headerFields
         }, 1))
     }
@@ -144,7 +133,17 @@ function DisplaySettings() {
         if (settings?.headerConfig) {
             setHeaderFields(() => settings?.headerConfig)
         }
-    }, [settings?.headerConfig])
+    }, [settings?.headerConfig]);
+
+    useEffect(() => {
+        if (settings) {
+            setSelectedBack(settings?.background);
+            setSelectedColor(settings?.color);
+            setFontSize(settings?.fontSize);
+            setSelectedHeaderColor(settings?.headerColor)
+        }
+    }, [settings]);
+
     return (
         <>
             <Backdrop
@@ -164,9 +163,7 @@ function DisplaySettings() {
                         min={10}
                         max={23}
                         value={fontSize === -1 ? 16 : fontSize}
-                        onChange={(e, value) => {
-                            setFontSize(value)
-                        }}
+                        onChange={(e, value) => setFontSize(value)}
                     />
                 </div>
             </Box>
@@ -179,6 +176,22 @@ function DisplaySettings() {
             <Box className={s.FontMainContainer}>
                 <Typography className={s.FontLabel}>{t("Background")}</Typography>
                 <div className={s.FontContainer + " " + s.ColorsLine}>{backs}</div>
+            </Box>
+
+            <Box className={s.FontMainContainer}>
+                <Typography className={s.FontLabel}>{t("Header link hover color")}</Typography>
+                <div className={s.FontContainer + " " + s.ColorsLine}>
+                    <div className={s.ColorPickerContainer}>
+                        <label htmlFor={"color"}>Color picker:</label>
+                        <input type={"color"} name={"color"} id={"color"}
+                               onBlur={(e) => setSelectedHeaderColor(e.target.value)}
+                        />
+                    </div>
+                    <div className={s.ColorPickerContainer}>
+                        <label>Selected color:</label>
+                        <span style={{color: `${selectHeaderColor}`, margin: "10px"}}>{selectHeaderColor}</span>
+                    </div>
+                </div>
             </Box>
 
             <table className={s.FontMainContainer}>

@@ -49,9 +49,15 @@ function Header() {
             style={{
                 background: settings?.configs?.background[settings?.background],
                 fontSize: settings?.configs?.size[settings?.fontSize],
-                maxHeight:`${height()-2}px`
+                maxHeight: `${height() - 2}px`
             }}
         >
+            <style>{`
+            .${s.NavBar} p:hover a {
+            border-color: ${settings?.headerColor};
+            color: rgb(73, 73, 248);
+            }
+            `}</style>
             <UserShortBar/>
             <div
                 style={{

@@ -3,6 +3,17 @@
     max-width: 85%;
 }
 
+.ColorPickerContainer {
+    height: 60px;
+    display: flex;
+    align-items: center;
+}
+
+.ColorPickerContainer input {
+    width: 100px;
+    margin: 10px;
+}
+
 .MusicCover {
     display: flex;
     align-items: center;

@@ -2,6 +2,7 @@ import MatesContainer from "./MatesContainer";
 import RequestsContainer from "./RequestsConditions";
 import {useEffect, useState} from "react";
 import {useTranslation} from "react-i18next";
+import textareaStyles from "../components/solid-textarea/solid-textarea.module.css"
 
 function PeopleContainer(props) {
     const {
@@ -32,13 +33,18 @@ function PeopleContainer(props) {
         <>
             {
                 !chatMode
-                && <input
-                    placeholder={t("Search for friend")}
-                    className="chatMenuInput"
-                    onChange={(e) => {
-                        setSearch(e.target?.value)
-                    }}
-                />
+                &&
+                <>
+                    <input
+                        id={"FocusInput"}
+                        placeholder={t("Search for friend")}
+                        className="chatMenuInput"
+                        onChange={(e) => {
+                            setSearch(e.target?.value)
+                        }}
+                    />
+                    <div className={textareaStyles.ThematicBreak}/>
+                </>
             }
             {
                 !chatMode

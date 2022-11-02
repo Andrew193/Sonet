@@ -134,9 +134,6 @@ function ChatContainer() {
         <>
             <style>
                 {`
-                .chatMenuInput {
-                 border-bottom: 1px solid ${settings?.configs?.color[settings?.color]};
-                 }
                  .messenger {
                   border-right: 1px solid ${hexToRgb(settings?.configs?.color[settings?.color] || "rgb(231 231 240)")};
                   }
