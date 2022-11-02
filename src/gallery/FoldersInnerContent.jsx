@@ -4,7 +4,8 @@ import FoldersActionsBar from "./FoldersActionsBar";
 import {useHistory} from "react-router-dom";
 import {getItemFromLocalStorage} from "../localStorageService";
 import {USER_INFORMATION} from "../vars";
-
+import EmptySection from "../components/common/empty-section/EmptySection";
+import SolidTextareaStyle from "../components/solid-textarea/solid-textarea.module.css";
 
 function FoldersInnerContent(props) {
     const {
@@ -27,30 +28,35 @@ function FoldersInnerContent(props) {
                     setFolders={setFolders}
                 />
             }
-            <Box
-                className={s.ImagesContainer}
-            >
-                {folderName && <Typography
-                    variant={"p"}
-                    component={"h4"}
-                >{folderName} Folder</Typography>}
+            <Box className={s.ImagesContainer}>
+                {folderName &&
+                    <>
+                        <Typography
+                            variant={"p"}
+                            component={"h4"}
+                        >{folderName} Folder</Typography>
+                        <div className={SolidTextareaStyle.ThematicBreak}/>
+                    </>}
 
                 {
                     (folderName && isFolderContent)
-                        ? <p>
-                            This folder is empty. You still can go
-                            <span
-                                style={{
-                                    padding: '5px 10px',
-                                    margin: '5px'
-                                }}
-                                id={"mainPostBtn"}
-                                onClick={() => {
-                                    setOpenedFolderImage(null)
-                                    history.push("/gallery")
-                                }}
-                            >back</span>
-                        </p>
+                        ?
+                        <EmptySection
+                            title={"This folder is empty"}
+                            message={<p>You still can go
+                                <span
+                                    style={{
+                                        padding: '5px 10px',
+                                        margin: '5px'
+                                    }}
+                                    id={"mainPostBtn"}
+                                    onClick={() => {
+                                        setOpenedFolderImage(null)
+                                        history.push("/gallery")
+                                    }}
+                                >back</span>
+                            </p>}
+                        />
                         : (folderName && !isFolderContent)
                             ? <span
                                 id={"mainPostBtn"}
@@ -62,9 +68,7 @@ function FoldersInnerContent(props) {
                             : null
                 }
 
-                <div
-                    className={s.folderImagesContainer}
-                >
+                <div className={s.folderImagesContainer}>
                     {folderName ? configuredFolderImages : configuredFolders}
                 </div>
             </Box>

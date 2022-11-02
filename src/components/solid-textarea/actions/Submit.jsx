@@ -27,6 +27,9 @@ function PostButton(props) {
     return (
         <button
             disabled={disabled}
+            style={{
+                margin: "0px 5px 5px 0px"
+            }}
             className={`button btn btn-default ${buttonsConfig[customStyle?.color]}`}
             onClick={() => {
                 setIsOpened(true);

@@ -74,9 +74,7 @@ function Folders(props) {
                                 onClick={() => {
                                 }}
                             />
-                            <div
-                                className={s.FolderDescription}
-                            >
+                            <div className={s.FolderDescription}>
                                 <span>Created date: <span>{dateHelper.fromNow(folder?.createdAt)}</span></span>
                                 <span>Folder name: {folder?.name}</span>
                             </div>
@@ -110,18 +108,14 @@ function Folders(props) {
                 </p>
                 : null), [selectedFolder])
 
-    const isFolderContent = useMemo(() => {
-        return configuredFolderImages?.every((image) => image === null);
-    }, [configuredFolderImages])
+    const isFolderContent = useMemo(() => configuredFolderImages?.every((image) => image === null), [configuredFolderImages])
 
     const {t} = useTranslation();
     let image = useRef();
     const [isOpened, setIsOpened] = useState(false);
 
     return (
-        <div
-            className={s.FolderInnerContainer}
-        >
+        <div className={s.FolderInnerContainer}>
             <Backdrop
                 sx={{color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1}}
                 open={isOpened}

@@ -10,15 +10,19 @@ function MatePin(props) {
         friend,
         setCurrentChat,
         index,
-        setConversations
+        setConversations,
+        usersInChat
     } = props;
 
     const userInformation = getItemFromLocalStorage(USER_INFORMATION);
     const [userAvatar, setUserAvatar] = useState();
+    const [isOnline, setIsOnline] = useState(false);
 
     useEffect(() => {
         if (userInformation?.id) {
-            getUserAvatar(userAvatar, setUserAvatar, userInformation?.id === friend?.receiverId ? friend?.requestSendById : friend?.receiverId);
+            const friendId = userInformation?.id === friend?.receiverId ? friend?.requestSendById : friend?.receiverId;
+            setIsOnline(() => usersInChat?.filter((user) => user?.userId === friendId)[0])
+            getUserAvatar(userAvatar, setUserAvatar, friendId);
         }
     }, [userInformation])
 
@@ -40,6 +44,7 @@ function MatePin(props) {
             <FriendPin
                 {...friend}
                 userAvatar={userAvatar}
+                isOnline={isOnline}
                 friendName={friend?.receiverName}
                 approved={friend?.approved}
                 setConversations={setConversations}

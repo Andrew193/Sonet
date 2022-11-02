@@ -1,12 +1,12 @@
 import {useEffect, useContext, useState, useMemo} from "react";
 import "./messenger.css";
-import {getSettings} from "../db";
 import {alpha, hexToRgb} from "@mui/material";
 import Messenger from "./Messenger";
 import {createChatMessage, getConversationById, getMatesList} from "./chatHelper";
 import {Context} from "../App";
 import {getItemFromLocalStorage} from "../localStorageService";
 import {USER_INFORMATION} from "../vars";
+import {useSettings} from "../hooks";
 
 function ChatContainer() {
     const [conversations, setConversations] = useState([]);
@@ -16,7 +16,7 @@ function ChatContainer() {
     const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState("");
     const [arrivalMessage, setArrivalMessage] = useState(null);
-    const [settings, setSettings] = useState({});
+    const {settings} = useSettings();
 
     const userInformation = getItemFromLocalStorage(USER_INFORMATION);
 
@@ -32,7 +32,7 @@ function ChatContainer() {
         });
     }, [socket]);
 
-    useEffect(()=>{
+    useEffect(() => {
         socket.on("updateMessages", (data) => {
             if (!!data?.refresh) {
                 if (!!currentChat?.id) {
@@ -50,7 +50,7 @@ function ChatContainer() {
                 }
             }
         })
-    },[socket, currentChat])
+    }, [socket, currentChat])
 
     useEffect(() => {
         try {
@@ -85,7 +85,7 @@ function ChatContainer() {
                 setUsersInChat(users)
             });
         }
-    }, [userInformation?.id]);
+    });
 
     const receiverId = useMemo(() => {
         if (currentChat) {
@@ -130,16 +130,6 @@ function ChatContainer() {
         }
     };
 
-    useEffect(() => {
-        async function getData() {
-            const response = await getSettings();
-
-            setSettings(response[0])
-        }
-
-        getData();
-    }, [])
-
     return (
         <>
             <style>
@@ -170,6 +160,7 @@ function ChatContainer() {
             </style>
 
             <Messenger
+                usersInChat={usersInChat}
                 settings={settings}
                 setCurrentChat={setCurrentChat}
                 currentChat={currentChat}

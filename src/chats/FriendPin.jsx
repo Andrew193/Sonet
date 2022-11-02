@@ -7,6 +7,7 @@ import {createCopy} from "../utils";
 import LazyImage from "../posts/LazyImage";
 import {getItemFromLocalStorage} from "../localStorageService";
 import {USER_INFORMATION} from "../vars";
+import {alpha} from "@mui/material";
 
 function FriendPin(props) {
     const {
@@ -18,7 +19,8 @@ function FriendPin(props) {
         setConversations,
         setPossibleMates,
         id,
-        userAvatar
+        userAvatar,
+        isOnline
     } = props;
 
     const userInformation = getItemFromLocalStorage(USER_INFORMATION);
@@ -40,7 +42,8 @@ function FriendPin(props) {
 
     return (
         <>
-            <div className={`conversation ${!approved ? "closedFriendPin" : ""} ${requestMode ? "closedFriendPin" : ""}`}>
+            <div
+                className={`conversation ${!approved ? "closedFriendPin" : ""} ${requestMode ? "closedFriendPin" : ""}`}>
                 {
                     approved &&
                     <span
@@ -74,7 +77,9 @@ function FriendPin(props) {
                 </span>
                 }
                 <LazyImage imageSrc={userAvatar} onClick={() => {
-                }} imgClass={"conversationImg"}/>
+                }} imgClass={"conversationImg"}
+                           wrapperStyle={{boxShadow: ` ${alpha(isOnline ? "#008000" : "#ff0000", 0.8)} 0px 0px 8px 0px`}}
+                />
                 <span className="conversationName">{friendName}</span>
                 {
                     !approved

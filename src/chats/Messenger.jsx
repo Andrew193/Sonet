@@ -13,6 +13,7 @@ import MatePin from "./MatePin";
 function Messenger(props) {
     const {
         setConversations,
+        usersInChat,
         setIsLoading,
         isLoading,
         settings,
@@ -34,6 +35,7 @@ function Messenger(props) {
         setIsLoading(() => false)
         setMatesList(() => conversations?.map((friend, index) => (friend?.show === undefined || friend?.show === true) ?
             <MatePin
+                usersInChat={usersInChat}
                 key={index}
                 currentChat={currentChat}
                 index={index}
@@ -41,7 +43,7 @@ function Messenger(props) {
                 setCurrentChat={setCurrentChat}
                 setConversations={setConversations}
             /> : null))
-    }, [conversations, currentChat?.currentIndex]);
+    }, [conversations, currentChat?.currentIndex, usersInChat]);
 
     const [possibleMates, setPossibleMates] = useState(null);
     const [chatMode, setChatMode] = useState(false);

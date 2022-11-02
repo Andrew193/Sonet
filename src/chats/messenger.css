@@ -7,6 +7,43 @@
     display: flex;
 }
 
+.TipLine {
+    margin: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.TipLine p {
+    padding: 5px;
+}
+
+.TipLine p span {
+    margin: 5px;
+    padding: 15px 3px;
+    border-radius: 50px;
+}
+
+.TipLine p span:first-of-type {
+    box-shadow: rgba(0, 128, 0, 0.8) 0px 0px 8px 0px;
+}
+
+.TipLine p span:last-of-type {
+    box-shadow: rgba(255, 0, 0, 0.8) 0px 0px 8px 0px;
+}
+
+.TipLine svg {
+    font-size: 26px;
+    padding: 5px;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all ease 0.5s;
+}
+
+.TipLine svg:hover {
+    background-color: rgb(203, 203, 243);
+}
+
 .noConversationImage {
     position: absolute;
     top: 100%;
@@ -64,7 +101,7 @@
 
 .deleteExistingFriend + div {
     width: 80px;
-    min-height: 60px!important;
+    min-height: 60px !important;
 }
 
 .deleteExistingFriend + div > div {

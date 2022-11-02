@@ -1,11 +1,12 @@
 import s from "../settings/settings.module.css";
 import {buttonsConfig} from "../create-post/CreatePostLine";
-import {MdOutlineCreate, VscEmptyWindow} from "react-icons/all";
+import {VscEmptyWindow} from "react-icons/all";
 import {alpha, Box, hexToRgb, Typography} from "@mui/material";
 import {useEffect, useState} from "react";
 import {useTranslation} from "react-i18next";
 import {getSettings} from "../db";
 import {addPhotoToFolder} from "./galleryHelper";
+import SolidTextareaStyle from "../components/solid-textarea/solid-textarea.module.css"
 import InputEmoji from 'react-input-emoji';
 
 function FoldersActionsBar(props) {
@@ -30,10 +31,9 @@ function FoldersActionsBar(props) {
     }, [])
 
     return (
-        <Box
-            className={s.Actions + " " + s.FoldersActions}
-        >
-            <style>{`
+        <div>
+            <Box className={s.Actions + " " + s.FoldersActions}>
+                <style>{`
             .inputCover {
             position: absolute!important;
             z-index: 11;
@@ -59,33 +59,33 @@ function FoldersActionsBar(props) {
             }
             `}</style>
 
-            {isTextUpdate && <div
-                className={"inputCover"}
-            >
-                <div
-                    style={{
-                        width: "100%",
-                        display: 'flex',
-                        alignItems: 'center',
-                        flexDirection: 'column',
-                        padding: '15px',
-                    }}
-                    onDoubleClick={() => {
-                        setIsTextUpdate(false)
-                    }}
+                {isTextUpdate && <div
+                    className={"inputCover"}
                 >
-                    <InputEmoji
-                        value={newFolderText}
-                        onChange={setNewFolderText}
-                        cleanOnEnter
-                        placeholder={t("Type a new post text")}
-                    />
                     <div
                         style={{
-                            flex: '5 0',
-                            padding: "10px"
+                            width: "100%",
+                            display: 'flex',
+                            alignItems: 'center',
+                            flexDirection: 'column',
+                            padding: '15px',
+                        }}
+                        onDoubleClick={() => {
+                            setIsTextUpdate(false)
                         }}
                     >
+                        <InputEmoji
+                            value={newFolderText}
+                            onChange={setNewFolderText}
+                            cleanOnEnter
+                            placeholder={t("Type a new post text")}
+                        />
+                        <div
+                            style={{
+                                flex: '5 0',
+                                padding: "10px"
+                            }}
+                        >
                     <span
                         id={"mainPostBtn"}
                         style={{
@@ -105,36 +105,38 @@ function FoldersActionsBar(props) {
                             }
                         }}
                     >Create Folder</span>
+                        </div>
                     </div>
                 </div>
-            </div>
-            }
-            <div>
-                <Typography
-                    variant={"h4"}
-                    component={"h4"}
+                }
+                <div>
+                    <Typography
+                        variant={"h4"}
+                        component={"h4"}
+                    >
+                        Folders
+                    </Typography>
+                    <Typography
+                        variant={"h6"}
+                        component={"p"}
+                    >Create, delete, update back image.</Typography>
+                </div>
+                <button
+                    style={{
+                        display: "flex",
+                        justifyContent: 'space-evenly'
+                    }}
+                    className={`button btn btn-default  ${buttonsConfig[settings?.configs?.color[settings?.color]]}`}
+                    onClick={() => {
+                        setIsTextUpdate(true)
+                    }}
                 >
-                    Folders
-                </Typography>
-                <Typography
-                    variant={"h6"}
-                    component={"p"}
-                >Create, delete, update back image.</Typography>
-            </div>
-            <button
-                style={{
-                    display: "flex",
-                    justifyContent: 'space-evenly'
-                }}
-                className={`button btn btn-default  ${buttonsConfig[settings?.configs?.color[settings?.color]]}`}
-                onClick={() => {
-                    setIsTextUpdate(true)
-                }}
-            >
-                <VscEmptyWindow/>
-                {t("Create")}
-            </button>
-        </Box>
+                    <VscEmptyWindow/>
+                    {t("Create")}
+                </button>
+            </Box>
+            <div className={SolidTextareaStyle.ThematicBreak}/>
+        </div>
     )
 }
 
