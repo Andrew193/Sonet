@@ -5,7 +5,7 @@ import s from "./header.module.css"
 import Script from "./script.js"
 import Script2 from "../components/profile/profileHelper";
 import {useOutsideClick} from "../hooks";
-import {useRef} from "react";
+import {useEffect, useRef, useState} from "react";
 import {Divider} from "@mui/material";
 import Avatar from "@mui/material/Avatar";
 import {AiOutlineSecurityScan} from "react-icons/ai";
@@ -26,7 +26,8 @@ const colorPair = {
 function Portal(props) {
     const {
         click,
-        customStyles
+        customStyles,
+        parentConfig
     } = props;
 
     const {id, userName: name} = Script.GetInfo();
@@ -38,12 +39,44 @@ function Portal(props) {
         click(false);
     })
 
+    const [style, setStyle] = useState({});
+
+    function setTooltipPosition() {
+        const target = parentConfig;
+
+        let left = target?.screenX - 150;
+        if (left < 0) left = 0;
+
+        let top = target?.clientY + 20;
+        if (top < 0) {
+            top = target?.clientY + 35;
+        }
+
+        if (top + 200 > window?.innerHeight - 100) {
+            top -= 200;
+        } else if (top + 100 > window?.innerHeight - 100) {
+            top -= 100;
+        }
+
+        setStyle({
+            left: left + 'px',
+            top: top + 'px'
+        })
+    }
+
+    useEffect(() => {
+        if (parentConfig) {
+            setTooltipPosition();
+        }
+    }, [parentConfig])
+
     return createPortal(
         <div
             className={s.UserPortal}
             onClick={click}
             ref={wrapperRef}
             style={{
+                ...style,
                 fontSize: customStyles?.fontSize,
                 color: customStyles?.color,
                 background: colorPair[customStyles?.color],
@@ -58,9 +91,7 @@ function Portal(props) {
                     }}
                 >{name[0]}</Avatar>
                 <div
-                    onClick={() => {
-                        CommonHelper.redirect(history, null, "/profile")
-                    }}
+                    onClick={() => CommonHelper.redirect(history, null, "/profile")}
                     style={{alignItems: 'flex-start'}}
                 >
                     <span className={"fs_font-bold"}>{name}</span>
@@ -71,10 +102,7 @@ function Portal(props) {
                 </div>
             </div>
 
-            <Divider
-                className={"divider_default"}
-                light
-            />
+            <Divider className={"divider_default"} light/>
 
             <p
                 id={s.Controle}
@@ -90,9 +118,7 @@ function Portal(props) {
             >{t("Set up profile")}</p>
             <p
                 id={s.Controle}
-                onClick={() => {
-                    Script.leave(history)
-                }}
+                onClick={() => Script.leave(history)}
                 style={{
                     fontSize: customStyles?.fontSize,
                     color: customStyles?.color,

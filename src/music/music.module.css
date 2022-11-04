@@ -91,6 +91,11 @@ video {
     overflow: hidden;
 }
 
+.TracksHeader p {
+    text-align: center;
+    margin: 0px 3px !important;
+}
+
 .TrackCategory {
     flex: 5 0;
     border-right: 1px solid rgb(115 113 113);

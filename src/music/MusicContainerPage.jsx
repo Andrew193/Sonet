@@ -12,7 +12,7 @@ function MusicContainerPage() {
     const [file, setFile] = useState();
     const [search, setSearch] = useState("");
     const [allFiles, setAllFiles] = useState(null);
-    const settingsConfig = useSettings(allFiles?.length);
+    const settingsConfig = useSettings(file);
 
     useEffect(() => {
         if (settingsConfig?.settings?.music && settingsConfig?.settings?.music[0]) {
@@ -30,6 +30,7 @@ function MusicContainerPage() {
 
     const createNewSong = useCallback(() => {
         function readFile() {
+            debugger
             updateSettings({
                 ...settingsConfig.settings,
                 music: [...settingsConfig.settings?.music, file],
@@ -50,7 +51,7 @@ function MusicContainerPage() {
         const reader = new FileReader();
         reader.addEventListener('load', readFile);
         reader.readAsText(file);
-    }, [file]);
+    }, [file, settingsConfig]);
 
     function dropPreviewMusic() {
         setFile(null);

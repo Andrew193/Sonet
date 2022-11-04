@@ -23,15 +23,11 @@ function GetShortUserInfo(notify) {
     }
 }
 
-function ToggleStateValue(setFlag) {
-    setFlag((prev) => !prev.flag)
-}
-
 export function GetInfo() {
     const {userName, id} = getItemFromLocalStorage(USER_INFORMATION);
     return {userName: userName || "", id: id || null};
 }
 
-const obj = {leave, GetShortUserInfo, ToggleStateValue, GetInfo}
+const obj = {leave, GetShortUserInfo, GetInfo}
 
 export default obj;

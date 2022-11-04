@@ -4,6 +4,10 @@
     margin: 0;
 }
 
+.logotype:hover a {
+    border: none !important;
+}
+
 ::marker {
     font-size: 16px;
 }

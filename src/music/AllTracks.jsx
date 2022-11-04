@@ -129,6 +129,10 @@ function AllTracks(props) {
             <Typography
                 component={"h4"}
                 variant={"h4"}
+                style={{
+                    textAlign: "center",
+                    margin: "3px"
+                }}
             >
                 All tracks
             </Typography>

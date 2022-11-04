@@ -9,9 +9,7 @@ function UploadArea(props) {
     let hiddenArea = useRef();
 
     return (
-        <div
-            className={s.UploadContainer}
-        >
+        <div className={s.UploadContainer}>
             <style>{`
             #custom-button {
             padding: 5px!important;
@@ -41,15 +39,11 @@ function UploadArea(props) {
                     display: "none"
                 }}
                 onChange={handleVideoUpload}
-                onClick={(event)=> {
-                    event.target.value = null
-                }}
+                onClick={(event) => event.target.value = null}
             />
             <button
                 id="custom-button"
-                onClick={() => {
-                    hiddenArea.click();
-                }}
+                onClick={() => hiddenArea.click()}
             >CHOOSE A FILE
             </button>
             <span id="custom-text">No file chosen, yet.</span>

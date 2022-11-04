@@ -11,13 +11,7 @@ function UploadNewTrack(props) {
         setFile(() => event.target.files[0]);
     };
 
-    return (
-        <>
-            <UploadArea
-                handleVideoUpload={handleVideoUpload}
-            />
-        </>
-    )
+    return (<UploadArea handleVideoUpload={handleVideoUpload}/>)
 }
 
 export default UploadNewTrack;

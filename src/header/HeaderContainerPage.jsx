@@ -31,7 +31,8 @@ export const headerLinksConfig = [
 ];
 
 function Header() {
-    const [flag, setFlag] = useState(false);
+    const [portalConfig, setPortalConfig] = useState({isOpened: false, e: null});
+
     const {settings} = useSettings();
     const history = useHistory();
     const {t, i18n} = useTranslation();
@@ -115,7 +116,11 @@ function Header() {
 
             <div
                 className={s.userInfo}
-                onClick={() => Script.ToggleStateValue(setFlag)}
+                onClick={(e) => setPortalConfig((t) => ({
+                        isOpened: !t.isOpened,
+                        e: e
+                    })
+                )}
             >
                 <ProfileContainer
                     customStyles={{
@@ -126,9 +131,14 @@ function Header() {
                 />
             </div>
 
-            {flag && <Portal
+            {portalConfig.isOpened && <Portal
                 s={s.userInfo}
-                click={() => setFlag(!flag)}
+                click={() => setPortalConfig((t) => ({
+                        isOpened: !t.isOpened,
+                        e: null
+                    })
+                )}
+                parentConfig={portalConfig.e}
                 customStyles={{
                     fontSize: settings?.configs?.size[settings?.fontSize],
                     color: settings?.configs?.color[settings?.color],
