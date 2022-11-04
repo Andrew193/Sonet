@@ -5,25 +5,25 @@ import {v4 as uuidv4} from 'uuid';
 import {Typography} from "@mui/material";
 import {useMemo} from "react";
 import s from "../top-info.module.css"
-import {AiOutlineComment, AiOutlineDislike, AiOutlineLike} from "react-icons/ai";
+import {AiOutlineComment, AiOutlineDislike, AiOutlineLike, AiOutlineMail} from "react-icons/ai";
 import CountUp from "react-countup";
 import {useTranslation} from "react-i18next";
 
-function PostCreator(props) {
+function UsersCreator(props) {
     const {
-        settings
+        settings,
+        toCreate
     } = props;
 
     const history = useHistory();
     const {t} = useTranslation();
-    const postsListToMap = useMemo(() => props.toCreate, [props?.toCreate]);
+    const usersListToMap = useMemo(() => toCreate, [toCreate]);
 
     return (
         <>
-            {postsListToMap.map((value) =>
+            {usersListToMap.map((value) =>
                 <div
                     key={uuidv4()}
-                    onClick={() => script.openFull(history, value.id)}
                     data-id={value.id}
                     style={{
                         color: settings?.configs?.color[settings?.color]
@@ -34,39 +34,45 @@ function PostCreator(props) {
                         component="div"
                         className={s.latestPostFirstLine}
                     >
-                        <li>{dateHelper.fromNow(value.createdAt)}</li>
+                        <li
+                            style={{
+                                flex: '4'
+                            }}
+                        >{dateHelper.fromNow(value[4])}</li>
                         <Typography
                             variant="h5"
                             component="h4"
                             style={{
                                 fontWeight: "bold",
-                                fontSize: '13px'
+                                fontSize: '13px',
+                                flex: '8'
                             }}
-                        >{t("Created by")} @{value.createdBy}</Typography>
+                        ><span
+                            style={{
+                                marginLeft: "15px",
+                                fontSize: "13px"
+                            }}
+                        >#{value[0]}</span></Typography>
                     </Typography>
                     <Typography
                         variant="p"
                         component="p"
                         className={s.PostLine}
-                    >{value.text.slice(0, 75)}</Typography>
-                    <p className={s.ActionsLine}>
-                        <span>
-                            <AiOutlineLike size={"14px"}/>
-                             <CountUp delay={1} end={value.likeCount}/>
-                        </span>
-                        <span>
-                            <AiOutlineDislike size={"14px"}/>
-                             <CountUp delay={1} end={value.dislikeCount}/>
-                        </span>
-                        <span>
-                            <AiOutlineComment size={"14px"}/>
-                               <CountUp delay={1} end={value.comCount}/>
-                        </span>
-                    </p>
+                        style={{
+                            display: "flex",
+                            alignItems: "center"
+                        }}
+                    ><AiOutlineMail
+                        style={{
+                            fontSize: "16px",
+                            marginRight: "5px"
+                        }}
+                    />{value[1]}</Typography>
+                    <p/>
                 </div>
             )}
         </>
     )
 }
 
-export default PostCreator;
+export default UsersCreator;

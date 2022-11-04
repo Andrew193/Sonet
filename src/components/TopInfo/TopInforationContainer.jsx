@@ -1,21 +1,11 @@
 import LatestPosts from "./LatestPosts"
 import s from "./top-info.module.css"
-import {useEffect, useState} from "react";
-import {getSettings} from "../../db";
 import {hexToRgb} from "@mui/material";
+import {useSettings} from "../../hooks";
+import TopUsers from "./TopUsers";
 
 function TopInfo() {
-    const [settings, setSettings] = useState({});
-
-    useEffect(() => {
-        async function getData() {
-            const response = await getSettings();
-
-            setSettings(response[0])
-        }
-
-        getData();
-    }, [])
+    const {settings} = useSettings();
 
     return (
         <>
@@ -28,6 +18,7 @@ function TopInfo() {
             </style>
             <aside className={s.Container}>
                 <LatestPosts/>
+                <TopUsers/>
                 <span>© {(new Date()).getFullYear()} Sonet, Inc.</span>
             </aside>
         </>

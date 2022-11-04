@@ -1,4 +1,4 @@
-import {useContext, useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import s from "./top-info.module.css"
 import Script from "./script.js"
 import Skeleton from 'react-loading-skeleton';
@@ -7,25 +7,24 @@ import {alpha} from "@mui/material";
 import {useTranslation} from "react-i18next";
 import {headerListLinks} from "../../vars";
 import {useHistory} from "react-router-dom";
-import {Context} from "../../App";
 import {useSettings} from "../../hooks";
 import {getElementsThemeConfig, getPropertiesConfig} from "../../utils";
+import HttpHelper from "../../helpers/httpHelper";
+import UsersCreator from "./creators/users";
 
-function LatestPosts() {
+function TopUsers() {
     const [state, setState] = useState(false);
     const history = useHistory();
     const {settings} = useSettings()
-    const {socket} = useContext(Context);
-
-    socket.on("postCreate", (updatedPosts) => setState({posts: updatedPosts}))
 
     useEffect(() => {
-        Script.getPosts()
-            .then((newState) => setState(newState))
+        HttpHelper.USERS.getAllUsers()
+            .then((newState) => setState(newState.users.slice(newState.users?.length - 5, newState.users?.length)))
     }, [])
 
     const {t} = useTranslation();
 
+    console.log(state)
     return (
         <div
             className={!state ? s.Tip + " " + s.Center : s.Tip}
@@ -34,20 +33,20 @@ function LatestPosts() {
                     null, alpha(settings?.configs?.color[settings?.color] || "rgb(203, 203, 243)", 0.2)))
             }}
         >
-            <h2>{t("Latest Posts")}</h2>
+            <h2>{t("Recent Users")}</h2>
             {state ?
                 <>
-                    <PostCreator
-                        toCreate={state?.posts}
+                    <UsersCreator
                         settings={settings}
+                        toCreate={state}
                     />
                     <div
                         className={s.LastTipItem}
-                        onClick={() => history.push(headerListLinks.posts)}
+                        onClick={() => history.push(headerListLinks.users)}
                     >{t("Show More")}</div>
                 </> : <Skeleton height={"50px"} count={5}/>}
         </div>
     )
 }
 
-export default LatestPosts;
+export default TopUsers;
