@@ -112,8 +112,9 @@ function App() {
             display: ${containerDisplay}!important;
             }
             .App {
-            min-height: ${height() - 1}px;
-            background:${settings?.configs?.background[settings?.background]};
+            height: ${height() - 2}px;
+            overflow: auto;
+            background: ${settings?.configs?.background[settings?.background]};
             } 
             .${bookmarksStyle.BookmarksContainer} {
              min-height: ${height() - 84}px;
@@ -135,6 +136,7 @@ function App() {
             } 
             .genContainer > div {
             min-height: ${height() - 1}px;
+            height: fit-content;
             } 
             .${galleryStyles.Container} {
             min-height: ${height() - 1}px;

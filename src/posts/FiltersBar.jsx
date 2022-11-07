@@ -1,7 +1,8 @@
 import {Box, Typography} from "@mui/material";
 import s from "./posts.module.css"
-import {useHistory, useLocation} from "react-router-dom";
+import {useHistory} from "react-router-dom";
 import {useMemo} from "react";
+import SortLine from "./SortLine";
 
 function FiltersBar(props) {
     const {
@@ -24,21 +25,17 @@ function FiltersBar(props) {
 
     return (
         <>
-            <Box
-                className={s.FiltersBar}
-            >
+            <Box className={s.FiltersBar}>
                 <Typography
                     variant={"h4"}
                     component={"h4"}
                 >
                     Used filters
                 </Typography>
-
+                <SortLine/>
                 <>
                     {!!styledHashtags?.length
-                        ? <div
-                            style={{width: "100%"}}
-                        >
+                        ? <div style={{width: "100%"}}>
                             <Typography
                                 variant={"h5"}
                                 component={"h5"}
@@ -59,9 +56,7 @@ function FiltersBar(props) {
             </Box>
             <div
                 className={"Separator"}
-                onClick={(e) => {
-                    e?.target?.nextElementSibling?.classList.toggle("Hide")
-                }}
+                onClick={(e) => e?.target?.nextElementSibling?.classList.toggle("Hide")}
             />
         </>
     )

@@ -180,14 +180,10 @@
 }
 
 .SortLine {
-    padding: 10px;
     display: flex;
     flex-wrap: wrap;
-    position: fixed;
-    width: 57.5%;
-    background: aliceblue;
+    width: 100%;
     bottom: 0;
-    height: 7%;
     justify-content: space-evenly;
     align-items: center;
 }
@@ -318,13 +314,6 @@
         margin: unset;
     }
 
-    .SortLine {
-        position: absolute;
-        top: 0;
-        right: 0;
-        background: transparent;
-    }
-
     .SortLine span {
         padding: 7px 10px;
         height: 30px;
@@ -339,10 +328,6 @@
 
     .Container {
         margin: 0px;
-    }
-
-    .SortLine {
-        width: 75%;
     }
 
     .PostsCont {

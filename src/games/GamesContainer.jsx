@@ -15,7 +15,7 @@ function GamesContainer() {
             className={s.Container}
             style={{
                 ...getEmptyElementsThemeConfig(settings),
-                height: `${!!gameType ? "-webkit-fill-available" : "unset"}`
+                height: `${!!gameType ? "-webkit-fill-available" : "fit-content"}`
             }}
         >
             <GamesContent styleSettings={settings}/>

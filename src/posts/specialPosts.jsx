@@ -82,4 +82,4 @@ function SpecialPosts(props) {
     )
 }
 
-export default withRouter(SpecialPosts)
+export default withRouter(SpecialPosts);

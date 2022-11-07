@@ -3,6 +3,7 @@
     max-width: 85%;
     height: -webkit-fill-available;
     height: unset;
+    overflow: auto;
 }
 
 .GamesTilesContainer {

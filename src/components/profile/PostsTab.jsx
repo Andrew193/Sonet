@@ -35,9 +35,7 @@ function UserPostTab({information, avatarUrl}) {
                     width: '100%'
                 }}
             >
-                <Typography
-                    className={s.metaBar}
-                >
+                <Typography className={s.metaBar}>
                     <Typography
                         variant={"h6"}
                         component={"span"}

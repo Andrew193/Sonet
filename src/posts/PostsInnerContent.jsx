@@ -4,6 +4,7 @@ import {useEffect, useState, useMemo} from "react";
 import commentsStyle from "../components/comments/comments.module.css";
 import LazyLoad, {forceCheck} from 'react-lazyload';
 import {v4 as uuidv4} from 'uuid';
+import {useSettings} from "../hooks";
 
 forceCheck();
 
@@ -12,11 +13,11 @@ function ClearPosts(props) {
         toMake,
         ignoreAppOpen,
         id,
-        settings,
         setParentPosts
     } = props;
 
     const [posts, setPost] = useState(false)
+    const {settings} = useSettings();
 
     useEffect(() => {
         setPost(() => (toMake?.posts || [])?.map((value, index) =>

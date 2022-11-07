@@ -9,34 +9,27 @@ import {getItemFromLocalStorage} from "../localStorageService";
 function SortLine() {
     const hist = useHistory();
     const id = getItemFromLocalStorage(USER_INFORMATION, "id");
-
     const {t} = useTranslation();
 
     return (
         <div className={s.SortLine}>
             <span
                 id={"mainPostBtn"}
-                onClick={() => {
-                    Script.getMy(hist, id)
-                }}
+                onClick={() => Script.getMy(hist, id)}
             >
                 <AiOutlineReload/>
                  <span>{t("My")}</span>
             </span>
             <span
                 id={"mainPostBtn"}
-                onClick={() => {
-                    Script.getNotMy(hist, id)
-                }}
+                onClick={() => Script.getNotMy(hist, id)}
             >
                 <AiOutlineReload/>
                 <span>{t("Not my")}</span>
             </span>
             <span
                 id={"mainPostBtn"}
-                onClick={() => {
-                    Script.def(hist)
-                }}>
+                onClick={() => Script.def(hist)}>
                 <AiOutlineReload/>
                 <span>{t("All")}</span>
             </span>

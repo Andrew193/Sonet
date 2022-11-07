@@ -17,6 +17,27 @@ import UserShortBar from "./UserShortBar";
 import {getElementsThemeConfig, getPropertiesConfig} from "../utils";
 import {height} from "../App";
 
+export function CreatePost() {
+    const {settings} = useSettings();
+    const {t} = useTranslation();
+    return (
+        <p className={"wrap-link-line post-btn-nav "}>
+                    <span
+                        id={"mainPostBtn"}
+                        className={"col-sm-12 " + s.PostBtn}
+                        onClick={() => {
+                            window?.document?.body?.querySelector(".App")?.classList?.add("Open")
+                            Script2.openModal("Mpost")
+                        }}
+                        style={{
+                            fontSize: settings?.configs?.size[settings?.fontSize],
+                            color: settings?.configs?.color[settings?.color],
+                        }}
+                    >{t("Post")}</span>
+        </p>
+    )
+}
+
 export const headerLinksConfig = [
     {path: headerListLinks.base, label: "Home"},
     {path: headerListLinks.profile, label: "Profile"},
@@ -87,20 +108,7 @@ function Header() {
                     </span>
                 </p>
 
-                <p className={"wrap-link-line post-btn-nav "}>
-                    <span
-                        id={"mainPostBtn"}
-                        className={"col-sm-12 " + s.PostBtn}
-                        onClick={() => {
-                            window?.document?.body?.querySelector(".App")?.classList?.add("Open")
-                            Script2.openModal("Mpost")
-                        }}
-                        style={{
-                            fontSize: settings?.configs?.size[settings?.fontSize],
-                            color: settings?.configs?.color[settings?.color],
-                        }}
-                    >{t("Post")}</span>
-                </p>
+                <CreatePost/>
 
                 <span
                     onClick={() => {

@@ -1,0 +1,47 @@
+.Container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 53px;
+    padding: 10px 8%;
+    border-bottom: 1px solid rgb(206, 204, 204);
+    box-shadow: rgb(182 192 243 / 80%) 0px 0px 8px 0px;
+    z-index: 1;
+    position: relative;
+}
+
+.Container p {
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.Container > div {
+    display: flex;
+    align-items: center;
+}
+
+.Container > div p {
+    width: 100px;
+    text-align: center;
+    padding: 0px;
+    display: block !important;
+}
+
+.Container > div p span {
+    padding: 9px !important;
+    display: block;
+}
+
+.NightMode {
+    padding: 10px;
+    background: rgb(206, 204, 204);
+    border-radius: 4px;
+    display: inherit;
+    cursor: pointer;
+    transition: all ease 0.5s;
+}
+
+.NightMode:hover {
+    color: rgb(73, 73, 248) !important;
+    opacity: 0.4;
+}

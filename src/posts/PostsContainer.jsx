@@ -2,7 +2,6 @@ import {useContext, useEffect, useState} from "react";
 import ClearPosts from "./PostsInnerContent";
 import postsHelper, {getFilteredPostsByTags} from "./postsHelper"
 import Skeleton from 'react-loading-skeleton';
-import SortLine from "./SortLine.jsx"
 import s from "./posts.module.css"
 import {useHistory, withRouter} from "react-router-dom";
 import {alpha, hexToRgb} from "@mui/material";
@@ -112,9 +111,8 @@ function PostsContainer(props) {
                 posts
                     ? <>
                         <FiltersBar settings={settings}/>
-                        <ClearPosts id={id} toMake={posts} settings={settings} setParentPosts={setPosts}/>
+                        <ClearPosts id={id} toMake={posts} setParentPosts={setPosts}/>
                         <div className={s.fixer}/>
-                        <SortLine/>
                     </>
                     : <Skeleton height={"60px"} count={10}/>
             }

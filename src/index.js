@@ -5,10 +5,12 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter} from 'react-router-dom';
 import TipHelper from "./helpers/tipHelper.js";
+import AboveHeader from "./components/above-header/AboveHeader";
 
 TipHelper.rel();
 ReactDOM.render(
     <BrowserRouter>
+        <AboveHeader/>
         <App/>
     </BrowserRouter>,
     document.getElementById('root')

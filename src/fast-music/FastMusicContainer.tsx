@@ -89,9 +89,6 @@ function FastMusicContainer(props: FastElementsPropsType) {
                 .${s.Header} > p {
                   display: ${isOpened ? "block!important" : "none"};
                 }
-                .${s.Container} {
-                min-width:300px};
-                }
                 }
                 `}
             </style>
@@ -100,28 +97,18 @@ function FastMusicContainer(props: FastElementsPropsType) {
                 className={s.Header}
             >
                 <p>Tracks</p>
-                <span
-                    className={s.HeaderActions}
-                >
+                <span className={s.HeaderActions}>
                     {
                         !isOpened
                             ? <Tooltip title={t("Expand")} arrow placement="top">
                                 <TooltipButtonCover>
-                                    <BiUpArrowAlt
-                                        onClick={() => {
-                                            setIsOpened(true)
-                                        }}
-                                    />
+                                    <BiUpArrowAlt onClick={() => setIsOpened(true)}/>
                                 </TooltipButtonCover>
                             </Tooltip>
                             :
                             <Tooltip title={t("Collapse")} arrow placement="top">
                                 <TooltipButtonCover>
-                                    <FiArrowDown
-                                        onClick={() => {
-                                            setIsOpened(false)
-                                        }}
-                                    />
+                                    <FiArrowDown onClick={() => setIsOpened(false)}/>
                                 </TooltipButtonCover>
                             </Tooltip>
                     }
@@ -129,7 +116,8 @@ function FastMusicContainer(props: FastElementsPropsType) {
             </Typography>
             <div
                 style={{
-                    overflow: "auto"
+                    overflow: "auto",
+                    height: "-webkit-fill-available"
                 }}
             >
                 <MusicContainerMemo/>
