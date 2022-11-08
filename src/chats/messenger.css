@@ -223,19 +223,23 @@
     flex-direction: column;
     justify-content: space-between;
     position: relative;
+    border-top: 1px solid #ccc;
 }
 
 .chatBoxTop {
     height: 98.7%;
     overflow-y: scroll;
+}
+
+.chatBoxTop > div {
     padding-right: 10px;
     padding-left: 10px;
 }
 
 .messagesLoader {
-    height: 87.6%;
+    height: calc(753px - 100px - 120px);
     top: 0;
-    left: 0px;
+    left: 0;
     position: absolute;
     width: 100%;
     background: gray;
@@ -268,7 +272,7 @@
 }
 
 .messageText {
-    padding: 10px 10px 20px 10px;
+    padding: 5px 5px 0px 5px;
     border-radius: 5px;
     background-color: #1877f2;
     color: white;
@@ -297,14 +301,24 @@
 }
 
 .chatActionsBar {
-    position: absolute;
-    top: 55%;
-    left: 1%;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     border-top: 1px solid;
-    width: 98%;
-    margin-top: 2px;
+}
+
+
+.ChatDayShowContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ChatDayShow {
+    background: rgb(203, 203, 243);
+    padding: 5px 25px;
+    border-radius: 27px;
+    color: white;
 }
 
 .chatActionsBar svg {
@@ -316,7 +330,8 @@
 
 .messageBottom {
     font-size: 12px;
-    margin-top: 10px;
+    margin-left: 8px;
+    border-left: 1px solid;
 }
 
 .message.own {
@@ -424,7 +439,7 @@
     }
 
     .mainMessagesCaver {
-        height: calc(753px - 100px - 175px);
+        height: calc(753px - 100px - 120px);
     }
 
     .chatBoxBottom {

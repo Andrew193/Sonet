@@ -11,6 +11,7 @@ import React from "react";
 import InputEmoji from 'react-input-emoji';
 import {getUserAvatar} from "../posts/postsHelper";
 import {getElementsThemeConfig} from "../utils";
+import {Dayjs} from "../helpers/dateHelper";
 
 const PostButtonCover = React.forwardRef(function MyComponent(props, ref) {
     //  Spread the props to the underlying DOM element.
@@ -92,7 +93,7 @@ function CurrentChat(props) {
         }
 
         setTimeout(() => {
-            scrollRef.current?.scrollIntoView({behavior: "smooth"});
+            scrollRef.current?.scrollBy(0, 60000)
             setIsLoader(false)
         }, 1000)
     }, [messages]);
@@ -101,21 +102,29 @@ function CurrentChat(props) {
 
     return (
         <>
-            <div className="chatBoxTop">
-                {messages?.sort((a,b)=>a.id-b.id)?.map((m, index) => <div ref={scrollRef} key={index}>
-                    <MessageCover
-                        m={m}
-                        avatar={avatars[0]?.id === m?.createdById ? avatars[0]?.avatar : avatars[1]?.avatar}
-                        userId={userInformation?.id}
-                        receiverId={receiverId}
-                        setMessages={setMessages}
-                    />
-                </div>)}
+            <div className="chatBoxTop" ref={scrollRef}>
+                {messages?.sort((a, b) => a.id - b.id)?.map((m, index) => {
+                    const now = Dayjs(messages[index]?.createdAt).format('DD/MM/YYYY');
+                    const then = Dayjs(messages[index - 1]?.createdAt || "").format('DD/MM/YYYY');
+                    return <>
+                        {
+                            now !== then &&
+                            <div className={"ChatDayShowContainer"}><span className={"ChatDayShow"}>{now}</span></div>
+                        }
+                        <div key={index}>
+                            <MessageCover
+                                m={m}
+                                avatar={avatars[0]?.id === m?.createdById ? avatars[0]?.avatar : avatars[1]?.avatar}
+                                userId={userInformation?.id}
+                                receiverId={receiverId}
+                                setMessages={setMessages}
+                            />
+                        </div>
+                    </>
+                })}
 
                 {!isLoader && messages?.length === 0
-                    ? <div
-                        className={"noMessagesLabel"}
-                    >
+                    ? <div className={"noMessagesLabel"}>
                         {t("There are no messages yet. Be the first")})
                         <TiMessages
                             style={{
@@ -126,29 +135,24 @@ function CurrentChat(props) {
                     </div>
                     : null}
 
-                {isLoader && <div
-                    className={"chatLoader messagesLoader"}
+                {isLoader && <div className={"chatLoader messagesLoader"}><Loader/></div>}
+                <div
+                    style={getElementsThemeConfig(settings)}
+                    className="chatBoxBottom"
                 >
-                    <Loader/>
-                </div>
-                }
-            </div>
-            <div
-                style={getElementsThemeConfig(settings)}
-                className="chatBoxBottom"
-            >
-                <InputEmoji
-                    value={newMessage}
-                    onChange={setNewMessage}
-                    cleanOnEnter
-                    placeholder={t("So... What is it?")}
-                />
-                <span
-                    className={`${buttonsConfig[customStyle?.color]} chatPostBtn`}
-                    onClick={handleSubmit}
-                >
+                    <InputEmoji
+                        value={newMessage}
+                        onChange={setNewMessage}
+                        cleanOnEnter
+                        placeholder={t("So... What is it?")}
+                    />
+                    <span
+                        className={`${buttonsConfig[customStyle?.color]} chatPostBtn`}
+                        onClick={handleSubmit}
+                    >
                     <Tooltip title={t("Post")} arrow placement="top"><PostButtonCover/></Tooltip>
                 </span>
+                </div>
             </div>
         </>
     )

@@ -53,9 +53,7 @@ function Message(props) {
             return <Tooltip title={action?.label} key={index}>
                 <button
                     id={"dropStylesForMessagesActions"}
-                    onClick={() => {
-                        action?.onClick(message, socket, receiverId, setMessages, setIsOpened, setMessageToUpdateId)
-                    }}
+                    onClick={() => action?.onClick(message, socket, receiverId, setMessages, setIsOpened, setMessageToUpdateId)}
                 >
                     {action?.icon}
                 </button>
@@ -83,10 +81,10 @@ function Message(props) {
                     {message.text || message?.messageText}
                     <div className={"chatActionsBar"}>
                         {actions(message)}
+                        <span className="messageBottom">{dateHelper.fromNow(message.createdAt)}</span>
                     </div>
                 </p>
             </div>
-            <li className="messageBottom">{dateHelper.fromNow(message.createdAt)}</li>
         </div>
     )
 }

@@ -1,16 +1,19 @@
-import {Avatar, Box, Typography} from "@mui/material";
+import {Avatar, Badge, Box, Typography} from "@mui/material";
 import style from "./above.module.css";
-import {MdOutlineNightlight} from "react-icons/all";
+import {IoMdNotificationsOutline, MdOutlineNightlight} from "react-icons/all";
 import {CreatePost} from "../../header/HeaderContainerPage";
 import {getTabElementsThemeConfig} from "../../utils";
 import {getItemFromLocalStorage} from "../../localStorageService";
 import {headerListLinks, USER_INFORMATION} from "../../vars";
 import {useEffect, useState} from "react";
 import {useHistory} from "react-router-dom";
+import {useSelector} from "react-redux";
 
 function AboveHeader() {
     const {avatar} = getItemFromLocalStorage(USER_INFORMATION);
+    const notifications = useSelector(store => store?.notifications?.notifications)
     const [userAvatar, setUsersAvatar] = useState();
+    const [notificationsToShow, setNotificationsToShow] = useState([]);
     const history = useHistory();
 
     useEffect(() => {
@@ -21,11 +24,21 @@ function AboveHeader() {
         }
     }, [avatar]);
 
+    useEffect(() => {
+        setNotificationsToShow(new Set(notifications))
+    }, [notifications])
+
+    console.log(notificationsToShow)
     return (
         <Box className={style.Container}>
             <Typography>Sonet34</Typography>
             <div>
                 <span className={style.NightMode}><MdOutlineNightlight/></span>
+                <Badge badgeContent={notificationsToShow?.size} color="primary">
+                    <span className={style.NightMode + " " + style.Badge}>
+                        <IoMdNotificationsOutline/>
+                    </span>
+                </Badge>
                 <CreatePost/>
                 <Avatar
                     onClick={() => history.push(headerListLinks.profile)}

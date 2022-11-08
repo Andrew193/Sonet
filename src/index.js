@@ -10,7 +10,6 @@ import AboveHeader from "./components/above-header/AboveHeader";
 TipHelper.rel();
 ReactDOM.render(
     <BrowserRouter>
-        <AboveHeader/>
         <App/>
     </BrowserRouter>,
     document.getElementById('root')

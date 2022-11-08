@@ -18,6 +18,14 @@
 .Container > div {
     display: flex;
     align-items: center;
+    justify-content: space-between;
+}
+
+.Badge + span {
+    margin: 5px;
+    width: 3px;
+    height: 3px;
+    padding: 10px 0px;
 }
 
 .Container > div p {
@@ -30,6 +38,7 @@
 .Container > div p span {
     padding: 9px !important;
     display: block;
+    width: 100px;
 }
 
 .NightMode {
@@ -39,6 +48,7 @@
     display: inherit;
     cursor: pointer;
     transition: all ease 0.5s;
+    margin: 0px 5%;
 }
 
 .NightMode:hover {

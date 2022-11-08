@@ -53,9 +53,7 @@ function Messenger(props) {
             if (friend?.approved) {
                 return null;
             }
-            return <div
-                key={`${index}`}
-            >
+            return <div key={`${index}`}>
                 <FriendPin
                     id={index}
                     receiverId={friend?.receiverId}
@@ -99,20 +97,14 @@ function Messenger(props) {
         <div className="messenger">
             <div className="chatMenu">
                 <div className="chatMenuWrapper">
-                    <div
-                        className={"chatModeLine"}
-                    >
+                    <div className={"chatModeLine"}>
                         <button
-                            onClick={() => {
-                                setChatMode(false)
-                            }}
+                            onClick={() => setChatMode(false)}
                             className={`button ${buttonsConfig[settings?.configs?.color[settings?.color]]} ${!chatMode ? "activeChatMode" : ""}`}
                         >{t("My Friends")}
                         </button>
                         <button
-                            onClick={() => {
-                                setChatMode(true)
-                            }}
+                            onClick={() => setChatMode(true)}
                             className={`button ${buttonsConfig[settings?.configs?.color[settings?.color]]} ${chatMode ? "activeChatMode" : ""}`}
                         >{t("Friend Requests")}
                         </button>

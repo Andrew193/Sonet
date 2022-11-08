@@ -34,6 +34,7 @@ function ChatContainer() {
 
     useEffect(() => {
         socket.on("updateMessages", (data) => {
+
             if (!!data?.refresh) {
                 if (!!currentChat?.id) {
                     getConversationById(currentChat?.id,

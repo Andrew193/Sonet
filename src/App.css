@@ -3,6 +3,10 @@
     display: flex;
 }
 
+.BaseBadge-root {
+    margin-right: 5%;
+}
+
 .App .genContainer {
     display: flex;
     width: 80%;

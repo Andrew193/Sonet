@@ -17,7 +17,7 @@ import galleryStyles from "./gallery/gallery.module.css";
 import settingsStyles from "./settings/settings.module.css";
 import {headerListLinks, USER_INFORMATION} from "./vars";
 import store from "./app/store";
-import {Provider} from 'react-redux';
+import {Provider, useDispatch} from 'react-redux';
 import React from "react";
 import fastActions from "./fast-actions/fast-actions.module.css";
 import fastMessages from "./fast-message/fast-message.module.css";
@@ -27,6 +27,8 @@ import {getFastDisplay} from "./fast-actions/FastActionsContainer";
 import {useLocation} from "react-router-dom";
 import {useSettings} from "./hooks";
 import {getItemFromLocalStorage} from "./localStorageService";
+import {setNotifications} from "./app/notificationReducer";
+import AboveHeader from "./components/above-header/AboveHeader";
 
 const sessionHelper = require("./helpers/sessionHelper")
 const socket = io();
@@ -61,7 +63,9 @@ function AppCover() {
         <MusicContext.Provider value={[musicContext, setMusicContext]}>
             <Context.Provider value={{notify, socket}}>
                 <Provider store={store}>
+                    <AboveHeader/>
                     <Test/>
+
                     <App/>
                 </Provider>
             </Context.Provider>
@@ -73,6 +77,7 @@ function App() {
     let modal = useRef<HTMLDivElement>(null);
     const [flag, setFlag] = useState(false);
     const history = useHistory();
+    const dispatch = useDispatch();
     const {settings} = useSettings();
     const userInformation = getItemFromLocalStorage(USER_INFORMATION);
 
@@ -98,18 +103,23 @@ function App() {
         }
     }, [userInformation?.id])
 
-    const [containerDisplay, setContainerDisplay] = useState<"flex" | "none">("flex");
     const location = useLocation();
+
+    const [containerDisplay, setContainerDisplay] = useState<"flex" | "none">("flex");
 
     useEffect(() => {
         setContainerDisplay(() => getFastDisplay(history))
+        socket.on("getMessageInChat", (data) => {
+            console.log(data, location?.pathname)
+            dispatch(setNotifications(data))
+        });
     }, [location?.pathname])
 
     return (
         <>
             <style>{`
             .${fastActions.Container}, .${fastMessages.Container}, .${fastMusic.Container} {
-            display: ${containerDisplay}!important;
+            display: ${containerDisplay};
             }
             .App {
             height: ${height() - 2}px;

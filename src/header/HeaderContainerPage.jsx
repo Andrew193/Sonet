@@ -71,7 +71,7 @@ function Header() {
             style={{
                 background: settings?.configs?.background[settings?.background],
                 fontSize: settings?.configs?.size[settings?.fontSize],
-                maxHeight: `${height() - 2}px`
+                maxHeight: `${height() - 52}px`
             }}
         >
             <style>{`
