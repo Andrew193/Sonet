@@ -28,13 +28,15 @@ function AboveHeader() {
         setNotificationsToShow(new Set(notifications))
     }, [notifications])
 
-    console.log(notificationsToShow)
     return (
         <Box className={style.Container}>
             <Typography>Sonet34</Typography>
             <div>
                 <span className={style.NightMode}><MdOutlineNightlight/></span>
-                <Badge badgeContent={notificationsToShow?.size} color="primary">
+                <Badge badgeContent={notificationsToShow?.size}
+                       color="primary"
+                       onClick={() => history.push(headerListLinks.notifications)}
+                >
                     <span className={style.NightMode + " " + style.Badge}>
                         <IoMdNotificationsOutline/>
                     </span>

@@ -8,7 +8,7 @@ import './res/bootstrap/bootstrap.min.css';
 import './res/grid/styles.scss';
 import './res/grid/drag-drop.scss';
 import {ToastContainer} from 'react-toastify';
-import {SetStateAction, useEffect, useRef, useState} from "react";
+import {SetStateAction, useEffect, useMemo, useRef, useState} from "react";
 import {toast} from 'react-toastify';
 import {io} from "socket.io-client";
 import {setupDb} from "./db";
@@ -65,7 +65,6 @@ function AppCover() {
                 <Provider store={store}>
                     <AboveHeader/>
                     <Test/>
-
                     <App/>
                 </Provider>
             </Context.Provider>
@@ -104,6 +103,7 @@ function App() {
     }, [userInformation?.id])
 
     const location = useLocation();
+    const screenHeight = useMemo(() => height(), []);
 
     const [containerDisplay, setContainerDisplay] = useState<"flex" | "none">("flex");
 
@@ -122,40 +122,40 @@ function App() {
             display: ${containerDisplay};
             }
             .App {
-            height: ${height() - 2}px;
+            height: 700px;
             overflow: auto;
             background: ${settings?.configs?.background[settings?.background]};
             } 
             .${bookmarksStyle.BookmarksContainer} {
-             min-height: ${height() - 84}px;
+             min-height: ${screenHeight - 84}px;
              }
             .${bookmarksStyle.BookmarksContainer} .empty-table {
             color:${settings?.configs?.color[settings?.color]};
             }
             .App.Open {
-            height: ${height() - 1}px!important;
+            height: ${screenHeight - 1}px!important;
             }
             .genContainer {
-            min-height: ${height() - 1}px;
+            min-height: ${screenHeight - 1}px;
             }
              .genContainer div.onePostContainer{
-            min-height: ${height() - 1}px;
+            min-height: ${screenHeight - 1}px;
             }
             .genContainer main {
-            min-height: ${height() - 1}px;
+            min-height: ${screenHeight - 1}px;
             } 
             .genContainer > div {
-            min-height: ${height() - 1}px;
+            min-height: ${screenHeight - 1}px;
             height: fit-content;
             } 
             .${galleryStyles.Container} {
-            min-height: ${height() - 1}px;
+            min-height: ${screenHeight - 1}px;
             }
              .${settingsStyles.Container} {
-            min-height: ${height() - 1}px;
+            min-height: ${screenHeight - 1}px;
             }
             .mainFollowContainer {
-            min-height: ${height() - 1}px;
+            min-height: ${screenHeight - 1}px;
             }
             `}</style>
             <div className="App">
@@ -208,6 +208,11 @@ function App() {
                 <Route exact path={headerListLinks.settings}
                        render={() => <Components.SettingsContainerPage/>}/>
                 <Route exact path={headerListLinks.chats} render={() => <Components.ChatContainer/>}/>
+                <Route exact path={headerListLinks.notifications} render={() =>
+                    <div className={"genContainer"}>
+                        <Components.NotificationsContainer/>
+                        <Components.TopInfo/>
+                    </div>}/>
                 <Route exact path={headerListLinks.music} render={() => <Components.MusicContainerPage/>}/>
                 <Route exact path={headerListLinks.auth} render={() => <Components.ContainerAuth/>}/>
                 <Route exact path={headerListLinks.gallery + "/:folderName?"}

@@ -7,7 +7,7 @@ import {getEmptyElementsThemeConfig} from "../utils";
 import {useSettings} from "../hooks";
 import HttpHelper from "../helpers/httpHelper";
 import {getItemFromLocalStorage} from "../localStorageService";
-import {USER_INFORMATION} from "../vars";
+import {headerListLinks, USER_INFORMATION} from "../vars";
 import PostItem from "../posts/PostItem";
 import EmptySection from "../components/common/empty-section/EmptySection";
 
@@ -45,7 +45,7 @@ function Bookmarks() {
 
     return (
         <div className={s.Container} style={{...getEmptyElementsThemeConfig(settings)}}>
-            <MaintainedPageHeader path={"/"} linkPath={"/bookmarks"} linkTitle={t("Bookmarks")}/>
+            <MaintainedPageHeader path={headerListLinks.base} linkPath={headerListLinks.bookmarks} linkTitle={t("Bookmarks")}/>
             <div className={"Separator"}/>
             <main className={s.PostsCont + " onePostContainer " + bookmarksStyles.BookmarksContainer}>
                 {parsedBookmarks?.length ? parsedBookmarks : <EmptySection

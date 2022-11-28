@@ -20,8 +20,10 @@ import FastMessageContainer from "./fast-message/FastMessageContainer";
 import FastActionsContainer from "./fast-actions/FastActionsContainer";
 import FastMusicContainer from "./fast-music/FastMusicContainer";
 import Bookmarks from "./bookmarks/BookmarksPageContainer";
+import NotificationsContainer from "./notifications/NotificationsContainer";
 
 const obj = {
+    NotificationsContainer,
     FastMusicContainer,
     Bookmarks,
     FastMessageContainer,

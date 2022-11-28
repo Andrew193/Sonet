@@ -1,7 +1,14 @@
 import {NavLink, useHistory, withRouter} from "react-router-dom";
 import s from "./header.module.css";
 import {AiOutlineBank, AiOutlineComment, AiOutlineFile, AiOutlineTeam, AiOutlineUser} from "react-icons/ai";
-import {BsBookmarkCheck, CgGames, IoSettingsOutline, MdQueueMusic, RiGalleryLine} from "react-icons/all";
+import {
+    BsBookmarkCheck,
+    CgGames,
+    IoMdNotificationsOutline,
+    IoSettingsOutline,
+    MdQueueMusic,
+    RiGalleryLine
+} from "react-icons/all";
 
 const linksImages = {
     Home: <AiOutlineBank size={"24px"}/>,
@@ -13,7 +20,8 @@ const linksImages = {
     Games: <CgGames size={"24px"}/>,
     Settings: <IoSettingsOutline size={"24px"}/>,
     Music: <MdQueueMusic size={"24px"}/>,
-    Bookmarks: <BsBookmarkCheck size={"24px"}/>
+    Bookmarks: <BsBookmarkCheck size={"24px"}/>,
+    Notifications: <IoMdNotificationsOutline size={"24px"}/>,
 }
 
 function getNavLinkClass(path, isExact, pathname) {

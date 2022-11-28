@@ -136,23 +136,23 @@ function CurrentChat(props) {
                     : null}
 
                 {isLoader && <div className={"chatLoader messagesLoader"}><Loader/></div>}
-                <div
-                    style={getElementsThemeConfig(settings)}
-                    className="chatBoxBottom"
+            </div>
+            <div
+                style={getElementsThemeConfig(settings)}
+                className="chatBoxBottom"
+            >
+                <InputEmoji
+                    value={newMessage}
+                    onChange={setNewMessage}
+                    cleanOnEnter
+                    placeholder={t("So... What is it?")}
+                />
+                <span
+                    className={`${buttonsConfig[customStyle?.color]} chatPostBtn`}
+                    onClick={handleSubmit}
                 >
-                    <InputEmoji
-                        value={newMessage}
-                        onChange={setNewMessage}
-                        cleanOnEnter
-                        placeholder={t("So... What is it?")}
-                    />
-                    <span
-                        className={`${buttonsConfig[customStyle?.color]} chatPostBtn`}
-                        onClick={handleSubmit}
-                    >
                     <Tooltip title={t("Post")} arrow placement="top"><PostButtonCover/></Tooltip>
                 </span>
-                </div>
             </div>
         </>
     )
