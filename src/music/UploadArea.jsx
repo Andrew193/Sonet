@@ -1,5 +1,7 @@
+import React from "react";
 import {useRef} from "react";
 import s from "./music.module.css";
+import PropTypes from "prop-types";
 
 function UploadArea(props) {
     const {
@@ -49,6 +51,10 @@ function UploadArea(props) {
             <span id="custom-text">No file chosen, yet.</span>
         </div>
     )
+}
+
+UploadArea.propTypes = {
+    handleVideoUpload: PropTypes.func
 }
 
 export default UploadArea;

@@ -1,3 +1,4 @@
+import React from "react";
 import s from "./create-post.module.css"
 import Script from "./script"
 import {useMemo, useRef, useState} from "react";
@@ -35,14 +36,13 @@ function CreatePost(props: CreatePostType) {
     } = props;
 
     const {t} = useTranslation();
-    let image = useRef<HTMLInputElement>(null);
-
+    const image = useRef<HTMLInputElement>(null);
     const [images, setImages] = useState<ImageType[]>([]);
     const [isOpened, setIsOpened] = useState<boolean>(false);
 
     const previewImages = useMemo(() =>
         images?.map((image: ImageType, index: number) =>
-            <div>
+            <div key={index}>
                 <Avatar
                     src={image?.blobUrl}
                     key={image?.blobUrl}
@@ -65,7 +65,7 @@ function CreatePost(props: CreatePostType) {
         <div className={s.Container}>
             <Backdrop
                 sx={{color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1}}
-                open={isOpened}
+                open={isOpened || false}
             >
                 <CircularProgress color="inherit"/>
             </Backdrop>

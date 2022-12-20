@@ -1,6 +1,7 @@
 import {TbMoodCry} from "react-icons/all";
 import {Typography} from "@mui/material";
-
+import React from "react";
+import PropTypes from "prop-types";
 
 function EmptySection(props) {
     const {
@@ -22,5 +23,10 @@ function EmptySection(props) {
         </div>
     )
 }
+
+EmptySection.propTypes = {
+    title: PropTypes.string,
+    message: PropTypes.string
+};
 
 export default EmptySection;

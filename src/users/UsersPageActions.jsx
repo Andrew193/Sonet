@@ -1,10 +1,12 @@
 import s from "./users.module.css"
+import React from "react";
 import Script from "./script"
 import {toast} from "react-toastify"
 import {buttonsConfig} from "../create-post/CreatePostLine";
 import {AiOutlineEye, AiOutlineUserAdd, AiOutlineUsergroupAdd} from "react-icons/ai";
 import {USER_INFORMATION} from "../vars";
 import {getItemFromLocalStorage} from "../localStorageService";
+import PropTypes from "prop-types";
 
 function UsersPageActions(props) {
     const {
@@ -56,5 +58,14 @@ function UsersPageActions(props) {
         </div>
     )
 }
+
+UsersPageActions.propTypes = {
+    value:PropTypes.string,
+    history:PropTypes.object,
+    notYouFolCount:PropTypes.number,
+    settings:PropTypes.object,
+    userName:PropTypes.string,
+    userAvatarLink:PropTypes.string || PropTypes.object
+};
 
 export default UsersPageActions;

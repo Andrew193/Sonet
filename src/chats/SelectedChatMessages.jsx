@@ -1,6 +1,8 @@
 import CurrentChat from "./CurrentChat";
 import {useTranslation} from "react-i18next";
 import {BiConversation} from "react-icons/all";
+import React from "react";
+import PropTypes from "prop-types";
 
 function SelectedChatMessages(props) {
     const {
@@ -60,5 +62,18 @@ function SelectedChatMessages(props) {
         </>
     )
 }
+
+SelectedChatMessages.propTypes = {
+    currentChat: PropTypes.object,
+    wrapperRef: PropTypes.object,
+    messages: PropTypes.array,
+    newMessage: PropTypes.any,
+    setNewMessage: PropTypes.func,
+    settings: PropTypes.object,
+    userInformation: PropTypes.object,
+    handleSubmit: PropTypes.func,
+    setMessages: PropTypes.func,
+    receiverId: PropTypes.number
+};
 
 export default SelectedChatMessages;

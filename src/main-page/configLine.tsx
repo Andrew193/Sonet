@@ -2,6 +2,7 @@ import {useHistory} from "react-router";
 import s from "./main-page.module.css"
 import {buttonsConfig} from "../create-post/CreatePostLine";
 import {useTranslation} from "react-i18next";
+import React from "react";
 
 export type CustomStyleType = {
     fontSize: string,
@@ -43,10 +44,13 @@ function ConfigLine(props: ConfigLineType) {
                 <button
                     className={`button ${buttonsConfig[customStyle?.color]}`}
                     onClick={() => {
-                        open!()
+                        if (open) {
+                            open()
+                        }
                         window?.document?.body?.querySelector(".App")?.classList?.add("Open")
                     }}
                 >
+
                     {t("Update your information")}
                 </button>
                 <button

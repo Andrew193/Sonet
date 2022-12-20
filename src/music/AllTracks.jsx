@@ -13,6 +13,8 @@ import {deleteTrack, getPlayerPath, updateTrackDescription} from "./musicHelper"
 import ReactPlayer from "react-player";
 import EmptySection from "../components/common/empty-section/EmptySection";
 import {getSettings} from "../db";
+import React from "react";
+import PropTypes from "prop-types";
 
 function AllTracks(props) {
     const {
@@ -177,7 +179,7 @@ function AllTracks(props) {
             <>
                 {
                     <ReactPlayer
-                        url={!!previewUrl ? URL.createObjectURL(previewUrl) : ""}
+                        url={previewUrl ? URL.createObjectURL(previewUrl) : ""}
                         className={s.Player}
                         onEnded={() => {
                             if (musicContext?.selectedTrack < musicContext?.tracksLength - 1) {
@@ -200,6 +202,14 @@ function AllTracks(props) {
             </>
         </div>
     )
+}
+
+AllTracks.propTypes = {
+    allFiles: PropTypes.array,
+    settings: PropTypes.object,
+    setAllFiles: PropTypes.func,
+    setSearch: PropTypes.func,
+    ignoreActions: PropTypes.bool
 }
 
 export default AllTracks;

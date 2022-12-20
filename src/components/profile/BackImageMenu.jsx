@@ -1,3 +1,4 @@
+import React from "react";
 import {ListItemIcon, ListItemText, Menu, MenuItem} from "@mui/material";
 import {downloadFile} from "../../utils";
 import spareBacImg from "./img/luxfon.com-4767.jpg";
@@ -8,6 +9,7 @@ import {useCallback, useState} from "react";
 import ImageViewer from 'react-simple-image-viewer';
 import {useRef} from "react";
 import {useTranslation} from "react-i18next";
+import PropTypes from "prop-types";
 
 function BackImageMenu(props) {
     const {
@@ -108,9 +110,18 @@ function BackImageMenu(props) {
                     onClose={closeImageViewer}
                 />
             )}
-
         </>
     )
 }
+
+BackImageMenu.propTypes = {
+    anchorEl: PropTypes.object,
+    open: PropTypes.any,
+    userInfoBack: PropTypes.string,
+    handleClose: PropTypes.func,
+    image: PropTypes.any,
+    backStyle: PropTypes.string,
+    backId: PropTypes.string
+};
 
 export default BackImageMenu;

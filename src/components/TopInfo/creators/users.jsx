@@ -1,13 +1,11 @@
-import {useHistory} from "react-router-dom";
+import React from "react";
 import dateHelper from "../../../helpers/dateHelper.js"
-import script from "../script.js";
 import {v4 as uuidv4} from 'uuid';
 import {Typography} from "@mui/material";
 import {useMemo} from "react";
 import s from "../top-info.module.css"
-import {AiOutlineComment, AiOutlineDislike, AiOutlineLike, AiOutlineMail} from "react-icons/ai";
-import CountUp from "react-countup";
-import {useTranslation} from "react-i18next";
+import {AiOutlineMail} from "react-icons/ai";
+import PropTypes from "prop-types";
 
 function UsersCreator(props) {
     const {
@@ -15,8 +13,6 @@ function UsersCreator(props) {
         toCreate
     } = props;
 
-    const history = useHistory();
-    const {t} = useTranslation();
     const usersListToMap = useMemo(() => toCreate, [toCreate]);
 
     return (
@@ -74,5 +70,10 @@ function UsersCreator(props) {
         </>
     )
 }
+
+UsersCreator.propTypes = {
+    settings: PropTypes.object,
+    toCreate: PropTypes.array
+};
 
 export default UsersCreator;

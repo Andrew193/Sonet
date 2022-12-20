@@ -1,11 +1,11 @@
+import React from "react";
 import cookieHelper from "./cookieHelper"
 import CommonHelper from "./common"
 import Script from "./cookieHelper";
 import {createErrorsForApiCall} from "../utils";
 import {notify} from "../App";
 import {img_api} from "../vars";
-
-const axios = require('axios').default;
+import axios from "axios";
 
 const Http = {
     uploadImg: (endpoint, data) => {
@@ -17,7 +17,8 @@ const Http = {
     },
     configToken: (token, history) => {
         axios.get("/api/token/configToken", {params: {token}})
-            .then(_ => {
+            .then(() => {
+                //spare
             }).catch((error) => {
             if (error) {
                 cookieHelper.removeCookie("token")
@@ -83,7 +84,7 @@ const Http = {
                 })
                 .catch((error) => {
                     const message = createErrorsForApiCall(error?.response?.data, error?.response?.data)
-                    const Msg = ({closeToast, toastProps}) => (
+                    const Msg = () => (
                         <div>{message}</div>
                     )
                     notify(<Msg/>);
@@ -166,7 +167,7 @@ const Http = {
                 postText: JSON.stringify(value),
                 userId,
             })
-                .then((response) => okCallback())
+                .then(() => okCallback())
                 .catch((error) => error.response && errorCallback(error))
         },
         emotion: (userId, value, callback, callback1, emType) => {
@@ -175,7 +176,7 @@ const Http = {
                 userId,
                 postText: JSON.stringify(value)
             })
-                .then((response) => callback())
+                .then(() => callback())
                 .catch((error) => error.response && callback1(error))
         },
         getPostWithType: (id, setPosts, endpoint) => {

@@ -1,3 +1,4 @@
+import React from "react";
 import {
     alpha,
     Card,
@@ -9,6 +10,7 @@ import {
 } from "@mui/material";
 import {useHistory} from "react-router-dom";
 import {useTranslation} from "react-i18next";
+import PropTypes from "prop-types";
 
 function GamePreviewTile(props) {
     const {
@@ -21,7 +23,6 @@ function GamePreviewTile(props) {
     } = props;
 
     const history = useHistory();
-
     const {t} = useTranslation();
 
     return (
@@ -96,6 +97,15 @@ function GamePreviewTile(props) {
             </CardContent>
         </Card>
     )
+}
+
+GamePreviewTile.propTypes = {
+    gameName: PropTypes.string,
+    icon: PropTypes.node,
+    description: PropTypes.string,
+    keyPath: PropTypes.string,
+    altText: PropTypes.string,
+    styleSettings: PropTypes.object
 }
 
 export default GamePreviewTile;

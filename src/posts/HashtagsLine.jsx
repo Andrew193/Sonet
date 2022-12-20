@@ -1,8 +1,10 @@
 import {Box, Typography} from "@mui/material";
+import React from "react";
 import {useMemo} from "react";
 import {getHashtags} from "./postsHelper";
 import s from "./posts.module.css"
 import {useHistory} from "react-router-dom";
+import PropTypes from "prop-types";
 
 function HashtagsLine(props) {
     const {
@@ -34,6 +36,10 @@ function HashtagsLine(props) {
                 </Box> : null}
         </>
     )
+}
+
+HashtagsLine.propTypes = {
+    text: PropTypes.string
 }
 
 export default HashtagsLine;

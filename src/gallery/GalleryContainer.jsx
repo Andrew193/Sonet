@@ -1,3 +1,4 @@
+import React from "react";
 import {alpha, Box, hexToRgb} from "@mui/material";
 import s from "./gallery.module.css";
 import GalleryInnerContent from "./GalleryInnerContent";

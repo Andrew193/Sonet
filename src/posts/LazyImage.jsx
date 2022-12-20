@@ -1,69 +1,45 @@
-import LazyLoad from 'react-lazyload';
-import {useState} from "react";
-import {alpha, Avatar, hexToRgb} from "@mui/material";
-import Placeholder from "./Placeholder";
-import s from "./posts.module.css";
-import {useSettings} from "../hooks";
+import React from "react";
+import PropTypes from "prop-types";
+import {LazyLoadImage} from 'react-lazy-load-image-component'
+import st from "../res/img/Spinner-1s-200px.gif"
 
 function LazyImage(props) {
     const {
         imageSrc,
-        onClick = () => {
-        },
+        onClick,
         imgClass,
-        wrapperStyle
+        wrapperStyle,
+        wrapperClassName,
     } = props;
 
-    const [isLoading, setIsLoading] = useState(true);
-    const PlaceholderCover = () => <div className={s.LazyBackground}><Placeholder/></div>;
-    const {settings} = useSettings();
-
     return (
-        <LazyLoad
-            key={imageSrc}
-            height={200}
-            offset={[-50, 0]}
-            style={{
-                position: "relative",
-                minHeight: "80px",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center"
+        <LazyLoadImage
+            placeholderSrc={st}
+            src={imageSrc}
+            wrapperClassName={`lazyImg ${wrapperClassName}`}
+            className={imgClass}
+            style={{...wrapperStyle}}
+            onClick={(e) => {
+                if (onClick) {
+                    onClick(e)
+                }
             }}
-        >
-            <style>{`
-            .${s.LazyBackground} {
-            background: ${alpha(hexToRgb(settings?.configs?.color[settings?.color] || "#e6ddf9"), 0.4)}!important;
-            }
-            .lazyImg {
-             position: ${!isLoading ? "static!important" : "absolute!important"};
-             top:0;
-             left:0;
-            }
-            `}</style>
-            {
-                <>
-                    {!!isLoading && <PlaceholderCover/>}
-                    {imageSrc && <Avatar
-                        src={imageSrc}
-                        alt={""}
-                        key={imageSrc}
-                        className={"lazyImg " + imgClass}
-                        style={{
-                            display: !!isLoading ? "none" : "block",
-                            ...wrapperStyle
-                        }}
-                        onLoad={() => {
-                            setIsLoading(false)
-                        }}
-                        onClick={(e) => onClick(e)}
-                        onError={() => setIsLoading(false)}
-                    />
-                    }
-                </>
-            }
-        </LazyLoad>
+        />
     )
+}
+
+LazyImage.propTypes = {
+    imageSrc: PropTypes.string,
+    onClick: PropTypes.func,
+    imgClass: PropTypes.string,
+    wrapperStyle: PropTypes.object,
+    wrapperClassName: PropTypes.string
+}
+
+LazyImage.defaultsProps = {
+    onClick: () => {
+        //spare
+    }
 }
 
 export default LazyImage;

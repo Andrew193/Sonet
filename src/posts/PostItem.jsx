@@ -1,5 +1,5 @@
 import s from "./posts.module.css";
-import {alpha, Avatar} from "@mui/material";
+import {alpha} from "@mui/material";
 import {Link} from "react-router-dom";
 import EmotionsLineContainer from "./EmotionsLineContainer";
 import DataHelper from "../helpers/dateHelper";
@@ -7,7 +7,7 @@ import {useEffect, useState, useMemo, useCallback, useRef, useContext} from "rea
 import ImageViewer from "react-simple-image-viewer";
 import QuizBar from "./QuizBar";
 import {BsThreeDots, RiShareForwardLine} from "react-icons/all";
-import {getElementsThemeConfig} from "../utils";
+import {getElementsThemeConfig, getPropertiesConfig} from "../utils";
 import {useOutsideClick} from "../hooks";
 import PostItemsImages from "./PostItemsImages";
 import React from "react";
@@ -19,6 +19,8 @@ import {Context} from "../App";
 import PostItemActions from "./PostItemActions";
 import SharedPost from "./SharedPost";
 import {AiOutlineClockCircle} from "react-icons/ai";
+import PropTypes from "prop-types";
+import LazyImage from "./LazyImage";
 
 function PostItem(props) {
     const {
@@ -112,10 +114,13 @@ function PostItem(props) {
                 style={settings?.list?.listItemStyles}
             >
                 <div className={s.PostItemBar}>
-                    <Avatar
-                        src={userAvatar}
-                        className={s.PostAvatar}
-                        style={{...getElementsThemeConfig(settings)}}
+                    <LazyImage
+                        imageSrc={userAvatar}
+                        imgClass={s.PostAvatar}
+                        wrapperStyle={{
+                            ...getElementsThemeConfig(settings, getPropertiesConfig(true, null,
+                                false, null, null, alpha("#b6c0f3", 0.3), false))
+                        }}
                     />
                     {value?.shared === "{}" ? null : <RiShareForwardLine style={{
                         color: "red",
@@ -178,6 +183,18 @@ function PostItem(props) {
             </div>
         </>
     )
+}
+
+PostItem.propTypes = {
+    bookmark: PropTypes.number,
+    value: PropTypes.object,
+    id: PropTypes.number,
+    settings: PropTypes.object,
+    customStyle: PropTypes.string,
+    setPost: PropTypes.func,
+    index: PropTypes.number,
+    setParentPosts: PropTypes.func,
+    ignoreAppOpen: PropTypes.bool
 }
 
 const MemoizedPostItem = React.memo(PostItem);

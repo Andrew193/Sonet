@@ -1,3 +1,4 @@
+import React from "react";
 import Tetris from 'react-tetris';
 import './tetris.css';
 import {alpha, Box, Typography} from "@mui/material";
@@ -63,7 +64,7 @@ function TetrisContainer() {
             <span className={'tetris-tips-arrow'}>
             <AiOutlineArrowLeft
                 onClick={() => {
-                    setIsTipOpened((state) => true)
+                    setIsTipOpened(() => true)
                 }}
             />
             </span>

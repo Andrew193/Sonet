@@ -1,3 +1,4 @@
+import React from "react";
 import withPageHeader from "../hoc/withPageHeader";
 import MusicTip from "./MusicTip";
 import UploadNewTrack from "./UploadNewTrack";
@@ -6,6 +7,7 @@ import {Typography} from "@mui/material";
 import MusicPlayer from "./MusicPlayer";
 import PlayerActions from "./PlayerActions";
 import AllTracks from "./AllTracks";
+import PropTypes from "prop-types";
 
 function MusicInnerContainer(props) {
     const {
@@ -29,7 +31,6 @@ function MusicInnerContainer(props) {
                 setVideoFilePath={setVideoFilePath}
             />
             {
-
                 !!videoFilePath
                 && <div className={s.MusicCover}>
                     <Typography
@@ -57,6 +58,18 @@ function MusicInnerContainer(props) {
             />
         </>
     )
+}
+
+MusicInnerContainer.propTypes = {
+    setSearch: PropTypes.func,
+    setFile: PropTypes.func,
+    setVideoFilePath: PropTypes.func,
+    videoFilePath: PropTypes.string,
+    dropPreviewMusic: PropTypes.func,
+    settings: PropTypes.object,
+    createNewSong: PropTypes.func,
+    allFiles: PropTypes.array,
+    setAllFiles: PropTypes.func
 }
 
 export default withPageHeader(MusicInnerContainer, {path: "/music", Title: <span>Music</span>});

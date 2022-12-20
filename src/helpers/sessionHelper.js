@@ -3,9 +3,10 @@ import HttpHelper from "./httpHelper"
 import CommonHelper from "./common"
 import {deleteItemFromLocalStorage} from "../localStorageService";
 import {USER_INFORMATION} from "../vars";
+
 function isElive(history) {
     const token = cookieHelper.getCookie("token");
-    if(token) {
+    if (token) {
         HttpHelper.configToken(token, history)
     } else {
         deleteItemFromLocalStorage(USER_INFORMATION);
@@ -13,6 +14,10 @@ function isElive(history) {
     }
 }
 
-const obj = { isElive };
+const obj = {
+    default: {
+        isElive
+    }
+};
 
 export default obj;

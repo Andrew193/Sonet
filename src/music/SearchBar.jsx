@@ -1,4 +1,6 @@
 import s from "./music.module.css";
+import React from "react";
+import PropTypes from "prop-types";
 
 function SearchBar(props) {
     const {
@@ -6,9 +8,7 @@ function SearchBar(props) {
     } = props;
 
     return (
-        <div
-            className={s.SearchBar}
-        >
+        <div className={s.SearchBar}>
             <input
                 onInput={(e) => setSearch(e.target.value)}
                 id={"FocusInput"}
@@ -16,6 +16,10 @@ function SearchBar(props) {
             />
         </div>
     )
+}
+
+SearchBar.propTypes = {
+    setSearch: PropTypes.func
 }
 
 export default SearchBar

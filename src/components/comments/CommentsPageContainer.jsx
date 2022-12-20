@@ -12,6 +12,7 @@ import {getEmptyElementsThemeConfig} from "../../utils";
 import TableLoader from "../table-loader/TableLoader";
 import {useTranslation} from "react-i18next";
 import MaintainedPageHeader from "../MaintainedPageHeader";
+import PropTypes from "prop-types";
 
 function Comments(props) {
     const {
@@ -98,5 +99,10 @@ function Comments(props) {
         </div>
     )
 }
+
+Comments.propTypes = {
+    match: PropTypes.object,
+    location: PropTypes.object
+};
 
 export default withRouter(Comments);

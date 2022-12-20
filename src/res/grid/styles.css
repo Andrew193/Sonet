@@ -6094,7 +6094,7 @@ body {
 
 .flex-form .fs_scheduler-toolbar .fs_wrap-buttons {
     display: flex;
-    align-items: start;
+    align-items: flex-start;
     flex-grow: 1;
     justify-content: flex-end;
     margin-left: 15px;

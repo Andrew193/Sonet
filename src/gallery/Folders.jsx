@@ -1,3 +1,4 @@
+import React from "react";
 import {useMemo, useState, useRef} from "react";
 import s from "./gallery.module.css";
 import {alpha, Backdrop, CircularProgress, ListItemIcon, Menu, MenuItem, Typography} from "@mui/material";
@@ -12,6 +13,8 @@ import FoldersInnerContent from "./FoldersInnerContent";
 import dateHelper from "../helpers/dateHelper";
 import {getItemFromLocalStorage} from "../localStorageService";
 import {USER_INFORMATION} from "../vars";
+import PropTypes from "prop-types";
+import {getGalleryImageConfig} from "./GalleryInnerContent";
 
 function Folders(props) {
     const {
@@ -42,11 +45,9 @@ function Folders(props) {
     };
 
     const configuredFolders = useMemo(() => {
-        const uniqFolders = folders.filter(function (item, pos, self) {
-            return self?.map((item) => item?.name).indexOf(item?.name) === pos;
-        })
+        const uniqFolders = folders.filter((item, pos, self) => self?.map((item) => item?.name).indexOf(item?.name) === pos)
 
-        return uniqFolders?.map((folder, index) => {
+        return uniqFolders?.map((folder) => {
             let backImage;
             try {
                 backImage = JSON.parse(folder?.folderBack)?.webContentLink
@@ -66,14 +67,10 @@ function Folders(props) {
                 }}
             >
                 {
-                    !!backImage
+                    backImage
                         ?
                         <>
-                            <LazyImage
-                                imageSrc={backImage}
-                                onClick={() => {
-                                }}
-                            />
+                            <LazyImage imageSrc={backImage}{...getGalleryImageConfig()}/>
                             <div className={s.FolderDescription}>
                                 <span>Created date: <span>{dateHelper.fromNow(folder?.createdAt)}</span></span>
                                 <span>Folder name: {folder?.name}</span>
@@ -91,7 +88,7 @@ function Folders(props) {
 
     const configuredFolderImages = useMemo(() =>
         selectedFolder?.map((image, index) =>
-            !!image?.src
+            image?.src
                 ? <p
                     key={JSON.parse(image?.src)?.webContentLink + index}
                     onClick={(e) => {
@@ -99,11 +96,7 @@ function Folders(props) {
                         handleClick(e);
                     }}
                 >
-                    <LazyImage
-                        imageSrc={JSON.parse(image?.src)?.webContentLink}
-                        onClick={() => {
-                        }}
-                    />
+                    <LazyImage imageSrc={JSON.parse(image?.src)?.webContentLink}   {...getGalleryImageConfig()}/>
                     {image?.shared && <RiUserShared2Line/>}
                 </p>
                 : null), [selectedFolder])
@@ -118,7 +111,7 @@ function Folders(props) {
         <div className={s.FolderInnerContainer}>
             <Backdrop
                 sx={{color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1}}
-                open={isOpened}
+                open={isOpened || false}
             >
                 <CircularProgress color="inherit"/>
             </Backdrop>
@@ -209,6 +202,13 @@ function Folders(props) {
             />
         </div>
     )
+}
+
+Folders.propTypes = {
+    folderName: PropTypes.string,
+    folders: PropTypes.array,
+    setFolders: PropTypes.func,
+    settings: PropTypes.object
 }
 
 export default Folders;

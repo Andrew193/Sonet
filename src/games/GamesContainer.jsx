@@ -1,3 +1,4 @@
+import React from "react";
 import s from './games.module.css';
 import {Box} from "@mui/material";
 import GamesContent from "./GamesContent";
@@ -15,7 +16,7 @@ function GamesContainer() {
             className={s.Container}
             style={{
                 ...getEmptyElementsThemeConfig(settings),
-                height: `${!!gameType ? "-webkit-fill-available" : "fit-content"}`
+                height: `${gameType ? "-webkit-fill-available" : "fit-content"}`
             }}
         >
             <GamesContent styleSettings={settings}/>

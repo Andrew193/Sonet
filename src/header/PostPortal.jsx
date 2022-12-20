@@ -1,3 +1,4 @@
+import React from "react";
 import {createPortal} from "react-dom";
 import CreatePost from "../create-post/CreatePostLine";
 import s from "./header.module.css"

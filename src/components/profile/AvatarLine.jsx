@@ -1,11 +1,12 @@
 import s from "./profile.module.css"
-import Script from "./profileHelper"
+import React from "react";
 import {AiOutlineHighlight} from "react-icons/ai";
 import {useMemo, useState} from "react";
 import {alpha} from "@mui/material";
 import AvatarImageMenu from "./AvatarImageMenu";
 import {useTranslation} from "react-i18next";
 import Script2 from "./profileHelper";
+import PropTypes from "prop-types";
 
 function AvatarLine(props) {
     const {
@@ -99,5 +100,12 @@ function AvatarLine(props) {
             </div>
         </>)
 }
+
+AvatarLine.propTypes = {
+    imgUrl: PropTypes.string,
+    myId: PropTypes.number,
+    id: PropTypes.number,
+    settings: PropTypes.object
+};
 
 export default AvatarLine;

@@ -3,7 +3,7 @@ import Message from "./Message";
 import {useEffect, useRef, useState} from "react";
 import {getConversationById} from "./chatHelper";
 import {notify} from "../App";
-import {alpha, Tooltip} from "@mui/material";
+import {Tooltip} from "@mui/material";
 import Loader from "../components/common/spinner/Spinner";
 import {BsPencil, TiMessages} from "react-icons/all";
 import {useTranslation} from "react-i18next";
@@ -12,6 +12,7 @@ import InputEmoji from 'react-input-emoji';
 import {getUserAvatar} from "../posts/postsHelper";
 import {getElementsThemeConfig} from "../utils";
 import {Dayjs} from "../helpers/dateHelper";
+import PropTypes from "prop-types";
 
 const PostButtonCover = React.forwardRef(function MyComponent(props, ref) {
     //  Spread the props to the underlying DOM element.
@@ -38,6 +39,14 @@ function MessageCover(props) {
         />
     )
 }
+
+MessageCover.propTypes = {
+    m: PropTypes.object,
+    userId: PropTypes.number,
+    avatar: PropTypes.string,
+    receiverId: PropTypes.number,
+    setMessages: PropTypes.func
+};
 
 function CurrentChat(props) {
     const {
@@ -111,7 +120,7 @@ function CurrentChat(props) {
                             now !== then &&
                             <div className={"ChatDayShowContainer"}><span className={"ChatDayShow"}>{now}</span></div>
                         }
-                        <div key={index}>
+                        <div key={messages[index]?.createdAt}>
                             <MessageCover
                                 m={m}
                                 avatar={avatars[0]?.id === m?.createdById ? avatars[0]?.avatar : avatars[1]?.avatar}
@@ -157,5 +166,18 @@ function CurrentChat(props) {
         </>
     )
 }
+
+CurrentChat.propTypes = {
+    messages: PropTypes.array,
+    newMessage: PropTypes.any,
+    setNewMessage: PropTypes.func,
+    customStyle: PropTypes.any,
+    userInformation: PropTypes.object,
+    handleSubmit: PropTypes.func,
+    conversationId: PropTypes.string,
+    setMessages: PropTypes.func,
+    settings: PropTypes.object,
+    receiverId: PropTypes.number
+};
 
 export default CurrentChat;

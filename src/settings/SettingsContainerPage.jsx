@@ -1,5 +1,6 @@
 import {Box, hexToRgb} from "@mui/material";
 import s from './settings.module.css';
+import React from "react";
 import SettingsContent from "./SettingsContent";
 import {useSettings} from "../hooks";
 import {getEmptyElementsThemeConfig} from "../utils";

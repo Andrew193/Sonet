@@ -1,13 +1,16 @@
+import React from "react";
 import {MdKeyboardBackspace} from "react-icons/md";
 import {useHistory} from "react-router-dom";
 import s from "./style.module.css";
 import CommonHelper from "../../../helpers/common";
 import {hexToRgb} from "@mui/material";
 import {useSettings} from "../../../hooks";
+import PropTypes from "prop-types";
 
 function PageHeader(props) {
     const {
-        historyPath
+        historyPath,
+        children
     } = props;
 
     const history = useHistory();
@@ -43,9 +46,14 @@ function PageHeader(props) {
                     color: settings?.configs?.color[settings?.color]
                 }}
             />
-            {props.children}
+            {children}
         </div>
     )
 }
+
+PageHeader.propTypes = {
+    historyPath: PropTypes.string,
+    children: PropTypes.node
+};
 
 export default PageHeader;

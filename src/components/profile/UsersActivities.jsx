@@ -1,3 +1,4 @@
+import React from "react";
 import {Box, Tab, Tabs, Typography} from "@mui/material";
 import {useEffect, useState, useMemo} from "react";
 import s from "./profile.module.css"
@@ -8,6 +9,7 @@ import {useTranslation} from "react-i18next";
 import CommentsTab from "./CommentsTab";
 import LikesTab from "./LikesTab";
 import DislikesTab from "./DislikesTab";
+import PropTypes from "prop-types";
 
 export function TabPanel(props) {
     const {children, value, index, ...other} = props;
@@ -28,6 +30,12 @@ export function TabPanel(props) {
         </div>
     );
 }
+
+TabPanel.propTypes = {
+    children: PropTypes.node,
+    value: PropTypes.number,
+    index: PropTypes.number
+};
 
 function a11yProps(index) {
     return {
@@ -58,7 +66,6 @@ function UsersActivities(props) {
     const [comments, setComments] = useState([]);
     const [likes, setLikes] = useState([]);
     const [dislikes, setDislikes] = useState([]);
-
     const avatarUrl = useMemo(() => {
         try {
             return JSON.parse(userInfo?.avatar)?.webContentLink;
@@ -144,5 +151,9 @@ function UsersActivities(props) {
         </Box>
     )
 }
+
+UsersActivities.propTypes = {
+    userInfo: PropTypes.object
+};
 
 export default UsersActivities;

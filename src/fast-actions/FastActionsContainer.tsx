@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from "react";
-import {useHistory} from "react-router-dom";
 import {useTranslation} from "react-i18next";
 import {alpha, Box, Tooltip, Typography} from "@mui/material";
 import s from "./fast-actions.module.css";

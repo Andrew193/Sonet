@@ -1,4 +1,5 @@
 import {useContext, useEffect, useState} from "react";
+import React from "react";
 import ClearPosts from "./PostsInnerContent";
 import postsHelper, {getFilteredPostsByTags} from "./postsHelper"
 import Skeleton from 'react-loading-skeleton';
@@ -12,6 +13,7 @@ import MaintainedPageHeader from "../components/MaintainedPageHeader";
 import {getEmptyElementsThemeConfig} from "../utils";
 import {USER_INFORMATION} from "../vars";
 import {getItemFromLocalStorage} from "../localStorageService";
+import PropTypes from "prop-types";
 
 function PostsContainer(props) {
     const [posts, setPosts] = useState(false);
@@ -34,7 +36,7 @@ function PostsContainer(props) {
     }, [notify, props?.match?.params?.id]);
 
     useEffect(() => {
-        if (!!history?.location?.hash) {
+        if (history?.location?.hash) {
             setPosts(getFilteredPostsByTags(posts, history))
         } else {
             setPosts((posts) => ({
@@ -118,6 +120,10 @@ function PostsContainer(props) {
             }
         </div>
     )
+}
+
+PostsContainer.propTypes = {
+    match: PropTypes.object
 }
 
 export default withRouter(PostsContainer);

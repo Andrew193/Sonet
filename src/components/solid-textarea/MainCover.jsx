@@ -1,3 +1,4 @@
+import React from "react";
 import {WhatsHappeningBar} from "./WhatsHappeningBar";
 import {Form} from "usetheform";
 import s from "./solid-textarea.module.css"
@@ -5,6 +6,7 @@ import {PrivacyPicker} from "./privacy-picker/PrivacyPicker";
 import {SolidTextareaActions} from "./actions/SolidTextareaActions";
 import {useState} from "react";
 import AddQuizBar from "../quizBar/AddQuizBar";
+import PropTypes from "prop-types";
 
 function MainCover(props) {
     const {
@@ -18,7 +20,9 @@ function MainCover(props) {
 
     return (
         <>
-            <Form onSubmit={onSubmit}>
+            <Form onSubmit={()=>{
+                //spare
+            }}>
                 <WhatsHappeningBar maxChars={maxLength} setMaxLength={setMaxLength}/>
                 <PrivacyPicker>
                     <AddQuizBar/>
@@ -37,15 +41,11 @@ function MainCover(props) {
     )
 }
 
-async function onSubmit(state) {
-    // make an API call
-    // await submitForm(state)
-    const {
-        editor: {plainText},
-        ...resState
-    } = state;
-    return true;
+MainCover.propTypes = {
+    customStyle: PropTypes.object,
+    setIsOpened: PropTypes.func,
+    images: PropTypes.array,
+    setImages: PropTypes.func
 }
-
 
 export default MainCover;

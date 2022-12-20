@@ -1,3 +1,4 @@
+import React from "react";
 import {Link, useHistory} from "react-router-dom";
 import s from "./header.module.css";
 import Script from "./script";

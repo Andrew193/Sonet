@@ -1,4 +1,4 @@
-import {alpha, Box} from "@mui/material";
+import React from "react";
 import {useEffect, useState} from "react";
 import {getUserAvatar} from "../posts/postsHelper";
 import LazyImage from "../posts/LazyImage";

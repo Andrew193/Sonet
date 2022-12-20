@@ -38,8 +38,7 @@ function MusicContainer() {
 
 const areEqual = () => true;
 
-const MusicContainerMemo = React.memo(() => {
-    return <MusicContainer/>
-}, areEqual);
+const MusicContainerCover = () => <MusicContainer/>
+const MusicContainerMemo = React.memo(MusicContainerCover, areEqual);
 
 export default MusicContainerMemo;

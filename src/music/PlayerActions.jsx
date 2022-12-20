@@ -1,7 +1,8 @@
-import {buttonsConfig} from "../create-post/CreatePostLine";
 import {alpha, Box, hexToRgb} from "@mui/material";
 import {useTranslation} from "react-i18next";
 import s from "./music.module.css";
+import React from "react";
+import PropTypes from "prop-types";
 
 function PlayerActions(props) {
     const {
@@ -13,9 +14,7 @@ function PlayerActions(props) {
     const {t} = useTranslation();
 
     return (
-        <Box
-            className={s.PlayerActions}
-        >
+        <Box className={s.PlayerActions}>
             <style>{`
             .${s.Track} {
              background:${alpha(hexToRgb(color || "#ffffff"), 0.5)}
@@ -40,6 +39,12 @@ function PlayerActions(props) {
             </span>
         </Box>
     )
+}
+
+PlayerActions.propTypes = {
+    color: PropTypes.string,
+    createNewSong: PropTypes.func,
+    dropPreviewMusic: PropTypes.func
 }
 
 export default PlayerActions;

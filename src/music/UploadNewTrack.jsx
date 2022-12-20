@@ -1,4 +1,6 @@
+import React from "react";
 import UploadArea from "./UploadArea";
+import PropTypes from "prop-types";
 
 function UploadNewTrack(props) {
     const {
@@ -12,6 +14,11 @@ function UploadNewTrack(props) {
     };
 
     return (<UploadArea handleVideoUpload={handleVideoUpload}/>)
+}
+
+UploadNewTrack.propTypes = {
+    setVideoFilePath: PropTypes.func,
+    setFile: PropTypes.func
 }
 
 export default UploadNewTrack;

@@ -43,7 +43,7 @@ function Subscribe(id, toast, otherUserFolCount) {
 
 export function friendRequest(values, callback) {
     HttpHelper.MATES.friendRequest(values,
-        (e) => {
+        () => {
             callback("Success");
         }, (error) => {
             callback(error);

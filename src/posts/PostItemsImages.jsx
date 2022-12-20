@@ -12,6 +12,7 @@ import {useTranslation} from "react-i18next";
 import {USER_INFORMATION} from "../vars";
 import {getItemFromLocalStorage} from "../localStorageService";
 import {v4 as uuidv4} from 'uuid';
+import PropTypes from "prop-types";
 
 function PostItemsImages(props) {
     const {
@@ -21,7 +22,7 @@ function PostItemsImages(props) {
     } = props;
 
     const [images, setImages] = useState(JSON.parse(valueSavedImages));
-    const id =  getItemFromLocalStorage(USER_INFORMATION,"id");
+    const id = getItemFromLocalStorage(USER_INFORMATION, "id");
 
     const [anchorEl, setAnchorEl] = useState(null);
     const [selectedImage, setSelectedImage] = useState(null);
@@ -41,6 +42,10 @@ function PostItemsImages(props) {
                 onClick={(e) => {
                     setSelectedImage(index)
                     handleClick(e);
+                }}
+                wrapperClassName={"post-images-lazy-cover"}
+                wrapperStyle={{
+                    height: "250px",
                 }}
                 key={uuidv4()}
                 imgClass={s.ImgPreview}
@@ -104,6 +109,12 @@ function PostItemsImages(props) {
             {images}
         </div>
     )
+}
+
+PostItemsImages.propTypes = {
+    valueSavedImages: PropTypes.string,
+    openImageViewer: PropTypes.func,
+    valueUserId: PropTypes.number
 }
 
 const MemoizedPostItemsImages = React.memo(PostItemsImages);

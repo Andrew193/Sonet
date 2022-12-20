@@ -1,3 +1,4 @@
+import React from "react";
 import {useHistory} from "react-router-dom";
 import dateHelper from "../../../helpers/dateHelper.js"
 import script from "../script.js";
@@ -8,15 +9,17 @@ import s from "../top-info.module.css"
 import {AiOutlineComment, AiOutlineDislike, AiOutlineLike} from "react-icons/ai";
 import CountUp from "react-countup";
 import {useTranslation} from "react-i18next";
+import PropTypes from "prop-types";
 
 function PostCreator(props) {
     const {
-        settings
+        settings,
+        toCreate
     } = props;
 
     const history = useHistory();
     const {t} = useTranslation();
-    const postsListToMap = useMemo(() => props.toCreate, [props?.toCreate]);
+    const postsListToMap = useMemo(() => toCreate, [toCreate]);
 
     return (
         <>
@@ -68,5 +71,10 @@ function PostCreator(props) {
         </>
     )
 }
+
+PostCreator.propTypes = {
+    settings: PropTypes.object,
+    toCreate: PropTypes.array
+};
 
 export default PostCreator;

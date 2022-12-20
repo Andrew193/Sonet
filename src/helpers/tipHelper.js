@@ -23,7 +23,7 @@ function rel() {
         }
     };
 
-    document.onmouseout = function (e) {
+    document.onmouseout = function () {
         if (tooltipElem) {
             tooltipElem.remove();
             tooltipElem = null;

@@ -2,6 +2,7 @@ import {Typography} from "@mui/material";
 import {MdMusicNote} from "react-icons/all";
 import s from "./music.module.css";
 import {useEffect, useState} from "react";
+import React from "react";
 
 function MusicTip() {
     const [shouldTransform, setShouldTransform] = useState(false);

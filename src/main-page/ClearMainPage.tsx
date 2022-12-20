@@ -31,7 +31,9 @@ function ClearMainPage(props: MainPageType) {
                 className={"Separator"}
                 onClick={(e: React.MouseEvent<HTMLDivElement>) => {
                     const nextElementSibling = (e.target as HTMLDivElement).nextElementSibling;
-                    nextElementSibling!.classList.toggle("Hide")
+                    if (nextElementSibling) {
+                        nextElementSibling.classList.toggle("Hide")
+                    }
                 }}
             />
             <ConfigLine

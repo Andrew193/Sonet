@@ -8,6 +8,16 @@
     border: none !important;
 }
 
+.lazyImg {
+    background-repeat: no-repeat;
+    background-size: contain !important;
+}
+
+.post-images-lazy-cover {
+    min-width: 100px;
+    min-height: 100px;
+}
+
 ::marker {
     font-size: 16px;
 }

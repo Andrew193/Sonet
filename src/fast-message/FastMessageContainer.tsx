@@ -39,7 +39,7 @@ function FastMessageContainer(props: FastElementsPropsType) {
         <Box
             className={s.Container}
             style={{
-                visibility: !!opened ? "visible" : "hidden"
+                visibility: opened ? "visible" : "hidden"
             }}
         >
             {dropSelection}
@@ -50,7 +50,7 @@ function FastMessageContainer(props: FastElementsPropsType) {
                 }
                 .${s.Container} {
                 box-shadow: 0px 0px 8px 0px ${alpha(settingsConfig?.settings?.configs?.color[settingsConfig?.settings?.color] || "#b6c0f3", 0.8)} !important;
-                z-index:${!!opened ? "100" : "10"};
+                z-index:${opened ? "100" : "10"};
                 }
                 .${s.HeaderActions} svg:hover {
                 background: ${alpha(settingsConfig?.settings?.configs?.color[settingsConfig?.settings?.color] || "#b6c0f3", 0.8)};

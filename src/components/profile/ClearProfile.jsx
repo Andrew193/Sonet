@@ -1,3 +1,4 @@
+import React from "react";
 import {Link} from "react-router-dom";
 import VerificationLine from "./VerificationLine";
 import AvatarLine from "./AvatarLine";
@@ -15,6 +16,7 @@ import BackImageMenu from "./BackImageMenu";
 import {useTranslation} from "react-i18next";
 import {getItemFromLocalStorage} from "../../localStorageService";
 import {USER_INFORMATION} from "../../vars";
+import PropTypes from "prop-types";
 
 function ClearProfile(props) {
     const {
@@ -163,9 +165,7 @@ function ClearProfile(props) {
                 className="Separator"
                 onClick={(e) => e.target.nextElementSibling.classList.toggle("Hide")}
             />
-            <AboutYou
-                description={userInfo?.description}
-            />
+            <AboutYou description={userInfo?.description}/>
             <div
                 className="Separator"
                 onClick={(e) => e.target.nextElementSibling.classList.toggle("Hide")}
@@ -174,5 +174,12 @@ function ClearProfile(props) {
         </>
     )
 }
+
+ClearProfile.propTypes = {
+    s: PropTypes.object,
+    history: PropTypes.object,
+    userInfo: PropTypes.object,
+    settings: PropTypes.object
+};
 
 export default ClearProfile;

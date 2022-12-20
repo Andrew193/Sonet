@@ -3,6 +3,8 @@ import RequestsContainer from "./RequestsConditions";
 import {useEffect, useState} from "react";
 import {useTranslation} from "react-i18next";
 import textareaStyles from "../components/solid-textarea/solid-textarea.module.css"
+import React from "react";
+import PropTypes from "prop-types";
 
 function PeopleContainer(props) {
     const {
@@ -60,5 +62,14 @@ function PeopleContainer(props) {
         </>
     )
 }
+
+PeopleContainer.propTypes = {
+    chatMode: PropTypes.bool,
+    matesList: PropTypes.array,
+    isLoading: PropTypes.bool,
+    possibleMatesList: PropTypes.array,
+    setConversations: PropTypes.func,
+    conversations: PropTypes.array
+};
 
 export default PeopleContainer;

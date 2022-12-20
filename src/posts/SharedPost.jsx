@@ -1,11 +1,13 @@
 import {useEffect, useState} from "react";
 import {getUserAvatar} from "./postsHelper";
 import s from "../header/header.module.css";
+import React from "react";
 import postS from "./posts.module.css";
 import LazyImage from "./LazyImage";
 import DataHelper from "../helpers/dateHelper";
 import {getLazyImagesElementsThemeConfig} from "../utils";
 import {AiOutlineClockCircle} from "react-icons/ai";
+import PropTypes from "prop-types";
 
 function SharedPost(props) {
     const {
@@ -54,6 +56,10 @@ function SharedPost(props) {
             }
         </>
     )
+}
+
+SharedPost.propTypes = {
+    shared: PropTypes.string
 }
 
 export default SharedPost;

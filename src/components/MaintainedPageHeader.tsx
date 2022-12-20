@@ -1,3 +1,4 @@
+import React from "react";
 import {Link} from "react-router-dom";
 import PageHeader from "./common/navigationLine/NavigationLine";
 import {getElementsThemeConfig, getPropertiesConfig} from "../utils";

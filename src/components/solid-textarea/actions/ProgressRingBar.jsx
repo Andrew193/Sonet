@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 export const ProgressRingBar = ({
                                     textLabel,
@@ -32,7 +33,7 @@ export const ProgressRingBar = ({
                         strokeWidth={stroke}
                         strokeDasharray={circumference + " " + circumference}
                         r={normalizedRadius}
-                        style={{ strokeDashoffset }}
+                        style={{strokeDashoffset}}
                         cx={radius}
                         cy={radius}
                     />
@@ -46,3 +47,12 @@ export const ProgressRingBar = ({
         </svg>
     );
 };
+
+ProgressRingBar.propTypes = {
+    textLabel: PropTypes.number,
+    colorBar: PropTypes.string,
+    radius: PropTypes.number,
+    stroke: PropTypes.number,
+    progress: PropTypes.number,
+    hideRingBar: PropTypes.bool
+}

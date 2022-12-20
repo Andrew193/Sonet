@@ -1,3 +1,4 @@
+import React from "react";
 import FriendPin from "./FriendPin";
 import {useEffect, useState} from "react";
 import {getForApprovalMatesList} from "./chatHelper";
@@ -9,6 +10,7 @@ import PeopleContainer from "./PeopleContainer";
 import SelectedChatMessages from "./SelectedChatMessages";
 import {useTranslation} from "react-i18next";
 import MatePin from "./MatePin";
+import PropTypes from "prop-types";
 
 function Messenger(props) {
     const {
@@ -134,5 +136,23 @@ function Messenger(props) {
         </div>
     )
 }
+
+Messenger.propTypes = {
+    setConversations: PropTypes.func,
+    usersInChat: PropTypes.array,
+    setIsLoading: PropTypes.func,
+    isLoading: PropTypes.bool,
+    settings: PropTypes.object,
+    setCurrentChat: PropTypes.func,
+    currentChat: PropTypes.object,
+    messages: PropTypes.any,
+    setNewMessage: PropTypes.func,
+    newMessage: PropTypes.any,
+    userInformation: PropTypes.object,
+    handleSubmit: PropTypes.func,
+    setMessages: PropTypes.func,
+    conversations: PropTypes.array,
+    receiverId: PropTypes.number
+};
 
 export default Messenger;

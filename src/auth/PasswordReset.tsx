@@ -1,3 +1,4 @@
+import React from "react";
 import s from "./auth.module.css";
 import HttpHelper from "../helpers/httpHelper";
 import {Typography} from "@mui/material";

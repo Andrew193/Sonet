@@ -1,3 +1,4 @@
+import React from "react";
 import {useContext, useEffect, useState} from "react";
 import s from "./top-info.module.css"
 import Script from "./script.js"

@@ -1,8 +1,9 @@
 import React from "react";
-import { useSelector } from "usetheform";
-import { ProgressRingBar } from "./ProgressRingBar";
-import { getProgressRingBarProps } from "./utils/getProgressRingBarProps";
+import {useSelector} from "usetheform";
+import {ProgressRingBar} from "./ProgressRingBar";
+import {getProgressRingBarProps} from "./utils/getProgressRingBarProps";
 import s from "../solid-textarea.module.css";
+import PropTypes from "prop-types";
 
 export const CharacterCounter = (props) => {
     const {
@@ -10,7 +11,7 @@ export const CharacterCounter = (props) => {
     } = props;
     const [plainText] = useSelector((state) => state.editor.plainText);
 
-    const { uiStatus, ...propsRingBar } = getProgressRingBarProps(
+    const {uiStatus, ...propsRingBar} = getProgressRingBarProps(
         plainText,
         maxChars
     );
@@ -21,3 +22,7 @@ export const CharacterCounter = (props) => {
         </div>
     );
 };
+
+CharacterCounter.propTypes = {
+    maxChars: PropTypes.number
+}

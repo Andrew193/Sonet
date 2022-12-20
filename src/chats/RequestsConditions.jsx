@@ -1,6 +1,8 @@
 import {AiOutlineClose} from "react-icons/all";
 import {useTranslation} from "react-i18next";
 import textareaStyles from "../components/solid-textarea/solid-textarea.module.css";
+import React from "react";
+import PropTypes from "prop-types";
 
 function RequestsConditions(props) {
     const {
@@ -26,5 +28,9 @@ function RequestsConditions(props) {
         </>
     )
 }
+
+RequestsConditions.propTypes = {
+    possibleMatesList: PropTypes.array,
+};
 
 export default RequestsConditions;

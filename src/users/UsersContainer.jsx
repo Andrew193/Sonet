@@ -4,13 +4,14 @@ import Skeleton from 'react-loading-skeleton';
 import s from "./users.module.css"
 import {withRouter} from "react-router-dom";
 import ClearUsersContainer from './UsersPageContent';
-import {hexToRgb} from "@mui/material";
+import React from "react";
 import {useSettings} from "../hooks";
 import {getEmptyElementsThemeConfig} from "../utils";
+import PropTypes from "prop-types";
 
 function UsersContainer(props) {
     const [usersConfig, setUsers] = useState({users: []});
-    const [open, setOpen] = useState(false);
+    const [, setOpen] = useState(false);
     const {settings} = useSettings();
 
     useEffect(() => {
@@ -53,5 +54,9 @@ function UsersContainer(props) {
         </div>
     )
 }
+
+UsersContainer.propTypes = {
+    match: PropTypes.object,
+};
 
 export default withRouter(UsersContainer);

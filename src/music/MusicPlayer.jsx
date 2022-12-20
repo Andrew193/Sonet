@@ -1,6 +1,7 @@
 import ReactPlayer from "react-player";
-import Fallback from "./img/fallback.png";
+import React from "react";
 import s from "./music.module.css";
+import PropTypes from "prop-types";
 
 function MusicPlayer(props) {
     const {
@@ -8,9 +9,7 @@ function MusicPlayer(props) {
     } = props;
 
     return (
-        <div
-            className={s.playerWrapper}
-        >
+        <div className={s.playerWrapper}>
             <ReactPlayer
                 className={s.reactPlayer}
                 url={videoFilePath}
@@ -25,6 +24,10 @@ function MusicPlayer(props) {
             />
         </div>
     )
+}
+
+MusicPlayer.propTypes = {
+    videoFilePath: PropTypes.string
 }
 
 export default MusicPlayer;

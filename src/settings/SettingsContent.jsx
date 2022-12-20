@@ -1,4 +1,5 @@
 import {Typography} from "@mui/material";
+import React from "react";
 import {useMemo, useState} from "react";
 import withPageHeader from "../hoc/withPageHeader";
 import Accordion from "./SettingsAccordion";
@@ -9,6 +10,8 @@ import s from './settings.module.css';
 import AppearanceSettings from "./components/AppearanceSettings";
 import {useTranslation} from "react-i18next";
 import GeneralSettings from "./components/GeneralSettings";
+import PropTypes from "prop-types";
+
 
 const settingsList = [
     {panelName: "themes", label: "Display", innerContent: <DisplaySettings/>},
@@ -69,6 +72,10 @@ function SettingsContent(props) {
             <div className={s.Divider}/>
         </>
     )
+}
+
+SettingsContent.propTypes = {
+    settingsStyles: PropTypes.object
 }
 
 export default withPageHeader(SettingsContent, {path: "/settings", Title: <span>Settings</span>});

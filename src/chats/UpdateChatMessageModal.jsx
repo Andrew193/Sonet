@@ -1,3 +1,4 @@
+import React from "react";
 import {useTranslation} from "react-i18next";
 import {Backdrop, CircularProgress} from "@mui/material";
 import s from "../create-post/create-post.module.css";
@@ -5,6 +6,7 @@ import {BsPencil} from "react-icons/all";
 import InputEmoji from 'react-input-emoji';
 import {useState} from "react";
 import {updateMessageById} from "./chatHelper";
+import PropTypes from "prop-types";
 
 function UpdateChatMessageModal(props) {
     const {
@@ -28,7 +30,7 @@ function UpdateChatMessageModal(props) {
                     <div className={s.Container + " chatUpdateModal"}>
                         <Backdrop
                             sx={{color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1}}
-                            open={isBackdoor}
+                            open={isBackdoor || false}
                         >
                             <CircularProgress color="inherit"/>
                         </Backdrop>
@@ -65,5 +67,15 @@ function UpdateChatMessageModal(props) {
         </>
     )
 }
+
+UpdateChatMessageModal.propTypes = {
+    setIsOpened: PropTypes.func,
+    socket: PropTypes.object,
+    receiverId: PropTypes.number,
+    setMessages: PropTypes.func,
+    isOpened: PropTypes.bool,
+    notify: PropTypes.func,
+    messageToUpdateId: PropTypes.number
+};
 
 export default UpdateChatMessageModal;

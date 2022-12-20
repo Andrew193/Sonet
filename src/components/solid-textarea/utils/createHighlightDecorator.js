@@ -3,6 +3,7 @@ import s from "../solid-textarea.module.css";
 import HttpHelper from "../../../helpers/httpHelper";
 import {setPostInformation} from "../../../app/postReducer";
 import {getStore} from "../../../app/store";
+import PropTypes from "prop-types";
 
 function comboStrategy(contentBlock, callback, regex) {
     const text = contentBlock.getText();
@@ -50,6 +51,10 @@ function HashPin({children}) {
     return <span className={s.Editor__Highlight + " " + s.Editor_hashtag}>{children}</span>;
 }
 
+HashPin.propTypes = {
+    children: PropTypes.node
+}
+
 function MentionPin(props, onChangeHandler) {
     const dispatch = getStore().dispatch;
     const postInformation = getStore().getState().post.postInformation;
@@ -63,21 +68,28 @@ function MentionPin(props, onChangeHandler) {
         dispatch(setPostInformation({selectedMention: ""}));
     }
 
-    return <li
-        className={s.Editor__Highlight + " " + s.Editor_mention}
-        style={{display: "inline-block"}}
+    return <li className={s.Editor__Highlight + " " + s.Editor_mention}
+               style={{display: "inline-block"}}
     >{props.decoratedText} <span style={{display: "none"}}>{props.children}</span></li>;
+}
+
+MentionPin.propTypes = {
+    start: PropTypes.number,
+    end: PropTypes.number,
+    decoratedText: PropTypes.string,
+    children: PropTypes.node
 }
 
 function showPossiblePeople(name) {
     return HttpHelper.USERS.getUserByName(name.trim().slice(1))
-        .then((response) => {
-
-            return response.data.user;
-        })
-        .catch((error) => [])
+        .then((response) => response.data.user)
+        .catch(() => [])
 }
 
 function LinkPin({children}) {
     return <a className={s.Editor__Highlight + " " + s.Editor_link} href={children[0].props.text}>{children}</a>;
+}
+
+LinkPin.propTypes = {
+    children: PropTypes.array
 }

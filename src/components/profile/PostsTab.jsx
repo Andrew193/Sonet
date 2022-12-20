@@ -1,10 +1,9 @@
+import React from "react";
 import {TabPanel} from "./UsersActivities";
 import {useMemo} from "react";
 import {Avatar, Box, Typography} from "@mui/material";
-import LazyLoad from 'react-lazyload';
 import s from "./profile.module.css"
 import postS from "../../posts/posts.module.css";
-import {forceCheck} from 'react-lazyload';
 import DateHelper from "../../helpers/dateHelper";
 import EmotionsLineContainer from "../../posts/EmotionsLineContainer";
 import {MdOutlinePostAdd} from "react-icons/all";
@@ -13,8 +12,7 @@ import {replaceTags} from "../../posts/postsHelper";
 import {getTabsImageStyle} from "./LikesTab";
 import {useSettings} from "../../hooks";
 import {AiOutlineClockCircle} from "react-icons/ai";
-
-forceCheck();
+import PropTypes from "prop-types";
 
 function UserPostTab({information, avatarUrl}) {
     const {settings} = useSettings();
@@ -68,6 +66,11 @@ function UserPostTab({information, avatarUrl}) {
     )
 }
 
+UserPostTab.propTypes = {
+    information: PropTypes.object,
+    avatarUrl: PropTypes.string
+};
+
 function PostsTab(props) {
     const {
         value,
@@ -76,12 +79,11 @@ function PostsTab(props) {
     } = props;
 
     const postsLine = useMemo(() => postsConfig?.map((post, index) =>
-        <LazyLoad key={index}>
             <UserPostTab
+                key={index}
                 information={post}
                 avatarUrl={avatarUrl}
             />
-        </LazyLoad>
     ), [postsConfig]);
 
     return (
@@ -90,11 +92,9 @@ function PostsTab(props) {
             index={0}
         >
             {
-                !!postsLine?.length
+                postsLine?.length
                     ? postsLine
-                    : <p
-                        className={s.EmptyLine}
-                    >
+                    : <p className={s.EmptyLine}>
                         <Typography
                             variant={"h3"}
                             component={"span"}
@@ -106,5 +106,11 @@ function PostsTab(props) {
         </TabPanel>
     )
 }
+
+PostsTab.propTypes = {
+    value: PropTypes.number,
+    postsConfig: PropTypes.array,
+    avatarUrl: PropTypes.string
+};
 
 export default PostsTab;

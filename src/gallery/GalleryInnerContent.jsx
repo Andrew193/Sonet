@@ -1,3 +1,4 @@
+import React from "react";
 import withPageHeader from "../hoc/withPageHeader";
 import {
     alpha,
@@ -17,7 +18,7 @@ import {notify} from "../App";
 import LazyImage from "../posts/LazyImage";
 import s from "./gallery.module.css";
 import {AiOutlineDelete, RiUserShared2Line} from "react-icons/all";
-import {downloadFileVersion2} from "../utils";
+import {downloadFileVersion2, getLazyImagesElementsThemeConfig} from "../utils";
 import {AiOutlineDownload, AiOutlineEye} from "react-icons/ai";
 import GalleryActions from "./GalleryActions";
 import ImageViewer from "react-simple-image-viewer";
@@ -27,6 +28,18 @@ import Folders from "./Folders";
 import {withRouter} from "react-router-dom";
 import {getItemFromLocalStorage} from "../localStorageService";
 import {USER_INFORMATION} from "../vars";
+import PropTypes from "prop-types";
+
+export function getGalleryImageConfig() {
+    return {
+        wrapperStyle: {
+            height: "200px",
+            transition: "all ease 0.7s",
+            ...getLazyImagesElementsThemeConfig()
+        },
+        imgClass: "gallery-lazy-img"
+    }
+}
 
 function GalleryInnerContent(props) {
     const {
@@ -58,6 +71,7 @@ function GalleryInnerContent(props) {
                         setSelectedImage(index)
                         handleClick(e);
                     }}
+                    {...getGalleryImageConfig()}
                 />
                 {image?.shared && <RiUserShared2Line/>}
             </p>
@@ -133,7 +147,7 @@ function GalleryInnerContent(props) {
             `}</style>
             <Backdrop
                 sx={{color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1}}
-                open={isOpened}
+                open={isOpened || false}
             >
                 <CircularProgress color="inherit"/>
             </Backdrop>
@@ -153,7 +167,6 @@ function GalleryInnerContent(props) {
                     />
                 )
             }
-
             <Menu
                 anchorEl={anchorEl}
                 open={open}
@@ -226,7 +239,6 @@ function GalleryInnerContent(props) {
                     <Typography>{t("Delete")}</Typography>
                 </MenuItem>
             </Menu>
-
             <GalleryActions/>
             <div
                 className={"Separator"}
@@ -236,17 +248,10 @@ function GalleryInnerContent(props) {
                 selected={selected}
                 setSelected={setSelected}
             />
-
             {
                 !selected
-                    ? <Box
-                        className={s.ImagesContainer}
-                    >
-                        {configuredImages}
-                    </Box>
-                    : <Box
-                        className={s.ImagesContainer}
-                    >
+                    ? <Box className={s.ImagesContainer}>{configuredImages}</Box>
+                    : <Box className={s.ImagesContainer}>
                         <Folders
                             settings={settings}
                             folderName={folderName}
@@ -257,6 +262,11 @@ function GalleryInnerContent(props) {
             }
         </Box>
     )
+}
+
+GalleryInnerContent.propTypes = {
+    settings: PropTypes.object,
+    match: PropTypes.object
 }
 
 export default withRouter(withPageHeader(GalleryInnerContent, {path: "/gallery", Title: <span>Gallery</span>}));

@@ -17,14 +17,6 @@
 
 .ShortUserAvatar {
     border-radius: 5px !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    width: 100% !important;
-    height: 80px !important;
-    position: absolute !important;
-    top: 0;
-    z-index: 10;
 }
 
 .NavBar aside {
@@ -72,7 +64,7 @@
 .NavBar > div p:last-of-type {
     display: flex;
     align-items: center;
-    justify-content: end;
+    justify-content: flex-end;
 }
 
 .NavBar > div p:first-of-type {
@@ -259,7 +251,7 @@
 .UserPortal > div > div:last-of-type {
     height: 100%;
     width: 100%;
-    align-items: end;
+    align-items: flex-end;
 }
 
 .UserPortal p:last-of-type {

@@ -1,3 +1,4 @@
+import React from "react";
 import {useContext, useState} from "react";
 import s from "./comments.module.css"
 import Script from "./Script.js"
@@ -8,6 +9,7 @@ import InputEmoji from 'react-input-emoji';
 import {Context} from "../../App";
 import {getItemFromLocalStorage} from "../../localStorageService";
 import {USER_INFORMATION} from "../../vars";
+import PropTypes from "prop-types";
 
 function CommentLine(props) {
     const {
@@ -28,7 +30,7 @@ function CommentLine(props) {
         <>
             <Backdrop
                 sx={{color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1}}
-                open={isOpened}
+                open={isOpened || false}
             >
                 <CircularProgress color="inherit"/>
             </Backdrop>
@@ -46,7 +48,6 @@ function CommentLine(props) {
                     onChange={setText}
                     cleanOnEnter
                     placeholder={t("What do you think about it?")}
-                    className={"test"}
                 />
                 <span
                     className={`button ${s.noBefore} ${buttonsConfig[settings?.configs?.color[settings?.color]]}`}
@@ -60,9 +61,14 @@ function CommentLine(props) {
                     }}
                 >{t("Comment")}</span>
             </div>
-
         </>
     )
 }
+
+CommentLine.propTypes = {
+    id: PropTypes.number,
+    comCount: PropTypes.number,
+    settings: PropTypes.object
+};
 
 export default CommentLine;

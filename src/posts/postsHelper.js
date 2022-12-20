@@ -1,4 +1,5 @@
 import HTMLhelp from "../helpers/htmlHelper.js"
+import React from "react";
 import HttpHelper from "../helpers/httpHelper"
 import CommonHelper from "../helpers/common";
 import textareaStyle from "../components/solid-textarea/solid-textarea.module.css";
@@ -9,6 +10,7 @@ import {useState} from "react";
 import {useHistory} from "react-router-dom";
 import {openUserProfile} from "../users/script";
 import {detectHashtag, detectPerson, detectURL} from "../components/solid-textarea/utils/composeDecorators";
+import PropTypes from "prop-types";
 
 function MentionPerson(props) {
     const {
@@ -34,34 +36,55 @@ function MentionPerson(props) {
     )
 }
 
+MentionPerson.propTypes = {
+    mention: PropTypes.object
+}
+
 function ComponentToReplace(props) {
+    const {
+        link,
+        match,
+        className,
+        i,
+        mention
+    } = props;
+
     const [isHovered, setIsHovered] = useState(false);
+
     return (
         <>
             {
-                props?.link
+                link
                     ? <a
-                        href={props.match}
+                        href={match}
                         target="_blank" rel="noopener noreferrer"
-                        key={props.i} className={textareaStyle.Editor__Highlight + " " + props.className}>{props.match}</a>
-                    : <span key={props.i}
+                        key={i} className={textareaStyle.Editor__Highlight + " " + className}>{match}</a>
+                    : <span key={i}
                             onMouseOver={() => setIsHovered(() => true)}
                             onMouseLeave={() => setIsHovered(() => false)}
-                            className={textareaStyle.Editor__Highlight + " " + props.className}
+                            className={textareaStyle.Editor__Highlight + " " + className}
                             style={{
                                 display: "inline-block",
                                 padding: "0px",
                                 marginBottom: "3px",
                                 position: "relative"
                             }}>
-            {props.match}
+            {match}
                         <>
-            {isHovered && props.mention && <MentionPerson mention={props.mention}/>}
+            {isHovered && mention && <MentionPerson mention={mention}/>}
             </>
         </span>
             }
         </>
     )
+}
+
+ComponentToReplace.propTypes = {
+    link: PropTypes.string,
+    match: PropTypes.string,
+    className: PropTypes.string,
+    i: PropTypes.number,
+    mention: PropTypes.object
 }
 
 export function replaceTags(text, possibleMentions) {
@@ -132,11 +155,13 @@ export function getFilteredPostsByTags(posts, history) {
 
 export async function deletePostById(id, savedImages) {
     HttpHelper.POSTS.deletePostById(id, () => {
+        //spare
     }, savedImages)
 }
 
 export async function updatePostById(id, text) {
     HttpHelper.POSTS.updatePostById({id, newText: text}, () => {
+        //spare
     })
 }
 
@@ -167,6 +192,7 @@ export function setEmotion(userId, value, emotionType, emotionCount, socket) {
     return HttpHelper.POSTS.complexEmotions({userId, value, emotionType, emotionCount}, () => {
         refresh(socket, userId)
     }, () => {
+        //spare
     })
 }
 

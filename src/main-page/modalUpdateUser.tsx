@@ -1,18 +1,18 @@
-import {forwardRef, Ref, useState} from "react";
+import {forwardRef, LegacyRef, useState} from "react";
 import {createPortal} from "react-dom";
-import {useHistory} from "react-router";
 import ClearModalUser from "./clearModalUser";
 import s from "./main-page.module.css"
 import Script from "./script.js"
 import {CardContent, Paper} from "@mui/material";
 import {getItemFromLocalStorage} from "../localStorageService";
+import React from "react";
 import {USER_INFORMATION} from "../vars";
 
 type ModalUserInterface = {
-    click: Function
+    click: () => void
 }
 
-const ModalUser = forwardRef<HTMLDivElement, ModalUserInterface>((props, ref) => {
+const ModalUserCover = (props: ModalUserInterface, ref: LegacyRef<HTMLDivElement>) => {
     const {
         userName,
         email,
@@ -22,8 +22,6 @@ const ModalUser = forwardRef<HTMLDivElement, ModalUserInterface>((props, ref) =>
     const [name, setName] = useState(userName);
     const [userEmail, setEmail] = useState(email);
     const [password, setPassword] = useState("Your password");
-
-    const history = useHistory();
 
     const {click} = props;
 
@@ -39,7 +37,6 @@ const ModalUser = forwardRef<HTMLDivElement, ModalUserInterface>((props, ref) =>
                         em={userEmail}
                         pas={password}
                         Script={Script}
-                        history={history}
                         click={click}
                         userId={id}
                     />
@@ -47,6 +44,8 @@ const ModalUser = forwardRef<HTMLDivElement, ModalUserInterface>((props, ref) =>
             </Paper>
         </div>, document.body
     )
-})
+}
+
+const ModalUser = forwardRef<HTMLDivElement, ModalUserInterface>(ModalUserCover)
 
 export default ModalUser;

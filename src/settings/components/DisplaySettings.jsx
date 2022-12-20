@@ -1,5 +1,6 @@
 import {Backdrop, Box, CircularProgress, Slider, Typography} from "@mui/material";
 import s from '../settings.module.css'
+import React from "react";
 import {useEffect, useMemo, useState} from "react";
 import {AiOutlineCheck, FiSettings, GiCheckMark} from "react-icons/all";
 import {updateSettings} from "../../db";
@@ -9,6 +10,7 @@ import {useDragAndDrop} from "../../drag-drop/useDragAndDrop";
 import OuterDragAndDropContainer from "../../drag-drop/OuterDragAndDropContainer";
 import HeaderLink from "../../header/HeaderLink";
 import {useSettings} from "../../hooks";
+import PropTypes from "prop-types";
 
 const marks = [
     {
@@ -53,13 +55,19 @@ const backgroundConfig = [
 ]
 
 function HeaderListPageRow(props) {
+    const {item} = props;
+
     const {t} = useTranslation();
     return (<HeaderLink
-        linkConfig={props?.item}
+        linkConfig={item}
         t={t}
         settings={{}}
-        key={props?.item?.label}
+        key={item?.label}
     />)
+}
+
+HeaderListPageRow.propTypes = {
+    item: PropTypes.object
 }
 
 function DisplaySettings() {
@@ -148,7 +156,7 @@ function DisplaySettings() {
         <>
             <Backdrop
                 sx={{color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1}}
-                open={open}
+                open={open || false}
             >
                 <CircularProgress color="inherit"/>
             </Backdrop>

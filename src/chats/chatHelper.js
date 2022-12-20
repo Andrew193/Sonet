@@ -44,7 +44,9 @@ export async function approveFriendRequest(info, okCallback, errorCallback) {
 }
 
 export async function rejectFriendRequest(info, okCallback = () => {
+    //spare
 }, errorCallback = () => {
+    //spare
 }) {
     HttpHelper.MATES.rejectRequest(info, okCallback, errorCallback)
 }

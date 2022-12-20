@@ -1,6 +1,7 @@
 import {AiOutlineReload} from "react-icons/ai";
 import {useHistory} from "react-router-dom";
 import Script from "./postsHelper"
+import React from "react";
 import s from "./posts.module.css";
 import {useTranslation} from "react-i18next";
 import {USER_INFORMATION} from "../vars";

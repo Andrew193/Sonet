@@ -1,21 +1,25 @@
-import LazyLoad from "react-lazyload";
+import React from "react";
 import s from "./users.module.css";
+import postStyle from "../posts/posts.module.css"
 import Script from "./script";
-import {Avatar} from "@mui/material";
 import {AiOutlineClockCircle, AiOutlineMail, AiOutlineSafetyCertificate, AiOutlineUser} from "react-icons/ai";
 import DataHelper from "../helpers/dateHelper";
 import UsersPageActions from "./UsersPageActions";
+import {LazyLoadComponent, trackWindowScroll} from "react-lazy-load-image-component";
 import {useHistory} from "react-router-dom";
 import {useSettings} from "../hooks";
+import PropTypes from "prop-types";
+import Loader from "../Loader";
+import LazyImage from "../posts/LazyImage";
+import {getElementsThemeConfig, getPropertiesConfig} from "../utils";
+import {alpha} from "@mui/material";
 
 function UserComponent(props) {
     const {
-        index,
         value,
         avatarUrl,
         searchId,
         id,
-        t
     } = props;
 
     const history = useHistory();
@@ -23,29 +27,31 @@ function UserComponent(props) {
 
     return (
         <div>
-            <LazyLoad key={"as" + index}>
+            <LazyLoadComponent placeholder={<Loader/>}>
                 <div
-                    key={"df" + index}
                     className={s.Item + " itemsUsersPage"}
                     data-id={value[5]}
                     onClick={(e) => Script.openUser(e, history)}
                     style={settings?.list?.listItemStyles}
                 >
-                    {value[3] && <Avatar
-                        src={avatarUrl}
-                        style={{
-                            height: '100%',
-                            width: '75px',
-                            marginRight: '15px',
-                            borderRadius: '5px',
-                            marginLeft: '15px'
-                        }}
-                        alt={"Avatar"}
-                    />
+                    {value[3] &&
+                        <div className={postStyle.PostItemBar}>
+                            <LazyImage
+                                imgClass={postStyle.PostAvatar}
+                                wrapperStyle={{
+                                    ...getElementsThemeConfig(settings, getPropertiesConfig(true, null,
+                                        false, null, null, alpha("#ffffff", 0.3), false))
+                                }}
+                                wrapperClassName={"post-images-lazy-cover"}
+                                imageSrc={avatarUrl}
+                            />
+                        </div>
                     }
                     <div
                         style={{
-                            borderLeft: '1px solid #ccc'
+                            borderLeft: '1px solid #ccc',
+                            flex: "10 0 0",
+                            padding: "10px"
                         }}
                     >
                         <h3>
@@ -77,9 +83,17 @@ function UserComponent(props) {
                     userName={value[0]}
                     userAvatarLink={value[3]}
                 />}
-            </LazyLoad>
+            </LazyLoadComponent>
         </div>
     )
 }
 
-export default UserComponent;
+UserComponent.propTypes = {
+    index: PropTypes.number,
+    value: PropTypes.array,
+    avatarUrl: PropTypes.string,
+    searchId: PropTypes.string,
+    id: PropTypes.number,
+};
+
+export default trackWindowScroll(UserComponent);

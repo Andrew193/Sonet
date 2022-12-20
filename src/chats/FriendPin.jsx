@@ -1,3 +1,4 @@
+import React from "react";
 import {AiOutlineLock, ImCancelCircle, IoAddSharp} from "react-icons/all";
 import {approveFriendRequest, rejectFriendRequest} from "./chatHelper";
 import {notify} from "../App";
@@ -8,6 +9,7 @@ import LazyImage from "../posts/LazyImage";
 import {getItemFromLocalStorage} from "../localStorageService";
 import {USER_INFORMATION} from "../vars";
 import {alpha} from "@mui/material";
+import PropTypes from "prop-types";
 
 function FriendPin(props) {
     const {
@@ -77,6 +79,7 @@ function FriendPin(props) {
                 </span>
                 }
                 <LazyImage imageSrc={userAvatar} onClick={() => {
+                    //spare
                 }} imgClass={"conversationImg"}
                            wrapperStyle={{boxShadow: ` ${alpha(isOnline ? "#008000" : "#ff0000", 0.8)} 0px 0px 8px 0px`}}
                 />
@@ -145,5 +148,18 @@ function FriendPin(props) {
         </>
     )
 }
+
+FriendPin.propTypes = {
+    friendName: PropTypes.string,
+    approved: PropTypes.bool,
+    requestMode: PropTypes.any,
+    receiverId: PropTypes.number,
+    requestSendById: PropTypes.number,
+    setConversations: PropTypes.func,
+    setPossibleMates: PropTypes.func,
+    id: PropTypes.number,
+    userAvatar: PropTypes.any,
+    isOnline: PropTypes.bool
+};
 
 export default FriendPin;

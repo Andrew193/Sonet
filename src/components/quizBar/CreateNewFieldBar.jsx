@@ -1,11 +1,13 @@
+import React from "react";
 import quizStyle from "./quiz.module.css";
 import {getElementsThemeConfig, getPropertiesConfig} from "../../utils";
 import {useSettings} from "../../hooks";
 import {AiOutlinePlusCircle} from "react-icons/all";
 import {useEffect, useMemo, useState} from "react";
 import {withDelay} from "../../app/helpers";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import {setPostInformation} from "../../app/postReducer";
+import PropTypes from "prop-types";
 
 function getInputColor(optionsLength) {
     return {
@@ -83,6 +85,10 @@ function CreateNewFieldBar(props) {
             </form>
         </>
     )
+}
+
+CreateNewFieldBar.propTypes = {
+    setHeaderFields: PropTypes.func
 }
 
 export default CreateNewFieldBar;

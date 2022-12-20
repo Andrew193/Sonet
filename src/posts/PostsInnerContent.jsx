@@ -2,11 +2,10 @@ import s from "./posts.module.css"
 import PostItem from "./PostItem";
 import {useEffect, useState, useMemo} from "react";
 import commentsStyle from "../components/comments/comments.module.css";
-import LazyLoad, {forceCheck} from 'react-lazyload';
 import {v4 as uuidv4} from 'uuid';
+import React from "react";
 import {useSettings} from "../hooks";
-
-forceCheck();
+import PropTypes from "prop-types";
 
 function ClearPosts(props) {
     const {
@@ -37,14 +36,20 @@ function ClearPosts(props) {
         ))
     }, [JSON.stringify(toMake), settings])
 
-    const postsLine = useMemo(() => !!posts ? posts?.map((post) => <LazyLoad
-        key={uuidv4()}>{post}</LazyLoad>) : [], [posts]);
+    const postsLine = useMemo(() => posts ? posts?.map((post) => post) : [], [posts]);
 
     return (
         <div className={s.PostsCont + " onePostContainer"}>
             {postsLine}
         </div>
     )
+}
+
+ClearPosts.propTypes = {
+    toMake: PropTypes.object,
+    ignoreAppOpen: PropTypes.bool,
+    id: PropTypes.number,
+    setParentPosts: PropTypes.func
 }
 
 export default ClearPosts;

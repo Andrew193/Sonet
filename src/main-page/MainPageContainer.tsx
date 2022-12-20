@@ -1,4 +1,5 @@
 import ClearMainPage from "./ClearMainPage";
+import React from "react";
 
 export type MainPageType = {
     open?: () => void

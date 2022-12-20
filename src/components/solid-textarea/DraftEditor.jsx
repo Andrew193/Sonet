@@ -9,6 +9,7 @@ import {getStore} from "../../app/store";
 import {setPostInformation} from "../../app/postReducer";
 import {withDelay} from "../../app/helpers";
 import PossibleMentions from "./PossibleMentions";
+import PropTypes from "prop-types";
 
 export const DraftEditor = ({maxChars, name = "editorState"}) => {
     const postInformation = useSelector(store => store?.post?.postInformation);
@@ -95,3 +96,8 @@ export const DraftEditor = ({maxChars, name = "editorState"}) => {
         </div>
     );
 };
+
+DraftEditor.propTypes = {
+    maxChars: PropTypes.number,
+    name: PropTypes.string
+}

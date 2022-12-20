@@ -1,3 +1,4 @@
+import React from "react";
 import s from "./profile.module.css"
 import s2 from "../common/navigationLine/style.module.css"
 import Script from "./profileHelper"
@@ -5,6 +6,7 @@ import {useRef} from "react";
 import {AiOutlineSafetyCertificate, AiOutlineSecurityScan} from "react-icons/ai";
 import {buttonsConfig} from "../../create-post/CreatePostLine";
 import {useTranslation} from "react-i18next";
+import PropTypes from "prop-types";
 
 function VerificationLine(props) {
     let text = useRef();
@@ -33,7 +35,7 @@ function VerificationLine(props) {
                         Script.confirmPerson("Mconfirm", text.value, userInfo.email)
                     }}
                     style={{
-                        padding:"3px 5px"
+                        padding: "3px 5px"
                     }}
                     className={`${buttonsConfig[settings?.configs?.color[settings?.color]]}`}
                 >{t("Confirm")}</span>
@@ -52,5 +54,11 @@ function VerificationLine(props) {
         </div>
     )
 }
+
+VerificationLine.propTypes = {
+    userInfo: PropTypes.object,
+    myId: PropTypes.number,
+    settings: PropTypes.object
+};
 
 export default VerificationLine;

@@ -1,4 +1,5 @@
 import s from "./posts.module.css";
+import React from "react";
 import postsHelper, {setEmotion} from "./postsHelper";
 import {AiOutlineComment, AiOutlineDislike, AiOutlineFire, AiOutlineHeart, AiOutlineLike} from "react-icons/ai";
 import CountUp from "react-countup";
@@ -8,6 +9,7 @@ import {Context, notify} from "../App";
 import {AiOutlineStar, BiAngry, CgSmile, CgSmileSad, GiBoombox} from "react-icons/all";
 import {TabPanel} from "../components/profile/UsersActivities";
 import {Tab, Tabs} from "@mui/material";
+import PropTypes from "prop-types";
 
 const emotionsConfig = [
     {
@@ -105,12 +107,13 @@ function EmotionsLineContainer(props) {
 
     return (
         <>
-            <p style={{pointerEvents:"auto"}}>
-                <Tabs value={activeTab} onChange={handleChange} aria-label="basic tabs example" className={"tabs-custom"}>
+            <p style={{pointerEvents: "auto"}}>
+                <Tabs value={activeTab} onChange={handleChange} aria-label="basic tabs example"
+                      className={"tabs-custom"}>
                     <Tab label="Common emotions" {...a11yProps(0)}
-                         classes={{root: activeTab === 0 ? "highlight-tab":""}}/>
+                         classes={{root: activeTab === 0 ? "highlight-tab" : ""}}/>
                     <Tab label="Complex emotions" {...a11yProps(1)}
-                         classes={{root: activeTab === 1 ? "highlight-tab":""}}/>
+                         classes={{root: activeTab === 1 ? "highlight-tab" : ""}}/>
                 </Tabs>
             </p>
             <TabPanel value={activeTab} index={0}>
@@ -125,6 +128,12 @@ function EmotionsLineContainer(props) {
             </TabPanel>
         </>
     )
+}
+
+EmotionsLineContainer.propTypes = {
+    value: PropTypes.object,
+    id: PropTypes.number,
+    containerClass: PropTypes.string
 }
 
 export default EmotionsLineContainer;

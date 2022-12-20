@@ -1,6 +1,8 @@
 import Avatar from '@mui/material/Avatar';
+import React from "react";
 import {BsThreeDots} from "react-icons/all";
 import {GetInfo} from "../header/script";
+import PropTypes from "prop-types";
 
 function ProfileContainer(props) {
     const {
@@ -50,6 +52,10 @@ function ProfileContainer(props) {
             </span>
         </>
     )
+}
+
+ProfileContainer.propTypes = {
+    customStyles: PropTypes.object
 }
 
 export default ProfileContainer;

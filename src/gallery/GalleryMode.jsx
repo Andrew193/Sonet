@@ -1,8 +1,8 @@
 import s from "./gallery.module.css";
 import {Typography} from "@mui/material";
-import {useState} from "react";
+import React from "react";
 import {useTranslation} from "react-i18next";
-
+import PropTypes from "prop-types";
 
 function GalleryMode(props) {
     const {
@@ -13,9 +13,7 @@ function GalleryMode(props) {
     const {t} = useTranslation();
 
     return (
-        <Typography
-            className={s.Navigation}
-        >
+        <Typography className={s.Navigation}>
             <span
                 id={"mainPostBtn"}
                 style={{background: !selected ? "red" : ""}}
@@ -27,7 +25,7 @@ function GalleryMode(props) {
             </span>
             <span
                 id={"mainPostBtn"}
-                style={{background: !!selected ? "red" : ""}}
+                style={{background: selected ? "red" : ""}}
                 onClick={() => {
                     setSelected(1)
                 }}
@@ -36,6 +34,11 @@ function GalleryMode(props) {
             </span>
         </Typography>
     )
+}
+
+GalleryMode.propTypes = {
+    selected: PropTypes.number,
+    setSelected: PropTypes.func
 }
 
 export default GalleryMode;

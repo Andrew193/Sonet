@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from "prop-types";
 
 function Placeholder(props) {
     const {
@@ -17,6 +18,10 @@ function Placeholder(props) {
             <div/>
         </div>
     );
+}
+
+Placeholder.propTypes = {
+    id: PropTypes.number
 }
 
 export default Placeholder;

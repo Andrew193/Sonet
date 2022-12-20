@@ -1,8 +1,10 @@
+import React from "react";
 import quizStyle from "./quiz.module.css";
 import {useState} from "react";
 import {useDragAndDrop} from "../../drag-drop/useDragAndDrop";
 import ClearOuterDragAndDropContainer from "../../drag-drop/ClearOuterDragAndDropContainer";
 import CreateNewFieldBar from "./CreateNewFieldBar";
+import PropTypes from "prop-types";
 
 function QuizLine(props) {
     const {
@@ -11,6 +13,11 @@ function QuizLine(props) {
     } = props;
 
     return <div key={item?.index}>{label}</div>
+}
+
+QuizLine.propTypes = {
+    label: PropTypes.string,
+    item: PropTypes.object
 }
 
 function QuizBody() {

@@ -7,7 +7,8 @@ import ImageViewer from "react-simple-image-viewer";
 import {useCallback, useState} from "react";
 import {useRef} from "react";
 import {useTranslation} from "react-i18next";
-
+import React from "react";
+import PropTypes from "prop-types";
 
 function AvatarImageMenu(props) {
     const {
@@ -111,5 +112,15 @@ function AvatarImageMenu(props) {
         </>
     )
 }
+
+AvatarImageMenu.propTypes = {
+    anchorEl: PropTypes.object,
+    open: PropTypes.any,
+    handleClose: PropTypes.func,
+    image: PropTypes.any,
+    backStyle: PropTypes.string,
+    avatarUrl: PropTypes.any,
+    avatarId: PropTypes.string
+};
 
 export default AvatarImageMenu;

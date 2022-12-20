@@ -1,3 +1,4 @@
+import React from "react";
 import {Typography} from "@mui/material";
 import GamesList from "./GamesList";
 import withPageHeader from "../hoc/withPageHeader";
@@ -7,6 +8,7 @@ import TicTacToe from "./tic-tac/TicTacToe";
 import Game2048Container from "./2048/Game2048Container";
 import TetrisContainer from "./tetris/TetrisContainer";
 import {useTranslation} from "react-i18next";
+import PropTypes from "prop-types";
 
 function getSelectedGame(game) {
     return {
@@ -33,7 +35,7 @@ function GamesContent(props) {
     return (
         <>
             {
-                !!Game
+                Game
                     ? <Game/>
                     : <>
                         <Typography
@@ -41,7 +43,7 @@ function GamesContent(props) {
                             component={'h4'}
                             style={{
                                 margin: '10px',
-                                fontWeight:"bold"
+                                fontWeight: "bold"
                             }}
                         >{t("Choose a game")}</Typography>
 
@@ -50,6 +52,11 @@ function GamesContent(props) {
             }
         </>
     )
+}
+
+GamesContent.propTypes = {
+    match: PropTypes.object,
+    styleSettings: PropTypes.object
 }
 
 export default withRouter(withPageHeader(GamesContent, {path: "/games", Title: "Games"}));

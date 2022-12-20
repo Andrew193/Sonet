@@ -7,6 +7,7 @@ import Tic from "../images/check+circle+icon-1320184982103223133.png";
 import Tac from "../images/416-4167052_cross-sign-png-tic-tac-toe-cross-transparent.png";
 import {buttonsConfig} from "../../create-post/CreatePostLine";
 import {useTranslation} from "react-i18next";
+import PropTypes from "prop-types";
 
 const TicTacToe = () => {
     const [turn, setTurn] = useState('X')
@@ -40,7 +41,7 @@ const TicTacToe = () => {
                     squares[pattern[1]]?.props?.alt === "" ||
                     squares[pattern[2]]?.props?.alt === ""
                 ) {
-
+                    //spare
                 } else if (squares[pattern[0]]?.props?.alt === squares[pattern[1]]?.props?.alt &&
                     squares[pattern[1]]?.props?.alt === squares[pattern[2]]?.props?.alt) {
                     setWinner(squares[pattern[0]]?.props?.alt)
@@ -68,6 +69,9 @@ const TicTacToe = () => {
     const Cell = ({num}) => {
         return <td onClick={() => handleClick(num)}>{cells[num]}</td>
     };
+    Cell.propTypes = {
+        num: PropTypes.number
+    }
 
     const handleRestart = () => {
         setWinner(null)

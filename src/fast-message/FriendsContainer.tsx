@@ -42,8 +42,8 @@ function FriendsContainer(props: FriendsContainerProps) {
     const [newMessage, setNewMessage] = useState("");
     const [arrivalMessage, setArrivalMessage] = useState<ArrivalMessageType | null>(null);
     const {settings} = useSettings();
-    const [usersInChat, setUsersInChat] = useState([]);
-    const [isLoading, setIsLoading] = useState(false);
+    const [, setUsersInChat] = useState([]);
+    const [, setIsLoading] = useState(false);
 
     const {socket} = useContext(Context);
 
@@ -91,14 +91,12 @@ function FriendsContainer(props: FriendsContainerProps) {
 
     useEffect(() => {
         socket.on("updateMessages", (data) => {
-            if (!!data?.refresh) {
-                if (!!currentChat?.id) {
+            if (data?.refresh) {
+                if (currentChat?.id) {
                     getConversationById(currentChat?.id,
                         (response: { clearData: ArrivalMessageType[] }) => {
                             if (currentChat?.id) {
-                                setMessages((state) => {
-                                    return JSON.parse(JSON.stringify(response?.clearData))
-                                })
+                                setMessages(() => JSON.parse(JSON.stringify(response?.clearData)))
                             }
                         },
                         (errorMessage: ReactNode | string) => {

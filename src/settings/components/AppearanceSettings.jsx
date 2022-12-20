@@ -1,5 +1,6 @@
 import {Backdrop, Box, CircularProgress, Slider, Typography} from "@mui/material";
 import s from '../settings.module.css'
+import React from "react";
 import {useEffect, useMemo, useState} from "react";
 import {FiSettings, GiCheckMark} from "react-icons/all";
 import {getSettings, updateSettings} from "../../db";
@@ -106,7 +107,7 @@ function AppearanceSettings() {
         <>
             <Backdrop
                 sx={{color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1}}
-                open={open}
+                open={open || false}
             >
                 <CircularProgress color="inherit"/>
             </Backdrop>

@@ -9,6 +9,7 @@ import {setPostInformation} from "../../../app/postReducer";
 import {useDispatch, useSelector} from "react-redux";
 import {getStore} from "../../../app/store";
 import {Context} from "../../../App";
+import PropTypes from "prop-types";
 
 function PostButton(props) {
     const {
@@ -49,6 +50,15 @@ function PostButton(props) {
     )
 }
 
+PostButton.propTypes = {
+    disabled: PropTypes.bool,
+    customStyle: PropTypes.object,
+    setIsOpened: PropTypes.func,
+    text: PropTypes.string,
+    images: PropTypes.array,
+    setImages: PropTypes.func
+}
+
 export const Submit = (props) => {
     const {
         customStyle,
@@ -76,3 +86,10 @@ export const Submit = (props) => {
         />
     )
 };
+
+Submit.propTypes = {
+    customStyle: PropTypes.object,
+    setIsOpened: PropTypes.func,
+    images: PropTypes.array,
+    setImages: PropTypes.func
+}

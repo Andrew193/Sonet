@@ -5,6 +5,8 @@ import {Box, Tooltip} from "@mui/material";
 import {useState} from "react";
 import {TooltipButtonCover} from "../components/tooltip-cover/TooltipButtonCover";
 import textareaStyles from "../components/solid-textarea/solid-textarea.module.css";
+import React from "react";
+import PropTypes from "prop-types";
 
 function MatesContainer(props) {
     const {
@@ -41,5 +43,10 @@ function MatesContainer(props) {
         </>
     )
 }
+
+MatesContainer.propTypes = {
+    matesList: PropTypes.array,
+    isLoading: PropTypes.bool
+};
 
 export default MatesContainer;

@@ -61,10 +61,7 @@
 }
 
 .Item img {
-    height: 75px;
-    width: 80px;
-    max-width: 80px;
-    object-fit: contain;
+    height: 130px;
     box-shadow: 0 5px 10px 0 rgb(107 159 199 / 34%);
     border-radius: 5px;
 }

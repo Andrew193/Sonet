@@ -1,3 +1,4 @@
+import React from "react";
 import withPageHeader from "../hoc/withPageHeader"
 import ClearUsers from "./ClearUsers";
 import FindUserLine from './SearchBar';
@@ -5,6 +6,7 @@ import {AiOutlineArrowLeft} from "react-icons/all";
 import {useState, useRef} from "react";
 import {useOutsideClick} from "../hooks";
 import {alpha} from "@mui/material";
+import PropTypes from "prop-types";
 
 function UsersPageContent(props) {
     const {
@@ -78,7 +80,7 @@ function UsersPageContent(props) {
             >
             <AiOutlineArrowLeft
                 onClick={() => {
-                    setIsSearchBarOpened((state) => true)
+                    setIsSearchBarOpened(() => true)
                 }}
             />
             </span>
@@ -105,5 +107,13 @@ function UsersPageContent(props) {
             </div>
         </>)
 }
+
+UsersPageContent.propTypes = {
+    users: PropTypes.object,
+    setOpen: PropTypes.func,
+    open: PropTypes.bool,
+    settings: PropTypes.object,
+    id: PropTypes.number
+};
 
 export default withPageHeader(UsersPageContent, {path: "/users", Title: "Users"});

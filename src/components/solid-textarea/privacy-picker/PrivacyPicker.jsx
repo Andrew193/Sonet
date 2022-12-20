@@ -7,6 +7,7 @@ import PrivacySVG_1 from "./images/privacy-following.svg";
 import PrivacySVG_2 from "./images/privacy-mentioned.svg";
 import {setPostInformation} from "../../../app/postReducer";
 import {useDispatch} from "react-redux";
+import PropTypes from "prop-types";
 
 const labels = {
     0: "Everyone",
@@ -66,6 +67,10 @@ export const PrivacyPicker = ({children}) => {
     );
 };
 
+PrivacyPicker.propTypes = {
+    children: PropTypes.node
+}
+
 function RadioWithLabel({
                             id,
                             img,
@@ -83,6 +88,15 @@ function RadioWithLabel({
             </label>
         </div>
     );
+}
+
+RadioWithLabel.propTypes = {
+    id: PropTypes.string,
+    img: PropTypes.string,
+    children: PropTypes.node,
+    value: PropTypes.string,
+    checked: PropTypes.bool,
+    name: PropTypes.string
 }
 
 const useClickOutPicker = (cb) => {

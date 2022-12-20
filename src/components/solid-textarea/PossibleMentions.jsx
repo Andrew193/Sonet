@@ -6,6 +6,7 @@ import {handleOnMentionSelect} from "./possibleMentionsHelper";
 import {getItemFromLocalStorage} from "../../localStorageService";
 import LazyImage from "../../posts/LazyImage";
 import {USER_INFORMATION} from "../../vars";
+import PropTypes from "prop-types";
 
 function PossibleMentions(props) {
     const {
@@ -25,8 +26,7 @@ function PossibleMentions(props) {
             ? <p key={person.id}
                  onClick={() => handleOnMentionSelect(selectedMention, person, setValue, onChangeHandler, postInformation, setPossibleMentions, value)}
             >
-                <LazyImage imageSrc={person.avatar} onClick={() => {
-                }} imgClass={"conversationImg"}/>
+                <LazyImage imageSrc={person.avatar} imgClass={"conversationImg"}/>
                 {person.userName}</p> : null), [possibleMentions])
 
     return (
@@ -47,6 +47,16 @@ function PossibleMentions(props) {
             </div> : null}
         </>
     )
+}
+
+PossibleMentions.propTypes = {
+    possibleMentions: PropTypes.array,
+    value: PropTypes.object,
+    setValue: PropTypes.func,
+    onChangeHandler: PropTypes.func,
+    postInformation: PropTypes.object,
+    setPossibleMentions: PropTypes.func,
+    selectedMention: PropTypes.string,
 }
 
 export default PossibleMentions;

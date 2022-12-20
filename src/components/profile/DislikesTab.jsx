@@ -1,10 +1,9 @@
+import React from "react";
 import {TabPanel} from "./UsersActivities";
 import {Typography} from "@mui/material";
-import {forceCheck} from 'react-lazyload';
 import {TbHeartBroken} from "react-icons/all";
 import {TabContainer, useEmotionConfig} from "./LikesTab";
-
-forceCheck();
+import PropTypes from "prop-types";
 
 function DislikesTab(props) {
     const {
@@ -31,5 +30,11 @@ function DislikesTab(props) {
         </TabPanel>
     )
 }
+
+DislikesTab.propTypes = {
+    value: PropTypes.any,
+    dislikeConfig: PropTypes.array,
+    avatarUrl: PropTypes.string
+};
 
 export default DislikesTab;

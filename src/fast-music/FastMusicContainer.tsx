@@ -43,14 +43,14 @@ function FastMusicContainer(props: FastElementsPropsType) {
             style={{
                 bottom: isOpened ? "0px" : "-400px",
                 minWidth: isOpened ? "300px" : "50px",
-                visibility: !!opened ? "visible" : "hidden"
+                visibility: opened ? "visible" : "hidden"
             }}
         >
             {dropSelection}
             <style>
                 {`
                 .${s.Container} {
-                z-index:${!!opened ? "100" : "10"};
+                z-index:${opened ? "100" : "10"};
                 }
                 .${s.Container} {
                 box-shadow: 0px 0px 8px 0px ${alpha(settings?.configs?.color[settings?.color] || "#b6c0f3", 0.8)} !important;

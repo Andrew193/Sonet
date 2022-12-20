@@ -1,5 +1,6 @@
 import {styled} from "@mui/material/styles";
 import MuiAccordion from "@mui/material/Accordion";
+import React from "react";
 
 const Accordion = styled((props) => (
     <MuiAccordion

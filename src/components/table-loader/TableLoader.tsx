@@ -1,3 +1,4 @@
+import React from "react";
 import {Box, Typography} from "@mui/material";
 import Loader from "../common/spinner/Spinner";
 import styles from "./table-loader.module.css";
@@ -10,7 +11,6 @@ function TableLoader(props: TableLoaderPropsType) {
     const {
         loaderLabel
     } = props;
-
 
     return (
         <Box className={styles.Container}>

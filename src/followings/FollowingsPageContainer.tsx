@@ -1,3 +1,4 @@
+import React from "react";
 import {withRouter} from "react-router-dom";
 import FollowingsPageContent from "./FollowingsPageContent";
 import {FollowersFollowingCover, FollowersType} from "../followers/FollowersPageContainer";

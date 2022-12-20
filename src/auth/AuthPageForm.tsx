@@ -1,3 +1,4 @@
+import React from "react";
 import s from "./auth.module.css";
 import {alpha} from "@mui/material";
 import {hexToRgb as muiHexToRgb} from "@mui/system/colorManipulator";

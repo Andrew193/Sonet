@@ -1,5 +1,6 @@
 import {downloadFileVersion2, getElementsThemeConfig} from "../utils";
 import s from "./posts.module.css";
+import React from "react";
 import {Box, ListItemIcon, Typography} from "@mui/material";
 import {AiOutlineDownload, AiOutlineHighlight} from "react-icons/ai";
 import {deletePostById, refresh, updatePostById} from "./postsHelper";
@@ -10,6 +11,7 @@ import {useEffect, useState} from "react";
 import HttpHelper from "../helpers/httpHelper";
 import {getItemFromLocalStorage} from "../localStorageService";
 import {USER_INFORMATION} from "../vars";
+import PropTypes from "prop-types";
 
 function PostItemActions(props) {
     const {
@@ -53,7 +55,7 @@ function PostItemActions(props) {
     return (
         <Box
             style={{
-                display: `${!!anchorEl ? "display" : "none"}`,
+                display: `${anchorEl ? "display" : "none"}`,
                 ...getElementsThemeConfig(settings)
             }}
             key={anchorEl}
@@ -167,6 +169,22 @@ function PostItemActions(props) {
             }
         </Box>
     )
+}
+
+PostItemActions.propTypes = {
+    bookmark: PropTypes.bool,
+    anchorEl: PropTypes.object,
+    settings: PropTypes.object,
+    handleClose: PropTypes.func,
+    wrapperRef: PropTypes.object,
+    imagesForPreview: PropTypes.array,
+    t: PropTypes.func,
+    setPost: PropTypes.func,
+    socket: PropTypes.object,
+    setIsTextUpdate: PropTypes.func,
+    setParentPosts: PropTypes.func,
+    value: PropTypes.object,
+    index: PropTypes.number
 }
 
 export default PostItemActions;

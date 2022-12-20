@@ -1,9 +1,8 @@
+import React from "react";
 import {TabPanel} from "./UsersActivities";
 import {useEffect, useMemo, useState} from "react";
 import {Avatar, Box, Typography} from "@mui/material";
-import LazyLoad from 'react-lazyload';
 import s from "./profile.module.css"
-import {forceCheck} from 'react-lazyload';
 import DateHelper from "../../helpers/dateHelper";
 import postsHelper, {replaceTags} from "../../posts/postsHelper"
 import {notify} from "../../App";
@@ -14,8 +13,7 @@ import {getTabElementsThemeConfig} from "../../utils";
 import {useSettings} from "../../hooks";
 import TableLoader from "../table-loader/TableLoader";
 import {useTranslation} from "react-i18next";
-
-forceCheck();
+import PropTypes from "prop-types";
 
 const actionIconSetup = (() => ({
     style: {
@@ -117,15 +115,20 @@ export function LikeDislikeTab({information, avatarUrl, isLike}) {
     )
 }
 
+LikeDislikeTab.propTypes = {
+    information: PropTypes.object,
+    avatarUrl: PropTypes.string,
+    isLike: PropTypes.bool
+};
+
 export function useEmotionConfig(config, avatarUrl, isLike) {
-    return useMemo(() => !!config?.length ? config?.map((configElement, index) =>
-        <LazyLoad key={index}>
+    return useMemo(() => config?.length ? config?.map((configElement, index) =>
             <LikeDislikeTab
+                key={index}
                 information={configElement}
                 avatarUrl={avatarUrl}
                 isLike={isLike}
             />
-        </LazyLoad>
     ) : null, [config]);
 }
 
@@ -148,7 +151,7 @@ export function TabContainer(props) {
     return (
         <>
             {
-                !!valueLine?.length
+                valueLine?.length
                     ? valueLine
                     : valueLine === null && spareLoader ?
                         <TableLoader loaderLabel={t("We are loading your pretty content")}/> :
@@ -157,6 +160,11 @@ export function TabContainer(props) {
         </>
     )
 }
+
+TabContainer.propTypes = {
+    valueLine: PropTypes.array,
+    children: PropTypes.node
+};
 
 function LikesTab(props) {
     const {
@@ -183,5 +191,11 @@ function LikesTab(props) {
         </TabPanel>
     )
 }
+
+LikesTab.propTypes = {
+    value: PropTypes.any,
+    likesConfig: PropTypes.array,
+    avatarUrl: PropTypes.string
+};
 
 export default LikesTab;

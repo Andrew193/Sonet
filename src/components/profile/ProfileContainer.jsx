@@ -1,3 +1,4 @@
+import React from "react";
 import {useHistory, withRouter} from "react-router";
 import s from "./profile.module.css";
 import Script from "./profileHelper"
@@ -8,6 +9,7 @@ import {getEmptyElementsThemeConfig} from "../../utils";
 import {useSettings} from "../../hooks";
 import {getItemFromLocalStorage} from "../../localStorageService";
 import {USER_INFORMATION} from "../../vars";
+import PropTypes from "prop-types";
 
 function Profile(props) {
     const userId = props.match.params.id;
@@ -48,5 +50,9 @@ function Profile(props) {
         </div>
     )
 }
+
+Profile.propTypes = {
+    match: PropTypes.object,
+};
 
 export default withRouter(Profile);

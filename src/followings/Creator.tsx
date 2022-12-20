@@ -1,3 +1,4 @@
+import React from "react";
 import {AiOutlineMail, AiOutlineNumber} from "react-icons/ai";
 import {useHistory} from "react-router";
 import Script from "../users/script"
@@ -68,7 +69,7 @@ function FollowersCreator(props: FollowersCreatorType) {
     } = props;
 
     const mappedUsersList = useMemo(() => usersList.map((value: FollowersUsers[number], index: number) => <Item
-        index={index} value={value}/>), [usersList]);
+        index={index} value={value} key={index}/>), [usersList]);
 
     return (<>{mappedUsersList}</>)
 }

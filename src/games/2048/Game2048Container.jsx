@@ -1,5 +1,6 @@
 import "./2048.css";
-import {useEffect, useMemo, useState} from "react";
+import React from "react";
+import {useEffect, useState} from "react";
 import {ImStarEmpty} from "react-icons/all";
 import {getSettings} from "../../db";
 import {alpha, hexToRgb as muiHexToRgb} from "@mui/material"
@@ -321,6 +322,7 @@ function Game2048Container() {
 
         return () => {
             document.onkeydown = () => {
+                //spare
             }
         }
     }, [])

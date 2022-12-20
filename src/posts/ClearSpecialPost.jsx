@@ -1,10 +1,11 @@
 import withPageHeader from "../hoc/withPageHeader"
-import SortLine from "./SortLine.jsx";
+import React from "react";
 import ClearPost from "./PostsInnerContent"
 import {useContext} from "react";
 import {Context} from "../App";
 import FiltersBar from "./FiltersBar";
 import {useSettings} from "../hooks";
+import PropTypes from "prop-types";
 
 function ClearSpecialPost(props) {
     const {
@@ -27,6 +28,11 @@ function ClearSpecialPost(props) {
             />
         </>
     )
+}
+
+ClearSpecialPost.propTypes = {
+    posts: PropTypes.object,
+    id: PropTypes.number
 }
 
 export default withPageHeader(ClearSpecialPost, {path: "/posts", Title: "Posts"});

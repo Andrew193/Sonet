@@ -1,9 +1,11 @@
 import {alpha, CardActions, Typography} from "@mui/material";
 import {buttonsConfig} from "../create-post/CreatePostLine";
 import {useState} from "react";
+import React from "react";
 import {useTranslation} from "react-i18next";
 import InputEmoji from 'react-input-emoji';
 import {useSettings} from "../hooks";
+import PropTypes from "prop-types";
 
 function ClearModalUser(props) {
     const {
@@ -15,7 +17,7 @@ function ClearModalUser(props) {
         pas,
         Script,
         click,
-        userId
+        userId,
     } = props;
 
     const {settings} = useSettings();
@@ -102,12 +104,23 @@ function ClearModalUser(props) {
                             description: text
                         }, click)
                     }}
-                >
-                    Submit
+                >Submit
                 </button>
             </CardActions>
         </div>
     )
+}
+
+ClearModalUser.propTypes = {
+    setName: PropTypes.func,
+    setEmail: PropTypes.func,
+    setPassword: PropTypes.func,
+    nm: PropTypes.string,
+    em: PropTypes.string,
+    pas: PropTypes.string,
+    Script: PropTypes.object,
+    click: PropTypes.func,
+    userId: PropTypes.number
 }
 
 export default ClearModalUser;

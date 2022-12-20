@@ -1,3 +1,4 @@
+import React from "react";
 import s from "../settings/settings.module.css";
 import {Box} from "@mui/material";
 import {useCallback, useEffect, useState} from "react";
@@ -30,7 +31,6 @@ function MusicContainerPage() {
 
     const createNewSong = useCallback(() => {
         function readFile() {
-            debugger
             updateSettings({
                 ...settingsConfig.settings,
                 music: [...settingsConfig.settings?.music, file],

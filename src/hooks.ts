@@ -28,7 +28,7 @@ export interface UseSettingsInterface {
     list: {
         viewType: string,
         borderRadius: number,
-        listItemStyles: {},
+        listItemStyles: Record<string, unknown>,
         margin: number,
         padding: number,
         boxShadow: boolean
@@ -42,7 +42,7 @@ export interface UseSettingsInterface {
 }
 
 export const useSettings =
-    (updateKey: number = 1) => {
+    (updateKey = 1) => {
         const [settings, setSettings] = useState<UseSettingsInterface>(defaultSettingsConfig);
 
         useEffect(() => {

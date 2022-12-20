@@ -27,7 +27,6 @@ function NotificationsContainer() {
         </Typography>)
     }, [notificationsToShow])
 
-    console.log(notificationsToShow)
     return (
         <Box className={s.Container} style={{...getEmptyElementsThemeConfig(settings)}}>
             <MaintainedPageHeader path={headerListLinks.base} linkPath={headerListLinks.notifications}

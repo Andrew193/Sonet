@@ -1,10 +1,11 @@
+import React from "react";
 import s from "./comments.module.css"
 import DataHelper from "../../helpers/dateHelper"
 import {v4 as uuidv4} from 'uuid';
 import {useEffect, useMemo, useState} from "react";
-import LazyLoad from 'react-lazyload';
 import {Avatar, Box} from "@mui/material";
-import profileHelper from "../profile/profileHelper";
+import PropTypes from "prop-types";
+import {getUserAvatar} from "../../posts/postsHelper";
 
 function CommentItem(props) {
     const {
@@ -15,19 +16,7 @@ function CommentItem(props) {
     const [avatarUrl, setAvatarUrl] = useState("");
 
     useEffect(() => {
-        async function getUserAvatar() {
-            if (value?.userId && !avatarUrl) {
-                const response = await profileHelper.getUser(value?.userId);
-
-                try {
-                    setAvatarUrl(JSON.parse(response?.data?.user?.avatar)?.webContentLink)
-                } catch (error) {
-                    setAvatarUrl(response?.data?.user?.avatar)
-                }
-            }
-        }
-
-        getUserAvatar();
+        getUserAvatar(avatarUrl, setAvatarUrl, value?.userId)
     }, [value]);
 
     return (
@@ -35,9 +24,7 @@ function CommentItem(props) {
             key={uuidv4()}
             style={{background: value?.id === commentId ? "#f3bdbd" : ""}}
         >
-            <Box
-                className={s.CommentsAvatarLine}
-            >
+            <Box className={s.CommentsAvatarLine}>
                 <Avatar
                     src={avatarUrl}
                     className={"conversationImg"}
@@ -50,6 +37,11 @@ function CommentItem(props) {
     )
 }
 
+CommentItem.propTypes = {
+    value: PropTypes.object,
+    commentId: PropTypes.number
+};
+
 function Comments(props) {
     const {
         toMake,
@@ -57,14 +49,11 @@ function Comments(props) {
     } = props;
 
     const postComments = useMemo(() => toMake.map((value, index) =>
-        <LazyLoad
+        <CommentItem
             key={index}
-        >
-            <CommentItem
-                value={value}
-                commentId={commentId}
-            />
-        </LazyLoad>
+            value={value}
+            commentId={commentId}
+        />
     ), [JSON.stringify(toMake)]);
 
     return (
@@ -73,5 +62,10 @@ function Comments(props) {
         </div>
     )
 }
+
+Comments.propTypes = {
+    toMake: PropTypes.array,
+    commentId: PropTypes.number
+};
 
 export default Comments;

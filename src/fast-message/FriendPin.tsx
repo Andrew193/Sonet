@@ -1,3 +1,4 @@
+import React from "react";
 import {rejectFriendRequest} from "../chats/chatHelper";
 import {notify} from "../App";
 import {ImCancelCircle} from "react-icons/all";
@@ -7,11 +8,11 @@ import {getUserAvatar} from "../posts/postsHelper";
 
 type FriendPinProps = {
     index: number,
-    setConversations: Function,
-    setCurrentChat: Function,
+    setConversations: (parameter: (parameter: FriendTypeForConversations[]) => any) => any,
+    setCurrentChat: React.Dispatch<React.SetStateAction<any | null>>,
     receiverName?: string,
     receiverId: number,
-    requestSendById?: number,
+    requestSendById?: any,
     userId: number,
 }
 
@@ -42,8 +43,13 @@ function FriendPin(props: FriendPinProps) {
                 className={`conversation`}
                 onClick={() => {
                     setCurrentChat({
-                        members: [+receiverId, +requestSendById!],
-                        id: `${[receiverId, requestSendById].sort((a, b): number => a! - b!).join("")}`,
+                        members: [+receiverId, +(requestSendById || 0)],
+                        id: `${[receiverId, requestSendById].sort((a, b): number => {
+                            if (a && b) {
+                                return a - b
+                            }
+                            return 0;
+                        }).join("")}`,
                         currentIndex: index
                     })
                 }}
@@ -79,8 +85,6 @@ function FriendPin(props: FriendPinProps) {
                 </span>
                 <LazyImage
                     imageSrc={avatar}
-                    onClick={() => {
-                    }}
                     key={avatar}
                     imgClass={"conversationImg"}
                 />

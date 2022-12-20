@@ -1,4 +1,5 @@
 import {Box, Typography} from "@mui/material";
+import React from "react";
 import s from '../settings.module.css'
 import {useEffect, useState} from "react";
 import {getSettings} from "../../db";

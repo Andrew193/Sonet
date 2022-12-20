@@ -1,5 +1,6 @@
 import {Avatar, Badge, Box, Typography} from "@mui/material";
 import style from "./above.module.css";
+import React from "react";
 import {IoMdNotificationsOutline, MdOutlineNightlight} from "react-icons/all";
 import {CreatePost} from "../../header/HeaderContainerPage";
 import {getTabElementsThemeConfig} from "../../utils";

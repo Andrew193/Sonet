@@ -1,3 +1,4 @@
+import React from "react";
 import dateHelper from "../helpers/dateHelper";
 import {AiOutlineDelete, AiOutlineEdit, FiCopy} from "react-icons/all";
 import {Avatar, Tooltip} from "@mui/material";
@@ -5,6 +6,7 @@ import {useCallback, useContext, useState} from "react";
 import {copyToClipboard, deleteMessageById} from "./chatHelper";
 import {Context, notify} from "../App";
 import UpdateChatMessageModal from "./UpdateChatMessageModal";
+import PropTypes from "prop-types";
 
 const actionsConfig = [
     {label: "Copy to buffer", icon: <FiCopy/>, type: "copy", onClick: ({messageText}) => copyToClipboard(messageText)},
@@ -88,5 +90,13 @@ function Message(props) {
         </div>
     )
 }
+
+Message.propTypes = {
+    message: PropTypes.any,
+    own: PropTypes.bool,
+    avatar: PropTypes.any,
+    receiverId: PropTypes.number,
+    setMessages: PropTypes.func
+};
 
 export default Message;

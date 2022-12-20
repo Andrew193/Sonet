@@ -1,3 +1,4 @@
+import React from "react";
 import {Box, ListItemIcon, Menu, MenuItem, Typography} from "@mui/material";
 import {AiOutlineDelete, AiOutlineMedium, BsGear, TbLetterB} from "react-icons/all";
 import s from "./gallery.module.css";
@@ -5,7 +6,6 @@ import {useMemo, useState} from "react";
 import {useTranslation} from "react-i18next";
 
 function GalleryActions() {
-
     const [anchorEl, setAnchorEl] = useState(null);
     const [size, setSize] = useState({min: 190, max: 135})
     const [hideDescription, setHideDescription] = useState(false)
@@ -21,7 +21,7 @@ function GalleryActions() {
 
     const cssStyleString = useMemo(() => {
         return `
-                .${s.ImagesContainer} > p > div > div {
+                .gallery-lazy-img {
                 min-height: ${size.min}px;
                 min-width: ${size.max}px;
                 }
@@ -45,7 +45,7 @@ function GalleryActions() {
                 className={s.ImageMenu}
             >
                 <MenuItem onClick={() => {
-
+                    //spare
                 }}>
                     <ListItemIcon>
                         <AiOutlineDelete/>

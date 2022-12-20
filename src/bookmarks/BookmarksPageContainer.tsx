@@ -33,9 +33,11 @@ function Bookmarks() {
                 id={id}
                 settings={settings}
                 setPost={() => {
+                    //spare
                 }}
                 index={index}
                 setParentPosts={() => {
+                    //spare
                 }}
                 ignoreAppOpen
                 bookmark={bookmark.id}

@@ -1,8 +1,7 @@
 import {useEffect, useState} from "react";
 import s from "./top-info.module.css"
-import Script from "./script.js"
 import Skeleton from 'react-loading-skeleton';
-import PostCreator from "./creators/post";
+import React from "react";
 import {alpha} from "@mui/material";
 import {useTranslation} from "react-i18next";
 import {headerListLinks} from "../../vars";
@@ -24,7 +23,6 @@ function TopUsers() {
 
     const {t} = useTranslation();
 
-    console.log(state)
     return (
         <div
             className={!state ? s.Tip + " " + s.Center : s.Tip}

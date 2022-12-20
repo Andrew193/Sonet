@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 function ProgressBar(props) {
     const {
@@ -46,5 +47,16 @@ function ProgressBar(props) {
         </div>
     );
 }
+
+ProgressBar.propTypes = {
+    percent: PropTypes.number,
+    label: PropTypes.string,
+    height: PropTypes.string,
+    width: PropTypes.string,
+    radius: PropTypes.string,
+    borderColor: PropTypes.string,
+    fillColor: PropTypes.string,
+    colorShift: PropTypes.bool
+};
 
 export default ProgressBar;

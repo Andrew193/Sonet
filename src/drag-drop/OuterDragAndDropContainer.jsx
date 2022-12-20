@@ -1,5 +1,6 @@
 import Placeholder from "./Placeholder";
 import React from "react";
+import PropTypes from "prop-types";
 
 function OuterDragAndDropContainer(props) {
     const {
@@ -18,6 +19,11 @@ function OuterDragAndDropContainer(props) {
                 </DragAndDropConfig.SortableListContainer>
         }
     </>)
+}
+
+OuterDragAndDropContainer.propTypes = {
+    isOrderChangeMode: PropTypes.bool,
+    DragAndDropConfig: PropTypes.object
 }
 
 export default OuterDragAndDropContainer;

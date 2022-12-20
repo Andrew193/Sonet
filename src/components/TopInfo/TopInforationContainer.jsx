@@ -3,6 +3,7 @@ import s from "./top-info.module.css"
 import {hexToRgb} from "@mui/material";
 import {useSettings} from "../../hooks";
 import TopUsers from "./TopUsers";
+import React from "react";
 
 function TopInfo() {
     const {settings} = useSettings();

@@ -1,3 +1,4 @@
+import React from "react";
 import s from "./gallery.module.css";
 import {Box, Typography} from "@mui/material";
 import FoldersActionsBar from "./FoldersActionsBar";
@@ -6,6 +7,7 @@ import {getItemFromLocalStorage} from "../localStorageService";
 import {USER_INFORMATION} from "../vars";
 import EmptySection from "../components/common/empty-section/EmptySection";
 import SolidTextareaStyle from "../components/solid-textarea/solid-textarea.module.css";
+import PropTypes from "prop-types";
 
 function FoldersInnerContent(props) {
     const {
@@ -74,6 +76,15 @@ function FoldersInnerContent(props) {
             </Box>
         </>
     )
+}
+
+FoldersInnerContent.propTypes = {
+    folderName: PropTypes.string,
+    isFolderContent: PropTypes.bool,
+    setOpenedFolderImage: PropTypes.func,
+    configuredFolderImages: PropTypes.array,
+    configuredFolders: PropTypes.array,
+    setFolders: PropTypes.func
 }
 
 export default FoldersInnerContent;

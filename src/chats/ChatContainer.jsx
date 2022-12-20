@@ -1,3 +1,4 @@
+import React from "react";
 import {useEffect, useContext, useState, useMemo} from "react";
 import "./messenger.css";
 import {alpha, hexToRgb} from "@mui/material";
@@ -35,12 +36,12 @@ function ChatContainer() {
     useEffect(() => {
         socket.on("updateMessages", (data) => {
 
-            if (!!data?.refresh) {
-                if (!!currentChat?.id) {
+            if (data?.refresh) {
+                if (currentChat?.id) {
                     getConversationById(currentChat?.id,
                         (response) => {
                             if (currentChat?.id) {
-                                setMessages((state) => {
+                                setMessages(() => {
                                     return JSON.parse(JSON.stringify(response?.clearData))
                                 })
                             }

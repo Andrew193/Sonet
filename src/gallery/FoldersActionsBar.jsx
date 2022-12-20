@@ -1,13 +1,15 @@
+import React from "react";
 import s from "../settings/settings.module.css";
 import {buttonsConfig} from "../create-post/CreatePostLine";
 import {VscEmptyWindow} from "react-icons/all";
 import {alpha, Box, hexToRgb, Typography} from "@mui/material";
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import {useTranslation} from "react-i18next";
-import {getSettings} from "../db";
 import {addPhotoToFolder} from "./galleryHelper";
 import SolidTextareaStyle from "../components/solid-textarea/solid-textarea.module.css"
 import InputEmoji from 'react-input-emoji';
+import PropTypes from "prop-types";
+import {useSettings} from "../hooks";
 
 function FoldersActionsBar(props) {
     const {
@@ -15,20 +17,10 @@ function FoldersActionsBar(props) {
         setFolders
     } = props;
 
-    const [settings, setSettings] = useState({})
+    const {settings} = useSettings();
     const [newFolderText, setNewFolderText] = useState("");
     const [isTextUpdate, setIsTextUpdate] = useState(false);
     const {t} = useTranslation();
-
-    useEffect(() => {
-        async function getSettingsConfig() {
-            const response = await getSettings();
-
-            setSettings(response[0]);
-        }
-
-        getSettingsConfig();
-    }, [])
 
     return (
         <div>
@@ -58,10 +50,7 @@ function FoldersActionsBar(props) {
             min-width: 45px !important;
             }
             `}</style>
-
-                {isTextUpdate && <div
-                    className={"inputCover"}
-                >
+                {isTextUpdate && <div className={"inputCover"}>
                     <div
                         style={{
                             width: "100%",
@@ -93,7 +82,7 @@ function FoldersActionsBar(props) {
                         }}
                         onClick={() => {
                             setIsTextUpdate(false);
-                            if (!!newFolderText) {
+                            if (newFolderText) {
                                 addPhotoToFolder({
                                     src: "",
                                     userId: userId,
@@ -138,6 +127,11 @@ function FoldersActionsBar(props) {
             <div className={SolidTextareaStyle.ThematicBreak}/>
         </div>
     )
+}
+
+FoldersActionsBar.propTypes = {
+    userId: PropTypes.number,
+    setFolders: PropTypes.func
 }
 
 export default FoldersActionsBar;

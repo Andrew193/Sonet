@@ -1,3 +1,4 @@
+import React from "react";
 import {useMemo} from "react";
 import GamePreviewTile from "./GamePreviewTile";
 import Tic from "./images/tic.png";
@@ -5,6 +6,7 @@ import Image2048 from './images/2048.avif';
 import Tetris from './images/tetris.png'
 import {Box} from "@mui/material";
 import s from './games.module.css';
+import PropTypes from "prop-types";
 
 const gamesLisConfig = [
     {
@@ -51,6 +53,9 @@ function GamesList(props) {
             {games}
         </Box>
     )
+}
+GamesList.propTypes = {
+    styleSettings: PropTypes.object
 }
 
 export default GamesList;

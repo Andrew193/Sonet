@@ -1,3 +1,4 @@
+import React from "react";
 import withPageHeader from "../hoc/withPageHeader";
 import FollowersCreator from "../followings/Creator";
 import {FollowersPropsType} from "./FollowersPageContainer";

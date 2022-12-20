@@ -1,3 +1,4 @@
+import React from "react";
 import {RouteComponentProps, withRouter} from "react-router-dom";
 import FollowersPageContent from "./FollowersPageContent";
 import s from "../followings/followers.module.css"
@@ -26,7 +27,7 @@ export type FollowersPropsType = {
     users: FollowersUsers,
 }
 
-export type FollowersType = RouteComponentProps<{}, {}, FollowersPropsType>;
+export type FollowersType = RouteComponentProps<any, Record<string, unknown>, FollowersPropsType>;
 
 function Followers(props: FollowersType) {
     const users = props.location.state.users;

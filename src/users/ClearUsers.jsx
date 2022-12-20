@@ -1,20 +1,22 @@
 import {useHistory} from "react-router-dom";
 import s from "./users.module.css"
+import React from "react";
 import {useEffect, useMemo, useState} from "react";
 import {useTranslation} from "react-i18next";
-import {forceCheck} from 'react-lazyload';
 import UserComponent from "./UserComponent";
 import {USER_INFORMATION} from "../vars";
 import {getItemFromLocalStorage} from "../localStorageService";
-
-forceCheck();
+import PropTypes from "prop-types";
+import {trackWindowScroll, LazyLoadComponent} from "react-lazy-load-image-component";
+import Loader from "../Loader";
 
 function ClearUsers(props) {
     const {
         isSearchBarOpened,
         setOpen,
         settings,
-        searchId
+        searchId,
+        toMake
     } = props;
 
     const history = useHistory();
@@ -28,7 +30,7 @@ function ClearUsers(props) {
     useEffect(() => {
         setOpen(() => false);
 
-        setParsedUsers(() => props?.toMake?.users?.map((value, index) => {
+        setParsedUsers(() => toMake?.users?.map((value, index) => {
             let avatarUrl = null;
 
             try {
@@ -37,17 +39,24 @@ function ClearUsers(props) {
                 avatarUrl = value[3];
             }
 
-            return <UserComponent
-                key={index}
-                index={index}
-                value={value}
-                avatarUrl={avatarUrl}
-                searchId={searchId}
-                id={id}
-                t={t}
-            />
+            return (
+                <LazyLoadComponent
+                    key={index + "_lazy"}
+                    placeholder={<Loader/>}
+                >
+                    <UserComponent
+                        key={index}
+                        index={index}
+                        value={value}
+                        avatarUrl={avatarUrl}
+                        searchId={searchId}
+                        id={id}
+                        t={t}
+                    />
+                </LazyLoadComponent>
+            )
         }))
-    }, [history, id, props?.toMake?.users, setOpen])
+    }, [history, id, toMake?.users, setOpen])
 
     return (
         <div
@@ -69,4 +78,12 @@ function ClearUsers(props) {
     )
 }
 
-export default ClearUsers;
+ClearUsers.propTypes = {
+    isSearchBarOpened: PropTypes.bool,
+    setOpen: PropTypes.func,
+    settings: PropTypes.object,
+    searchId: PropTypes.number,
+    toMake: PropTypes.object
+};
+
+export default trackWindowScroll(ClearUsers);

@@ -1,8 +1,10 @@
+import React from "react";
 import s from "./profile.module.css"
 import {AiOutlineCalendar, AiOutlineMail, AiOutlineNumber, AiOutlineEye} from "react-icons/ai";
 import Script from "./profileHelper"
 import {useHistory} from "react-router";
 import {useTranslation} from "react-i18next";
+import PropTypes from "prop-types";
 
 function FlexColl(props) {
     const {
@@ -14,7 +16,6 @@ function FlexColl(props) {
     } = props;
 
     const history = useHistory();
-
     const {t} = useTranslation();
 
     return (
@@ -48,9 +49,7 @@ function FlexColl(props) {
                     />{userInfo.id}
                 </span>
             </div>
-            <div
-                className={"wrap-link-line-v2"}
-            >
+            <div className={"wrap-link-line-v2"}>
                 <AiOutlineCalendar
                     className={s.CommonIcon}
                     style={{
@@ -70,9 +69,7 @@ function FlexColl(props) {
                 /> {t("Last update")} {cr === up ? t("Never") : up}
             </div>
             <div className={s.LastLine}>
-                <span onClick={() => {
-                    Script.getMyFollowings(myId, history)
-                }}>
+                <span onClick={() => Script.getMyFollowings(myId, history)}>
                     <AiOutlineEye
                         className={s.CommonIcon}
                         style={{
@@ -80,9 +77,7 @@ function FlexColl(props) {
                         }}
                     /> <b className={s.Black}>{userInfo.youFolCount}</b> {t("Following")}
                 </span>
-                <span onClick={() => {
-                    Script.getMyFollowers(myId, history)
-                }}>
+                <span onClick={() => Script.getMyFollowers(myId, history)}>
                     <AiOutlineEye
                         className={s.CommonIcon}
                         style={{
@@ -94,5 +89,13 @@ function FlexColl(props) {
         </div>
     )
 }
+
+FlexColl.propTypes = {
+    userInfo: PropTypes.object,
+    cr: PropTypes.string,
+    up: PropTypes.string,
+    myId: PropTypes.number,
+    settings: PropTypes.object
+};
 
 export default FlexColl;

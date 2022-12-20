@@ -1,5 +1,6 @@
 import {useContext, useEffect, useState} from "react";
 import Skeleton from 'react-loading-skeleton';
+import React from "react";
 import s from "./posts.module.css"
 import {withRouter} from "react-router-dom";
 import Script from "./postsHelper"
@@ -7,6 +8,7 @@ import ClearSpecialPost from "./ClearSpecialPost";
 import {alpha} from "@mui/material";
 import {getSettings} from "../db";
 import {Context} from "../App";
+import PropTypes from "prop-types";
 
 function SpecialPosts(props) {
     const id = props?.location?.state?.id;
@@ -80,6 +82,11 @@ function SpecialPosts(props) {
             }
         </div>
     )
+}
+
+SpecialPosts.propTypes = {
+    location: PropTypes.object,
+    match: PropTypes.object
 }
 
 export default withRouter(SpecialPosts);

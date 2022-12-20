@@ -48,7 +48,7 @@
     display: inherit;
     cursor: pointer;
     transition: all ease 0.5s;
-    margin: 0px 5%;
+    margin: 0px 1%;
 }
 
 .NightMode:hover {

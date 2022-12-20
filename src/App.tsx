@@ -29,8 +29,8 @@ import {useSettings} from "./hooks";
 import {getItemFromLocalStorage} from "./localStorageService";
 import {setNotifications} from "./app/notificationReducer";
 import AboveHeader from "./components/above-header/AboveHeader";
+import sessionHelper from "./helpers/sessionHelper"
 
-const sessionHelper = require("./helpers/sessionHelper")
 const socket = io();
 
 export function notify(content: string | React.ReactNode) {
@@ -41,7 +41,8 @@ type MusicContextType = {
     [key: string]: any
 }
 
-export const MusicContext = React.createContext<[MusicContextType, React.Dispatch<SetStateAction<{}>>]>([{}, () => {
+export const MusicContext = React.createContext<[MusicContextType, React.Dispatch<SetStateAction<Record<string, unknown>>>]>([{}, () => {
+//spare
 }]);
 
 export function height() {
@@ -73,7 +74,7 @@ function AppCover() {
 }
 
 function App() {
-    let modal = useRef<HTMLDivElement>(null);
+    const modal = useRef<HTMLDivElement>(null);
     const [flag, setFlag] = useState(false);
     const history = useHistory();
     const dispatch = useDispatch();
@@ -81,18 +82,19 @@ function App() {
     const userInformation = getItemFromLocalStorage(USER_INFORMATION);
 
     function open() {
-        window?.document?.body?.querySelector(".App")?.classList?.remove("Open")
+        window.document.body.querySelector(".App")?.classList.remove("Open");
         modal?.current?.classList?.toggle("Open");
     }
 
     useEffect(() => {
         sessionHelper?.default?.isElive(history);
-        Script.GetShortUserInfo(notify)?.then((newState) => {
+        Script.GetShortUserInfo(notify)?.then((newState: { data: any; }) => {
             Script2.SaveInfo(newState?.data);
             setFlag(true);
         });
 
         setupDb(async () => {
+            //spare
         });
     }, []);
 

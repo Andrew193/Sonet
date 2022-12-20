@@ -1,8 +1,10 @@
 import {Box, Typography} from "@mui/material";
+import React from "react";
 import s from "./posts.module.css"
 import {useHistory} from "react-router-dom";
 import {useMemo} from "react";
 import SortLine from "./SortLine";
+import PropTypes from "prop-types";
 
 function FiltersBar(props) {
     const {
@@ -34,7 +36,7 @@ function FiltersBar(props) {
                 </Typography>
                 <SortLine/>
                 <>
-                    {!!styledHashtags?.length
+                    {styledHashtags?.length
                         ? <div style={{width: "100%"}}>
                             <Typography
                                 variant={"h5"}
@@ -60,6 +62,10 @@ function FiltersBar(props) {
             />
         </>
     )
+}
+
+FiltersBar.propTypes = {
+    settings: PropTypes.object
 }
 
 export default FiltersBar;

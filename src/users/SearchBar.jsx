@@ -1,9 +1,11 @@
 import s from "./users.module.css"
 import Script from "./script.js"
+import React from "react";
 import {useRef} from "react"
 import {useHistory} from "react-router-dom"
 import Loader from "../Loader";
 import {useTranslation} from "react-i18next";
+import PropTypes from "prop-types";
 
 function FindUserLine(props) {
     const {
@@ -44,5 +46,10 @@ function FindUserLine(props) {
         </div>
     )
 }
+
+FindUserLine.propTypes = {
+    setOpen: PropTypes.func,
+    open: PropTypes.bool
+};
 
 export default FindUserLine;

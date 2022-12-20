@@ -133,7 +133,7 @@ video {
 .UploadContainer {
     display: flex;
     align-items: center;
-    justify-content: end;
+    justify-content: flex-end;
     margin: 10px;
     font-size: 10px;
 }

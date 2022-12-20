@@ -1,3 +1,4 @@
+import React from "react";
 import {NavLink, useHistory, withRouter} from "react-router-dom";
 import s from "./header.module.css";
 import {AiOutlineBank, AiOutlineComment, AiOutlineFile, AiOutlineTeam, AiOutlineUser} from "react-icons/ai";
@@ -9,6 +10,7 @@ import {
     MdQueueMusic,
     RiGalleryLine
 } from "react-icons/all";
+import PropTypes from "prop-types";
 
 const linksImages = {
     Home: <AiOutlineBank size={"24px"}/>,
@@ -59,6 +61,13 @@ function HeaderLink(props) {
             </NavLink>
         </p>
     )
+}
+
+HeaderLink.propTypes = {
+    linkConfig: PropTypes.object,
+    t: PropTypes.func,
+    settings: PropTypes.object,
+    location: PropTypes.object
 }
 
 export default withRouter(HeaderLink);

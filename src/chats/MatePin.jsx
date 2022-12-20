@@ -3,6 +3,8 @@ import FriendPin from "./FriendPin";
 import {getUserAvatar} from "../posts/postsHelper";
 import {getItemFromLocalStorage} from "../localStorageService";
 import {USER_INFORMATION} from "../vars";
+import React from "react";
+import PropTypes from "prop-types";
 
 function MatePin(props) {
     const {
@@ -29,7 +31,7 @@ function MatePin(props) {
     return (
         <div
             className={currentChat?.currentIndex === index ? "currentChat" : ""}
-            onClick={(e) => {
+            onClick={() => {
                 if (friend?.approved) {
                     setCurrentChat({
                         members: [+friend?.receiverId, +friend?.requestSendById],
@@ -52,5 +54,14 @@ function MatePin(props) {
         </div>
     )
 }
+
+MatePin.propTypes = {
+    currentChat: PropTypes.object,
+    friend: PropTypes.any,
+    setCurrentChat: PropTypes.func,
+    index: PropTypes.number,
+    setConversations: PropTypes.func,
+    usersInChat: PropTypes.array
+};
 
 export default MatePin;
