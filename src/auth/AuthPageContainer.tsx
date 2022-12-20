@@ -2,15 +2,17 @@ import React from "react";
 import {useFormik} from "formik";
 import AuthPageForm from "./AuthPageForm"
 import {ToastContainer} from 'react-toastify';
-import Script from "./script.js"
-import s from "../header/header.module.css";
-import fastActions from "../fast-actions/fast-actions.module.css";
-import fastMessages from "../fast-message/fast-message.module.css";
-import fastMusic from "../fast-music/fast-music.module.css";
+import AuthHelper from "./authHelper";
+import HeaderStyles from "../header/header.module.css";
+import FastActions from "../fast-actions/fast-actions.module.css";
+import FastMessages from "../fast-message/fast-message.module.css";
+import FastMusic from "../fast-music/fast-music.module.css";
 import {ReactNode, useEffect, useState} from "react";
 import {useHistory} from "react-router";
 import {notify} from "../App";
 import {useSettings} from "../hooks";
+import CommonHelper from "../helpers/common";
+import {headerListLinks} from "../vars";
 
 function ContainerAuth() {
     const [isRegisterUser, setIsRegisterUser] = useState<boolean>(true);
@@ -26,7 +28,7 @@ function ContainerAuth() {
             password: ""
         },
         onSubmit: (values, {resetForm}) => {
-            Script.sendReq(values, resetForm, isRegisterUser, setRedirect, (message: ReactNode | string) => {
+            AuthHelper.AuthPageSubmitCover(values, resetForm, isRegisterUser, setRedirect, (message: ReactNode | string) => {
                 const Msg = () => (
                     <div>{message}</div>
                 )
@@ -37,17 +39,17 @@ function ContainerAuth() {
 
     useEffect(() => {
         if (redirect) {
-            history.push("/");
+            CommonHelper.redirect(history, null, headerListLinks.base)
         }
     }, [redirect])
 
     return (
         <>
             <style>{`
-             .${s.HeadersLinksPaper} {
+             .${HeaderStyles.HeadersLinksPaper} {
              height:0px!important;
              }
-             .${fastActions.Container}, .${fastMessages.Container}, .${fastMusic.Container} {
+             .${FastActions.Container}, .${FastMessages.Container}, .${FastMusic.Container} {
              display: none!important;
              }
             `}</style>

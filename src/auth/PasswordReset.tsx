@@ -1,5 +1,5 @@
 import React from "react";
-import s from "./auth.module.css";
+import AuthStyles from "./auth.module.css";
 import HttpHelper from "../helpers/httpHelper";
 import {Typography} from "@mui/material";
 import {useFormik} from "formik";
@@ -24,41 +24,35 @@ function PasswordReset(props: PasswordReset) {
     })
 
     return (
-        <>
-            <form onSubmit={Formik.handleSubmit}>
-                <article><h2 className={s.Active} id={"modeLinks"}>Password recovery</h2></article>
-                <div>
-                     <span className={s.Span}>
-                         <input type="email" id="email" {...Formik.getFieldProps("email")}/>
-                     </span>
-                    <span className={s.Tip}>Email</span>
-                </div>
-
-                {Formik.touched.email && Formik.errors.email &&
-                    <span className={s.Error + " " + s.f1}>{Formik.errors.email}</span>}
-
-                <button
-                    type="submit"
-                    id={"btnEnter"}
-                    className={s.welcB}
-                >►
-                </button>
-
-                <Typography
-                    style={{
-                        color: styleSettings?.configs?.color[styleSettings?.color],
-                        padding: 'unset'
-                    }}
-                >
-                    Your new password will be sent to this email address.
-                    <span
-                        className={s.updatePassword}
-                        onClick={() => setRecreatePasswordMode(false)}
-                    >Go back</span>
-                </Typography>
-
-            </form>
-        </>
+        <form onSubmit={Formik.handleSubmit}>
+            <article><h2 className={AuthStyles.Active} id={"modeLinks"}>Password recovery</h2></article>
+            <div>
+                <span className={AuthStyles.Span}>
+                    <input type="email" id="email" {...Formik.getFieldProps("email")}/>
+                </span>
+                <span className={AuthStyles.Tip}>Email</span>
+            </div>
+            {Formik.touched.email && Formik.errors.email &&
+                <span className={AuthStyles.Error + " " + AuthStyles.f1}>{Formik.errors.email}</span>}
+            <button
+                type="submit"
+                id={"btnEnter"}
+                className={AuthStyles.welcB}
+            >►
+            </button>
+            <Typography
+                style={{
+                    color: styleSettings?.configs?.color[styleSettings?.color],
+                    padding: 'unset'
+                }}
+            >
+                Your new password will be sent to this email address.
+                <span
+                    className={AuthStyles.updatePassword}
+                    onClick={() => setRecreatePasswordMode(false)}
+                >Go back</span>
+            </Typography>
+        </form>
     )
 }
 

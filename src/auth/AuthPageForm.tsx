@@ -1,10 +1,11 @@
 import React from "react";
-import s from "./auth.module.css";
+import AuthStyles from "./auth.module.css";
 import {alpha} from "@mui/material";
 import {hexToRgb as muiHexToRgb} from "@mui/system/colorManipulator";
 import {useState} from "react";
 import PasswordReset from "./PasswordReset";
 import AuthInnerContainer, {AuthInnerContainerType} from "./AuthInnerContainer";
+import {getElementsThemeConfig, getPropertiesConfig} from "../utils";
 
 type AuthType = Omit<AuthInnerContainerType<"">, "setRecreatePasswordMode">
 
@@ -20,12 +21,8 @@ function Auth(props: AuthType) {
 
     return (
         <div
-            className={s.Container}
-            style={{
-                color: styleSettings?.configs?.color[styleSettings?.color],
-                fontSize: styleSettings?.configs?.size[styleSettings?.fontSize],
-                background: styleSettings?.configs?.background[styleSettings?.background]
-            }}
+            className={AuthStyles.Container}
+            style={{...getElementsThemeConfig(styleSettings, getPropertiesConfig())}}
         >
             <style>
                 {`

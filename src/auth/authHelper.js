@@ -11,7 +11,7 @@ function comboReset(token, seter, resetForm) {
     setTimeout(() => window.location.reload(), 150);
 }
 
-function sendReq(values, resetForm, isRegisterUser, setRedirect, toast) {
+function AuthPageSubmitCover(values, resetForm, isRegisterUser, setRedirect, toast) {
     values.userName = "Default";
 
     if (isRegisterUser) {
@@ -29,4 +29,4 @@ function sendReq(values, resetForm, isRegisterUser, setRedirect, toast) {
     }
 }
 
-export default {sendReq};
+export default {AuthPageSubmitCover};
