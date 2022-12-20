@@ -29,9 +29,13 @@ function PostItem(props) {
         id,
         settings,
         customStyle,
-        setPost,
+        setPost = () => {
+            //spare
+        },
         index,
-        setParentPosts,
+        setParentPosts = () => {
+            //spare
+        },
         ignoreAppOpen
     } = props;
 

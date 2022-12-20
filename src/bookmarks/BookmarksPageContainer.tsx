@@ -1,7 +1,7 @@
 import MaintainedPageHeader from "../components/MaintainedPageHeader";
 import React, {useEffect, useMemo, useState} from "react";
 import {useTranslation} from "react-i18next";
-import s from "../posts/posts.module.css";
+import PostStyles from "../posts/posts.module.css";
 import bookmarksStyles from "./bookmarks.module.css";
 import {getEmptyElementsThemeConfig} from "../utils";
 import {useSettings} from "../hooks";
@@ -27,18 +27,12 @@ function Bookmarks() {
     }, [])
 
     const parsedBookmarks = useMemo(() => {
-        return bookmarks ? bookmarks!.map((bookmark, index) => <PostItem
+        return bookmarks ? bookmarks.map((bookmark, index) => <PostItem
                 key={index}
                 value={JSON.parse(bookmark.markText)}
                 id={id}
                 settings={settings}
-                setPost={() => {
-                    //spare
-                }}
                 index={index}
-                setParentPosts={() => {
-                    //spare
-                }}
                 ignoreAppOpen
                 bookmark={bookmark.id}
             />
@@ -46,10 +40,10 @@ function Bookmarks() {
     }, [bookmarks])
 
     return (
-        <div className={s.Container} style={{...getEmptyElementsThemeConfig(settings)}}>
+        <div className={PostStyles.Container} style={{...getEmptyElementsThemeConfig(settings)}}>
             <MaintainedPageHeader path={headerListLinks.base} linkPath={headerListLinks.bookmarks} linkTitle={t("Bookmarks")}/>
             <div className={"Separator"}/>
-            <main className={s.PostsCont + " onePostContainer " + bookmarksStyles.BookmarksContainer}>
+            <main className={PostStyles.PostsCont + " onePostContainer " + bookmarksStyles.BookmarksContainer}>
                 {parsedBookmarks?.length ? parsedBookmarks : <EmptySection
                     title={"Nothing to show here yet"}
                     message={"You haven't created any Songs yet. When you do, they'll show up here."}
