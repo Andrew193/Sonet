@@ -42,9 +42,6 @@ function FriendsContainer(props: FriendsContainerProps) {
     const [newMessage, setNewMessage] = useState("");
     const [arrivalMessage, setArrivalMessage] = useState<ArrivalMessageType | null>(null);
     const {settings} = useSettings();
-    const [, setUsersInChat] = useState([]);
-    const [, setIsLoading] = useState(false);
-
     const {socket} = useContext(Context);
 
     useEffect(() => {
@@ -53,9 +50,7 @@ function FriendsContainer(props: FriendsContainerProps) {
                 (response: { clearData: ConversationType[] }) => {
                     setConversations(response?.clearData)
                 },
-                (errorMessage: ReactNode | string) => {
-                    notify(errorMessage || "Error");
-                })
+                (errorMessage: ReactNode | string) => notify(errorMessage || "Error"))
         }
 
         if (userInformation?.id && !conversation.length) {
@@ -64,19 +59,16 @@ function FriendsContainer(props: FriendsContainerProps) {
     }, [userInformation]);
 
     const friendsConfig = useMemo(() => {
-        return conversation?.map((friend, index) => {
-            if (friend?.approved) {
-                return <FriendPin
-                    key={index}
-                    index={index}
-                    {...friend}
-                    userId={userInformation?.id}
-                    setConversations={setConversations}
-                    setCurrentChat={setCurrentChat}
-                />
-            }
-            return null;
-        })
+        return conversation?.map((friend, index) => friend?.approved ?
+            <FriendPin
+                key={index}
+                index={index}
+                {...friend}
+                userId={userInformation?.id}
+                setConversations={setConversations}
+                setCurrentChat={setCurrentChat}
+            /> : null
+        )
     }, [conversation])
 
     useEffect(() => {
@@ -99,9 +91,7 @@ function FriendsContainer(props: FriendsContainerProps) {
                                 setMessages(() => JSON.parse(JSON.stringify(response?.clearData)))
                             }
                         },
-                        (errorMessage: ReactNode | string) => {
-                            notify(errorMessage || "Error");
-                        })
+                        (errorMessage: ReactNode | string) => notify(errorMessage || "Error"))
                 }
             }
         })
@@ -121,37 +111,17 @@ function FriendsContainer(props: FriendsContainerProps) {
     useEffect(() => {
         async function getMates() {
             getMatesList(userInformation?.id,
-                (response: { clearData: ConversationType[] }) => {
-                    setConversations(response?.clearData)
-                },
-                (errorMessage: ReactNode | string) => {
-                    notify(errorMessage || "Error");
-                })
+                (response: { clearData: ConversationType[] }) => setConversations(response?.clearData),
+                (errorMessage: ReactNode | string) => notify(errorMessage || "Error"))
         }
 
         if (userInformation?.id) {
-            setIsLoading(() => true)
             getMates();
         }
     }, [JSON.stringify(userInformation?.id)])
 
-    useEffect(() => {
-        if (userInformation?.id) {
-            socket.on("getUsersInChat", (users) => {
-                setUsersInChat(users)
-            });
-        }
-    }, [userInformation?.id]);
-
-    const receiverId = useMemo(() => {
-        if (currentChat) {
-            // @ts-ignore
-            return currentChat?.members?.find(
-                (member: number) => member !== userInformation.id
-            )
-        }
-        return null;
-    }, [currentChat])
+    // @ts-ignore
+    const receiverId = useMemo(() => currentChat ? currentChat?.members?.find((member: number) => member !== userInformation.id) : null, [currentChat])
 
     const handleSubmit = async (e: React.MouseEvent<HTMLElement>) => {
         e.preventDefault();
@@ -174,14 +144,10 @@ function FriendsContainer(props: FriendsContainerProps) {
                     createdById: userInformation?.id
                 },
                 (res: { data: ArrivalMessageType }) => {
-
                     setMessages((currentMessages) => [...currentMessages, res.data]);
                     setNewMessage("");
                 },
-                (errorMessage: ReactNode | string) => {
-                    notify(errorMessage || "Error");
-                })
-
+                (errorMessage: ReactNode | string) => notify(errorMessage || "Error"))
         } catch (err) {
             console.error(err);
         }

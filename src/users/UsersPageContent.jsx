@@ -7,6 +7,7 @@ import {useState, useRef} from "react";
 import {useOutsideClick} from "../hooks";
 import {alpha} from "@mui/material";
 import PropTypes from "prop-types";
+import Separator from "../components/common/Separator/Separator";
 
 function UsersPageContent(props) {
     const {
@@ -68,25 +69,11 @@ function UsersPageContent(props) {
                      }
                 `}
             </style>
-            <div
-                className={"Separator"}
-                onClick={(e) => {
-                    e?.target?.nextElementSibling?.classList.toggle("Hide")
-                }}
-            />
-            <span
-                className={'tetris-tips-arrow'}
-                style={{top: '2%'}}
-            >
-            <AiOutlineArrowLeft
-                onClick={() => {
-                    setIsSearchBarOpened(() => true)
-                }}
-            />
+            <Separator/>
+            <span className={'tetris-tips-arrow'} style={{top: '2%'}}>
+            <AiOutlineArrowLeft onClick={() => setIsSearchBarOpened(() => true)}/>
             </span>
-            <div
-                className={"row rowUsersContainer"}
-            >
+            <div className={"row rowUsersContainer"}>
                 <ClearUsers
                     toMake={users}
                     isSearchBarOpened={isSearchBarOpened}
@@ -96,13 +83,8 @@ function UsersPageContent(props) {
                 />
 
                 {isSearchBarOpened &&
-                    <div
-                        ref={wrapperRef}
-                    >
-                        <FindUserLine
-                            setOpen={setOpen}
-                            open={open}
-                        />
+                    <div ref={wrapperRef}>
+                        <FindUserLine setOpen={setOpen} open={open}/>
                     </div>}
             </div>
         </>)
@@ -113,7 +95,7 @@ UsersPageContent.propTypes = {
     setOpen: PropTypes.func,
     open: PropTypes.bool,
     settings: PropTypes.object,
-    id: PropTypes.number
+    id: PropTypes.string
 };
 
 export default withPageHeader(UsersPageContent, {path: "/users", Title: "Users"});

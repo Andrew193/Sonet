@@ -29,6 +29,7 @@ import {withRouter} from "react-router-dom";
 import {getItemFromLocalStorage} from "../localStorageService";
 import {USER_INFORMATION} from "../vars";
 import PropTypes from "prop-types";
+import Separator from "../components/common/Separator/Separator";
 
 export function getGalleryImageConfig() {
     return {
@@ -240,14 +241,8 @@ function GalleryInnerContent(props) {
                 </MenuItem>
             </Menu>
             <GalleryActions/>
-            <div
-                className={"Separator"}
-                onClick={(e) => e.target.nextElementSibling.classList.toggle("Hide")}
-            />
-            <GalleryMode
-                selected={selected}
-                setSelected={setSelected}
-            />
+            <Separator/>
+            <GalleryMode selected={selected} setSelected={setSelected}/>
             {
                 !selected
                     ? <Box className={s.ImagesContainer}>{configuredImages}</Box>

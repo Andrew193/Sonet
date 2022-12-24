@@ -2,6 +2,14 @@ import React from "react";
 import {v4 as uuidv4} from 'uuid';
 import {alpha} from "@mui/material";
 
+export function getImageLinkFromStaticObject(imgUrl, noImgRespone) {
+    try {
+        return JSON.parse(imgUrl)?.webContentLink;
+    } catch (error) {
+        return imgUrl || noImgRespone;
+    }
+}
+
 export function downloadFile(url, name) {
     const link = document.createElement('a');
     link.href = url;
@@ -20,8 +28,8 @@ export function downloadFileVersion2(url, name) {
 }
 
 export async function createFile(src) {
-    let response = await fetch(src);
-    let data = await response.blob();
+    const response = await fetch(src);
+    const data = await response.blob();
     let metadata = {
         type: 'image/png'
     };
@@ -49,16 +57,10 @@ export function hexToRgb(hex) {
 }
 
 export function createErrorsForApiCall(parsedResponse, oneErrorMessage) {
-
     return parsedResponse
         ? Object.entries(parsedResponse)
-            ?.map((error) => {
-                if (JSON.stringify(error[1]) === "{}") {
-                    return null;
-                }
-                return <li
-                    key={uuidv4()}>{error[0] === "error" ? "Main reason" : error[0]}: {error[1]?.wrong || error[1]}</li>
-            })
+            ?.map((error) => JSON.stringify(error[1]) === "{}" ? null : <li
+                key={uuidv4()}>{error[0] === "error" ? "Main reason" : error[0]}: {error[1]?.wrong || error[1]}</li>)
         : <li key={uuidv4()}>{oneErrorMessage?.error || "Something went wrong"}</li>;
 }
 

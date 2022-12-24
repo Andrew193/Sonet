@@ -1,27 +1,15 @@
 import {Box, Typography} from "@mui/material";
 import React from "react";
-import s from '../settings.module.css'
-import {useEffect, useState} from "react";
-import {getSettings} from "../../db";
+import SettingsStyles from '../settings.module.css'
 import {buttonsConfig} from "../../create-post/CreatePostLine";
 import {useTranslation} from "react-i18next";
 import UK from "../images/uk.png";
 import UA from "../images/ua.png";
+import {useSettings} from "../../hooks";
 
 function GeneralSettings() {
-    const [settings, setSettings] = useState({})
+    const {settings} = useSettings()
     const {t, i18n} = useTranslation();
-
-
-    useEffect(() => {
-        async function getSettingsConfig() {
-            const response = await getSettings();
-
-            setSettings(response[0]);
-        }
-
-        getSettingsConfig();
-    }, [])
 
     const changeLanguage = lng => {
         i18n.changeLanguage(lng);
@@ -29,14 +17,10 @@ function GeneralSettings() {
 
     return (
         <>
-            <Box
-                className={s.FontMainContainer}
-            >
-                <Typography
-                    className={s.FontLabel}
-                >{t("UI language")}</Typography>
+            <Box className={SettingsStyles.FontMainContainer}>
+                <Typography className={SettingsStyles.FontLabel}>{t("UI language")}</Typography>
                 <div
-                    className={s.FontContainer + ' ' + s.ListStyleContainer + ' ' + s.Flags}
+                    className={`${SettingsStyles.FontContainer} ${SettingsStyles.ListStyleContainer} ${ SettingsStyles.Flags}`}
                 >
                     <div className={`${buttonsConfig[settings?.configs?.color[settings?.color]]}`}
                          style={{color: `${i18n?.language === "en" ? "red" : ""}`}}

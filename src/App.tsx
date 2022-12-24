@@ -112,7 +112,6 @@ function App() {
     useEffect(() => {
         setContainerDisplay(() => getFastDisplay(history))
         socket.on("getMessageInChat", (data) => {
-            console.log(data, location?.pathname)
             dispatch(setNotifications(data))
         });
     }, [location?.pathname])

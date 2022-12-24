@@ -15,6 +15,7 @@ import {getItemFromLocalStorage} from "../localStorageService";
 import {USER_INFORMATION} from "../vars";
 import PropTypes from "prop-types";
 import {getGalleryImageConfig} from "./GalleryInnerContent";
+import {getImageLinkFromStaticObject} from "../utils";
 
 function Folders(props) {
     const {
@@ -48,12 +49,7 @@ function Folders(props) {
         const uniqFolders = folders.filter((item, pos, self) => self?.map((item) => item?.name).indexOf(item?.name) === pos)
 
         return uniqFolders?.map((folder) => {
-            let backImage;
-            try {
-                backImage = JSON.parse(folder?.folderBack)?.webContentLink
-            } catch (err) {
-                backImage = "";
-            }
+            const backImage = getImageLinkFromStaticObject(folder?.folderBack, "")
 
             return <p
                 style={{

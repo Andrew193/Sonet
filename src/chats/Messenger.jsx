@@ -51,11 +51,8 @@ function Messenger(props) {
     const [chatMode, setChatMode] = useState(false);
 
     useEffect(() => {
-        setPossibleMatesList(() => possibleMates?.map((friend, index) => {
-            if (friend?.approved) {
-                return null;
-            }
-            return <div key={`${index}`}>
+        setPossibleMatesList(() => possibleMates?.map((friend, index) =>
+            friend?.approved ? null : <div key={`${index}`}>
                 <FriendPin
                     id={index}
                     receiverId={friend?.receiverId}
@@ -68,18 +65,14 @@ function Messenger(props) {
                     friend={friend}
                 />
             </div>
-        }))
+        ))
     }, [possibleMates]);
 
     useEffect(() => {
         async function getPossibleMates() {
             getForApprovalMatesList(userInformation?.id,
-                (response) => {
-                    setPossibleMates(response?.clearData)
-                },
-                (errorMessage) => {
-                    notify(errorMessage || "Error");
-                })
+                (response) => setPossibleMates(response?.clearData),
+                (errorMessage) => notify(errorMessage || "Error"))
         }
 
         if (userInformation?.id) {

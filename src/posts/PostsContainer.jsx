@@ -14,6 +14,7 @@ import {getEmptyElementsThemeConfig} from "../utils";
 import {USER_INFORMATION} from "../vars";
 import {getItemFromLocalStorage} from "../localStorageService";
 import PropTypes from "prop-types";
+import Separator from "../components/common/Separator/Separator";
 
 function PostsContainer(props) {
     const [posts, setPosts] = useState(false);
@@ -103,12 +104,7 @@ function PostsContainer(props) {
             `}
             </style>
             <MaintainedPageHeader path={"/"} linkPath={"/posts"} linkTitle={"Posts"}/>
-            <div
-                className={"Separator"}
-                onClick={(e) => {
-                    e?.target?.nextElementSibling?.classList.toggle("Hide")
-                }}
-            />
+            <Separator/>
             {
                 posts
                     ? <>

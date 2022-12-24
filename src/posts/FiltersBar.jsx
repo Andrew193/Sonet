@@ -5,6 +5,7 @@ import {useHistory} from "react-router-dom";
 import {useMemo} from "react";
 import SortLine from "./SortLine";
 import PropTypes from "prop-types";
+import Separator from "../components/common/Separator/Separator";
 
 function FiltersBar(props) {
     const {
@@ -56,10 +57,7 @@ function FiltersBar(props) {
                     }
                 </>
             </Box>
-            <div
-                className={"Separator"}
-                onClick={(e) => e?.target?.nextElementSibling?.classList.toggle("Hide")}
-            />
+            <Separator/>
         </>
     )
 }

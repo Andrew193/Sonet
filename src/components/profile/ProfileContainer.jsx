@@ -1,7 +1,7 @@
 import React from "react";
 import {useHistory, withRouter} from "react-router";
-import s from "./profile.module.css";
-import Script from "./profileHelper"
+import ProfileStyles from "./profile.module.css";
+import ProfileHelper from "./profileHelper"
 import ClearProfile from "./ClearProfile";
 import {useEffect, useState} from "react";
 import Skeleton from "react-loading-skeleton";
@@ -20,7 +20,7 @@ function Profile(props) {
         if (!userId) {
             setUserInfo(getItemFromLocalStorage(USER_INFORMATION))
         } else {
-            Script.getUser(userId)
+            ProfileHelper.getUser(userId)
                 .then((response) => setUserInfo(response?.data?.user))
                 .catch((error) => console.log(error))
         }
@@ -30,12 +30,12 @@ function Profile(props) {
 
     return (
         <div
-            className={s.Container}
+            className={ProfileStyles.Container}
             style={{...getEmptyElementsThemeConfig(settings)}}
         >
             {userInfo ?
                 <ClearProfile
-                    s={s}
+                    styles={ProfileStyles}
                     history={history}
                     userInfo={userInfo}
                     settings={settings}

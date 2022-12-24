@@ -14,10 +14,7 @@ function MatesConditions(props) {
 
     return (
         <>
-            {
-                (isLoading && !matesListLength) &&
-                <div className={"chatLoader"}><Loader/></div>
-            }
+            {(isLoading && !matesListLength) && <div className={"chatLoader"}><Loader/></div>}
             {
                 (!isLoading && !matesListLength) &&
                 <div className={"lonelyLine"}>

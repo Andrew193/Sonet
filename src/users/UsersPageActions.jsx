@@ -1,6 +1,6 @@
-import s from "./users.module.css"
+import UsersStyles from "./users.module.css"
 import React from "react";
-import Script from "./script"
+import UsersHelper from "./usersHelper"
 import {toast} from "react-toastify"
 import {buttonsConfig} from "../create-post/CreatePostLine";
 import {AiOutlineEye, AiOutlineUserAdd, AiOutlineUsergroupAdd} from "react-icons/ai";
@@ -21,20 +21,16 @@ function UsersPageActions(props) {
     const userInformation = getItemFromLocalStorage(USER_INFORMATION);
 
     return (
-        <div className={s.ActionLine}>
+        <div className={UsersStyles.ActionLine}>
             <button
-                onClick={() => {
-                    Script.openUserProfile(value, history)
-                }}
+                onClick={() => UsersHelper.openUserProfile(value, history)}
                 className={`button ${buttonsConfig[settings?.configs?.color[settings?.color]]}`}
             >
                 <AiOutlineEye/>
                 Open profile
             </button>
             <button
-                onClick={() => {
-                    Script.Subscribe(value, toast, notYouFolCount)
-                }}
+                onClick={() => UsersHelper.Subscribe(value, toast, notYouFolCount)}
                 className={`button ${buttonsConfig[settings?.configs?.color[settings?.color]]}`}
             >
                 <AiOutlineUsergroupAdd/>
@@ -42,7 +38,7 @@ function UsersPageActions(props) {
             </button>
             <button
                 onClick={() => {
-                    Script.friendRequest({
+                    UsersHelper.friendRequest({
                         receiverId: +value,
                         requestSendById: +userInformation?.id,
                         receiverName: userName,
@@ -60,12 +56,12 @@ function UsersPageActions(props) {
 }
 
 UsersPageActions.propTypes = {
-    value:PropTypes.string,
-    history:PropTypes.object,
-    notYouFolCount:PropTypes.number,
-    settings:PropTypes.object,
-    userName:PropTypes.string,
-    userAvatarLink:PropTypes.string || PropTypes.object
+    value: PropTypes.number,
+    history: PropTypes.object,
+    notYouFolCount: PropTypes.number,
+    settings: PropTypes.object,
+    userName: PropTypes.string,
+    userAvatarLink: PropTypes.string || PropTypes.object
 };
 
 export default UsersPageActions;

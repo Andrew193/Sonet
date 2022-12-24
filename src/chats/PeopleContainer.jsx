@@ -34,16 +34,12 @@ function PeopleContainer(props) {
     return (
         <>
             {
-                !chatMode
-                &&
-                <>
+                !chatMode && <>
                     <input
                         id={"FocusInput"}
                         placeholder={t("Search for friend")}
                         className="chatMenuInput"
-                        onChange={(e) => {
-                            setSearch(e.target?.value)
-                        }}
+                        onChange={(e) => setSearch(e.target?.value)}
                     />
                     <div className={textareaStyles.ThematicBreak}/>
                 </>

@@ -1,7 +1,7 @@
 import React from "react";
 import {useTranslation} from "react-i18next";
 import {Backdrop, CircularProgress} from "@mui/material";
-import s from "../create-post/create-post.module.css";
+import CreatePostStyles from "../create-post/create-post.module.css";
 import {BsPencil} from "react-icons/all";
 import InputEmoji from 'react-input-emoji';
 import {useState} from "react";
@@ -27,7 +27,7 @@ function UpdateChatMessageModal(props) {
         <>
             {
                 isOpened ?
-                    <div className={s.Container + " chatUpdateModal"}>
+                    <div className={CreatePostStyles.Container + " chatUpdateModal"}>
                         <Backdrop
                             sx={{color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1}}
                             open={isBackdoor || false}

@@ -31,12 +31,8 @@ function SelectedChatMessages(props) {
                     }}
                 >
                     {
-                        currentChat
-                            ?
-                            <div
-                                ref={wrapperRef}
-                                className={"mainMessagesCaver"}
-                            >
+                        currentChat ?
+                            <div ref={wrapperRef} className={"mainMessagesCaver"}>
                                 <CurrentChat
                                     messages={messages}
                                     newMessage={newMessage}
@@ -52,9 +48,7 @@ function SelectedChatMessages(props) {
                             </div>
                             : <span className="noConversationText">
                                     {t("Open a conversation to start a chat.")}
-                                <BiConversation
-                                    className="noConversationImage"
-                                />
+                                <BiConversation className="noConversationImage"/>
                             </span>
                     }
                 </div>

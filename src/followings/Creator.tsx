@@ -1,7 +1,7 @@
 import React from "react";
 import {AiOutlineMail, AiOutlineNumber} from "react-icons/ai";
 import {useHistory} from "react-router";
-import Script from "../users/script"
+import Script from "../users/usersHelper";
 import {useEffect, useMemo, useState} from "react";
 import {FollowersUsers} from "../followers/FollowersPageContainer";
 import LazyImage from "../posts/LazyImage";

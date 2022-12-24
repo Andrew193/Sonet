@@ -1,5 +1,5 @@
 import {useState} from "react";
-import s from "./fast-message.module.css";
+import FastMessagesStyles from "./fast-message.module.css";
 import {alpha, Box, Tooltip, Typography} from "@mui/material";
 import {BiMessageRoundedDots, BiUpArrowAlt, FiArrowDown} from "react-icons/all";
 import React from "react"
@@ -37,7 +37,7 @@ function FastMessageContainer(props: FastElementsPropsType) {
 
     return (
         <Box
-            className={s.Container}
+            className={FastMessagesStyles.Container}
             style={{
                 visibility: opened ? "visible" : "hidden"
             }}
@@ -45,32 +45,35 @@ function FastMessageContainer(props: FastElementsPropsType) {
             {dropSelection}
             <style>
                 {`
+                .react-emoji-picker--container {
+                top: -355px;
+                }
                 .messageText {
                 min-width: 200px;
                 }
-                .${s.Container} {
+                .${FastMessagesStyles.Container} {
                 box-shadow: 0px 0px 8px 0px ${alpha(settingsConfig?.settings?.configs?.color[settingsConfig?.settings?.color] || "#b6c0f3", 0.8)} !important;
                 z-index:${opened ? "100" : "10"};
                 }
-                .${s.HeaderActions} svg:hover {
+                .${FastMessagesStyles.HeaderActions} svg:hover {
                 background: ${alpha(settingsConfig?.settings?.configs?.color[settingsConfig?.settings?.color] || "#b6c0f3", 0.8)};
                 }
-                .${s.Container} {
+                .${FastMessagesStyles.Container} {
                 bottom: ${isOpened ? "0px" : "-400px"};
                 }
-                .${s.Container} .chatBoxTop {
+                .${FastMessagesStyles.Container} .chatBoxTop {
                 height: 300px;
                 }
-                .${s.Container} .fromNow {
+                .${FastMessagesStyles.Container} .fromNow {
                 width: max-content;
                 }
-                .${s.Container} .noConversationText, .noConversationImage {
+                .${FastMessagesStyles.Container} .noConversationText, .noConversationImage {
                 display: none;
                 }
                 .noMessagesLabel {
                 font-size: 35px;
                 }
-                .${s.Container} .messageText {
+                .${FastMessagesStyles.Container} .messageText {
                 text-align: left!important;
                 padding-top:3px;
                 padding-bottom: 25px;
@@ -85,10 +88,10 @@ function FastMessageContainer(props: FastElementsPropsType) {
                 .fast_m_up {
                 display: none;
                 }
-                .${s.Container} {
+                .${FastMessagesStyles.Container} {
                 min-width:${isOpened ? "300px!important" : "50px"};
                 }
-                .${s.Header} > span:not(.${s.HeaderActions}), .fast_m_up {
+                .${FastMessagesStyles.Header} > span:not(.${FastMessagesStyles.HeaderActions}), .fast_m_up {
                 display: ${isOpened ? "block!important" : "none"};
                 }
                 }
@@ -96,12 +99,10 @@ function FastMessageContainer(props: FastElementsPropsType) {
             </style>
             <Typography
                 component={"p"}
-                className={s.Header}
+                className={FastMessagesStyles.Header}
             >
                 <span>Messages</span>
-                <span
-                    className={s.HeaderActions}
-                >
+                <span className={FastMessagesStyles.HeaderActions}>
                     <Tooltip title={t("Write a message")} arrow placement="top">
                                 <TooltipButtonCover>
                                     <BiMessageRoundedDots
@@ -117,35 +118,19 @@ function FastMessageContainer(props: FastElementsPropsType) {
                         !isOpened
                             ? <Tooltip title={t("Expand")} arrow placement="top">
                                 <TooltipButtonCover>
-                                    <BiUpArrowAlt
-                                        onClick={() => {
-                                            setIsOpened(true)
-                                        }}
-                                    />
+                                    <BiUpArrowAlt onClick={() => setIsOpened(true)}/>
                                 </TooltipButtonCover>
                             </Tooltip>
                             :
                             <Tooltip title={t("Collapse")} arrow placement="top">
                                 <TooltipButtonCover>
-                                    <FiArrowDown
-                                        onClick={() => {
-                                            setIsOpened(false)
-                                        }}
-                                    />
+                                    <FiArrowDown onClick={() => setIsOpened(false)}/>
                                 </TooltipButtonCover>
                             </Tooltip>
                     }
                 </span>
             </Typography>
-            <div>
-                {
-                    isOpened
-                    && <FriendsContainer
-                        conversation={conversation}
-                        setConversations={setConversations}
-                    />
-                }
-            </div>
+            <div>{isOpened && <FriendsContainer conversation={conversation} setConversations={setConversations}/>}</div>
         </Box>
     )
 }

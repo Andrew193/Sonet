@@ -10,6 +10,7 @@ import CommentsTab from "./CommentsTab";
 import LikesTab from "./LikesTab";
 import DislikesTab from "./DislikesTab";
 import PropTypes from "prop-types";
+import {getImageLinkFromStaticObject} from "../../utils";
 
 export function TabPanel(props) {
     const {children, value, index, ...other} = props;
@@ -66,13 +67,7 @@ function UsersActivities(props) {
     const [comments, setComments] = useState([]);
     const [likes, setLikes] = useState([]);
     const [dislikes, setDislikes] = useState([]);
-    const avatarUrl = useMemo(() => {
-        try {
-            return JSON.parse(userInfo?.avatar)?.webContentLink;
-        } catch (error) {
-            return userInfo?.avatar;
-        }
-    }, [userInfo?.avatar])
+    const avatarUrl = useMemo(() => getImageLinkFromStaticObject(userInfo?.avatar), [userInfo?.avatar])
 
     const handleChange = (event, newValue) => {
         setValue(newValue);

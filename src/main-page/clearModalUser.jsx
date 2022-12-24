@@ -9,13 +9,11 @@ import PropTypes from "prop-types";
 
 function ClearModalUser(props) {
     const {
-        setName,
-        setEmail,
-        setPassword,
-        nm,
-        em,
-        pas,
-        Script,
+        setUserInfo,
+        userName,
+        userEmail,
+        password,
+        ApiHelper,
         click,
         userId,
     } = props;
@@ -25,11 +23,7 @@ function ClearModalUser(props) {
     const {t} = useTranslation();
 
     return (
-        <div
-            style={{
-                color: settings?.configs?.color[settings?.color],
-            }}
-        >
+        <div style={{color: settings?.configs?.color[settings?.color]}}>
             <style>
                 {`
                   .Muser {
@@ -41,49 +35,31 @@ function ClearModalUser(props) {
                   }
                 `}
             </style>
-            <Typography
-                gutterBottom
-                component={'div'}
-            >
+            <Typography gutterBottom component={'div'}>
                 <label htmlFor="name">Your name</label>
                 <input
                     name="name"
-                    onChange={(e) => {
-                        setName(e.target.value)
-                    }}
-                    placeholder={nm}
+                    onChange={({target}) => setUserInfo((state) => ({...state, userName: target.value}))}
+                    placeholder={userName}
                 />
             </Typography>
-            <Typography
-                gutterBottom
-                component={'div'}
-            >
+            <Typography gutterBottom component={'div'}>
                 <label htmlFor="email">Your email</label>
                 <input
                     name="email"
-                    onChange={(e) => {
-                        setEmail(e.target.value)
-                    }}
-                    placeholder={em}
+                    onChange={({target}) => setUserInfo((state) => ({...state, userEmail: target.value}))}
+                    placeholder={userEmail}
                 />
             </Typography>
-            <Typography
-                gutterBottom
-                component={'div'}
-            >
+            <Typography gutterBottom component={'div'}>
                 <label htmlFor="pass">Your password</label>
                 <input
                     name="pass"
-                    onChange={(e) => {
-                        setPassword(e.target.value)
-                    }}
-                    placeholder={pas}
+                    onChange={({target}) => setUserInfo((state) => ({...state, password: target.value}))}
+                    placeholder={password}
                 />
             </Typography>
-            <Typography
-                gutterBottom
-                component={'div'}
-            >
+            <Typography gutterBottom component={'div'}>
                 <label htmlFor="pass">About you</label>
                 <InputEmoji
                     value={text}
@@ -96,10 +72,10 @@ function ClearModalUser(props) {
                 <button
                     className={`button ${buttonsConfig[settings?.configs?.color[settings?.color]]}`}
                     onClick={() => {
-                        Script.UpdateInfo({
-                            userName: nm,
-                            email: em,
-                            password: pas,
+                        ApiHelper.UpdateInfo({
+                            userName: userName,
+                            email: userEmail,
+                            password: password,
                             id: userId,
                             description: text
                         }, click)
@@ -112,13 +88,11 @@ function ClearModalUser(props) {
 }
 
 ClearModalUser.propTypes = {
-    setName: PropTypes.func,
-    setEmail: PropTypes.func,
-    setPassword: PropTypes.func,
-    nm: PropTypes.string,
-    em: PropTypes.string,
-    pas: PropTypes.string,
-    Script: PropTypes.object,
+    setUserInfo: PropTypes.func,
+    userName: PropTypes.string,
+    userEmail: PropTypes.string,
+    password: PropTypes.string,
+    ApiHelper: PropTypes.object,
     click: PropTypes.func,
     userId: PropTypes.number
 }

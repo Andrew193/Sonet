@@ -1,8 +1,8 @@
 import {forwardRef, LegacyRef, useState} from "react";
 import {createPortal} from "react-dom";
 import ClearModalUser from "./clearModalUser";
-import s from "./main-page.module.css"
-import Script from "./script.js"
+import MainPageStyle from "./main-page.module.css"
+import MainPageHelper from "./mainPageHelper"
 import {CardContent, Paper} from "@mui/material";
 import {getItemFromLocalStorage} from "../localStorageService";
 import React from "react";
@@ -19,24 +19,22 @@ const ModalUserCover = (props: ModalUserInterface, ref: LegacyRef<HTMLDivElement
         id
     } = getItemFromLocalStorage(USER_INFORMATION);
 
-    const [name, setName] = useState(userName);
-    const [userEmail, setEmail] = useState(email);
-    const [password, setPassword] = useState("Your password");
+    const [userInfo, setUserInfo] = useState({
+        userName: userName,
+        userEmail: email,
+        password: "Your password"
+    });
 
     const {click} = props;
 
     return createPortal(
-        <div className={s.UpdateModal + " Hide Muser"} ref={ref} onDoubleClick={() => click()}>
+        <div className={MainPageStyle.UpdateModal + " Hide Muser"} ref={ref} onDoubleClick={() => click()}>
             <Paper elevation={0}>
                 <CardContent>
                     <ClearModalUser
-                        setName={setName}
-                        setEmail={setEmail}
-                        setPassword={setPassword}
-                        nm={name}
-                        em={userEmail}
-                        pas={password}
-                        Script={Script}
+                        setUserInfo={setUserInfo}
+                        {...userInfo}
+                        ApiHelper={MainPageHelper}
                         click={click}
                         userId={id}
                     />

@@ -1,5 +1,5 @@
 import React from "react";
-import s from "./create-post.module.css"
+import createPostStyles from "./create-post.module.css"
 import Script from "./script"
 import {useMemo, useRef, useState} from "react";
 import {AiOutlineClose, BiImageAdd} from "react-icons/all";
@@ -14,14 +14,14 @@ type buttonsConfigType = {
 }
 
 export const buttonsConfig: buttonsConfigType = {
-    "#FF0000": s.RedButton,
-    "#FFA500": s.YellowButton,
-    "#008000": s.GreenButton,
-    "#0a00ce": s.BlueButton,
-    "#FF7F50": s.CoralButton,
-    "#bd9d33": s.GoldButton,
-    "#2177e8": s.SkyButton,
-    "#b32dd2": s.PurpleButton
+    "#FF0000": createPostStyles.RedButton,
+    "#FFA500": createPostStyles.YellowButton,
+    "#008000": createPostStyles.GreenButton,
+    "#0a00ce": createPostStyles.BlueButton,
+    "#FF7F50": createPostStyles.CoralButton,
+    "#bd9d33": createPostStyles.GoldButton,
+    "#2177e8": createPostStyles.SkyButton,
+    "#b32dd2": createPostStyles.PurpleButton
 }
 
 type CreatePostType = {
@@ -43,10 +43,7 @@ function CreatePost(props: CreatePostType) {
     const previewImages = useMemo(() =>
         images?.map((image: ImageType, index: number) =>
             <div key={index}>
-                <Avatar
-                    src={image?.blobUrl}
-                    key={image?.blobUrl}
-                />
+                <Avatar src={image?.blobUrl} key={image?.blobUrl}/>
                 <span
                     onClick={() => {
                         const imgCopy = JSON.parse(JSON.stringify(images));
@@ -54,7 +51,7 @@ function CreatePost(props: CreatePostType) {
 
                         setImages(imgCopy)
                     }}
-                    className={s.CloseBtn}
+                    className={createPostStyles.CloseBtn}
                 >
                     <AiOutlineClose/>
                 </span>
@@ -62,7 +59,7 @@ function CreatePost(props: CreatePostType) {
         ), [images?.length])
 
     return (
-        <div className={s.Container}>
+        <div className={createPostStyles.Container}>
             <Backdrop
                 sx={{color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1}}
                 open={isOpened || false}
@@ -90,21 +87,13 @@ function CreatePost(props: CreatePostType) {
                     }}
                 />
             </form>
-            <Box
-                className={s.ImagePreviewContainer}
-            >
-                {
-                    images?.length > 0
-                        ? <>{previewImages}</>
-                        : null
-                }
+            <Box className={createPostStyles.ImagePreviewContainer}>
+                {images?.length > 0 ? <>{previewImages}</> : null}
             </Box>
             <p>
                 <button
                     className={`button btn btn-default ${buttonsConfig[customStyle?.color]}`}
-                    onClick={() => {
-                        userHelper.CallImageInput(image?.current)
-                    }}
+                    onClick={() => userHelper.CallImageInput(image?.current)}
                     disabled={previewImages?.length === 4}
                 >
                     <BiImageAdd/>

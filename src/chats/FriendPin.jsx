@@ -3,7 +3,7 @@ import {AiOutlineLock, ImCancelCircle, IoAddSharp} from "react-icons/all";
 import {approveFriendRequest, rejectFriendRequest} from "./chatHelper";
 import {notify} from "../App";
 import {toast} from "react-toastify";
-import {friendRequest} from "../users/script";
+import {friendRequest} from "../users/usersHelper";
 import {createCopy} from "../utils";
 import LazyImage from "../posts/LazyImage";
 import {getItemFromLocalStorage} from "../localStorageService";

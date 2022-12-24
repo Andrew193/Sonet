@@ -1,9 +1,9 @@
 import React from "react";
 import {TabPanel} from "./UsersActivities";
-import {Typography} from "@mui/material";
 import {TbHeartBroken} from "react-icons/all";
-import {TabContainer, useEmotionConfig} from "./LikesTab";
+import {LikeDislikeTab} from "./LikesTab";
 import PropTypes from "prop-types";
+import UserActionsTab from "./UserActionsTab";
 
 function DislikesTab(props) {
     const {
@@ -12,21 +12,18 @@ function DislikesTab(props) {
         avatarUrl
     } = props;
 
-    const dislikesLine = useEmotionConfig(dislikeConfig, avatarUrl)
-
     return (
-        <TabPanel
-            value={value}
-            index={3}
-        >
-            <TabContainer valueLine={dislikesLine}>
-                <Typography
-                    variant={"h3"}
-                    component={"span"}
-                >You don’t have any dislikes yet</Typography>
-                Tap the dislike icon on any Post to take back some love. When you do, it’ll show up here.
+        <TabPanel value={value} index={3}>
+            <UserActionsTab
+                isLike={false}
+                ContentTab={LikeDislikeTab}
+                contentConfig={dislikeConfig}
+                avatarUrl={avatarUrl}
+                noContentCaption={"You don’t have any dislikes yet"}
+                noContentText={"   Tap the dislike icon on any Post to take back some love. When you do, it’ll show up here."}
+            >
                 <TbHeartBroken/>
-            </TabContainer>
+            </UserActionsTab>
         </TabPanel>
     )
 }

@@ -1,25 +1,25 @@
 import React from "react";
 import {TabPanel} from "./UsersActivities";
-import {useMemo} from "react";
 import {Avatar, Box, Typography} from "@mui/material";
-import s from "./profile.module.css"
-import postS from "../../posts/posts.module.css";
+import ProfileStyles from "./profile.module.css"
+import PostStyles from "../../posts/posts.module.css";
 import DateHelper from "../../helpers/dateHelper";
 import EmotionsLineContainer from "../../posts/EmotionsLineContainer";
-import {MdOutlinePostAdd} from "react-icons/all";
 import {getTabElementsThemeConfig} from "../../utils";
 import {replaceTags} from "../../posts/postsHelper";
 import {getTabsImageStyle} from "./LikesTab";
 import {useSettings} from "../../hooks";
 import {AiOutlineClockCircle} from "react-icons/ai";
 import PropTypes from "prop-types";
+import UserActionsTab from "./UserActionsTab";
+import {MdOutlinePostAdd} from "react-icons/all";
 
 function UserPostTab({information, avatarUrl}) {
     const {settings} = useSettings();
 
     return (
         <Box
-            className={s.UsersPost + " profilePostBorder"}
+            className={ProfileStyles.UsersPost + " profilePostBorder"}
             style={settings?.list?.listItemStyles}
         >
             <Avatar
@@ -33,7 +33,7 @@ function UserPostTab({information, avatarUrl}) {
                     width: '100%'
                 }}
             >
-                <Typography className={s.metaBar}>
+                <Typography className={ProfileStyles.metaBar}>
                     <Typography
                         variant={"h6"}
                         component={"span"}
@@ -50,13 +50,13 @@ function UserPostTab({information, avatarUrl}) {
                         }}/>{DateHelper.fromNow(information.createdAt)}
                     </span>
                 </Typography>
-                <Typography className={s.postContent}>
+                <Typography className={ProfileStyles.postContent}>
                     {replaceTags(information?.text || "", information?.possibleMentions || JSON.stringify([]))}
                 </Typography>
 
-                <div className={postS.PostsCont}>
+                <div className={PostStyles.PostsCont}>
                     <EmotionsLineContainer
-                        containerClass={postS.EmotionContainer}
+                        containerClass={PostStyles.EmotionContainer}
                         value={information}
                         id={information?.id}
                     />
@@ -78,31 +78,17 @@ function PostsTab(props) {
         avatarUrl
     } = props;
 
-    const postsLine = useMemo(() => postsConfig?.map((post, index) =>
-            <UserPostTab
-                key={index}
-                information={post}
-                avatarUrl={avatarUrl}
-            />
-    ), [postsConfig]);
-
     return (
-        <TabPanel
-            value={value}
-            index={0}
-        >
-            {
-                postsLine?.length
-                    ? postsLine
-                    : <p className={s.EmptyLine}>
-                        <Typography
-                            variant={"h3"}
-                            component={"span"}
-                        >You don’t have any posts yet</Typography>
-                        Create a post in any way. When you do, it’ll show up here.
-                        <MdOutlinePostAdd/>
-                    </p>
-            }
+        <TabPanel value={value} index={0}>
+            <UserActionsTab
+                ContentTab={UserPostTab}
+                contentConfig={postsConfig}
+                avatarUrl={avatarUrl}
+                noContentCaption={"You don’t have any posts yet"}
+                noContentText={"Create a post in any way. When you do, it’ll show up here."}
+            >
+                <MdOutlinePostAdd/>
+            </UserActionsTab>
         </TabPanel>
     )
 }

@@ -47,20 +47,14 @@ function Message(props) {
     const [messageToUpdateId, setMessageToUpdateId] = useState();
 
     const actions = useCallback(() => {
-        return message => actionsConfig?.map((action, index) => {
-            if (action?.type !== "copy" && own === false) {
-                return null
-            }
-
-            return <Tooltip title={action?.label} key={index}>
+        return message => actionsConfig?.map((action, index) =>
+            (action?.type !== "copy" && own === false) ? null : <Tooltip title={action?.label} key={index}>
                 <button
                     id={"dropStylesForMessagesActions"}
                     onClick={() => action?.onClick(message, socket, receiverId, setMessages, setIsOpened, setMessageToUpdateId)}
-                >
-                    {action?.icon}
-                </button>
+                >{action?.icon}</button>
             </Tooltip>
-        })
+        )
     }, [own])()
 
     return (
@@ -75,10 +69,7 @@ function Message(props) {
                 messageToUpdateId={messageToUpdateId}
             />
             <div className="messageTop">
-                <Avatar
-                    src={avatar}
-                    className={"conversationImg"}
-                />
+                <Avatar src={avatar} className={"conversationImg"}/>
                 <p className="messageText">
                     {message.text || message?.messageText}
                     <div className={"chatActionsBar"}>

@@ -10,6 +10,7 @@ import {getItemFromLocalStorage} from "../localStorageService";
 import {headerListLinks, USER_INFORMATION} from "../vars";
 import PostItem from "../posts/PostItem";
 import EmptySection from "../components/common/empty-section/EmptySection";
+import Separator from "../components/common/Separator/Separator";
 
 function Bookmarks() {
     const {t} = useTranslation();
@@ -41,8 +42,9 @@ function Bookmarks() {
 
     return (
         <div className={PostStyles.Container} style={{...getEmptyElementsThemeConfig(settings)}}>
-            <MaintainedPageHeader path={headerListLinks.base} linkPath={headerListLinks.bookmarks} linkTitle={t("Bookmarks")}/>
-            <div className={"Separator"}/>
+            <MaintainedPageHeader path={headerListLinks.base} linkPath={headerListLinks.bookmarks}
+                                  linkTitle={t("Bookmarks")}/>
+            <Separator/>
             <main className={PostStyles.PostsCont + " onePostContainer " + bookmarksStyles.BookmarksContainer}>
                 {parsedBookmarks?.length ? parsedBookmarks : <EmptySection
                     title={"Nothing to show here yet"}

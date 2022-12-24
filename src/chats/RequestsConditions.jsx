@@ -14,16 +14,14 @@ function RequestsConditions(props) {
     return (
         <>
             {
-                possibleMatesList?.every(v => v === null)
-                    ?
+                possibleMatesList?.every(v => v === null) ?
                     <>
                         <div className={textareaStyles.ThematicBreak}/>
                         <div className={"lonelyLine"}>
                             <AiOutlineClose/>
                             <span>{t("Out of requests")}</span>
                         </div>
-                    </>
-                    : <>{possibleMatesList}</>
+                    </> : <>{possibleMatesList}</>
             }
         </>
     )

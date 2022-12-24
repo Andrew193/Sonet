@@ -1,5 +1,5 @@
 import s from "./users.module.css"
-import Script from "./script.js"
+import Script from "./usersHelper"
 import React from "react";
 import {useRef} from "react"
 import {useHistory} from "react-router-dom"

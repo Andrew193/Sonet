@@ -4,23 +4,23 @@ import VerificationLine from "./VerificationLine";
 import AvatarLine from "./AvatarLine";
 import DateHelper from "../../helpers/dateHelper.js";
 import FlexColl from "./FlexColl.jsx";
-import Script from "./profileHelper"
+import ProfileHelper from "./profileHelper"
 import postServ from "../../posts/postsHelper"
 import {useEffect, useMemo, useState} from "react";
 import PageHeader from "../common/navigationLine/NavigationLine.jsx";
-import {alpha, hexToRgb} from "@mui/material";
-import AboutYou from "./AboutYou";
+import {alpha, Box, hexToRgb, Typography} from "@mui/material";
 import UsersActivities from "./UsersActivities";
-import style from "./profile.module.css";
+import ProfileStyle from "./profile.module.css";
 import BackImageMenu from "./BackImageMenu";
 import {useTranslation} from "react-i18next";
 import {getItemFromLocalStorage} from "../../localStorageService";
-import {USER_INFORMATION} from "../../vars";
+import {headerListLinks, USER_INFORMATION} from "../../vars";
 import PropTypes from "prop-types";
+import Separator from "../common/Separator/Separator";
 
 function ClearProfile(props) {
     const {
-        s,
+        styles,
         history,
         userInfo,
         settings
@@ -34,18 +34,13 @@ function ClearProfile(props) {
     const updatedAt = DateHelper.fromNow(userInfo.updatedAt);
 
     const [anchorEl, setAnchorEl] = useState(null);
+
     const open = Boolean(anchorEl);
-
-    const handleClick = (event) => {
-        setAnchorEl(event.currentTarget);
-    };
-
-    const handleClose = () => {
-        setAnchorEl(null);
-    };
+    const handleClick = (event) => setAnchorEl(event.currentTarget)
+    const handleClose = () => setAnchorEl(null)
 
     useEffect(() => {
-        Script.getPCount(userInfo.id, setCount);
+        ProfileHelper.getPCount(userInfo.id, setCount);
     }, [userInfo.id]);
 
     const backId = useMemo(() => {
@@ -71,7 +66,7 @@ function ClearProfile(props) {
                 .profilePostBorder{
                  border-bottom: 1px solid ${settings?.configs?.color[settings?.color] || "rgb(206, 204, 204)"};
                 }
-                .${style.UsersPost}:hover {
+                .${ProfileStyle.UsersPost}:hover {
                 background-color: ${alpha(settings?.configs?.color[settings?.color] || "rgb(231 231 240)", 0.5)} !important;
                 }
                 .react-simple-image-viewer__close {
@@ -119,15 +114,13 @@ function ClearProfile(props) {
                 handleClose={handleClose}
                 backId={backId}
             />
-
-
-            <PageHeader historyPath={"/"}>
+            <PageHeader historyPath={headerListLinks.base}>
                 <>
                     <div>
-                        <Link to={{pathname: "/profile"}}>{userInfo.userName}</Link>
+                        <Link to={{pathname: headerListLinks.profile}}>{userInfo.userName}</Link>
                         <br/>
                         <span
-                            className={s.PostCount}
+                            className={styles.PostCount}
                             onClick={() => postServ.getMy(history, userInfo.id)}
                         >{0 || count} {t("Posts")}
                         </span>
@@ -140,7 +133,7 @@ function ClearProfile(props) {
                 </>
             </PageHeader>
             <div
-                className={s.Back}
+                className={styles.Back}
                 onClick={(e) => (myId === userInfo.id) && handleClick(e)}
                 style={userInfo.back && {backgroundImage: `url(${JSON.parse(userInfo.back)?.webContentLink})`}}
             />
@@ -150,10 +143,7 @@ function ClearProfile(props) {
                 id={userInfo.id}
                 settings={settings}
             />
-            <div
-                className={"Separator"}
-                onClick={(e) => e.target.nextElementSibling.classList.toggle("Hide")}
-            />
+            <Separator/>
             <FlexColl
                 settings={settings}
                 myId={myId}
@@ -161,22 +151,19 @@ function ClearProfile(props) {
                 cr={createdAt}
                 userInfo={userInfo}
             />
-            <div
-                className="Separator"
-                onClick={(e) => e.target.nextElementSibling.classList.toggle("Hide")}
-            />
-            <AboutYou description={userInfo?.description}/>
-            <div
-                className="Separator"
-                onClick={(e) => e.target.nextElementSibling.classList.toggle("Hide")}
-            />
+            <Separator/>
+            <Box className={ProfileStyle.FlexColl}>
+                <h3 className={ProfileStyle.Black}>{t("About you")}</h3>
+                <Typography className={ProfileStyle.AboutMe}>{t(userInfo?.description)}</Typography>
+            </Box>
+            <Separator/>
             <UsersActivities userInfo={userInfo}/>
         </>
     )
 }
 
 ClearProfile.propTypes = {
-    s: PropTypes.object,
+    styles: PropTypes.object,
     history: PropTypes.object,
     userInfo: PropTypes.object,
     settings: PropTypes.object

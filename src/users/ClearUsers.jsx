@@ -1,5 +1,5 @@
 import {useHistory} from "react-router-dom";
-import s from "./users.module.css"
+import UsersStyles from "./users.module.css"
 import React from "react";
 import {useEffect, useMemo, useState} from "react";
 import {useTranslation} from "react-i18next";
@@ -9,6 +9,7 @@ import {getItemFromLocalStorage} from "../localStorageService";
 import PropTypes from "prop-types";
 import {trackWindowScroll, LazyLoadComponent} from "react-lazy-load-image-component";
 import Loader from "../Loader";
+import {getImageLinkFromStaticObject} from "../utils";
 
 function ClearUsers(props) {
     const {
@@ -31,19 +32,10 @@ function ClearUsers(props) {
         setOpen(() => false);
 
         setParsedUsers(() => toMake?.users?.map((value, index) => {
-            let avatarUrl = null;
-
-            try {
-                avatarUrl = JSON.parse(value[3])?.webContentLink
-            } catch (error) {
-                avatarUrl = value[3];
-            }
+            const avatarUrl = getImageLinkFromStaticObject(value[3]);
 
             return (
-                <LazyLoadComponent
-                    key={index + "_lazy"}
-                    placeholder={<Loader/>}
-                >
+                <LazyLoadComponent key={index + "_lazy"} placeholder={<Loader/>}>
                     <UserComponent
                         key={index}
                         index={index}
@@ -66,7 +58,7 @@ function ClearUsers(props) {
                         ? 'col-xs-8 col-sm-8'
                         : 'col-xs-12 col-sm-12'
                     : 'col-xs-12 col-sm-12'
-            } users-box` + s.UsersCont}
+            } users-box` + UsersStyles.UsersCont}
             style={{
                 height: '700px',
                 padding: 'unset',
@@ -82,7 +74,7 @@ ClearUsers.propTypes = {
     isSearchBarOpened: PropTypes.bool,
     setOpen: PropTypes.func,
     settings: PropTypes.object,
-    searchId: PropTypes.number,
+    searchId: PropTypes.string,
     toMake: PropTypes.object
 };
 

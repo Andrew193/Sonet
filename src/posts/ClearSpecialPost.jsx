@@ -6,6 +6,7 @@ import {Context} from "../App";
 import FiltersBar from "./FiltersBar";
 import {useSettings} from "../hooks";
 import PropTypes from "prop-types";
+import Separator from "../components/common/Separator/Separator";
 
 function ClearSpecialPost(props) {
     const {
@@ -18,7 +19,7 @@ function ClearSpecialPost(props) {
 
     return (
         <>
-            <div className={"Separator"}/>
+            <Separator/>
             <FiltersBar settings={settings}/>
             <ClearPost
                 id={id}

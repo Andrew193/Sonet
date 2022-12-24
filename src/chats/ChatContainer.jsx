@@ -35,20 +35,15 @@ function ChatContainer() {
 
     useEffect(() => {
         socket.on("updateMessages", (data) => {
-
             if (data?.refresh) {
                 if (currentChat?.id) {
                     getConversationById(currentChat?.id,
                         (response) => {
                             if (currentChat?.id) {
-                                setMessages(() => {
-                                    return JSON.parse(JSON.stringify(response?.clearData))
-                                })
+                                setMessages(() => JSON.parse(JSON.stringify(response?.clearData)))
                             }
                         },
-                        (errorMessage) => {
-                            notify(errorMessage || "Error");
-                        })
+                        (errorMessage) => notify(errorMessage || "Error"))
                 }
             }
         })
@@ -67,12 +62,8 @@ function ChatContainer() {
     useEffect(() => {
         async function getMates() {
             getMatesList(userInformation?.id,
-                (response) => {
-                    setConversations(response?.clearData)
-                },
-                (errorMessage) => {
-                    notify(errorMessage || "Error");
-                })
+                (response) => setConversations(response?.clearData),
+                (errorMessage) => notify(errorMessage || "Error"))
         }
 
         if (userInformation?.id) {
@@ -83,20 +74,11 @@ function ChatContainer() {
 
     useEffect(() => {
         if (userInformation?.id) {
-            socket.on("getUsersInChat", (users) => {
-                setUsersInChat(users)
-            });
+            socket.on("getUsersInChat", (users) => setUsersInChat(users));
         }
     });
 
-    const receiverId = useMemo(() => {
-        if (currentChat) {
-            return currentChat?.members?.find(
-                (member) => member !== userInformation.id
-            )
-        }
-        return null;
-    }, [currentChat])
+    const receiverId = useMemo(() => currentChat ? currentChat?.members?.find((member) => member !== userInformation.id) : null, [currentChat])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -119,14 +101,10 @@ function ChatContainer() {
                     createdById: userInformation?.id
                 },
                 (res) => {
-
                     setMessages((currentMessages) => [...currentMessages, res.data]);
                     setNewMessage("");
                 },
-                (errorMessage) => {
-                    notify(errorMessage || "Error");
-                })
-
+                (errorMessage) => notify(errorMessage || "Error"))
         } catch (err) {
             console.error(err);
         }

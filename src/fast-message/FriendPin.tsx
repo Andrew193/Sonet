@@ -44,12 +44,7 @@ function FriendPin(props: FriendPinProps) {
                 onClick={() => {
                     setCurrentChat({
                         members: [+receiverId, +(requestSendById || 0)],
-                        id: `${[receiverId, requestSendById].sort((a, b): number => {
-                            if (a && b) {
-                                return a - b
-                            }
-                            return 0;
-                        }).join("")}`,
+                        id: `${[receiverId, requestSendById].sort((a, b): number => (a && b) ? a - b : 0).join("")}`,
                         currentIndex: index
                     })
                 }}

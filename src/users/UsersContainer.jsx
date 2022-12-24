@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
-import Script from "./script.js"
+import UsersHelper from "./usersHelper";
 import Skeleton from 'react-loading-skeleton';
-import s from "./users.module.css"
+import UserStyles from "./users.module.css"
 import {withRouter} from "react-router-dom";
 import ClearUsersContainer from './UsersPageContent';
 import React from "react";
@@ -19,24 +19,20 @@ function UsersContainer(props) {
 
         if (id && typeof (+id) === "number") {
             setOpen(() => true)
-            Script.getSelectedUser(+id)
+            UsersHelper.getSelectedUser(+id)
                 .then((usersF) => {
                     usersF.users[0].push(true)
                     setUsers(usersF)
                 })
-                .catch((error) => {
-                    error && console.log(error);
-                })
+                .catch((error) => console.log(error))
         } else {
-            Script.getUsers().then((usersF) => setUsers(usersF)).catch((error) => {
-                error && console.log(error);
-            })
+            UsersHelper.getUsers().then((usersF) => setUsers(usersF)).catch((error) => console.log(error))
         }
     }, [props?.match?.params?.id])
 
     return (
         <div
-            className={s.Container}
+            className={UserStyles.Container}
             style={{...getEmptyElementsThemeConfig(settings)}}
         >
             {usersConfig.users?.length > 0

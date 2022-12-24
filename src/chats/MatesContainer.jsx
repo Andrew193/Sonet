@@ -25,21 +25,12 @@ function MatesContainer(props) {
                         <AiOutlineQuestionCircle onClick={() => setIsOpen((flag) => !flag)}/>
                     </TooltipButtonCover>
                 </Tooltip>
-                {
-                    isOpen && <p>
-                        <span>Online</span>
-                        <span>Offline</span>
-                    </p>
-                }
+                {isOpen && <p><span>Online</span><span>Offline</span></p>}
             </Box>
             <div className={textareaStyles.ThematicBreak}/>
-
             <h3>{t("Mates")}</h3>
             {matesList}
-            <MatesConditions
-                matesListLength={matesList?.length}
-                isLoading={isLoading}
-            />
+            <MatesConditions matesListLength={matesList?.length} isLoading={isLoading}/>
         </>
     )
 }

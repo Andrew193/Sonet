@@ -1,7 +1,7 @@
 import React from "react";
 import s from "./users.module.css";
 import postStyle from "../posts/posts.module.css"
-import Script from "./script";
+import UsersHelper from "./usersHelper";
 import {AiOutlineClockCircle, AiOutlineMail, AiOutlineSafetyCertificate, AiOutlineUser} from "react-icons/ai";
 import DataHelper from "../helpers/dateHelper";
 import UsersPageActions from "./UsersPageActions";
@@ -31,7 +31,7 @@ function UserComponent(props) {
                 <div
                     className={s.Item + " itemsUsersPage"}
                     data-id={value[5]}
-                    onClick={(e) => Script.openUser(e, history)}
+                    onClick={(e) => UsersHelper.openUser(e, history)}
                     style={settings?.list?.listItemStyles}
                 >
                     {value[3] &&

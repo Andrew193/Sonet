@@ -3,7 +3,7 @@ import Footer from './footer';
 import SpecialPosts from "./posts/specialPosts";
 import Comment from "./components/comments/CommentsPageContainer";
 import Header from './header/HeaderContainerPage';
-import MainPage from "./main-page/MainPageContainer";
+import MainPage from "./main-page/ClearMainPage";
 import Profile from './components/profile/ProfileContainer';
 import ModalUser from './main-page/modalUpdateUser';
 import UsersContainer from './users/UsersContainer';

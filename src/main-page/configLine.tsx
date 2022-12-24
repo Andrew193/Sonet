@@ -1,5 +1,5 @@
 import {useHistory} from "react-router";
-import s from "./main-page.module.css"
+import mainPageStyle from "./main-page.module.css"
 import {buttonsConfig} from "../create-post/CreatePostLine";
 import {useTranslation} from "react-i18next";
 import React from "react";
@@ -24,9 +24,7 @@ function ConfigLine(props: ConfigLineType) {
     const history = useHistory();
 
     return (
-        <div
-            className={s.ConfigLine}
-        >
+        <div className={mainPageStyle.ConfigLine}>
             <h3
                 style={{
                     fontWeight: "bold"
@@ -50,7 +48,6 @@ function ConfigLine(props: ConfigLineType) {
                         window?.document?.body?.querySelector(".App")?.classList?.add("Open")
                     }}
                 >
-
                     {t("Update your information")}
                 </button>
                 <button

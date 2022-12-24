@@ -8,9 +8,10 @@ import s from "./posts.module.css";
 import profileHelper from "../components/profile/profileHelper";
 import {useState} from "react";
 import {useHistory} from "react-router-dom";
-import {openUserProfile} from "../users/script";
+import {openUserProfile} from "../users/usersHelper";
 import {detectHashtag, detectPerson, detectURL} from "../components/solid-textarea/utils/composeDecorators";
 import PropTypes from "prop-types";
+import {getImageLinkFromStaticObject} from "../utils";
 
 function MentionPerson(props) {
     const {
@@ -105,22 +106,13 @@ export function replaceTags(text, possibleMentions) {
 export async function getUserAvatar(userAvatar, setUserAvatar, userId) {
     if (userId && !userAvatar) {
         const response = await profileHelper.getUser(userId);
-
-        try {
-            setUserAvatar(JSON.parse(response?.data?.user?.avatar)?.webContentLink)
-        } catch (error) {
-            setUserAvatar(response?.data?.user?.avatar)
-        }
+        setUserAvatar(getImageLinkFromStaticObject(response?.data?.user?.avatar))
     }
 }
 
 export async function getParsedUserAvatar(userAvatar, setUserAvatar, user) {
     if (!userAvatar) {
-        try {
-            setUserAvatar(JSON.parse(user?.avatar)?.webContentLink)
-        } catch (error) {
-            setUserAvatar(user?.avatar)
-        }
+        setUserAvatar(getImageLinkFromStaticObject(user?.avatar))
     }
 }
 

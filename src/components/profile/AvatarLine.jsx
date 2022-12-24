@@ -1,12 +1,13 @@
-import s from "./profile.module.css"
+import ProfileStyles from "./profile.module.css"
 import React from "react";
 import {AiOutlineHighlight} from "react-icons/ai";
 import {useMemo, useState} from "react";
 import {alpha} from "@mui/material";
 import AvatarImageMenu from "./AvatarImageMenu";
 import {useTranslation} from "react-i18next";
-import Script2 from "./profileHelper";
+import ProfileHelper from "./profileHelper";
 import PropTypes from "prop-types";
+import {getImageLinkFromStaticObject} from "../../utils";
 
 function AvatarLine(props) {
     const {
@@ -16,13 +17,7 @@ function AvatarLine(props) {
         settings
     } = props;
 
-    const avatarUrl = useMemo(() => {
-        try {
-            return JSON.parse(imgUrl)?.webContentLink;
-        } catch (error) {
-            return imgUrl;
-        }
-    }, [imgUrl])
+    const avatarUrl = useMemo(() => getImageLinkFromStaticObject(imgUrl), [imgUrl])
 
     const avatarId = useMemo(() => {
         try {
@@ -34,14 +29,8 @@ function AvatarLine(props) {
 
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
-
-    const handleClick = (event) => {
-        setAnchorEl(event.currentTarget);
-    };
-
-    const handleClose = () => {
-        setAnchorEl(null);
-    };
+    const handleClick = (event) => setAnchorEl(event.currentTarget)
+    const handleClose = () => setAnchorEl(null)
 
     const {t} = useTranslation();
 
@@ -78,7 +67,7 @@ function AvatarLine(props) {
                 backStyle={`${alpha(settings?.configs?.color[settings?.color] || "rgb(231 231 240)", 0.2)}`}
             />
 
-            <div className={s.FirstLine}>
+            <div className={ProfileStyles.FirstLine}>
                 <img
                     alt={"Avatar"}
                     src={avatarUrl}
@@ -91,10 +80,10 @@ function AvatarLine(props) {
                         id={"updateButton"}
                         onClick={() => {
                             window?.document?.body?.querySelector(".App")?.classList?.add("Open")
-                            Script2.openModal("Muser")
+                            ProfileHelper.openModal("Muser")
                         }}
                     >
-                        <AiOutlineHighlight className={s.CommonIcon}/>{t("Set up profile")}
+                        <AiOutlineHighlight className={ProfileStyles.CommonIcon}/>{t("Set up profile")}
                     </button>
                 }
             </div>

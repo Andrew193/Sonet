@@ -4,9 +4,10 @@ import Skeleton from "react-loading-skeleton";
 import CommentLine from "./commentLine"
 import ClearPosts from "../../posts/PostsInnerContent";
 import {useContext} from "react";
-import s from "./comments.module.css";
+import CommentsStyles from "./comments.module.css";
 import {Context} from "../../App";
 import PropTypes from "prop-types";
+import Separator from "../common/Separator/Separator";
 
 function ClearComment(props) {
     const {
@@ -29,16 +30,11 @@ function ClearComment(props) {
                         notify={notify}
                         socket={socket}
                         id={userId}
-                        toMake={{...post, customClass: s.OnePost}}
+                        toMake={{...post, customClass: CommentsStyles.OnePost}}
                     />
                     : <Skeleton height={"60px"}/>
             }
-            <div
-                className={"Separator"}
-                onClick={(e) => {
-                    e.target.nextElementSibling.classList.toggle("Hide")
-                }}
-            />
+            <Separator/>
             {
                 comments
                     ? <Comment toMake={comments} commentId={commentId}/>
@@ -53,6 +49,7 @@ function ClearComment(props) {
                     comCount={post.posts[0].comCount}
                 />
             }
+            <Separator/>
         </>
     )
 }
