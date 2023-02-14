@@ -29,33 +29,37 @@ function AboveHeader() {
     }, [notificationsState?.notifications, history?.location?.pathname])
 
     return (
-        <Box className={AboveHeaderStyles.Container}>
-            <Typography>Sonet34</Typography>
-            <div>
-                <span className={AboveHeaderStyles.NightMode}><MdOutlineNightlight/></span>
-                <Badge badgeContent={notificationsState?.notificationsToShow?.size}
-                       color="primary"
-                       onClick={() => history.push(headerListLinks.notifications)}
-                >
+        <>
+            {
+                history?.location?.pathname !== headerListLinks.auth ? <Box className={AboveHeaderStyles.Container}>
+                    <Typography>Sonet34</Typography>
+                    <div>
+                        <span className={AboveHeaderStyles.NightMode}><MdOutlineNightlight/></span>
+                        <Badge badgeContent={notificationsState?.notificationsToShow?.size}
+                               color="primary"
+                               onClick={() => history.push(headerListLinks.notifications)}
+                        >
                     <span className={`${AboveHeaderStyles.NightMode} ${AboveHeaderStyles.Badge}`}>
                         <IoMdNotificationsOutline/>
                     </span>
-                </Badge>
-                <CreatePost/>
-                <Avatar
-                    onClick={() => history.push(headerListLinks.profile)}
-                    src={userAvatar}
-                    style={{
-                        ...getTabElementsThemeConfig(),
-                        height: "40px",
-                        width: "40px",
-                        marginLeft: "20px",
-                        boxShadow: "rgb(0 0 0 / 80%) 0px 0px 8px 0px"
-                    }}
-                    className={"conversationImg"}
-                />
-            </div>
-        </Box>
+                        </Badge>
+                        <CreatePost/>
+                        <Avatar
+                            onClick={() => history.push(headerListLinks.profile)}
+                            src={userAvatar}
+                            style={{
+                                ...getTabElementsThemeConfig(),
+                                height: "40px",
+                                width: "40px",
+                                marginLeft: "20px",
+                                boxShadow: "rgb(0 0 0 / 80%) 0px 0px 8px 0px"
+                            }}
+                            className={"conversationImg"}
+                        />
+                    </div>
+                </Box> : null
+            }
+        </>
     )
 }
 
