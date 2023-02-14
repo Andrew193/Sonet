@@ -1,6 +1,8 @@
 import React from "react";
-import s from "../solid-textarea.module.css";
+import SolidTextareaStyles from "../solid-textarea.module.css";
 import {getStore} from "../../../app/store";
+
+const OverLimit = ({children}) => <span className={SolidTextareaStyles.Editor__OverLimit}>{children}</span>
 
 export const createOverLimitDecorator = (maxChars) => {
     function overLimitStrategy(contentBlock, callback) {
@@ -16,7 +18,3 @@ export const createOverLimitDecorator = (maxChars) => {
         component: OverLimit
     };
 };
-
-function OverLimit({children}) {
-    return <span className={s.Editor__OverLimit}>{children}</span>;
-}

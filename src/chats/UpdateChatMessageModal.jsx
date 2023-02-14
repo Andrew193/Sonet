@@ -27,7 +27,7 @@ function UpdateChatMessageModal(props) {
         <>
             {
                 isOpened ?
-                    <div className={CreatePostStyles.Container + " chatUpdateModal"}>
+                    <div className={`${CreatePostStyles.Container} chatUpdateModal`}>
                         <Backdrop
                             sx={{color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1}}
                             open={isBackdoor || false}
@@ -42,7 +42,7 @@ function UpdateChatMessageModal(props) {
                         />
                         <p>
                             <span
-                                className={`chatPostBtn`}
+                                className={"chatPostBtn"}
                                 onClick={() => {
                                     setIsOpened(false);
                                     setIsBackdoor(() => true);

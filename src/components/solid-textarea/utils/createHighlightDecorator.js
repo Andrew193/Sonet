@@ -1,9 +1,20 @@
 import React from "react";
-import s from "../solid-textarea.module.css";
+import SolidTextareaStyles from "../solid-textarea.module.css";
 import HttpHelper from "../../../helpers/httpHelper";
 import {setPostInformation} from "../../../app/postReducer";
 import {getStore} from "../../../app/store";
 import PropTypes from "prop-types";
+
+const HashPin = ({children}) => <span
+    className={`${SolidTextareaStyles.Editor__Highlight} ${SolidTextareaStyles.Editor_hashtag}`}>{children}</span>
+
+const showPossiblePeople = (name) => HttpHelper.USERS.getUserByName(name.trim().slice(1))
+    .then((response) => response.data.user)
+    .catch(() => [])
+
+const LinkPin = ({children}) => <a
+    className={`${SolidTextareaStyles.Editor__Highlight} ${SolidTextareaStyles.Editor_link}`}
+    href={children[0].props.text}>{children}</a>
 
 function comboStrategy(contentBlock, callback, regex) {
     const text = contentBlock.getText();
@@ -47,14 +58,6 @@ export const highlightPerson = (regex, onChangeHandler) => {
     };
 };
 
-function HashPin({children}) {
-    return <span className={s.Editor__Highlight + " " + s.Editor_hashtag}>{children}</span>;
-}
-
-HashPin.propTypes = {
-    children: PropTypes.node
-}
-
 function MentionPin(props, onChangeHandler) {
     const dispatch = getStore().dispatch;
     const postInformation = getStore().getState().post.postInformation;
@@ -68,7 +71,7 @@ function MentionPin(props, onChangeHandler) {
         dispatch(setPostInformation({selectedMention: ""}));
     }
 
-    return <li className={s.Editor__Highlight + " " + s.Editor_mention}
+    return <li className={`${SolidTextareaStyles.Editor__Highlight} ${SolidTextareaStyles.Editor_mention}`}
                style={{display: "inline-block"}}
     >{props.decoratedText} <span style={{display: "none"}}>{props.children}</span></li>;
 }
@@ -80,14 +83,8 @@ MentionPin.propTypes = {
     children: PropTypes.node
 }
 
-function showPossiblePeople(name) {
-    return HttpHelper.USERS.getUserByName(name.trim().slice(1))
-        .then((response) => response.data.user)
-        .catch(() => [])
-}
-
-function LinkPin({children}) {
-    return <a className={s.Editor__Highlight + " " + s.Editor_link} href={children[0].props.text}>{children}</a>;
+HashPin.propTypes = {
+    children: PropTypes.node
 }
 
 LinkPin.propTypes = {

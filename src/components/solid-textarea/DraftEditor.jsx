@@ -2,7 +2,7 @@ import React, {useCallback, useEffect, useMemo, useRef, useState} from "react";
 import {composeDecorators} from "./utils/composeDecorators";
 import {useField} from "usetheform";
 import {Editor, EditorState} from "draft-js";
-import s from "./solid-textarea.module.css";
+import SolidTextareaStyles from "./solid-textarea.module.css";
 import {useDispatch, useSelector} from "react-redux";
 import {BiTrash} from "react-icons/all";
 import {getStore} from "../../app/store";
@@ -16,16 +16,12 @@ export const DraftEditor = ({maxChars, name = "editorState"}) => {
     const [focusPosition, setFocusPosition] = useState(null);
     const dispatch = useDispatch();
     const [possibleMentions, setPossibleMentions] = useState([]);
-    const onChangeHandler = withDelay(500,
-        (callback) => {
-            const selectedMention = getStore().getState().post.postInformation.selectedMention
-            callback(selectedMention || "").then((users) => {
-                setPossibleMentions(() => users);
-            })
-        })
+    const onChangeHandler = withDelay(500, (callback) => {
+        const selectedMention = getStore().getState().post.postInformation.selectedMention
+        callback(selectedMention || "").then((users) => setPossibleMentions(() => users))
+    })
 
-    const initialState = useMemo(() => EditorState.createEmpty(composeDecorators(onChangeHandler)),
-        [maxChars]);
+    const initialState = useMemo(() => EditorState.createEmpty(composeDecorators(onChangeHandler)), [maxChars]);
     const {value, setValue} = useField({type: "custom", name, value: initialState});
     const onInputChange = useCallback((editorState) => {
         setFocusPosition(() => editorState._immutable.selection.focusOffset)
@@ -53,8 +49,7 @@ export const DraftEditor = ({maxChars, name = "editorState"}) => {
     useEffect(() => {
         if (postInformation?.shouldClear) {
             clear();
-            const dispatch = getStore().dispatch;
-            dispatch(setPostInformation({shouldClear: false}))
+            getStore().dispatch(setPostInformation({shouldClear: false}))
         }
     }, [postInformation?.shouldClear])
 
@@ -64,7 +59,7 @@ export const DraftEditor = ({maxChars, name = "editorState"}) => {
 
     return (
         <div
-            className={s.Editor}
+            className={SolidTextareaStyles.Editor}
             ref={ref}
             style={{
                 maxWidth: `${maxWidth}px`,
@@ -73,7 +68,7 @@ export const DraftEditor = ({maxChars, name = "editorState"}) => {
             }}
         >
             <span
-                className={s.Editor__Clear}
+                className={SolidTextareaStyles.Editor__Clear}
                 onClick={() => clear()}
             >
                 <BiTrash/>

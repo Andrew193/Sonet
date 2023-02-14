@@ -30,14 +30,12 @@ function MatePin(props) {
 
     return (
         <div
-            className={currentChat?.currentIndex === index ? "currentChat" : ""}
+            className={`${currentChat?.currentIndex === index ? "currentChat" : ""}`}
             onClick={() => {
                 if (friend?.approved) {
                     setCurrentChat({
                         members: [+friend?.receiverId, +friend?.requestSendById],
-                        id: `${[friend?.receiverId, friend?.requestSendById].sort(function (a, b) {
-                            return a - b;
-                        }).join("")}`,
+                        id: `${[friend?.receiverId, friend?.requestSendById].sort((a, b) => a - b).join("")}`,
                         currentIndex: index
                     })
                 }

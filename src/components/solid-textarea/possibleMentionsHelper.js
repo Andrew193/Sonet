@@ -23,8 +23,7 @@ export function handleOnMentionSelect(selectedMention, person, setValue, onChang
     setValue(EditorState.set(newState, {decorator: composeDecorators(onChangeHandler)}));
 
     const timer = setTimeout(() => {
-        dispatch(setPostInformation([{possibleMentions: [...postInformation.possibleMentions, person]},
-            {selectedMention: ""}]));
+        dispatch(setPostInformation([{possibleMentions: [...postInformation.possibleMentions, person]}, {selectedMention: ""}]));
         setPossibleMentions([]);
         clearTimeout(timer);
     }, 500)

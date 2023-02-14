@@ -1,7 +1,7 @@
 import React from "react";
-import s from "./profile.module.css"
-import s2 from "../common/navigationLine/style.module.css"
-import Script from "./profileHelper"
+import ProfileStyles from "./profile.module.css"
+import NavigationLineStyles from "../common/navigationLine/navigation-line.module.css"
+import ProfileHelper from "./profileHelper"
 import {useRef} from "react";
 import {AiOutlineSafetyCertificate, AiOutlineSecurityScan} from "react-icons/ai";
 import {buttonsConfig} from "../../create-post/CreatePostLine";
@@ -19,8 +19,8 @@ function VerificationLine(props) {
     const {t} = useTranslation();
 
     return (
-        <div className={s.Ver}>
-            <div className={s.ConfirmLine + " Hide Mconfirm"}>
+        <div className={ProfileStyles.Ver}>
+            <div className={`${ProfileStyles.ConfirmLine} Hide Mconfirm`}>
                 <input
                     placeholder={t("Input your email")}
                     ref={(el) => text = el}
@@ -31,25 +31,22 @@ function VerificationLine(props) {
                 />
                 <span
                     id="mainPostBtn"
-                    onClick={() => {
-                        Script.confirmPerson("Mconfirm", text.value, userInfo.email)
-                    }}
+                    onClick={() => ProfileHelper.confirmPerson("Mconfirm", text.value, userInfo.email)}
                     style={{
                         padding: "3px 5px"
                     }}
                     className={`${buttonsConfig[settings?.configs?.color[settings?.color]]}`}
                 >{t("Confirm")}</span>
             </div>
-            {userInfo.ver ? <AiOutlineSafetyCertificate className={s.CommonIcon + " " + s2.Icon}/> :
+            {userInfo.ver ?
+                <AiOutlineSafetyCertificate className={`${ProfileStyles.CommonIcon} ${NavigationLineStyles.Icon}`}/> :
                 myId === userInfo.id ?
                     <AiOutlineSecurityScan
-                        className={s.CommonIcon + " " + s2.Icon}
-                        onClick={() => {
-                            Script.openModal("Mconfirm")
-                        }}
+                        className={`${ProfileStyles.CommonIcon} ${NavigationLineStyles.Icon}`}
+                        onClick={() => ProfileHelper.openModal("Mconfirm")}
                     />
                     :
-                    <AiOutlineSecurityScan className={s.CommonIcon + " " + s2.Icon}/>
+                    <AiOutlineSecurityScan className={`${ProfileStyles.CommonIcon} ${NavigationLineStyles.Icon}`}/>
             }
         </div>
     )

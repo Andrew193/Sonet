@@ -4,8 +4,8 @@ type SeparatorType = {
     onClickHandler?: any
 }
 
-function basicSeparatorOnClick(e: any) {
-    e.target.nextElementSibling.classList.toggle("Hide")
+function basicSeparatorOnClick(event: any) {
+    event.target.nextElementSibling.classList.toggle("Hide")
 }
 
 function Separator(props: SeparatorType) {
@@ -15,7 +15,7 @@ function Separator(props: SeparatorType) {
 
     const separatorOnClick = useMemo(() => onClickHandler || basicSeparatorOnClick, [onClickHandler]);
 
-    return (<div className={"Separator"} onClick={(e: any) => separatorOnClick(e)}/>)
+    return (<div className={"Separator"} onClick={(event: any) => separatorOnClick(event)}/>)
 }
 
 export default Separator;

@@ -1,13 +1,13 @@
 import {withRouter} from "react-router";
-import s from "./comments.module.css"
+import CommentsStyles from "./comments.module.css"
 import React, {useContext, useEffect, useState} from "react";
-import Script from "../../posts/postsHelper"
-import S2 from "./Script.js"
-import ClearComment from "./clearComment";
+import PostsHelper from "../../posts/postsHelper"
+import ComponentsHelper from "./ComponentsHelper"
+import ClearComment from "./ClearComment";
 import {Context} from "../../App";
 import {useSettings} from "../../hooks";
 import {getItemFromLocalStorage} from "../../localStorageService";
-import {USER_INFORMATION} from "../../vars";
+import {headerListLinks, USER_INFORMATION} from "../../vars";
 import {getEmptyElementsThemeConfig} from "../../utils";
 import TableLoader from "../table-loader/TableLoader";
 import {useTranslation} from "react-i18next";
@@ -32,21 +32,19 @@ function Comments(props) {
     socket.on("refreshPost", (e) => setPost({posts: [e]}));
 
     useEffect(() => {
-        Script.getSelectedPost(id || 1, notify)
-            .then((response) => setPost(response))
-        S2.getAllComments(id, notify)
-            .then((response) => setComments(response?.data?.posts))
+        PostsHelper.getSelectedPost(id || 1, notify).then((response) => setPost(response))
+        ComponentsHelper.getAllComments(id, notify).then((response) => setComments(response?.data?.posts))
     }, [id, notify])
 
     return (
         <div
-            className={s.Container + " commentsPage"}
+            className={`${CommentsStyles.Container} commentsPage`}
             style={{
                 ...getEmptyElementsThemeConfig(settings),
                 justifyContent: post && comments ? "space-between" : "unset"
             }}
         >
-            <MaintainedPageHeader path={"/"} linkPath={"/posts"} linkTitle={t("Posts")}/>
+            <MaintainedPageHeader path={headerListLinks.base} linkPath={headerListLinks.posts} linkTitle={t("Posts")}/>
             <style>
                 {`
                      .highlight-tab:after {
@@ -66,7 +64,7 @@ function Comments(props) {
                      .basicPageHead {
                       background: ${settings?.configs?.background[settings?.background]};
                      }
-                     .${s.Comments}{
+                     .${CommentsStyles.Comments}{
                      background: ${settings?.configs?.background[settings?.background]};
                      }
                      .rowPostsContainer {

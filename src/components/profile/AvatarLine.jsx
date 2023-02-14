@@ -71,8 +71,8 @@ function AvatarLine(props) {
                 <img
                     alt={"Avatar"}
                     src={avatarUrl}
-                    onClick={(e) => {
-                        (myId === id) && handleClick(e)
+                    onClick={(event) => {
+                        (myId === id) && handleClick(event)
                     }}
                 />
                 {

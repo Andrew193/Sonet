@@ -6,9 +6,7 @@ export async function createChatMessage(values, okCallback, errorCallback) {
 }
 
 export function copyToClipboard(text) {
-    navigator.clipboard.writeText(text).then(() => {
-        notify('Copying to clipboard was successful!');
-    }, () => notify('Could not copy text'));
+    navigator.clipboard.writeText(text).then(() => notify('Copying to clipboard was successful!'), () => notify('Could not copy text'));
 }
 
 export async function deleteMessageById(id, socket, receiverId) {
@@ -22,9 +20,7 @@ export async function deleteMessageById(id, socket, receiverId) {
 
 export async function updateMessageById(id, newText, socket, receiverId) {
     HttpHelper.CHAT.updateChatMessage(id, newText)
-        .then(() => {
-            socket.emit("updateAfterDeleting", {id: receiverId});
-        })
+        .then(() => socket.emit("updateAfterDeleting", {id: receiverId}))
 }
 
 export async function getConversationById(conversationId, okCallback, errorCallback) {

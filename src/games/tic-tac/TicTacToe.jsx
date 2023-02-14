@@ -1,20 +1,20 @@
 import React from 'react'
-import {useState, useEffect} from "react"
+import {useState} from "react"
 import "./TicTacToe.css"
-import {getSettings} from "../../db";
 import {alpha, Typography} from "@mui/material";
 import Tic from "../images/check+circle+icon-1320184982103223133.png";
 import Tac from "../images/416-4167052_cross-sign-png-tic-tac-toe-cross-transparent.png";
 import {buttonsConfig} from "../../create-post/CreatePostLine";
 import {useTranslation} from "react-i18next";
 import PropTypes from "prop-types";
+import {useSettings} from "../../hooks";
 
 const TicTacToe = () => {
     const [turn, setTurn] = useState('X')
     const [cells, setCells] = useState(Array(9).fill(''))
     const [winner, setWinner] = useState()
 
-    const [settings, setSettings] = useState({});
+    const {settings} = useSettings();
 
     const CheckWinner = (squares) => {
         let combos = {
@@ -77,16 +77,6 @@ const TicTacToe = () => {
         setWinner(null)
         setCells(Array(9).fill(''))
     }
-
-    useEffect(() => {
-        async function getData() {
-            const response = await getSettings();
-
-            setSettings(response[0])
-        }
-
-        getData();
-    }, [])
 
     const {t} = useTranslation();
 

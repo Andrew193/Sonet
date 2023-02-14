@@ -32,8 +32,7 @@ export function LikeDislikeTab({information, avatarUrl, isLike}) {
     const [relatedPost, setRelatedPost] = useState(null);
 
     useEffect(() => {
-        PostsHelper.getSelectedPost(information?.postId, notify)
-            .then((response) => setRelatedPost(response?.posts))
+        PostsHelper.getSelectedPost(information?.postId, notify).then((response) => setRelatedPost(response?.posts))
     }, []);
 
     return (

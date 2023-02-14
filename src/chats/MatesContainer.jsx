@@ -4,7 +4,7 @@ import {AiOutlineQuestionCircle} from "react-icons/all";
 import {Box, Tooltip} from "@mui/material";
 import {useState} from "react";
 import {TooltipButtonCover} from "../components/tooltip-cover/TooltipButtonCover";
-import textareaStyles from "../components/solid-textarea/solid-textarea.module.css";
+import TextareaStyles from "../components/solid-textarea/solid-textarea.module.css";
 import React from "react";
 import PropTypes from "prop-types";
 
@@ -27,7 +27,7 @@ function MatesContainer(props) {
                 </Tooltip>
                 {isOpen && <p><span>Online</span><span>Offline</span></p>}
             </Box>
-            <div className={textareaStyles.ThematicBreak}/>
+            <div className={TextareaStyles.ThematicBreak}/>
             <h3>{t("Mates")}</h3>
             {matesList}
             <MatesConditions matesListLength={matesList?.length} isLoading={isLoading}/>

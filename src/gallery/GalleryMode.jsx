@@ -1,4 +1,4 @@
-import s from "./gallery.module.css";
+import GalleryStyles from "./gallery.module.css";
 import {Typography} from "@mui/material";
 import React from "react";
 import {useTranslation} from "react-i18next";
@@ -13,22 +13,18 @@ function GalleryMode(props) {
     const {t} = useTranslation();
 
     return (
-        <Typography className={s.Navigation}>
+        <Typography className={GalleryStyles.Navigation}>
             <span
                 id={"mainPostBtn"}
                 style={{background: !selected ? "red" : ""}}
-                onClick={() => {
-                    setSelected(0)
-                }}
+                onClick={() => setSelected(0)}
             >
                 {t("All")}
             </span>
             <span
                 id={"mainPostBtn"}
                 style={{background: selected ? "red" : ""}}
-                onClick={() => {
-                    setSelected(1)
-                }}
+                onClick={() => setSelected(1)}
             >
                 {t("Folders")}
             </span>

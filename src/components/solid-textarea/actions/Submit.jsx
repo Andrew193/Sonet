@@ -1,6 +1,6 @@
 import React from "react";
 import {useForm} from "usetheform";
-import Script from "../../../create-post/script";
+import CreatePostHelper from "../../../create-post/CreatePostHelper";
 import {BsPencil} from "react-icons/all";
 import {buttonsConfig} from "../../../create-post/CreatePostLine";
 import {useContext, useEffect} from "react";
@@ -35,7 +35,7 @@ function PostButton(props) {
             onClick={() => {
                 setIsOpened(true);
                 window?.document?.body?.querySelector(".App")?.classList?.remove("Open")
-                Script.CreatePost(text, notify, null, socket, images, postInformation)
+                CreatePostHelper.CreatePost(text, notify, null, socket, images, postInformation)
                     .then(() => {
                         const dispatch = getStore().dispatch;
                         dispatch(setPostInformation({shouldClear: true}))

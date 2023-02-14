@@ -1,7 +1,7 @@
 import React from "react";
 import {WhatsHappeningBar} from "./WhatsHappeningBar";
 import {Form} from "usetheform";
-import s from "./solid-textarea.module.css"
+import SolidTextareaStyles from "./solid-textarea.module.css"
 import {PrivacyPicker} from "./privacy-picker/PrivacyPicker";
 import {SolidTextareaActions} from "./actions/SolidTextareaActions";
 import {useState} from "react";
@@ -27,7 +27,7 @@ function MainCover(props) {
                 <PrivacyPicker>
                     <AddQuizBar/>
                 </PrivacyPicker>
-                <span className={s.ThematicBreak}/>
+                <span className={SolidTextareaStyles.ThematicBreak}/>
                 <SolidTextareaActions
                     customStyle={customStyle}
                     setIsOpened={setIsOpened}

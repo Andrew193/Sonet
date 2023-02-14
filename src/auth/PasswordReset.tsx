@@ -33,7 +33,7 @@ function PasswordReset(props: PasswordReset) {
                 <span className={AuthStyles.Tip}>Email</span>
             </div>
             {Formik.touched.email && Formik.errors.email &&
-                <span className={AuthStyles.Error + " " + AuthStyles.f1}>{Formik.errors.email}</span>}
+                <span className={`${AuthStyles.Error} ${AuthStyles.f1}`}>{Formik.errors.email}</span>}
             <button
                 type="submit"
                 id={"btnEnter"}

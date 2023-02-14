@@ -1,55 +1,36 @@
-import s from "./users.module.css"
-import Script from "./usersHelper"
+import UsersStyles from "./users.module.css"
+import UsersHelper from "./usersHelper"
 import React from "react";
 import {useRef} from "react"
 import {useHistory} from "react-router-dom"
 import Loader from "../Loader";
 import {useTranslation} from "react-i18next";
-import PropTypes from "prop-types";
 
-function FindUserLine(props) {
-    const {
-        setOpen,
-        open
-    } = props;
-
-    let Input = useRef()
-    const hist = useHistory();
+function FindUserLine() {
+    let userID = useRef()
+    const history = useHistory();
     const {t} = useTranslation();
 
     return (
         <div
-            className={`${s.FindUserLine} col-xs-4 col-sm-4`}
+            className={`${UsersStyles.FindUserLine} col-xs-4 col-sm-4`}
             data-testid={"FindLine"}
             style={{padding: 'unset'}}
         >
             <div data-testid={"inner"}>
                 <input
-                    ref={(el) => Input = el}
-                    onInput={(e) => {
-                        e.target.value = Script.input(e.target.value)
-                    }}
+                    type={"number"}
+                    ref={(el) => userID = el}
                     placeholder={t("Input user ID")}/>
                 <span
                     id={'mainPostBtn'}
-                    onClick={() => {
-                        setOpen(() => true)
-                        Script.openUser(null, hist, Input.value, setOpen)
-                    }}
+                    onClick={() => UsersHelper.openUser(null, history, userID.value)}
                 >{t("Find by ID")}
                 </span>
             </div>
-
-            <Loader
-                open={open}
-            />
+            <Loader/>
         </div>
     )
 }
-
-FindUserLine.propTypes = {
-    setOpen: PropTypes.func,
-    open: PropTypes.bool
-};
 
 export default FindUserLine;

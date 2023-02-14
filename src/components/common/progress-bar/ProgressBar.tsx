@@ -1,16 +1,27 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-function ProgressBar(props) {
+type ProgressBar = {
+    percent: number,
+    label: string,
+    height: string,
+    width: string,
+    radius: string,
+    borderColor: string,
+    fillColor: string,
+    colorShift: boolean
+}
+
+function ProgressBar(props: ProgressBar) {
     const {
         percent,
         label,
-        height = '25px',
+        height,
         width,
-        radius = '5px',
-        borderColor = '#eee',
-        fillColor = 'rgb(150 150 238)',
-        colorShift = true
+        radius,
+        borderColor,
+        fillColor,
+        colorShift
     } = props;
 
     return (
@@ -29,7 +40,7 @@ function ProgressBar(props) {
                     borderRadius: 'inherit',
                     backgroundColor: fillColor,
                     transition: 'all .2s ease',
-                    [colorShift ? 'filter' : null]: `hue-rotate(-${percent}deg)`,
+                    [colorShift ? 'filter' : '']: `hue-rotate(-${percent}deg)`,
                     textAlign: "center",
                     padding: percent ? '1.5px' : 'none'
                 }}
@@ -58,5 +69,13 @@ ProgressBar.propTypes = {
     fillColor: PropTypes.string,
     colorShift: PropTypes.bool
 };
+
+ProgressBar.defaultProps = {
+    height: '25px',
+    radius: '5px',
+    borderColor: '#eee',
+    fillColor: 'rgb(150 150 238)',
+    colorShift: true
+}
 
 export default ProgressBar;

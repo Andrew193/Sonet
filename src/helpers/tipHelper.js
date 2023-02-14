@@ -1,5 +1,4 @@
-
-function rel() {
+function activateTooltip() {
     let tooltipElem;
 
     document.onmouseover = function (event) {
@@ -31,6 +30,6 @@ function rel() {
     };
 }
 
-const obj={ rel };
+const toExport = {activateTooltip};
 
-export default obj;
+export default toExport;

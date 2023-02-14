@@ -5,7 +5,7 @@ import CommonHelper from "../helpers/common";
 import {deleteItemFromLocalStorage, getItemFromLocalStorage} from "../localStorageService";
 import {USER_INFORMATION} from "../vars";
 
-function leave(history) {
+function logout(history) {
     Script.removeCookie("token");
     deleteItemFromLocalStorage(USER_INFORMATION);
     CommonHelper.redirect(history, null, "/auth");
@@ -23,11 +23,11 @@ function GetShortUserInfo(notify) {
     }
 }
 
-export function GetInfo() {
+export function GetShortUserInformation() {
     const {userName, id} = getItemFromLocalStorage(USER_INFORMATION);
     return {userName: userName || "", id: id || null};
 }
 
-const obj = {leave, GetShortUserInfo, GetInfo}
+const toExport = {logout, GetShortUserInfo, GetShortUserInformation}
 
-export default obj;
+export default toExport;

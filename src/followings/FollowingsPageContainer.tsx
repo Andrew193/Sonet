@@ -6,11 +6,7 @@ import {FollowersFollowingCover, FollowersType} from "../followers/FollowersPage
 function Followers(props: FollowersType) {
     const users = props.location.state.users;
 
-    return (
-        <FollowersFollowingCover>
-            <FollowingsPageContent users={users}/>
-        </FollowersFollowingCover>
-    )
+    return (<FollowersFollowingCover><FollowingsPageContent users={users}/></FollowersFollowingCover>)
 }
 
 export default withRouter(Followers);

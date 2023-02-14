@@ -1,4 +1,4 @@
-import s from "./textarea.module.css";
+import TextareaStyles from "./textarea.module.css";
 import data from '@emoji-mart/data'
 import Picker from '@emoji-mart/react'
 import {useRef, useState} from "react";
@@ -18,36 +18,24 @@ function Textarea(props) {
         text
     } = props;
 
-    let textarea = useRef();
+    const textarea = useRef();
     const [isOpened, setIsOpened] = useState(false);
 
     return (
-        <>
-            <div
-                className={s.MainCover}
-            >
-                {isOpened && <Picker
-                    data={data}
-                    onEmojiSelect={(e) => {
-                        insert(textarea, e?.native, setText)
-                        setIsOpened(false)
-                    }}
-                />}
-                <textarea
-                    className={s.Container}
-                    onChange={(e) => {
-                        setText(e?.value);
-                    }}
-                    ref={textarea}
-                    value={text}
-                />
-                <BsEmojiSmile
-                    onClick={() => {
-                        setIsOpened(true)
-                    }}
-                />
-            </div>
-        </>
+        <div className={TextareaStyles.MainCover}>
+            {isOpened && <Picker data={data}
+                                 onEmojiSelect={(e) => {
+                                     insert(textarea, e?.native, setText)
+                                     setIsOpened(false)
+                                 }}/>}
+            <textarea
+                className={TextareaStyles.Container}
+                onChange={(e) => setText(e?.value)}
+                ref={textarea}
+                value={text}
+            />
+            <BsEmojiSmile onClick={() => setIsOpened(true)}/>
+        </div>
     )
 }
 

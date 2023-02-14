@@ -61,8 +61,8 @@ function BackImageMenu(props) {
                 aria-haspopup="true"
             >
                 <MenuItem
-                    onClick={(e) => {
-                        handleClose(e)
+                    onClick={(event) => {
+                        handleClose(event)
                         downloadFile(JSON.parse(userInfoBack)?.webContentLink || spareBacImg)
                     }}
                 >
@@ -73,8 +73,8 @@ function BackImageMenu(props) {
                 </MenuItem>
 
                 <MenuItem
-                    onClick={(e) => {
-                        handleClose(e)
+                    onClick={(event) => {
+                        handleClose(event)
                         UserHelper.CallImageInput(imageRef)
                     }}
                 >
@@ -85,8 +85,8 @@ function BackImageMenu(props) {
                 </MenuItem>
 
                 <MenuItem
-                    onClick={(e) => {
-                        handleClose(e)
+                    onClick={(event) => {
+                        handleClose(event)
                         openImageViewer(0)
                     }}
                 >

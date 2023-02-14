@@ -134,7 +134,7 @@ function ClearProfile(props) {
             </PageHeader>
             <div
                 className={styles.Back}
-                onClick={(e) => (myId === userInfo.id) && handleClick(e)}
+                onClick={(event) => (myId === userInfo.id) && handleClick(event)}
                 style={userInfo.back && {backgroundImage: `url(${JSON.parse(userInfo.back)?.webContentLink})`}}
             />
             <AvatarLine

@@ -69,12 +69,8 @@ function CurrentChat(props) {
     useEffect(() => {
         async function getData() {
             getConversationById(conversationId,
-                (response) => {
-                    setMessages(response?.clearData)
-                },
-                (errorMessage) => {
-                    notify(errorMessage || "Error");
-                })
+                (response) => setMessages(response?.clearData),
+                (errorMessage) => notify(errorMessage || "Error"))
         }
 
         if (conversationId) {

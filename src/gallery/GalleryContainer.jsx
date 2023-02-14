@@ -1,6 +1,6 @@
 import React from "react";
 import {alpha, Box, hexToRgb} from "@mui/material";
-import s from "./gallery.module.css";
+import GalleryStyles from "./gallery.module.css";
 import GalleryInnerContent from "./GalleryInnerContent";
 import {withRouter} from "react-router-dom";
 import {useSettings} from "../hooks";
@@ -10,13 +10,13 @@ function GalleryContainer() {
     const {settings} = useSettings();
 
     return (
-        <Box className={s.Container} style={getEmptyElementsThemeConfig(settings)}>
+        <Box className={GalleryStyles.Container} style={getEmptyElementsThemeConfig(settings)}>
             <style>
                 {`
-                 html, .chatBoxWrapper, .chatMenu, .chatMenuInput, .basicPageHead, .${s.ImagesContainer}, .${s.GalleryActions} {
+                 html, .chatBoxWrapper, .chatMenu, .chatMenuInput, .basicPageHead, .${GalleryStyles.ImagesContainer}, .${GalleryStyles.GalleryActions} {
                  background: ${settings?.configs?.background[settings?.background]};
                  }
-                 .${s.GalleryActions} > svg:hover {
+                 .${GalleryStyles.GalleryActions} > svg:hover {
                  background: ${alpha(hexToRgb(settings?.configs?.color[settings?.color] || "#7986cb"), 0.2)};
                  color: ${settings?.configs?.color[settings?.color]};
                  }
@@ -26,9 +26,7 @@ function GalleryContainer() {
                  }
                 `}
             </style>
-            <GalleryInnerContent
-                settings={settings}
-            />
+            <GalleryInnerContent settings={settings}/>
         </Box>
     )
 }

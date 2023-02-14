@@ -1,6 +1,6 @@
 import React from "react";
 import {useMemo, useState, useRef} from "react";
-import s from "./gallery.module.css";
+import GalleryStyles from "./gallery.module.css";
 import {alpha, Backdrop, CircularProgress, ListItemIcon, Menu, MenuItem, Typography} from "@mui/material";
 import {useHistory} from "react-router-dom";
 import LazyImage from "../posts/LazyImage";
@@ -63,11 +63,9 @@ function Folders(props) {
                 }}
             >
                 {
-                    backImage
-                        ?
-                        <>
+                    backImage ? <>
                             <LazyImage imageSrc={backImage}{...getGalleryImageConfig()}/>
-                            <div className={s.FolderDescription}>
+                            <div className={GalleryStyles.FolderDescription}>
                                 <span>Created date: <span>{dateHelper.fromNow(folder?.createdAt)}</span></span>
                                 <span>Folder name: {folder?.name}</span>
                             </div>
@@ -87,9 +85,9 @@ function Folders(props) {
             image?.src
                 ? <p
                     key={JSON.parse(image?.src)?.webContentLink + index}
-                    onClick={(e) => {
+                    onClick={(event) => {
                         setOpenedFolderImage(image)
-                        handleClick(e);
+                        handleClick(event);
                     }}
                 >
                     <LazyImage imageSrc={JSON.parse(image?.src)?.webContentLink}   {...getGalleryImageConfig()}/>
@@ -104,7 +102,7 @@ function Folders(props) {
     const [isOpened, setIsOpened] = useState(false);
 
     return (
-        <div className={s.FolderInnerContainer}>
+        <div className={GalleryStyles.FolderInnerContainer}>
             <Backdrop
                 sx={{color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1}}
                 open={isOpened || false}
@@ -131,7 +129,7 @@ function Folders(props) {
                 anchorEl={anchorEl}
                 open={open}
                 onClose={handleClose}
-                className={s.ImageMenu}
+                className={GalleryStyles.ImageMenu}
             >
                 {
                     !openedFolderImage
@@ -153,18 +151,12 @@ function Folders(props) {
                             src: openedFolderImage?.src,
                             id: openedFolderImage?.id
                         }).then(() => {
-                            setFolders((state) => {
-                                const newState = state?.filter((folder) => folder?.id !== openedFolderImage?.id);
-                                return JSON.parse(JSON.stringify(newState));
-                            })
+                            setFolders((state) => JSON.parse(JSON.stringify(state?.filter((folder) => folder?.id !== openedFolderImage?.id))))
                             setTimeout(() => setIsOpened(() => false), 1000)
                         })
                     } else {
                         deleteFolder({name: openedFolder?.name}).then(() => {
-                            setFolders((state) => {
-                                const newState = state?.filter((folder) => folder?.name !== openedFolder?.name);
-                                return JSON.parse(JSON.stringify(newState));
-                            })
+                            setFolders((state) => JSON.parse(JSON.stringify(state?.filter((folder) => folder?.name !== openedFolder?.name))))
                             setTimeout(() => setIsOpened(() => false), 1000)
                         })
                     }

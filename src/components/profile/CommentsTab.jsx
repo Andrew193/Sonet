@@ -22,13 +22,12 @@ function CommentTab({information, avatarUrl}) {
     const [relatedPost, setRelatedPost] = useState({});
 
     useEffect(() => {
-        postsHelper.getSelectedPost(information?.postId || 1, notify)
-            .then((response) => setRelatedPost(response?.posts))
+        postsHelper.getSelectedPost(information?.postId || 1, notify).then((response) => setRelatedPost(response?.posts))
     }, []);
 
     return (
         <Box
-            className={ProfileStyles.UsersPost + " profilePostBorder"}
+            className={`${ProfileStyles.UsersPost} profilePostBorder`}
             style={{flexDirection: "column", ...settings?.list?.listItemStyles}}
         >
             <Box

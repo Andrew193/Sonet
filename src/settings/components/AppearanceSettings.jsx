@@ -7,6 +7,7 @@ import {getSettings, updateSettings} from "../../db";
 import {buttonsConfig} from "../../create-post/CreatePostLine";
 import {useTranslation} from "react-i18next";
 import {getElementsThemeConfig} from "../../utils";
+import {useSettings} from "../../hooks";
 
 const marks = [
     {
@@ -32,7 +33,7 @@ const marks = [
 ];
 
 function AppearanceSettings() {
-    const [settings, setSettings] = useState({})
+    const {settings} = useSettings()
     const [borderRadius, setBorderRadius] = useState(0);
     const [margin, setMargin] = useState(0);
     const [padding, setPadding] = useState(0);
@@ -92,7 +93,6 @@ function AppearanceSettings() {
         async function getSettingsConfig() {
             const response = await getSettings();
 
-            setSettings(response[0]);
             setBorderRadius(response[0]?.list?.borderRadius);
             setViewType(response[0]?.list?.viewType);
             setMargin(response[0]?.list?.margin);

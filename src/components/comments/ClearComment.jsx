@@ -1,7 +1,7 @@
 import React from "react";
-import Comment from "./comments"
+import Comment from "./Comments"
 import Skeleton from "react-loading-skeleton";
-import CommentLine from "./commentLine"
+import CommentsLine from "./CommentsLine"
 import ClearPosts from "../../posts/PostsInnerContent";
 import {useContext} from "react";
 import CommentsStyles from "./comments.module.css";
@@ -41,7 +41,7 @@ function ClearComment(props) {
                     : <Skeleton height={"50px"} count={5}/>
             }
             {
-                post && <CommentLine
+                post && <CommentsLine
                     settings={settings}
                     id={id}
                     notify={notify}

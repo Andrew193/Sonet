@@ -1,7 +1,7 @@
 import React from "react";
 import {useContext, useState} from "react";
-import s from "./comments.module.css"
-import Script from "./Script.js"
+import CommentsStyles from "./comments.module.css"
+import ComponentsHelper from "./ComponentsHelper"
 import {buttonsConfig} from "../../create-post/CreatePostLine";
 import {useTranslation} from "react-i18next";
 import {Backdrop, CircularProgress} from "@mui/material";
@@ -11,7 +11,7 @@ import {getItemFromLocalStorage} from "../../localStorageService";
 import {USER_INFORMATION} from "../../vars";
 import PropTypes from "prop-types";
 
-function CommentLine(props) {
+function CommentsLine(props) {
     const {
         id,
         comCount,
@@ -19,10 +19,8 @@ function CommentLine(props) {
     } = props;
 
     const {socket, notify} = useContext(Context);
-
     const [text, setText] = useState('')
     const [isOpened, setIsOpened] = useState(false);
-
     const userInfo = getItemFromLocalStorage(USER_INFORMATION);
     const {t} = useTranslation();
 
@@ -35,14 +33,14 @@ function CommentLine(props) {
                 <CircularProgress color="inherit"/>
             </Backdrop>
             <style>{`
-            .${s.CommentLine} .react-emoji {
+            .${CommentsStyles.CommentLine} .react-emoji {
             width: 77%;
             }
-            .${s.CommentLine} .react-emoji button {
+            .${CommentsStyles.CommentLine} .react-emoji button {
             flex: unset !important;
             }
             `}</style>
-            <div className={s.CommentLine}>
+            <div className={CommentsStyles.CommentLine}>
                 <InputEmoji
                     value={text}
                     onChange={setText}
@@ -50,10 +48,10 @@ function CommentLine(props) {
                     placeholder={t("What do you think about it?")}
                 />
                 <span
-                    className={`button ${s.noBefore} ${buttonsConfig[settings?.configs?.color[settings?.color]]}`}
+                    className={`button ${CommentsStyles.noBefore} ${buttonsConfig[settings?.configs?.color[settings?.color]]}`}
                     onClick={() => {
                         setIsOpened(true);
-                        Script.createComment(text, userInfo, id, comCount, notify, socket)
+                        ComponentsHelper.createComment(text, userInfo, id, comCount, notify, socket)
                             .then(() => {
                                 setText("")
                                 setIsOpened(false);
@@ -65,10 +63,10 @@ function CommentLine(props) {
     )
 }
 
-CommentLine.propTypes = {
+CommentsLine.propTypes = {
     id: PropTypes.number,
     comCount: PropTypes.number,
     settings: PropTypes.object
 };
 
-export default CommentLine;
+export default CommentsLine;

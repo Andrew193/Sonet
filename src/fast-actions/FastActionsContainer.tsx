@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {useTranslation} from "react-i18next";
 import {alpha, Box, Tooltip, Typography} from "@mui/material";
-import s from "./fast-actions.module.css";
+import FastActionsStyles from "./fast-actions.module.css";
 import {headerListLinks} from "../vars";
 import {AiOutlineStar, BiUpArrowAlt, BsChatDots, FiArrowDown, MdQueueMusic} from "react-icons/all";
 import {useSettings} from "../hooks";
@@ -40,7 +40,7 @@ function FastActionsContainer() {
     return (
         <>
             <Box
-                className={s.Container}
+                className={FastActionsStyles.Container}
                 style={{
                     bottom: isOpened ? "0px" : "-400px",
                     minWidth: isOpened ? "300px" : "50px",
@@ -49,32 +49,32 @@ function FastActionsContainer() {
             >
                 <style>
                     {`
-                .${s.Container} {
+                .${FastActionsStyles.Container} {
                 z-index:${selectedMode === 0 ? "100" : "10"};
                 }
-                .${s.Container} {
+                .${FastActionsStyles.Container} {
                 box-shadow: 0px 0px 8px 0px ${alpha(settingsConfig?.settings?.configs?.color[settingsConfig?.settings?.color] || "#b6c0f3", 0.8)} !important;
                 }
-                .${s.HeaderActions} svg:hover {
+                .${FastActionsStyles.HeaderActions} svg:hover {
                 background: ${alpha(settingsConfig?.settings?.configs?.color[settingsConfig?.settings?.color] || "#b6c0f3", 0.8)};
                 }
-                .${s.Container} .chatBoxTop {
+                .${FastActionsStyles.Container} .chatBoxTop {
                 height: 300px;
                 }
-                .${s.Container} .fromNow {
+                .${FastActionsStyles.Container} .fromNow {
                 width: max-content;
                 }
                 @media (max-width: 1024px) {
                 .fast_m_up {
                 display: none;
                 }
-                .${s.FastElement}:hover {
+                .${FastActionsStyles.FastElement}:hover {
                 background: ${alpha(settingsConfig?.settings?.configs?.color[settingsConfig?.settings?.color] || "#b6c0f3", 0.5)};
                 }
-                .${s.Header} > .p {
+                .${FastActionsStyles.Header} > .p {
                   display: ${isOpened ? "block!important" : "none"};
                 }
-                .${s.Container} {
+                .${FastActionsStyles.Container} {
                 min-width:300px};
                 }
                 }
@@ -82,31 +82,21 @@ function FastActionsContainer() {
                 </style>
                 <Typography
                     component={"p"}
-                    className={s.Header}
+                    className={FastActionsStyles.Header}
                 >
                     <span className={"p"}>Fast actions</span>
-                    <span
-                        className={s.HeaderActions}
-                    >
+                    <span className={FastActionsStyles.HeaderActions}>
                     {
                         !isOpened
                             ? <Tooltip title={t("Expand")} arrow placement="top">
                                 <TooltipButtonCover>
-                                    <BiUpArrowAlt
-                                        onClick={() => {
-                                            setIsOpened(true)
-                                        }}
-                                    />
+                                    <BiUpArrowAlt onClick={() => setIsOpened(true)}/>
                                 </TooltipButtonCover>
                             </Tooltip>
                             :
                             <Tooltip title={t("Collapse")} arrow placement="top">
                                 <TooltipButtonCover>
-                                    <FiArrowDown
-                                        onClick={() => {
-                                            setIsOpened(false)
-                                        }}
-                                    />
+                                    <FiArrowDown onClick={() => setIsOpened(false)}/>
                                 </TooltipButtonCover>
                             </Tooltip>
                     }
@@ -115,14 +105,14 @@ function FastActionsContainer() {
                 <Box>
                     <ul>
                         <li
-                            className={s.FastElement}
+                            className={FastActionsStyles.FastElement}
                             onClick={() => setSelectedMode(fastEntities.music)}
                         >
                             <MdQueueMusic/>
                             Fast Music
                         </li>
                         <li
-                            className={s.FastElement}
+                            className={FastActionsStyles.FastElement}
                             onClick={() => setSelectedMode(fastEntities.messages)}
                         >
                             <BsChatDots/>
@@ -134,19 +124,15 @@ function FastActionsContainer() {
             <Components.FastMusicContainer
                 opened={selectedMode === fastEntities.music}
                 dropSelection={<AiOutlineStar
-                    onClick={() => {
-                        setSelectedMode(0)
-                    }}
-                    className={s.ResetFastConfigButton}
+                    onClick={() => setSelectedMode(0)}
+                    className={FastActionsStyles.ResetFastConfigButton}
                 />}
             />
             <Components.FastMessageContainer
                 opened={selectedMode === fastEntities.messages}
                 dropSelection={<AiOutlineStar
-                    onClick={() => {
-                        setSelectedMode(0)
-                    }}
-                    className={s.ResetFastConfigButton}
+                    onClick={() => setSelectedMode(0)}
+                    className={FastActionsStyles.ResetFastConfigButton}
                 />}
             />
         </>

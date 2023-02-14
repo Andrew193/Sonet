@@ -1,6 +1,6 @@
 import {alpha} from "@mui/material";
 
-export const FollowersStyles = (settings: any) => `
+export const FollowersStylesConfig = (settings: any) => `
                      .mainFollowContainer {
                      border-right: 1px solid ${settings?.configs?.color[settings?.color]};
                      } 

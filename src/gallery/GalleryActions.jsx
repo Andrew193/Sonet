@@ -1,7 +1,7 @@
 import React from "react";
 import {Box, ListItemIcon, Menu, MenuItem, Typography} from "@mui/material";
 import {AiOutlineDelete, AiOutlineMedium, BsGear, TbLetterB} from "react-icons/all";
-import s from "./gallery.module.css";
+import GalleryStyles from "./gallery.module.css";
 import {useMemo, useState} from "react";
 import {useTranslation} from "react-i18next";
 
@@ -25,7 +25,7 @@ function GalleryActions() {
                 min-height: ${size.min}px;
                 min-width: ${size.max}px;
                 }
-                .${s.FolderDescription} {
+                .${GalleryStyles.FolderDescription} {
                 ${hideDescription ? "width: 0px !important;padding: 0px !important;overflow: hidden;" : ""}
                 }
                 `
@@ -34,19 +34,15 @@ function GalleryActions() {
     const {t} = useTranslation();
 
     return (
-        <Box
-            className={s.GalleryActions}
-        >
+        <Box className={GalleryStyles.GalleryActions}>
             <style>{cssStyleString}</style>
             <Menu
                 anchorEl={anchorEl}
                 open={open}
                 onClose={handleClose}
-                className={s.ImageMenu}
+                className={GalleryStyles.ImageMenu}
             >
-                <MenuItem onClick={() => {
-                    //spare
-                }}>
+                <MenuItem>
                     <ListItemIcon>
                         <AiOutlineDelete/>
                     </ListItemIcon>
@@ -89,11 +85,7 @@ function GalleryActions() {
                     <Typography>{t("Toggle description")}</Typography>
                 </MenuItem>
             </Menu>
-            <BsGear
-                onClick={(e) => {
-                    handleClick(e)
-                }}
-            />
+            <BsGear onClick={(e) => handleClick(e)}/>
         </Box>
     )
 }

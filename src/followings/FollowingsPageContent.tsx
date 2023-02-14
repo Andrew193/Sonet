@@ -8,11 +8,7 @@ function FollowingsPageContentWrapper(props: FollowersPropsType) {
         users
     } = props;
 
-    return (
-        <>
-            <FollowersCreator usersList={users}/>
-        </>
-    )
+    return (<FollowersCreator usersList={users}/>)
 }
 
 export default withPageHeader(FollowingsPageContentWrapper, {path: "/profile", Title: "Followings"})

@@ -2,7 +2,7 @@ import MatesContainer from "./MatesContainer";
 import RequestsContainer from "./RequestsConditions";
 import {useEffect, useState} from "react";
 import {useTranslation} from "react-i18next";
-import textareaStyles from "../components/solid-textarea/solid-textarea.module.css"
+import TextareaStyles from "../components/solid-textarea/solid-textarea.module.css"
 import React from "react";
 import PropTypes from "prop-types";
 
@@ -22,10 +22,8 @@ function PeopleContainer(props) {
         setConversations((state) =>
             search === ""
                 ? conversations?.map((conversation) => ({...conversation, show: true}))
-                : state?.map((conversation) =>
-                    conversation?.receiverName?.includes(search)
-                        ? {...conversation, show: true}
-                        : {...conversation, show: false}
+                : state?.map((conversation) => conversation?.receiverName?.includes(search)
+                    ? {...conversation, show: true} : {...conversation, show: false}
                 ))
     }, [search])
 
@@ -41,7 +39,7 @@ function PeopleContainer(props) {
                         className="chatMenuInput"
                         onChange={(e) => setSearch(e.target?.value)}
                     />
-                    <div className={textareaStyles.ThematicBreak}/>
+                    <div className={TextareaStyles.ThematicBreak}/>
                 </>
             }
             {

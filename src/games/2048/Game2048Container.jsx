@@ -2,9 +2,9 @@ import "./2048.css";
 import React from "react";
 import {useEffect, useState} from "react";
 import {ImStarEmpty} from "react-icons/all";
-import {getSettings} from "../../db";
-import {alpha, hexToRgb as muiHexToRgb} from "@mui/material"
+import {alpha, hexToRgb as muiHexToRgb} from "@mui/material";
 import {useTranslation} from "react-i18next";
+import {useSettings} from "../../hooks";
 
 let mydata = [];    // Добавляем атрибут mydata для хранения игровых данных
 let score = 0;	  	   // Добавляем атрибут оценки
@@ -261,7 +261,7 @@ function moveBottomInRow(r) {
 
 function Game2048Container() {
     const [highestTileCost, setHighestTileCost] = useState(0);
-    const [settings, setSettings] = useState({});
+    const {settings} = useSettings();
 
     useEffect(() => {
         document.onkeydown = function (e) {
@@ -325,16 +325,6 @@ function Game2048Container() {
                 //spare
             }
         }
-    }, [])
-
-    useEffect(() => {
-        async function getData() {
-            const response = await getSettings();
-
-            setSettings(response[0])
-        }
-
-        getData();
     }, [])
 
     const {t} = useTranslation();

@@ -12,8 +12,6 @@ import Separator from "../components/common/Separator/Separator";
 function UsersPageContent(props) {
     const {
         users,
-        setOpen,
-        open,
         settings,
         id
     } = props;
@@ -29,20 +27,6 @@ function UsersPageContent(props) {
         <>
             <style>
                 {`
-                @keyframes pulse {
-                     0% {
-                     -moz-box-shadow: 0 0 0 0 ${settings?.configs?.color[settings?.color] || "rgb(79, 141, 255)"};
-                     box-shadow: 0 0 5px 0 ${settings?.configs?.color[settings?.color] || "rgb(79, 141, 255)"};
-                     }
-                     70% {
-                     -moz-box-shadow: 0 0 0 5px ${settings?.configs?.color[settings?.color] || "rgb(79, 141, 255)"};
-                     box-shadow: 0 0 5px 5px ${settings?.configs?.color[settings?.color] || "rgb(79, 141, 255)"};
-                     }
-                     100% {
-                     -moz-box-shadow: 0 0 0 0 ${settings?.configs?.color[settings?.color] || "rgb(79, 141, 255)"};
-                     box-shadow: 0 0 5px 0 ${settings?.configs?.color[settings?.color] || "rgb(79, 141, 255)"};
-                     }
-                     }
                      .tetris-tips-arrow svg:hover {
                      background: ${alpha(settings?.configs?.color[settings?.color] || "rgb(231 231 240)", 0.5)};
                      }
@@ -77,23 +61,16 @@ function UsersPageContent(props) {
                 <ClearUsers
                     toMake={users}
                     isSearchBarOpened={isSearchBarOpened}
-                    setOpen={setOpen}
                     settings={settings}
                     searchId={id}
                 />
-
-                {isSearchBarOpened &&
-                    <div ref={wrapperRef}>
-                        <FindUserLine setOpen={setOpen} open={open}/>
-                    </div>}
+                {isSearchBarOpened && <div ref={wrapperRef}><FindUserLine/></div>}
             </div>
         </>)
 }
 
 UsersPageContent.propTypes = {
     users: PropTypes.object,
-    setOpen: PropTypes.func,
-    open: PropTypes.bool,
     settings: PropTypes.object,
     id: PropTypes.string
 };

@@ -1,5 +1,5 @@
 import React from "react";
-import s from './games.module.css';
+import GamesStyles from './games.module.css';
 import {Box} from "@mui/material";
 import GamesContent from "./GamesContent";
 import {useLocation, withRouter} from "react-router-dom";
@@ -13,14 +13,14 @@ function GamesContainer() {
 
     return (
         <Box
-            className={s.Container}
+            className={GamesStyles.Container}
             style={{
                 ...getEmptyElementsThemeConfig(settings),
                 height: `${gameType ? "-webkit-fill-available" : "fit-content"}`
             }}
         >
-            <GamesContent styleSettings={settings}/>
-            <div className={s.Fixer}/>
+            <GamesContent/>
+            <div className={GamesStyles.Fixer}/>
         </Box>
     )
 }

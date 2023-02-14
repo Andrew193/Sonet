@@ -1,5 +1,5 @@
 import React from "react";
-import s from "./gallery.module.css";
+import GalleryStyles from "./gallery.module.css";
 import {Box, Typography} from "@mui/material";
 import FoldersActionsBar from "./FoldersActionsBar";
 import {useHistory} from "react-router-dom";
@@ -30,7 +30,7 @@ function FoldersInnerContent(props) {
                     setFolders={setFolders}
                 />
             }
-            <Box className={s.ImagesContainer}>
+            <Box className={GalleryStyles.ImagesContainer}>
                 {folderName &&
                     <>
                         <Typography
@@ -70,7 +70,7 @@ function FoldersInnerContent(props) {
                             : null
                 }
 
-                <div className={s.folderImagesContainer}>
+                <div className={GalleryStyles.folderImagesContainer}>
                     {folderName ? configuredFolderImages : configuredFolders}
                 </div>
             </Box>

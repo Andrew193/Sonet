@@ -60,11 +60,7 @@ function FriendPin(props: FriendPinProps) {
                             })
                                 .then(() => {
                                     notify("Deleted successfully");
-                                    setConversations((state: FriendTypeForConversations[]) => {
-                                        return JSON.parse(JSON.stringify(state?.filter((friend): boolean => {
-                                            return friend?.receiverId !== receiverId
-                                        })))
-                                    })
+                                    setConversations((state: FriendTypeForConversations[]) => JSON.parse(JSON.stringify(state?.filter((friend): boolean => friend?.receiverId !== receiverId))))
                                 });
                             rejectFriendRequest({
                                 receiverId: requestSendById,

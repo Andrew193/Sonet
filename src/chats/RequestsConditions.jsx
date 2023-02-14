@@ -1,6 +1,6 @@
 import {AiOutlineClose} from "react-icons/all";
 import {useTranslation} from "react-i18next";
-import textareaStyles from "../components/solid-textarea/solid-textarea.module.css";
+import TextareaStyles from "../components/solid-textarea/solid-textarea.module.css";
 import React from "react";
 import PropTypes from "prop-types";
 
@@ -16,7 +16,7 @@ function RequestsConditions(props) {
             {
                 possibleMatesList?.every(v => v === null) ?
                     <>
-                        <div className={textareaStyles.ThematicBreak}/>
+                        <div className={TextareaStyles.ThematicBreak}/>
                         <div className={"lonelyLine"}>
                             <AiOutlineClose/>
                             <span>{t("Out of requests")}</span>

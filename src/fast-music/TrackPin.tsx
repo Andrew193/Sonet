@@ -1,4 +1,4 @@
-import s from "./fast-music.module.css";
+import FastMusicStyles from "./fast-music.module.css";
 import {AiFillPlayCircle} from "react-icons/all";
 import {Tooltip} from "@mui/material";
 import {TooltipButtonCover} from "../components/tooltip-cover/TooltipButtonCover";
@@ -19,7 +19,7 @@ function TrackPin(props: TrackPinType) {
 
     return (
         <div
-            className={s.FastTrack}
+            className={FastMusicStyles.FastTrack}
             style={{
                 border: selected ? `1px solid red` : 'unset'
             }}

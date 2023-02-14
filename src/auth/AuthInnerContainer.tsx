@@ -30,13 +30,13 @@ function AuthInnerContainer(props: AuthInnerContainerType<false>) {
         <form onSubmit={Formik.handleSubmit}>
             <article>
                 <h2
-                    className={isRegisterUser ? AuthStyles.Active : ""}
+                    className={`${isRegisterUser ? AuthStyles.Active : ""}`}
                     onClick={() => setIsRegisterUser(true)}
                     id={"modeLinks"}
                 >Log up</h2>
                 <h2
                     id={"modeLinks"}
-                    className={!isRegisterUser ? AuthStyles.Active : ""}
+                    className={`${!isRegisterUser ? AuthStyles.Active : ""}`}
                     onClick={() => setIsRegisterUser(false)}
                 >Log in</h2>
             </article>

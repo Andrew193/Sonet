@@ -1,22 +1,22 @@
-import cookieHelper from "./cookieHelper.js"
+import CookieHelper from "./cookieHelper.js"
 import HttpHelper from "./httpHelper"
 import CommonHelper from "./common"
 import {deleteItemFromLocalStorage} from "../localStorageService";
-import {USER_INFORMATION} from "../vars";
+import {headerListLinks, USER_INFORMATION} from "../vars";
 
-function isElive(history) {
-    const token = cookieHelper.getCookie("token");
+function isTokenAlive(history) {
+    const token = CookieHelper.getCookie("token");
     if (token) {
         HttpHelper.configToken(token, history)
     } else {
         deleteItemFromLocalStorage(USER_INFORMATION);
-        CommonHelper.redirect(history, null, "/auth");
+        CommonHelper.redirect(history, null, headerListLinks.auth);
     }
 }
 
 const obj = {
     default: {
-        isElive
+        isTokenAlive
     }
 };
 

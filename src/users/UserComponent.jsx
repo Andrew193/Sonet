@@ -1,6 +1,6 @@
 import React from "react";
-import s from "./users.module.css";
-import postStyle from "../posts/posts.module.css"
+import UsersStyles from "./users.module.css";
+import PostStyle from "../posts/posts.module.css"
 import UsersHelper from "./usersHelper";
 import {AiOutlineClockCircle, AiOutlineMail, AiOutlineSafetyCertificate, AiOutlineUser} from "react-icons/ai";
 import DataHelper from "../helpers/dateHelper";
@@ -29,15 +29,15 @@ function UserComponent(props) {
         <div>
             <LazyLoadComponent placeholder={<Loader/>}>
                 <div
-                    className={s.Item + " itemsUsersPage"}
+                    className={`${UsersStyles.Item} itemsUsersPage`}
                     data-id={value[5]}
-                    onClick={(e) => UsersHelper.openUser(e, history)}
+                    onClick={(event) => UsersHelper.openUser(event, history)}
                     style={settings?.list?.listItemStyles}
                 >
                     {value[3] &&
-                        <div className={postStyle.PostItemBar}>
+                        <div className={PostStyle.PostItemBar}>
                             <LazyImage
-                                imgClass={postStyle.PostAvatar}
+                                imgClass={PostStyle.PostAvatar}
                                 wrapperStyle={{
                                     ...getElementsThemeConfig(settings, getPropertiesConfig(true, null,
                                         false, null, null, alpha("#ffffff", 0.3), false))
@@ -56,10 +56,8 @@ function UserComponent(props) {
                     >
                         <h3>
                             <div
-                                className={s.users_a}
-                                onClick={() => {
-                                    history.push(`/users/${value[0]}`)
-                                }}>
+                                className={UsersStyles.users_a}
+                                onClick={() => history.push(`/users/${value[0]}`)}>
                                 <AiOutlineUser style={{color: value[5] === id ? "red" : ""}}/>
                                 <span style={{color: value[5] === id ? "red" : ""}}
                                       className={"usersNamePageName"}>{value[0]}</span>
@@ -71,7 +69,7 @@ function UserComponent(props) {
                                 <a href={`mailto:${value[1]}`}>{value[1]}</a>
                             </span>
                     </div>
-                    <span className={s.CreatedDate + " d-flex-c-c"}>
+                    <span className={`${UsersStyles.CreatedDate} d-flex-c-c`}>
                             <AiOutlineClockCircle/>{DataHelper.fromNow(value[4])}
                     </span>
                 </div>

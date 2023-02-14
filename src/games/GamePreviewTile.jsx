@@ -11,6 +11,7 @@ import {
 import {useHistory} from "react-router-dom";
 import {useTranslation} from "react-i18next";
 import PropTypes from "prop-types";
+import {useSettings} from "../hooks";
 
 function GamePreviewTile(props) {
     const {
@@ -18,11 +19,11 @@ function GamePreviewTile(props) {
         icon,
         description,
         keyPath,
-        altText,
-        styleSettings
+        altText
     } = props;
 
     const history = useHistory();
+    const {settings} = useSettings();
     const {t} = useTranslation();
 
     return (
@@ -32,8 +33,8 @@ function GamePreviewTile(props) {
                 history.push(`/games${keyPath}`)
             }}
             style={{
-                color: styleSettings?.configs?.color[styleSettings?.color],
-                fontSize: styleSettings?.configs?.size[styleSettings?.fontSize]
+                color: settings?.configs?.color[settings?.color],
+                fontSize: settings?.configs?.size[settings?.fontSize]
             }}
             className={"gameTile"}
         >
@@ -42,21 +43,21 @@ function GamePreviewTile(props) {
                 .gameTile {
                 transition: all ease 0.5s;
                 }
-                
+               
                 .gameTile:hover{
-                background-color: ${alpha(hexToRgb(styleSettings?.configs?.color[styleSettings?.color] || "rgb(0, 0, 0)"), 0.2)} !important;
+                background-color: ${alpha(hexToRgb(settings?.configs?.color[settings?.color] || "rgb(0, 0, 0)"), 0.2)} !important;
                 }  
                 
                 .divider_default{
-                 background-color: ${alpha(hexToRgb(styleSettings?.configs?.color[styleSettings?.color] || "rgb(0, 0, 0)"), 0.6)} !important;
+                 background-color: ${alpha(hexToRgb(settings?.configs?.color[settings?.color] || "rgb(0, 0, 0)"), 0.6)} !important;
                 }
                 
                 ::-webkit-scrollbar-thumb {
-                background-color: ${alpha(hexToRgb(styleSettings?.configs?.color[styleSettings?.color] || "rgb(0, 0, 0)"), 0.6)};
+                background-color: ${alpha(hexToRgb(settings?.configs?.color[settings?.color] || "rgb(0, 0, 0)"), 0.6)};
                 }
                 
                 ::-webkit-scrollbar-track {
-                background-color: ${alpha(hexToRgb(styleSettings?.configs?.color[styleSettings?.color] || "rgb(0, 0, 0)"), 0.2)};
+                background-color: ${alpha(hexToRgb(settings?.configs?.color[settings?.color] || "rgb(0, 0, 0)"), 0.2)};
                 }
                 `}
             </style>
@@ -65,8 +66,8 @@ function GamePreviewTile(props) {
                 title={t("" + gameName + "")}
                 subheader={t("Play now!)")}
                 style={{
-                    color: styleSettings?.configs?.color[styleSettings?.color],
-                    fontSize: styleSettings?.configs?.size[styleSettings?.fontSize]
+                    color: settings?.configs?.color[settings?.color],
+                    fontSize: settings?.configs?.size[settings?.fontSize]
                 }}
             />
             <Divider
@@ -88,8 +89,8 @@ function GamePreviewTile(props) {
                     variant="body2"
                     color="text.secondary"
                     style={{
-                        color: styleSettings?.configs?.color[styleSettings?.color],
-                        fontSize: styleSettings?.configs?.size[styleSettings?.fontSize]
+                        color: settings?.configs?.color[settings?.color],
+                        fontSize: settings?.configs?.size[settings?.fontSize]
                     }}
                 >
                     {t("" + description + "")}
@@ -104,8 +105,7 @@ GamePreviewTile.propTypes = {
     icon: PropTypes.node,
     description: PropTypes.string,
     keyPath: PropTypes.string,
-    altText: PropTypes.string,
-    styleSettings: PropTypes.object
+    altText: PropTypes.string
 }
 
 export default GamePreviewTile;

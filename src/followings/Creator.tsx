@@ -1,11 +1,11 @@
 import React from "react";
 import {AiOutlineMail, AiOutlineNumber} from "react-icons/ai";
 import {useHistory} from "react-router";
-import Script from "../users/usersHelper";
+import UsersHelper from "../users/usersHelper";
 import {useEffect, useMemo, useState} from "react";
 import {FollowersUsers} from "../followers/FollowersPageContainer";
 import LazyImage from "../posts/LazyImage";
-import s from "../header/header.module.css";
+import HeaderStyles from "../header/header.module.css";
 import followersS from "../followings/followers.module.css";
 import {getLazyImagesElementsThemeConfig} from "../utils";
 import {getUserAvatar} from "../posts/postsHelper";
@@ -40,10 +40,10 @@ function Item(props: ItemPropsType) {
             key={index}
             style={settings.list.listItemStyles}
             className={"followerOrFollowingContainer"}
-            onClick={() => Script.openUserProfile(+value.id, history)}
+            onClick={() => UsersHelper.openUserProfile(+value.id, history)}
         >
-            <h3 className={"authorName " + followersS.authorName}>
-                <LazyImage imgClass={s.ShortUserAvatar} imageSrc={userAvatar}
+            <h3 className={`authorName ${followersS.authorName}`}>
+                <LazyImage imgClass={HeaderStyles.ShortUserAvatar} imageSrc={userAvatar}
                            wrapperStyle={getLazyImagesElementsThemeConfig()}/>
             </h3>
 
@@ -51,9 +51,7 @@ function Item(props: ItemPropsType) {
                 <span className={followersS.UserName}>{value.userName}</span>
                 <span>
                     <AiOutlineMail/>
-                    <a href={`mailto:${value.email}`} onClick={(e)=>{
-                        e.stopPropagation();
-                    }}>{value.email}</a>
+                    <a href={`mailto:${value.email}`} onClick={(e) => e.stopPropagation()}>{value.email}</a>
                 </span>
             </p>
             <span className={followersS.UserId}>

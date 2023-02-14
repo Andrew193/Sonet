@@ -100,7 +100,7 @@ function Header() {
                     <span className={"col-sm-5"}/>
                     <span
                         className={s.LeaveBtn + " col-sm-7"}
-                        onClick={() => Script.leave(history)}
+                        onClick={() => Script.logout(history)}
                         data-tooltip={t("Leave")}
                     >
                         <AiOutlineLogout size={"24px"} style={{"marginRight": "10px"}}/>

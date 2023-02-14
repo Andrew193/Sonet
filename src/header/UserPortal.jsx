@@ -2,9 +2,9 @@ import React from "react";
 import {createPortal} from "react-dom";
 import {useHistory} from "react-router";
 import CommonHelper from "../helpers/common"
-import s from "./header.module.css"
+import HeaderStyles from "./header.module.css"
 import Script from "./script.js"
-import Script2 from "../components/profile/profileHelper";
+import ProfileHelper from "../components/profile/profileHelper";
 import {useOutsideClick} from "../hooks";
 import {useEffect, useRef, useState} from "react";
 import {Divider} from "@mui/material";
@@ -12,6 +12,29 @@ import Avatar from "@mui/material/Avatar";
 import {AiOutlineSecurityScan} from "react-icons/ai";
 import {hexToRgb} from "../utils";
 import {useTranslation} from "react-i18next";
+
+function setTooltipPosition(setPortalStyles, parentConfig) {
+    const target = parentConfig;
+
+    let left = target?.screenX - 150;
+    if (left < 0) left = 0;
+
+    let top = target?.clientY + 20;
+    if (top < 0) {
+        top = target?.clientY + 35;
+    }
+
+    if (top + 200 > window?.innerHeight - 100) {
+        top -= 200;
+    } else if (top + 100 > window?.innerHeight - 100) {
+        top -= 100;
+    }
+
+    setPortalStyles({
+        left: `${left}px`,
+        top: `${top}px`
+    })
+}
 
 const colorPair = {
     "#2177e8": "rgb(226 237 250)",
@@ -31,7 +54,7 @@ function Portal(props) {
         parentConfig
     } = props;
 
-    const {id, userName: name} = Script.GetInfo();
+    const {id, userName: name} = Script.GetShortUserInformation();
     const {t} = useTranslation();
     const history = useHistory();
     const wrapperRef = useRef(null);
@@ -40,44 +63,21 @@ function Portal(props) {
         click(false);
     })
 
-    const [style, setStyle] = useState({});
-
-    function setTooltipPosition() {
-        const target = parentConfig;
-
-        let left = target?.screenX - 150;
-        if (left < 0) left = 0;
-
-        let top = target?.clientY + 20;
-        if (top < 0) {
-            top = target?.clientY + 35;
-        }
-
-        if (top + 200 > window?.innerHeight - 100) {
-            top -= 200;
-        } else if (top + 100 > window?.innerHeight - 100) {
-            top -= 100;
-        }
-
-        setStyle({
-            left: left + 'px',
-            top: top + 'px'
-        })
-    }
+    const [portalStyles, setPortalStyles] = useState({});
 
     useEffect(() => {
         if (parentConfig) {
-            setTooltipPosition();
+            setTooltipPosition(setPortalStyles, parentConfig);
         }
     }, [parentConfig])
 
     return createPortal(
         <div
-            className={s.UserPortal}
+            className={HeaderStyles.UserPortal}
             onClick={click}
             ref={wrapperRef}
             style={{
-                ...style,
+                ...portalStyles,
                 fontSize: customStyles?.fontSize,
                 color: customStyles?.color,
                 background: colorPair[customStyles?.color],
@@ -106,10 +106,10 @@ function Portal(props) {
             <Divider className={"divider_default"} light/>
 
             <p
-                id={s.Controle}
+                id={HeaderStyles.Controle}
                 onClick={() => {
                     window?.document?.body?.querySelector(".App")?.classList?.add("Open")
-                    Script2.openModal("Muser")
+                    ProfileHelper.openModal("Muser")
                 }}
                 style={{
                     fontSize: customStyles?.fontSize,
@@ -118,8 +118,8 @@ function Portal(props) {
                 }}
             >{t("Set up profile")}</p>
             <p
-                id={s.Controle}
-                onClick={() => Script.leave(history)}
+                id={HeaderStyles.Controle}
+                onClick={() => Script.logout(history)}
                 style={{
                     fontSize: customStyles?.fontSize,
                     color: customStyles?.color,

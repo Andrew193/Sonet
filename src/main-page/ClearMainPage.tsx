@@ -8,6 +8,7 @@ import {getEmptyElementsThemeConfig} from "../utils";
 import MaintainedPageHeader from "../components/MaintainedPageHeader";
 import {headerListLinks} from "../vars";
 import Separator from "../components/common/Separator/Separator";
+import {withAsideBar} from "../hoc/withAsideBar";
 
 export type MainPageType = {
     open?: () => void
@@ -45,4 +46,4 @@ function ClearMainPage(props: MainPageType) {
     )
 }
 
-export default ClearMainPage;
+export default withAsideBar(ClearMainPage);

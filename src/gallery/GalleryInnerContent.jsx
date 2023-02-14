@@ -16,7 +16,7 @@ import {useCallback, useEffect, useMemo, useState} from "react";
 import {addPhotoToFolder, deleteMyPhoto, getMyFolders, getMyGallery} from "./galleryHelper";
 import {notify} from "../App";
 import LazyImage from "../posts/LazyImage";
-import s from "./gallery.module.css";
+import GalleryStyles from "./gallery.module.css";
 import {AiOutlineDelete, RiUserShared2Line} from "react-icons/all";
 import {downloadFileVersion2, getLazyImagesElementsThemeConfig} from "../utils";
 import {AiOutlineDownload, AiOutlineEye} from "react-icons/ai";
@@ -53,9 +53,7 @@ function GalleryInnerContent(props) {
 
     useEffect(() => {
         async function getData() {
-            getMyGallery(userInformation?.id, setImages, (error) => {
-                notify(error || "Something went wrong")
-            })
+            getMyGallery(userInformation?.id, setImages, (error) => notify(error || "Something went wrong"))
         }
 
         if (userInformation?.id) {
@@ -63,33 +61,26 @@ function GalleryInnerContent(props) {
         }
     }, [userInformation?.id]);
 
-    const configuredImages = useMemo(() => {
-        return images?.clearData?.map((image, index) =>
-            <p key={JSON.parse(image?.src)?.webContentLink + index}>
-                <LazyImage
-                    imageSrc={JSON.parse(image?.src)?.webContentLink}
-                    onClick={(e) => {
-                        setSelectedImage(index)
-                        handleClick(e);
-                    }}
-                    {...getGalleryImageConfig()}
-                />
-                {image?.shared && <RiUserShared2Line/>}
-            </p>
-        )
-    }, [images])
+    const configuredImages = useMemo(() => images?.clearData?.map((image, index) =>
+        <p key={JSON.parse(image?.src)?.webContentLink + index}>
+            <LazyImage
+                imageSrc={JSON.parse(image?.src)?.webContentLink}
+                onClick={(e) => {
+                    setSelectedImage(index)
+                    handleClick(e);
+                }}
+                {...getGalleryImageConfig()}
+            />
+            {image?.shared && <RiUserShared2Line/>}
+        </p>
+    ), [images])
 
     const [anchorEl, setAnchorEl] = useState(null);
     const [isViewerOpen, setIsViewerOpen] = useState(false);
     const [selectedImage, setSelectedImage] = useState(null);
     const open = Boolean(anchorEl);
 
-    const imagesForPreview = useMemo(() => {
-        if (images?.clearData) {
-            return images?.clearData?.map((image) => JSON.parse(image?.src)?.webContentLink)
-        }
-        return [];
-    }, [images?.clearData])
+    const imagesForPreview = useMemo(() => images?.clearData ? images?.clearData?.map((image) => JSON.parse(image?.src)?.webContentLink) : [], [images?.clearData])
 
     const closeImageViewer = () => {
         setSelectedImage(0);
@@ -128,9 +119,7 @@ function GalleryInnerContent(props) {
     useEffect(() => {
         if (folders?.length === 0) {
             if (userInformation?.id) {
-                getMyFolders(userInformation?.id, setFolders, (error) => {
-                    console.error(error)
-                })
+                getMyFolders(userInformation?.id, setFolders, (error) => console.error(error))
             }
         }
     }, [userInformation?.id, folders?.length]);
@@ -138,7 +127,7 @@ function GalleryInnerContent(props) {
     return (
         <Box>
             <style>{`
-            .folderItem, .lazyload-wrapper > div, .${s.FolderDescription} {
+            .folderItem, .lazyload-wrapper > div, .${GalleryStyles.FolderDescription} {
              box-shadow: 0px 0px 8px 0px ${alpha(settings?.configs?.color[settings?.color] || "#b6c0f3", 0.8)};
             }
             
@@ -172,7 +161,7 @@ function GalleryInnerContent(props) {
                 anchorEl={anchorEl}
                 open={open}
                 onClose={handleClose}
-                className={s.ImageMenu}
+                className={GalleryStyles.ImageMenu}
             >
                 <MenuItem onClick={() => {
                     downloadFileVersion2(JSON.parse(images?.clearData[selectedImage]?.src)?.webContentLink)
@@ -245,8 +234,8 @@ function GalleryInnerContent(props) {
             <GalleryMode selected={selected} setSelected={setSelected}/>
             {
                 !selected
-                    ? <Box className={s.ImagesContainer}>{configuredImages}</Box>
-                    : <Box className={s.ImagesContainer}>
+                    ? <Box className={GalleryStyles.ImagesContainer}>{configuredImages}</Box>
+                    : <Box className={GalleryStyles.ImagesContainer}>
                         <Folders
                             settings={settings}
                             folderName={folderName}

@@ -47,9 +47,7 @@ function FriendsContainer(props: FriendsContainerProps) {
     useEffect(() => {
         async function getMates() {
             getMatesList(userInformation?.id,
-                (response: { clearData: ConversationType[] }) => {
-                    setConversations(response?.clearData)
-                },
+                (response: { clearData: ConversationType[] }) => setConversations(response?.clearData),
                 (errorMessage: ReactNode | string) => notify(errorMessage || "Error"))
         }
 
@@ -58,18 +56,16 @@ function FriendsContainer(props: FriendsContainerProps) {
         }
     }, [userInformation]);
 
-    const friendsConfig = useMemo(() => {
-        return conversation?.map((friend, index) => friend?.approved ?
-            <FriendPin
-                key={index}
-                index={index}
-                {...friend}
-                userId={userInformation?.id}
-                setConversations={setConversations}
-                setCurrentChat={setCurrentChat}
-            /> : null
-        )
-    }, [conversation])
+    const friendsConfig = useMemo(() => conversation?.map((friend, index) => friend?.approved ?
+        <FriendPin
+            key={index}
+            index={index}
+            {...friend}
+            userId={userInformation?.id}
+            setConversations={setConversations}
+            setCurrentChat={setCurrentChat}
+        /> : null
+    ), [conversation])
 
     useEffect(() => {
         socket.on("getMessageInChat", (data) => {

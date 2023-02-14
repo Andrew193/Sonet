@@ -1,5 +1,5 @@
 import React from "react";
-import s from "../settings/settings.module.css";
+import SettingsStyles from "../settings/settings.module.css";
 import {buttonsConfig} from "../create-post/CreatePostLine";
 import {VscEmptyWindow} from "react-icons/all";
 import {alpha, Box, hexToRgb, Typography} from "@mui/material";
@@ -24,7 +24,7 @@ function FoldersActionsBar(props) {
 
     return (
         <div>
-            <Box className={s.Actions + " " + s.FoldersActions}>
+            <Box className={`${SettingsStyles.Actions} ${SettingsStyles.FoldersActions}`}>
                 <style>{`
             .inputCover {
             position: absolute!important;
@@ -59,9 +59,7 @@ function FoldersActionsBar(props) {
                             flexDirection: 'column',
                             padding: '15px',
                         }}
-                        onDoubleClick={() => {
-                            setIsTextUpdate(false)
-                        }}
+                        onDoubleClick={() => setIsTextUpdate(false)}
                     >
                         <InputEmoji
                             value={newFolderText}
@@ -116,9 +114,7 @@ function FoldersActionsBar(props) {
                         justifyContent: 'space-evenly'
                     }}
                     className={`button btn btn-default  ${buttonsConfig[settings?.configs?.color[settings?.color]]}`}
-                    onClick={() => {
-                        setIsTextUpdate(true)
-                    }}
+                    onClick={() => setIsTextUpdate(true)}
                 >
                     <VscEmptyWindow/>
                     {t("Create")}

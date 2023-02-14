@@ -8,7 +8,7 @@ import Profile from './components/profile/ProfileContainer';
 import ModalUser from './main-page/modalUpdateUser';
 import UsersContainer from './users/UsersContainer';
 import PostsContainer from "./posts/PostsContainer";
-import TopInfo from './components/TopInfo/TopInforationContainer';
+import AsideBarContainer from './components/aside-bar/AsideBarContainer';
 import Followings from "./followings/FollowingsPageContainer";
 import GamesContainer from '../src/games/GamesContainer';
 import SettingsContainerPage from "./settings/SettingsContainerPage";
@@ -42,7 +42,7 @@ const obj = {
     ModalUser,
     UsersContainer,
     PostsContainer,
-    TopInfo,
+    AsideBarContainer,
     Followings,
     Followers,
     ChatContainer

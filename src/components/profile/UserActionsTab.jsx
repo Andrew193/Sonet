@@ -23,16 +23,11 @@ function UserActionsTab(props) {
         />
     ) : null, [contentConfig]);
 
-    return (
-        <>
-            <TabContainer valueLine={contentLine}>
-                <Typography variant={"h3"} component={"span"}>
-                    {noContentCaption}</Typography>
-                {noContentText}
-                {children}
-            </TabContainer>
-        </>
-    )
+    return (<TabContainer valueLine={contentLine}>
+        <Typography variant={"h3"} component={"span"}>{noContentCaption}</Typography>
+        {noContentText}
+        {children}
+    </TabContainer>)
 }
 
 UserActionsTab.propTypes = {

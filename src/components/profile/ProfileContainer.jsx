@@ -10,6 +10,7 @@ import {useSettings} from "../../hooks";
 import {getItemFromLocalStorage} from "../../localStorageService";
 import {USER_INFORMATION} from "../../vars";
 import PropTypes from "prop-types";
+import {withAsideBar} from "../../hoc/withAsideBar";
 
 function Profile(props) {
     const userId = props.match.params.id;
@@ -55,4 +56,4 @@ Profile.propTypes = {
     match: PropTypes.object,
 };
 
-export default withRouter(Profile);
+export default withAsideBar(withRouter(Profile));

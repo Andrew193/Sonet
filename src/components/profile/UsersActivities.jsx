@@ -1,7 +1,7 @@
 import React from "react";
 import {Box, Tab, Tabs, Typography} from "@mui/material";
 import {useEffect, useState, useMemo} from "react";
-import s from "./profile.module.css"
+import ProfileStyles from "./profile.module.css"
 import HttpHelper from "../../helpers/httpHelper";
 import PostsTab from "./PostsTab";
 import profileHelper from "./profileHelper";
@@ -23,11 +23,7 @@ export function TabPanel(props) {
             aria-labelledby={`simple-tab-${index}`}
             {...other}
         >
-            {value === index && (
-                <Box>
-                    <Typography>{children}</Typography>
-                </Box>
-            )}
+            {value === index && (<Box><Typography>{children}</Typography></Box>)}
         </div>
     );
 }
@@ -47,12 +43,8 @@ function a11yProps(index) {
 
 function getPosts(setPosts, id) {
     HttpHelper.POSTS.getPosts(null, "my", `&userId=${id}`)
-        .then(response => {
-            setPosts(response.posts)
-        })
-        .catch(error => {
-            console.error(error)
-        })
+        .then(response => setPosts(response.posts))
+        .catch(error => console.error(error))
 }
 
 function UsersActivities(props) {
@@ -96,26 +88,26 @@ function UsersActivities(props) {
         >
             <Box
                 sx={{borderBottom: 1, borderColor: 'divider'}}
-                className={s.TabsContainer}
+                className={ProfileStyles.TabsContainer}
             >
                 <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
                     <Tab
-                        className={s.Tab}
+                        className={ProfileStyles.Tab}
                         label={t("Posts")}
                         {...a11yProps(0)}
                     />
                     <Tab
-                        className={s.Tab}
+                        className={ProfileStyles.Tab}
                         label={t("Comments")}
                         {...a11yProps(1)}
                     />
                     <Tab
-                        className={s.Tab}
+                        className={ProfileStyles.Tab}
                         label={t("Likes")}
                         {...a11yProps(2)}
                     />
                     <Tab
-                        className={s.Tab}
+                        className={ProfileStyles.Tab}
                         label={t("Dislikes")}
                         {...a11yProps(2)}
                     />

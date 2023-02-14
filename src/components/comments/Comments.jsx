@@ -1,5 +1,5 @@
 import React from "react";
-import s from "./comments.module.css"
+import CommentsStyles from "./comments.module.css"
 import DataHelper from "../../helpers/dateHelper"
 import {v4 as uuidv4} from 'uuid';
 import {useEffect, useMemo, useState} from "react";
@@ -24,7 +24,7 @@ function CommentItem(props) {
             key={uuidv4()}
             style={{background: value?.id === commentId ? "#f3bdbd" : ""}}
         >
-            <Box className={s.CommentsAvatarLine}>
+            <Box className={CommentsStyles.CommentsAvatarLine}>
                 <Avatar
                     src={avatarUrl}
                     className={"conversationImg"}
@@ -57,7 +57,7 @@ function Comments(props) {
     ), [JSON.stringify(toMake)]);
 
     return (
-        <div className={s.Comments}>
+        <div className={CommentsStyles.Comments}>
             {postComments}
         </div>
     )

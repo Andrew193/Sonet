@@ -5,7 +5,7 @@ import {Box, ListItemIcon, Typography} from "@mui/material";
 import {AiOutlineDownload, AiOutlineHighlight} from "react-icons/ai";
 import {deletePostById, refresh, updatePostById} from "./postsHelper";
 import {AiOutlineDelete, BiShare, BsBookmarkDash, BsBookmarkPlus} from "react-icons/all";
-import {BookmarkItem, DeleteBookmarkItem, SharePost} from "../create-post/script";
+import {BookmarkItem, DeleteBookmarkItem, SharePost} from "../create-post/CreatePostHelper";
 import {notify} from "../App";
 import {useEffect, useState} from "react";
 import HttpHelper from "../helpers/httpHelper";

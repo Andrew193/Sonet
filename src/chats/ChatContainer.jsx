@@ -80,8 +80,8 @@ function ChatContainer() {
 
     const receiverId = useMemo(() => currentChat ? currentChat?.members?.find((member) => member !== userInformation.id) : null, [currentChat])
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+    const handleSubmit = async (event) => {
+        event.preventDefault();
         const message = {
             sender: userInformation.id,
             text: newMessage,

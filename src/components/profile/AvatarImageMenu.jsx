@@ -36,7 +36,6 @@ function AvatarImageMenu(props) {
     };
 
     let imageAvatar = useRef();
-
     const {t} = useTranslation();
 
     return (
@@ -72,8 +71,8 @@ function AvatarImageMenu(props) {
                 </MenuItem>
 
                 <MenuItem
-                    onClick={(e) => {
-                        handleClose(e)
+                    onClick={(event) => {
+                        handleClose(event)
                         UserHelper.CallImageInput(imageAvatar)
                     }}
                 >
@@ -84,8 +83,8 @@ function AvatarImageMenu(props) {
                 </MenuItem>
 
                 <MenuItem
-                    onClick={(e) => {
-                        handleClose(e)
+                    onClick={(event) => {
+                        handleClose(event)
                         openImageViewer(0)
                     }}
                 >

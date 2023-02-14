@@ -1,39 +1,29 @@
 import HttpHelper from "../../helpers/httpHelper";
 import {notify} from "../../App";
 
-function openModal(cl) {
-    document.querySelector(`.${cl}`).classList.toggle("Open")
+function openModal(elementClass) {
+    document.querySelector(`.${elementClass}`).classList.toggle("Open")
 }
 
 function getLikes(userId, setLikes) {
-    HttpHelper.POSTS.getAllLikesByUserId(userId, () => {
-        notify("Something went wrong with your likes")
-    }).then(response => {
-        setLikes(response?.data?.posts)
-    })
+    HttpHelper.POSTS.getAllLikesByUserId(userId, () => notify("Something went wrong with your likes")).then(response => setLikes(response?.data?.posts))
 }
 
 function getDislikes(userId, setDislikes) {
-    HttpHelper.POSTS.getAllDislikesByUserId(userId, () => {
-        notify("Something went wrong with your dislikes")
-    }).then(response => {
-        setDislikes(response?.data?.posts)
-    })
+    HttpHelper.POSTS.getAllDislikesByUserId(userId, () => notify("Something went wrong with your dislikes")).then(response => setDislikes(response?.data?.posts))
 }
 
 function getMyComments(userId, setComments) {
-    HttpHelper.POSTS.getAllCommentsByUserId(userId, () => {
-        notify("Something went wrong with your comments")
-    }).then(data => setComments(data?.data?.posts))
+    HttpHelper.POSTS.getAllCommentsByUserId(userId, () => notify("Something went wrong with your comments")).then(data => setComments(data?.data?.posts))
 }
 
-function confirmPerson(Class, phone, email) {
-    openModal(Class);
+function confirmPerson(elementClass, phone, email) {
+    openModal(elementClass);
     HttpHelper.USERS.confirm(phone, email)
 }
 
-function getPCount(id, set) {
-    HttpHelper.POSTS.getPCount(id, set)
+function getPCount(postId, setPost) {
+    HttpHelper.POSTS.getPCount(postId, setPost)
 }
 
 function getMyFollowers(myId, history) {
@@ -48,6 +38,16 @@ function getUser(id) {
     return HttpHelper.USERS.getOneObj(id);
 }
 
-const obj = {openModal, getPCount, confirmPerson, getUser, getMyFollowings, getMyFollowers, getMyComments, getLikes, getDislikes}
+const toExport = {
+    openModal,
+    getPCount,
+    confirmPerson,
+    getUser,
+    getMyFollowings,
+    getMyFollowers,
+    getMyComments,
+    getLikes,
+    getDislikes
+}
 
-export default obj;
+export default toExport;

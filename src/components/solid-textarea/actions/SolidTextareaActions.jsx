@@ -1,5 +1,5 @@
 import React from "react";
-import s from "../solid-textarea.module.css"
+import SolidTextareaStyles from "../solid-textarea.module.css"
 import {UploadMediaBar} from "./UploadMediaBar";
 import {CharacterCounter} from "./CharacterCounter";
 import {Submit} from "./Submit";
@@ -16,11 +16,11 @@ export function SolidTextareaActions(props) {
     } = props;
 
     return (
-        <div className={s.ActionBar}>
+        <div className={SolidTextareaStyles.ActionBar}>
             <UploadMediaBar/>
-            <div className={s.ActionBar__Submit}>
+            <div className={SolidTextareaStyles.ActionBar__Submit}>
                 <CharacterCounter maxChars={maxChars}/>
-                <span className={s.ThematicBreakVertical}/>
+                <span className={SolidTextareaStyles.ThematicBreakVertical}/>
                 <Submit
                     setMaxLength={setMaxLength}
                     customStyle={customStyle}

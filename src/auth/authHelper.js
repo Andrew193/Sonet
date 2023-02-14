@@ -1,31 +1,23 @@
 import HttpHelper from "../helpers/httpHelper"
 
-function reset(token, seter, resetForm) {
+function ResetDocumentCookie(token, setter, resetForm) {
     document.cookie = `token=${token}`;
     resetForm();
-    seter(true);
+    setter(true);
 }
 
-function comboReset(token, seter, resetForm) {
-    reset(token, seter, resetForm)
+function comboReset(token, setter, resetForm) {
+    ResetDocumentCookie(token, setter, resetForm);
     setTimeout(() => window.location.reload(), 150);
 }
 
-function AuthPageSubmitCover(values, resetForm, isRegisterUser, setRedirect, toast) {
+function AuthPageSubmitCover(values, ResetForm, isRegisterUser, setRedirect, toast) {
     values.userName = "Default";
 
     if (isRegisterUser) {
-        HttpHelper.USERS.createUser(values, (token) => {
-            comboReset(token, setRedirect, resetForm);
-        }, (error) => {
-            toast(error || "User already exist");
-        })
+        HttpHelper.USERS.createUser(values, (token) => comboReset(token, setRedirect, ResetForm), (error) => toast(error || "User already exist"));
     } else {
-        HttpHelper.USERS.authUser(values, (token) => {
-            comboReset(token, setRedirect, resetForm);
-        }, (error) => {
-            toast(error);
-        })
+        HttpHelper.USERS.authUser(values, (token) => comboReset(token, setRedirect, ResetForm), (error) => toast(error));
     }
 }
 

@@ -1,8 +1,8 @@
 import {Route, Switch, useHistory} from 'react-router';
 import './App.css';
 import Components from "./components"
-import Script from "../src/header/script.js"
-import Script2 from "./user/script.js";
+import HeaderHelper from "../src/header/script.js"
+import UserHelper from "./user/UserHelper";
 import 'react-toastify/dist/ReactToastify.css';
 import './res/bootstrap/bootstrap.min.css';
 import './res/grid/styles.scss';
@@ -13,23 +13,23 @@ import {toast} from 'react-toastify';
 import {io} from "socket.io-client";
 import {setupDb} from "./db";
 import "./i18n";
-import galleryStyles from "./gallery/gallery.module.css";
-import settingsStyles from "./settings/settings.module.css";
+import GalleryStyles from "./gallery/gallery.module.css";
+import SettingsStyles from "./settings/settings.module.css";
 import {headerListLinks, USER_INFORMATION} from "./vars";
 import store from "./app/store";
 import {Provider, useDispatch} from 'react-redux';
 import React from "react";
-import fastActions from "./fast-actions/fast-actions.module.css";
-import fastMessages from "./fast-message/fast-message.module.css";
-import fastMusic from "./fast-music/fast-music.module.css";
-import bookmarksStyle from "./bookmarks/bookmarks.module.css";
+import FastActions from "./fast-actions/fast-actions.module.css";
+import FastMessages from "./fast-message/fast-message.module.css";
+import FastMusic from "./fast-music/fast-music.module.css";
+import BookmarksStyle from "./bookmarks/bookmarks.module.css";
 import {getFastDisplay} from "./fast-actions/FastActionsContainer";
 import {useLocation} from "react-router-dom";
 import {useSettings} from "./hooks";
 import {getItemFromLocalStorage} from "./localStorageService";
 import {setNotifications} from "./app/notificationReducer";
 import AboveHeader from "./components/above-header/AboveHeader";
-import sessionHelper from "./helpers/sessionHelper"
+import SessionHelper from "./helpers/sessionHelper"
 
 const socket = io();
 
@@ -53,7 +53,7 @@ export function height() {
 
 export const Context = React.createContext<{ notify: typeof notify, socket: typeof socket }>({socket, notify});
 
-function Test() {
+function MaintainedComponents() {
     return (<Components.FastActionsContainer/>)
 }
 
@@ -65,7 +65,7 @@ function AppCover() {
             <Context.Provider value={{notify, socket}}>
                 <Provider store={store}>
                     <AboveHeader/>
-                    <Test/>
+                    <MaintainedComponents/>
                     <App/>
                 </Provider>
             </Context.Provider>
@@ -75,7 +75,6 @@ function AppCover() {
 
 function App() {
     const modal = useRef<HTMLDivElement>(null);
-    const [flag, setFlag] = useState(false);
     const history = useHistory();
     const dispatch = useDispatch();
     const {settings} = useSettings();
@@ -87,15 +86,9 @@ function App() {
     }
 
     useEffect(() => {
-        sessionHelper?.default?.isElive(history);
-        Script.GetShortUserInfo(notify)?.then((newState: { data: any; }) => {
-            Script2.SaveInfo(newState?.data);
-            setFlag(true);
-        });
-
-        setupDb(async () => {
-            //spare
-        });
+        SessionHelper?.default?.isTokenAlive(history);
+        HeaderHelper.GetShortUserInfo(notify)?.then((newState: { data: any; }) => UserHelper.SaveInfo(newState?.data));
+        setupDb();
     }, []);
 
     useEffect(() => {
@@ -119,40 +112,54 @@ function App() {
     return (
         <>
             <style>{`
-            .${fastActions.Container}, .${fastMessages.Container}, .${fastMusic.Container} {
+            .${FastActions.Container}, .${FastMessages.Container}, .${FastMusic.Container} {
             display: ${containerDisplay};
+            }
+            @keyframes pulse {
+            0% {
+            -moz-box-shadow: 0 0 0 0 ${settings?.configs?.color[settings?.color] || "rgb(79, 141, 255)"};
+            box-shadow: 0 0 5px 0 ${settings?.configs?.color[settings?.color] || "rgb(79, 141, 255)"};
+            }
+            70% {
+            -moz-box-shadow: 0 0 0 5px ${settings?.configs?.color[settings?.color] || "rgb(79, 141, 255)"};
+            box-shadow: 0 0 5px 5px ${settings?.configs?.color[settings?.color] || "rgb(79, 141, 255)"};
+            }
+            100% {
+            -moz-box-shadow: 0 0 0 0 ${settings?.configs?.color[settings?.color] || "rgb(79, 141, 255)"};
+            box-shadow: 0 0 5px 0 ${settings?.configs?.color[settings?.color] || "rgb(79, 141, 255)"};
+            }
             }
             .App {
             height: 700px;
             overflow: auto;
             background: ${settings?.configs?.background[settings?.background]};
             } 
-            .${bookmarksStyle.BookmarksContainer} {
+            .${BookmarksStyle.BookmarksContainer} {
              min-height: ${screenHeight - 84}px;
              }
-            .${bookmarksStyle.BookmarksContainer} .empty-table {
+            .${BookmarksStyle.BookmarksContainer} .empty-table {
             color:${settings?.configs?.color[settings?.color]};
             }
             .App.Open {
             height: ${screenHeight - 1}px!important;
             }
-            .genContainer {
+            .aside-container {
             min-height: ${screenHeight - 1}px;
             }
-             .genContainer div.onePostContainer{
+             .aside-container div.onePostContainer{
             min-height: ${screenHeight - 1}px;
             }
-            .genContainer main {
+            .aside-container main {
             min-height: ${screenHeight - 1}px;
             } 
-            .genContainer > div {
+            .aside-container > div {
             min-height: ${screenHeight - 1}px;
             height: fit-content;
             } 
-            .${galleryStyles.Container} {
+            .${GalleryStyles.Container} {
             min-height: ${screenHeight - 1}px;
             }
-             .${settingsStyles.Container} {
+             .${SettingsStyles.Container} {
             min-height: ${screenHeight - 1}px;
             }
             .mainFollowContainer {
@@ -160,48 +167,27 @@ function App() {
             }
             `}</style>
             <div className="App">
-                {flag && <>
-                    <Components.Header/>
-                    <Switch>
-                        <Route exact path={headerListLinks.base} render={() =>
-                            <div className={"genContainer"}>
-                                <Components.MainPage open={open}/>
-                                <Components.TopInfo/>
-                            </div>}>
-                        </Route>
-                        <Route exact path={headerListLinks.users + "/:id?"} render={() =>
-                            <div className={"genContainer"}>
-                                <Components.UsersContainer/>
-                                <Components.TopInfo/>
-                            </div>}/>
-                        <Route exact path={headerListLinks.profile + "/:id?"} render={() =>
-                            <div className={"genContainer"}>
-                                <Components.Profile/>
-                                <Components.TopInfo/>
-                            </div>}/>
-                        <Route exact path={headerListLinks.posts + "/:id?"} render={() =>
-                            <div className={"genContainer"}>
-                                <Components.PostsContainer/>
-                                <Components.TopInfo/>
-                            </div>}/>
-                        <Route exact path={headerListLinks.post + "/:type"}
-                               render={() => <Components.SpecialPosts/>}/>
-                        <Route exact path={headerListLinks.comment + "/:id?"}
-                               render={() => <Components.Comment/>}/>
-                        <Route exact path={headerListLinks.followers + "/Followings"}
-                               render={() => <Components.Followings/>}/>
-                        <Route exact path={headerListLinks.followers + "/Followers"}
-                               render={() => <Components.Followers/>}/>
-                    </Switch>
-                    <Components.Footer/>
-                    <ToastContainer
-                        toastStyle={{background: "black", borderRadius: "15px"}}
-                        hideProgressBar={true}
-                        autoClose={2000}
-                        position="top-right"
-                    />
-                    <Components.ModalUser ref={modal} click={open}/>
-                </>}
+                <Components.Header/>
+                <Switch>
+                    <Route exact path={headerListLinks.base} render={() => <Components.MainPage open={open}/>}/>
+                    <Route exact path={headerListLinks.users + "/:id?"} render={() => <Components.UsersContainer/>}/>
+                    <Route exact path={headerListLinks.profile + "/:id?"} render={() => <Components.Profile/>}/>
+                    <Route exact path={headerListLinks.posts + "/:id?"} render={() => <Components.PostsContainer/>}/>
+                    <Route exact path={headerListLinks.post + "/:type"} render={() => <Components.SpecialPosts/>}/>
+                    <Route exact path={headerListLinks.comment + "/:id?"} render={() => <Components.Comment/>}/>
+                    <Route exact path={headerListLinks.followers + "/Followings"}
+                           render={() => <Components.Followings/>}/>
+                    <Route exact path={headerListLinks.followers + "/Followers"}
+                           render={() => <Components.Followers/>}/>
+                </Switch>
+                <Components.Footer/>
+                <ToastContainer
+                    toastStyle={{background: "black", borderRadius: "15px"}}
+                    hideProgressBar={true}
+                    autoClose={2000}
+                    position="top-right"
+                />
+                <Components.ModalUser ref={modal} click={open}/>
                 <Route path={headerListLinks.games + "/:gameType?"}
                        render={() => <Components.GamesContainer/>}/>
                 <Route path={headerListLinks.bookmarks}
@@ -209,18 +195,14 @@ function App() {
                 <Route exact path={headerListLinks.settings}
                        render={() => <Components.SettingsContainerPage/>}/>
                 <Route exact path={headerListLinks.chats} render={() => <Components.ChatContainer/>}/>
-                <Route exact path={headerListLinks.notifications} render={() =>
-                    <div className={"genContainer"}>
-                        <Components.NotificationsContainer/>
-                        <Components.TopInfo/>
-                    </div>}/>
+                <Route exact path={headerListLinks.notifications} render={() => <Components.NotificationsContainer/>}/>
                 <Route exact path={headerListLinks.music} render={() => <Components.MusicContainerPage/>}/>
                 <Route exact path={headerListLinks.auth} render={() => <Components.ContainerAuth/>}/>
                 <Route exact path={headerListLinks.gallery + "/:folderName?"}
                        render={() => <Components.GalleryContainer/>}/>
             </div>
         </>
-    );
+    )
 }
 
 export default AppCover;

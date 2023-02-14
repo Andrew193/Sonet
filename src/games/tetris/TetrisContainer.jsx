@@ -3,9 +3,8 @@ import Tetris from 'react-tetris';
 import './tetris.css';
 import {alpha, Box, Typography} from "@mui/material";
 import {AiOutlineAlignCenter, AiOutlineArrowLeft, BiCoinStack} from "react-icons/all";
-import {useState, useEffect, useRef} from "react";
-import {useOutsideClick} from "../../hooks";
-import {getSettings} from "../../db";
+import {useState, useRef} from "react";
+import {useOutsideClick, useSettings} from "../../hooks";
 import {buttonsConfig} from "../../create-post/CreatePostLine";
 import {useTranslation} from "react-i18next";
 import {getElementsThemeConfig} from "../../utils";
@@ -19,22 +18,10 @@ function TetrisContainer() {
         setIsTipOpened(false);
     })
 
-    const [settings, setSettings] = useState({});
-
-    useEffect(() => {
-        async function getData() {
-            const response = await getSettings();
-
-            setSettings(response[0])
-        }
-
-        getData();
-    }, [])
+    const {settings} = useSettings();
 
     return (
-        <Box
-            className={'tetris-container'}
-        >
+        <Box className={'tetris-container'}>
             <style>
                 {`
                     .tetris-game-field {
@@ -42,31 +29,12 @@ function TetrisContainer() {
                      color: ${settings?.configs?.color[settings?.color]};
                      font-weight: bold !important;
                      }
-                     
-                     @keyframes pulse {
-                     0% {
-                     -moz-box-shadow: 0 0 0 0 ${settings?.configs?.color[settings?.color] || "rgb(79, 141, 255)"};
-                     box-shadow: 0 0 5px 0 ${settings?.configs?.color[settings?.color] || "rgb(79, 141, 255)"};
-                     }
-                     70% {
-                     -moz-box-shadow: 0 0 0 5px ${settings?.configs?.color[settings?.color] || "rgb(79, 141, 255)"};
-                     box-shadow: 0 0 5px 5px ${settings?.configs?.color[settings?.color] || "rgb(79, 141, 255)"};
-                     }
-                     100% {
-                     -moz-box-shadow: 0 0 0 0 ${settings?.configs?.color[settings?.color] || "rgb(79, 141, 255)"};
-                     box-shadow: 0 0 5px 0 ${settings?.configs?.color[settings?.color] || "rgb(79, 141, 255)"};
-                     }
-                     }
                      .tetris-tips-arrow svg:hover {
-                     background: ${alpha(settings?.configs?.color[settings?.color] || "rgb(231 231 240)",0.5)};
+                     background: ${alpha(settings?.configs?.color[settings?.color] || "rgb(231 231 240)", 0.5)};
                      }`}
             </style>
             <span className={'tetris-tips-arrow'}>
-            <AiOutlineArrowLeft
-                onClick={() => {
-                    setIsTipOpened(() => true)
-                }}
-            />
+            <AiOutlineArrowLeft onClick={() => setIsTipOpened(() => true)}/>
             </span>
             <Tetris>
                 {({
@@ -115,9 +83,7 @@ function TetrisContainer() {
 
                             <div>
                                 <h4>{t("Game field")}</h4>
-                                <Gameboard
-                                    style={{background: 'red'}}
-                                />
+                                <Gameboard style={{background: 'red'}}/>
                             </div>
                         </div>
 

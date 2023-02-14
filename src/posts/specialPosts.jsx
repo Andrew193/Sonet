@@ -6,9 +6,9 @@ import {withRouter} from "react-router-dom";
 import Script from "./postsHelper"
 import ClearSpecialPost from "./ClearSpecialPost";
 import {alpha} from "@mui/material";
-import {getSettings} from "../db";
 import {Context} from "../App";
 import PropTypes from "prop-types";
+import {useSettings} from "../hooks";
 
 function SpecialPosts(props) {
     const id = props?.location?.state?.id;
@@ -20,7 +20,7 @@ function SpecialPosts(props) {
     const {socket} = useContext(Context);
 
     const [posts, setPosts] = useState(false);
-    const [settings, setSettings] = useState({});
+    const {settings} = useSettings();
 
     socket.on(type === "notMy" ? "notMyPostUpdate" : "MyPostUpdate", (updatedPosts) => {
         setPosts({posts: updatedPosts})
@@ -29,16 +29,6 @@ function SpecialPosts(props) {
     useEffect(() => {
         Script.getMyPostWithEndpoint(id, setPosts, type === "notMy" ? "notMy" : "my")
     }, [id, type]);
-
-    useEffect(() => {
-        async function getData() {
-            const response = await getSettings();
-
-            setSettings(response[0])
-        }
-
-        getData();
-    }, [])
 
     return (
         <div

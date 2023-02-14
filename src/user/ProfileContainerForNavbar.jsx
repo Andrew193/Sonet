@@ -1,7 +1,7 @@
 import Avatar from '@mui/material/Avatar';
 import React from "react";
 import {BsThreeDots} from "react-icons/all";
-import {GetInfo} from "../header/script";
+import {GetShortUserInformation} from "../header/script";
 import PropTypes from "prop-types";
 
 function ProfileContainer(props) {
@@ -9,7 +9,7 @@ function ProfileContainer(props) {
         customStyles
     } = props;
 
-    const {userName, id} = GetInfo()
+    const {userName, id} = GetShortUserInformation()
 
     return (
         <>

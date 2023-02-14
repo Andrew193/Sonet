@@ -1,6 +1,6 @@
 import {useContext, useEffect, useState} from "react";
 import {getSettings} from "../db";
-import s from "./fast-music.module.css";
+import FastMusicStyles from "./fast-music.module.css";
 import {alpha, Box, Tooltip, Typography} from "@mui/material";
 import fastActionsStyles from "../fast-actions/fast-actions.module.css";
 import {BiUpArrowAlt, FiArrowDown} from "react-icons/all";
@@ -39,7 +39,7 @@ function FastMusicContainer(props: FastElementsPropsType) {
 
     return (
         <Box
-            className={s.Container}
+            className={FastMusicStyles.Container}
             style={{
                 bottom: isOpened ? "0px" : "-400px",
                 minWidth: isOpened ? "300px" : "50px",
@@ -49,35 +49,35 @@ function FastMusicContainer(props: FastElementsPropsType) {
             {dropSelection}
             <style>
                 {`
-                .${s.Container} {
+                .${FastMusicStyles.Container} {
                 z-index:${opened ? "100" : "10"};
                 }
-                .${s.Container} {
+                .${FastMusicStyles.Container} {
                 box-shadow: 0px 0px 8px 0px ${alpha(settings?.configs?.color[settings?.color] || "#b6c0f3", 0.8)} !important;
                 }
-                .${s.HeaderActions} svg:hover {
+                .${FastMusicStyles.HeaderActions} svg:hover {
                 background: ${alpha(settings?.configs?.color[settings?.color] || "#b6c0f3", 0.8)};
                 }
                  .${fastActionsStyles.ResetFastConfigButton}:hover {
                 background: ${alpha(settings?.configs?.color[settings?.color] || "#b6c0f3", 0.5)};
                 color: white;
                 }
-                .${s.FastTrack}:hover {
+                .${FastMusicStyles.FastTrack}:hover {
                 background: ${alpha(settings?.configs?.color[settings?.color] || "#b6c0f3", 0.5)};
                 }
-                .${s.FastTrack}  svg:hover {
+                .${FastMusicStyles.FastTrack}  svg:hover {
                   background: ${alpha(settings?.configs?.color[settings?.color] || "#b6c0f3", 0.8)};
                 }
-                .${s.Container} .chatBoxTop {
+                .${FastMusicStyles.Container} .chatBoxTop {
                 height: 300px;
                 }
-                .${s.Container} .fromNow {
+                .${FastMusicStyles.Container} .fromNow {
                 width: max-content;
                 }
-                .${s.Container} .noConversationText {
+                .${FastMusicStyles.Container} .noConversationText {
                 display: none;
                 }
-                .${s.Container} .messageText {
+                .${FastMusicStyles.Container} .messageText {
                 text-align: left!important;
                 padding-top:3px;
                 padding-bottom: 25px;
@@ -86,7 +86,7 @@ function FastMusicContainer(props: FastElementsPropsType) {
                 .fast_m_up {
                 display: none;
                 }
-                .${s.Header} > p {
+                .${FastMusicStyles.Header} > p {
                   display: ${isOpened ? "block!important" : "none"};
                 }
                 }
@@ -94,10 +94,10 @@ function FastMusicContainer(props: FastElementsPropsType) {
             </style>
             <Typography
                 component={"p"}
-                className={s.Header}
+                className={FastMusicStyles.Header}
             >
                 <p>Tracks</p>
-                <span className={s.HeaderActions}>
+                <span className={FastMusicStyles.HeaderActions}>
                     {
                         !isOpened
                             ? <Tooltip title={t("Expand")} arrow placement="top">

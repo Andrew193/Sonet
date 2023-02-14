@@ -1,5 +1,5 @@
 import {Avatar, Badge, Box, Typography} from "@mui/material";
-import style from "./above.module.css";
+import AboveHeaderStyles from "./above.module.css";
 import React from "react";
 import {IoMdNotificationsOutline, MdOutlineNightlight} from "react-icons/all";
 import {CreatePost} from "../../header/HeaderContainerPage";
@@ -29,15 +29,15 @@ function AboveHeader() {
     }, [notificationsState?.notifications, history?.location?.pathname])
 
     return (
-        <Box className={style.Container}>
+        <Box className={AboveHeaderStyles.Container}>
             <Typography>Sonet34</Typography>
             <div>
-                <span className={style.NightMode}><MdOutlineNightlight/></span>
+                <span className={AboveHeaderStyles.NightMode}><MdOutlineNightlight/></span>
                 <Badge badgeContent={notificationsState?.notificationsToShow?.size}
                        color="primary"
                        onClick={() => history.push(headerListLinks.notifications)}
                 >
-                    <span className={style.NightMode + " " + style.Badge}>
+                    <span className={`${AboveHeaderStyles.NightMode} ${AboveHeaderStyles.Badge}`}>
                         <IoMdNotificationsOutline/>
                     </span>
                 </Badge>

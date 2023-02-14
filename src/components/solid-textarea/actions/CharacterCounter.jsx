@@ -2,7 +2,7 @@ import React from "react";
 import {useSelector} from "usetheform";
 import {ProgressRingBar} from "./ProgressRingBar";
 import {getProgressRingBarProps} from "./utils/getProgressRingBarProps";
-import s from "../solid-textarea.module.css";
+import SolidTextareaStyles from "../solid-textarea.module.css";
 import PropTypes from "prop-types";
 
 export const CharacterCounter = (props) => {
@@ -17,7 +17,7 @@ export const CharacterCounter = (props) => {
     );
 
     return (
-        <div data-ui={uiStatus} className={s.ProgressRingBar}>
+        <div data-ui={uiStatus} className={SolidTextareaStyles.ProgressRingBar}>
             <ProgressRingBar {...propsRingBar} />
         </div>
     );

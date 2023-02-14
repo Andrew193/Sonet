@@ -1,6 +1,6 @@
-import React, {useState, useEffect, useRef} from "react";
+import React, {useState, useEffect, useRef, useMemo} from "react";
 import {Input, useSelector} from "usetheform";
-import s from "./privacy-picker.module.css";
+import PrivacyPickerStyles from "./privacy-picker.module.css";
 import WorlSVG from "./images/world.svg";
 import PrivacySVG_0 from "./images/privacy-world.svg";
 import PrivacySVG_1 from "./images/privacy-following.svg";
@@ -19,16 +19,14 @@ export const PrivacyPicker = ({children}) => {
     const dispatch = useDispatch();
     const [visible, setVisibility] = useState(() => false);
     const [postPrivacy] = useSelector((state) => state.postPrivacy);
-
-    const label = labels[postPrivacy] || labels[0];
-    const bntLabel = `${label} can reply`;
+    const bntLabel = useMemo(() => `${labels[postPrivacy] || labels[0]} can reply`, [labels, postPrivacy])
 
     const refPicker = useClickOutPicker(() => {
         visible && setVisibility(false);
     });
 
-    const toggle = (e) => {
-        e.stopPropagation();
+    const toggle = (event) => {
+        event.stopPropagation();
         setVisibility((prev) => !prev);
     };
 
@@ -40,18 +38,18 @@ export const PrivacyPicker = ({children}) => {
     }, [postPrivacy]);
 
     return (
-        <div className={s.PrivacyPicker}>
-            <button type="button" className={s.PrivacyPicker_Btn} onClick={toggle}>
+        <div className={PrivacyPickerStyles.PrivacyPicker}>
+            <button type="button" className={PrivacyPickerStyles.PrivacyPicker_Btn} onClick={toggle}>
                 <img alt={bntLabel} src={WorlSVG}/>
                 <span>{bntLabel}</span>
             </button>
             {children}
-            <div ref={refPicker} data-visible={visible} className={s.PrivacySelection}>
-                <div className={s.PrivacySelection__Header}>Who can reply?</div>
-                <div className={s.PrivacySelection__Hint}>
+            <div ref={refPicker} data-visible={visible} className={PrivacyPickerStyles.PrivacySelection}>
+                <div className={PrivacyPickerStyles.PrivacySelection__Header}>Who can reply?</div>
+                <div className={PrivacyPickerStyles.PrivacySelection__Hint}>
                     Choose who can reply to this Post. Anyone mentioned can always reply.
                 </div>
-                <div className={s.PrivacySelection__Radios}>
+                <div className={PrivacyPickerStyles.PrivacySelection__Radios}>
                     <RadioWithLabel img={PrivacySVG_0} id="everyone" value="0" checked>
                         {labels[0]}
                     </RadioWithLabel>
@@ -80,9 +78,9 @@ function RadioWithLabel({
                             checked
                         }) {
     return (
-        <div className={s.RadioWithLabel}>
+        <div className={PrivacyPickerStyles.RadioWithLabel}>
             <Input type="radio" id={id} name={name} value={value} checked={checked}/>
-            <label className={s.RadioWithLabel__Label} htmlFor={id}>
+            <label className={PrivacyPickerStyles.RadioWithLabel__Label} htmlFor={id}>
                 <img alt="privacy" src={img}/>
                 <span>{children}</span>
             </label>

@@ -8,7 +8,7 @@ export async function getMyGallery(userId, okCallback, errorCallback) {
     return HttpHelper.GALLERY.getMyGallery(userId, okCallback, errorCallback)
 }
 
-export  function updateBackCover(image, openedFolder, setIsOpened, folders, setFolders) {
+export function updateBackCover(image, openedFolder, setIsOpened, folders, setFolders) {
     let formData = new FormData();
     let fileId;
     formData.append("file", image.files[0]);
@@ -29,9 +29,7 @@ export  function updateBackCover(image, openedFolder, setIsOpened, folders, setF
             )
 
             setFolders(() => JSON.parse(JSON.stringify(newFolders)))
-            setTimeout(() => {
-                setIsOpened(() => false)
-            }, 1000)
+            setTimeout(() => setIsOpened(() => false), 1000)
         })
 }
 
@@ -49,12 +47,8 @@ export async function deleteFolder({name}) {
 
 export async function addPhotoToFolder(values, setFolders) {
     return HttpHelper.FOLDER.addPhotoToFolder(values, (response) => {
-        setFolders((state) => {
-            return response?.data[1] ? [...(state || []), response?.data[0]] : state;
-        })
-    }, (error) => {
-        console.log(error)
-    })
+        setFolders((state) => response?.data[1] ? [...(state || []), response?.data[0]] : state)
+    }, (error) => console.log(error))
 }
 
 export async function updateFolderBack(values) {

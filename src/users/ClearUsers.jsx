@@ -1,8 +1,6 @@
-import {useHistory} from "react-router-dom";
 import UsersStyles from "./users.module.css"
-import React from "react";
+import React, {useRef} from "react";
 import {useEffect, useMemo, useState} from "react";
-import {useTranslation} from "react-i18next";
 import UserComponent from "./UserComponent";
 import {USER_INFORMATION} from "../vars";
 import {getItemFromLocalStorage} from "../localStorageService";
@@ -14,41 +12,30 @@ import {getImageLinkFromStaticObject} from "../utils";
 function ClearUsers(props) {
     const {
         isSearchBarOpened,
-        setOpen,
         settings,
         searchId,
         toMake
     } = props;
 
-    const history = useHistory();
     const [parsedUsers, setParsedUsers] = useState([]);
     const currentWidth = useMemo(() => document?.body.offsetWidth, [document?.body.offsetWidth]);
 
-    const id = getItemFromLocalStorage(USER_INFORMATION, "id");
-
-    const {t} = useTranslation();
+    const idRef = useRef(getItemFromLocalStorage(USER_INFORMATION, "id"))
 
     useEffect(() => {
-        setOpen(() => false);
-
-        setParsedUsers(() => toMake?.users?.map((value, index) => {
-            const avatarUrl = getImageLinkFromStaticObject(value[3]);
-
-            return (
-                <LazyLoadComponent key={index + "_lazy"} placeholder={<Loader/>}>
-                    <UserComponent
-                        key={index}
-                        index={index}
-                        value={value}
-                        avatarUrl={avatarUrl}
-                        searchId={searchId}
-                        id={id}
-                        t={t}
-                    />
-                </LazyLoadComponent>
-            )
-        }))
-    }, [history, id, toMake?.users, setOpen])
+        setParsedUsers(() => toMake?.users?.map((value, index) =>
+            <LazyLoadComponent key={index + "_lazy"} placeholder={<Loader/>}>
+                <UserComponent
+                    key={index}
+                    index={index}
+                    value={value}
+                    avatarUrl={getImageLinkFromStaticObject(value[3])}
+                    searchId={searchId}
+                    id={idRef.current}
+                />
+            </LazyLoadComponent>
+        ))
+    }, [toMake?.users])
 
     return (
         <div
@@ -60,7 +47,7 @@ function ClearUsers(props) {
                     : 'col-xs-12 col-sm-12'
             } users-box` + UsersStyles.UsersCont}
             style={{
-                height: '700px',
+                minHeight: '700px',
                 padding: 'unset',
                 background: parsedUsers?.length === 1 ? settings?.configs?.background[settings?.background] : ""
             }}
@@ -72,7 +59,6 @@ function ClearUsers(props) {
 
 ClearUsers.propTypes = {
     isSearchBarOpened: PropTypes.bool,
-    setOpen: PropTypes.func,
     settings: PropTypes.object,
     searchId: PropTypes.string,
     toMake: PropTypes.object

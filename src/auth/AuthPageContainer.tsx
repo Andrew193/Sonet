@@ -19,7 +19,6 @@ function ContainerAuth() {
     const [redirect, setRedirect] = useState<boolean>(false)
 
     const history = useHistory();
-
     const {settings} = useSettings();
 
     const Formik = useFormik({

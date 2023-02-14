@@ -10,7 +10,7 @@ function createHTML(info) {
 
 function stringFromJSON(json) {
     if (json) {
-        return Object.values(json).reduce((value, curr) => value += Object.values(curr).join(". "), "")
+        return Object.values(json).reduce((value, current) => value += Object.values(current).join(". "), "")
     }
     return null;
 }

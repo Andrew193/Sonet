@@ -31,10 +31,10 @@ function input(value) {
 }
 
 function HidePanel(e, s) {
-    const parrent = e.target.parentElement;
-    parrent.classList.toggle(s.Hide)
-    parrent.previousElementSibling.classList.toggle(s.FullHeight)
-    parrent.previousElementSibling.children[0].scrollIntoView()
+    const parent = e.target.parentElement;
+    parent.classList.toggle(s.Hide)
+    parent.previousElementSibling.classList.toggle(s.FullHeight)
+    parent.previousElementSibling.children[0].scrollIntoView()
 }
 
 function Subscribe(id, toast, otherUserFolCount) {
@@ -43,13 +43,9 @@ function Subscribe(id, toast, otherUserFolCount) {
 
 export function friendRequest(values, callback) {
     HttpHelper.MATES.friendRequest(values,
-        () => {
-            callback("Success");
-        }, (error) => {
-            callback(error);
-        })
+        () => callback("Success"), (error) => callback(error))
 }
 
-const obj = {getUsers, openUser, getSelectedUser, HidePanel, input, openUserProfile, Subscribe, friendRequest}
+const toExport = {getUsers, openUser, getSelectedUser, HidePanel, input, openUserProfile, Subscribe, friendRequest}
 
-export default obj;
+export default toExport;

@@ -1,6 +1,6 @@
 import React from "react";
 import createPostStyles from "./create-post.module.css"
-import Script from "./script"
+import CreatePostHelper from "./CreatePostHelper"
 import {useMemo, useRef, useState} from "react";
 import {AiOutlineClose, BiImageAdd} from "react-icons/all";
 import userHelper from "../helpers/userHelper";
@@ -78,7 +78,7 @@ function CreatePost(props: CreatePostType) {
                     type="file"
                     style={{display: "none"}}
                     onChange={() => {
-                        Script.createBlob((blob: string) => {
+                        CreatePostHelper.createBlob((blob: string) => {
                             setImages((state: ImageType[]) => [...state, {
                                 file: image?.current?.files![0],
                                 blobUrl: blob

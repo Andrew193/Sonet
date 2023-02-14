@@ -32,9 +32,7 @@ function FriendPin(props) {
             const copy = createCopy(state);
 
             if (flag) {
-                setConversations((state) => {
-                    return [...(state || []), {...copy[id], approved: true}]
-                })
+                setConversations((state) => [...(state || []), {...copy[id], approved: true}])
             }
 
             copy.splice(id, 1)
@@ -50,8 +48,8 @@ function FriendPin(props) {
                     approved &&
                     <span
                         className={"deleteExistingFriend"}
-                        onClick={(e) => {
-                            e.stopPropagation();
+                        onClick={(event) => {
+                            event.stopPropagation();
 
                             rejectFriendRequest({
                                 receiverId,
@@ -59,11 +57,7 @@ function FriendPin(props) {
                             })
                                 .then(() => {
                                     notify("Deleted successfully");
-                                    setConversations((state) => {
-                                        return JSON.parse(JSON.stringify(state?.filter((friend) => {
-                                            return friend?.receiverId !== receiverId
-                                        })))
-                                    })
+                                    setConversations((state) => JSON.parse(JSON.stringify(state?.filter((friend) => friend?.receiverId !== receiverId))))
                                 });
                             rejectFriendRequest({
                                 receiverId: requestSendById,
@@ -78,29 +72,17 @@ function FriendPin(props) {
                     />
                 </span>
                 }
-                <LazyImage imageSrc={userAvatar} onClick={() => {
-                    //spare
-                }} imgClass={"conversationImg"}
+                <LazyImage imageSrc={userAvatar} imgClass={"conversationImg"}
                            wrapperStyle={{boxShadow: ` ${alpha(isOnline ? "#008000" : "#ff0000", 0.8)} 0px 0px 8px 0px`}}
                 />
                 <span className="conversationName">{friendName}</span>
-                {
-                    !approved
-                    && <AiOutlineLock
-                        className={"lockedFriendPin"}
-                    />
-                }
-
-                {
-                    !requestMode
-                    && <span className={`${!approved ? "approvalIsRequired" : "hide"}`}>Approval Is Required</span>
-                }
+                {!approved && <AiOutlineLock className={"lockedFriendPin"}/>}
+                {!requestMode &&
+                    <span className={`${!approved ? "approvalIsRequired" : "hide"}`}>Approval Is Required</span>}
             </div>
 
             {
-                requestMode
-                &&
-                <div className={"matesActions"}>
+                requestMode && <div className={"matesActions"}>
                     <span
                         onClick={() => {
                             rejectFriendRequest({

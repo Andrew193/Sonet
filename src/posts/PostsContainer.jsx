@@ -15,6 +15,7 @@ import {USER_INFORMATION} from "../vars";
 import {getItemFromLocalStorage} from "../localStorageService";
 import PropTypes from "prop-types";
 import Separator from "../components/common/Separator/Separator";
+import {withAsideBar} from "../hoc/withAsideBar";
 
 function PostsContainer(props) {
     const [posts, setPosts] = useState(false);
@@ -122,4 +123,4 @@ PostsContainer.propTypes = {
     match: PropTypes.object
 }
 
-export default withRouter(PostsContainer);
+export default withAsideBar(withRouter(PostsContainer));

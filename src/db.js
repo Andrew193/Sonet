@@ -60,11 +60,11 @@ export function setupDb(callBack) {
         .then((recordsCount) => {
             if (recordsCount === 0) {
                 indexDB[SETTINGS_DB_NAME].put(defaultSettingsConfig);
-            } else {
-                //indexDB[SETTINGS_DB_NAME].update(1, newLookup);
             }
 
-            callBack();
+            if (callBack) {
+                callBack();
+            }
         })
         .catch((error) => {
             console.error(error)
@@ -72,9 +72,7 @@ export function setupDb(callBack) {
 }
 
 export async function getSettings() {
-    return await indexDB[SETTINGS_DB_NAME].orderBy('id').filter((settingConfig) => {
-        return Number(settingConfig.id) === Number(1)
-    }).toArray()
+    return await indexDB[SETTINGS_DB_NAME].orderBy('id').filter((settingConfig) => Number(settingConfig.id) === Number(1)).toArray()
 }
 
 export async function updateSettings(data, id) {

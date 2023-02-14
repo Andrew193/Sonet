@@ -5,8 +5,7 @@ import Tic from "./images/tic.png";
 import Image2048 from './images/2048.avif';
 import Tetris from './images/tetris.png'
 import {Box} from "@mui/material";
-import s from './games.module.css';
-import PropTypes from "prop-types";
+import GamesStyles from './games.module.css';
 
 const gamesLisConfig = [
     {
@@ -32,30 +31,23 @@ const gamesLisConfig = [
     }
 ]
 
-function GamesList(props) {
-    const {
-        styleSettings
-    } = props;
+function GamesList() {
 
     const games = useMemo(() => {
         return gamesLisConfig?.map((gameConfig, index) => <GamePreviewTile
             key={index}
             {...gameConfig}
-            styleSettings={styleSettings}
         />)
-    }, [styleSettings]);
+    }, []);
 
     return (
         <Box
             m={2}
-            className={s.GamesTilesContainer}
+            className={GamesStyles.GamesTilesContainer}
         >
             {games}
         </Box>
     )
-}
-GamesList.propTypes = {
-    styleSettings: PropTypes.object
 }
 
 export default GamesList;

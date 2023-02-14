@@ -6,7 +6,12 @@ import ClearOuterDragAndDropContainer from "../../drag-drop/ClearOuterDragAndDro
 import CreateNewFieldBar from "./CreateNewFieldBar";
 import PropTypes from "prop-types";
 
-function QuizLine(props) {
+type QuizLine = {
+    label: string,
+    item: { index: string }
+}
+
+function QuizLine(props: QuizLine) {
     const {
         label,
         item
@@ -32,9 +37,7 @@ function QuizBody() {
         <main className={quizStyle.QuizBodyContainer}>
             <div className={"Separator"} style={{margin: "5px 0px"}}/>
             <h3>Create your quiz</h3>
-            <CreateNewFieldBar
-                setHeaderFields={setHeaderFields}
-            />
+            <CreateNewFieldBar setHeaderFields={setHeaderFields}/>
             <h3>Quiz options</h3>
             <div className={quizStyle.OptionsContainer}>
                 <ClearOuterDragAndDropContainer DragAndDropConfig={DragAndDropConfig}/>

@@ -13,6 +13,7 @@ import {IoMdNotificationsOutline} from "react-icons/all";
 import {setNotificationsToShow} from "../app/notificationReducer";
 import {useHistory} from "react-router-dom";
 import Separator from "../components/common/Separator/Separator";
+import {withAsideBar} from "../hoc/withAsideBar";
 
 function NotificationsContainer() {
     const {settings} = useSettings();
@@ -60,4 +61,4 @@ function NotificationsContainer() {
     )
 }
 
-export default NotificationsContainer;
+export default withAsideBar(NotificationsContainer);

@@ -1,9 +1,4 @@
 import React from "react";
-import s from "../solid-textarea.module.css";
+import SolidTextareaStyles from "../solid-textarea.module.css";
 
-export const UploadMediaBar = () => {
-    return (
-        <div className={s.UploadMediaBar}>
-        </div>
-    );
-};
+export const UploadMediaBar = () => <div className={SolidTextareaStyles.UploadMediaBar}/>

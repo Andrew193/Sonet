@@ -8,27 +8,30 @@ function createPostService(element, notify, socket, text, savedImages, possibleM
         notify(htmlHelper.createHTML({title: "Ok", message: response?.data?.message}));
         socket.emit("postCreate");
     }, (error) => {
-        const inner = htmlHelper.stringFromJSON(error?.response?.data)
-        notify(htmlHelper.createHTML({title: "Error", message: inner}));
+        const errorString = htmlHelper.stringFromJSON(error?.response?.data)
+        notify(htmlHelper.createHTML({title: "Error", message: errorString}));
     }, savedImages, possibleMentions, sharedInfo, quiz)
 }
 
 export async function SharePost(text, sharedPost) {
-    HttpHelper.POSTS.sharePost(text, sharedPost, (response) => {
-        notify(htmlHelper.createHTML({title: "Ok", message: response?.data?.message}));
-    })
+    HttpHelper.POSTS.sharePost(text, sharedPost, (response) => notify(htmlHelper.createHTML({
+        title: "Ok",
+        message: response?.data?.message
+    })))
 }
 
 export function BookmarkItem(bookmarkConfig) {
-    HttpHelper.BOOKMARKS.addItemToBookmarks(bookmarkConfig, (response) => {
-        notify(htmlHelper.createHTML({title: "Ok", message: response?.data?.message}));
-    })
+    HttpHelper.BOOKMARKS.addItemToBookmarks(bookmarkConfig, (response) => notify(htmlHelper.createHTML({
+        title: "Ok",
+        message: response?.data?.message
+    })))
 }
 
 export function DeleteBookmarkItem(bookmarkId) {
-    HttpHelper.BOOKMARKS.deleteMyBookmarkById(bookmarkId, (response) => {
-        notify(htmlHelper.createHTML({title: "Ok", message: response?.data?.message}));
-    })
+    HttpHelper.BOOKMARKS.deleteMyBookmarkById(bookmarkId, (response) => notify(htmlHelper.createHTML({
+        title: "Ok",
+        message: response?.data?.message
+    })))
 }
 
 export async function CreatePost(text, notify, element, socket, images, {possibleMentions = [], sharedInfo, quiz}) {
@@ -51,17 +54,11 @@ function createBlob(callback, file) {
     const fileReader = new FileReader();
     fileReader.readAsArrayBuffer(file);
 
-    fileReader.onload = function () {
-        // you can keep blob or save blob to another position
-        const blob = new Blob([fileReader.result]);
-
-        // url for download
-        const url = URL.createObjectURL(blob);
-
-        callback(url)
+    fileReader.onload = () => {
+        callback(URL.createObjectURL(new Blob([fileReader.result])))
     }
 }
 
-const obj = {CreatePost, createBlob}
+const toExport = {CreatePost, createBlob}
 
-export default obj;
+export default toExport;

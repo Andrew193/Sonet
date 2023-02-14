@@ -19,17 +19,9 @@ function getSelectedGame(game) {
 }
 
 function GamesContent(props) {
-    const {
-        match,
-        styleSettings
-    } = props;
+    const {match} = props;
 
-    const Game = useMemo(() => {
-        if (match?.params?.gameType) {
-            return getSelectedGame(match?.params?.gameType);
-        }
-    }, [match])
-
+    const Game = useMemo(() => match?.params?.gameType ? getSelectedGame(match?.params?.gameType) : null, [match])
     const {t} = useTranslation();
 
     return (
@@ -46,8 +38,7 @@ function GamesContent(props) {
                                 fontWeight: "bold"
                             }}
                         >{t("Choose a game")}</Typography>
-
-                        <GamesList styleSettings={styleSettings}/>
+                        <GamesList/>
                     </>
             }
         </>
@@ -56,7 +47,6 @@ function GamesContent(props) {
 
 GamesContent.propTypes = {
     match: PropTypes.object,
-    styleSettings: PropTypes.object
 }
 
 export default withRouter(withPageHeader(GamesContent, {path: "/games", Title: "Games"}));

@@ -1,7 +1,7 @@
 import React from "react";
 import {Box, Typography} from "@mui/material";
 import Loader from "../common/spinner/Spinner";
-import styles from "./table-loader.module.css";
+import TableLoaderStyles from "./table-loader.module.css";
 
 type TableLoaderPropsType = {
     loaderLabel: string
@@ -13,7 +13,7 @@ function TableLoader(props: TableLoaderPropsType) {
     } = props;
 
     return (
-        <Box className={styles.Container}>
+        <Box className={TableLoaderStyles.Container}>
             <Typography>{loaderLabel}</Typography>
             <Loader/>
         </Box>
