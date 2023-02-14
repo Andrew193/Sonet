@@ -1,0 +1,197 @@
+.Container {
+    flex: 1 0;
+    padding: 2%;
+    width: 25%;
+    overflow: hidden;
+}
+
+.Tip {
+    background-color: rgb(203, 203, 243);
+    border-radius: 20px;
+    text-align: left;
+    padding: 10px 10px 0px 10px;
+    box-shadow: 0 0 8px 0 rgb(0 130 231 / 20%);
+    margin-bottom: 5%;
+}
+
+.Tip h2 {
+    padding: 0px 10px 5px 10px;
+    position: relative;
+    text-align: center;
+    margin-top: unset;
+}
+
+.Center {
+    text-align: center;
+}
+
+.Tip h2::after {
+    position: absolute;
+    content: '';
+    height: 1px;
+    background-color: rgb(174 171 179);
+    width: 104%;
+    top: 100%;
+    left: -6px;
+}
+
+.Tip > div {
+    position: relative;
+    cursor: pointer;
+    width: 110%;
+    margin-left: -5%;
+    transition: all ease 0.7s;
+    border-bottom: 1px solid;
+    margin-bottom: 5px;
+}
+
+.Tip > div:last-of-type {
+    border: unset;
+    margin-bottom: unset;
+}
+
+.ActionsLine {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.Tip > div span {
+    display: flex;
+    font-size: 10px;
+    align-items: center;
+    margin-left: 2px;
+}
+
+.PostLine {
+    margin: 2px 3px !important;
+    max-width: 100% !important;
+    padding-left: 10px;
+    font-size: 16px;
+}
+
+.PostLine:first-letter {
+    text-transform: capitalize;
+}
+
+.latestPostFirstLine {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.Tip > div > h4 {
+    padding-left: 5%;
+}
+
+.Tip > div:hover {
+    background-color: rgb(167, 167, 241);
+    border-left: 1px solid #3452f1;
+    border-right: 1px solid #3452f1;
+}
+
+.LastTipItem:hover {
+    background-color: rgb(167, 167, 241);
+}
+
+.LastTipItem {
+    margin-bottom: -10px;
+    text-align: center;
+    padding: 10px 5px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    color: #3452f1;
+    font-weight: 500;
+}
+
+.Tip > div p {
+    font-size: 13px;
+    margin-top: 1%;
+    margin-left: 3%;
+    max-width: 95%;
+    overflow: hidden;
+}
+
+.Tip > div p:last-of-type {
+    text-align: center;
+    color: #3452f1;
+}
+
+@media (max-width: 1024px) {
+    .Container {
+        display: none;
+    }
+
+    .Tip h2 {
+        font-size: 16px;
+    }
+
+    .Tip > div {
+        font-size: 10px;
+        width: 109%;
+        margin-left: -4.5%;
+    }
+}
+
+@media (min-width: 1030px) {
+    .Tip h2 {
+        font-size: 20px;
+    }
+
+    .Tip > div {
+        font-size: 13px;
+        width: 109%;
+        margin-left: -4.5%;
+    }
+}
+
+@media (min-width: 1300px) {
+    .Tip h2 {
+        font-size: 26px;
+    }
+
+    .Tip > div {
+        width: 107%;
+        margin-left: -3.5%;
+    }
+}
+
+@media (min-width: 1700px) {
+    .Tip h2 {
+        font-size: 26px;
+    }
+
+    .Tip > div {
+        font-size: 20px;
+        width: 105%;
+        margin-left: -2.6%;
+    }
+
+    .Tip > div span {
+        font-size: 16px;
+    }
+
+    .Tip > div p {
+        font-size: 16px;
+    }
+}
+
+@media (min-width: 2101px) {
+    .Tip h2 {
+        font-size: 46px;
+    }
+
+    .Tip > div {
+        font-size: 26px;
+        width: 105%;
+        margin-left: -2.6%;
+    }
+
+    .Tip > div span {
+        font-size: 26px;
+    }
+
+    .Tip > div p {
+        font-size: 27px;
+    }
+}
