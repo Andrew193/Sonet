@@ -13,6 +13,7 @@ import {getUserAvatar} from "../posts/postsHelper";
 import {getElementsThemeConfig} from "../utils";
 import {Dayjs} from "../helpers/dateHelper";
 import PropTypes from "prop-types";
+import CommentStyles from "../components/comments/comments.module.css";
 
 const PostButtonCover = React.forwardRef(function MyComponent(props, ref) {
     //  Spread the props to the underlying DOM element.
@@ -153,7 +154,7 @@ function CurrentChat(props) {
                     placeholder={t("So... What is it?")}
                 />
                 <span
-                    className={`${buttonsConfig[customStyle?.color]} chatPostBtn`}
+                    className={`${buttonsConfig[customStyle?.color]} chatPostBtn  ${CommentStyles.CommentSendButton}`}
                     onClick={handleSubmit}
                 >
                     <Tooltip title={t("Post")} arrow placement="top"><PostButtonCover/></Tooltip>

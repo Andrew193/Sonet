@@ -10,6 +10,7 @@ import {Context} from "../../App";
 import {getItemFromLocalStorage} from "../../localStorageService";
 import {USER_INFORMATION} from "../../vars";
 import PropTypes from "prop-types";
+import {AiOutlineHighlight} from "react-icons/ai";
 
 function CommentsLine(props) {
     const {
@@ -34,7 +35,10 @@ function CommentsLine(props) {
             </Backdrop>
             <style>{`
             .${CommentsStyles.CommentLine} .react-emoji {
-            width: 77%;
+            width: 100%;
+            }
+            .${CommentsStyles.CommentLine} .react-emoji-picker--container {
+            width: 1px;
             }
             .${CommentsStyles.CommentLine} .react-emoji button {
             flex: unset !important;
@@ -47,8 +51,8 @@ function CommentsLine(props) {
                     cleanOnEnter
                     placeholder={t("What do you think about it?")}
                 />
-                <span
-                    className={`button ${CommentsStyles.noBefore} ${buttonsConfig[settings?.configs?.color[settings?.color]]}`}
+                <AiOutlineHighlight
+                    className={`${CommentsStyles.noBefore} ${CommentsStyles.CommentSendButton}`}
                     onClick={() => {
                         setIsOpened(true);
                         ComponentsHelper.createComment(text, userInfo, id, comCount, notify, socket)
@@ -57,7 +61,7 @@ function CommentsLine(props) {
                                 setIsOpened(false);
                             })
                     }}
-                >{t("Comment")}</span>
+                />
             </div>
         </>
     )

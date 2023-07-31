@@ -42,7 +42,7 @@ function UpdateChatMessageModal(props) {
                         />
                         <p>
                             <span
-                                className={"chatPostBtn"}
+                                className={"chatPostBtn "}
                                 onClick={() => {
                                     setIsOpened(false);
                                     setIsBackdoor(() => true);

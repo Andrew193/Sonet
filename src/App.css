@@ -117,12 +117,18 @@
     min-width: 0px !important;
 }
 
+.react-emoji {
+    padding: 6px 4px;
+}
+
 .react-input-emoji--button {
-    position: relative !important;
+    position: absolute !important;
+    right: 8px;
+    top: 10px;
     display: block !important;
     text-align: center;
     min-width: 0px !important;
-    padding: 0 10px !important;
+    padding: 0px !important;
     overflow: hidden;
     transition: color 0.1s ease-out;
     margin: 0;
@@ -137,6 +143,8 @@
 .react-input-emoji--container {
     border-radius: 5px !important;
     min-height: 90px !important;
+    padding: 0px 30px 0px 0px;
+    margin: 0!important;
 }
 
 

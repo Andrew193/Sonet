@@ -1,12 +1,24 @@
 .CommentLine {
+    position: relative;
     display: flex;
     flex-wrap: wrap;
     align-items: baseline;
     justify-content: space-between;
-    padding: 1% 5%;
+    padding: 1px 5px;
     border: 1px solid #ccc;
     background: aliceblue;
     transition: all ease 0.3s;
+}
+
+.CommentSendButton {
+    position: absolute!important;
+    padding: 1px!important;
+    font-size: 26px!important;
+    border: 1px solid!important;
+    border-radius: 50%!important;
+    cursor: pointer!important;
+    top: 37px;
+    right: 12px;
 }
 
 .OnePost {
@@ -47,8 +59,8 @@
 }
 
 .Container {
-    height: auto;
-    min-height: 100%;
+    min-height: 753px;
+    height: fit-content;
     width: 80%;
     display: flex;
     flex-direction: column;

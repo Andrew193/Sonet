@@ -11,6 +11,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    height: 25px;
 }
 
 .TipLine p {
@@ -19,7 +20,7 @@
 
 .TipLine p span {
     margin: 5px;
-    padding: 11px 0px;
+    padding: 5px;
     border-radius: 50px;
 }
 
@@ -74,14 +75,12 @@
     border-top: unset !important;
 }
 
+.chatPostBtn svg {
+    font-size: 20px!important;
+}
+
 .chatPostBtn {
-    padding: 10px;
-    display: flex;
-    margin: 5px;
-    border-radius: 50px;
-    border: 1px solid;
-    cursor: pointer;
-    position: relative;
+    right: 8px!important;
 }
 
 .conversation {
@@ -200,7 +199,7 @@
 }
 
 .chatMenu {
-    flex: 3.5;
+    flex: 4.5;
 }
 
 .chatMenuInput {
@@ -214,7 +213,7 @@
 }
 
 .chatBox {
-    flex: 5.5;
+    flex: 5.5 0;
 }
 
 .chatBoxWrapper {
@@ -350,6 +349,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    position: relative;
 }
 
 .chatMessageInput {
@@ -400,7 +400,7 @@
 
 @media screen and (max-width: 768px) {
     .chatBoxTop {
-        height: 98.1%;
+        flex: 10 1;
     }
 
     .chatMenuWrapper {
@@ -440,10 +440,13 @@
 
     .mainMessagesCaver {
         height: calc(753px - 100px - 120px);
+        display: flex;
+        flex-direction: column;
     }
 
     .chatBoxBottom {
         align-items: center;
+        flex: 2 1;
     }
 
 }
